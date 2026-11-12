@@ -12,7 +12,8 @@ const KNOWN={
  'Kylian Mbappé':'Kylian Mbappé.jpg',
  'Victor Wembanyama':'Victor Wembanyama.jpg',
  'Moïse Kouamé':'Moïse Kouamé (2026 US Open) 02 (cropped).jpg',
- 'Mirra Andreeva':'Mirra Andreeva.jpg'
+ 'Mirra Andreeva':'Mirra Andreeva.jpg',
+ 'Rafael Jódar':'Rafael Jódar Roland Garros 2026 (cropped).jpg'
 };
 const ARTICLE={
  'Arthur Fils':['Arthur Fils','Arthur Fils'],
