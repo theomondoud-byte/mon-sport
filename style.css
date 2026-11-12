@@ -241,3 +241,18 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .news-frame-slot{margin-top:12px}
 .news-embedded-frame{width:100%;height:min(70vh,680px);border:1px solid #54828b;background:white;border-radius:10px}
 @media(max-width:550px){.news-card>summary{padding:14px}.news-reader{padding:14px}.detail-teams{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* V10 — liens d'actualités fiables et prochaine compétition */
+.news-link-card{overflow:hidden}
+.news-plain-link{display:block;padding:17px;text-decoration:none;color:inherit}
+.news-plain-link:hover{background:#1d4257}
+.news-plain-link:focus-visible{outline:3px solid #a2dbff;outline-offset:-3px;border-radius:16px}
+.news-plain-link h3{margin:12px 0 7px;color:#f3fbff}
+.news-plain-link .news-tap{display:block;font-size:.81rem}
+.agenda-next{display:flex;flex-direction:column;gap:7px;border:1px solid #477e78;
+ background:linear-gradient(110deg,#1e493e,#12394c);border-radius:15px;padding:13px 15px;
+ font-size:.83rem;line-height:1.5;color:#ddfaeb}
+.agenda-next b{color:#b4ffdb}
+.agenda-next span{color:#d0e7ec}
+.agenda-next a{font-weight:750}
+@media(max-width:580px){.news-plain-link{padding:14px}.agenda-next{padding:12px}}
