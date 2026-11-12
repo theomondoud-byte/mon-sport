@@ -61,7 +61,7 @@ export function renderAgendaView({
   +'<button type="button" data-agenda-phase="future" aria-pressed="'+(phase==='future')+'" class="'+(phase==='future'?'selected':'')+'">À venir <small>'+duration+'</small></button>'
   +'<button type="button" data-agenda-phase="past" aria-pressed="'+(phase==='past')+'" class="'+(phase==='past'?'selected':'')+'">Passés <small>'+duration+'</small></button></div>';
  const count=cards.length+' événement'+(cards.length>1?'s':'')+' trouvé'+(cards.length>1?'s':'');
- const missing=single?[]:agendaCoverage(favorites,cards).missing;
+ const missing=single||loading?[]:agendaCoverage(favorites,cards).missing;
  const all=groupAgenda(cards).map(g=>'<section class="agenda-day-group">'+headingDay(g.day,esc)+g.items.map(e=>eventHtml(e,esc,safeUrl)).join('')+'</section>').join('');
  const progress=(loading||extendedLoading)?'<div class="agenda-progress" role="status"><span class="agenda-spinner"></span>'
   +esc(single?'Vérification des calendriers des deux mois…':'Actualisation des événements…')+'</div>':'';
