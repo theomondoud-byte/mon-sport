@@ -3,6 +3,8 @@
 const DAY=86400000;
 export const PROFILE_CHECKED='2026-11-12';
 export const PROFILES={
+ 'Sauveur Cristofini':{born:'2009-11-29',country:'France',role:'Natation · nage libre / 4 nages',fact:'Champion de France grand bassin 2026 du 200 m et du 400 m libre. Argent aux Championnats d’Europe 2026 avec le relais 4 × 200 m libre.',source:'https://www.lequipe.fr/fiche/sauveur-cristofini/97076'},
+ 'FC Barcelone':{role:'Football · LaLiga et Ligue des champions',fact:'Résultats de LaLiga et de Ligue des champions, avec calendrier officiel du club et relevés ESPN.',source:'https://www.fcbarcelona.com/en/football/first-team/results'},
  'Arthur Fils':{born:'2004-06-12',country:'France',role:'Tennis · droitier',rank:{label:'ATP simple',value:'#7',asOf:'2026-11-09',source:'https://tennisabstract.com/reports/atpRankings.html'},fact:'Meilleur Français au classement ATP des favoris suivis cette semaine.',source:'https://www.atptour.com/en/players/'},
  'Jannik Sinner':{born:'2001-08-16',country:'Italie',role:'Tennis · droitier',rank:{label:'ATP simple',value:'#2',asOf:'2026-11-09',source:'https://tennisabstract.com/reports/atpRankings.html'},fact:'Vainqueur de Wimbledon 2026 selon les résultats ajoutés à Mon Sport.',source:'https://www.wimbledon.com/'},
  'Carlos Alcaraz':{born:'2003-05-05',country:'Espagne',role:'Tennis · droitier',rank:{label:'ATP simple',value:'#3',asOf:'2026-11-09',source:'https://tennisabstract.com/reports/atpRankings.html'},fact:'Présent dans le trio de tête ATP au 9 novembre 2026.',source:'https://www.atptour.com/en/players/'},
