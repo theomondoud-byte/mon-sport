@@ -47,6 +47,7 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    key,id:item.id||key,date:originalDate,day,favorite:item.favorite,title,score,
    competition,round:item.round||'',status:finished?'Terminé':status,finished,live,
    datePrecision:noExactHour?'jour':'heure',approximate:!!item.approxDate,
+   uncertainParticipation:!!item.uncertainParticipation,
    source,sourceUrl:item.sourceUrl||'',type,stats:item.stats||null,
    favorites:[item.favorite],origin:item
   });
