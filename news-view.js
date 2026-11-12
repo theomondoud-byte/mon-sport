@@ -24,7 +24,8 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,esc,safeUr
  const recent=newsLastWeek(news,now);
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span>'
   +'<h2>Articles sportifs · favoris et FFL</h2>'
-  +'<p>Uniquement les articles sportifs publiés au cours des sept derniers jours, du plus récent au plus ancien. Un clic ouvre directement le site de l’éditeur.</p></div>'
+  +'<p>Sept derniers jours · du plus récent au plus ancien · sans actualités people.</p>'
+  +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Toutes les actualités FFL ↗</a></div>'
   +'<div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Derniers 7 jours</span></div>';
  const cards=recent.map(n=>{
   const link=safeUrl(n.link);
