@@ -29,7 +29,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,esc,safeUr
   const link=safeUrl(n.link);
   const published=new Date(n.date||n.published).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
   const excerpt=safeExcerpt(n.excerpt||n.description||n.summary||'');
-  return '<details class="news-card" data-news-id="'+index+'">'
+  return '<details class="news-card" data-news-id="'+index+'" data-source-link="'+esc(link)+'">'
    +'<summary><div class="news-card-top"><span class="agenda-favorite">'+esc(n.favorite||'Sport')+'</span>'
    +'<span class="news-date">'+esc(published)+'</span></div>'
    +'<h3>'+esc(n.title)+'</h3>'
