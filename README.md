@@ -1,4 +1,4 @@
-# ⚡ Mon Sport — V5.1 (Android PWA)
+# ⚡ Mon Sport — V5.2 (Android PWA)
 
 Application personnelle gratuite hébergée sur GitHub Pages. Tous les favoris restent sur l'appareil (localStorage). Aucune clé API n'est nécessaire pour les scores ESPN.
 
@@ -6,8 +6,9 @@ Application personnelle gratuite hébergée sur GitHub Pages. Tous les favoris r
 - **Équipes** : PSG (Ligue 1), Real Madrid (LaLiga), San Antonio Spurs (NBA) via les tableaux ESPN non officiels.
 - **Individuels** : scores ATP/WTA pour les joueurs suivis dans les tournois qu'ESPN couvre; statistiques de Victor Wembanyama des derniers matchs NBA visibles.
 - **Nouveau V5 : historique 2026** de tes joueurs ATP et WTA, y compris Moïse Kouamé, pour les données disponibles en tour principal, Challenger, qualifications et ITF.
-- **Moïse Kouamé** : un relevé limité de 23 matchs récents vérifiés, arrêté au 12 novembre 2026, vient compléter les archives historiques. Ce relevé n'est PAS mis à jour automatiquement. Les liens vers la fiche du joueur permettent de suivre les matchs ultérieurs.
+- **Moïse Kouamé** : un relevé limité de 62 matchs recensés sur la saison 2026, arrêté au 12 novembre 2026, vient compléter les archives historiques. Ce relevé n'est PAS mis à jour automatiquement. Les liens vers la fiche du joueur permettent de suivre les matchs ultérieurs.
 - **V5.1** : dernier match vérifié de Moïse Kouamé (Forejtek, 11 novembre) mis en évidence en haut de l’accueil et de Résultats ; 13 rencontres ajoutées (juillet–octobre). Données manuelles figées au 12 novembre 2026. Le lien externe ouvre un suivi actualisé, mais aucun flux gratuit automatique Challenger/ITF n'est intégré sans clé API.
+- **V5.2** : 39 résultats supplémentaires vérifiés pour Moïse Kouamé sur 2026 (dont ses titres ITF de janvier, Roland-Garros, Miami, Lille et Thionville). Une sélection **2025/2026** charge les archives ATP/Challenger/ITF et WTA des joueurs suivis. Les scores ESPN essaient aussi d'intégrer Ligue des champions, coupes nationales, équipe de France de football et XV de France aux Six Nations : disponibilité variable, pas de garantie d'exhaustivité. Pas de modification du Worker.
 - **Autres sports** (tennis de table, cyclisme, natation, rugby) : actualités et liens de recherche; aucun score individuel automatique n'est garanti à ce stade.
 
 ### Sources historiques tennis et licences
