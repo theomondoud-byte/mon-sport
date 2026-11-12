@@ -12,10 +12,12 @@ const AQUA='https://www.worldaquatics.com/athletes/1188005/ws';
 const PCS='https://www.procyclingstats.com/rider/paul-seixas/results';
 const TT_COTON='https://tabletennisapi.com/players/coton-flavien/matches/2026';
 export const SOURCES_2026={
+ 'FC Barcelone':{kind:'équipe',unit:'matchs football',source:'Calendrier officiel FC Barcelona / ESPN',url:'https://www.fcbarcelona.com/en/football/first-team/results',referenceCount:18,referenceUnit:'18 matchs officiels recensés de août à novembre 2026, autres périodes à compléter',referenceAsOf:AUDIT_AS_OF},
  'Real Madrid':{kind:'équipe',unit:'matchs terminés',source:'ESPN · LaLiga, C1, Coupe du Roi',url:'https://www.realmadrid.com/fr-FR/calendrier?filter-football=primer-equipo-masculino'},
  PSG:{kind:'équipe',unit:'matchs terminés',source:'ESPN · Ligue 1, C1, Coupe de France',url:'https://www.psg.fr/football-masculin/calendrier'},
  'San Antonio Spurs':{kind:'équipe',unit:'matchs NBA terminés',source:'ESPN NBA',url:'https://www.nba.com/spurs/schedule'},
  'Victor Wembanyama':{kind:'joueur',unit:'matchs joués',source:'NBA · match log',url:'https://www.nba.com/player/1641705/victor-wembanyama'},
+ 'Sauveur Cristofini':{kind:'nageur',unit:'courses et relais 2026',source:'FFN / L’Équipe · natation',url:'https://www.lequipe.fr/fiche/sauveur-cristofini/97076',referenceCount:10,referenceUnit:'10 performances 2026 de sélection, non exhaustif',referenceAsOf:AUDIT_AS_OF},
  'Léon Marchand':{kind:'nageur',unit:'courses individuelles',source:'World Aquatics · fiches et résultats',url:AQUA},
  'Félix Lebrun':{kind:'pongiste',unit:'matchs (simples + doubles)',source:'FFTT / WTT · résultats sélectionnés',url:'https://www.fftt.com/felixlebrun/'},
  'Alexis Lebrun':{kind:'pongiste',unit:'matchs (simples + doubles)',source:'FFTT / WTT · résultats sélectionnés',url:FFTT_EURO},
@@ -103,7 +105,7 @@ export function auditInfo(name){return SOURCES_2026[name]||{kind:'autre',unit:'�
 export function safeScoreCount(name,tennisItems,teamAudit){
  const info=auditInfo(name);
  if(info.kind==='tennis')return {count:tennisItems.filter(x=>x.favorite===name&&x.date.startsWith('2026-')).length,label:'simples recensés, non exhaustif',verified:false};
- if(['Real Madrid','PSG','San Antonio Spurs'].includes(name)&&teamAudit?.byFavorite?.[name])return {count:teamAudit.byFavorite[name].count,label:'matchs retrouvés par ESPN (couverture à vérifier)',verified:false};
+ if(['Real Madrid','FC Barcelone','PSG','San Antonio Spurs'].includes(name)&&teamAudit?.byFavorite?.[name])return {count:teamAudit.byFavorite[name].count,label:'matchs retrouvés par ESPN (couverture à vérifier)',verified:false};
  if(info.referenceCount!==undefined)return {count:info.referenceCount,label:info.referenceUnit||'résultats recensés',verified:true};
  const selected=verified2026For(name);
  if(selected.length)return {count:selected.length,label:'résultats de référence (sélection seulement)',verified:false};
