@@ -1,4 +1,4 @@
-// Mon Sport V8 — modèle indépendant de la navigation et des sources.
+// Mon Sport V10 — modèle indépendant de la navigation et des sources.
 // Les fenêtres sont glissantes : 7 jours, 2 mois futurs et 12 mois passés par favori.
 // Seules les rencontres réellement renvoyées par les sources sont affichées.
 export const agendaNow=()=>new Date();
@@ -49,7 +49,11 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
     :item.id?.startsWith('espn-')?'event:'+item.id.replace(/^espn-/,''):null;
   // En simple, une même rencontre ATP peut être livrée à la fois par ESPN,
   // les archives et le relevé manuel avec des noms abrégés.
-  const key=eventKey&&type!=='tennis'?eventKey
+  const alias=str=>norm(str).replace(/\bsouth africa\b/g,'afrique du sud').replace(/\bargentina\b/g,'argentine')
+   .replace(/\bparis saint germain\b/g,'psg').replace(/\bfrance rugby\b/g,'france');
+  const teams=item.home&&item.away?[alias(item.home),alias(item.away)].sort().join('|'):null;
+  const key=teams&&!item.scheduledCompetition?'fixture:'+day+':'+teams
+   :eventKey&&type!=='tennis'?eventKey
    :type==='tennis'?'tennis:'+day+':'+names
    :type+':'+day+':'+names+':'+norm(competition);
   all.push({
@@ -57,6 +61,9 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    competition,round:item.round||'',status:finished?'Terminé':status,finished,live,
    datePrecision:noExactHour?'jour':'heure',approximate:!!item.approxDate,
    uncertainParticipation:!!item.uncertainParticipation,
+   isCompetition:!!item.scheduledCompetition,
+   endDate:item.endDate||null,participationLevel:item.participationLevel||null,
+   notes:item.notes||'',cycleUnit:item.cycleUnit||null,
    source,sourceUrl:item.sourceUrl||'',type,stats:item.stats||null,
    favorites:[item.favorite],origin:item
   });
@@ -90,6 +97,12 @@ export function agendaMatches(events,{view='semaine',phase='future',favorite=nul
   }
   // Les rencontres en cours restent visibles pendant 4 h après le début.
   if(!(e.status==='À venir'||e.live))return false;
+  // Une compétition multi-jours continue de s'afficher jusqu'à la fin
+  // de son tournoi même si la première journée est passée.
+  if(e.isCompetition&&e.endDate){
+   const last=Date.parse(e.endDate);
+   if(Number.isFinite(last)&&last>=lo&&dt<=hi)return true;
+  }
   return dt>=lo&&dt<hi||(e.live&&dt>=lo-4*3600000&&dt<=hi);
  });
  // Prochains matchs chronologiques ; résultats passés du plus récent au plus ancien.
