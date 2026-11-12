@@ -29,7 +29,8 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   const status=item.status||((item.type==='tennis-history'||item.type==='verified2026'||item.type==='manual2026')?'Terminé':'');
   const finished=status==='Terminé'||item.type==='tennis-history'||item.type==='verified2026'||item.type==='manual2026';
   const live=status==='En cours';
-  if(!finished&&!live&&status!=='À venir')continue;
+  const pendingResult=!!item.pendingResult&&status==='Résultat à vérifier';
+  if(!finished&&!live&&!pendingResult&&status!=='À venir')continue;
   const title=String(item.title||(item.home&&item.away?item.home+' — '+item.away:item.opponent?item.favorite+' — '+item.opponent:'Événement sportif'));
   const score=item.score||(item.homeScore!==undefined&&item.homeScore!==null&&item.awayScore!==undefined&&item.awayScore!==null?item.homeScore+' – '+item.awayScore:'');
   const source=String(item.source||'Source sportive');
@@ -63,7 +64,7 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    competition,round:item.round||'',status:finished?'Terminé':status,finished,live,
    datePrecision:noExactHour?'jour':'heure',approximate:!!item.approxDate,
    uncertainParticipation:!!item.uncertainParticipation,
-   isCompetition:!!item.scheduledCompetition,
+   pendingResult,isCompetition:!!item.scheduledCompetition,
    endDate:item.endDate||null,participationLevel:item.participationLevel||null,
    notes:item.notes||'',cycleUnit:item.cycleUnit||null,
    source,sourceUrl:item.sourceUrl||'',type,stats:item.stats||null,
@@ -94,7 +95,7 @@ export function agendaMatches(events,{view='semaine',phase='future',favorite=nul
   // plutôt que laisser croire au jour exact de la rencontre.
   const uncertain=!!e.approximate;
   if(phase==='past'){
-   if(!e.finished)return false;
+   if(!e.finished&&!e.pendingResult)return false;
    return uncertain?(dt+6*86400000>=lo&&dt<=hi):(dt>=lo&&dt<=hi);
   }
   // Les rencontres en cours restent visibles pendant 4 h après le début.
