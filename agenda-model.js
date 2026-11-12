@@ -1,5 +1,5 @@
-// Mon Sport V7 — modèle indépendant de la navigation et des sources.
-// Les fenêtres sont glissantes : 7 jours ou deux mois de calendrier.
+// Mon Sport V8 — modèle indépendant de la navigation et des sources.
+// Les fenêtres sont glissantes : 7 jours, 2 mois futurs et 12 mois passés par favori.
 // Seules les rencontres réellement renvoyées par les sources sont affichées.
 export const agendaNow=()=>new Date();
 const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
@@ -14,7 +14,7 @@ export function agendaWindow(view,phase,now=new Date()){
  const t=now instanceof Date?new Date(now):new Date(now);
  const past=phase==='past';
  const interval=view==='favori'
-  ?shiftedMonths(t,past?-2:2)
+  ?shiftedMonths(t,past?-12:2)
   :new Date(t.getTime()+(past?-7:7)*86400000);
  return past?{from:interval,to:t,days:view==='favori'?null:7}
   :{from:t,to:interval,days:view==='favori'?null:7};
