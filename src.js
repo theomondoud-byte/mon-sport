@@ -35,7 +35,7 @@ const load=()=>{
   return result;
  }catch{return DEFAULTS;}
 };
-let favorites=load(), workerUrl=localStorage.getItem(URL_KEY)||'',active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={};
+let favorites=load(), workerUrl=localStorage.getItem(URL_KEY)||'',active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={},photoRequest=0;
 const app=document.querySelector('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
@@ -544,8 +544,12 @@ function syncPhoto(name,photo){
  if(status)status.textContent=Object.keys(photoMap).length+'/'+favorites.length+' images identifiées (chargement selon disponibilité).';
 }
 async function reloadPhotos(clear=false){
+ const token=++photoRequest;
  if(clear){clearPhotoCache(favorites);photoMap={};}
- const result=await loadFavoritePhotos(favorites,syncPhoto);
+ const result=await loadFavoritePhotos(favorites,(name,photo)=>{
+  if(token===photoRequest)syncPhoto(name,photo);
+ });
+ if(token!==photoRequest)return {};
  photoMap={...photoMap,...result};
  const status=document.querySelector('#photoStatus');
  if(status)status.textContent=Object.keys(photoMap).length+'/'+favorites.length+' images identifiées ; les autres affichent des initiales.';
