@@ -1,4 +1,4 @@
-# ⚡ Mon Sport — V5.2 (Android PWA)
+# ⚡ Mon Sport — V5.3 (Android PWA)
 
 Application personnelle gratuite hébergée sur GitHub Pages. Tous les favoris restent sur l'appareil (localStorage). Aucune clé API n'est nécessaire pour les scores ESPN.
 
@@ -9,6 +9,7 @@ Application personnelle gratuite hébergée sur GitHub Pages. Tous les favoris r
 - **Moïse Kouamé** : un relevé limité de 62 matchs recensés sur la saison 2026, arrêté au 12 novembre 2026, vient compléter les archives historiques. Ce relevé n'est PAS mis à jour automatiquement. Les liens vers la fiche du joueur permettent de suivre les matchs ultérieurs.
 - **V5.1** : dernier match vérifié de Moïse Kouamé (Forejtek, 11 novembre) mis en évidence en haut de l’accueil et de Résultats ; 13 rencontres ajoutées (juillet–octobre). Données manuelles figées au 12 novembre 2026. Le lien externe ouvre un suivi actualisé, mais aucun flux gratuit automatique Challenger/ITF n'est intégré sans clé API.
 - **V5.2** : 39 résultats supplémentaires vérifiés pour Moïse Kouamé sur 2026 (dont ses titres ITF de janvier, Roland-Garros, Miami, Lille et Thionville). Une sélection **2025/2026** charge les archives ATP/Challenger/ITF et WTA des joueurs suivis. Les scores ESPN essaient aussi d'intégrer Ligue des champions, coupes nationales, équipe de France de football et XV de France aux Six Nations : disponibilité variable, pas de garantie d'exhaustivité. Pas de modification du Worker.
+- **V5.3 — Jannik Sinner** : 7 matchs de Wimbledon 2026 vérifiés (29 juin–12 juillet) ont été ajoutés à son historique : avec les 40 matchs déjà présents dans les archives ATP, le joueur compte désormais **47 rencontres en 2026** lorsque l'archive est accessible. Le dernier match est affiché sur l'accueil et dans Résultats. Sinner a arrêté sa saison après Wimbledon pour une blessure au genou. Sources : [TennisDB](https://tennis-db.com/players/2/jannik-sinner/matches), [Wimbledon officiel](https://www.wimbledon.com/en_GB/news/wimbledon_2026_sinner_zverev_final) et [Reuters via CNA](https://www.channelnewsasia.com/sport/sinner-miss-rest-2026-recover-knee-injury-6435866). Les 7 scores ajoutés sont fixes et ne constituent pas un flux automatique.
 - **Autres sports** (tennis de table, cyclisme, natation, rugby) : actualités et liens de recherche; aucun score individuel automatique n'est garanti à ce stade.
 
 ### Sources historiques tennis et licences
