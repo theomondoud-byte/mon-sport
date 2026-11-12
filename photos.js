@@ -1,4 +1,4 @@
-// Mon Sport V11 — portraits de sportifs et logos d'équipes, chargés depuis
+// Mon Sport V12 — portraits de sportifs et logos d'équipes, chargés depuis
 // leurs producteurs (Wikimedia/ESPN) et vérifiés avant affichage.
 // Aucun portrait fictif ni photo d'une autre personne.
 const KNOWN={
@@ -8,10 +8,10 @@ const KNOWN={
  'Léon Marchand':'Léon Marchand - JO 2024.jpg',
  'Félix Lebrun':'Félix Lebrun (FRA) 2022.jpg',
  'Alexis Lebrun':'Alexis Lebrun.jpg',
- 'Paul Seixas':'Paul Seixas.jpg',
+ 'Paul Seixas':"Paul Seixas - 2026 UCI Road World Championships (Men's time trial).jpg",
  'Kylian Mbappé':'Kylian Mbappé.jpg',
  'Victor Wembanyama':'Victor Wembanyama.jpg',
- 'Moïse Kouamé':'Moïse Kouamé (2026 US Open) 02 (cropped).jpg',
+ 'Moïse Kouamé':'Moïse Kaoumé (James Tamim crop) (cropped).jpg',
  'Mirra Andreeva':'Mirra Andreeva.jpg',
  'Rafael Jódar':'Rafael Jódar Roland Garros 2026 (cropped).jpg'
 };
@@ -39,7 +39,7 @@ const TEAMS={
  'Équipe de France de football':{league:'soccer/fifa.world',test:/^france$|france national/i,wiki:'France national football team'},
  'XV de France':{league:'rugby/180659',test:/^france$|france rugby/i,wiki:'France national rugby union team'}
 };
-const CACHE='mon-sport-photo-v11:';
+const CACHE='mon-sport-photo-v12:';
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z ]/g,' ').trim().replace(/\s+/g,' ');
 const samePerson=(name,title)=>{
  const x=normalize(name).split(' '),y=normalize(title).split(' ');
@@ -49,14 +49,24 @@ const fileLink=file=>'https://commons.wikimedia.org/wiki/File:'+encodeURICompone
 const fileRedirect=file=>'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(file)+'?width=380';
 const validImage=url=>/^https:\/\/(?:upload\.wikimedia\.org|a\.espncdn\.com)\//.test(String(url||''));
 export function photoInitials(name){return String(name||'').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase()||'★';}
+const OFFICIAL_LOGOS={
+ 'FC Barcelone':{src:'https://a.espncdn.com/i/teamlogos/soccer/500/83.png',url:'https://www.espn.com/soccer/team/_/id/83/barcelona'},
+ 'Real Madrid':{src:'https://a.espncdn.com/i/teamlogos/soccer/500/86.png',url:'https://www.espn.com/soccer/team/_/id/86/real-madrid'},
+ PSG:{src:'https://a.espncdn.com/i/teamlogos/soccer/500/160.png',url:'https://www.espn.com/soccer/team/_/id/160/paris-saint-germain'},
+ 'San Antonio Spurs':{src:'https://a.espncdn.com/i/teamlogos/nba/500/sas.png',url:'https://www.nba.com/spurs'}
+};
 export function staticPortrait(name){
- if(name==='San Antonio Spurs')return {src:'https://a.espncdn.com/i/teamlogos/nba/500/sas.png',
-  fallbackSrc:null,creditUrl:'https://www.nba.com/spurs',credit:'Logo NBA',source:'ESPN'};
- if(name==='FC Barcelone')return {src:fileRedirect('FC Barcelona Logo on Window.jpg'),
-  fallbackSrc:null,creditUrl:fileLink('FC Barcelona Logo on Window.jpg'),credit:'Image du blason · Wikimedia Commons',source:'Commons'};
+ const logo=OFFICIAL_LOGOS[name];
+ if(logo)return {src:logo.src,fallbackSrc:null,creditUrl:logo.url,credit:'Logo du club · ESPN',source:'ESPN'};
  const file=KNOWN[name];
  return file?{src:fileRedirect(file),fallbackSrc:null,creditUrl:fileLink(file),
-  credit:'Wikimedia Commons · attribution/licence sur la fiche',source:'Commons'}:null;
+  credit:'Wikimedia Commons · attribution et licence sur la fiche',source:'Commons'}:null;
+}
+export function clearPhotoCache(favorites){
+ for(const f of favorites||[]){
+  const name=typeof f==='string'?f:f?.name;
+  if(name)try{localStorage.removeItem(CACHE+name);}catch{}
+ }
 }
 async function requestJSON(url){
  const r=await fetch(url,{signal:AbortSignal.timeout(8000),cache:'no-store'});
