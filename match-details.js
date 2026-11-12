@@ -22,9 +22,14 @@ export function matchVerdict(match,favorite){
  // Pas de V/D inventé pour un chrono de natation, une course où le
  // sportif termine quatrième ou un match NBA sans feuille nominative.
  if(!isEvent)return null;
- if(orig.outcome==='Victoire')return 'V';
- if(orig.outcome==='Défaite')return 'D';
- if(orig.outcome==='Nul')return 'N';
+ if(orig.outcome==='Victoire'||orig.outcome==='Défaite'||orig.outcome==='Nul'){
+  // Si deux favoris se sont affrontés, le relevé est généralement rédigé
+  // du point de vue du premier. Le verdict du second doit être inversé.
+  let verdict=orig.outcome==='Victoire'?'V':orig.outcome==='Défaite'?'D':'N';
+  if(verdict!=='N'&&orig.favorite&&orig.favorite!==favorite&&match.favorites?.includes(favorite))
+   verdict=verdict==='V'?'D':'V';
+  return verdict;
+ }
  if(typeof orig.winner==='boolean')return orig.winner?'V':'D';
  const home=String(orig.home||''),away=String(orig.away||'');
  if(!home||!away)return null;
