@@ -50,17 +50,26 @@ export function summaryForMatch(match,favorite){
  const past=!!match.finished;
  const scoreText=score?' Score indiqué : '+score+'.':'';
  const stage=match.live?'est en cours':past?'est terminée':'est programmée';
- let result='La rencontre '+label+' '+stage+' en '+competition+round+'.'+scoreText;
+ let result;
+ if(match.isCompetition){
+  result='Compétition annoncée pour '+selected+' : '+label+' ('+competition+').';
+  result+=' Les adversaires, le tableau et les horaires des rencontres individuelles seront précisés par l’organisateur.';
+ }else if(/cyclisme|cycling/i.test(match.type||'')){
+  result='Résultat de cyclisme de '+selected+' : '+label+', '+competition+'.'+scoreText;
+ }else{
+  result='La rencontre '+label+' '+stage+' en '+competition+round+'.'+scoreText;
+ }
  if(verdict==='V')result+=' Victoire de '+selected+'.';
  else if(verdict==='D')result+=' Défaite de '+selected+'.';
  else if(verdict==='N')result+=' Match nul pour '+selected+'.';
+ if(match.notes)result+=' '+String(match.notes);
  if(match.uncertainParticipation)result+=' Il s’agit du calendrier de son équipe : la participation du sportif n’est pas confirmée.';
  if(match.approximate)result+=' La date est celle de la semaine du tournoi, pas nécessairement celle du match.';
  const stats=match.stats&&typeof match.stats==='object'?Object.entries(match.stats)
   .filter(([,v])=>v!==null&&v!==undefined&&v!=='')
   .map(([k,v])=>({name:({pts:'Points',reb:'Rebonds',ast:'Passes',blk:'Contres'})[k]||k.toUpperCase(),value:String(v)})):[];
  return {
-  title:past?'Résumé du résultat':'Présentation de la rencontre',
+  title:match.isCompetition?'Présentation de la compétition':past?'Résumé du résultat':'Présentation de la rencontre',
   text:result,
   stats,
   caveat:past
