@@ -69,7 +69,7 @@ export async function auditEspn2026(favorites,leagues,onProgress=()=>{},now=new 
       opponent:opp,competition:item.league.name,
       score:score(home)+'-'+score(away),
       status:'Terminé',source:'ESPN',
-      sourceUrl:fav==='PSG'?'https://www.psg.fr/equipes/equipe-premiere/calendrier':fav==='Real Madrid'?'https://www.realmadrid.com/fr-FR/football/equipe-premiere/calendrier':fav==='San Antonio Spurs'?'https://www.nba.com/spurs/schedule':'https://www.fff.fr',
+      sourceUrl:fav==='PSG'?'https://www.psg.fr/football-masculin/calendrier':fav==='Real Madrid'?'https://www.realmadrid.com/fr-FR/calendrier?filter-football=primer-equipo-masculino':fav==='San Antonio Spurs'?'https://www.nba.com/spurs/schedule':'https://www.fff.fr',
       outcome:null,type:'team'
     });
    }
