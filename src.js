@@ -119,7 +119,7 @@ async function espnResults(){
     result.push({id:'espn-'+event.id,home:espnName(home),away:espnName(away),
      homeScore:started?espnScore(home):null,awayScore:started?espnScore(away):null,
      date:event.date||c.date,status:completed?'Terminé':(started?'En cours':'À venir'),favorite,
-     competition:league.name,source:'ESPN ('+league.name+')',
+     competition:league.name,leaguePath:league.url,espnEventId:String(event.id),source:'ESPN ('+league.name+')',
      sourceUrl:league.url.startsWith('basketball/')?'https://www.espn.com/nba/scoreboard':'https://www.espn.com/soccer/scoreboard'});
     count++;
    }
@@ -187,7 +187,7 @@ function getTennisMatches(events,league,start,end,tennisFavorites){
      items.push({id:key,type:'tennis',favorite:favorite.name,sport:'Tennis',date:matchDate,
       title:`${names[0]} — ${names[1]}`,competition:tournament.name||'Tennis',round,
       score:score||(completed?'Score par set indisponible':started?'Match en cours':'Match à venir'),
-      status:statusText,outcome,source:`ESPN ${league.toUpperCase()}`,
+      status:statusText,outcome,leaguePath:'tennis/'+league,espnEventId:String(c.id||tournament.id||''),source:`ESPN ${league.toUpperCase()}`,
       sourceUrl:'https://www.espn.com/tennis/scoreboard'});
     }
    }
@@ -264,7 +264,7 @@ async function wembanyamaResults(teamEvents){
    if(!stats)continue;
    events.push({type:'nba',id:'wemby-'+match.id,favorite:wembyFav.name,sport:'Basketball',
     date:match.date,title:`${match.home} — ${match.away}`,competition:'NBA',status:'Terminé',
-    stats,source:'ESPN NBA'});
+    stats,leaguePath:'basketball/nba',espnEventId:match.id.slice(5),source:'ESPN NBA'});
   }catch(e){issues.push(`Statistiques NBA indisponibles (${String(e.message||e)}).`);}
  }
  if(!events.length&&!issues.length)issues.push('Victor Wembanyama : statistiques individuelles absentes des feuilles de match disponibles.');
