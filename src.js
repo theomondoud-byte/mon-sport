@@ -654,7 +654,7 @@ async function refresh(){
  loading=true;errors=[];scoreNotes=[];individualNotes=[];render();
  try{
   const articles=workerUrl?favorites.slice(0,22):[];
-  const [espn,tennis,newsGroups,extraNews]=await Promise.all([
+  const [espn,tennis,newsGroups,extraNews,fflNews]=await Promise.all([
    espnResults(),
    tennisResults(),
    Promise.all(articles.map(async f=>{
@@ -663,7 +663,14 @@ async function refresh(){
      return (data.articles||[]).slice(0,6).map(a=>({...a,favorite:f.name}));
     }catch{return []}
    })),
-   fetchSportsNews(favorites).catch(()=>[])
+   fetchSportsNews(favorites).catch(()=>[]),
+   fetchFFLNews().catch(async()=>{
+    // Repli Google News site: FFL si l'API WordPress refuse CORS.
+    if(!workerUrl)return [];
+    try{const response=await request('/api/news',{q:'site:fflose.com sport'});return (response.articles||[])
+      .filter(a=>/^https:\/\/fflose\.com\//.test(a.link||''))
+      .map(a=>({...a,favorite:'FFL',source:'FFL'}));}catch{return []}
+   })
   ]);
   scoreNotes.push(...espn.notes);
   const seen=new Set();
@@ -675,8 +682,8 @@ async function refresh(){
   const nba=await wembanyamaResults(matches);
   individualResults=[...tennis.events,...nba.events].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
   individualNotes.push(...tennis.notes,...nba.notes);
-  news=newsLastWeek([...newsGroups.flat(),...extraNews],new Date());
-  if(!workerUrl)errors.push('Configure le Worker dans Réglages pour afficher les actualités. Les scores ESPN restent consultables sans Worker.');
+  news=newsLastWeek([...newsGroups.flat(),...extraNews,...fflNews],new Date());
+  if(!workerUrl&&!news.length)errors.push('Aucun article reçu de la FFL ou d’ESPN. Le relais Cloudflare est facultatif.');
   else if(!news.length)errors.push('Aucune actualité reçue du relais.');
   if(!matches.length&&!scoreNotes.length)scoreNotes.push('Aucune rencontre disponible pour PSG, Real Madrid ou Spurs sur la période consultée.');
  }catch(e){errors.push('Actualisation impossible : '+String(e.message||e));}
