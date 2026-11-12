@@ -19,7 +19,7 @@ export function agendaWindow(view,phase,now=new Date()){
  return past?{from:interval,to:t,days:view==='favori'?null:7}
   :{from:t,to:interval,days:view==='favori'?null:7};
 }
-const precise=x=>!x.approxDate&&!x.snapshot&&x.type!=='manual2026'&&x.type!=='tennis-history'&&x.type!=='verified2026';
+const precise=x=>!x.approxDate&&!x.snapshot&&!String(x.id||'').startsWith('verified26-')&&x.type!=='manual2026'&&x.type!=='tennis-history'&&x.type!=='verified2026';
 const selected=x=>Array.isArray(x)?x:[];
 export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expanded=[]}={}){
  const all=[];
@@ -39,9 +39,18 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   const type=item.type==='nba'?'nba':item.type==='tennis'||item.type==='tennis-history'?'tennis':item.type==='verified2026'||item.type==='manual2026'?'verified':item.home?'team':item.type||'other';
   const noExactHour=!precise(item);
   // L'heure fictive de midi des relevés manuels n'est JAMAIS montrée.
-  const names=title.split(' — ').map(norm).sort().join('|');
-  const key=item.id?.startsWith('espn-')?'event:'+item.id.replace(/^espn-/,'')
-   :item.id?.startsWith('agenda-espn-')?'event:'+item.id.replace(/^agenda-espn-/,'')
+  const personKey=name=>{
+   const tokens=norm(name).split(' ').filter(Boolean);
+   if(tokens.length<2)return tokens[0]||'';
+   return tokens.at(-1).length===1?tokens[0]+'-'+tokens.at(-1):tokens.at(-1)+'-'+tokens[0][0];
+  };
+  const names=title.split(' — ').map(type==='tennis'?personKey:norm).sort().join('|');
+  const eventKey=item.id?.startsWith('agenda-espn-')?'event:'+item.id.replace(/^agenda-espn-/,'')
+    :item.id?.startsWith('espn-')?'event:'+item.id.replace(/^espn-/,''):null;
+  // En simple, une même rencontre ATP peut être livrée à la fois par ESPN,
+  // les archives et le relevé manuel avec des noms abrégés.
+  const key=eventKey&&type!=='tennis'?eventKey
+   :type==='tennis'?'tennis:'+day+':'+names
    :type+':'+day+':'+names+':'+norm(competition);
   all.push({
    key,id:item.id||key,date:originalDate,day,favorite:item.favorite,title,score,
