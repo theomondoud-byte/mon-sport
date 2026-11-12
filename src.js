@@ -393,7 +393,7 @@ function agendaItems(){
   ?agendaExtended:[];
  return makeAgenda({
   teams:matches,individuals:individualResults,history:historyResults,
-  verified:[...favorites.flatMap(f=>verified2026For(f.name)),...verified.past,...extra.past],
+  verified:[...favorites.flatMap(f=>verified2026For(f.name)),...verified.past,...extra.past,...(verified.pending||[]),...(extra.pending||[])],
   expanded:[...expanded,...verified.future,...extra.future]
  });
 }
