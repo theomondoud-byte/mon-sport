@@ -40,7 +40,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +(item.uncertainParticipation?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'');
  const sourceLink=recap.url&&safeUrl(recap.url)!=='#'
   ?'<a href="'+esc(safeUrl(recap.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a>':'';
- const scoreText=item.isCompetition?'Tableau et horaires à confirmer'
+ const scoreText=item.isCompetition?(/cycling|cyclisme/i.test(item.type)?'Horaire et résultat à confirmer':'Tableau et horaires à confirmer')
   :item.score||(!item.finished?'Score à venir':'Score indisponible');
  const timing=item.isCompetition&&item.endDate
   ?'Du '+dateLabel(item.date,{day:'numeric',month:'short'})+' au '+dateLabel(item.endDate,{day:'numeric',month:'short',year:'numeric'})
