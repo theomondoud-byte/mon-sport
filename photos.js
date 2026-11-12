@@ -136,9 +136,9 @@ export async function loadFavoritePhotos(favorites,onPhoto=()=>{}){
   if(quick){result[f.name]=quick;onPhoto(f.name,quick);}
   queue.push(f.name);
  }
- // 3 requêtes en parallèle ; aucun blocage global si une API est en panne.
- for(let i=0;i<queue.length;i+=3){
-  const batch=await Promise.all(queue.slice(i,i+3).map(async name=>{
+ // 5 fiches maximum en parallèle ; les autres chargements ne bloquent pas l'écran.
+ for(let i=0;i<queue.length;i+=5){
+  const batch=await Promise.all(queue.slice(i,i+5).map(async name=>{
    let photo=null;try{photo=await findPortrait(name);}catch{}
    if(photo)try{localStorage.setItem(CACHE+name,JSON.stringify({photo,at:Date.now()}));}catch{}
    return {name,photo};
