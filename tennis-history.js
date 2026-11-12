@@ -1,4 +1,4 @@
-// Mon Sport V6 — Archives gratuites ATP, Challenger, ITF et WTA.
+// Mon Sport V8 — Archives gratuites ATP, Challenger, ITF et WTA.
 // Source : Jeff Sackmann, miroir Aneeshers/tennis-sackmann-archive.
 // Licence des DONNÉES : CC BY-NC-SA 4.0 (usage personnel et non commercial).
 // Le miroir a été mis à jour le 25 juin 2026 : il ne donne PAS les derniers matchs.
@@ -14,7 +14,7 @@ const filesForYear=year=>[
  [`wta/wta_matches_${year}.csv`,'WTA'],
  [`wta/wta_matches_qual_itf_${year}.csv`,'ITF féminin / qualifications']
 ];
-const CACHE_PREFIX='mon-sport-history-v6:';
+const CACHE_PREFIX='mon-sport-history-v8:';
 const SNAPSHOT_DATE='2026-11-12';
 // Sources des faits : TennisExplorer et TennisTemple (liens uniquement, pas de scraping).
 // Relevé MANUEL : ne prétend pas se mettre à jour automatiquement.
@@ -170,7 +170,7 @@ function dateOfWeek(raw){
  if(!/^\d{8}$/.test(s))return null;
  return s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6,8)+'T12:00:00Z';
 }
-export function extractArchive(csv,source,favorites){
+export function extractArchive(csv,source,favorites,year=2026){
  const lines=parseCsv(csv);
  if(lines.length<2)return [];
  const headers=lines.shift(),ix=k=>headers.indexOf(k);
@@ -185,9 +185,9 @@ export function extractArchive(csv,source,favorites){
    const week=dateOfWeek(cells[ix('tourney_date')]);
    const preciseField=ix('start_time_utc')>=0?cells[ix('start_time_utc')]:null;
    const timestamp=Date.parse(preciseField||'');
-   const precise=Number.isFinite(timestamp)&&new Date(timestamp).getUTCFullYear()===2026;
+   const precise=Number.isFinite(timestamp)&&new Date(timestamp).getUTCFullYear()===year;
    const exactDate=precise?new Date(timestamp).toISOString():week;
-   if(!exactDate||!exactDate.startsWith('2026-'))continue;
+   if(!exactDate||!exactDate.startsWith(year+'-'))continue;
    for(const f of selected){
      const won=sameName(f.name,win);
      items.push({
@@ -227,23 +227,23 @@ const uniqueMatches=list=>{
 // contacter (CORS, délai, indisponibilité), retour à l'archive de juin 2026.
 const WEEKLY='https://huggingface.co/datasets/minmaxxxer/atp-wta-matches-with-odds/resolve/main/';
 export async function loadArchiveTennis(favorites,year=2026){
- if(year!==2026)throw Error('Mon Sport suit seulement 2026.');
+ if(![2025,2026].includes(year))throw Error('Archive disponible : 2025 ou 2026.');
  const players=favorites.filter(f=>f.sport==='Tennis'&&f.type==='sportif');
  if(!players.length)return {events:[],notes:[]};
- const key=CACHE_PREFIX+players.map(f=>normalized(f.name)).sort().join('|');
+ const key=CACHE_PREFIX+year+':'+players.map(f=>normalized(f.name)).sort().join('|');
  try{
   const cached=JSON.parse(localStorage.getItem(key)||'null');
   if(cached&&Date.now()-cached.saved<24*3600*1000&&Array.isArray(cached.events))return cached;
  }catch{}
  const hasWomen=players.some(p=>/andreeva|swiatek|sabalenka|gauff|rybakina|paolini|raducanu|osaka|pegula|jabeur|sakkari|kasatkina|badosa|fernandez|siegemund|krejcikova|samsonova|svitolina|vondrousova|mertens|mirra/i.test(normalized(p.name)));
  const primary=[
-  {name:'ATP',weekly:'atp_matches_2026.csv',archive:'atp/atp_matches_2026.csv'},
-  ...(hasWomen?[{name:'WTA',weekly:'wta_matches_2026.csv',archive:'wta/wta_matches_2026.csv'}]:[])
+  {name:'ATP',weekly:'atp_matches_'+year+'.csv',archive:'atp/atp_matches_'+year+'.csv'},
+  ...(hasWomen?[{name:'WTA',weekly:'wta_matches_'+year+'.csv',archive:'wta/wta_matches_'+year+'.csv'}]:[])
  ];
  const get=async(url,label)=>{
   const r=await fetch(url,{signal:AbortSignal.timeout(20000),cache:'no-store'});
   if(!r.ok)throw Error('HTTP '+r.status);
-  return extractArchive(await r.text(),label,players);
+  return extractArchive(await r.text(),label,players,year);
  };
  const tour=await Promise.all(primary.map(async item=>{
   try{return {name:item.name,mode:'weekly',events:await get(WEEKLY+item.weekly,'Hebdomadaire '+item.name)};}
@@ -253,17 +253,17 @@ export async function loadArchiveTennis(favorites,year=2026){
   }
  }));
  const extras=[
-  ['atp/atp_matches_qual_chall_2026.csv','ATP / Challenger / qualifications'],
-  ['atp/atp_matches_futures_2026.csv','ITF masculin'],
-  ...(hasWomen?[['wta/wta_matches_qual_itf_2026.csv','ITF féminin / qualifications']]:[])
+  ['atp/atp_matches_qual_chall_'+year+'.csv','ATP / Challenger / qualifications'],
+  ['atp/atp_matches_futures_'+year+'.csv','ITF masculin'],
+  ...(hasWomen?[['wta/wta_matches_qual_itf_'+year+'.csv','ITF féminin / qualifications']]:[])
  ];
  const more=await Promise.allSettled(extras.map(([file,label])=>get(MIRROR+file,label)));
  const raw=[...tour.flatMap(x=>x.events),...more.flatMap(x=>x.status==='fulfilled'?x.value:[])];
- const events=uniqueMatches(raw).filter(e=>e.date.startsWith('2026-'));
+ const events=uniqueMatches(raw).filter(e=>e.date.startsWith(year+'-'));
  const notes=[
-  'Seuls les simples 2026 recensés sont comptés. L’exhaustivité par joueur n’est pas garantie.',
-  'Tour principal ATP/WTA : Min Maxxxer (CC BY 4.0), fichiers 2026 hebdomadaires si accessibles.',
-  'Challenger / ITF / qualifications : Jeff Sackmann (CC BY-NC-SA 4.0), miroir arrêté en juin 2026.'
+  'Matchs de simple '+year+' recensés (période limitée aux 12 derniers mois dans la vue Favori). Couverture partielle possible.',
+  'Tour principal ATP/WTA : Min Maxxxer (CC BY 4.0), fichiers '+year+' si accessibles.',
+  'Challenger / ITF / qualifications : Jeff Sackmann (CC BY-NC-SA 4.0), miroir actualisé en juin 2026. La couverture 2026 après juin reste partielle.'
  ];
  for(const item of tour)if(item.mode!=='weekly')notes.push(item.name+' : '+(item.mode==='failed'?'aucune source disponible.':'source hebdomadaire indisponible, repli sur juin 2026.'));
  const incomplete=more.filter(x=>x.status==='rejected').length;
