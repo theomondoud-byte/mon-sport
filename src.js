@@ -581,7 +581,18 @@ function bindContent(){
    slot.textContent='Recherche des statistiques de cette rencontre…';
    try{
     const details=await loadEventDetails(item);
-    if(card.isConnected&&card.open)slot.innerHTML=renderEventDetails(details,esc);
+    if(card.isConnected&&card.open){
+     const near=findMatchArticles(item,news);
+     const reports=near.length?'<div class="event-editorial"><h5>📰 Articles sur cette rencontre</h5>'
+       +near.map(n=>'<a href="'+esc(safeUrl(n.link))+'" target="_blank" rel="noopener noreferrer">'+esc(n.title)+' · '+esc(n.source||'Éditeur')+' ↗</a>').join('')+'</div>':'';
+     const q=[item.title,item.competition,new Date(item.date).getFullYear(),'résumé'].filter(Boolean).join(' ');
+     const search='https://news.google.com/search?q='+encodeURIComponent(q)+'&hl=fr&gl=FR&ceid=FR:fr';
+     const source=item.sourceUrl&&safeUrl(item.sourceUrl)!=='#'
+      ?'<a href="'+esc(safeUrl(item.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Source sportive ↗</a>':'';
+     slot.innerHTML='<div class="event-article-summary"><h4>Compte rendu sportif</h4><p>Résultat et statistiques issus des sources affichées ci-dessous.</p></div>'
+      +renderEventDetails(details,esc)+reports
+      +'<div class="event-source-links">'+source+'<a href="'+esc(search)+'" target="_blank" rel="noopener noreferrer">Chercher un article de cette rencontre ↗</a></div>';
+    }
    }catch(e){
     if(card.isConnected)slot.textContent='Données détaillées indisponibles : '+String(e.message||e);
    }
