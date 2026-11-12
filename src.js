@@ -524,15 +524,16 @@ async function refresh(){
  loading=true;errors=[];scoreNotes=[];individualNotes=[];render();
  try{
   const articles=workerUrl?favorites.slice(0,18):[];
-  const [espn,tennis,newsGroups]=await Promise.all([
+  const [espn,tennis,newsGroups,extraNews]=await Promise.all([
    espnResults(),
    tennisResults(),
    Promise.all(articles.map(async f=>{
     try{
      const data=await request('/api/news',{q:f.name+' '+f.sport});
-     return (data.articles||[]).slice(0,2).map(a=>({...a,favorite:f.name}));
+     return (data.articles||[]).slice(0,6).map(a=>({...a,favorite:f.name}));
     }catch{return []}
-   }))
+   })),
+   fetchSportsNews(favorites).catch(()=>[])
   ]);
   scoreNotes.push(...espn.notes);
   const seen=new Set();
@@ -544,7 +545,7 @@ async function refresh(){
   const nba=await wembanyamaResults(matches);
   individualResults=[...tennis.events,...nba.events].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
   individualNotes.push(...tennis.notes,...nba.notes);
-  news=newsGroups.flat().filter(a=>a.title&&a.link).filter((a,i,array)=>array.findIndex(b=>b.link===a.link)===i).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).slice(0,40);
+  news=newsLastWeek([...newsGroups.flat(),...extraNews],new Date());
   if(!workerUrl)errors.push('Configure le Worker dans Réglages pour afficher les actualités. Les scores ESPN restent consultables sans Worker.');
   else if(!news.length)errors.push('Aucune actualité reçue du relais.');
   if(!matches.length&&!scoreNotes.length)scoreNotes.push('Aucune rencontre disponible pour PSG, Real Madrid ou Spurs sur la période consultée.');
