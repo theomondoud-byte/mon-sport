@@ -1,4 +1,4 @@
-// Mon Sport V5.1 — Archives gratuites ATP, Challenger, ITF et WTA.
+// Mon Sport V5.2 — Archives gratuites ATP, Challenger, ITF et WTA.
 // Source : Jeff Sackmann, miroir Aneeshers/tennis-sackmann-archive.
 // Licence des DONNÉES : CC BY-NC-SA 4.0 (usage personnel et non commercial).
 // Le miroir a été mis à jour le 25 juin 2026 : il ne donne PAS les derniers matchs.
@@ -7,14 +7,14 @@ export const TENNIS_HISTORY_SOURCE =
 export const TENNIS_LATEST_SOURCE =
   'https://fr.tennistemple.com/player/moise-kouame/results';
 const MIRROR='https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/main/';
-const CSV_FILES=[
- ['atp/atp_matches_2026.csv','ATP'],
- ['atp/atp_matches_qual_chall_2026.csv','ATP / Challenger / qualifications'],
- ['atp/atp_matches_futures_2026.csv','ITF masculin'],
- ['wta/wta_matches_2026.csv','WTA'],
- ['wta/wta_matches_qual_itf_2026.csv','ITF féminin / qualifications']
+const filesForYear=year=>[
+ [`atp/atp_matches_${year}.csv`,'ATP'],
+ [`atp/atp_matches_qual_chall_${year}.csv`,'ATP / Challenger / qualifications'],
+ [`atp/atp_matches_futures_${year}.csv`,'ITF masculin'],
+ [`wta/wta_matches_${year}.csv`,'WTA'],
+ [`wta/wta_matches_qual_itf_${year}.csv`,'ITF féminin / qualifications']
 ];
-const CACHE_PREFIX='mon-sport-history-v5-1:';
+const CACHE_PREFIX='mon-sport-history-v5-2:';
 const SNAPSHOT_DATE='2026-11-12';
 // Sources des faits : TennisExplorer et TennisTemple (liens uniquement, pas de scraping).
 // Relevé MANUEL : ne prétend pas se mettre à jour automatiquement.
@@ -41,7 +41,46 @@ const KOUAME_MATCHES=[
  ['2026-08-25','Nishesh Basavareddy','D','7-6(3) 4-6 6-3','US Open - qualifications','Qualification 1'],
  ['2026-07-29','Edward Winter','D','6-1 6-4','Los Cabos ATP 250','Premier tour'],
  ['2026-07-14','Nuno Borges','D','6-4 6-2','Bastad ATP 250','Premier tour'],
- ['2026-07-06','Max Hans Rehberg','D','6-4 6-4','Braunschweig Challenger','Premier tour']
+ ['2026-07-06','Max Hans Rehberg','D','6-4 6-4','Braunschweig Challenger','Premier tour'],
+ ["2026-08-22','Moez Echargui','D','6-4 2-6 7-6(5)','Cancun Challenger','Quart de finale"],
+ ["2026-08-21','Roman Andrés Burruchaga','V','6-2 6-2','Cancun Challenger','Huitième de finale"],
+ ["2026-08-20','Felipe Meligeni Alves','V','6-1 6-4','Cancun Challenger','Premier tour"],
+ ["2026-05-30','Alejandro Tabilo','D','4-6 6-3 6-4 7-6(9)','Roland-Garros','Troisième tour"],
+ ["2026-05-28','Adolfo Daniel Vallejo','V','6-3 7-5 3-6 2-6 7-6(8)','Roland-Garros','Deuxième tour"],
+ ["2026-05-26','Marin Čilić','V','7-6(4) 6-2 6-1','Roland-Garros','Premier tour"],
+ ["2026-05-19','Jacopo Vasami','D','6-3 7-6(3)','Cervia Challenger','Premier tour"],
+ ["2026-05-12','Benjamin Bonzi','D','2-6 6-4 6-0','Bordeaux Challenger','Premier tour"],
+ ["2026-04-20','Patrick Kypson','D','6-2 6-2','Madrid Masters - qualifications','Qualification 1"],
+ ["2026-04-18','Juan Cruz Martin Manzano','V','6-3 4-6 6-3','Santa Margherita di Pula ITF M25','Finale"],
+ ["2026-04-17','Philip Henning','V','6-2 6-3','Santa Margherita di Pula ITF M25','Demi-finale"],
+ ["2026-04-17','Andrey Chepelev','V','6-1 6-2','Santa Margherita di Pula ITF M25','Quart de finale"],
+ ["2026-04-15','Francesco Ferrari','V','6-2 6-0','Santa Margherita di Pula ITF M25','Huitième de finale"],
+ ["2026-04-14','Henry Bernet','V','7-5 2-6 6-4','Santa Margherita di Pula ITF M25','Premier tour"],
+ ["2026-04-05','Ugo Humbert','D','6-3 7-5','Monte-Carlo Masters','Premier tour"],
+ ["2026-03-21','Jiří Lehečka','D','6-2 7-5','Miami Masters','Deuxième tour"],
+ ["2026-03-19','Zachary Svajda','V','5-7 6-4 6-4','Miami Masters','Premier tour"],
+ ["2026-03-06','Hugo Gaston','D','3-6 6-3 6-4','Thionville Challenger','Quart de finale"],
+ ["2026-03-04','Giulio Zeppieri','V','6-1 1-0 (abandon adverse)','Thionville Challenger','Huitième de finale"],
+ ["2026-03-03','Jelle Sels','V','6-3 6-0','Thionville Challenger','Premier tour"],
+ ["2026-02-25','Titouan Droguet','D','7-6(3) 6-4','Saint-Brieuc Challenger','Premier tour"],
+ ["2026-02-21','Luca Van Assche','D','6-1 6-1','Lille Challenger','Demi-finale"],
+ ["2026-02-20','Nishesh Basavareddy','V','6-3 6-3','Lille Challenger','Quart de finale"],
+ ["2026-02-19','Joel Schwärzler','V','6-3 6-4','Lille Challenger','Huitième de finale"],
+ ["2026-02-17','Matej Dodig','V','6-4 6-2','Lille Challenger','Premier tour"],
+ ["2026-02-10','Henri Squire','D','6-3 7-5','Pau Challenger','Premier tour"],
+ ["2026-02-04','Aleksandar Kovacevic','D','6-7(5) 6-2 6-2','Montpellier ATP 250','Premier tour"],
+ ["2026-02-02','Clément Chidekh','V','7-5 6-7(6) 6-3','Montpellier ATP 250 - qualifications','Qualification 2"],
+ ["2026-02-01','Elias Ymer','V','6-4 4-6 7-5','Montpellier ATP 250 - qualifications','Qualification 1"],
+ ["2026-01-18','Pierre-Yves Bailly','V','6-1 6-4','Bressuire ITF M15','Finale"],
+ ["2026-01-17','Cannon Kingsley','V','6-2 6-4','Bressuire ITF M15','Demi-finale"],
+ ["2026-01-16','Amaury Raynel','V','6-4 7-6(5)','Bressuire ITF M15','Quart de finale"],
+ ["2026-01-15','Martin Sabas','V','5-7 6-3 6-4','Bressuire ITF M15','Huitième de finale"],
+ ["2026-01-14','Arthur Nagel','V','6-1 6-3','Bressuire ITF M15','Premier tour"],
+ ["2026-01-11','Théo Papamalamis','V','7-6(5) 6-1','Hazebrouck ITF M25','Finale"],
+ ["2026-01-10','Lucas Poullain','V','6-3 6-2','Hazebrouck ITF M25','Demi-finale"],
+ ["2026-01-09','Arthur Nagel','V','6-2 6-7(5) 7-6(5)','Hazebrouck ITF M25','Quart de finale"],
+ ["2026-01-08','Yanis Ghazouani Durand','V','3-6 6-2 6-4','Hazebrouck ITF M25','Huitième de finale"],
+ ["2026-01-07','Timo Legout','V','3-6 7-6(5) (abandon adverse)','Hazebrouck ITF M25','Premier tour"]
 ];
 const normalized=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
   .toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
@@ -129,17 +168,19 @@ const uniqueMatches=list=>{
    return true;
  }).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
 };
-export async function loadArchiveTennis(favorites){
+export async function loadArchiveTennis(favorites,year=2026){
+ if(![2025,2026].includes(year))throw Error('Année non prise en charge');
  const players=favorites.filter(f=>f.sport==='Tennis'&&f.type==='sportif');
  if(!players.length)return {events:[],notes:[]};
- const key=CACHE_PREFIX+players.map(f=>normalized(f.name)).sort().join('|');
+ const key=CACHE_PREFIX+year+':'+players.map(f=>normalized(f.name)).sort().join('|');
  try{
    const cached=JSON.parse(localStorage.getItem(key)||'null');
    if(cached&&Date.now()-cached.saved<24*3600*1000&&Array.isArray(cached.events))return cached;
  }catch{}
- const sources=CSV_FILES.filter(([,category])=>{
+ const sources=filesForYear(year).filter(([,category])=>{
    const female=category.startsWith('WTA')||category.startsWith('ITF féminin');
-   const hasWomen=players.some(p=>normalized(p.name).includes('andreeva'));
+   const hasWomen=players.some(p=>/andreeva|swiatek|sabalenka|gauff|rybakina|paolini|raducanu|osaka|pegula|jabeur|sakkari|kasatkina|badosa|fernandez|siegemund|krejcikova|samsonova|svitolina|vondrousova|mertens|mirra|wta/i.test(normalized(p.name)));
+   // Inclure au moins les joueuses connues parmi les favoris; éviter un gros fichier WTA si inutile.
    return !female||hasWomen;
  });
  const results=await Promise.allSettled(sources.map(async ([filename,category])=>{
@@ -150,7 +191,7 @@ export async function loadArchiveTennis(favorites){
  const events=uniqueMatches(results.flatMap(r=>r.status==='fulfilled'?r.value:[]));
  const fails=results.filter(r=>r.status==='rejected');
  const notes=[
-   'Archive historique : copie datée du 25 juin 2026. Les jours affichés pour ces matchs sont les semaines de tournoi, pas les dates exactes.',
+   'Archive '+year+' : copie historique du 25 juin 2026. Les jours affichés sont les semaines de tournoi, pas forcément les dates exactes.',
    'Source : Jeff Sackmann (CC BY-NC-SA 4.0) via miroir public Aneeshers. Usage personnel non commercial.'
  ];
  if(fails.length)notes.push(fails.length+' fichier(s) historiques indisponible(s) : couverture incomplète.');
