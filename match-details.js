@@ -52,7 +52,9 @@ export function summaryForMatch(match,favorite){
  const scoreText=score?' Score indiqué : '+score+'.':'';
  const stage=match.live?'est en cours':past?'est terminée':'est programmée';
  let result;
- if(match.isCompetition){
+ if(match.pendingResult){
+  result='Événement annoncé : '+label+' ('+competition+'). Le score et la tenue effective de la rencontre n’ont pas encore été confirmés par les sources.';
+ }else if(match.isCompetition){
   result='Compétition annoncée pour '+selected+' : '+label+' ('+competition+').';
   result+=/cyclisme|cycling/i.test(match.type||'')
    ?' L’horaire précis du critérium et son classement seront confirmés par l’organisateur.'
@@ -72,10 +74,10 @@ export function summaryForMatch(match,favorite){
   .filter(([,v])=>v!==null&&v!==undefined&&v!=='')
   .map(([k,v])=>({name:({pts:'Points',reb:'Rebonds',ast:'Passes',blk:'Contres'})[k]||k.toUpperCase(),value:String(v)})):[];
  return {
-  title:match.isCompetition?'Présentation de la compétition':past?'Résumé du résultat':'Présentation de la rencontre',
+  title:match.pendingResult?'Résultat à vérifier':match.isCompetition?'Présentation de la compétition':past?'Résumé du résultat':'Présentation de la rencontre',
   text:result,
   stats,
-  caveat:past
+  caveat:match.pendingResult?'Aucun vainqueur ni résultat n’est déduit du seul calendrier.' :past
    ?'Résumé factuel construit à partir du score et des données disponibles. Les faits de jeu détaillés ne sont pas fournis.'
    :'Programme prévisionnel, sous réserve des changements annoncés par l’organisateur.',
   source:match.source||'Source sportive',

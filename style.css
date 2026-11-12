@@ -310,3 +310,13 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .favorite-profile{min-height:75px;padding:10px}
  .portrait-wrap.large,.portrait-placeholder.large{height:58px;width:58px}
 }
+
+/* Mon Sport V12 — logos sans recadrage et commandes photos mobiles */
+.portrait-wrap img[src*="a.espncdn.com"],.fav-thumb img[src*="a.espncdn.com"]{
+ object-fit:contain!important;object-position:center;padding:3px
+}
+#refreshPhotos{min-height:42px}
+#photoStatus{min-height:1.1em}
+
+.agenda-status.pending{background:#4e5260;color:#f6ebc4;border:1px solid #727c83}
+.agenda-event:has(.agenda-status.pending) .agenda-scoreline strong{color:#e8dca9;font-size:.92rem}

@@ -1,11 +1,11 @@
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=11.0.0';
-import {auditInfo} from './audit-2026.js?v=11.0.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=11.0.0';
-import {renderFavoriteStats} from './stats-view.js?v=11.0.0';
-import {photoInitials} from './photos.js?v=11.0.0';
-import {nextCompetitionNote} from './verified-program.js?v=11.0.0';
-import {coverageFor} from './coverage-v11.js?v=11.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=12.0.0';
+import {auditInfo} from './audit-2026.js?v=12.0.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=12.0.0';
+import {renderFavoriteStats} from './stats-view.js?v=12.0.0';
+import {photoInitials} from './photos.js?v=12.0.0';
+import {nextCompetitionNote} from './verified-program.js?v=12.0.0';
+import {coverageFor} from './coverage-v11.js?v=12.0.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -14,9 +14,9 @@ const fullDay=(day)=>new Date(day+'T12:00:00').toLocaleDateString('fr-FR',{weekd
 function avatar(name,photos,esc,safeUrl,size='tiny'){
  const image=photos?.[name];
  if(image?.src&&safeUrl(image.src)!=='#'){
-  return '<span class="portrait-wrap '+size+'"><img class="athlete-photo" data-photo-name="'+esc(name)+'" loading="lazy" decoding="async" alt="Photo de '+esc(name)+'" src="'+esc(safeUrl(image.src))+'"/><span class="portrait-error-initials">'+esc(photoInitials(name))+'</span></span>';
+  return '<span class="portrait-wrap '+size+'" data-photo-owner="'+esc(name)+'"><img class="athlete-photo" data-photo-name="'+esc(name)+'" loading="lazy" decoding="async" alt="Photo ou logo de '+esc(name)+'" src="'+esc(safeUrl(image.src))+'"/><span class="portrait-error-initials">'+esc(photoInitials(name))+'</span></span>';
  }
- return '<span class="portrait-placeholder '+size+'" aria-hidden="true">'+esc(photoInitials(name))+'</span>';
+ return '<span class="portrait-placeholder '+size+'" data-photo-owner="'+esc(name)+'" aria-hidden="true">'+esc(photoInitials(name))+'</span>';
 }
 function verdictChip(item,name,esc){
  const result=matchVerdict(item,name);
@@ -26,7 +26,7 @@ function verdictChip(item,name,esc){
 }
 function eventHtml(item,esc,safeUrl,photos,chosen){
  const isFuture=!item.finished;
- const state=item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
+ const state=item.pendingResult?'À vérifier':item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
  const people=item.favorites.map(name=>
   '<span class="agenda-person-tag">'+avatar(name,photos,esc,safeUrl)
   +'<span>'+esc(name)+'</span>'+verdictChip(item,name,esc)+'</span>').join('');
@@ -38,7 +38,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +(item.uncertainParticipation?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'');
  const sourceLink=recap.url&&safeUrl(recap.url)!=='#'
   ?'<a href="'+esc(safeUrl(recap.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a>':'';
- const scoreText=item.isCompetition?(/cycling|cyclisme/i.test(item.type)?'Horaire et résultat à confirmer':'Tableau et horaires à confirmer')
+ const scoreText=item.pendingResult?'Résultat non disponible':item.isCompetition?(/cycling|cyclisme/i.test(item.type)?'Horaire et résultat à confirmer':'Tableau et horaires à confirmer')
   :item.score||(!item.finished?'Score à venir':'Score indisponible');
  const timing=item.isCompetition&&item.endDate
   ?'Du '+dateLabel(item.date,{day:'numeric',month:'short'})+' au '+dateLabel(item.endDate,{day:'numeric',month:'short',year:'numeric'})
@@ -46,11 +46,11 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
  return '<details class="agenda-event" data-event-detail="'+esc(item.key)+'">'
    +'<summary class="agenda-event-clickable">'
    +'<div class="agenda-event-top"><div class="agenda-people">'+people+'</div>'
-   +(item.finished?'':'<span class="agenda-status '+(item.live?'live':'upcoming')+'">'+esc(state)+'</span>')+'</div>'
+   +(item.finished?'':'<span class="agenda-status '+(item.pendingResult?'pending':item.live?'live':'upcoming')+'">'+esc(state)+'</span>')+'</div>'
    +'<h3>'+esc(item.title)+'</h3>'
    +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong>'+(timing?'<span>'+esc(timing)+'</span>':'')+'</div>'
    +'<div class="agenda-detail">'+esc([item.competition,item.round].filter(Boolean).join(' · '))+'</div>'
-   +'<div class="agenda-open-hint"><span>'+(item.isCompetition?'Voir le programme':'Résumé')+'</span><span aria-hidden="true">⌄</span></div>'
+   +'<div class="agenda-open-hint"><span>'+(item.pendingResult?'Voir la source':item.isCompetition?'Voir le programme':'Résumé')+'</span><span aria-hidden="true">⌄</span></div>'
    +'</summary>'
    +'<div class="agenda-recap"><h4>'+esc(recap.title)+'</h4><p>'+esc(recap.text)+'</p>'
    +stats

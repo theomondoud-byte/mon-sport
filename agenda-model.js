@@ -1,4 +1,4 @@
-// Mon Sport V10 — modèle indépendant de la navigation et des sources.
+// Mon Sport V12 — modèle indépendant de la navigation et des sources.
 // Les fenêtres sont glissantes : 7 jours, 2 mois futurs et 12 mois passés par favori.
 // Seules les rencontres réellement renvoyées par les sources sont affichées.
 export const agendaNow=()=>new Date();
@@ -29,13 +29,14 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   const status=item.status||((item.type==='tennis-history'||item.type==='verified2026'||item.type==='manual2026')?'Terminé':'');
   const finished=status==='Terminé'||item.type==='tennis-history'||item.type==='verified2026'||item.type==='manual2026';
   const live=status==='En cours';
-  if(!finished&&!live&&status!=='À venir')continue;
+  const pendingResult=!!item.pendingResult&&status==='Résultat à vérifier';
+  if(!finished&&!live&&!pendingResult&&status!=='À venir')continue;
   const title=String(item.title||(item.home&&item.away?item.home+' — '+item.away:item.opponent?item.favorite+' — '+item.opponent:'Événement sportif'));
   const score=item.score||(item.homeScore!==undefined&&item.homeScore!==null&&item.awayScore!==undefined&&item.awayScore!==null?item.homeScore+' – '+item.awayScore:'');
   const source=String(item.source||'Source sportive');
   const competition=String(item.competition||source.replace(/^ESPN \(/,'').replace(/\)$/,''));
   const originalDate=item.date;
-  const day=originalDate.slice(0,10);
+  const day=item.pendingResult&&item.endDate?String(item.endDate).slice(0,10):originalDate.slice(0,10);
   const type=item.type==='nba'?'nba':item.type==='tennis'||item.type==='tennis-history'?'tennis':item.type==='verified2026'||item.type==='manual2026'?'verified':item.home?'team':item.type||'other';
   const noExactHour=!precise(item);
   // L'heure fictive de midi des relevés manuels n'est JAMAIS montrée.
@@ -63,7 +64,7 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    competition,round:item.round||'',status:finished?'Terminé':status,finished,live,
    datePrecision:noExactHour?'jour':'heure',approximate:!!item.approxDate,
    uncertainParticipation:!!item.uncertainParticipation,
-   isCompetition:!!item.scheduledCompetition,
+   pendingResult,isCompetition:!!item.scheduledCompetition,
    endDate:item.endDate||null,participationLevel:item.participationLevel||null,
    notes:item.notes||'',cycleUnit:item.cycleUnit||null,
    source,sourceUrl:item.sourceUrl||'',type,stats:item.stats||null,
@@ -94,8 +95,9 @@ export function agendaMatches(events,{view='semaine',phase='future',favorite=nul
   // plutôt que laisser croire au jour exact de la rencontre.
   const uncertain=!!e.approximate;
   if(phase==='past'){
-   if(!e.finished)return false;
-   return uncertain?(dt+6*86400000>=lo&&dt<=hi):(dt>=lo&&dt<=hi);
+   if(!e.finished&&!e.pendingResult)return false;
+   const relevantDate=e.pendingResult&&e.endDate?Date.parse(e.endDate):dt;
+   return uncertain?(relevantDate+6*86400000>=lo&&relevantDate<=hi):(relevantDate>=lo&&relevantDate<=hi);
   }
   // Les rencontres en cours restent visibles pendant 4 h après le début.
   if(!(e.status==='À venir'||e.live))return false;

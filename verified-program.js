@@ -105,9 +105,14 @@ export function extraProgramFor(favorites,now=new Date()){
  const available=new Set(favorites.map(x=>x.name));
  // Retirer les fixtures qui sont définitivement dans le passé, sans les
  // considérer comme un score terminé. Les résultats manuels restent passés.
- const future=UPCOMING.filter(x=>available.has(x.favorite)&&Date.parse(x.endDate||x.date)>=now.getTime()-4*3600000);
+ const cutoff=now.getTime()-4*3600000;
+ const future=UPCOMING.filter(x=>available.has(x.favorite)&&Date.parse(x.endDate||x.date)>=cutoff);
+ const pending=UPCOMING.filter(x=>available.has(x.favorite)&&Date.parse(x.endDate||x.date)<cutoff).map(x=>({
+  ...x,status:'Résultat à vérifier',pendingResult:true,
+  notes:[x.notes,'Résultat non encore trouvé dans les sources connectées.'].filter(Boolean).join(' ')
+ }));
  const past=PAST.filter(x=>available.has(x.favorite)&&Date.parse(x.date)<=now.getTime());
- return {future,past};
+ return {future,past,pending};
 }
 export function nextCompetitionNote(name,now=new Date()){
  const list=UPCOMING.filter(x=>x.favorite===name&&Date.parse(x.endDate||x.date)>=now.getTime())
