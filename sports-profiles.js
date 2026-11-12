@@ -57,8 +57,16 @@ export function keySportStats(favorite,items=[],now=new Date()){
   }
  }
  if(f.sport==='Cyclisme'){
-  const podiums=recent.filter(x=>/^(1er|2e|3e|1re|2ème|3ème)$/i.test(String(x.score||'').trim())).length;
-  if(podiums)numbers.push({label:'Podiums recensés',value:String(podiums),detail:'Épreuves sélectionnées, couverture partielle'});
+  // Une étape du Tour n'est pas une nouvelle épreuve : les compteurs
+  // de courses, étapes et critériums d'exhibition sont séparés.
+  const main=recent.filter(x=>x.cycleUnit==='course');
+  const stages=recent.filter(x=>x.cycleUnit==='étape');
+  const crits=recent.filter(x=>x.cycleUnit==='critérium');
+  if(main.length)numbers.push({label:'Courses UCI recensées',value:String(main.length),detail:'Ne compte pas les étapes à part'});
+  if(stages.length)numbers.push({label:'Résultats d’étapes',value:String(stages.length),detail:'Tour de France, Algarve, Pays basque, Tour AURA'});
+  if(crits.length)numbers.push({label:'Critériums d’exhibition',value:String(crits.length),detail:'Événements hors calendrier des courses UCI'});
+  const podiums=main.filter(x=>/^(1er|2e|3e|1re|2ème|3ème)$/i.test(String(x.score||'').trim())).length;
+  if(podiums)numbers.push({label:'Podiums en courses',value:String(podiums),detail:'Sans compter les podiums des étapes'});
  }
  if(f.sport==='Natation'){
   const races=recent.filter(x=>/natation|swim|nage|aquatics/i.test((x.type||'')+' '+(x.competition||''))).length;
