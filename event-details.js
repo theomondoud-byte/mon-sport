@@ -135,7 +135,26 @@ function dataFromEvent(event){
   ?Object.entries(original.stats).filter(([,v])=>v!==null&&v!=='')
      .map(([key,value])=>({label:({pts:'Points',reb:'Rebonds',ast:'Passes',blk:'Contres',stl:'Interceptions',min:'Minutes'})[key]||key,value:String(value)}))
   :[];
- return {sport,teamStats:[],players:embedded.length?[{name:event.favorite,metrics:embedded}]:[],scorers:[],extra:[]};
+ const extra=[];
+ const put=(label,value)=>{if(value!==null&&value!==undefined&&String(value).trim())extra.push({label,value:String(value)});};
+ if(sport==='natation'){
+  put('Épreuve',original.opponent||event.title);
+  put('Chrono',event.score);
+  put('Compétition',event.competition);
+  put('Performance',original.round||'');
+ }else if(sport==='cyclisme'){
+  put('Épreuve',event.title);
+  put('Classement ou résultat',event.score);
+  put('Course / étape',event.competition);
+ }else if(sport==='ping'){
+  put('Score de la rencontre',event.score);
+  const raw=String(event.score||''),m=raw.match(/^(\d+)\s*[-–:]\s*(\d+)$/);
+  if(m){put('Manches gagnées (dans cet ordre)',m[1]);put('Manches adverses',m[2]);}
+ }else if(sport==='tennis'){
+  put('Score en sets / jeux',event.score);
+  put('Tour',event.round);
+ }
+ return {sport,teamStats:[],players:embedded.length?[{name:event.favorite,metrics:embedded}]:[],scorers:[],extra};
 }
 export async function loadEventDetails(event,{fetchFn=fetch}={}){
  const data=dataFromEvent(event);
@@ -173,6 +192,8 @@ export function renderEventDetails(info,esc){
  const sportNames={football:'⚽ Football',basketball:'🏀 Basket',tennis:'🎾 Tennis',rugby:'🏉 Rugby',
   ping:'🏓 Tennis de table',natation:'🏊 Natation',cyclisme:'🚴 Cyclisme'};
  const title='<div class="detail-sport-heading">'+esc(sportNames[info.sport]||'📊 Compte rendu sportif')+'</div>';
+ const extras=info.extra?.length?'<div class="detail-player"><h5>Indicateurs disponibles</h5><div class="detail-metrics">'+info.extra.map(m=>
+   '<div class="detail-metric"><span>'+esc(m.label)+'</span><b>'+esc(m.value)+'</b></div>').join('')+'</div></div>':'';
  const scores=info.teamStats.length?'<div class="detail-teams">'+info.teamStats.map(team=>
   '<div class="detail-team"><h5>'+esc(team.name)+'</h5><div class="detail-metrics">'+team.metrics.map(s=>
   '<div class="detail-metric"><span>'+esc(s.label)+'</span><b>'+esc(s.value)+'</b></div>').join('')+'</div></div>').join('')+'</div>':'';
@@ -181,5 +202,5 @@ export function renderEventDetails(info,esc){
  const players=info.players.length?'<h5 class="detail-head">Statistiques des sportifs</h5>'
   +info.players.map(p=>'<div class="detail-player"><b>'+esc(p.name)+'</b><div class="detail-metrics">'+p.metrics.map(m=>
     '<div class="detail-metric"><span>'+esc(m.label)+'</span><b>'+esc(m.value)+'</b></div>').join('')+'</div></div>').join(''):'';
- return title+scores+scorers+players+'<p class="agenda-recap-note">'+esc(info.note||'Couverture partielle.')+'</p>';
+ return title+extras+scores+scorers+players+'<p class="agenda-recap-note">'+esc(info.note||'Couverture partielle.')+'</p>';
 }
