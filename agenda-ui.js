@@ -1,18 +1,16 @@
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=10.0.0';
-import {auditInfo} from './audit-2026.js?v=10.0.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=10.0.0';
-import {renderFavoriteStats} from './stats-view.js?v=10.0.0';
-import {photoInitials} from './photos.js?v=10.0.0';
-import {nextCompetitionNote} from './verified-program.js?v=10.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=11.0.0';
+import {auditInfo} from './audit-2026.js?v=11.0.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=11.0.0';
+import {renderFavoriteStats} from './stats-view.js?v=11.0.0';
+import {photoInitials} from './photos.js?v=11.0.0';
+import {nextCompetitionNote} from './verified-program.js?v=11.0.0';
+import {coverageFor} from './coverage-v11.js?v=11.0.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
- const day=dateLabel(item.date,{weekday:'short',day:'numeric',month:'short',year:'numeric'});
- return item.datePrecision==='heure'
-  ?day+' · '+new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})
-  :day;
+ return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
 };
-const fullDay=(day)=>new Date(day+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+const fullDay=(day)=>new Date(day+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 function avatar(name,photos,esc,safeUrl,size='tiny'){
  const image=photos?.[name];
  if(image?.src&&safeUrl(image.src)!=='#'){
@@ -52,7 +50,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +'<h3>'+esc(item.title)+'</h3>'
    +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong><span>'+esc(timing)+'</span></div>'
    +'<div class="agenda-detail">'+esc([item.competition,item.round].filter(Boolean).join(' · '))+'</div>'
-   +'<div class="agenda-open-hint"><span>'+(item.isCompetition?'Voir le programme':'Voir le résumé du match ou de la course')+'</span><span aria-hidden="true">⌄</span></div>'
+   +'<div class="agenda-open-hint"><span>'+(item.isCompetition?'Voir le programme':'Résumé')+'</span><span aria-hidden="true">⌄</span></div>'
    +'</summary>'
    +'<div class="agenda-recap"><h4>'+esc(recap.title)+'</h4><p>'+esc(recap.text)+'</p>'
    +stats
@@ -65,7 +63,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
 function placeholderMissing(missing,esc,safeUrl){
  if(!missing.length)return '';
  return '<details class="agenda-missing"><summary>'+missing.length+' favori(s) sans événement confirmé dans cette période</summary>'
-   +'<p>Une absence ici ne signifie pas qu’ils ne jouent pas. Certains sports et tournois ne disposent pas encore de calendrier complet.</p>'
+   +'<p>Certains calendriers restent incomplets.</p>'
    +'<div class="agenda-missing-links">'+missing.map(f=>{
     const info=auditInfo(f.name);
     return '<a href="'+esc(safeUrl(info.url))+'" target="_blank" rel="noopener noreferrer">'+esc(f.name)+' ↗</a>';
@@ -84,18 +82,16 @@ export function renderAgendaView({
  const cards=stats?[]:agendaMatches(items,{view,phase:periodPhase,favorite:single?chosen:null,now});
  const period=dateLabel(periodWindow.from,{day:'numeric',month:'short',year:'numeric'})
   +' — '+dateLabel(periodWindow.to,{day:'numeric',month:'short',year:'numeric'});
- const header='<div class="agenda-head"><span class="agenda-eyebrow">MON SPORT · AGENDA</span>'
-  +'<h2>'+(single?'Un favori':'Tous mes favoris')+'</h2>'
-  +'<p>'+(single?'Sélectionne ton favori, puis consulte ses rencontres et ses statistiques.':'Les résultats et les rencontres programmées de tous tes favoris.')+'</p></div>';
+ const header='<div class="agenda-head"><h2>'+(single?'Un favori':'Tous mes favoris')+'</h2></div>';
  const select=single?'<div class="agenda-controls"><label class="agenda-label" for="agendaFavorite">Choisir mon favori</label>'
   +'<select id="agendaFavorite" class="agenda-select">'+favorites.map(f=>
    '<option value="'+esc(f.name)+'" '+(f.name===chosen?'selected':'')+'>'+esc(f.name)+' · '+esc(f.sport)+'</option>').join('')+'</select></div>':'';
  const image=photos[chosen];
  const picture=single?'<div class="favorite-profile">'
    +avatar(chosen,photos,esc,safeUrl,'large')
-   +'<div class="favorite-profile-name"><span>FAVORI SÉLECTIONNÉ</span><h3>'+esc(chosen)+'</h3>'
+   +'<div class="favorite-profile-name"><h3>'+esc(chosen)+'</h3>'
    +'<p>'+esc(which?.sport||'Sport')+'</p>'
-   +(image?.creditUrl?'<a href="'+esc(safeUrl(image.creditUrl))+'" target="_blank" rel="noopener noreferrer">Photo : Wikimedia Commons · licence ↗</a>':'')
+   +(image?.creditUrl?'<a href="'+esc(safeUrl(image.creditUrl))+'" target="_blank" rel="noopener noreferrer">Image · crédit ↗</a>':'')
    +'</div></div>':'';
  const duration=(single&&phase==='past')?'12 mois':single?'2 mois':'7 jours';
  const segments='<div class="agenda-segments '+(single?'three':'')+'" role="group" aria-label="Afficher les matchs ou les statistiques">'
@@ -112,17 +108,20 @@ export function renderAgendaView({
  const details=groupAgenda(cards).map(g=>'<section class="agenda-day-group"><h3 class="agenda-day">'+esc(fullDay(g.day))+'</h3>'
   +g.items.map(e=>eventHtml(e,esc,safeUrl,photos,single?chosen:null)).join('')+'</section>').join('');
  const empty=!cards.length&&!loading&&!extendedLoading?'<div class="agenda-empty"><div class="agenda-empty-icon">📅</div>'
-  +'<h3>Aucun match ou événement confirmé dans cette période</h3><p>Les sources ne renvoient pas de rencontre disponible. Cela ne signifie pas que le favori n’a pas joué ou ne jouera pas.</p>'
+  +'<h3>Aucun événement trouvé</h3><p>Les sources peuvent être incomplètes.</p>'
   +(single?'<a href="'+esc(safeUrl(auditInfo(chosen).url))+'" target="_blank" rel="noopener noreferrer">Vérifier le calendrier source ↗</a>':'')+'</div>':'';
- const reliability=notes.length?'<details class="agenda-missing"><summary>Couverture et fiabilité des sources</summary>'
-  +'<p>'+notes.slice(0,8).map(esc).join('<br>')+'</p></details>':'';
+ const reliability=notes.length?'<details class="agenda-missing"><summary>État des sources</summary>'
+  +'<p>'+notes.slice(0,5).map(esc).join('<br>')+'</p></details>':'';
  const upcomingSource=single&&phase==='future'?nextCompetitionNote(chosen,now):null;
  const extraNext=upcomingSource?'<div class="agenda-next"><b>📌 Information du calendrier</b><span>'+esc(upcomingSource.text)+'</span>'
   +'<a target="_blank" rel="noopener noreferrer" href="'+esc(safeUrl(upcomingSource.url))+'">Vérifier la source ↗</a></div>':'';
+ const verification=single?coverageFor(chosen):null;
+ const sources=verification?'<details class="agenda-missing"><summary>Sources · '+esc(verification.level)+'</summary>'
+  +'<p>'+esc(verification.scope)+'</p><a href="'+esc(safeUrl(verification.url))+'" target="_blank" rel="noopener noreferrer">'
+  +esc(verification.source)+' ↗</a></details>':'';
  return '<section class="agenda-shell">'+header+select+picture+segments+extraNext
   +(stats?progress+error+renderFavoriteStats({items,favorite:chosen,favoriteData:which,now,loading:extendedLoading||loading,esc}):
     count+progress+error+(details||empty)+placeholderMissing(missing,esc,safeUrl)+reliability)
-  +'<div class="agenda-footnote">Un résultat n’est affiché que si une source le fournit. Les pastilles V/D signalent uniquement les victoires et défaites identifiables. '
-  +'Appuie sur une carte pour ouvrir son résumé factuel. Les statistiques peuvent être partielles pour certaines disciplines.</div>'
+  +sources
   +'</section>';
 }
