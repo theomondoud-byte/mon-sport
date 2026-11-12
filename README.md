@@ -1,45 +1,42 @@
-# ⚡ Mon Sport V10 — calendriers complétés
+# Mon Sport V11 — 20 favoris
 
-Application PWA : https://theomondoud-byte.github.io/mon-sport/
+PWA Android : https://theomondoud-byte.github.io/mon-sport/
 
-## Navigation
+## Favoris ajoutés
+- **FC Barcelone** : équipe de football masculine, LaLiga et Ligue des champions.
+- **Sauveur Cristofini** : nageur français, nom correct sans « h ».
 
-- **Semaine** : Passés (7 jours) affiché en premier, puis À venir (7 jours).
-- **Un favori** : Passés (12 mois) affiché en premier, puis À venir (2 mois) et Statistiques.
-- Les favoris enregistrés, leurs photos et les paramètres Cloudflare sont conservés.
+Ils sont ajoutés **une fois** aux listes déjà enregistrées sur Android. Les anciens favoris et le Worker Cloudflare restent inchangés ; une suppression manuelle ultérieure n'est pas annulée.
 
-## Nouveaux événements vérifiés (12 novembre 2026)
+## Contrôle 2026 des 20 favoris
+Le module coverage-v11.js référence une source et un périmètre par favori. La recherche ESPN par mois couvre jusqu'à 12 mois passés pour les équipes et le tennis selon disponibilité. Les sources spécialisées couvrent FFTT, natation FFN, cyclisme, rugby et ATP/WTA/Challenger.
 
-Le nouveau module verified-program.js ajoute des compétitions que les flux ESPN gratuits ne remontaient pas. Une compétition sans tirage ne doit pas être confondue avec un match ayant déjà un adversaire déterminé.
+**Les sources gratuites sont incomplètes : il n'est pas possible d'assurer que chaque match ou course des 20 favoris est présent.** L'onglet « Un favori » propose les liens officiels pour vérifier les écarts.
 
-- **XV de France** : France–Afrique du Sud le **13 novembre à 21h10** et France–Argentine le **21 novembre à 21h10**. Source : [FFR](https://presse.ffr.fr/categories/equipes-de-france/saison-26-27-programme-des-equipes-de-france-a-xv).
-- **Moïse Kouamé** : participation annoncée au **Challenger 125 de Metz du 15 au 22 novembre** ; tableau principal le 16, adversaire et heure du premier match encore inconnus. Source : [TennisActu](https://www.tennisactu.net/news-metz-ch-moutet-kouame-bonzi-mannarino-un-joli-plateau-devoile-127949.html).
-- **Félix et Alexis Lebrun** : rencontre de club SPO Rouen–Alliance Nîmes/Montpellier en Pro A le **24 novembre à 19h30**. Source : [Ville de Rouen](https://rouen.fr/index.php/fr/evenement/20261102/tennis-de-table-les-lebrun-contre-le-spo-rouen-et-pour-un-record). Leur présence au déplacement est annoncée, pas l'adversaire individuel du simple.
-- **Félix Lebrun, Alexis Lebrun, Flavien Coton** : officiellement sélectionnés pour la **Coupe du monde mixte de Chengdu (29 novembre – 6 décembre)**. Source : [FFTT](https://www.fftt.com/actualites/equipe-de-france/la-selection-pour-la-coupe-du-monde-mixte-2026-est-connue/).
-- **Paul Seixas** : engagé au **Critérium de Saitama le 15 novembre** ([organisateurs](https://www.saitamacriterium.com/fr/actus/2025/seixas-et-un-arc-en-ciel-au-pays-du-soleil-levant/204)). Il a terminé **2e du Critérium de Singapour le 8 novembre** ([Straits Times](https://www.straitstimes.com/sport/mexican-young-star-isaac-del-toro-wins-tour-de-france-singapore-criterium)). Ces exhibitions restent distinctes des courses UCI.
-- **ATP Finals (Turin)** : Rafael Jódar–Alexander Zverev le **15 novembre pas avant 14h**, Arthur Fils–Ben Shelton le **15 novembre pas avant 20h30**, Carlos Alcaraz–Frances Tiafoe le **16 novembre pas avant 14h**. Source : [ATP Finals](https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule-sunday-monday).
-- **Mirra Andreeva** : match contre Karolína Muchová le **13 novembre à 01h (heure de Paris)**. Source : [Eurosport](https://www.eurosport.fr/tennis/wta-finals/2026/live-mirra-andreeva-karolina-muchova_mtc22044018/live.shtml).
+Nouveaux relevés vérifiés :
+- FC Barcelone : 18 résultats officiels du 16 août au 8 novembre 2026 et 10 rencontres programmées entre le 22 novembre 2026 et le 10 janvier 2027. Source : https://www.fcbarcelona.com/en/football/first-team/results
+- Sauveur Cristofini : 14 performances depuis le 2 décembre 2025, dont ses titres nationaux en 200 et 400 m libre, l'argent européen en relais, ses records personnels européens et le 200 m quatre nages du 1er novembre 2026. Sources : https://www.lequipe.fr/fiche/sauveur-cristofini/97076 ; https://ffn.extranat.fr/webffn/resultats.php?go=res&idact=&idban=43306&idcpt=92037&idres=23738113
+- Félix Lebrun, Alexis Lebrun et Flavien Coton : 16 rencontres de simple vérifiées des Championnats d'Europe 2026 et du WTT Champions Montpellier. Sources : https://www.fftt.com/actualites/equipe-de-france/championnats-deurope-2026-programme-resultats/ et https://www.fftt.com/actualites/wtt/suivre-le-wtt-champions-de-montpellier-2026/
 
-## Paul Seixas : historique 2026 détaillé
+Restent conservés : calendrier XV de France, sélection FFTT à Chengdu, Challenger de Metz, ATP Finals, 12 courses et 40 étapes de Paul Seixas, statistiques sportives et actualités des sept derniers jours.
 
-Le suivi de Paul Seixas conserve désormais :
-- **12 résultats de courses UCI distinctes**, dont les classements généraux des courses à étapes.
-- **40 résultats d'étapes** : 21 étapes du Tour de France, 6 du Tour du Pays basque, 5 du Tour d'Algarve, 8 du Tour Auvergne–Rhône-Alpes.
-- **Le critérium de Singapour du 8 novembre** (2e place), séparé du circuit UCI.
-- **Le Critérium de Saitama du 15 novembre** (départ annoncé, aucun résultat inventé).
+## Photos
+Portraits Wikimedia Commons / Wikipédia des sportifs. Logos ESPN des équipes lorsque disponibles, avec photo libre du blason du Barça en secours. Un portrait libre de Rafael Jódar est ajouté : https://commons.wikimedia.org/wiki/File:Rafael_J%C3%B3dar_Roland_Garros_2026_(cropped).jpg
 
-Références : [CyclingDB](https://cyclingdb.com/rider/paul-seixas), [ProCyclingStats](https://www.procyclingstats.com/rider/paul-seixas/calendar), [A.S.O. Saitama](https://www.saitamacriterium.com/fr/actus/2025/seixas-et-un-arc-en-ciel-au-pays-du-soleil-levant/204). Les statistiques de courses, d'étapes et de critériums sont séparées pour éviter de confondre étapes et épreuves.
+Le chargement est progressif et les images sont validées si l'API répond. Une photo absente ou non libre n'est pas inventée : les initiales sont le repli. Les licences et auteurs restent consultables depuis le lien « Image · crédit ».
 
-## Photographies
+## Interface compacte
+- Premier onglet « Passés » conservé par défaut, semaine 7 jours et favori 12 mois.
+- Bandeau d'introduction retiré, cartes réduites, jours affichés une seule fois.
+- Sources et état de couverture accessibles en ouvrant la section repliée sous chaque favori.
+- Photos et logos affichés dans la liste Favoris et sur les cartes.
 
-Onze fichiers personnels **réellement présents dans Wikimedia Commons** ont été identifiés : Arthur Fils, Jannik Sinner, Carlos Alcaraz, Léon Marchand, Félix Lebrun, Alexis Lebrun, Paul Seixas, Kylian Mbappé, Victor Wembanyama, Moïse Kouamé et Mirra Andreeva. Le navigateur demande la vignette canonique via l'API Commons ImageInfo et conserve un lien de secours Special:FilePath. Les crédits et licences figurent sur les fiches Wikimedia. Pour Flavien Coton et Rafael Jódar, la photo individuelle reste à récupérer depuis Wikipedia ; sans photo sûre, ce sont les initiales qui s'affichent.
+## Mise à jour Android
+Réglages → Vérifier et recharger ; vérifier « Mon Sport V11 » en pied de page. Les clés de favoris et du Worker Cloudflare ne changent pas. Service Worker version mon-sport-v11-0 ; scripts et CSS version 11.0.0.
 
-## Actualités
-
-Plus d'aperçus ni de fenêtres blanches : les titres des **7 derniers jours**, triés des plus récents aux plus anciens, sont des liens directs vers l'éditeur. Le contenu protégé de l'article n'est pas recopié.
-
-## PWA et limites
-
-Cache de service worker : mon-sport-v10-0 ; fichiers CSS et JS versionnés avec v=10.0.0. Ouvrir Réglages → Vérifier et recharger sur Android. Les favoris et le relais Cloudflare ne sont pas effacés.
-
-Le répertoire sportif comporte des instantanés sourcés **arrêtés au 12 novembre 2026**. La présence à un tournoi ne préjuge pas des horaires ou du tirage ; le résultat d'un événement à venir ne devient pas automatiquement un résultat passé sans feuille de match. Les compétitions non publiées par des fournisseurs gratuits restent potentiellement absentes.
+## Code
+- src.js : migration sûre, favoris et calendriers.
+- verified-extra-v11.js : résultats additionnels 2025/2026 et Barça futur.
+- coverage-v11.js : 20 sources de référence.
+- photos.js : images et logos, contrôle et repli.
+- agenda-ui.js / agenda-model.js : navigation et affichage compact.
