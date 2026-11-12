@@ -107,8 +107,13 @@ export const EXTRA_2026_PAST=[...BARCA_RESULTS,...CRISTOFINI,...PING];
 export const EXTRA_2026_FUTURE=BARCA_FUTURE;
 export function verifiedExtraFor(favorites,now=new Date()){
  const names=new Set(favorites.map(f=>f.name)),ms=now.getTime();
+ const cutoff=ms-4*3600000;
  return {
   past:EXTRA_2026_PAST.filter(e=>names.has(e.favorite)&&Date.parse(e.date)<=ms),
-  future:EXTRA_2026_FUTURE.filter(e=>names.has(e.favorite)&&Date.parse(e.date)>=ms-4*3600000)
+  future:EXTRA_2026_FUTURE.filter(e=>names.has(e.favorite)&&Date.parse(e.date)>=cutoff),
+  pending:EXTRA_2026_FUTURE.filter(e=>names.has(e.favorite)&&Date.parse(e.date)<cutoff).map(e=>({
+   ...e,status:'Résultat à vérifier',pendingResult:true,
+   notes:'Score non encore confirmé par les sources connectées.'
+  }))
  };
 }
