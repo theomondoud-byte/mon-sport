@@ -1,11 +1,11 @@
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=12.0.0';
-import {auditInfo} from './audit-2026.js?v=12.0.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=12.0.0';
-import {renderFavoriteStats} from './stats-view.js?v=12.0.0';
-import {photoInitials} from './photos.js?v=12.0.0';
-import {nextCompetitionNote} from './verified-program.js?v=12.0.0';
-import {coverageFor} from './coverage-v11.js?v=12.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=13.0.0';
+import {auditInfo} from './audit-2026.js?v=13.0.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=13.0.0';
+import {renderFavoriteStats} from './stats-view.js?v=13.0.0';
+import {photoInitials} from './photos.js?v=13.0.0';
+import {nextCompetitionNote} from './verified-program.js?v=13.0.0';
+import {coverageFor} from './coverage-v11.js?v=13.0.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -71,7 +71,7 @@ function placeholderMissing(missing,esc,safeUrl){
 }
 export function renderAgendaView({
  view='semaine',phase='future',favorite='',favorites=[],items=[],loading=false,
- extendedLoading=false,extendedError='',notes=[],photos={},esc,safeUrl,now=new Date()
+ extendedLoading=false,extendedError='',notes=[],photos={},rankings={},esc,safeUrl,now=new Date()
 }){
  const single=view==='favori';
  const which=single?(favorites.find(f=>f.name===favorite)||favorites[0]):null;
@@ -97,7 +97,7 @@ export function renderAgendaView({
  const segments='<div class="agenda-segments '+(single?'three':'')+'" role="group" aria-label="Afficher les matchs ou les statistiques">'
   +'<button type="button" data-agenda-phase="past" aria-pressed="'+(phase==='past')+'" class="'+(phase==='past'?'selected':'')+'">Passés <small>'+(single?'12 mois':'7 jours')+'</small></button>'
   +'<button type="button" data-agenda-phase="future" aria-pressed="'+(phase==='future')+'" class="'+(phase==='future'?'selected':'')+'">À venir <small>'+(single?'2 mois':'7 jours')+'</small></button>'
-  +(single?'<button type="button" data-agenda-phase="stats" aria-pressed="'+stats+'" class="'+(stats?'selected':'')+'">Statistiques <small>12 mois</small></button>':'')
+  +(single?'<button type="button" data-agenda-phase="stats" aria-pressed="'+stats+'" class="'+(stats?'selected':'')+'">Statistiques <small>sources</small></button>':'')
   +'</div>';
  const progress=(loading||extendedLoading)?'<div class="agenda-progress" role="status"><span class="agenda-spinner"></span>'
   +esc(single?'Vérification des résultats du favori…':'Actualisation des rencontres…')+'</div>':'';
@@ -120,7 +120,7 @@ export function renderAgendaView({
   +'<p>'+esc(verification.scope)+'</p><a href="'+esc(safeUrl(verification.url))+'" target="_blank" rel="noopener noreferrer">'
   +esc(verification.source)+' ↗</a></details>':'';
  return '<section class="agenda-shell">'+header+select+picture+segments+extraNext
-  +(stats?progress+error+renderFavoriteStats({items,favorite:chosen,favoriteData:which,now,loading:extendedLoading||loading,esc}):
+  +(stats?progress+error+renderFavoriteStats({favorite:chosen,favoriteData:which,now,rankings,esc,safeUrl}):
     count+progress+error+(details||empty)+placeholderMissing(missing,esc,safeUrl)+reliability)
   +sources
   +'</section>';
