@@ -53,7 +53,9 @@ export function summaryForMatch(match,favorite){
  let result;
  if(match.isCompetition){
   result='Compétition annoncée pour '+selected+' : '+label+' ('+competition+').';
-  result+=' Les adversaires, le tableau et les horaires des rencontres individuelles seront précisés par l’organisateur.';
+  result+=/cyclisme|cycling/i.test(match.type||'')
+   ?' L’horaire précis du critérium et son classement seront confirmés par l’organisateur.'
+   :' Les adversaires, le tableau et les horaires des rencontres individuelles seront précisés par l’organisateur.';
  }else if(/cyclisme|cycling/i.test(match.type||'')){
   result='Résultat de cyclisme de '+selected+' : '+label+', '+competition+'.'+scoreText;
  }else{
