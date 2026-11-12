@@ -37,8 +37,12 @@ export function renderFavoriteStats({favorite='',favoriteData=null,now=new Date(
   officialStats='<p class="stat-help">Chronos, records et médailles à consulter sur les résultats officiels de la fédération : pas de moyenne de temps reconstituée.</p>';
  }
  if(favorite==='Victor Wembanyama'){
-  officialStats='<p class="stat-help">Points, rebonds, passes et contres de saison sur la fiche officielle NBA, actualisée directement par la ligue.</p>';
+  officialStats='<div class="stat-grid">'+tile('Points / match',30.3,'NBA · 2026-27 · 12 nov. 2026',esc)
+   +tile('Rebonds / match',11.7,'NBA · 2026-27',esc)
+   +tile('Passes / match',2.8,'NBA · 2026-27',esc)
+   +tile('Contres / match',4.4,'NBA · 2026-27',esc)+'</div>';
   sourceLinks.push(['Statistiques NBA officielles','https://www.nba.com/player/1641705/victor-wembanyama']);
+  sourceLinks.push(['Fiche statistiques ESPN','https://www.espn.com/nba/player/stats/_/id/5104157']);
  }
  if(favorite==='Kylian Mbappé'){
   officialStats='<p class="stat-help">Buts, passes décisives et matchs joués sur les fiches officielles du club et de la sélection.</p>';
