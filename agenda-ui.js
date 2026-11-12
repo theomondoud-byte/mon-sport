@@ -19,7 +19,8 @@ function eventHtml(item,esc,safeUrl){
  const state=item.live?'En cours':isFuture?'À venir':'Terminé';
  const sourceLink=item.sourceUrl&&safeUrl(item.sourceUrl)!=='#'
   ?'<a class="agenda-source" href="'+esc(safeUrl(item.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':'';
- const flags=item.approximate?'<span class="agenda-caution">Date approximative · semaine du tournoi</span>':'';
+ const flags=(item.approximate?'<span class="agenda-caution">Date approximative · semaine du tournoi</span>':'')
+  +(item.uncertainParticipation?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'');
  const playerTags=item.favorites.map(name=>'<span class="agenda-favorite">'+esc(name)+'</span>').join('');
  const stats=item.stats?' · '+Object.entries(item.stats).filter(([,v])=>v!==null).map(([k,v])=>k.toUpperCase()+' '+v).join(' · '):'';
  return '<article class="agenda-event">'
