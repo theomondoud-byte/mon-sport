@@ -190,3 +190,54 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .stat-source-link{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
  border:1px solid #426577;background:#153649;padding:12px 14px;border-radius:12px;font-size:.8rem;color:#b8d5dc}
 .stat-source-link a{font-weight:800;font-size:.82rem}
+
+
+/* Mon Sport V9 : lecteur d'actualités, profils et feuilles de match détaillées */
+.portrait-error-initials{display:none;font-weight:900;color:#baffdf;font-size:1em}
+.portrait-wrap.photo-failed img{display:none}
+.portrait-wrap.photo-failed .portrait-error-initials{display:inline}
+.stat-profile-section{display:grid;gap:12px;padding:15px 14px;background:#112d40;border:1px solid #345d6b;border-radius:16px}
+.stat-profile-section>h3{margin:0;color:#e3fff0;font-size:1.12rem}
+.stat-sport-identity{padding:12px;border:1px solid #34616e;border-radius:12px;background:#16394a}
+.stat-sport-identity b{font-size:.96rem}
+.stat-sport-identity p{font-size:.88rem;line-height:1.6;color:#dbeef2;margin:8px 0}
+.stat-sport-identity small{font-size:.73rem;color:#a6c8d2;line-height:1.5}
+.stat-reference-list{display:flex;flex-wrap:wrap;gap:7px}
+.stat-reference-list a{display:inline-block;padding:7px 10px;border:1px solid #457a75;background:#1e4c50;border-radius:10px;text-decoration:none}
+.detail-live-slot{margin-top:13px}
+.detail-sport-heading{padding:8px 0;font-size:.86rem;color:#98efcf;font-weight:850;letter-spacing:.02em}
+.detail-teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:11px;margin:8px 0 12px}
+.detail-team,.detail-player{background:#193f4e;border:1px solid #416d79;border-radius:13px;padding:12px}
+.detail-team h5,.detail-head{font-size:.92rem;color:#e5fff6;margin:4px 0 10px}
+.detail-player{margin:7px 0}
+.detail-player>b{font-size:.9rem;display:block;margin-bottom:8px}
+.detail-metrics{display:grid;gap:7px}
+.detail-metric{display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid #3d5c66;padding:4px 0;font-size:.8rem}
+.detail-metric:last-child{border-bottom:0}
+.detail-metric span{color:#b3d0dc}
+.detail-metric b{font-variant-numeric:tabular-nums;color:#dcffed;font-weight:800}
+.detail-plays{padding-left:20px;font-size:.84rem;line-height:1.6;color:#e5f1f4}
+.detail-plays li{margin-bottom:5px}
+.news-feed{display:grid;gap:14px}
+.news-intro{display:grid;gap:5px}
+.news-intro h2{font-size:1.55rem;line-height:1.2;margin:5px 0 0}
+.news-intro p{font-size:.89rem;color:#b1c9d3;line-height:1.6;margin:2px 0}
+.news-card{background:linear-gradient(135deg,#173a4e,#112c42);border:1px solid #3e6372;border-radius:17px;overflow:hidden}
+.news-card[open]{border-color:#6ecba9}
+.news-card>summary{list-style:none;display:block;padding:17px;cursor:pointer}
+.news-card>summary::-webkit-details-marker{display:none}
+.news-card>summary:focus-visible{outline:3px solid #a3daff;outline-offset:-3px}
+.news-card-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.news-card h3{font-size:1.04rem;line-height:1.45;margin:12px 0 8px;color:#f3fbff}
+.news-date,.news-source{font-size:.78rem;color:#bdd0df}
+.news-source{margin:0}
+.news-tap{display:flex;justify-content:space-between;border-top:1px solid #3c5969;padding-top:10px;margin-top:12px;color:#90edc9;font-weight:800;font-size:.82rem}
+.news-card[open] .news-tap span{transform:rotate(180deg)}
+.news-reader{padding:18px;background:#0c293b;border-top:1px solid #456475}
+.news-article-label{font-size:.66rem;letter-spacing:.13em;font-weight:900;color:#9af3c8;margin:0 0 9px}
+.news-excerpt{font-size:.97rem;color:#f0fbff;line-height:1.7;margin:8px 0 14px}
+.news-reading-info{font-size:.8rem;color:#afc6d3;line-height:1.55;margin:11px 0}
+.news-open-frame{font-size:.85rem;padding:10px 13px}
+.news-frame-slot{margin-top:12px}
+.news-embedded-frame{width:100%;height:min(70vh,680px);border:1px solid #54828b;background:white;border-radius:10px}
+@media(max-width:550px){.news-card>summary{padding:14px}.news-reader{padding:14px}.detail-teams{grid-template-columns:repeat(2,minmax(0,1fr))}}
