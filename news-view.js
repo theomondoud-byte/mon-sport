@@ -75,3 +75,43 @@ export function mountNewsFrames(root,safeUrl){
   button.textContent='Fermer la lecture intégrée';
  });
 }
+
+
+// Sources complémentaires directes : annonces ESPN avec description officielle.
+// Ce repli fonctionne même si le Cloudflare Worker n'a pas encore reçu
+// le champ 'description'. Il n'affiche que les articles citant des favoris.
+const SPORTS_NEWS=[
+ 'soccer/esp.1','soccer/fra.1','soccer/uefa.champions',
+ 'basketball/nba','tennis/atp','tennis/wta'
+];
+const normalized=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+export async function fetchSportsNews(favorites,now=new Date()){
+ const aliases=name=>({
+  'PSG':['psg','paris saint-germain','paris saint germain'],
+  'Real Madrid':['real madrid','madrid'],
+  'San Antonio Spurs':['san antonio spurs','spurs'],
+  'Victor Wembanyama':['wembanyama'],
+  'Kylian Mbappé':['mbappe','mbappé'],
+  'Moïse Kouamé':['kouamé','kouame'],
+  'Rafael Jódar':['jódar','jodar'],
+  'Mirra Andreeva':['andreeva'],
+  'Équipe de France de football':['france football','les bleus']
+ }[name]||[normalized(name)]).map(normalized);
+ const settled=await Promise.allSettled(SPORTS_NEWS.map(async path=>{
+  const url='https://site.api.espn.com/apis/site/v2/sports/'+path+'/news?limit=30';
+  const r=await fetch(url,{signal:AbortSignal.timeout(9000),cache:'no-store'});
+  if(!r.ok)throw Error('ESPN news '+r.status);
+  const body=await r.json();
+  return (body.articles||[]).map(a=>{
+   const link=a.links?.web?.href||a.links?.mobile?.href||'';
+   const title=a.headline||a.title||'';
+   const description=safeExcerpt(a.description||a.story||'');
+   const date=a.published||a.lastModified||'';
+   const text=normalized(title+' '+description);
+   const fav=favorites.find(f=>aliases(f.name).some(alias=>alias.length>3&&text.includes(alias)));
+   if(!fav||!/^https?:\/\//.test(link))return null;
+   return {title,link,date,source:'ESPN',favorite:fav.name,excerpt:description};
+  }).filter(Boolean);
+ }));
+ return newsLastWeek(settled.flatMap(x=>x.status==='fulfilled'?x.value:[]),now);
+}
