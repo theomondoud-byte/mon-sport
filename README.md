@@ -1,4 +1,4 @@
-# ⚡ Mon Sport — V5 (Android PWA)
+# ⚡ Mon Sport — V5.1 (Android PWA)
 
 Application personnelle gratuite hébergée sur GitHub Pages. Tous les favoris restent sur l'appareil (localStorage). Aucune clé API n'est nécessaire pour les scores ESPN.
 
@@ -6,7 +6,8 @@ Application personnelle gratuite hébergée sur GitHub Pages. Tous les favoris r
 - **Équipes** : PSG (Ligue 1), Real Madrid (LaLiga), San Antonio Spurs (NBA) via les tableaux ESPN non officiels.
 - **Individuels** : scores ATP/WTA pour les joueurs suivis dans les tournois qu'ESPN couvre; statistiques de Victor Wembanyama des derniers matchs NBA visibles.
 - **Nouveau V5 : historique 2026** de tes joueurs ATP et WTA, y compris Moïse Kouamé, pour les données disponibles en tour principal, Challenger, qualifications et ITF.
-- **Moïse Kouamé** : un relevé limité de dix matchs récents vérifiés, arrêté au 12 novembre 2026, vient compléter les archives historiques. Ce relevé n'est PAS mis à jour automatiquement. Les liens vers la fiche du joueur permettent de suivre les matchs ultérieurs.
+- **Moïse Kouamé** : un relevé limité de 23 matchs récents vérifiés, arrêté au 12 novembre 2026, vient compléter les archives historiques. Ce relevé n'est PAS mis à jour automatiquement. Les liens vers la fiche du joueur permettent de suivre les matchs ultérieurs.
+- **V5.1** : dernier match vérifié de Moïse Kouamé (Forejtek, 11 novembre) mis en évidence en haut de l’accueil et de Résultats ; 13 rencontres ajoutées (juillet–octobre). Données manuelles figées au 12 novembre 2026. Le lien externe ouvre un suivi actualisé, mais aucun flux gratuit automatique Challenger/ITF n'est intégré sans clé API.
 - **Autres sports** (tennis de table, cyclisme, natation, rugby) : actualités et liens de recherche; aucun score individuel automatique n'est garanti à ce stade.
 
 ### Sources historiques tennis et licences
