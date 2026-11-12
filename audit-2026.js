@@ -17,7 +17,7 @@ export const SOURCES_2026={
  PSG:{kind:'équipe',unit:'matchs terminés',source:'ESPN · Ligue 1, C1, Coupe de France',url:'https://www.psg.fr/football-masculin/calendrier'},
  'San Antonio Spurs':{kind:'équipe',unit:'matchs NBA terminés',source:'ESPN NBA',url:'https://www.nba.com/spurs/schedule'},
  'Victor Wembanyama':{kind:'joueur',unit:'matchs joués',source:'NBA · match log',url:'https://www.nba.com/player/1641705/victor-wembanyama'},
- 'Sauveur Cristofini':{kind:'nageur',unit:'courses et relais 2026',source:'FFN / L’Équipe · natation',url:'https://www.lequipe.fr/fiche/sauveur-cristofini/97076',referenceCount:10,referenceUnit:'10 performances 2026 de sélection, non exhaustif',referenceAsOf:AUDIT_AS_OF},
+ 'Sauveur Cristofini':{kind:'nageur',unit:'courses et relais 2026',source:'FFN / L’Équipe · natation',url:'https://www.lequipe.fr/fiche/sauveur-cristofini/97076',referenceCount:12,referenceUnit:'12 performances 2026 recensées, non exhaustif',referenceAsOf:AUDIT_AS_OF},
  'Léon Marchand':{kind:'nageur',unit:'courses individuelles',source:'World Aquatics · fiches et résultats',url:AQUA},
  'Félix Lebrun':{kind:'pongiste',unit:'matchs (simples + doubles)',source:'FFTT / WTT · résultats sélectionnés',url:'https://www.fftt.com/felixlebrun/'},
  'Alexis Lebrun':{kind:'pongiste',unit:'matchs (simples + doubles)',source:'FFTT / WTT · résultats sélectionnés',url:FFTT_EURO},
