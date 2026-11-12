@@ -13,6 +13,8 @@ const ATP='https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule
 const WTA='https://www.wtatennis.com/news/4599683';
 const CYCLING='https://cyclingdb.com/rider/paul-seixas';
 const PCS='https://www.procyclingstats.com/rider/paul-seixas/calendar';
+const SAITAMA='https://www.saitamacriterium.com/fr/actus/2025/seixas-et-un-arc-en-ciel-au-pays-du-soleil-levant/204';
+const SINGAPORE='https://www.straitstimes.com/sport/mexican-young-star-isaac-del-toro-wins-tour-de-france-singapore-criterium';
 // Niveau de vérification : "affiche" pour une rencontre et un adversaire annoncés ;
 // "engagé" pour une participation annoncée à une compétition sans tableau précis ;
 // "calendrier" pour un événement général sans engagement nominatif confirmé.
@@ -26,6 +28,7 @@ const fixture=(name,id,date,title,competition,sourceUrl,opts={})=>({
  sport:opts.sport||'',notes:opts.notes||''
 });
 const UPCOMING=[
+ fixture('Paul Seixas','saitama-2026','2026-11-15T12:00:00+09:00','Paul Seixas — Critérium de Saitama','Critérium ASO d’exhibition · Saitama (Japon)',SAITAMA,{sport:'Cyclisme',type:'cycling-competition',scheduledCompetition:true,endDate:'2026-11-15T23:59:00+09:00',participationLevel:'engagé',organizer:'ASO / Saitama',notes:'Participation confirmée, heure de la course à vérifier ; hors calendrier UCI WorldTour.'}),
  fixture('XV de France','rugby-sa-13','2026-11-13T21:10:00+01:00','France — Afrique du Sud','Championnat des Nations 2026',RUGBY,{sport:'Rugby',type:'rugby',exactTime:true,organizer:'FFR',home:'France',away:'Afrique du Sud'}),
  fixture('XV de France','rugby-arg-21','2026-11-21T21:10:00+01:00','France — Argentine','Championnat des Nations 2026',RUGBY_TICKET,{sport:'Rugby',type:'rugby',exactTime:true,organizer:'FFR',home:'France',away:'Argentine'}),
  fixture('Moïse Kouamé','metz-ch-2026','2026-11-15T12:00:00+01:00','Moïse Kouamé — Open Metz–Grand Est','Challenger 125 · 15–22 novembre',METZ,{sport:'Tennis',type:'tennis-competition',scheduledCompetition:true,endDate:'2026-11-22T23:59:00+01:00',participationLevel:'engagé',organizer:'Organisation / TennisActu',notes:'Inscription annoncée ; heure du premier match et adversaire non publiés.'}),
@@ -87,6 +90,10 @@ const result=(id,date,title,score,category,type='cycling')=>({
  sport:'Cyclisme'
 });
 const PAST=[
+ {id:'v10-criterium-singapore',date:'2026-11-08T12:00:00+08:00',favorite:'Paul Seixas',
+  title:'Paul Seixas — Critérium de Singapour',score:'2e',competition:'Critérium ASO · exhibition',
+  source:'The Straits Times · 8 novembre 2026',sourceUrl:SINGAPORE,status:'Terminé',
+  type:'cycling-criterium',snapshot:true,cycleUnit:'critérium',sport:'Cyclisme'},
  ...RACES.map(([date,title,rank],i)=>result('race'+i,date,title,rank,'Cyclisme · résultat de course')),
  ...TDF.map(([date,no,rank])=>result('tdf'+no,date,'Tour de France · Étape '+no,place(rank),'Tour de France · étapes','cycling-stage')),
  ...BASQUE.map(([date,no,rank])=>result('basque'+no,date,'Tour du Pays basque · Étape '+no,place(rank),'Itzulia · étapes','cycling-stage')),
@@ -96,7 +103,6 @@ const PAST=[
 export const PROGRAM_2026={future:UPCOMING,past:PAST};
 export function extraProgramFor(favorites,now=new Date()){
  const available=new Set(favorites.map(x=>x.name));
- const end=now.getTime()+3*366*86400000;
  // Retirer les fixtures qui sont définitivement dans le passé, sans les
  // considérer comme un score terminé. Les résultats manuels restent passés.
  const future=UPCOMING.filter(x=>available.has(x.favorite)&&Date.parse(x.endDate||x.date)>=now.getTime()-4*3600000);
@@ -107,7 +113,7 @@ export function nextCompetitionNote(name,now=new Date()){
  const list=UPCOMING.filter(x=>x.favorite===name&&Date.parse(x.endDate||x.date)>=now.getTime())
   .sort((a,b)=>Date.parse(a.date)-Date.parse(b.date));
  if(list.length)return {text:'Prochain événement annoncé : '+list[0].competition,url:list[0].sourceUrl};
- if(name==='Paul Seixas')return {text:'Aucune autre course 2026 annoncée après le Tour de Lombardie (10 octobre). Programme 2027 non publié dans le calendrier consulté.',url:PCS};
+ if(name==='Paul Seixas')return {text:'Aucune nouvelle course UCI 2026 annoncée après le Tour de Lombardie ; le critérium d’exhibition de Saitama du 15 novembre est suivi séparément.',url:SAITAMA};
  if(name==='Jannik Sinner')return {text:'Aucune prochaine compétition confirmée dans le calendrier vérifié. Consulte le calendrier ATP pour les nouvelles annonces.',url:'https://www.atptour.com/en/tournaments'};
  return null;
 }
