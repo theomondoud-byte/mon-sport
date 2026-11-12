@@ -1,9 +1,9 @@
 // V9 — deux blocs : identité & palmarès sourcés / forme sur 12 mois.
 // Aucun chiffre non daté ne prétend être un classement ou record à jour.
-import {agendaMatches,agendaWindow} from './agenda-model.js?v=11.0.0';
-import {matchVerdict} from './match-details.js?v=11.0.0';
-import {profileFor,keySportStats} from './sports-profiles.js?v=11.0.0';
-import {auditInfo} from './audit-2026.js?v=11.0.0';
+import {agendaMatches,agendaWindow} from './agenda-model.js?v=12.0.0';
+import {matchVerdict} from './match-details.js?v=12.0.0';
+import {profileFor,keySportStats} from './sports-profiles.js?v=12.0.0';
+import {auditInfo} from './audit-2026.js?v=12.0.0';
 const fmt=day=>new Date(day).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
 const tile=(label,value,desc='',esc=x=>x)=>'<div class="stat-tile"><b>'+esc(String(value))+'</b><span>'+esc(label)+'</span>'
  +(desc?'<small>'+esc(desc)+'</small>':'')+'</div>';
