@@ -14,11 +14,20 @@ export function isSportsArticle(article){
 }
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
 export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
- const endpoint='https://fflose.com/wp-json/wp/v2/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug';
- const response=await fetchFn(endpoint,{signal:AbortSignal.timeout(9000),cache:'no-store'});
- if(!response.ok)throw Error('Flux FFL HTTP '+response.status);
- const posts=await response.json();
- if(!Array.isArray(posts))throw Error('FFL : format incompatible');
+ const endpoints=[
+  'https://fflose.com/wp-json/wp/v2/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug',
+  'https://public-api.wordpress.com/wp/v2/sites/fflose.com/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug'
+ ];
+ let posts=null;
+ for(const endpoint of endpoints){
+  try{
+   const response=await fetchFn(endpoint,{signal:AbortSignal.timeout(9000),cache:'no-store'});
+   if(!response.ok)continue;
+   const value=await response.json();
+   if(Array.isArray(value)){posts=value;break;}
+  }catch{}
+ }
+ if(!posts)throw Error('Flux FFL indisponible');
  const start=now.getTime()-7*86400000,end=now.getTime()+10*60000;
  return posts.map(p=>{
   const when=p.date_gmt?p.date_gmt+'Z':p.date;
