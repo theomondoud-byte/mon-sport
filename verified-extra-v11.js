@@ -6,6 +6,8 @@ const BARCA='https://www.fcbarcelona.com/en/football/first-team/results';
 const BARCA_SCHEDULE='https://www.fcbarcelona.com/en/football/first-team/schedule';
 const AQUA='https://www.lequipe.fr/fiche/sauveur-cristofini/97076';
 const FFIN='https://www.ffnatation.fr/actualites/actu-grand-public/championnats-deurope-de-paris-2026-sauveur-cristofini-en-grande-forme';
+const FFN_ARCHIVE='https://ffn.extranat.fr/webffn/resultats.php?go=res&idact=&idban=43306&idcpt=92037&idres=23738113';
+const FFN_RECORDS='https://ffn.extranat.fr/webffn/nat_records.php?day=&idact=nat&idbas=&idcat=&idniv=4&idsex=&idzon=1581&month=&year=';
 const FFN_RESULTS='https://www.liveffn.com/cgi-bin/resultats.php?competition=94430&epreuve=91&go=epreuve&langue=gbr';
 const FFTT='https://www.fftt.com/actualites/equipe-de-france/championnats-deurope-2026-programme-resultats/';
 const FFTT_MONT='https://www.fftt.com/actualites/wtt/suivre-le-wtt-champions-de-montpellier-2026/';
@@ -24,7 +26,7 @@ const upcoming=(day,hour,home,away,competition,exact=true)=>({
 });
 const result=(name,day,event,score,rank,link,comp,extra={})=>({
  id:'v11-'+name.replace(/\W/g,'')+'-'+day+'-'+event.replace(/\W/g,'').slice(0,24),
- favorite:name,date:date(day),title:name+' — '+event,score,
+ favorite:name,date:date(day),title:name+' — '+event,score:rank?score+' · '+rank:score,
  competition:comp,source:extra.source||'Résultat fédéral 2026',sourceUrl:link,
  status:'Terminé',type:extra.type||'swim',snapshot:true,
  rank:rank||'',round:extra.round||'',outcome:extra.outcome||null,
@@ -68,6 +70,8 @@ const BARCA_FUTURE=[
  ['2027-01-10',null,'Osasuna','FC Barcelona','LaLiga',false]
 ].map(x=>upcoming(...x));
 const CRISTOFINI=[
+ result('Sauveur Cristofini','2025-12-02','Championnats d’Europe petit bassin · 400 m nage libre (séries)','3:41.72','17e des séries',FFN_ARCHIVE,'400 m nage libre (25 m)'),
+ result('Sauveur Cristofini','2025-12-13','France juniors · 400 m quatre nages','4:12.90','record national U17','https://www.lequipe.fr/Natation/Actualites/Sauveur-cristofini-bat-le-record-de-france-des-16-ans-sur-400-m-4-nages-que-detenait-leon-marchand/1616666','400 m 4 nages (25 m)'),
  result('Sauveur Cristofini','2026-03-20','Meeting de Saint-Denis · 400 m nage libre','3:48.29','3e',AQUA,'400 m nage libre'),
  result('Sauveur Cristofini','2026-03-21','Meeting de Saint-Denis · 200 m nage libre','1:47.56','3e',AQUA,'200 m nage libre'),
  result('Sauveur Cristofini','2026-05-23','Meeting de Monaco · 400 m nage libre','3:48.27','2e',AQUA,'400 m nage libre'),
@@ -76,7 +80,9 @@ const CRISTOFINI=[
  result('Sauveur Cristofini','2026-07-02','Championnats de France · 400 m nage libre','3:47.99','1er',AQUA,'400 m nage libre'),
  result('Sauveur Cristofini','2026-08-10','Championnats d’Europe · relais masculin 4 × 200 m nage libre','7:02.23','2e',AQUA,'4 × 200 m relais'),
  result('Sauveur Cristofini','2026-08-13','Championnats d’Europe · 200 m nage libre (séries)','1:45.93','3e des séries',FFIN,'200 m nage libre',{notes:'3e chrono de séries ; pas un classement de finale'}),
+ result('Sauveur Cristofini','2026-08-13','Championnats d’Europe · 200 m nage libre (demi-finale)','1:45.74','hors finale',FFN_RECORDS,'200 m nage libre',{notes:'Record personnel en demi-finale ; pas qualifié pour la finale'}),
  result('Sauveur Cristofini','2026-08-15','Championnats d’Europe · relais mixte 4 × 200 m nage libre','7:30.70','5e',AQUA,'4 × 200 m relais mixte'),
+ result('Sauveur Cristofini','2026-08-16','Championnats d’Europe · 400 m nage libre (séries)','3:46.98','hors finale',FFN_RECORDS,'400 m nage libre',{notes:'Record personnel de séries ; aucune finale'}),
  result('Sauveur Cristofini','2026-11-01','Championnats de France petit bassin · 200 m 4 nages (finale B)','1:57.52','1er de finale B',FFN_RESULTS,'200 m quatre nages',{notes:'1er de la finale B : ne pas confondre avec le titre national'})
 ];
 const PING=[
