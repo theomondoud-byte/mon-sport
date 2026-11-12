@@ -1,11 +1,11 @@
-// Mon Sport V5 — Archives gratuites ATP, Challenger, ITF et WTA.
+// Mon Sport V5.1 — Archives gratuites ATP, Challenger, ITF et WTA.
 // Source : Jeff Sackmann, miroir Aneeshers/tennis-sackmann-archive.
 // Licence des DONNÉES : CC BY-NC-SA 4.0 (usage personnel et non commercial).
 // Le miroir a été mis à jour le 25 juin 2026 : il ne donne PAS les derniers matchs.
 export const TENNIS_HISTORY_SOURCE =
   'https://github.com/Aneeshers/tennis-sackmann-archive';
 export const TENNIS_LATEST_SOURCE =
-  'https://www.tennisexplorer.com/player/kouame-d4969/';
+  'https://fr.tennistemple.com/player/moise-kouame/results';
 const MIRROR='https://raw.githubusercontent.com/Aneeshers/tennis-sackmann-archive/main/';
 const CSV_FILES=[
  ['atp/atp_matches_2026.csv','ATP'],
@@ -14,7 +14,7 @@ const CSV_FILES=[
  ['wta/wta_matches_2026.csv','WTA'],
  ['wta/wta_matches_qual_itf_2026.csv','ITF féminin / qualifications']
 ];
-const CACHE_PREFIX='mon-sport-history-v5:';
+const CACHE_PREFIX='mon-sport-history-v5-1:';
 const SNAPSHOT_DATE='2026-11-12';
 // Sources des faits : TennisExplorer et TennisTemple (liens uniquement, pas de scraping).
 // Relevé MANUEL : ne prétend pas se mettre à jour automatiquement.
@@ -28,7 +28,20 @@ const KOUAME_MATCHES=[
  ['2026-10-29','Hugo Gaston','V','7-5 2-1 RET','Brest Challenger','Huitième de finale'],
  ['2026-10-27','Hugo Grenier','V','6-4 7-6(1)','Brest Challenger','Premier tour'],
  ['2026-10-21','Lorenzo Musetti','D','6-4 6-4','Lyon ATP 250','Deuxième tour'],
- ['2026-10-19','Lorenzo Sonego','V','7-6(2) 6-4','Lyon ATP 250','Premier tour']
+ ['2026-10-19','Lorenzo Sonego','V','7-6(2) 6-4','Lyon ATP 250','Premier tour'],
+ ['2026-10-15','Nicolai Budkov Kjaer','D','6-4 6-2','Roanne Challenger','Huitième de finale'],
+ ['2026-10-13','Diego Dedura','V','6-1 6-4','Roanne Challenger','Premier tour'],
+ ['2026-09-30','Adam Walton','D','6-1 6-4','Jingshan Challenger','Premier tour'],
+ ['2026-09-24','Alexandre Muller','D','6-4 6-0','Chengdu ATP 250','Premier tour'],
+ ['2026-09-19','Rodrigo Pacheco Méndez','D','2-6 6-3 6-4','Phan Thiet Challenger','Demi-finale'],
+ ['2026-09-18','Florent Bax','V','6-4 6-2','Phan Thiet Challenger','Quart de finale'],
+ ['2026-09-17','Filip Peliwo','V','6-1 4-2 RET','Phan Thiet Challenger','Huitième de finale'],
+ ['2026-09-15','Ryuki Matsuda','V','6-1 6-3','Phan Thiet Challenger','Premier tour'],
+ ['2026-09-08','Kenta Miyoshi','D','4-6 6-4 7-5','Phan Thiet Challenger','Premier tour'],
+ ['2026-08-25','Nishesh Basavareddy','D','7-6(3) 4-6 6-3','US Open - qualifications','Qualification 1'],
+ ['2026-07-29','Edward Winter','D','6-1 6-4','Los Cabos ATP 250','Premier tour'],
+ ['2026-07-14','Nuno Borges','D','6-4 6-2','Bastad ATP 250','Premier tour'],
+ ['2026-07-06','Max Hans Rehberg','D','6-4 6-4','Braunschweig Challenger','Premier tour']
 ];
 const normalized=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
   .toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
