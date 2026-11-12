@@ -1,19 +1,19 @@
-// Mon Sport V7 : recherche élargie uniquement lors de l'ouverture « Un favori ».
+// Mon Sport V8 : recherche élargie uniquement lors de l'ouverture « Un favori ».
 // Les rencontres ne sont créées que si ESPN retourne date, adversaires et état.
-import {shiftedMonths} from './agenda-model.js?v=7.0.0';
+import {shiftedMonths} from './agenda-model.js?v=8.0.0';
 const humanSource=s=>s.startsWith('soccer/')?'https://www.espn.com/soccer/scoreboard'
   :s.startsWith('basketball/')?'https://www.espn.com/nba/scoreboard'
   :'https://www.espn.com/scores';
-export async function fetchAgendaFavorite(selected,deps,progress=()=>{},now=new Date()){
- const from=shiftedMonths(now,-2),to=shiftedMonths(now,2);
+export async function fetchAgendaFavorite(selected,deps,progress=()=>{},now=new Date(),phase='future'){
+ const from=phase==='past'?shiftedMonths(now,-12):new Date(now),to=phase==='past'?new Date(now):shiftedMonths(now,2);
  const months=deps.monthsInRange(from,to);
  // Un joueur ne doit jamais être présenté comme titulaire sur la seule
  // foi du calendrier de son club. Ces rencontres sont marquées incertaines.
  const proxyMap={'Victor Wembanyama':'San Antonio Spurs','Kylian Mbappé':'Real Madrid'};
  const linkedTeam=selected.type==='équipe'?selected.name:proxyMap[selected.name]||null;
  const proxy=selected.type!=='équipe'&&!!linkedTeam;
- const leagues=linkedTeam?deps.leagues.filter(l=>l.teams.some(([n])=>n===linkedTeam)):[];
- const tennisLeague=selected.type==='sportif'&&selected.sport==='Tennis'
+ const leagues=linkedTeam&&!(proxy&&phase==='past')?deps.leagues.filter(l=>l.teams.some(([n])=>n===linkedTeam)):[];
+ const tennisLeague=phase==='future'&&selected.type==='sportif'&&selected.sport==='Tennis'
   ?(/andreeva|sabalenka|swiatek|gauff|rybakina|paolini/i.test(selected.name)?'wta':'atp'):null;
  const jobs=[
   ...leagues.flatMap(league=>months.map(month=>({kind:'team',league,month}))),

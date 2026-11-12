@@ -108,3 +108,85 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .agenda-countbar{align-items:flex-start}
  .refresh-btn{font-size:.79rem;padding:10px 11px}
 }
+
+
+/* === Mon Sport V8 : portraits, score V/D, résumé interactif, statistiques === */
+.agenda-segments.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.agenda-segments.three button{flex-direction:column;gap:1px;font-size:.86rem;padding:7px 4px}
+.agenda-segments.three button small{font-size:.68rem}
+.favorite-profile{display:flex;align-items:center;gap:17px;padding:18px;
+ background:linear-gradient(105deg,#20465a 0%,#183d40 100%);border:1px solid #54887c;
+ border-radius:19px;min-height:126px}
+.favorite-profile-name{flex:1;min-width:0}
+.favorite-profile-name>span{font-size:.67rem;font-weight:850;letter-spacing:.11em;color:#a3ebc9}
+.favorite-profile-name h3{font-size:1.36rem;line-height:1.25;letter-spacing:-.02em;margin:6px 0}
+.favorite-profile-name p{font-size:.86rem;color:#c7e4e8;margin:3px 0}
+.favorite-profile-name a{font-size:.7rem;color:#c5ecdf;display:inline-block;margin-top:8px;line-height:1.3}
+.portrait-wrap,.portrait-placeholder{flex:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;
+ background:#173d4a;color:#c8fbe0;font-weight:800;border:1px solid #6ca39c}
+.portrait-wrap img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.portrait-wrap.large,.portrait-placeholder.large{height:95px;width:95px;border-radius:18px;font-size:1.9rem;box-shadow:0 7px 24px #061a244f}
+.portrait-wrap.tiny,.portrait-placeholder.tiny{width:26px;height:26px;border-radius:50%;font-size:.67rem}
+.agenda-people{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.agenda-person-tag{display:inline-flex;align-items:center;gap:6px;min-height:31px;background:#244c5b;
+ border:1px solid #3e7280;border-radius:22px;color:#f0fcff;font-size:.76rem;font-weight:750;padding:3px 7px 3px 3px}
+.agenda-verdict{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;
+ border-radius:8px;font-size:.82rem;font-weight:950;margin-left:1px}
+.agenda-verdict.win{background:#0c6c3c;color:#b5ffd3;border:1px solid #43c682}
+.agenda-verdict.loss{background:#7a2935;color:#ffd1d4;border:1px solid #e06c79}
+.agenda-verdict.draw{background:#4b536a;color:#e8e9f0;border:1px solid #828caa}
+.agenda-event{padding:0;transition:border-color .15s,background .15s}
+.agenda-event[open]{border-color:#6ec5a5;background:#19384b}
+.agenda-event-clickable{list-style:none;cursor:pointer;display:block;padding:15px 16px;user-select:none}
+.agenda-event-clickable::-webkit-details-marker{display:none}
+.agenda-event-clickable:focus-visible{outline:3px solid #9cddff;outline-offset:3px;border-radius:14px}
+.agenda-event-clickable h3{margin:12px 0 9px}
+.agenda-open-hint{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ font-size:.8rem;font-weight:780;color:#98e7c7;margin-top:14px;padding-top:11px;border-top:1px solid #3a5d6a}
+.agenda-open-hint span:last-child{font-size:1.2rem;line-height:1;transition:transform .15s}
+.agenda-event[open] .agenda-open-hint span:last-child{transform:rotate(180deg)}
+.agenda-recap{border-top:1px solid #47727b;padding:15px 17px 18px;background:#112e41;
+ border-radius:0 0 14px 14px}
+.agenda-recap h4{font-size:.94rem;color:#adf4d3;margin:0 0 10px}
+.agenda-recap p{font-size:.91rem;line-height:1.65;color:#e2f0f7;margin:9px 0}
+.agenda-recap-note{font-size:.77rem!important;color:#acc5d2!important}
+.agenda-recap-stats{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.agenda-recap-stats span{border:1px solid #3e6271;background:#235061;border-radius:9px;
+ padding:8px 11px;font-size:.8rem;color:#e3f8ff}
+.agenda-recap-source{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ flex-wrap:wrap;font-size:.78rem;color:#afcad4;margin-top:12px}
+.agenda-recap-source a{font-weight:800}
+.favorite-stats{display:grid;gap:14px}
+.stat-intro h3{font-size:1.22rem;margin:2px 0 5px}
+.stat-intro p{font-size:.86rem;color:#b3cfdb;margin:0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px}
+.stat-tile{min-height:105px;border:1px solid #315869;background:#17364b;
+ border-radius:15px;padding:15px;display:flex;flex-direction:column;gap:4px}
+.stat-tile b{color:#a9ffce;font-size:1.8rem;line-height:1.18}
+.stat-tile span{font-size:.82rem;font-weight:750;color:#edf8ff}
+.stat-tile small{font-size:.69rem;line-height:1.35;color:#abc4d0}
+.stat-heading{font-size:1.05rem;margin:10px 0 2px}
+.stat-competitions{background:#102a3b;border:1px solid #2f5265;border-radius:14px;padding:3px 15px}
+.stat-competition{display:flex;justify-content:space-between;align-items:center;gap:12px;
+ border-bottom:1px solid #305063;padding:13px 1px;font-size:.88rem}
+.stat-competition:last-child{border-bottom:0}
+.stat-competition b{color:#aef4d0}
+.stat-latest{display:grid;gap:5px;border-left:3px solid #66dba8;background:#18374a;
+ border-radius:11px;padding:14px}
+.stat-latest span{font-size:.7rem;font-weight:850;color:#a4d9c9;text-transform:uppercase;letter-spacing:.04em}
+.stat-latest b{font-size:1rem}
+.stat-latest small{color:#a9cbd9}
+@media(max-width:580px){
+ .favorite-profile{gap:13px;padding:13px;min-height:110px}
+ .portrait-wrap.large,.portrait-placeholder.large{width:75px;height:75px;border-radius:14px;font-size:1.5rem}
+ .favorite-profile-name h3{font-size:1.12rem}
+ .agenda-segments.three button{font-size:.77rem;min-height:58px}
+ .agenda-segments.three button small{font-size:.64rem}
+ .agenda-event-clickable{padding:13px}
+ .agenda-person-tag{font-size:.69rem}
+ .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+.stat-source-link{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+ border:1px solid #426577;background:#153649;padding:12px 14px;border-radius:12px;font-size:.8rem;color:#b8d5dc}
+.stat-source-link a{font-weight:800;font-size:.82rem}
