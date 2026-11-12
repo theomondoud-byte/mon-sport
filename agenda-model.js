@@ -1,4 +1,4 @@
-// Mon Sport V10 — modèle indépendant de la navigation et des sources.
+// Mon Sport V12 — modèle indépendant de la navigation et des sources.
 // Les fenêtres sont glissantes : 7 jours, 2 mois futurs et 12 mois passés par favori.
 // Seules les rencontres réellement renvoyées par les sources sont affichées.
 export const agendaNow=()=>new Date();
@@ -36,7 +36,7 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   const source=String(item.source||'Source sportive');
   const competition=String(item.competition||source.replace(/^ESPN \(/,'').replace(/\)$/,''));
   const originalDate=item.date;
-  const day=originalDate.slice(0,10);
+  const day=item.pendingResult&&item.endDate?String(item.endDate).slice(0,10):originalDate.slice(0,10);
   const type=item.type==='nba'?'nba':item.type==='tennis'||item.type==='tennis-history'?'tennis':item.type==='verified2026'||item.type==='manual2026'?'verified':item.home?'team':item.type||'other';
   const noExactHour=!precise(item);
   // L'heure fictive de midi des relevés manuels n'est JAMAIS montrée.
@@ -96,7 +96,8 @@ export function agendaMatches(events,{view='semaine',phase='future',favorite=nul
   const uncertain=!!e.approximate;
   if(phase==='past'){
    if(!e.finished&&!e.pendingResult)return false;
-   return uncertain?(dt+6*86400000>=lo&&dt<=hi):(dt>=lo&&dt<=hi);
+   const relevantDate=e.pendingResult&&e.endDate?Date.parse(e.endDate):dt;
+   return uncertain?(relevantDate+6*86400000>=lo&&relevantDate<=hi):(relevantDate>=lo&&relevantDate<=hi);
   }
   // Les rencontres en cours restent visibles pendant 4 h après le début.
   if(!(e.status==='À venir'||e.live))return false;
