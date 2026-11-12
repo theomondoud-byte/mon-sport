@@ -3,6 +3,7 @@
 // officielle complète lorsque la source ne couvre pas tous les matchs.
 import {agendaMatches,agendaWindow} from './agenda-model.js?v=8.0.0';
 import {matchVerdict} from './match-details.js?v=8.0.0';
+import {auditInfo} from './audit-2026.js?v=8.0.0';
 export function computeFavoriteStats(items,favorite,now=new Date()){
  const matches=agendaMatches(items,{view:'favori',phase:'past',favorite,now});
  const decisions=matches.map(m=>({event:m,verdict:matchVerdict(m,favorite)}));
@@ -29,7 +30,7 @@ export function computeFavoriteStats(items,favorite,now=new Date()){
  };
 }
 export function renderFavoriteStats({items=[],favorite='',now=new Date(),loading=false,esc}){
- const s=computeFavoriteStats(items,favorite,now);
+ const s=computeFavoriteStats(items,favorite,now),reference=auditInfo(favorite);
  const fmt=x=>x.toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
  const counter=(label,value,desc='')=>'<div class="stat-tile"><b>'+esc(value)+'</b><span>'+esc(label)+'</span>'
   +(desc?'<small>'+esc(desc)+'</small>':'')+'</div>';
@@ -57,6 +58,8 @@ export function renderFavoriteStats({items=[],favorite='',now=new Date(),loading
   +(averages?'<h3 class="stat-heading">🏀 Statistiques individuelles NBA</h3><div class="stat-grid">'+averages+'</div>':'')
   +(groups?'<h3 class="stat-heading">Compétitions retrouvées</h3><div class="stat-competitions">'+groups+'</div>':'')
   +note
+  +'<div class="stat-source-link"><span>Source de référence : '+esc(reference.source||'inconnue')+'</span>'
+  +(String(reference.url||'').startsWith('https://')?'<a target="_blank" rel="noopener noreferrer" href="'+esc(reference.url)+'">Consulter les statistiques à la source ↗</a>':'')+'</div>'
   +'<div class="agenda-footnote">Ces statistiques sont calculées uniquement à partir des résultats présents dans Mon Sport. '
   +'Les tournois ITF/Challenger, la natation, le cyclisme, le tennis de table et certaines rencontres peuvent ne pas être couverts intégralement. '
   +'Une absence de données ne signifie pas zéro match disputé.</div></section>';
