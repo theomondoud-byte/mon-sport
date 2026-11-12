@@ -12,8 +12,8 @@ const AQUA='https://www.worldaquatics.com/athletes/1188005/ws';
 const PCS='https://www.procyclingstats.com/rider/paul-seixas/results';
 const TT_COTON='https://tabletennisapi.com/players/coton-flavien/matches/2026';
 export const SOURCES_2026={
- 'Real Madrid':{kind:'équipe',unit:'matchs terminés',source:'ESPN · LaLiga, C1, Coupe du Roi',url:'https://www.realmadrid.com/fr-FR/football/equipe-premiere/calendrier'},
- PSG:{kind:'équipe',unit:'matchs terminés',source:'ESPN · Ligue 1, C1, Coupe de France',url:'https://www.psg.fr/equipes/equipe-premiere/calendrier'},
+ 'Real Madrid':{kind:'équipe',unit:'matchs terminés',source:'ESPN · LaLiga, C1, Coupe du Roi',url:'https://www.realmadrid.com/fr-FR/calendrier?filter-football=primer-equipo-masculino'},
+ PSG:{kind:'équipe',unit:'matchs terminés',source:'ESPN · Ligue 1, C1, Coupe de France',url:'https://www.psg.fr/football-masculin/calendrier'},
  'San Antonio Spurs':{kind:'équipe',unit:'matchs NBA terminés',source:'ESPN NBA',url:'https://www.nba.com/spurs/schedule'},
  'Victor Wembanyama':{kind:'joueur',unit:'matchs joués',source:'NBA · match log',url:'https://www.nba.com/player/1641705/victor-wembanyama'},
  'Léon Marchand':{kind:'nageur',unit:'courses individuelles',source:'World Aquatics · fiches et résultats',url:AQUA},
