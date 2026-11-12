@@ -1,3 +1,4 @@
+import {filterSportsNews} from './sports-articles.js?v=13.0.0';
 // Mon Sport V9 — dernières 7 journées, lecture à l'intérieur de la PWA.
 // Un titre RSS et un extrait librement fourni ne sont PAS un article intégral.
 // L'iframe de l'éditeur est tentée au clic ; l'éditeur peut refuser l'intégration.
@@ -5,7 +6,7 @@ const HOUR=3600000;
 const DAY=24*HOUR;
 export function newsLastWeek(items,now=new Date()){
  const end=now.getTime(),start=end-7*DAY,used=new Set();
- return (Array.isArray(items)?items:[]).filter(n=>{
+ return filterSportsNews(Array.isArray(items)?items:[]).filter(n=>{
   const t=Date.parse(n.date||n.published||'');
   if(!Number.isFinite(t)||t<start||t>end+10*60*1000||!n.title||!n.link)return false;
   const key=String(n.link).replace(/[?#].*$/,'').toLowerCase()+'|'+String(n.title).trim().toLowerCase();
@@ -22,8 +23,8 @@ export function safeExcerpt(value){
 export function renderNewsView({news=[],loading=false,hasWorker=false,esc,safeUrl,now=new Date()}){
  const recent=newsLastWeek(news,now);
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span>'
-  +'<h2>Les nouvelles de tes favoris</h2>'
-  +'<p>Uniquement les articles publiés au cours des sept derniers jours, du plus récent au plus ancien. Un clic ouvre directement le site de l’éditeur.</p></div>'
+  +'<h2>Articles sportifs · favoris et FFL</h2>'
+  +'<p>Uniquement les articles sportifs publiés au cours des sept derniers jours, du plus récent au plus ancien. Un clic ouvre directement le site de l’éditeur.</p></div>'
   +'<div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Derniers 7 jours</span></div>';
  const cards=recent.map(n=>{
   const link=safeUrl(n.link);
@@ -37,7 +38,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,esc,safeUr
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article récent</h3><p>Les articles plus anciens que sept jours sont masqués.</p></div>')
-  +(!hasWorker?'<p class="agenda-footnote">La connexion au Worker Cloudflare est facultative ; les sources sportives ESPN restent utilisées.</p>':'')
+  +(!hasWorker?'<p class="agenda-footnote">Sources : FFL et ESPN · flux complémentaires via Cloudflare si configuré.</p>':'')
   +'<p class="agenda-footnote">Mon Sport affiche uniquement les titres, dates, sources et liens. Le contenu intégral appartient à son éditeur.</p></section>';
 }
 // Compatibilité avec la navigation V9 : aucun iframe n'est utilisé en V10.
