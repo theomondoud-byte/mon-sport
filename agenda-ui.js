@@ -99,8 +99,8 @@ export function renderAgendaView({
    +'</div></div>':'';
  const duration=(single&&phase==='past')?'12 mois':single?'2 mois':'7 jours';
  const segments='<div class="agenda-segments '+(single?'three':'')+'" role="group" aria-label="Afficher les matchs ou les statistiques">'
-  +'<button type="button" data-agenda-phase="future" aria-pressed="'+(phase==='future')+'" class="'+(phase==='future'?'selected':'')+'">À venir <small>'+(single?'2 mois':'7 jours')+'</small></button>'
   +'<button type="button" data-agenda-phase="past" aria-pressed="'+(phase==='past')+'" class="'+(phase==='past'?'selected':'')+'">Passés <small>'+(single?'12 mois':'7 jours')+'</small></button>'
+  +'<button type="button" data-agenda-phase="future" aria-pressed="'+(phase==='future')+'" class="'+(phase==='future'?'selected':'')+'">À venir <small>'+(single?'2 mois':'7 jours')+'</small></button>'
   +(single?'<button type="button" data-agenda-phase="stats" aria-pressed="'+stats+'" class="'+(stats?'selected':'')+'">Statistiques <small>12 mois</small></button>':'')
   +'</div>';
  const progress=(loading||extendedLoading)?'<div class="agenda-progress" role="status"><span class="agenda-spinner"></span>'
@@ -112,11 +112,14 @@ export function renderAgendaView({
  const details=groupAgenda(cards).map(g=>'<section class="agenda-day-group"><h3 class="agenda-day">'+esc(fullDay(g.day))+'</h3>'
   +g.items.map(e=>eventHtml(e,esc,safeUrl,photos,single?chosen:null)).join('')+'</section>').join('');
  const empty=!cards.length&&!loading&&!extendedLoading?'<div class="agenda-empty"><div class="agenda-empty-icon">📅</div>'
-  +'<h3>Aucun match confirmé dans cette période</h3><p>Les sources ne renvoient pas de rencontre disponible. Cela ne signifie pas que le favori n’a pas joué ou ne jouera pas.</p>'
+  +'<h3>Aucun match ou événement confirmé dans cette période</h3><p>Les sources ne renvoient pas de rencontre disponible. Cela ne signifie pas que le favori n’a pas joué ou ne jouera pas.</p>'
   +(single?'<a href="'+esc(safeUrl(auditInfo(chosen).url))+'" target="_blank" rel="noopener noreferrer">Vérifier le calendrier source ↗</a>':'')+'</div>':'';
  const reliability=notes.length?'<details class="agenda-missing"><summary>Couverture et fiabilité des sources</summary>'
   +'<p>'+notes.slice(0,8).map(esc).join('<br>')+'</p></details>':'';
- return '<section class="agenda-shell">'+header+select+picture+segments
+ const upcomingSource=single&&phase==='future'?nextCompetitionNote(chosen,now):null;
+ const extraNext=upcomingSource?'<div class="agenda-next"><b>📌 Information du calendrier</b><span>'+esc(upcomingSource.text)+'</span>'
+  +'<a target="_blank" rel="noopener noreferrer" href="'+esc(safeUrl(upcomingSource.url))+'">Vérifier la source ↗</a></div>':'';
+ return '<section class="agenda-shell">'+header+select+picture+segments+extraNext
   +(stats?progress+error+renderFavoriteStats({items,favorite:chosen,favoriteData:which,now,loading:extendedLoading||loading,esc}):
     count+progress+error+(details||empty)+placeholderMissing(missing,esc,safeUrl)+reliability)
   +'<div class="agenda-footnote">Un résultat n’est affiché que si une source le fournit. Les pastilles V/D signalent uniquement les victoires et défaites identifiables. '
