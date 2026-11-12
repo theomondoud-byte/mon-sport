@@ -1,4 +1,4 @@
-// Mon Sport V5.2 — Archives gratuites ATP, Challenger, ITF et WTA.
+// Mon Sport V5.3 — Archives gratuites ATP, Challenger, ITF et WTA.
 // Source : Jeff Sackmann, miroir Aneeshers/tennis-sackmann-archive.
 // Licence des DONNÉES : CC BY-NC-SA 4.0 (usage personnel et non commercial).
 // Le miroir a été mis à jour le 25 juin 2026 : il ne donne PAS les derniers matchs.
@@ -14,7 +14,7 @@ const filesForYear=year=>[
  [`wta/wta_matches_${year}.csv`,'WTA'],
  [`wta/wta_matches_qual_itf_${year}.csv`,'ITF féminin / qualifications']
 ];
-const CACHE_PREFIX='mon-sport-history-v5-2:';
+const CACHE_PREFIX='mon-sport-history-v5-3:';
 const SNAPSHOT_DATE='2026-11-12';
 // Sources des faits : TennisExplorer et TennisTemple (liens uniquement, pas de scraping).
 // Relevé MANUEL : ne prétend pas se mettre à jour automatiquement.
@@ -106,6 +106,41 @@ export function recentKouameSnapshot(favorites){
    snapshot:true
  }));
 }
+
+// Sept matchs de Wimbledon 2026 confirmés par le journal des matchs de Jannik Sinner.
+// L'archive Jeff Sackmann utilisée par Mon Sport s'arrête au 25 juin 2026,
+// avant le début du tournoi. Il s'agit de résultats vérifiés et figés,
+// et non d'un flux automatique.
+// https://tennis-db.com/players/2/jannik-sinner/matches
+// https://www.wimbledon.com/en_GB/news/wimbledon_2026_sinner_zverev_final
+const SINNER_WIMBLEDON_2026=[
+ ['2026-07-12','Alexander Zverev','6-7(7) 7-6(2) 6-3 6-4','Finale'],
+ ['2026-07-10','Novak Djokovic','6-4 6-4 6-4','Demi-finale'],
+ ['2026-07-07','Jan-Lennard Struff','7-5 7-6(4) 6-3','Quart de finale'],
+ ['2026-07-05','Shintaro Mochizuki','6-3 7-6(0) 6-3','Huitième de finale'],
+ ['2026-07-03','Jenson Brooksby','6-4 6-3 6-4','Troisième tour'],
+ ['2026-07-01','Nuno Borges','7-6(4) 7-6(2) 6-4','Deuxième tour'],
+ ['2026-06-29','Miomir Kecmanović','4-6 6-3 6-7(6) 6-2 6-3','Premier tour']
+];
+export const SINNER_MATCH_SOURCE='https://tennis-db.com/players/2/jannik-sinner/matches';
+export function recentSinnerSnapshot(favorites){
+ const player=favorites.find(f=>f.sport==='Tennis'&&f.type==='sportif'&&sameName(f.name,'Jannik Sinner'));
+ if(!player)return [];
+ return SINNER_WIMBLEDON_2026.map(([day,opponent,score,round])=>({
+   id:'sinner-2026-wimbledon-'+day,
+   favorite:player.name,type:'tennis-history',date:day+'T12:00:00Z',
+   title:player.name+' — '+opponent,
+   score,competition:'Wimbledon 2026',round,outcome:'Victoire',
+   source:'Wimbledon 2026 · résultats vérifiés',sourceUrl:SINNER_MATCH_SOURCE,
+   approxDate:false,snapshot:true
+ }));
+}
+// Pour les sports avec un relevé particulier, ces rencontres complètent les CSV
+// de la saison 2026, et ne doivent jamais être présentées comme du direct.
+export function tennisSnapshot2026(favorites){
+ return [...recentKouameSnapshot(favorites),...recentSinnerSnapshot(favorites)];
+}
+
 // Parseur CSV compatible guillemets, séparateurs et lignes de retour, sans librairie.
 export function parseCsv(csv){
  const rows=[];let row=[],field='',quoted=false;
