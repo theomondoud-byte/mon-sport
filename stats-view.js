@@ -49,9 +49,9 @@ export function renderFavoriteStats({items=[],favorite='',now=new Date(),loading
   +(loading?'<p class="agenda-progress" role="status">Actualisation des résultats de cette période…</p>':'')
   +'<div class="stat-grid">'
   +counter('Événements recensés',String(s.events),'Couverture partielle possible')
-  +counter('Victoires (V)',String(s.wins))
-  +counter('Défaites (D)',String(s.losses))
-  +counter('Nuls (N)',String(s.draws))
+  +counter('Victoires (V)',s.known?String(s.wins):'—')
+  +counter('Défaites (D)',s.known?String(s.losses):'—')
+  +counter('Nuls (N)',s.known?String(s.draws):'—')
   +(s.winRate!==null?counter('Taux de victoire',s.winRate+' %','Parmi les résultats avec verdict'):'')
   +'</div>'+recap
   +(averages?'<h3 class="stat-heading">🏀 Statistiques individuelles NBA</h3><div class="stat-grid">'+averages+'</div>':'')
