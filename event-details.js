@@ -128,6 +128,27 @@ function parsePlayerStats(box,kind,favorite){
  const selected=output.filter(p=>norm(p.name).includes(wanted)||wanted.includes(norm(p.name)));
  return (selected.length?selected:output).slice(0,kind==='basketball'?5:4);
 }
+// ESPN peut publier un article de match distinct de la simple boxscore.
+export function recapArticleFromESPN(body){
+ const candidates=[body?.article,...(body?.news?.articles||[]),...(body?.articles||[])].filter(Boolean);
+ for(const a of candidates){
+  const title=a.headline||a.title||'';
+  const link=a.links?.web?.href||a.links?.mobile?.href||a.link||a.url||'';
+  if(title&&/^https:\/\/(?:www\.)?espn\.(?:com|co\.uk)\//i.test(link)){
+   const excerpt=String(a.description||a.summary||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,180);
+   return {title,link,excerpt,source:'ESPN'};
+  }
+ }
+ // Les liens dédiés au match (recap) peuvent être présents sans article.
+ const competition=body?.header?.competitions?.[0]||{};
+ for(const l of competition.links||[]){
+  const rel=String(l.rel?.join(' ')||l.text||'');
+  const url=l.href||l.url||'';
+  if(/recap|article|report|compte rendu/i.test(rel)&&/^https:\/\/(?:www\.)?espn\.(?:com|co\.uk)\//i.test(url))
+   return {title:'Compte rendu du match (ESPN)',link:url,excerpt:'',source:'ESPN'};
+ }
+ return null;
+}
 function dataFromEvent(event){
  const original=event.origin||{};
  const sport=family(event);
@@ -174,7 +195,7 @@ export async function loadEventDetails(event,{fetchFn=fetch}={}){
   if(!r.ok)throw Error('HTTP '+r.status);
   const body=await r.json();
   const parsed={
-   ...data,teamStats:parseTeamData(body.boxscore,data.sport),
+   ...data,article:recapArticleFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
    players:parsePlayerStats(body.boxscore,data.sport,event.favorite),
    scorers:parseScorers(body),
    note:'ESPN · statistiques de la feuille de match disponibles selon la compétition.',
@@ -202,5 +223,9 @@ export function renderEventDetails(info,esc){
  const players=info.players.length?'<h5 class="detail-head">Statistiques des sportifs</h5>'
   +info.players.map(p=>'<div class="detail-player"><b>'+esc(p.name)+'</b><div class="detail-metrics">'+p.metrics.map(m=>
     '<div class="detail-metric"><span>'+esc(m.label)+'</span><b>'+esc(m.value)+'</b></div>').join('')+'</div></div>').join(''):'';
- return title+extras+scores+scorers+players+'<p class="agenda-recap-note">'+esc(info.note||'Couverture partielle.')+'</p>';
+ const article=info.article?.link?'<div class="event-editorial"><h5>📰 Article de match</h5>'
+  +'<b>'+esc(info.article.title)+'</b>'
+  +(info.article.excerpt?'<p>'+esc(info.article.excerpt)+'</p>':'')
+  +'<a href="'+esc(info.article.link)+'" target="_blank" rel="noopener noreferrer">Lire le compte rendu ESPN ↗</a></div>':'';
+ return title+article+extras+scores+scorers+players+'<p class="agenda-recap-note">'+esc(info.note||'Couverture partielle.')+'</p>';
 }
