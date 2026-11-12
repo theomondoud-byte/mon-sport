@@ -1,7 +1,7 @@
 // V4.1 : ne pas conserver une ancienne version sur Android.
-const CACHE = 'mon-sport-v5-2';
+const CACHE = 'mon-sport-v5-3';
 const ASSETS = [
-  './', './index.html', './style.css?v=5.2.0', './src.js?v=5.2.0', './tennis-history.js?v=5.2.0',
+  './', './index.html', './style.css?v=5.3.0', './src.js?v=5.3.0', './tennis-history.js?v=5.3.0',
   './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'
 ];
 
