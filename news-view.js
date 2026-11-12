@@ -69,7 +69,7 @@ export function mountNewsFrames(root,safeUrl){
   iframe.title='Lecture intégrée de l’article';
   iframe.loading='lazy';
   iframe.referrerPolicy='no-referrer';
-  iframe.sandbox='allow-forms allow-scripts allow-same-origin allow-popups';
+  iframe.setAttribute('sandbox','allow-forms allow-scripts allow-same-origin allow-popups');
   iframe.className='news-embedded-frame';
   slot.replaceChildren(iframe);
   button.textContent='Fermer la lecture intégrée';
