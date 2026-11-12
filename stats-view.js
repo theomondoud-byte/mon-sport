@@ -8,7 +8,7 @@ const fmt=day=>new Date(day).toLocaleDateString('fr-FR',{day:'numeric',month:'sh
 const tile=(label,value,desc='',esc=x=>x)=>'<div class="stat-tile"><b>'+esc(String(value))+'</b><span>'+esc(label)+'</span>'
  +(desc?'<small>'+esc(desc)+'</small>':'')+'</div>';
 export function computeFavoriteStats(items,favorite,now=new Date()){
- const matches=agendaMatches(items,{view:'favori',phase:'past',favorite,now});
+ const matches=agendaMatches(items,{view:'favori',phase:'past',favorite,now}).filter(m=>m.finished);
  const verdicts=matches.map(m=>matchVerdict(m,favorite));
  const wins=verdicts.filter(x=>x==='V').length,losses=verdicts.filter(x=>x==='D').length;
  const draws=verdicts.filter(x=>x==='N').length,known=wins+losses+draws;
