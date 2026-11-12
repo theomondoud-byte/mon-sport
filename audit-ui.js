@@ -1,4 +1,4 @@
-import {AUDIT_AS_OF,auditInfo,safeScoreCount,verified2026For} from './audit-2026.js?v=10.0.0';
+import {AUDIT_AS_OF,auditInfo,safeScoreCount,verified2026For} from './audit-2026.js?v=11.0.0';
 
 // Un compteur = nombre réellement trouvé, pas un total garanti de saison.
 // Le détail affiché est borné à 25 entrées pour rester lisible sur Android.

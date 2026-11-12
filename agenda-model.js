@@ -50,7 +50,9 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   // En simple, une même rencontre ATP peut être livrée à la fois par ESPN,
   // les archives et le relevé manuel avec des noms abrégés.
   const alias=str=>norm(str).replace(/\bsouth africa\b/g,'afrique du sud').replace(/\bargentina\b/g,'argentine')
-   .replace(/\bparis saint germain\b/g,'psg').replace(/\bfrance rugby\b/g,'france');
+   .replace(/\bparis saint germain\b/g,'psg').replace(/\bfrance rugby\b/g,'france')
+   .replace(/\bfc barcelona\b/g,'barca').replace(/\bfc barcelone\b/g,'barca')
+   .replace(/\bbarcelona\b/g,'barca').replace(/\batletico de madrid\b/g,'atletico madrid');
   const teams=item.home&&item.away?[alias(item.home),alias(item.away)].sort().join('|'):null;
   const key=teams&&!item.scheduledCompetition?'fixture:'+day+':'+teams
    :eventKey&&type!=='tennis'?eventKey

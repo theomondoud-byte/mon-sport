@@ -4,6 +4,7 @@ function teamMatch(favorite,actual){
  const name=normalized(favorite),other=normalized(actual);
  if(!name||!other)return false;
  if(name==='psg')return other==='psg'||/paris saint germain|paris sg/.test(other);
+ if(name==='fc barcelone')return /^(fc )?(barcelona|barcelone)$|^barca$/.test(other);
  if(name==='xv de france'||name==='equipe de france de football')return other==='france'||other==='france rugby';
  if(name==='san antonio spurs')return other.includes('san antonio spurs');
  return other===name||other.includes(name+' ');
