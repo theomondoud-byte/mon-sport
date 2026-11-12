@@ -385,32 +385,55 @@ async function loadAgendaExpanded(force=false){
  if(active!=='favori')return;
  const selected=favorites.find(f=>f.name===agendaFavorite);
  if(!selected){agendaExtended=[];agendaExtendedFor='';return;}
+ const mode=favoritePhase==='future'?'future':'past';
  const day=new Date().toISOString().slice(0,10);
- const cacheKey=selected.name+'|'+day,local=agendaCache.get(cacheKey);
+ const cacheKey=selected.name+'|'+mode+'|'+day,local=agendaCache.get(cacheKey);
  if(!force&&local&&Date.now()-local.saved<15*60*1000){
-  agendaExtended=local.events;agendaExtendedFor=selected.name;
+  agendaExtended=local.events;agendaExtendedFor=selected.name;agendaExtendedPhase=mode;
   agendaExtendedMessage=local.message;agendaExtendedLoading=false;render();return;
  }
  const token=++agendaRequest;
- agendaExtended=[];agendaExtendedFor=selected.name;
- agendaExtendedLoading=true;
- agendaExtendedMessage='';
+ agendaExtended=[];agendaExtendedFor=selected.name;agendaExtendedPhase=mode;
+ agendaExtendedLoading=true;agendaExtendedMessage='';
  render();
  try{
-  const result=await fetchAgendaFavorite(selected,{
-   leagues:ESPN_LEAGUES,monthsInRange,base:ESPN_BASE,espnMonth,espnFetch,
-   getTennisMatches,espnName,espnScore
-  },(done,total)=>{
-   if(token!==agendaRequest)return;
-   const status=document.querySelector('.agenda-progress');
-   if(status)status.textContent='Recherche des calendriers : '+done+'/'+total+' périodes';
-  });
+  const fetches=[
+   fetchAgendaFavorite(selected,{
+    leagues:ESPN_LEAGUES,monthsInRange,base:ESPN_BASE,espnMonth,espnFetch,
+    getTennisMatches,espnName,espnScore
+   },(done,total)=>{
+    if(token!==agendaRequest)return;
+    const status=document.querySelector('.agenda-progress');
+    if(status)status.textContent='Recherche des calendriers : '+done+'/'+total+' périodes';
+   },new Date(),mode)
+  ];
+  // Le début des 12 derniers mois se situe actuellement fin 2025 :
+  // récupérer également les résultats ATP/Challenger/ITF de cette année.
+  // Les scores historiques restent des faits recoupés, pas du direct.
+  const getPastTennis=mode==='past'&&selected.sport==='Tennis'&&selected.type==='sportif'
+   &&new Date().getFullYear()===2026;
+  if(getPastTennis)fetches.push(loadArchiveTennis([selected],2025));
+  const results=await Promise.allSettled(fetches);
   if(token!==agendaRequest)return;
-  agendaExtended=result.events;
-  agendaExtendedMessage=result.total===0
-   ?'Aucun calendrier automatique complet n’est connecté pour cette discipline. Les résultats déjà vérifiés restent disponibles.'
-   :result.failures.length?result.failures.length+' période(s) indisponible(s) sur '+result.total+'. Certaines rencontres peuvent manquer.':'';
-  agendaCache.set(cacheKey,{events:result.events,message:agendaExtendedMessage,saved:Date.now()});
+  const events=[],warnings=[];
+  const main=results[0];
+  if(main.status==='fulfilled'){
+   events.push(...main.value.events);
+   if(main.value.failures.length)warnings.push(main.value.failures.length+' période(s) ESPN indisponible(s) sur '+main.value.total+'.');
+   if(main.value.total===0&&!getPastTennis)warnings.push('Pas de calendrier individuel complet connecté pour ce sport. Les résultats vérifiés restent disponibles.');
+  }else warnings.push('Calendrier ESPN indisponible : '+String(main.reason?.message||main.reason));
+  if(getPastTennis){
+   const archive=results[1];
+   if(archive?.status==='fulfilled'){
+    events.push(...archive.value.events);
+    warnings.push('Résultats 2025 issus des archives tennis (dates parfois approximatives).');
+    const unavailable=archive.value.coverage?.some(c=>c.mode!=='weekly');
+    if(unavailable)warnings.push('Certaines archives 2025 sont incomplètes ou indisponibles.');
+   }else warnings.push('L’archive tennis de fin 2025 n’a pas pu être chargée.');
+  }
+  agendaExtended=events;
+  agendaExtendedMessage=warnings.join(' ');
+  agendaCache.set(cacheKey,{events,message:agendaExtendedMessage,saved:Date.now()});
  }catch(e){
   if(token!==agendaRequest)return;
   agendaExtendedMessage='Calendrier étendu indisponible : '+String(e.message||e);
@@ -527,6 +550,10 @@ async function refresh(){
  finally{loading=false;render();}
 }
 render();refresh();refreshHistory();
+loadFavoritePhotos(favorites).then(result=>{
+ photoMap=result;
+ if(active==='favori'||active==='semaine')render();
+}).catch(()=>{});
 if('serviceWorker' in navigator){
  let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{
