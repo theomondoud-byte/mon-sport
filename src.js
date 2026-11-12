@@ -475,6 +475,33 @@ if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</
 return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version V9. Vérifie les nouvelles versions sans effacer tes favoris ou ton adresse Cloudflare.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section>`}
 function favoriteRows(){return filtered().map(f=>`<div class="fav"><div class="details"><b>${esc(f.name)}</b><br><small>${esc(f.sport)} · ${esc(f.type)}</small></div><button class="button ghost danger" data-remove="${esc(f.id)}" aria-label="Supprimer ${esc(f.name)}">✕</button></div>`).join('')||'<div class="empty">Aucun favori correspondant</div>'}
 function bindContent(){
+ // Chaque carte développe son résumé local ; la feuille ESPN détaillée
+ // n'est téléchargée qu'au moment du premier clic.
+ document.querySelectorAll('[data-event-detail]').forEach(card=>{
+  card.addEventListener('toggle',async()=>{
+   if(!card.open||card.dataset.detailLoaded==='1')return;
+   card.dataset.detailLoaded='1';
+   const item=agendaItems().find(x=>x.key===card.dataset.eventDetail);
+   const slot=card.querySelector('.detail-live-slot');
+   if(!item||!slot)return;
+   slot.textContent='Recherche des statistiques de cette rencontre…';
+   try{
+    const details=await loadEventDetails(item);
+    if(card.isConnected&&card.open)slot.innerHTML=renderEventDetails(details,esc);
+   }catch(e){
+    if(card.isConnected)slot.textContent='Données détaillées indisponibles : '+String(e.message||e);
+   }
+  });
+ });
+ // Si une URL Wikimedia ne charge pas, montrer immédiatement les initiales
+ // plutôt qu'une image cassée.
+ document.querySelectorAll('img.athlete-photo').forEach(img=>{
+  img.addEventListener('error',()=>{
+   img.closest('.portrait-wrap')?.classList.add('photo-failed');
+  },{once:true});
+ });
+ mountNewsFrames(document.querySelector('#content'),safeUrl);
+
  document.querySelectorAll('[data-agenda-phase]').forEach(button=>button.onclick=()=>{
   if(active==='favori'){
    favoritePhase=button.dataset.agendaPhase;
@@ -553,8 +580,11 @@ async function refresh(){
  finally{loading=false;render();}
 }
 render();refresh();refreshHistory();
-loadFavoritePhotos(favorites).then(result=>{
- photoMap=result;
+loadFavoritePhotos(favorites,(name,photo)=>{
+ photoMap[name]=photo;
+ if(active==='favori'||active==='semaine')render();
+}).then(result=>{
+ photoMap={...photoMap,...result};
  if(active==='favori'||active==='semaine')render();
 }).catch(()=>{});
 if('serviceWorker' in navigator){
