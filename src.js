@@ -4,7 +4,7 @@ const DEFAULTS = [
 ].map(([name,sport,type,apiName])=>({id:crypto.randomUUID(),name,sport,type,apiName:apiName||name}));
 const KEY='monsport-favorites-v1', URL_KEY='monsport-worker-url-v1';
 const load=()=>{try{let a=JSON.parse(localStorage.getItem(KEY));return Array.isArray(a)?a:DEFAULTS}catch{return DEFAULTS}};
-let favorites=load(), workerUrl=localStorage.getItem(URL_KEY)||'',active='accueil',sportFilter='Tous',search='',loading=false,news=[],matches=[],errors=[],scoreNotes=[];
+let favorites=load(), workerUrl=localStorage.getItem(URL_KEY)||'',active='accueil',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[];
 const app=document.querySelector('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
@@ -113,27 +113,173 @@ async function espnResults(){
  }));
  return {events:result,notes};
 }
+// V4 — Tennis ATP/WTA et statistiques individuelles NBA.
+// ESPN n'est pas une API officielle garantie : uniquement des données réellement retournées.
+const cleanName=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+function samePlayer(favorite,actual){
+ const a=cleanName(favorite),b=cleanName(actual);
+ if(!a||!b)return false;
+ if(a===b||b.startsWith(a+' ')||a.startsWith(b+' '))return true;
+ const f=a.split(' '),p=b.split(' ');
+ // ESPN affiche parfois « J. Sinner » ; ne jamais matcher sur le nom seul.
+ return f.length>1&&p.length>1&&f[f.length-1]===p[p.length-1]&&f[0][0]===p[0][0];
+}
+function tennisSetScore(c){
+ const rows=Array.isArray(c?.linescores)?c.linescores:[];
+ return rows.map(x=>{
+  const s=x?.displayValue??x?.value;
+  return s===null||s===undefined||s===''?'':String(s);
+ });
+}
+function tennisSingles(competition,group){
+ const label=cleanName(group?.grouping?.displayName||group?.displayName||'');
+ return !label||label.includes('single');
+}
+function tennisCompetitionDate(comp,event){return comp.date||comp.startDate||event.date||null;}
+function getTennisMatches(events,league,start,end,tennisFavorites){
+ const items=[],seen=new Set();
+ for(const tournament of events){
+  const groupings=Array.isArray(tournament.groupings)?tournament.groupings:[];
+  // Certains événements exposent directement les compétitions.
+  const groups=groupings.length?groupings:[{competitions:tournament.competitions||[]}];
+  for(const group of groups){
+   if(!tennisSingles(null,group))continue;
+   for(const c of group.competitions||[]){
+    if(!Array.isArray(c.competitors)||c.competitors.length!==2)continue;
+    const names=c.competitors.map(x=>x.athlete?.displayName||x.athlete?.fullName||x.displayName||'');
+    if(names.some(n=>!n||cleanName(n)==='tbd'))continue;
+    const matchDate=tennisCompetitionDate(c,tournament),timestamp=Date.parse(matchDate||'');
+    if(!Number.isFinite(timestamp)||timestamp<start||timestamp>end)continue;
+    const status=c.status?.type||c.status||{};
+    const completed=status.completed===true||status.state==='post';
+    const started=completed||status.state==='in';
+    const sets=c.competitors.map(tennisSetScore);
+    const score=started&&sets.some(s=>s.length)?Array.from({length:Math.max(sets[0].length,sets[1].length)},(_,idx)=>{
+     const a=sets[0][idx],b=sets[1][idx];return a&&b?`${a}–${b}`:'';
+    }).filter(Boolean).join('  '):'';
+    const round=c.round?.displayName||'';
+    const statusText=completed?'Terminé':started?'En cours':'À venir';
+    for(const favorite of tennisFavorites){
+     if(!names.some(n=>samePlayer(favorite.name,n)))continue;
+     const key=[league,c.id||c.uid||names.join(':'),favorite.name].join('|');
+     if(seen.has(key))continue;seen.add(key);
+     items.push({id:key,type:'tennis',favorite:favorite.name,sport:'Tennis',date:matchDate,
+      title:`${names[0]} — ${names[1]}`,competition:tournament.name||'Tennis',round,
+      score:score||(completed?'Score par set indisponible':started?'Match en cours':'Match à venir'),
+      status:statusText,source:`ESPN ${league.toUpperCase()}`});
+    }
+   }
+  }
+ }
+ return items;
+}
+async function tennisResults(){
+ const favored=favorites.filter(f=>f.sport==='Tennis'&&f.type==='sportif');
+ if(!favored.length)return {events:[],notes:[]};
+ const now=new Date(),first=new Date(now.getTime()-21*DAY_MS),last=new Date(now.getTime()+14*DAY_MS);
+ const months=monthsInRange(first,last),notes=[],events=[];
+ await Promise.all(['atp','wta'].map(async league=>{
+  let tournaments=[],failed=0,firstFailure='';
+  // Limiter volontairement les appels à 3 mois max par tour, sans scraping des sites ATP/WTA.
+  await Promise.all(months.slice(0,3).map(async month=>{
+   try{
+    const url=ESPN_BASE+'tennis/'+league+'/scoreboard?dates='+month;
+    const list=await espnFetch(url);
+    tournaments.push(...list);
+   }catch(e){
+    failed++;firstFailure=String(e.message||e);
+   }
+  }));
+  if(!tournaments.length&&failed){
+   // Repli : une journée, si le format mois n'est pas accepté.
+   try{tournaments=await espnFetch(ESPN_BASE+'tennis/'+league+'/scoreboard?dates='+dayKey(now));}
+   catch(e){notes.push(`ESPN tennis ${league.toUpperCase()} indisponible : ${String(e.message||e)}`);return;}
+  }else if(failed)notes.push(`Tennis ${league.toUpperCase()} : certaines périodes indisponibles (${firstFailure}).`);
+  events.push(...getTennisMatches(tournaments,league,first.getTime(),last.getTime(),favored));
+ }));
+ const unique=new Map(events.map(x=>[x.id,x]));
+ const all=[...unique.values()].sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+ for(const player of favored){
+  if(!all.some(x=>x.favorite===player.name))notes.push(`${player.name} : aucun match ATP/WTA trouvé sur les 21 derniers et 14 prochains jours (Challenger et ITF parfois absents).`);
+ }
+ return {events:all.slice(0,35),notes};
+}
+function nbaPlayerStats(box,playerName){
+ for(const team of box?.boxscore?.players||[]){
+  for(const category of team.statistics||[]){
+   const labels=category.labels||category.names||[];
+   for(const row of category.athletes||[]){
+    if(!samePlayer(playerName,row.athlete?.displayName||row.athlete?.fullName||''))continue;
+    if(row.didNotPlay)return {didNotPlay:true};
+    if(!Array.isArray(row.stats)||!row.stats.length)continue;
+    const val=label=>{
+     const i=labels.findIndex(x=>String(x).toUpperCase()===label);
+     return i>=0&&row.stats[i]!==undefined&&row.stats[i]!==''?String(row.stats[i]):null;
+    };
+    const pts=val('PTS'),reb=val('REB'),ast=val('AST'),blk=val('BLK');
+    if([pts,reb,ast,blk].every(x=>x===null))continue;
+    return {pts,reb,ast,blk};
+   }
+  }
+ }
+ return null;
+}
+async function wembanyamaResults(teamEvents){
+ const wembyFav=favorites.find(f=>f.type==='sportif'&&f.sport==='Basketball'&&/wemban[yi]ama/i.test(cleanName(f.name)));
+ if(!wembyFav)return {events:[],notes:[]};
+ const completed=teamEvents.filter(m=>m.favorite==='San Antonio Spurs'&&m.status==='Terminé'&&m.id.startsWith('espn-')).sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,3);
+ if(!completed.length)return {events:[],notes:['Victor Wembanyama : aucun match NBA terminé des Spurs sur la période recherchée.']};
+ const events=[],issues=[];
+ // Trois feuilles de match maximum par rafraîchissement pour limiter les requêtes.
+ for(const match of completed){
+  try{
+   const url=ESPN_BASE+'basketball/nba/summary?event='+encodeURIComponent(match.id.slice(5));
+   const response=await fetch(url,{signal:AbortSignal.timeout(12000)});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const data=await response.json();
+   const stats=nbaPlayerStats(data,'Victor Wembanyama');
+   if(stats?.didNotPlay){issues.push(`${date(match.date)} : Victor Wembanyama n'a pas joué.`);continue;}
+   if(!stats)continue;
+   events.push({type:'nba',id:'wemby-'+match.id,favorite:wembyFav.name,sport:'Basketball',
+    date:match.date,title:`${match.home} — ${match.away}`,competition:'NBA',status:'Terminé',
+    stats,source:'ESPN NBA'});
+  }catch(e){issues.push(`Statistiques NBA indisponibles (${String(e.message||e)}).`);}
+ }
+ if(!events.length&&!issues.length)issues.push('Victor Wembanyama : statistiques individuelles absentes des feuilles de match disponibles.');
+ return {events,notes:issues};
+}
+function individualCard(m){
+ const nba=m.type==='nba';
+ const lines=nba?['pts','reb','ast','blk'].map((k,i)=>m.stats[k]===null?'':`<div class="stat-mini"><b>${esc(m.stats[k])}</b><small>${['PTS','REB','PD','CTR'][i]}</small></div>`).filter(Boolean).join(''):'';
+ return `<article class="card individual"><div class="row wraprow"><span class="tag">${esc(m.favorite)}</span><small>${esc(date(m.date))}</small></div><h3>${esc(m.title)}</h3>${nba?`<div class="statline">${lines}</div>`:`<div class="tennis-score">${esc(m.score)}</div>`}<small>${esc([m.competition,m.round,m.status,m.source].filter(Boolean).join(' · '))}</small></article>`;
+}
+function individualHtml(limit=99){
+ if(loading&&!individualResults.length)return '<p class="muted">Récupération des résultats individuels…</p>';
+ const cards=individualResults.slice(0,limit).map(individualCard).join('');
+ const notes=individualNotes.length?`<details class="notice diagnostic"><summary>Couverture des sportifs (${individualNotes.length} indication${individualNotes.length>1?'s':''})</summary><div class="notice-text">${individualNotes.map(esc).join('<br>')}</div></details>`:'';
+ return (cards||'<p class="muted">Aucun résultat individuel récupéré actuellement.</p>')+(limit===99?notes:'');
+}
+
 function newsHtml(){if(!workerUrl)return `<div class="notice">Configure le relais gratuit Cloudflare Worker dans Réglages pour obtenir les titres directement dans l'application. En attendant, les liens Google Actualités ci-dessous fonctionnent.</div>`;if(loading&&!news.length)return '<p class="muted">Chargement des articles…</p>';return news.length?news.map(n=>`<article class="card"><span class="tag">${esc(n.favorite)}</span><h3><a href="${esc(safeUrl(n.link))}" rel="noopener noreferrer" target="_blank">${esc(n.title)}</a></h3><small>${esc(n.source)} • ${esc(date(n.date))}</small></article>`).join(''):'<p class="muted">Aucun article récupéré pour le moment. Essaie de rafraîchir ou d’utiliser les recherches directes.</p>'}
 function linkHtml(f){const q=encodeURIComponent(f.name);return `<div class="fav"><div class="details"><b>${esc(f.name)}</b><br><small>${esc(f.sport)} · ${esc(f.type)}</small></div><a target="_blank" rel="noopener noreferrer" href="https://news.google.com/search?q=${q}&hl=fr&gl=FR&ceid=FR%3Afr">Actualités ↗</a></div>`}
-function render(){let sports=['Tous',...new Set(favorites.map(f=>f.sport))];app.innerHTML=`<main class="wrap"><header><div><div class="eyebrow">Ton tableau de bord personnel</div><h1>⚡ Mon Sport</h1></div><button id="refresh" class="button" ${loading?'disabled':''}>${loading?'Actualisation…':'↻ Actualiser'}</button></header><section class="hero"><h2>Bienvenue dans ton espace sportif 👋</h2><p>Retrouve tes équipes, tes sportifs, leurs résultats disponibles et l'actualité gratuite — au même endroit.</p><div class="stats"><div class="stat"><strong>${favorites.length}</strong><small>Favoris</small></div><div class="stat"><strong>${new Set(favorites.map(f=>f.sport)).size}</strong><small>Sports</small></div><div class="stat"><strong>${matches.length}</strong><small>Événements</small></div></div></section><nav class="tabs">${tabs.map(([id,label])=>`<button data-tab="${id}" class="${id===active?'active':''}">${label}</button>`).join('')}</nav><div id="content">${content()}</div><footer class="muted" style="text-align:center;margin:26px 0;font-size:.8rem">Mon Sport • V3 gratuite • Scores non exhaustifs • Articles provenant de sources externes</footer></main>`;document.querySelectorAll('[data-tab]').forEach(el=>el.onclick=()=>{active=el.dataset.tab;search='';sportFilter='Tous';render()});document.querySelector('#refresh').onclick=refresh;bindContent()}
-function content(){if(active==='accueil')return `<section class="panel"><div class="row"><h2>🏆 Derniers résultats disponibles</h2><button class="button ghost" data-goto="resultats">Voir tout</button></div>${resultHtml()}</section><section class="panel"><div class="row"><h2>📰 Actualités récentes</h2><button class="button ghost" data-goto="actualites">Voir tout</button></div>${newsHtml()}</section><section class="panel"><h2>⭐ Accès rapide aux favoris</h2>${favorites.slice(0,6).map(linkHtml).join('')}</section>`;
-if(active==='resultats')return `<section class="panel"><h2>🏆 Résultats et prochains matchs</h2><p class="sub">Scores ESPN pour le PSG (Ligue 1), le Real Madrid (LaLiga) et les Spurs (NBA). Données non officielles et non exhaustives ; les autres favoris ne sont pas encore couverts.</p>${resultHtml()}</section><section class="panel"><h2>🔎 Rechercher un résultat sur le web</h2>${favorites.map(f=>`<div class="fav"><span class="details">${esc(f.name)}</span><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=${encodeURIComponent(f.name+' dernier résultat sportif')}">Voir ↗</a></div>`).join('')}</section>`;
+function render(){let sports=['Tous',...new Set(favorites.map(f=>f.sport))];app.innerHTML=`<main class="wrap"><header><div><div class="eyebrow">Ton tableau de bord personnel</div><h1>⚡ Mon Sport</h1></div><button id="refresh" class="button" ${loading?'disabled':''}>${loading?'Actualisation…':'↻ Actualiser'}</button></header><section class="hero"><h2>Bienvenue dans ton espace sportif 👋</h2><p>Retrouve tes équipes, tes sportifs, leurs résultats disponibles et l'actualité gratuite — au même endroit.</p><div class="stats"><div class="stat"><strong>${favorites.length}</strong><small>Favoris</small></div><div class="stat"><strong>${new Set(favorites.map(f=>f.sport)).size}</strong><small>Sports</small></div><div class="stat"><strong>${matches.length + individualResults.length}</strong><small>Événements</small></div></div></section><nav class="tabs">${tabs.map(([id,label])=>`<button data-tab="${id}" class="${id===active?'active':''}">${label}</button>`).join('')}</nav><div id="content">${content()}</div><footer class="muted" style="text-align:center;margin:26px 0;font-size:.8rem">Mon Sport • V4 gratuite • Scores non exhaustifs • Articles provenant de sources externes</footer></main>`;document.querySelectorAll('[data-tab]').forEach(el=>el.onclick=()=>{active=el.dataset.tab;search='';sportFilter='Tous';render()});document.querySelector('#refresh').onclick=refresh;bindContent()}
+function content(){if(active==='accueil')return `<section class="panel"><div class="row"><h2>🏆 Derniers résultats disponibles</h2><button class="button ghost" data-goto="resultats">Voir tout</button></div>${resultHtml()}</section><section class="panel"><div class="row"><h2>🎾🏀 Résultats individuels</h2><button class="button ghost" data-goto="resultats">Voir tout</button></div>${individualHtml(6)}</section><section class="panel"><div class="row"><h2>📰 Actualités récentes</h2><button class="button ghost" data-goto="actualites">Voir tout</button></div>${newsHtml()}</section><section class="panel"><h2>⭐ Accès rapide aux favoris</h2>${favorites.slice(0,6).map(linkHtml).join('')}</section>`;
+if(active==='resultats')return `<section class="panel"><h2>🏆 Résultats et prochains matchs</h2><p class="sub">Scores ESPN pour le PSG (Ligue 1), le Real Madrid (LaLiga) et les Spurs (NBA). Les scores individuels de tennis et les statistiques NBA sont présentés plus bas. Données non officielles et non exhaustives.</p>${resultHtml()}</section><section class="panel"><h2>🎾 Tennis ATP / WTA et 🏀 statistiques NBA</h2><p class="sub">Matchs des sportifs suivis au tennis (21 derniers et 14 prochains jours) et statistiques de Victor Wembanyama sur les derniers matchs des Spurs. ESPN : source publique non officielle, couverture partielle.</p>${individualHtml()}</section><section class="panel"><h2>🔎 Rechercher un résultat sur le web</h2>${favorites.map(f=>`<div class="fav"><span class="details">${esc(f.name)}</span><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=${encodeURIComponent(f.name+' dernier résultat sportif')}">Voir ↗</a></div>`).join('')}</section>`;
 if(active==='actualites')return `<section class="panel"><h2>📰 Articles liés à mes favoris</h2><p class="sub">Les liens vers les articles s'ouvrent chez leurs éditeurs. Certains médias peuvent afficher un paywall : la gratuité de chaque article n'est pas garantie.</p>${newsHtml()}</section><section class="panel"><h2>🔎 Rechercher directement dans Google Actualités</h2>${favorites.map(linkHtml).join('')}</section>`;
 if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</h2><form id="addform"><input name="name" placeholder="Nom de l'équipe ou du sportif" maxlength="100" required/><select name="sport">${['Football','Tennis','Rugby','Basketball','Cyclisme','Natation','Tennis de table','Autre'].map(s=>`<option>${s}</option>`).join('')}</select><select name="type"><option value="sportif">Sportif</option><option value="équipe">Équipe</option></select><input name="apiName" placeholder="Nom API (facultatif)" maxlength="100"/><button class="button" type="submit">Ajouter aux favoris</button></form></section><section class="panel"><h2>⭐ Mes favoris (${favorites.length})</h2><select id="sportFilter">${sports.map(s=>`<option ${sportFilter===s?'selected':''}>${esc(s)}</option>`).join('')}</select><input class="search" id="search" value="${esc(search)}" placeholder="Rechercher un favori"/><div id="favoriteList">${favoriteRows()}</div></section>`;
-return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section>`}
+return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section>`}
 function favoriteRows(){return filtered().map(f=>`<div class="fav"><div class="details"><b>${esc(f.name)}</b><br><small>${esc(f.sport)} · ${esc(f.type)}</small></div><button class="button ghost danger" data-remove="${esc(f.id)}" aria-label="Supprimer ${esc(f.name)}">✕</button></div>`).join('')||'<div class="empty">Aucun favori correspondant</div>'}
-function bindContent(){document.querySelectorAll('[data-goto]').forEach(e=>e.onclick=()=>{active=e.dataset.goto;render()});document.querySelectorAll('[data-remove]').forEach(e=>e.onclick=()=>{favorites=favorites.filter(f=>f.id!==e.dataset.remove);save();render()});const add=document.querySelector('#addform');if(add)add.onsubmit=e=>{e.preventDefault();const data=new FormData(add),name=String(data.get('name')).trim();if(!name)return;favorites.push({id:crypto.randomUUID(),name,sport:data.get('sport'),type:data.get('type'),apiName:String(data.get('apiName')).trim()||name});save();render()};const sf=document.querySelector('#sportFilter');if(sf)sf.onchange=()=>{sportFilter=sf.value;document.querySelector('#favoriteList').innerHTML=favoriteRows();bindRemove()};const input=document.querySelector('#search');if(input)input.oninput=()=>{search=input.value;document.querySelector('#favoriteList').innerHTML=favoriteRows();bindRemove()};const settings=document.querySelector('#settingsform');if(settings)settings.onsubmit=e=>{e.preventDefault();const val=document.querySelector('#workerUrl').value.trim().replace(/\/$/,'');if(val&&!/^https:\/\/[^\s]+$/.test(val)){alert('Une URL HTTPS valide est nécessaire.');return}workerUrl=val;localStorage.setItem(URL_KEY,workerUrl);active='accueil';news=[];matches=[];render();refresh()};const ex=document.querySelector('#export');if(ex)ex.onclick=()=>{const blob=new Blob([JSON.stringify(favorites,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mes-favoris-sport.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};const imp=document.querySelector('#import');if(imp)imp.onchange=async()=>{try{const data=JSON.parse(await imp.files[0].text());if(!Array.isArray(data)||data.some(f=>typeof f.name!=='string'||typeof f.sport!=='string'||!['équipe','sportif'].includes(f.type)))throw Error('Format invalide');favorites=data.slice(0,200).map(f=>({id:crypto.randomUUID(),name:f.name.slice(0,100),sport:f.sport.slice(0,50),type:f.type,apiName:String(f.apiName||f.name).slice(0,100)}));save();render()}catch(e){alert('Import impossible : '+e.message)}};const reset=document.querySelector('#reset');if(reset)reset.onclick=()=>{if(confirm('Réinitialiser tous les favoris ?')){favorites=DEFAULTS.map(f=>({...f,id:crypto.randomUUID()}));save();render()}}}
+function bindContent(){document.querySelectorAll('[data-goto]').forEach(e=>e.onclick=()=>{active=e.dataset.goto;render()});document.querySelectorAll('[data-remove]').forEach(e=>e.onclick=()=>{favorites=favorites.filter(f=>f.id!==e.dataset.remove);save();render()});const add=document.querySelector('#addform');if(add)add.onsubmit=e=>{e.preventDefault();const data=new FormData(add),name=String(data.get('name')).trim();if(!name)return;favorites.push({id:crypto.randomUUID(),name,sport:data.get('sport'),type:data.get('type'),apiName:String(data.get('apiName')).trim()||name});save();render()};const sf=document.querySelector('#sportFilter');if(sf)sf.onchange=()=>{sportFilter=sf.value;document.querySelector('#favoriteList').innerHTML=favoriteRows();bindRemove()};const input=document.querySelector('#search');if(input)input.oninput=()=>{search=input.value;document.querySelector('#favoriteList').innerHTML=favoriteRows();bindRemove()};const settings=document.querySelector('#settingsform');if(settings)settings.onsubmit=e=>{e.preventDefault();const val=document.querySelector('#workerUrl').value.trim().replace(/\/$/,'');if(val&&!/^https:\/\/[^\s]+$/.test(val)){alert('Une URL HTTPS valide est nécessaire.');return}workerUrl=val;localStorage.setItem(URL_KEY,workerUrl);active='accueil';news=[];matches=[];individualResults=[];render();refresh()};const ex=document.querySelector('#export');if(ex)ex.onclick=()=>{const blob=new Blob([JSON.stringify(favorites,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mes-favoris-sport.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};const imp=document.querySelector('#import');if(imp)imp.onchange=async()=>{try{const data=JSON.parse(await imp.files[0].text());if(!Array.isArray(data)||data.some(f=>typeof f.name!=='string'||typeof f.sport!=='string'||!['équipe','sportif'].includes(f.type)))throw Error('Format invalide');favorites=data.slice(0,200).map(f=>({id:crypto.randomUUID(),name:f.name.slice(0,100),sport:f.sport.slice(0,50),type:f.type,apiName:String(f.apiName||f.name).slice(0,100)}));save();render()}catch(e){alert('Import impossible : '+e.message)}};const reset=document.querySelector('#reset');if(reset)reset.onclick=()=>{if(confirm('Réinitialiser tous les favoris ?')){favorites=DEFAULTS.map(f=>({...f,id:crypto.randomUUID()}));save();render()}}}
 function bindRemove(){document.querySelectorAll('[data-remove]').forEach(e=>e.onclick=()=>{favorites=favorites.filter(f=>f.id!==e.dataset.remove);save();render()})}
 async function request(path,params){const u=new URL(workerUrl+path);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));const response=await fetch(u,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('HTTP '+response.status);return response.json()}
 async function refresh(){
  if(loading)return;
- loading=true;errors=[];scoreNotes=[];render();
+ loading=true;errors=[];scoreNotes=[];individualNotes=[];render();
  try{
-  // Les recherches d'équipes TheSportsDB sont désormais quasi inutilisables
-  // avec la clé gratuite 123 (seul Arsenal est documenté). Ne plus les appeler.
   const articles=workerUrl?favorites.slice(0,18):[];
-  const [espn,newsGroups]=await Promise.all([
+  const [espn,tennis,newsGroups]=await Promise.all([
    espnResults(),
+   tennisResults(),
    Promise.all(articles.map(async f=>{
     try{
      const data=await request('/api/news',{q:f.name+' '+f.sport});
@@ -147,6 +293,10 @@ async function refresh(){
    const key=[m.favorite,m.id].join('|');
    if(seen.has(key))return false;seen.add(key);return true;
   }).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).slice(0,40);
+  // Un échec d'une feuille de match NBA ne doit jamais bloquer les scores des clubs.
+  const nba=await wembanyamaResults(matches);
+  individualResults=[...tennis.events,...nba.events].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+  individualNotes.push(...tennis.notes,...nba.notes);
   news=newsGroups.flat().filter(a=>a.title&&a.link).filter((a,i,array)=>array.findIndex(b=>b.link===a.link)===i).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).slice(0,40);
   if(!workerUrl)errors.push('Configure le Worker dans Réglages pour afficher les actualités. Les scores ESPN restent consultables sans Worker.');
   else if(!news.length)errors.push('Aucune actualité reçue du relais.');
