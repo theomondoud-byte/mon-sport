@@ -1,9 +1,17 @@
-// V8 — portraits libres via les vignettes des articles Wikipédia.
-// Pas de photo inventée : à défaut de fichier libre fiable, on affiche
-// les initiales. Une attribution ouvre la page du fichier sur Commons.
-const WIKI_TITLES={
+// Mon Sport V9 — photos réelles et libres, cache réseau réparable.
+// V8 mémorisait un échec/null pendant 7 jours : suppression du cache négatif.
+// Les portraits Wikimedia vérifiés sont des URLs directes, sans API CORS.
+const FILES={
+ 'Jannik Sinner':'Jannik Sinner (2024 US Open) 04 (cropped).jpg',
+ 'Carlos Alcaraz':'Carlos Alcaraz (2026 US Open) - 01.jpg',
+ 'Arthur Fils':'Arthur Fils - 2024 Olympics (still) (cropped).jpg',
+ 'Léon Marchand':'Léon Marchand - JO 2024.jpg',
+ 'Félix Lebrun':'20220818 European Championships Munich 2022 Felix Lebrun 850 9499.jpg',
+ 'Kylian Mbappé':'Kylian Mbappe - France v Senegal - 16 June 2026.jpg'
+};
+const ARTICLE={
  'Victor Wembanyama':['Victor Wembanyama','Victor Wembanyama'],
- 'Léon Marchand':['Léon Marchand (natation)','Léon Marchand'],
+ 'Léon Marchand':['Léon Marchand','Léon Marchand'],
  'Félix Lebrun':['Félix Lebrun','Félix Lebrun'],
  'Alexis Lebrun':['Alexis Lebrun','Alexis Lebrun'],
  'Flavien Coton':['Flavien Coton','Flavien Coton'],
@@ -11,68 +19,78 @@ const WIKI_TITLES={
  'Kylian Mbappé':['Kylian Mbappé','Kylian Mbappé'],
  'Arthur Fils':['Arthur Fils','Arthur Fils'],
  'Jannik Sinner':['Jannik Sinner','Jannik Sinner'],
- 'Carlos Alcaraz':['Carlos Alcaraz (tennis)','Carlos Alcaraz'],
- 'Rafael Jódar':['Rafael Jódar','Rafael Jódar'],
+ 'Carlos Alcaraz':['Carlos Alcaraz','Carlos Alcaraz'],
+ 'Rafael Jódar':['Rafael Jódar','Rafael Jodar'],
  'Moïse Kouamé':['Moïse Kouamé','Moise Kouame'],
  'Mirra Andreeva':['Mirra Andreeva','Mirra Andreeva']
 };
-const CACHE='monsport-portraits-v8:';
-const key=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z ]/g,' ').replace(/\s+/g,' ').trim();
-const acceptable=(wanted,title)=>{
- const a=key(wanted).split(' '),b=key(title).split(' ');
- return a.length>=2&&b.length>=2&&a[0]===b[0]&&a[1]===b[1];
+const CACHE='monsport-photos-v9:';
+const tidy=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z ]/g,' ').trim().replace(/\s+/g,' ');
+const matched=(a,b)=>{
+ const x=tidy(a).split(' '),y=tidy(b).split(' ');
+ return x.length>1&&y.length>1&&x[0]===y[0]&&x[1]===y[1];
 };
+const fileLink=(name)=>'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(name.replaceAll(' ','_'));
 export function photoInitials(name){
- const parts=String(name||'').trim().split(/\s+/);
- return parts.slice(0,2).map(x=>x[0]||'').join('').toUpperCase()||'★';
+ return String(name||'').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase()||'★';
 }
-async function wikiImage(name,language,title){
- const url='https://'+language+'.wikipedia.org/w/api.php?action=query&format=json&formatversion=2'
-  +'&origin=*&redirects=1&prop=pageimages&piprop=thumbnail%7Cname&pilicense=free'
-  +'&pithumbsize=360&titles='+encodeURIComponent(title);
- const response=await fetch(url,{signal:AbortSignal.timeout(9000)});
- if(!response.ok)throw Error('Wikipedia '+response.status);
- const json=await response.json(),page=json?.query?.pages?.[0];
- if(!page||page.missing||!acceptable(name,page.title))return null;
- const src=page.thumbnail?.source;
- if(typeof src!=='string'||!/^https:\/\/upload\.wikimedia\.org\//.test(src))return null;
- if(/(?:logo|signature|flag|blason|icon)\b/i.test(page.pageimage||''))return null;
- const fileName=page.pageimage||'';
+export function staticPortrait(name){
+ const filename=FILES[name];
+ if(!filename)return null;
  return {
-  src,
-  creditUrl:fileName?'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(fileName)
-   :'https://'+language+'.wikipedia.org/wiki/'+encodeURIComponent(page.title.replaceAll(' ','_')),
-  credit:'Wikimedia Commons · voir licence'
+  src:'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename)+'?width=360',
+  creditUrl:fileLink(filename),
+  credit:'Wikimedia Commons · licence et auteur sur la fiche',
+  source:'Commons'
  };
 }
+async function wikiPhoto(name,lang,title){
+ const address='https://'+lang+'.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title.replaceAll(' ','_'));
+ const response=await fetch(address,{signal:AbortSignal.timeout(7000),cache:'no-store'});
+ if(!response.ok)throw Error('Wikipedia HTTP '+response.status);
+ const data=await response.json();
+ if(data.type==='disambiguation'||!matched(name,data.title||''))return null;
+ const src=data.thumbnail?.source;
+ if(!/^https:\/\/upload\.wikimedia\.org\//.test(src||''))return null;
+ const link=data.content_urls?.desktop?.page||address;
+ return {src,creditUrl:link,credit:'Wikipédia · photo et crédit sur la page',source:'Wikipedia'};
+}
 export async function loadFavoritePhotos(favorites,onPhoto=()=>{}){
- const athletes=favorites.filter(f=>f.type==='sportif'&&WIKI_TITLES[f.name]);
- const results={},jobs=[];
- for(const athlete of athletes){
-  const name=athlete.name;
+ const result={},jobs=[];
+ for(const favorite of favorites){
+  if(favorite.type!=='sportif')continue;
+  const name=favorite.name;
+  // Ressources Wikimedia connues : rendu immédiat, même sans accès aux APIs.
+  const known=staticPortrait(name);
+  if(known){result[name]=known;onPhoto(name,known);continue;}
+  if(!ARTICLE[name])continue;
   try{
    const saved=JSON.parse(localStorage.getItem(CACHE+name)||'null');
-   if(saved&&Date.now()-saved.at<7*86400000){
-    if(saved.photo)results[name]=saved.photo;
-    continue;
+   if(saved?.photo&&Date.now()-saved.at<7*86400000){
+    result[name]=saved.photo;onPhoto(name,saved.photo);continue;
    }
+   if(saved?.empty&&Date.now()-saved.at<30*60000)continue; // 30 minutes seulement
   }catch{}
   jobs.push(name);
  }
- // 3 requêtes en parallèle au plus pour éviter une rafale d'appels.
  for(let i=0;i<jobs.length;i+=3){
-  const found=await Promise.all(jobs.slice(i,i+3).map(async name=>{
-   const titles=WIKI_TITLES[name];
-   let photo=null;
-   for(const [idx,language] of ['fr','en'].entries()){
-    try{photo=await wikiImage(name,language,titles[idx]);if(photo)break;}catch{}
+  const data=await Promise.all(jobs.slice(i,i+3).map(async name=>{
+   let photo=null,hadResponse=false;
+   for(const [index,lang] of ['fr','en'].entries()){
+    try{
+     photo=await wikiPhoto(name,lang,ARTICLE[name][index]);
+     hadResponse=true;
+     if(photo)break;
+    }catch{}
    }
-   try{localStorage.setItem(CACHE+name,JSON.stringify({photo,at:Date.now()}));}catch{}
+   try{
+    if(photo)localStorage.setItem(CACHE+name,JSON.stringify({at:Date.now(),photo}));
+    // Ne JAMAIS conserver une erreur réseau en tant qu'absence de photo.
+    else if(hadResponse)localStorage.setItem(CACHE+name,JSON.stringify({at:Date.now(),empty:true}));
+   }catch{}
    return {name,photo};
   }));
-  for(const item of found){
-   if(item.photo){results[item.name]=item.photo;onPhoto(item.name,item.photo);}
-  }
+  for(const {name,photo} of data)if(photo){result[name]=photo;onPhoto(name,photo);}
  }
- return results;
+ return result;
 }

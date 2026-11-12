@@ -1,6 +1,6 @@
 // Mon Sport V8 : recherche élargie uniquement lors de l'ouverture « Un favori ».
 // Les rencontres ne sont créées que si ESPN retourne date, adversaires et état.
-import {shiftedMonths} from './agenda-model.js?v=8.0.0';
+import {shiftedMonths} from './agenda-model.js?v=9.0.0';
 const humanSource=s=>s.startsWith('soccer/')?'https://www.espn.com/soccer/scoreboard'
   :s.startsWith('basketball/')?'https://www.espn.com/nba/scoreboard'
   :'https://www.espn.com/scores';
@@ -56,6 +56,7 @@ export async function fetchAgendaFavorite(selected,deps,progress=()=>{},now=new 
     competition:job.league.name,
     source:proxy?'ESPN · match du club, présence du joueur non confirmée':'ESPN · '+job.league.name,
     sourceUrl:humanSource(job.league.url),
+    leaguePath:job.league.url,espnEventId:String(event.id||''),
     uncertainParticipation:proxy,type:proxy?'team-proxy':'team'
    });
   }

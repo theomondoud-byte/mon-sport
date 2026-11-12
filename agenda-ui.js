@@ -1,9 +1,9 @@
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=8.0.0';
-import {auditInfo} from './audit-2026.js?v=8.0.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=8.0.0';
-import {renderFavoriteStats} from './stats-view.js?v=8.0.0';
-import {photoInitials} from './photos.js?v=8.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=9.0.0';
+import {auditInfo} from './audit-2026.js?v=9.0.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=9.0.0';
+import {renderFavoriteStats} from './stats-view.js?v=9.0.0';
+import {photoInitials} from './photos.js?v=9.0.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  const day=dateLabel(item.date,{weekday:'short',day:'numeric',month:'short',year:'numeric'});
@@ -15,7 +15,7 @@ const fullDay=(day)=>new Date(day+'T12:00:00').toLocaleDateString('fr-FR',{weekd
 function avatar(name,photos,esc,safeUrl,size='tiny'){
  const image=photos?.[name];
  if(image?.src&&safeUrl(image.src)!=='#'){
-  return '<span class="portrait-wrap '+size+'"><img loading="lazy" decoding="async" alt="Photo de '+esc(name)+'" src="'+esc(safeUrl(image.src))+'"/></span>';
+  return '<span class="portrait-wrap '+size+'"><img class="athlete-photo" data-photo-name="'+esc(name)+'" loading="lazy" decoding="async" alt="Photo de '+esc(name)+'" src="'+esc(safeUrl(image.src))+'"/><span class="portrait-error-initials">'+esc(photoInitials(name))+'</span></span>';
  }
  return '<span class="portrait-placeholder '+size+'" aria-hidden="true">'+esc(photoInitials(name))+'</span>';
 }
@@ -40,7 +40,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
  const sourceLink=recap.url&&safeUrl(recap.url)!=='#'
   ?'<a href="'+esc(safeUrl(recap.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a>':'';
  const scoreText=item.score||(!item.finished?'Score à venir':'Score indisponible');
- return '<details class="agenda-event">'
+ return '<details class="agenda-event" data-event-detail="'+esc(item.key)+'">'
    +'<summary class="agenda-event-clickable">'
    +'<div class="agenda-event-top"><div class="agenda-people">'+people+'</div>'
    +'<span class="agenda-status '+(item.finished?'done':item.live?'live':'upcoming')+'">'+esc(state)+'</span></div>'
@@ -53,7 +53,8 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +stats
    +(flags?'<div class="agenda-meta">'+flags+'</div>':'')
    +'<p class="agenda-recap-note">'+esc(recap.caveat)+'</p>'
-   +'<div class="agenda-recap-source">Source : '+esc(recap.source)+' '+sourceLink+'</div></div>'
+   +'<div class="agenda-recap-source">Source : '+esc(recap.source)+' '+sourceLink+'</div>'
+   +'<div class="detail-live-slot" aria-live="polite"></div></div>'
    +'</details>';
 }
 function placeholderMissing(missing,esc,safeUrl){
@@ -111,7 +112,7 @@ export function renderAgendaView({
  const reliability=notes.length?'<details class="agenda-missing"><summary>Couverture et fiabilité des sources</summary>'
   +'<p>'+notes.slice(0,8).map(esc).join('<br>')+'</p></details>':'';
  return '<section class="agenda-shell">'+header+select+picture+segments
-  +(stats?progress+error+renderFavoriteStats({items,favorite:chosen,now,loading:extendedLoading||loading,esc}):
+  +(stats?progress+error+renderFavoriteStats({items,favorite:chosen,favoriteData:which,now,loading:extendedLoading||loading,esc}):
     count+progress+error+(details||empty)+placeholderMissing(missing,esc,safeUrl)+reliability)
   +'<div class="agenda-footnote">Un résultat n’est affiché que si une source le fournit. Les pastilles V/D signalent uniquement les victoires et défaites identifiables. '
   +'Appuie sur une carte pour ouvrir son résumé factuel. Les statistiques peuvent être partielles pour certaines disciplines.</div>'
