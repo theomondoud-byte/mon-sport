@@ -1,9 +1,10 @@
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=9.0.0';
-import {auditInfo} from './audit-2026.js?v=9.0.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=9.0.0';
-import {renderFavoriteStats} from './stats-view.js?v=9.0.0';
-import {photoInitials} from './photos.js?v=9.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=10.0.0';
+import {auditInfo} from './audit-2026.js?v=10.0.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=10.0.0';
+import {renderFavoriteStats} from './stats-view.js?v=10.0.0';
+import {photoInitials} from './photos.js?v=10.0.0';
+import {nextCompetitionNote} from './verified-program.js?v=10.0.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  const day=dateLabel(item.date,{weekday:'short',day:'numeric',month:'short',year:'numeric'});
@@ -27,7 +28,7 @@ function verdictChip(item,name,esc){
 }
 function eventHtml(item,esc,safeUrl,photos,chosen){
  const isFuture=!item.finished;
- const state=item.live?'En cours':isFuture?'À venir':'Terminé';
+ const state=item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
  const people=item.favorites.map(name=>
   '<span class="agenda-person-tag">'+avatar(name,photos,esc,safeUrl)
   +'<span>'+esc(name)+'</span>'+verdictChip(item,name,esc)+'</span>').join('');
@@ -39,15 +40,19 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +(item.uncertainParticipation?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'');
  const sourceLink=recap.url&&safeUrl(recap.url)!=='#'
   ?'<a href="'+esc(safeUrl(recap.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a>':'';
- const scoreText=item.score||(!item.finished?'Score à venir':'Score indisponible');
+ const scoreText=item.isCompetition?'Tableau et horaires à confirmer'
+  :item.score||(!item.finished?'Score à venir':'Score indisponible');
+ const timing=item.isCompetition&&item.endDate
+  ?'Du '+dateLabel(item.date,{day:'numeric',month:'short'})+' au '+dateLabel(item.endDate,{day:'numeric',month:'short',year:'numeric'})
+  :readableDate(item);
  return '<details class="agenda-event" data-event-detail="'+esc(item.key)+'">'
    +'<summary class="agenda-event-clickable">'
    +'<div class="agenda-event-top"><div class="agenda-people">'+people+'</div>'
    +'<span class="agenda-status '+(item.finished?'done':item.live?'live':'upcoming')+'">'+esc(state)+'</span></div>'
    +'<h3>'+esc(item.title)+'</h3>'
-   +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong><span>'+esc(readableDate(item))+'</span></div>'
+   +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong><span>'+esc(timing)+'</span></div>'
    +'<div class="agenda-detail">'+esc([item.competition,item.round].filter(Boolean).join(' · '))+'</div>'
-   +'<div class="agenda-open-hint"><span>Voir le résumé du match</span><span aria-hidden="true">⌄</span></div>'
+   +'<div class="agenda-open-hint"><span>'+(item.isCompetition?'Voir le programme':'Voir le résumé du match ou de la course')+'</span><span aria-hidden="true">⌄</span></div>'
    +'</summary>'
    +'<div class="agenda-recap"><h4>'+esc(recap.title)+'</h4><p>'+esc(recap.text)+'</p>'
    +stats
