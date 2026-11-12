@@ -204,13 +204,23 @@ export function extractArchive(csv,source,favorites){
  }
  return items;
 }
+function identityKey(name){
+ const p=normalized(name).split(' ').filter(Boolean);
+ if(p.length<2)return p[0]||'';
+ // « Sinner J. » : nom à gauche, initiale à droite.
+ if(p.length===2&&p[1].length===1)return p[0]+'-'+p[1];
+ return p.at(-1)+'-'+p[0][0];
+}
 const uniqueMatches=list=>{
- const seen=new Set();
+ const seenId=new Set(),seenMatch=new Set();
  return list.filter(m=>{
-   const k=m.id;
-   if(seen.has(k))return false;
-   seen.add(k);
-   return true;
+   const two=String(m.title||'').split(' — ');
+   const players=two.map(identityKey).sort();
+   // Si plusieurs sources renvoient le même affrontement dans un même tour
+   // du même tournoi, ne conserver qu'une seule copie.
+   const key=[normalized(m.favorite),normalized(m.competition),normalized(m.round),...players].join('|');
+   if(seenId.has(m.id)||seenMatch.has(key))return false;
+   seenId.add(m.id);seenMatch.add(key);return true;
  }).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
 };
 // Source ATP/WTA mise à jour chaque semaine. Si le navigateur ne peut pas la
