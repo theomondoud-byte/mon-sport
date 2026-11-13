@@ -991,7 +991,7 @@ test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
  assert.match(all,/data-news-source="Jeu, set et maths"/);
  assert.match(all,/Le PSG prépare/);
  assert.match(all,/Victor Wembanyama brille/);
- assert.match(all,/Mirra Andreeva et les statistiques/);
+ assert.match(all,/Mirra Andreeva améliore ses statistiques/);
  const ffl=renderNewsView({...args,sourceFilter:'FFL'});
  assert.match(ffl,/Le PSG prépare/);
  assert.doesNotMatch(ffl,/Victor Wembanyama brille/);
