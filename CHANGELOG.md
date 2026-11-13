@@ -4,6 +4,15 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V16.6 — texte FFL réellement complet (vérifié sur le vrai flux)
+
+- Le site FFL bloque son API WordPress (401) : le Worker lit le flux RSS complet, qui contient tout l'article.
+- L'encart « À lire aussi : … » placé en tête des articles FFL arrêtait l'extraction : il est désormais simplement ignoré. Seule une rubrique « À lire aussi » de fin d'article (titre seul sur sa ligne) coupe le texte. Résultat : 1 000 à 5 000 caractères par article FFL au lieu de 150 à 290.
+- Résumés vidéo : les « highlights » du match sont choisis en priorité parmi les vidéos ESPN.
+- Espace conservée après « dans les citations.
+
+---
+
 # Mon Sport V16.5 — résultats avec résumé et vidéo, articles illustrés, FFL complet
 
 - **Résultats** : chaque match terminé affiche, sans ouvrir la carte, le résumé d'un article de presse (article français du fil en priorité, sinon compte rendu ESPN) avec un lien vers l'article, et un bouton **▶ Voir le résumé vidéo** qui lit la vidéo ESPN dans la carte quand elle existe. Sinon, lien de recherche du résumé vidéo. La vidéo apparaît aussi dans le détail du match.

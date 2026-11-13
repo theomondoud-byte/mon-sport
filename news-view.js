@@ -1,5 +1,5 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=16.5.0';
-import {filterSportsNews} from './sports-articles.js?v=16.5.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=16.6.0';
+import {filterSportsNews} from './sports-articles.js?v=16.6.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -180,11 +180,12 @@ export function htmlToBlocks(html,base=''){
   .replace(/<[^>]+>/g,' ');
  const blocks=[],seen=new Set();
  for(const raw of decodeEntities(marked).replace(/\r/g,'').split(/\n+/)){
-  const line=raw.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').replace(/([(«“"]) +/g,'$1').trim();
+  const line=raw.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').replace(/([(“"]) +/g,'$1').trim();
   if(!line)continue;
   const img=line.match(/^\[\[IMG (\S+)\]\]$/);
   if(img){if(!seen.has(img[1])&&blocks.filter(b=>b.type==='img').length<12){seen.add(img[1]);blocks.push({type:'img',src:img[1]});}continue;}
-  if(/^(?:[àa] lire aussi|lire aussi|sur le même sujet)\b/i.test(line))break;
+  if(/^(?:[àa] lire aussi|lire aussi|voir aussi|sur le même sujet)\s*[:：]\s*\S/i.test(line))continue;
+  if(/^(?:[àa] lire aussi|lire aussi|sur le même sujet)\s*(?:\.\.\.|…|:)?\s*$/i.test(line))break;
   if(line.length<2||NOISE_LINE.test(line))continue;
   blocks.push({type:'p',text:line.slice(0,3000)});
  }
@@ -204,10 +205,11 @@ export function safeExcerpt(value){
   .replace(/\s+/g,' ').trim().replace(TRAILING_NOISE,'').trim().slice(0,600);
 }
 // Texte intégral : paragraphes propres, sans la rubrique « À lire aussi » de fin.
-const RELATED_SECTION=/\n\s*(?:[àa] lire aussi|lire aussi|sur le même sujet|à voir aussi|voir aussi)\b[\s\S]*$/i;
+const RELATED_SECTION=/\n\s*(?:[àa] lire aussi|lire aussi|sur le même sujet|à voir aussi|voir aussi)\s*(?:\.\.\.|…|:)?\s*\n[\s\S]*$/i;
+const RELATED_INLINE=/^\s*(?:[àa] lire aussi|lire aussi|voir aussi|sur le même sujet)\s*:\s*\S.*$/gim;
 export function articleParagraphs(text){
- const clean=decodeEntities(String(text||'')).replace(/\r/g,'').replace(RELATED_SECTION,'');
- return clean.split(/\n+/).map(p=>p.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').replace(/([(«“"]) +/g,'$1').trim()).filter(p=>p.length>1);
+ const clean=decodeEntities(String(text||'')).replace(/\r/g,'').replace(RELATED_SECTION,'').replace(RELATED_INLINE,'');
+ return clean.split(/\n+/).map(p=>p.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').replace(/([(“"]) +/g,'$1').trim()).filter(p=>p.length>1);
 }
 export function renderArticleBody(text,esc){
  const paragraphs=articleParagraphs(text);

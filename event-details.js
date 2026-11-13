@@ -160,7 +160,8 @@ export function videosFromESPN(body){
   out.push({title:String(v.headline||v.title||'Résumé vidéo').slice(0,160),src:/^https:\/\/[^\s]+\.mp4(?:\?|$)/i.test(src)?src:'',
    page:/^https:\/\//.test(page)?page:'',poster:/^https:\/\//.test(v.thumbnail||'')?v.thumbnail:'',duration:+v.duration||0});
  }
- return out.slice(0,3);
+ const score=v=>(v.src?2:0)+(/highlight|r[ée]sum[ée]|recap|extended/i.test(v.title)?3:0);
+ return out.sort((a,b)=>score(b)-score(a)).slice(0,3);
 }
 export function hasEspnSheet(event){
  const origin=event.origin||{};

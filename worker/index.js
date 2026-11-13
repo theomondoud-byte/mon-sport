@@ -66,7 +66,8 @@ function toBlocks(html,base){
   if(!line)continue;
   const img=line.match(/^\[\[IMG (\S+)\]\]$/);
   if(img){if(!seen.has(img[1])&&blocks.filter(b=>b.type==='img').length<12){seen.add(img[1]);blocks.push({type:'img',src:img[1]});}continue;}
-  if(/^(?:[àa] lire aussi|lire aussi|sur le même sujet)\b/i.test(line))break;
+  if(/^(?:[àa] lire aussi|lire aussi|voir aussi|sur le même sujet)\s*[:：]\s*\S/i.test(line))continue;
+  if(/^(?:[àa] lire aussi|lire aussi|sur le même sujet)\s*(?:\.\.\.|…|:)?\s*$/i.test(line))break;
   if(line.length<2||NOISE_LINE.test(line))continue;
   blocks.push({type:'p',text:line.slice(0,3000)});
  }

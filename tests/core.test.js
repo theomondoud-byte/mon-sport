@@ -1183,3 +1183,11 @@ test('V16.5 : résumé d’article associé à un résultat de match',()=>{
  assert.equal(found.excerpt,'Les Parisiens ont dominé de bout en bout.');
  assert.equal(matchSummaryArticle({...item,date:'2026-10-01T20:00:00Z'},news,favorites),null);
 });
+
+test('V16.6 : l’encart « À lire aussi : … » de FFL ne coupe plus l’article',()=>{
+ const html='<p><strong>Introduction de l’article.</strong></p><div><a href="https://fflose.com/x"><style>.u{color:red}</style><div><span class="ctaText">À lire aussi :</span>&nbsp; <span class="postTitle">Football | Un autre article</span></div></a></div><h2>« Un intertitre »</h2><p>Suite de l’article.</p><p>Fin.</p>';
+ assert.deepEqual(htmlToBlocks(html,'https://fflose.com/a/').map(b=>b.text),['Introduction de l’article.','« Un intertitre »','Suite de l’article.','Fin.']);
+ // La liste de liens en fin d'article (Tennis Actu) reste coupée.
+ assert.deepEqual(articleParagraphs('Texte.\nA lire aussi...\nWTA FINALS\nAutre titre'),['Texte.']);
+ assert.deepEqual(articleParagraphs('Début.\nÀ lire aussi : Autre article\nSuite.'),['Début.','Suite.']);
+});
