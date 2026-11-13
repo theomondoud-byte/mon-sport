@@ -234,6 +234,7 @@ export function rankingEntry(id,name,live={}){
 export function renderRankingsView({selected='atp',live={},favorites=[],loading=false,esc,safeUrl}){
  const spec=RANKINGS.find(r=>r.id===selected)||RANKINGS[0];
  const rows=rankingRows(spec.id,live);
+ const tennisColumns=spec.mode==='tennis-espn';
  const saved=live[spec.id];
  const asOf=saved?.asOf?new Date(saved.asOf).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
  const label=spec.mode==='snapshot'?'Relevé du 9 novembre 2026 · pas en direct'
@@ -260,15 +261,29 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    +(r.age!=null?'<span>'+esc(r.age)+' ans</span>':'')
    +(r.previousRank?'<span>Rang préc. : '+esc(r.previousRank)+'</span>':'')
    +'</span>':'';
-  const liveDetail=isTennis?'<details class="rank-live-details"><summary>Détails des points et du tournoi</summary>'
-   +'<div>Points officiels : <b>'+esc(r.points)+'</b></div>'
-   +'<div>Points live : <b>'+(r.livePoints??'Non disponible')+'</b></div>'
-   +'<div>Points gagnés cette semaine : <b>'+(r.earnedPoints??'Non disponible')+'</b></div>'
-   +'<div>Points à défendre : <b>'+(r.droppingPoints??'Non disponible')+'</b></div>'
-   +'<div>Tournoi en cours : <b>'+esc(r.tournament||'Non communiqué')+'</b></div>'
-   +'<div>Points après prochaine victoire : <b>'+(r.nextPoints??'Non disponible')+'</b></div>'
-   +'<div>Maximum possible : <b>'+(r.maxPoints??'Non disponible')+'</b></div>'
-   +'<p>Les projections de tournoi nécessitent un flux ATP live distinct : aucune valeur n’est estimée. <a href="'+esc(safeUrl(spec.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a></p></details>':'';
+  if(tennisColumns){
+   const activeFeed=spec.id==='atp'&&r.livePoints!==null&&r.livePoints!==undefined;
+   const movementValue=activeFeed?r.movementLive:r.movement;
+   const movementLabel=typeof movementValue==='number'
+    ?'<span class="rank-movement '+(movementValue>0?'up':movementValue<0?'down':'flat')+'">'+
+     (movementValue>0?'▲ '+movementValue:movementValue<0?'▼ '+Math.abs(movementValue):'▬')+'</span>':'';
+   const playerMeta=[r.country,r.age!=null?r.age+' ans':''].filter(Boolean).join(' · ');
+   const numeric=value=>value===null||value===undefined||value===''?'—':String(value);
+   const signed=value=>value==null?'—':value>0?'+'+value:String(value);
+   const cell=(value,klass='',hint='')=>'<span class="rank-data '+klass+'" title="'+esc(hint)+'">'+esc(numeric(value))+'</span>';
+   return '<div class="rank-row tennis-rank-row '+(clickable?'rank-tracked':'')+'">'
+    +'<span class="rank-place">'+esc(number)
+    +(activeFeed&&r.liveRank!==r.rank?'<small>Live '+esc(r.liveRank)+'</small>':'')+'</span>'
+    +'<span class="rank-person">'+portrait+name+movementLabel
+    +(playerMeta?'<small>'+esc(playerMeta)+'</small>':'')+'</span>'
+    +cell(r.points,'rank-number','Points officiels du dernier classement ESPN')
+    +cell(activeFeed?r.livePoints:null,'rank-number','Points ATP live issus du dernier relevé')
+    +cell(activeFeed&&r.pointsChange!=null?signed(r.pointsChange):null,'rank-number','Écart net de points par rapport au classement officiel, non uniquement les gains')
+    +cell(activeFeed?r.tournament||null:null,'rank-tournament','Tournoi et tour actuel')
+    +cell(activeFeed?r.nextPoints:null,'rank-number','Total de points après une victoire au prochain match')
+    +cell(activeFeed?r.maxPoints:null,'rank-number','Total possible en cas de titre')
+    +'</div>';
+  }
   return '<div class="rank-row '+(clickable?'rank-tracked':'')+'"><span class="rank-place">'+esc(number)+'</span>'
    +'<span class="rank-person">'+portrait+name+movement+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+tennisDetail+liveDetail+'</span>'
    +'<b class="rank-points">'+esc(r.points||'—')+'</b></div>';
@@ -276,11 +291,18 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
  const tracked=spec.mode==='snapshot'?favorites.map(f=>({name:f.name,entry:rankingEntry(spec.id,f.name)}))
   .filter(x=>x.entry&&!rows.some(r=>norm(r.name)===norm(x.name))):[];
  return '<section class="rankings-shell"><div class="rankings-heading"><h2>🏆 Classements</h2>'
-  +'<p>Ouvre la fiche d’un favori par son nom. Déplie un joueur pour connaître les points vérifiables et les données live disponibles.</p></div>'
+  +'<p>Le nom d’un favori reste cliquable. Un tiret signifie que la source ne communique pas la valeur.</p></div>'
   +nav+'<div class="rankings-source"><span>'+esc(label)+'</span>'
   +'<a href="'+esc(safeUrl(spec.url))+'" target="_blank" rel="noopener noreferrer">Voir le classement complet ↗</a></div>'
   +(loading?'<p class="agenda-progress">Actualisation des classements…</p>':'')
-  +(cards?'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>'
+  +(cards?(tennisColumns
+   ?'<p class="rank-horizontal-hint">↔ Fais défiler le tableau vers la droite pour voir les projections.</p><div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : défilement horizontal"><div class="rank-table tennis-rank-table"><div class="rank-table-head tennis-rank-row"><span>Rang</span><span>Joueur · variation</span><span>Officiels</span><span>Live</span><span>Δ pts</span><span>Tournoi en cours</span><span>Prochain</span><span>Maximum</span></div>'+cards+'</div></div>'
+   :'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>')
   :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
-  +'<p class="agenda-footnote">ATP et WTA : top 150 du dernier classement publié reçu depuis ESPN, avec points et évolution hebdomadaire (pas un rang live). Les colonnes ATP tournoi/points projetés restent indisponibles sans source live vérifiable. Race/Next Gen/WTT : relevés datés et non exhaustifs. Football : J, V, N, D, BP, BC selon les données transmises par ESPN.</p></section>';
+  +(spec.id==='atp'?'<p class="agenda-footnote">'
+    +(saved?.liveFeedAsOf?'Complément ATP live relevé le '+esc(new Date(saved.liveFeedAsOf).toLocaleString('fr-FR'))+' · '+esc(saved.liveFeedMatched)+' joueurs rapprochés. '
+     :'Relevé ATP live indisponible : seules les données officielles sont affichées. ')
+    +'Δ pts = variation nette des points (gains et retraits), pas uniquement les points gagnés dans le tournoi. Prochain et Maximum sont renseignés seulement lorsqu’une projection existe. '
+    +'<a href="https://live-tennis.eu/en/atp-live-ranking" target="_blank" rel="noopener noreferrer">Source ATP live ↗</a>.</p>':'')
+  +'<p class="agenda-footnote">ATP/WTA : top 150 officiel ESPN ; les colonnes WTA de projections ne sont pas encore alimentées. Race/Next Gen/WTT : instantanés partiels. Football : J, V, N, D, BP et BC selon ESPN.</p></section>';
 }
