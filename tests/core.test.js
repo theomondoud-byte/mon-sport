@@ -769,3 +769,22 @@ test('service worker : mise à jour différée sans prise de contrôle de la pag
  assert.doesNotMatch(source,/await self\.clients\.claim\(/);
  assert.match(source,/skipWaiting\(/);
 });
+
+test('détail d’un ancien match : Wembanyama est recherché dans la feuille, sans attribuer les chiffres d’autrui',async()=>{
+ const event={
+  type:'team',favorite:'San Antonio Spurs',favorites:['San Antonio Spurs','Victor Wembanyama'],
+  origin:{leaguePath:'basketball/nba',espnEventId:'401999888'},
+  leaguePath:'basketball/nba',espnEventId:'401999888'
+ };
+ const body={boxscore:{teams:[],players:[{statistics:[{labels:['PTS','REB','AST','BLK'],
+  athletes:[
+   {athlete:{displayName:'Autre joueur'},stats:['37','12','6','2']},
+   {athlete:{displayName:'Victor Wembanyama'},stats:['27','11','3','5']}
+  ]}]}]}};
+ const details=await loadEventDetails(event,{fetchFn:async()=>({ok:true,json:async()=>body})});
+ assert.deepEqual(details.players.map(x=>x.name),['Victor Wembanyama']);
+ const html=renderEventDetails(details,x=>String(x));
+ assert.match(html,/Victor Wembanyama/);
+ assert.match(html,/>27<\/b>/);
+ assert.doesNotMatch(html,/Autre joueur/);
+});
