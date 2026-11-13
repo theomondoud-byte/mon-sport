@@ -375,3 +375,11 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .rank-points{font-size:.8rem}
  .rankings-source{align-items:flex-start}
 }
+
+/* Classements et articles enrichis */
+.rank-football-stats{display:flex;flex-wrap:wrap;gap:5px 10px;margin-top:5px;font-size:.76rem;color:var(--muted)}
+.rank-football-stats span{white-space:nowrap}
+.news-visual-row{display:flex;align-items:flex-start;gap:12px}
+.news-thumbnail{width:92px;height:92px;object-fit:cover;border-radius:11px;flex-shrink:0;background:var(--panel)}
+.news-content{min-width:0;flex:1}
+@media(max-width:420px){.news-thumbnail{width:70px;height:70px}.rank-football-stats{font-size:.7rem}}
