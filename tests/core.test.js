@@ -8,7 +8,7 @@ import {createOnceLoader} from '../session-loader.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
-import {renderEventDetails} from '../event-details.js';
+import {loadEventDetails,renderEventDetails} from '../event-details.js';
 
 test('décalage de mois en fin de mois',()=>{
  assert.equal(shiftedMonths(new Date(2026,0,31),1).getDate(),28);
@@ -742,4 +742,30 @@ test('aucun rechargement spontané de page lors du remplacement du service worke
  assert.doesNotMatch(source,/controllerchange[\s\S]{0,150}location\.reload\(/);
  assert.match(source,/async function forceUpdate\(/,'Rechargement volontaire reste accessible');
  assert.match(source,/location\.replace\(url\.href\)/);
+});
+
+test('détail NBA fusionné : les chiffres individuels portent le nom de Wembanyama',async()=>{
+ const event={
+  favorite:'San Antonio Spurs',type:'team',title:'San Antonio Spurs — Chicago Bulls',
+  leaguePath:'basketball/nba',espnEventId:'401998881',
+  origin:{leaguePath:'basketball/nba',espnEventId:'401998881',
+   favorite:'San Antonio Spurs',wembanyamaName:'Victor Wembanyama',
+   stats:{pts:'29',reb:'12',ast:'5',blk:'4'}}
+ };
+ const details=await loadEventDetails(event,{fetchFn:async()=>({ok:true,json:async()=>({
+  boxscore:{teams:[],players:[]},header:{competitions:[]}
+ })})});
+ const html=renderEventDetails(details,x=>String(x));
+ assert.match(html,/Victor Wembanyama/);
+ assert.match(html,/Points/);
+ assert.match(html,/>29<\/b>/);
+ assert.match(html,/>12<\/b>/);
+ assert.doesNotMatch(html,/San Antonio Spurs<\/b><div class="detail-metrics">/);
+});
+
+test('service worker : mise à jour différée sans prise de contrôle de la page ouverte',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const source=await readFile(new URL('../sw.js',import.meta.url),'utf8');
+ assert.doesNotMatch(source,/await self\.clients\.claim\(/);
+ assert.match(source,/skipWaiting\(/);
 });
