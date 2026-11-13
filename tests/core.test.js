@@ -1031,6 +1031,6 @@ test('V15.8 : les extraits des médias RSS sont lisibles directement dans les ca
   esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
   safeUrl:x=>x,photos:{},favorites:[]});
  assert.match(html,/Le jeune coureur français revient sur sa préparation et ses objectifs\./);
- assert.match(html,/Ouvrir chez l’éditeur/);
+ assert.match(html,/Lire l’article chez l’éditeur/);
  assert.match(html,/Cyclism'Actu/);
 });
