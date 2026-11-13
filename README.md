@@ -1,3 +1,13 @@
+# Mon Sport V14.4 — filtres tennis et tournois observés sur 14 jours
+
+- **Filtres au-dessus des classements ATP et WTA** : âge strictement inférieur à une limite choisie (de 16 à 51 ans), nationalité, ou les deux ensemble. La France figure toujours en tête des pays disponibles, les autres sont triés par leur nom français. Le tableau conserve les vrais rangs et précise le nombre de joueurs affichés. Le bouton **Effacer** rétablit tous les joueurs.
+- **Classement ATP live, colonne « Tournois · 14 j »** : affiche le tournoi actuellement indiqué et les tournois précédemment observés dans les relevés ATP live de Mon Sport sur une fenêtre glissante de 14 jours. Les observations anciennes restent distinctes, avec le libellé « Observé ». Les informations ne sont ni datées fictivement ni présentées comme des résultats confirmés : le flux source ne fournit pas de date explicite par tournoi.
+- **Historique progressif** : le collecteur GitHub Actions toutes les 6 heures conserve les tournois présents dans les relevés successifs, avec leur date de dernière observation, et supprime ceux qui ne sont plus vus depuis 14 jours. Le premier relevé ne peut pas reconstituer les événements absents des données précédentes ; l'historique se complète lors des actualisations.
+- **Android/PWA** : versionnement des ressources V14.4 et renouvellement du cache pour rendre visibles les nouveaux filtres.
+- **Tests** : Node vérifie les filtres, la combinaison âge + France, le respect du vrai rang, l'absence de résultats et les tournois expirés ; Python valide la conservation sur 14 jours, les doublons et la suppression des données périmées.
+
+---
+
 # V14.3 — Classement ATP 100 % live (13 novembre 2026)
 
 L'onglet **ATP live** affiche maintenant **uniquement le top 150 du relevé [live-tennis.eu en français](https://live-tennis.eu/fr/classement-atp-live)**. Le classement ATP hebdomadaire ESPN n'est plus utilisé pour remplir ce tableau et n'est pas affiché en colonne.

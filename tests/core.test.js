@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,fetchRankings,renderRankingsView} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -209,4 +209,63 @@ test('récupération ATP sans requête au classement officiel ESPN',async()=>{
  assert.equal(data.atp.rows[0].points,'5000');
  assert.ok(requested.includes('./data/atp-live.json'));
  assert.ok(requested.every(url=>!url.includes('tennis/atp/rankings')));
+});
+
+test('ATP : l’âge est strictement inférieur et filtre cumulable avec la France',()=>{
+ const rows=[
+  {rank:1,name:'Français 19',age:19,country:'FRA'},
+  {rank:2,name:'Français 20',age:20,country:'FRA'},
+  {rank:3,name:'Espagnol 18',age:18,country:'ESP'},
+  {rank:4,name:'Âge inconnu',age:null,country:'FRA'}
+ ];
+ assert.deepEqual(filterTennisRankingRows(rows,{ageMax:20,country:'FRA'}).map(r=>r.rank),[1]);
+ assert.deepEqual(filterTennisRankingRows(rows,{ageMax:'',country:'FRA'}).map(r=>r.rank),[1,2,4]);
+ assert.deepEqual(filterTennisRankingRows(rows,{ageMax:'20',country:''}).map(r=>r.rank),[1,3]);
+ assert.equal(filterTennisRankingRows(rows,{ageMax:18,country:'FRA'}).length,0);
+ assert.equal(filterTennisRankingRows(rows).length,4);
+});
+
+test('filtres au-dessus du classement et France avant toutes les autres nations',()=>{
+ const html=renderRankingsView({selected:'atp',live:{atp:{
+  rows:[
+   {rank:1,name:'Allemand',age:21,country:'GER',livePoints:2800},
+   {rank:2,name:'Français',age:19,country:'FRA',livePoints:2500},
+   {rank:3,name:'Italien',age:18,country:'ITA',livePoints:2200}
+  ],live:true,asOf:new Date().toISOString()}},ageMax:20,country:'FRA',
+  favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.ok(html.indexOf('id="rankAgeMax"')<html.indexOf('class="rank-table-scroll"'));
+ assert.match(html,/Moins de 20 ans/);
+ assert.match(html,/1 joueur sur 3/);
+ assert.match(html,/Français/);
+ assert.doesNotMatch(html,/>Allemand</);
+ assert.ok(html.indexOf('option value="FRA"')<html.indexOf('option value="GER"'));
+ assert.match(html,/🇫🇷 France/);
+ const empty=renderRankingsView({selected:'atp',live:{atp:{rows:[
+   {rank:1,name:'Allemand',age:21,country:'GER',livePoints:2800}
+  ],live:true,asOf:new Date().toISOString()}},ageMax:18,country:'FRA',
+  favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(empty,/Aucun joueur ne correspond aux filtres/);
+ assert.doesNotMatch(empty,/Source non accessible/);
+});
+
+test('tournois ATP observés pendant les 14 derniers jours : aucune date de match inventée',()=>{
+ const now=new Date('2026-11-13T12:00:00Z');
+ const payload={fetchedAt:'2026-11-13T11:00:00Z',rows:Array.from({length:150},(_,i)=>({
+  rank:i+1,name:'Joueur '+i,livePoints:7000-i,country:'FRA',age:22,
+  tournament:i===0?'Orléans QF':'',
+  tournamentHistory:i===0?[
+   {text:'Orléans QF',lastSeen:'2026-11-13T11:00:00Z'},
+   {text:'Stockholm 8e',lastSeen:'2026-11-06T11:00:00Z'},
+   {text:'Paris R32',lastSeen:'2026-10-21T11:00:00Z'}
+  ]:[]
+ }))};
+ const rows=parseATPLiveSnapshot(payload,now);
+ assert.deepEqual(rows[0].tournamentHistory.map(r=>r.text),['Orléans QF','Stockholm 8e']);
+ const html=renderRankingsView({selected:'atp',live:{atp:{rows:rows.slice(0,1),
+  live:true,asOf:payload.fetchedAt}},favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Tournois · 14 j/);
+ assert.match(html,/Stockholm 8e/);
+ assert.match(html,/Orléans QF/);
+ assert.doesNotMatch(html,/Paris R32/);
+ assert.match(html,/Observé/);
 });

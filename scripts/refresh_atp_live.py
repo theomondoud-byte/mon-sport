@@ -87,6 +87,50 @@ def parse(html, debug=False):
         raise RuntimeError("Points ATP live invalides")
     return rows
 
+
+def parse_utc(value):
+    try:
+        result=datetime.fromisoformat(str(value).replace("Z","+00:00"))
+        return result.replace(tzinfo=timezone.utc) if result.tzinfo is None else result.astimezone(timezone.utc)
+    except (TypeError,ValueError,OverflowError):
+        return None
+
+def add_recent_tournaments(rows, previous=None, now=None):
+    """Conserver 14 jours de tournois *observés*, sans inventer de dates de matchs.
+
+    Les classements live ne donnent pas de date par tournoi. On garde la date
+    de dernière observation par notre collecteur, pas une date sportive supposée.
+    """
+    now=now or datetime.now(timezone.utc)
+    if now.tzinfo is None: now=now.replace(tzinfo=timezone.utc)
+    previous=previous if isinstance(previous,dict) else {}
+    prev_at=parse_utc(previous.get("fetchedAt"))
+    def key(name):
+        name=unicodedata.normalize("NFD",str(name or "").lower())
+        return re.sub(r"[^a-z0-9]","", "".join(c for c in name if not unicodedata.combining(c)))
+    former={key(p.get("name")):p for p in previous.get("rows",[])
+            if isinstance(p,dict) and p.get("name")}
+    for row in rows:
+        old=former.get(key(row["name"]),{})
+        history={}
+        observations=old.get("tournamentHistory") or []
+        # Rétrocompatibilité du relevé initial, datant de la version précédente.
+        if not observations and old.get("tournament") and prev_at:
+            observations=[{"text":old["tournament"],"lastSeen":prev_at.isoformat()}]
+        for event in observations:
+            if not isinstance(event,dict): continue
+            text=str(event.get("text") or "").strip()[:160]
+            seen=parse_utc(event.get("lastSeen"))
+            if not text or seen is None: continue
+            age=(now-seen).total_seconds()
+            if not (0<=age<14*86400): continue
+            history[key(text)]={"text":text,"lastSeen":seen.isoformat()}
+        current=str(row.get("tournament") or "").strip()[:160]
+        if current:
+            history[key(current)]={"text":current,"lastSeen":now.isoformat()}
+        row["tournamentHistory"]=sorted(history.values(),key=lambda v:v["lastSeen"],reverse=True)[:10]
+    return rows
+
 def main():
     args=argparse.ArgumentParser()
     args.add_argument("--dry-run",action="store_true")
@@ -96,6 +140,13 @@ def main():
     print("SOURCE_HTTP",response.status_code,"HTML_BYTES",len(response.content))
     response.raise_for_status()
     rows=parse(response.content.decode('utf-8',errors='replace'),debug=ns.debug)
+    previous=None
+    if DEST.exists():
+        try:
+            previous=json.loads(DEST.read_text(encoding="utf-8"))
+        except (OSError,UnicodeError,json.JSONDecodeError):
+            print("PREVIOUS_SNAPSHOT_INVALID")
+    rows=add_recent_tournaments(rows,previous)
     print("PARSED",len(rows),"TOP",rows[:2])
     losses=[(r["name"],r["previousTournaments"]) for r in rows if r["tournamentStatus"]=="defaite"]
     print("DEFAITES_DETECTEES",len(losses),"EXEMPLES",losses[:3])
