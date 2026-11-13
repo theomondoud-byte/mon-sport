@@ -62,36 +62,57 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
 }
 // Des posts publics vérifiés, extraits du compte @JeuSetMaths par le collecteur.
 // L'absence de données valides ne doit jamais produire de publications imaginaires.
-export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date()}={}){
+// Posts préchargés et conservés localement : les Android avec réseau lent / hors-ligne
+// n'affichent jamais un fil vide si un relevé vérifié des 7 derniers jours existe.
+const JSM_CACHE_KEY='mon-sport-jeu-set-maths-feed-v15-5';
+export function parseJeuSetMathsPosts(data,now=new Date()){
+ if(!Array.isArray(data?.posts)||data.source!=='https://x.com/JeuSetMaths')return [];
+ const cutoff=now.getTime()-7*86400000;
+ return data.posts.filter(p=>{
+  const time=Date.parse(p?.date||'');
+  return time>=cutoff&&time<=now.getTime()+600000&&
+   /^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(String(p.link||''))&&
+   String(p.title||'').trim().length>10;
+ }).slice(0,25).map(p=>{
+  const photos=Array.isArray(p.images)?p.images
+   .filter(url=>/^https:\/\/pbs\.twimg\.com\/media\//.test(String(url||'')))
+   .slice(0,4).map(sourceImage).filter(Boolean):[];
+  const fallback=sourceImage(p.image);
+  const images=photos.length?photos:fallback?[fallback]:[];
+  const video=/^https:\/\/video\.twimg\.com\/[\w/.-]+\.mp4(?:\?[^\s]*)?$/.test(String(p.video||''))
+   ?String(p.video):'';
+  return {
+   title:String(p.title).slice(0,180),link:p.link,date:p.date,
+   source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
+   text:typeof p.text==='string'?p.text.slice(0,30000):'',
+   image:images[0]||'',images,video
+  };
+ });
+}
+const browserStorage=()=>typeof localStorage==='undefined'?null:localStorage;
+export function readCachedJeuSetMathsNews({storage=browserStorage(),now=new Date()}={}){
+ try{
+  const json=storage?.getItem(JSM_CACHE_KEY);
+  return json?parseJeuSetMathsPosts(JSON.parse(json),now):[];
+ }catch{return [];}
+}
+export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date(),storage=browserStorage()}={}){
+ const cached=readCachedJeuSetMathsNews({storage,now});
+ // AbortSignal.timeout n'existe pas sur certains anciens navigateurs mobiles.
+ const controller=typeof AbortController==='function'?new AbortController():null;
+ const deadline=controller?setTimeout(()=>controller.abort(),9500):null;
  try{
   const response=await fetchFn('./data/jeu-set-et-maths.json',{
-   cache:'no-store',signal:AbortSignal.timeout(6000)
+   cache:'no-store',...(controller?{signal:controller.signal}:{})
   });
-  if(!response.ok)return [];
+  if(!response.ok)return cached;
   const data=await response.json();
-  if(!Array.isArray(data?.posts)||!data.source?.includes('x.com/JeuSetMaths'))return [];
-  const cutoff=now.getTime()-7*86400000;
-  return data.posts.filter(p=>{
-   const time=Date.parse(p?.date||'');
-   return time>=cutoff&&time<=now.getTime()+600000&&
-    /^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(String(p.link||''))&&
-    String(p.title||'').trim().length>10;
-  }).slice(0,25).map(p=>{
-   const photos=Array.isArray(p.images)?p.images
-    .filter(url=>/^https:\/\/pbs\.twimg\.com\/media\//.test(String(url||'')))
-    .slice(0,4).map(sourceImage).filter(Boolean):[];
-   const fallback=sourceImage(p.image);
-   const images=photos.length?photos:fallback?[fallback]:[];
-   const video=/^https:\/\/video\.twimg\.com\/[\w/.-]+\.mp4(?:\?[^\s]*)?$/.test(String(p.video||''))
-    ?String(p.video):'';
-   return {
-    title:String(p.title).slice(0,180),link:p.link,date:p.date,
-    source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
-    text:typeof p.text==='string'?p.text.slice(0,30000):'',
-    image:images[0]||'',images,video
-   };
-  });
- }catch{return [];}
+  const fresh=parseJeuSetMathsPosts(data,now);
+  if(!fresh.length)return cached;
+  try{storage?.setItem(JSM_CACHE_KEY,JSON.stringify(data));}catch{}
+  return fresh;
+ }catch{return cached;}
+ finally{if(deadline!==null)clearTimeout(deadline);}
 }
 export function findMatchArticles(item,news=[],now=new Date()){
  const day=Date.parse(item.date||''),key=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();

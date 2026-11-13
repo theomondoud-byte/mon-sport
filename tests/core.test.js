@@ -6,7 +6,7 @@ import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForF
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
 import {newsLastWeek,renderNewsView} from '../news-view.js';
-import {isSportsArticle,fetchJeuSetMathsNews} from '../sports-articles.js';
+import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
 
@@ -839,4 +839,56 @@ test('Aucun widget X ni bouton qui ouvre la plateforme dans les posts',async()=>
  assert.match(source,/jsm-native-video/);
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
  assert.doesNotMatch(app,/mountNewsFrames/);
+});
+
+test('Mobile : posts Jeu Set Maths conservés si le réseau se coupe, dans les 7 jours',async()=>{
+ const now=new Date('2026-11-13T12:00:00Z');
+ const raw={source:'https://x.com/JeuSetMaths',posts:[{
+  title:'📊 Classement ATP et statistiques de tennis',
+  text:'📊 Tableau tennis\\n\\n▪️ 2001 : Serena Williams\\n↪️ Finale',
+  date:'2026-11-12T11:00:00Z',link:'https://x.com/JeuSetMaths/status/2120668453770305629',
+  images:['https://pbs.twimg.com/media/graph.jpg?name=orig']
+ }]};
+ const values=new Map(),storage={getItem:key=>values.get(key)||null,setItem:(key,value)=>values.set(key,value)};
+ const online=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>({ok:true,json:async()=>raw})});
+ assert.equal(online.length,1);
+ assert.equal(online[0].source,'Jeu, set et maths');
+ assert.equal(readCachedJeuSetMathsNews({now,storage}).length,1);
+ const offline=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>{throw Error('hors ligne');}});
+ assert.deepEqual(offline,online);
+ const httpFailed=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>({ok:false,status:503})});
+ assert.deepEqual(httpFailed,online);
+ assert.deepEqual(readCachedJeuSetMathsNews({now:new Date('2026-12-01'),storage}),[]);
+ assert.deepEqual(parseJeuSetMathsPosts({...raw,source:'https://x.com/Imposteur'},now),[]);
+});
+
+test('Mobile : les posts statistiques restent visibles même avec 90 actualités de favoris',()=>{
+ const now=new Date('2026-11-13T12:00:00Z');
+ const others=Array.from({length:90},(_,i)=>({
+  title:'Le PSG marque un but numéro '+i,link:'https://espn.com/story/'+i,
+  date:new Date(now.getTime()-i*60*1000).toISOString(),
+  source:'ESPN',favorite:'PSG',sport:'Football'
+ }));
+ const maths=Array.from({length:15},(_,i)=>({
+  title:'📊 Tennis : classement officiel numéro '+i,
+  link:'https://x.com/JeuSetMaths/status/'+String(2120668453770305629n-BigInt(i)),
+  date:new Date(now.getTime()-(i+100)*60000).toISOString(),
+  source:'Jeu, set et maths',sport:'Tennis'
+ }));
+ const feed=newsLastWeek([...others,...maths],now);
+ assert.equal(feed.filter(x=>x.source==='Jeu, set et maths').length,15);
+ assert.ok(feed.length<=85);
+});
+
+test('Android : les posts se chargent indépendamment des scores ESPN',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.match(app,/let jeuSetMathsPosts=readCachedJeuSetMathsNews\(\)/);
+ assert.match(app,/function loadJeuSetMathsPosts\(\)/);
+ assert.match(app,/news:\[\.\.\.news,\.\.\.jeuSetMathsPosts\]/);
+ assert.match(app,/refresh\(\),\s*loadJeuSetMathsPosts\(\),\s*refreshHistory\(\)/);
+ const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
+ assert.match(sw,/\.\/data\/jeu-set-et-maths\.json/);
+ const css=await readFile(new URL('../style.css',import.meta.url),'utf8');
+ assert.match(css,/\.jsm-native-text\{white-space:pre-line/);
 });

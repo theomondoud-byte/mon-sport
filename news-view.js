@@ -1,18 +1,23 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=15.4.0';
-// Mon Sport V15.4 — posts de tennis natifs, sans iframe X et sans « Voir plus ».
+import {filterSportsNews} from './sports-articles.js?v=15.5.0';
+// Mon Sport V15.5 — posts tennis natifs, adaptés au téléphone et aux listes multilignes.
 const HOUR=3600000;
 const DAY=24*HOUR;
 export function newsLastWeek(items,now=new Date()){
  const end=now.getTime(),start=end-7*DAY,used=new Set();
- return filterSportsNews(Array.isArray(items)?items:[]).filter(n=>{
+ const ordered=filterSportsNews(Array.isArray(items)?items:[]).filter(n=>{
   const t=Date.parse(n.date||n.published||'');
   if(!Number.isFinite(t)||t<start||t>end+10*60*1000||!n.title||!n.link)return false;
   const key=String(n.link).replace(/[?#].*$/,'').toLowerCase()+'|'+String(n.title).trim().toLowerCase();
   if(used.has(key))return false;
   used.add(key);return true;
- }).sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published))
-  .slice(0,60);
+ }).sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published));
+ // Le flux personnalisé peut être très rempli : garder une place pour les
+ // derniers posts de statistiques, même avec de nombreux favoris sur mobile.
+ const top=ordered.slice(0,60);
+ const maths=ordered.filter(n=>n.source==='Jeu, set et maths').slice(0,25);
+ return [...new Map([...top,...maths].map(n=>[n.link,n])).values()]
+  .sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published));
 }
 export function safeExcerpt(value){
  return String(value||'').replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;/gi,' ')

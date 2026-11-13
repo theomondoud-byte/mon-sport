@@ -89,5 +89,18 @@ class SocialPostsTests(unittest.TestCase):
         self.assertIsNone(posts[0]['video'])
 
 
+    def test_newlines_and_paragraphs_are_preserved_for_mobile(self):
+        now=datetime(2026,11,13,12,tzinfo=timezone.utc)
+        ident=post_id(now-timedelta(hours=2))
+        original="📊 Bilan des finalistes sur le circuit ATP :\n\n▪️ 2001 : Serena Williams\n↪️ 6/0 6/2\n↪️ 6/3 6/0\n\n🆕 2026 : Mirra Andreeva"
+        html=(f'<div class="timeline-item" data-username="JeuSetMaths">'
+              f'<a class="tweet-link" href="/JeuSetMaths/status/{ident}"></a>'
+              f'<div class="tweet-content">{original}</div></div>')
+        row=parse_posts(html,now=now)[0]
+        self.assertEqual(row['text'],original)
+        self.assertNotIn('\n',row['title'])
+        self.assertIn('▪️ 2001 : Serena Williams',row['title'])
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -51,13 +51,18 @@ def parse_posts(html, *, now=None):
         date = timestamp_from_id(id)
         if date is None or not (0 <= (now - date).total_seconds() <= 7 * 86400):
             continue
-        text = content.get_text(" ", strip=True)
-        text = re.sub(r"\s+", " ", text).strip()
+        # Le miroir conserve déjà les véritables sauts de ligne dans le texte.
+        # Ne pas les écraser avec \s+ : les statistiques deviennent illisibles.
+        text = content.get_text(" ", strip=True).replace("\r\n", "\n").replace("\r", "\n")
+        text = re.sub(r"[^\S\n]+", " ", text)
+        text = re.sub(r" *\n *", "\n", text)
+        text = re.sub(r"\n{3,}", "\n\n", text).strip()
         if len(text) < 18 or text.startswith("@"):
             continue
-        # Le titre court reste utile pour la liste, le contenu est stocké séparément.
-        title = text[:170].rstrip()
-        if len(text) > 170:
+        # Le titre sert seulement aux listes : il tient sur une ligne.
+        headline = re.sub(r"\s+", " ", text).strip()
+        title = headline[:170].rstrip()
+        if len(headline) > 170:
             title = title.rsplit(" ", 1)[0] + "…"
         # Tous les visuels d'origine fournis par le miroir, sans galerie X externe.
         images = []
