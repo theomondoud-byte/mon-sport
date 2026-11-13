@@ -1,4 +1,5 @@
 import {sourceImage} from './sports-media.js?v=14.0.0';
+import {jeuSetMathsBundledData} from './data/jeu-set-et-maths-bundle.js?v=15.6.0';
 // FFL (Fédération française de la Lose) : articles de sport uniquement.
 // WordPress REST expose titre, date et URL; pas de copie intégrale des articles.
 export const FFL_HOME='https://fflose.com/';
@@ -89,29 +90,48 @@ export function parseJeuSetMathsPosts(data,now=new Date()){
   };
  });
 }
-const browserStorage=()=>typeof localStorage==='undefined'?null:localStorage;
+const browserStorage=()=>{try{return typeof localStorage==='undefined'?null:localStorage;}catch{return null;}};
 export function readCachedJeuSetMathsNews({storage=browserStorage(),now=new Date()}={}){
  try{
   const json=storage?.getItem(JSM_CACHE_KEY);
   return json?parseJeuSetMathsPosts(JSON.parse(json),now):[];
  }catch{return [];}
 }
+// L'instantané est inclus dans le JavaScript de la PWA : aucun fetch requis.
+// C'est une véritable copie vérifiée des posts, pas des cartes fictives.
+export function readBundledJeuSetMathsNews({now=new Date()}={}){
+ return parseJeuSetMathsPosts(jeuSetMathsBundledData,now);
+}
+export function mergeJeuSetMathsNews(...sources){
+ const rows=new Map();
+ for(const source of sources){
+  for(const post of Array.isArray(source)?source:[]){
+   const previous=rows.get(post.link);
+   if(!previous||String(post.text||'').length>=String(previous.text||'').length)
+    rows.set(post.link,post);
+  }
+ }
+ return [...rows.values()].sort((a,b)=>Date.parse(b.date)-Date.parse(a.date)).slice(0,25);
+}
+export function readAvailableJeuSetMathsNews({storage=browserStorage(),now=new Date()}={}){
+ return mergeJeuSetMathsNews(readBundledJeuSetMathsNews({now}),readCachedJeuSetMathsNews({storage,now}));
+}
 export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date(),storage=browserStorage()}={}){
- const cached=readCachedJeuSetMathsNews({storage,now});
- // AbortSignal.timeout n'existe pas sur certains anciens navigateurs mobiles.
+ const available=readAvailableJeuSetMathsNews({storage,now});
+ // Les posts intégrés sont immédiatement accessibles si le JSON est bloqué.
  const controller=typeof AbortController==='function'?new AbortController():null;
  const deadline=controller?setTimeout(()=>controller.abort(),9500):null;
  try{
   const response=await fetchFn('./data/jeu-set-et-maths.json',{
    cache:'no-store',...(controller?{signal:controller.signal}:{})
   });
-  if(!response.ok)return cached;
+  if(!response.ok)return available;
   const data=await response.json();
   const fresh=parseJeuSetMathsPosts(data,now);
-  if(!fresh.length)return cached;
+  if(!fresh.length)return available;
   try{storage?.setItem(JSM_CACHE_KEY,JSON.stringify(data));}catch{}
-  return fresh;
- }catch{return cached;}
+  return mergeJeuSetMathsNews(available,fresh);
+ }catch{return available;}
  finally{if(deadline!==null)clearTimeout(deadline);}
 }
 export function findMatchArticles(item,news=[],now=new Date()){
