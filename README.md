@@ -1,3 +1,16 @@
+# Mon Sport V15.2 — publications complètes de « Jeu, set et maths » intégrées
+
+En ouvrant une publication du compte **@JeuSetMaths** dans l'onglet **Articles**, Mon Sport essaie désormais de charger directement **le post original complet, avec son texte, ses images et ses vidéos**, via l'[intégration officielle de X](https://help.x.com/fr/using-x/how-to-embed-a-post).
+
+- Le lecteur X ne se charge **qu'au clic sur le post** : aucune requête à X n'est faite en naviguant simplement dans la liste des articles.
+- L'intégration reste **dans Mon Sport**, adaptée à la largeur du téléphone. La publication n'est pas copiée ni réhébergée par le tableau de bord.
+- Lorsque X ou un bloqueur empêche l'intégration, un message le précise, un extrait déjà disponible reste affiché et un lien vers la source demeure accessible.
+- L'ouverture du lecteur charge des éléments fournis par X et peut transmettre des données techniques à X ; cette possibilité est annoncée dans l'interface.
+- Le système de collecte des publications récentes et les articles des autres médias ne sont pas modifiés.
+- La PWA utilise le cache versionné **V15.2**. Le lecteur officiel n'est pas garanti en mode hors connexion.
+
+---
+
 # Mon Sport V15.1 — consulter « Jeu, set et maths » dans l’application
 
 Les publications publiques récentes de **Jeu, set et maths** s'ouvrent maintenant directement dans le fil **Articles**, sans renvoi automatique vers X. Il suffit de toucher leur carte pour déplier un lecteur intégré comprenant le court extrait de la publication, sa date et **son visuel de statistiques agrandi** lorsque le compte en a publié un.

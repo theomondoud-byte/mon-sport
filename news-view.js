@@ -40,21 +40,23 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
   // Les publications du compte Jeu, set et maths s'ouvrent dans la PWA.
   // Seuls l'extrait public et le visuel source sont affichés, sans copie intégrale.
   if(n.source==='Jeu, set et maths'&&/^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(n.link||'')){
-   const fullImage=sourceImage(n.image);
-   const visual=fullImage?'<div class="jsm-reader-visual"><img class="jsm-reader-image" loading="lazy" decoding="async" src="'+esc(fullImage)+'" alt="Visuel du post de Jeu, set et maths, contenant éventuellement un graphique de statistiques de tennis" />'
-    +'<p class="jsm-image-error" role="status">Visuel indisponible depuis la source X.</p></div>':'';
-   return '<details class="news-card news-post-card">'
+   const postId=n.link.match(/\/status\/(\d{16,20})$/)?.[1]||'';
+   return '<details class="news-card news-post-card" data-x-post-id="'+esc(postId)+'">'
     +'<summary class="news-post-summary">'+picture
     +'<span class="news-text"><span class="news-card-top"><span class="news-sport" aria-label="Tennis">🎾 Tennis</span>'
     +'<span class="news-date">'+esc(published)+'</span></span>'
     +'<h3>'+esc(n.title)+'</h3><p class="news-source">Jeu, set et maths</p>'
-    +'<span class="news-tap">Voir le post dans Mon Sport <span class="news-expand-chevron" aria-hidden="true">⌄</span></span>'
+    +'<span class="news-tap">Lire la publication complète ici <span class="news-expand-chevron" aria-hidden="true">⌄</span></span>'
     +'</span></summary>'
-    +'<div class="news-reader jsm-reader"><p class="news-article-label">📊 JEU, SET ET MATHS</p>'
-    +'<p class="news-excerpt">'+esc(n.title)+'</p>'
-    +visual
-    +'<p class="news-reading-info">Extrait de la publication et visuel d’origine. Si le post contient davantage de texte, l’extrait ne le reproduit pas intégralement.</p>'
-    +'<a class="jsm-original-link" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Voir la publication originale sur X ↗</a>'
+    +'<div class="news-reader jsm-reader">'
+    +'<p class="news-article-label">📊 JEU, SET ET MATHS · PUBLICATION ORIGINALE</p>'
+    +'<div class="jsm-official-embed" data-x-post-id="'+esc(postId)+'" role="region" aria-label="Publication X intégrée de Jeu, set et maths">'
+    +'<p class="jsm-embed-status" role="status">Ouvre ce post pour charger son contenu original ici.</p>'
+    +'</div>'
+    +'<div class="jsm-embed-fallback" hidden><p>Le contenu complet ne peut pas être affiché ici : X ou le navigateur bloque son intégration.</p>'
+    +'<p class="news-excerpt">'+esc(n.title)+'</p></div>'
+    +'<p class="news-reading-info">Le post complet est affiché par le lecteur officiel X lorsque celui-ci est disponible. Son ouverture charge du contenu de X et peut transmettre des données techniques à cette plateforme.</p>'
+    +'<a class="jsm-original-link" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Ouvrir le post original si nécessaire ↗</a>'
     +'</div></details>';
   }
   return '<article class="news-card news-link-card"><a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" class="news-plain-link">'
@@ -66,11 +68,65 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article récent</h3><p>Les articles plus anciens que sept jours sont masqués.</p></div>')
   +(!hasWorker?'<p class="agenda-footnote">Sources : FFL et ESPN · flux complémentaires via Cloudflare si configuré.</p>':'')
-  +'<p class="agenda-footnote">Les posts « Jeu, set et maths » s’ouvrent ici, avec leur extrait et leur visuel d’origine. Le lien X reste facultatif ; un contenu plus long peut nécessiter la source.</p>'
+  +'<p class="agenda-footnote">Les posts « Jeu, set et maths » affichent leur contenu complet via le lecteur officiel X lorsque celui-ci est autorisé par X et ton navigateur. Le lien original reste disponible si l’intégration est bloquée.</p>'
   +'<p class="agenda-footnote">Mon Sport affiche uniquement les titres, dates, sources et liens. Le contenu intégral appartient à son éditeur.</p></section>';
 }
 // Lecture intégrée des posts : aucun iframe externe, pas de sortie obligatoire vers X.
-export function mountNewsFrames(){}
+// Intégration officielle X : chargement explicite à l'ouverture, pas de copie hébergée du post.
+let xWidgetPromise=null;
+function loadXWidgets(){
+ if(typeof document==='undefined'||typeof window==='undefined')
+  return Promise.reject(new Error('Document indisponible'));
+ if(window.twttr?.widgets?.createTweet)return Promise.resolve(window.twttr);
+ if(xWidgetPromise)return xWidgetPromise;
+ xWidgetPromise=new Promise((resolve,reject)=>{
+  const script=document.createElement('script');
+  script.src='https://platform.twitter.com/widgets.js';
+  script.async=true;script.charset='utf-8';
+  const timeout=setTimeout(()=>reject(new Error('Lecteur X indisponible')),10000);
+  script.onload=()=>{
+   clearTimeout(timeout);
+   if(window.twttr?.widgets?.createTweet)resolve(window.twttr);
+   else reject(new Error('Lecteur X non initialisé'));
+  };
+  script.onerror=()=>{clearTimeout(timeout);reject(new Error('Chargement X bloqué'));};
+  document.head.appendChild(script);
+ }).catch(error=>{xWidgetPromise=null;throw error;});
+ return xWidgetPromise;
+}
+export function mountNewsFrames(root){
+ if(!root||typeof window==='undefined')return;
+ root.querySelectorAll('details.news-post-card[data-x-post-id]').forEach(card=>{
+  card.addEventListener('toggle',async()=>{
+   if(!card.open)return;
+   const panel=card.querySelector('.jsm-official-embed');
+   if(!panel||panel.dataset.status==='loaded'||panel.dataset.status==='loading')return;
+   const id=card.dataset.xPostId;
+   const fallback=card.querySelector('.jsm-embed-fallback');
+   const status=panel.querySelector('.jsm-embed-status');
+   if(!/^\d{16,20}$/.test(String(id||'')))return;
+   panel.dataset.status='loading';
+   if(status)status.textContent='Chargement de la publication complète depuis X…';
+   try{
+    const twitter=await loadXWidgets();
+    if(!panel.isConnected)return;
+    const embedded=await Promise.race([
+     twitter.widgets.createTweet(id,panel,{theme:'dark',lang:'fr',dnt:true,align:'center'}),
+     new Promise((_,reject)=>setTimeout(()=>reject(new Error('Délai dépassé')),12000))
+    ]);
+    if(!panel.isConnected)return;
+    if(!embedded)throw new Error('Post non intégrable');
+    panel.dataset.status='loaded';
+    if(status)status.remove();
+   }catch{
+    if(!panel.isConnected)return;
+    panel.dataset.status='failed';
+    if(status)status.textContent='Le lecteur officiel X ne peut pas afficher ce post dans Mon Sport.';
+    if(fallback)fallback.hidden=false;
+   }
+  });
+ });
+}
 
 // Sources complémentaires directes : annonces ESPN avec description officielle.
 // Ce repli fonctionne même si le Cloudflare Worker n'a pas encore reçu

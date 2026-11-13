@@ -797,13 +797,15 @@ test('Jeu, set et maths : lecture intégrée sans redirection obligatoire vers X
  const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
   esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
   safeUrl:x=>x,photos:{}});
- assert.match(html,/<details class="news-card news-post-card">/);
+ assert.match(html,/<details class="news-card news-post-card" data-x-post-id="2120668453770305629">/);
  assert.match(html,/<summary class="news-post-summary">/);
- assert.match(html,/Voir le post dans Mon Sport/);
- assert.match(html,/class="jsm-reader-image"/);
- assert.match(html,/class="news-excerpt"/);
- assert.match(html,/Visuel indisponible depuis la source X/);
- assert.match(html,/Voir la publication originale sur X/);
+ assert.match(html,/Lire la publication complète ici/);
+ assert.match(html,/data-x-post-id="2120668453770305629"/);
+ assert.match(html,/class="jsm-official-embed"/);
+ assert.match(html,/Ouvre ce post pour charger son contenu original ici/);
+ assert.match(html,/Le contenu complet ne peut pas être affiché ici/);
+ assert.match(html,/Ouvrir le post original si nécessaire/);
+ assert.doesNotMatch(html,/class="jsm-reader-image"/);
  assert.doesNotMatch(html,/<iframe/);
  assert.doesNotMatch(html,/class="news-plain-link"[^>]*href="https:\/\/x\.com/);
 });
@@ -817,4 +819,16 @@ test('Autres médias : conserver la carte de lien éditeur classique',()=>{
  assert.match(html,/class="news-card news-link-card"/);
  assert.match(html,/Lire l’article chez l’éditeur/);
  assert.doesNotMatch(html,/class="news-post-card"/);
+});
+
+test('le lecteur complet charge le widget X officiel uniquement au dépliage',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const source=await readFile(new URL('../news-view.js',import.meta.url),'utf8');
+ assert.match(source,/platform\.twitter\.com\/widgets\.js/);
+ assert.match(source,/twitter\.widgets\.createTweet\(id,panel/);
+ assert.match(source,/theme:'dark',lang:'fr',dnt:true/);
+ assert.match(source,/if\(!card\.open\)return/);
+ assert.match(source,/if\(!panel\.isConnected\)return/);
+ assert.match(source,/panel\.dataset\.status='failed'/);
+ assert.doesNotMatch(source,/script\.src='https:\/\/x\.com/);
 });

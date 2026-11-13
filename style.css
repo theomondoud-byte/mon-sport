@@ -834,3 +834,13 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .jsm-reader-image{max-height:70vh}
 }
 @media(prefers-reduced-motion:reduce){.news-expand-chevron{transition:none}}
+
+/* V15.2 — post original intégré via le widget officiel X, à la demande. */
+.jsm-official-embed{width:100%;max-width:580px;min-width:0;margin:0 auto;min-height:40px}
+.jsm-official-embed iframe{max-width:100%!important}
+.jsm-embed-status,.jsm-embed-fallback{font-size:.83rem;line-height:1.5;color:#c7dbe3}
+.jsm-embed-status{margin:8px auto;text-align:center}
+.jsm-embed-fallback{padding:10px;background:#263e50;border-radius:9px}
+.jsm-embed-fallback[hidden]{display:none}
+.jsm-embed-fallback .news-excerpt{margin:6px 0}
+@media(max-width:550px){.jsm-official-embed{width:100%}.jsm-embed-status{font-size:.75rem}}
