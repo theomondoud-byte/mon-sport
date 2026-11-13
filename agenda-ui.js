@@ -1,11 +1,11 @@
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=13.0.0';
-import {auditInfo} from './audit-2026.js?v=13.0.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=13.0.0';
-import {renderFavoriteStats} from './stats-view.js?v=13.0.0';
-import {photoInitials} from './photos.js?v=13.0.0';
-import {nextCompetitionNote} from './verified-program.js?v=13.0.0';
-import {coverageFor} from './coverage-v11.js?v=13.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=14.0.0';
+import {auditInfo} from './audit-2026.js?v=14.0.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=14.0.0';
+import {renderFavoriteStats} from './stats-view.js?v=14.0.0';
+import {photoInitials} from './photos.js?v=14.0.0';
+import {nextCompetitionNote} from './verified-program.js?v=14.0.0';
+import {coverageFor} from './coverage-v11.js?v=14.0.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
