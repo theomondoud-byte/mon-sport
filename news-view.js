@@ -1,6 +1,6 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=15.4.0';
-// Mon Sport V15.4 — posts de tennis natifs, sans iframe X et sans « Voir plus ».
+import {filterSportsNews} from './sports-articles.js?v=15.5.0';
+// Mon Sport V15.5 — posts tennis natifs, adaptés au téléphone et aux listes multilignes.
 const HOUR=3600000;
 const DAY=24*HOUR;
 export function newsLastWeek(items,now=new Date()){
