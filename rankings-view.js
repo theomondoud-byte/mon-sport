@@ -304,6 +304,50 @@ export function rankingEntry(id,name,live={}){
  return rankingRows(id,live).find(x=>norm(x.name)===norm(name)||
   (knownTeams[name]||[]).some(alias=>norm(x.name)===norm(alias)))||null;
 }
+// Colonnes spécifiques à chaque sport : ESPN pour football/NBA, ITTF pour tennis de table.
+export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
+ const nba=!!spec.west,tableTennis=spec.id==='wtt',mode=tableTennis?'tabletennis':nba?'nba':'football';
+ const blank=value=>value===undefined||value===null||value===''||value==='-'?'—':String(value);
+ const cell=(value,extra='',hint='')=>'<span class="rank-data '+extra+'"'+(hint?' title="'+esc(hint)+'"':'')+'>'+esc(blank(value))+'</span>';
+ const pct=value=>{
+  const number=Number(value);
+  return value==null||value===''||!Number.isFinite(number)||number<0||number>1?'—':
+   new Intl.NumberFormat('fr-FR',{style:'percent',minimumFractionDigits:1,maximumFractionDigits:1}).format(number);
+ };
+ const pctCell=value=>cell(pct(value),'rank-percent','Pourcentage de victoires');
+ const streak=value=>{const v=String(value||'');return /^W\d+$/i.test(v)?'V'+v.slice(1):/^L\d+$/i.test(v)?'D'+v.slice(1):v;};
+ const head=tableTennis?['#','Joueur','Pts']:
+  nba?['#','Équipe','V','D','%','Écart','Série','10 der.','Dom.','Ext.','PP/m','PA/m','Diff./m']:
+  ['#','Club','J','V','N','D','BP','BC','Diff.','Pts','Δ rang'];
+ const logo=r=>/^https:\/\//i.test(r.logo||'')
+  ?'<img class="standings-team-logo" loading="lazy" decoding="async" src="'+esc(safeUrl(r.logo))+'" alt="" />':'';
+ const cards=rows.map(row=>{
+  const fav=matchRankingFavorite(row.name,favorites);
+  const name=fav?'<button type="button" class="rank-favorite-link" data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Favoris">'+esc(row.name)+'</button>':esc(row.name);
+  const who='<span class="rank-person">'+logo(row)+name+'</span>';
+  if(tableTennis)return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who+cell(row.points,'rank-number')+'</div>';
+  if(nba)return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who
+   +cell(row.wins,'rank-number')+cell(row.losses,'rank-number')+pctCell(row.pct)
+   +cell(row.gamesBehind,'rank-number')+cell(streak(row.streak),'rank-streak')
+   +cell(row.lastTen,'rank-number')+cell(row.home,'rank-number')+cell(row.away,'rank-number')
+   +cell(row.avgPointsFor,'rank-number')+cell(row.avgPointsAgainst,'rank-number')
+   +cell(row.avgDiff,'rank-number')+'</div>';
+  const n=Number(row.rankChange),valid=row.rankChange!==''&&row.rankChange!=null&&Number.isFinite(n);
+  const movement=valid&&n!==0?' <span class="rank-movement '+(n>0?'up':'down')+'">'+
+   (n>0?'▲ ':'▼ ')+Math.abs(n)+'</span>':valid?'▬':'—';
+  return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who
+   +cell(row.played,'rank-number')+cell(row.wins,'rank-number')+cell(row.draws,'rank-number')
+   +cell(row.losses,'rank-number')+cell(row.goalsFor,'rank-number')+cell(row.goalsAgainst,'rank-number')
+   +cell(row.diff,'rank-number')+cell(row.points,'rank-number rank-points-highlight')
+   +'<span class="rank-data rank-number">'+movement+'</span></div>';
+ }).join('');
+ const captions=tableTennis?['Rang','Joueur','Points']:nba?head:head;
+ return '<div class="rank-horizontal-hint">↔ Glisse horizontalement pour afficher toutes les statistiques.</div>'
+  +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Tableau détaillé '+esc(spec.title)+' ; défilement horizontal">'
+  +'<div class="rank-table standings-table standings-'+mode+'">'
+  +'<div class="rank-table-head standings-row">'+captions.map((label,i)=>'<span class="'+(i===0?'rank-place':i===1?'rank-person':'')+'">'+esc(label)+'</span>').join('')+'</div>'
+  +cards+'</div></div>';
+}
 export function renderRankingsView({selected='atp',live={},favorites=[],loading=false,ageMax='',country='',esc,safeUrl}){
  const spec=RANKINGS.find(r=>r.id===selected)||RANKINGS[0];
  const rows=rankingRows(spec.id,live);
@@ -434,9 +478,14 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
     +'</div>'+cards+'</div></div>'
    :tennisColumns
    ?'<p class="rank-horizontal-hint">↔ Fais défiler le tableau vers la droite pour voir les projections.</p><div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : défilement horizontal"><div class="rank-table tennis-rank-table"><div class="rank-table-head tennis-rank-row"><span>Rang</span><span>Joueur · variation</span><span>Officiels</span><span>Live</span><span>Δ pts</span><span>Tournoi en cours</span><span>Prochain</span><span>Maximum</span></div>'+cards+'</div></div>'
-   :'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>')
+   :renderOtherRankingTable({spec,rows:displayedRows,favorites,esc,safeUrl}))
   :rows.length&&filterEnabled?'<div class="agenda-empty"><h3>Aucun joueur ne correspond aux filtres</h3><p>Choisis un autre âge ou une autre nationalité, ou efface les filtres.</p></div>'
    :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
+  +(spec.mode==='espn'?'<p class="agenda-footnote">'+(spec.west
+    ?'NBA Ouest : V/D, pourcentage, écart au leader, série, dix derniers matchs, bilan domicile/extérieur, points marqués/encaissés et différence moyenne par match, selon ESPN. '
+    :'Football : J, V, N, D, buts pour/contre, différence, points et variation de rang, selon ESPN. ')
+    +'« — » signifie que la statistique n’est pas fournie par la source. Statistiques actualisées depuis ESPN ; horodatage de la consultation affiché ci-dessus.</p>':'')
+  +(spec.id==='wtt'?'<p class="agenda-footnote">Tennis de table : relevé daté, limité aux joueurs vérifiés. Sans source récente complémentaire, aucun rang ni évolution fictif.</p>':'')
   +(tennisLive?'<p class="agenda-footnote">'+esc(spec.title)+' : relevé du '+esc(asOf||'non communiqué')
     +' sur '+esc(spec.source)+'. Tournoi en cours et tournoi précédent sont deux colonnes distinctes. '
     +'Lorsque la source ne mentionne pas de tournoi précédent, un ancien tournoi observé par Mon Sport dans les 14 derniers jours peut apparaître avec l’étiquette « Observé récemment ». '
