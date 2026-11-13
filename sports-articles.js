@@ -1,3 +1,4 @@
+import {sourceImage} from './sports-media.js?v=14.0.0';
 // FFL (Fédération française de la Lose) : articles de sport uniquement.
 // WordPress REST expose titre, date et URL; pas de copie intégrale des articles.
 export const FFL_HOME='https://fflose.com/';
@@ -15,8 +16,8 @@ export function isSportsArticle(article){
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
 export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
  const endpoints=[
-  'https://fflose.com/wp-json/wp/v2/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug',
-  'https://public-api.wordpress.com/wp/v2/sites/fflose.com/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug'
+  'https://fflose.com/wp-json/wp/v2/posts?per_page=40&_embed=1&_fields=date,date_gmt,link,title,excerpt,slug,jetpack_featured_media_url,_embedded',
+  'https://public-api.wordpress.com/wp/v2/sites/fflose.com/posts?per_page=40&_embed=1&_fields=date,date_gmt,link,title,excerpt,slug,jetpack_featured_media_url,_embedded'
  ];
  let posts=null;
  for(const endpoint of endpoints){
@@ -38,7 +39,7 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
      title:{rendered:i.title||''},date_gmt:(()=>{
       const time=Date.parse(i.pubDate||'');
       return Number.isFinite(time)?new Date(time).toISOString().replace(/Z$/,''):'';})(),
-     link:i.link,excerpt:{rendered:i.description||''}
+     link:i.link,thumbnail:i.thumbnail||i.enclosure?.link||'',excerpt:{rendered:i.description||''}
     }));
    }
   }catch{}
@@ -52,8 +53,11 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
   const title=clean(p.title?.rendered||p.title);
   const link=p.link;
   if(!/^https:\/\/fflose\.com\//.test(String(link||'')))return null;
+  const media=p._embedded?.['wp:featuredmedia']?.[0];
+  const image=sourceImage(media?.media_details?.sizes?.thumbnail?.source_url||media?.source_url||
+   p.jetpack_featured_media_url||p.thumbnail||p.enclosure?.link);
   return {title,link,date:new Date(timestamp).toISOString(),source:'FFL',
-   favorite:'FFL',excerpt:clean(p.excerpt?.rendered||'')};
+   favorite:'FFL',image,excerpt:clean(p.excerpt?.rendered||'')};
  }).filter(Boolean).filter(isSportsArticle);
 }
 export function findMatchArticles(item,news=[],now=new Date()){

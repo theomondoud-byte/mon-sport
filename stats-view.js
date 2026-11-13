@@ -1,8 +1,8 @@
 // Mon Sport V13 : statistiques publiées par les fournisseurs, pas de calcul
 // à partir de l'historique incomplet. Rangs ATP/WTA/Race/WTT DATÉS.
-import {profileFor} from './sports-profiles.js?v=13.0.0';
-import {auditInfo} from './audit-2026.js?v=13.0.0';
-import {RANKINGS,rankingForFavorite,rankingsForFavorite,rankingEntry,RANKING_DATE} from './rankings-view.js?v=13.0.0';
+import {profileFor} from './sports-profiles.js?v=14.0.0';
+import {auditInfo} from './audit-2026.js?v=14.0.0';
+import {RANKINGS,rankingForFavorite,rankingsForFavorite,rankingEntry,RANKING_DATE} from './rankings-view.js?v=14.0.0';
 const fmt=s=>new Date(s).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
 const tile=(label,value,subtitle='',esc=s=>s)=>'<div class="stat-tile"><b>'+esc(String(value))+'</b><span>'+esc(label)+'</span>'
  +(subtitle?'<small>'+esc(subtitle)+'</small>':'')+'</div>';

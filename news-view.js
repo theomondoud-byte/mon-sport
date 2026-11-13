@@ -1,4 +1,5 @@
-import {filterSportsNews} from './sports-articles.js?v=13.0.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
+import {filterSportsNews} from './sports-articles.js?v=14.0.0';
 // Mon Sport V9 — dernières 7 journées, lecture à l'intérieur de la PWA.
 // Un titre RSS et un extrait librement fourni ne sont PAS un article intégral.
 // L'iframe de l'éditeur est tentée au clic ; l'éditeur peut refuser l'intégration.
@@ -20,7 +21,7 @@ export function safeExcerpt(value){
   .replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'")
   .replace(/\s+/g,' ').trim().slice(0,600);
 }
-export function renderNewsView({news=[],loading=false,hasWorker=false,esc,safeUrl,now=new Date()}){
+export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date()}){
  const recent=newsLastWeek(news,now);
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span>'
   +'<h2>Articles sportifs · favoris et FFL</h2>'
@@ -31,11 +32,15 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,esc,safeUr
   const link=safeUrl(n.link);
   if(link==='#')return '';
   const published=new Date(n.date||n.published).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  const sport=sportInfo(n.sport,n.favorite,n.title,n.excerpt);
+  const image=sourceImage(n.image)||sourceImage(photos?.[n.favorite]?.src);
+  const picture=image?'<span class="article-visual"><img class="article-thumb-image" loading="lazy" decoding="async" src="'+esc(image)+'" alt="" /><span class="article-image-fallback" aria-hidden="true">'+sport.icon+'</span></span>'
+   :'<span class="article-visual article-visual-empty" aria-hidden="true">'+sport.icon+'</span>';
   return '<article class="news-card news-link-card"><a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" class="news-plain-link">'
-    +'<div class="news-card-top"><span class="agenda-favorite">'+esc(n.favorite||'Sport')+'</span>'
-    +'<span class="news-date">'+esc(published)+'</span></div>'
+    +picture+'<span class="news-text"><span class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
+    +'<span class="news-date">'+esc(published)+'</span></span>'
     +'<h3>'+esc(n.title)+'</h3><p class="news-source">'+esc(n.source||'Éditeur')+'</p>'
-    +'<span class="news-tap">Lire l’article chez l’éditeur ↗</span></a></article>';
+    +'<span class="news-tap">Lire l’article chez l’éditeur ↗</span></span></a></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article récent</h3><p>Les articles plus anciens que sept jours sont masqués.</p></div>')
@@ -78,7 +83,9 @@ export async function fetchSportsNews(favorites,now=new Date()){
    const text=normalized(title+' '+description);
    const fav=favorites.find(f=>aliases(f.name).some(alias=>alias.length>3&&text.includes(alias)));
    if(!fav||!/^https?:\/\//.test(link))return null;
-   return {title,link,date,source:'ESPN',favorite:fav.name,excerpt:description};
+   const image=(a.images||a.image||[]);
+   const editorial=Array.isArray(image)?image.find(v=>v?.url||v?.href):image;
+   return {title,link,date,source:'ESPN',favorite:fav.name,sport:fav.sport,excerpt:description,image:sourceImage(editorial?.url||editorial?.href||editorial)};
   }).filter(Boolean);
  }));
  return newsLastWeek(settled.flatMap(x=>x.status==='fulfilled'?x.value:[]),now);

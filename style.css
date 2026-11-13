@@ -375,3 +375,40 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .rank-points{font-size:.8rem}
  .rankings-source{align-items:flex-start}
 }
+
+/* V14 : indication réseau lisible sans bloquer les écrans en cache. */
+.connection-notice{margin:8px 0 12px;padding:10px 13px;border:1px solid #bd9561;border-radius:10px;background:#342a1d;color:#ffe4b8;font-size:.85rem;line-height:1.4}
+
+/* V14 : rangs détaillés, mouvements hebdomadaires et pictogrammes mobiles */
+.rank-movement{display:inline-block;vertical-align:middle;margin-left:7px;padding:2px 5px;border-radius:6px;font-size:.67rem;font-weight:850}
+.rank-movement.up{background:#164b37;color:#a7ffd3}
+.rank-movement.down{background:#603035;color:#ffd0d0}
+.rank-movement.flat{background:#233d4b;color:#b7cbd4}
+.rank-extras{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px;color:#bfdbe5;font-size:.7rem;font-weight:450}
+.rank-extras>span:not(:last-child){border-right:1px solid #507183;padding-right:7px}
+.rank-live-details{margin-top:7px;font-size:.75rem;font-weight:450;line-height:1.6;border-top:1px dashed #4d7180;padding-top:5px}
+.rank-live-details summary{cursor:pointer;color:#a5f7d3;font-weight:700;min-height:24px}
+.rank-live-details>div{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.rank-live-details>div>b{font-weight:750;text-align:right;color:#edf9f6}
+.rank-live-details>p{margin:6px 0;color:#bad0d8;font-size:.7rem}
+.agenda-person-tag.compact{display:inline-flex;align-items:center;gap:3px;padding:2px 4px}
+.event-sport-icon{display:inline-flex;align-items:center;justify-content:center;min-width:21px;height:21px;font-size:1rem}
+.news-link-card .news-plain-link{display:flex;align-items:stretch;gap:12px;padding:11px;text-decoration:none}
+.news-link-card .news-text{display:block;min-width:0;flex:1}
+.article-visual{width:94px;min-width:94px;min-height:91px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px;overflow:hidden;background:#214457;font-size:2.1rem}
+.article-thumb-image{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.article-image-fallback{display:none}
+.article-visual.image-failed .article-thumb-image{display:none}
+.article-visual.image-failed .article-image-fallback{display:block}
+.news-sport{display:inline-flex;align-items:center;gap:3px;padding:4px 7px;border-radius:8px;background:#245467;color:#e4fcf9;font-size:.72rem;font-weight:800}
+.news-link-card .news-card h3{margin:8px 0}
+.news-link-card .news-date{font-size:.7rem}
+.news-plain-link:focus-visible{outline:3px solid #a3daff;outline-offset:-3px}
+@media(max-width:550px){
+ .news-link-card .news-plain-link{gap:9px;padding:9px}
+ .article-visual{width:75px;min-width:75px;min-height:75px}
+ .news-card h3{font-size:.94rem;margin:7px 0}
+ .rank-live-details>div{flex-wrap:wrap}
+}
+
+.rank-player-photo{display:inline-block;width:28px;height:28px;object-fit:cover;border-radius:50%;vertical-align:middle;margin-right:6px;background:#315265;border:1px solid #456f7e}
