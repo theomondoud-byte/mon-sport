@@ -46,6 +46,16 @@ const WTT=fromTuple([
 export const SNAPSHOTS={atprace:ATPRACE,wtarace:WTA,nextgen:NEXTGEN,wtt:WTT};
 const TENNIS_API='https://site.api.espn.com/apis/site/v2/sports/tennis/';
 const cache=new Map();
+// Le classement consulté peut être relu hors connexion, toujours accompagné de sa date.
+function savedRanking(id){
+ try{
+  const v=JSON.parse(localStorage.getItem('monsport-ranking-v14-'+id)||'null');
+  return v&&Array.isArray(v.rows)&&v.rows.length&&Number.isFinite(Date.parse(v.asOf))?v:null;
+ }catch{return null;}
+}
+function storeRanking(id,value){
+ try{localStorage.setItem('monsport-ranking-v14-'+id,JSON.stringify(value));}catch{}
+}
 const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[^a-z0-9]/g,' ').trim().replace(/\s+/g,' ');
 const knownTeams={
@@ -169,8 +179,12 @@ export async function fetchRankings({fetchFn=fetch,force=false}={}){
    if(!data.length)throw Error('Tableau vide');
    const value={rows:data,asOf:new Date().toISOString(),live:true,
     kind:spec.mode==='tennis-espn'?'published':'standings'};
-   cache.set(spec.id,{result:value,at:Date.now()});result[spec.id]=value;
-  }catch(e){result[spec.id]={rows:[],error:'Classement indisponible depuis ESPN.',live:false};}
+   cache.set(spec.id,{result:value,at:Date.now()});storeRanking(spec.id,value);result[spec.id]=value;
+  }catch(e){
+   const saved=savedRanking(spec.id);
+   result[spec.id]=saved?{...saved,live:false,stale:true,error:'Dernière copie enregistrée · mise à jour indisponible'}
+    :{rows:[],error:'Classement indisponible depuis ESPN.',live:false};
+  }
  }));
  return result;
 }
@@ -186,8 +200,11 @@ export function rankingEntry(id,name,live={}){
 export function renderRankingsView({selected='atp',live={},favorites=[],loading=false,esc,safeUrl}){
  const spec=RANKINGS.find(r=>r.id===selected)||RANKINGS[0];
  const rows=rankingRows(spec.id,live);
+ const saved=live[spec.id];
+ const asOf=saved?.asOf?new Date(saved.asOf).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
  const label=spec.mode==='snapshot'?'Relevé du 9 novembre 2026 · pas en direct'
-  :live[spec.id]?.live?(spec.mode==='tennis-espn'?'Classement hebdomadaire ESPN consulté · pas un calcul live':'Classement ESPN consulté récemment')
+  :saved?.stale?'Copie enregistrée le '+asOf+' · peut être périmée'
+  :saved?.live?(spec.mode==='tennis-espn'?'Classement ATP/WTA ESPN consulté le '+asOf+' · pas un calcul live':'Classement ESPN consulté le '+asOf)
   :'Classement non disponible depuis la source';
  const nav='<div class="rank-tabs" role="group" aria-label="Types de classements">'+RANKINGS.map(r=>
   '<button type="button" data-rank-select="'+esc(r.id)+'" class="'+(r.id===spec.id?'selected':'')+'" aria-pressed="'+(r.id===spec.id?'true':'false')+'">'+esc(r.title)+'</button>').join('')+'</div>';
