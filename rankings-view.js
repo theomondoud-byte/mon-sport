@@ -234,7 +234,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    +'<div>Tournoi en cours : <b>'+esc(r.tournament||'Non communiqué')+'</b></div>'
    +'<div>Points après prochaine victoire : <b>'+(r.nextPoints??'Non disponible')+'</b></div>'
    +'<div>Maximum possible : <b>'+(r.maxPoints??'Non disponible')+'</b></div>'
-   +'<p>Les projections de tournoi nécessitent un flux ATP live distinct : aucune valeur n’est estimée.</p></details>':'';
+   +'<p>Les projections de tournoi nécessitent un flux ATP live distinct : aucune valeur n’est estimée. <a href="'+esc(safeUrl(spec.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a></p></details>':'';
   return '<div class="rank-row '+(clickable?'rank-tracked':'')+'"><span class="rank-place">'+esc(number)+'</span>'
    +'<span class="rank-person">'+portrait+name+movement+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+tennisDetail+liveDetail+'</span>'
    +'<b class="rank-points">'+esc(r.points||'—')+'</b></div>';
