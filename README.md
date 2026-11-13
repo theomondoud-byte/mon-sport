@@ -1,3 +1,13 @@
+## V14.2 — Tableau ATP live en colonnes
+
+- Navigation : `Semaine` devient **Résultats** ; `Un favori` devient **Favoris** ; l'ancien onglet de gestion `Favoris` devient **Gérer mes suivis**.
+- ATP et WTA : présentation en **8 colonnes** (rang, joueur, points officiels, points live, variation nette de points, tournoi, prochain match, maximum) dans un tableau à défilement horizontal sur téléphone, sans fiche de détail à ouvrir.
+- ATP : les colonnes live, tournoi, prochain et maximum sont alimentées depuis un relevé public de **live-tennis.eu**, validé pour les 150 premières places, puis rapproché des joueurs du classement hebdomadaire ESPN. Si une valeur n'est pas fournie, un tiret est affiché (pas un calcul fictif).
+- La colonne **Δ pts** est la variation **nette** entre le classement officiel et le relevé live, comprenant potentiellement les retraits de points de la semaine : ce n'est **pas** le seul nombre de points gagnés dans le tournoi.
+- WTA : top 150 officiel conservé, données live supplémentaires non alimentées.
+- Actualisation automatique via GitHub Actions toutes les six heures, avec contrôle strict de la structure et de la cohérence du top 150. Dernier relevé disponible dans `data/atp-live.json`, horodaté. Si la source devient inaccessible, on garde les valeurs officielles, sans afficher de projections périmées.
+- Le collecteur utilise des données publiques, avec un lien vers la source visible dans l'application. Toute modification de structure ou d'accès du site peut nécessiter une adaptation du collecteur.
+
 # Mon Sport V14 — fiabilité, hors connexion et tests
 
 > Version en préparation sur la branche `feat/v14-fiabilite-tests-ergonomie`. La version publique reste inchangée jusqu'à validation de la pull request.
