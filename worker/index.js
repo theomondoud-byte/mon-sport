@@ -21,7 +21,7 @@ const RSS_FEEDS=[
 ];
 function xmlValue(xml,names){
  for(const name of names){
-  const escaped=name.replace(/[.*+?^${}()|[\]\\]/g,'\\async function team(name){');
+  const escaped=name;
   const match=xml.match(new RegExp('<'+escaped+'(?:\\s[^>]*)?>([\\s\\S]*?)<\\/'+escaped+'>','i'));
   if(match)return decode(match[1].replace(/<[^>]+>/g,' ')).replace(/\\s+/g,' ').trim();
  }
