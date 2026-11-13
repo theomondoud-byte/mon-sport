@@ -1,5 +1,5 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=15.5.0';
+import {filterSportsNews} from './sports-articles.js?v=15.6.0';
 // Mon Sport V15.6 — dernières publications tennis intégrées au chargement Android.
 const HOUR=3600000;
 const DAY=24*HOUR;
