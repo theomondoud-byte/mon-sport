@@ -1,3 +1,16 @@
+# Mon Sport V15.1 — consulter « Jeu, set et maths » dans l’application
+
+Les publications publiques récentes de **Jeu, set et maths** s'ouvrent maintenant directement dans le fil **Articles**, sans renvoi automatique vers X. Il suffit de toucher leur carte pour déplier un lecteur intégré comprenant le court extrait de la publication, sa date et **son visuel de statistiques agrandi** lorsque le compte en a publié un.
+
+- Les cartes conservent les autres articles FFL et ESPN avec leur fonctionnement classique.
+- Les visuels chargent uniquement à l'ouverture du lecteur ; un message est affiché lorsqu'un média X ne répond pas.
+- Les posts s'ouvrent sans iframe, sans connexion obligatoire à X, et le lien **« Voir la publication originale sur X »** reste accessible mais facultatif.
+- L'application conserve la publication source et son attribution ; les posts longs n'y sont pas copiés intégralement, seuls les courts extraits et les visuels disponibles sont présentés.
+- La collecte existante des publications des sept derniers jours demeure inchangée, avec mises à jour planifiées et filtrage de provenance.
+- La PWA est versionnée **V15.1** pour que le nouveau lecteur arrive dans le cache Android.
+
+---
+
 # Mon Sport V15.0 — stabilité des écrans, Jeu Set et Maths et match NBA unique
 
 ## Plus jamais d'écran de démarrage forcé pendant la consultation d'un joueur
