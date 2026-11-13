@@ -1,5 +1,5 @@
 // V15.9 : tri chronologique, filtres sources et lecture intégrée.
-const CACHE = 'mon-sport-v15-9';
+const CACHE = 'mon-sport-v16-0';
 const ASSETS = [
   './',
   './index.html',
@@ -18,7 +18,7 @@ const ASSETS = [
   './match-details.js?v=14.0.0',
   './sports-profiles.js?v=14.0.0',
   './event-details.js?v=15.0.0',
-  './news-view.js?v=15.9.0',
+  './news-view.js?v=16.0.0',
   './verified-program.js?v=14.0.0',
   './verified-extra-v11.js?v=14.0.0',
   './coverage-v11.js?v=14.0.0',
