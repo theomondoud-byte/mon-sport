@@ -186,7 +186,41 @@ export async function fetchRankings({fetchFn=fetch,force=false}={}){
     :{rows:[],error:'Classement indisponible depuis ESPN.',live:false};
   }
  }));
+ // Enrichissement indépendant : ne pas substituer des chiffres non vérifiés.
+ if(result.atp?.rows?.length){
+  try{
+   const response=await fetchFn('./data/atp-live.json',{cache:'no-store',signal:AbortSignal.timeout(7000)});
+   if(response.ok){
+    const payload=await response.json();
+    const joined=mergeATPLiveRows(result.atp.rows,payload);
+    if(joined.matched>=100)result.atp={...result.atp,rows:joined.rows,
+     liveFeedAsOf:joined.asOf,liveFeedSource:payload.source,liveFeedMatched:joined.matched};
+   }
+  }catch{/* Continuer avec les points officiels si la source ATP live est indisponible. */}
+ }
  return result;
+}
+// Relevé indépendant et daté : la liste hebdomadaire ESPN reste la référence.
+export function mergeATPLiveRows(officialRows,payload,now=new Date()){
+ const asOf=Date.parse(payload?.fetchedAt||''),age=now.getTime()-asOf;
+ if(!Number.isFinite(asOf)||age<0||age>36*3600000||!Array.isArray(payload?.rows)||payload.rows.length<140)
+  return {rows:officialRows,asOf:null,matched:0};
+ const lookup=new Map();
+ for(const r of payload.rows)if(r.name&&Number.isInteger(r.livePoints)&&r.livePoints>=0&&Number.isInteger(r.rank)&&r.rank>0)
+  lookup.set(norm(r.name),r);
+ let matched=0;
+ const rows=officialRows.map(row=>{
+  const other=lookup.get(norm(row.name));
+  if(!other)return row;
+  matched++;
+  const projected=v=>Number.isInteger(v)&&v>=0?v:null;
+  return {...row,liveRank:other.rank,livePoints:other.livePoints,
+   movementLive:Number.isInteger(other.movement)?other.movement:null,
+   pointsChange:Number.isInteger(other.pointsChange)?other.pointsChange:null,
+   tournament:String(other.tournament||'').slice(0,120),
+   nextPoints:projected(other.nextPoints),maxPoints:projected(other.maxPoints)};
+ });
+ return {rows,asOf:payload.fetchedAt,matched};
 }
 export function rankingRows(id,live={}){
  const data=live?.[id];
