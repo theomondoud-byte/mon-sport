@@ -1,8 +1,6 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
 import {filterSportsNews} from './sports-articles.js?v=15.0.0';
-// Mon Sport V9 — dernières 7 journées, lecture à l'intérieur de la PWA.
-// Un titre RSS et un extrait librement fourni ne sont PAS un article intégral.
-// L'iframe de l'éditeur est tentée au clic ; l'éditeur peut refuser l'intégration.
+// Mon Sport V15.4 — posts de tennis natifs, sans iframe X et sans « Voir plus ».
 const HOUR=3600000;
 const DAY=24*HOUR;
 export function newsLastWeek(items,now=new Date()){
@@ -25,7 +23,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  const recent=newsLastWeek(news,now);
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span>'
   +'<h2>Articles et posts sportifs · favoris, FFL et Jeu, set et maths</h2>'
-  +'<p>Sept derniers jours · les publications X apparaissent directement dans le fil. « Voir plus » les agrandit ici.</p>'
+  +'<p>Sept derniers jours · publications de tennis affichées ici avec leur texte et leurs médias, sans fenêtre X.</p>'
   +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Actualités FFL ↗</a>'
   +'<a class="news-ffl-link" href="https://x.com/JeuSetMaths" target="_blank" rel="noopener noreferrer">Posts de Jeu, set et maths ↗</a></div>'
   +'<div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Derniers 7 jours</span></div>';
@@ -37,19 +35,28 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
   const image=sourceImage(n.image)||sourceImage(photos?.[n.favorite]?.src);
   const picture=image?'<span class="article-visual"><img class="article-thumb-image" loading="lazy" decoding="async" src="'+esc(image)+'" alt="" /><span class="article-image-fallback" aria-hidden="true">'+sport.icon+'</span></span>'
    :'<span class="article-visual article-visual-empty" aria-hidden="true">'+sport.icon+'</span>';
-  // Les publications apparaissent directement dans le fil, avec expansion locale.
+  // Un véritable article natif : pas d'iframe X ni de bouton « Voir plus ».
   if(n.source==='Jeu, set et maths'&&/^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(n.link||'')){
-   const postId=n.link.match(/\/status\/(\d{16,20})$/)?.[1]||'';
-   return '<article class="news-card news-post-card news-x-inline" data-x-post-id="'+esc(postId)+'">'
-    +'<div class="news-x-byline"><span class="news-sport">🎾 Jeu, set et maths</span>'
-    +'<time class="news-date">'+esc(published)+'</time></div>'
-    +'<div class="news-x-viewport" id="news-x-view-'+esc(postId)+'">'
-    +'<div class="jsm-official-embed" data-x-post-id="'+esc(postId)+'" role="region" aria-label="Publication X de Jeu, set et maths">'
-    +'<p class="jsm-embed-status" role="status">Chargement du post directement dans le fil…</p></div>'
-    +'<div class="jsm-embed-fallback" hidden><p>Impossible de charger le post depuis X.</p>'
-    +'<p class="news-excerpt">'+esc(n.title)+'</p></div></div>'
-    +'<button class="news-x-expand" type="button" data-x-expand="'+esc(postId)+'" aria-controls="news-x-view-'+esc(postId)+'" aria-expanded="false">Voir plus <span aria-hidden="true">⌄</span></button>'
-    +'<a class="jsm-original-link" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Publication originale ↗</a>'
+   const fullText=String(n.text||'').trim();
+   const images=(Array.isArray(n.images)&&n.images.length?n.images:n.image?[n.image]:[])
+    .filter(x=>/^https:\/\/pbs\.twimg\.com\/media\//.test(String(x||''))).slice(0,4);
+   const video=/^https:\/\/video\.twimg\.com\/[\w/.-]+\.mp4(?:\?[^\s]*)?$/.test(String(n.video||''))
+    ?n.video:'';
+   const gallery=images.length?'<div class="jsm-native-gallery '+(images.length>1?'multi':'single')+'">'
+    +images.map((url,i)=>'<figure class="jsm-native-figure">'
+      +'<img class="jsm-native-image" loading="lazy" decoding="async" src="'+esc(sourceImage(url))+'" alt="Visuel '+(i+1)+' du post de Jeu, set et maths" />'
+      +'<figcaption class="jsm-native-image-error" hidden>Image indisponible.</figcaption>'
+      +'</figure>').join('')+'</div>':'';
+   const media=video?'<video class="jsm-native-video" controls playsinline preload="none" src="'+esc(video)+'" aria-label="Vidéo du post de Jeu, set et maths"></video>':'';
+   return '<article class="news-card jsm-native-card">'
+    +'<header class="jsm-native-header"><div><span class="jsm-native-avatar" aria-hidden="true">📊</span>'
+    +'<span class="jsm-native-author"><b>Jeu, set et maths</b><small>@JeuSetMaths · 🎾 Tennis</small></span></div>'
+    +'<time class="news-date" datetime="'+esc(n.date||'')+'">'+esc(published)+'</time></header>'
+    +'<p class="jsm-native-text">'+esc(fullText||n.title)+'</p>'
+    +(fullText?'':'<p class="jsm-native-note">Seul le court extrait est actuellement disponible ; le prochain relevé complétera le texte.</p>')
+    +gallery+media
+    +'<footer class="jsm-native-footer"><span>Publication attribuée à Jeu, set et maths</span>'
+    +'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" aria-label="Source originale sur X">Source originale ↗</a></footer>'
     +'</article>';
   }
   return '<article class="news-card news-link-card"><a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" class="news-plain-link">'
@@ -61,85 +68,9 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article récent</h3><p>Les articles plus anciens que sept jours sont masqués.</p></div>')
   +(!hasWorker?'<p class="agenda-footnote">Sources : FFL et ESPN · flux complémentaires via Cloudflare si configuré.</p>':'')
-  +'<p class="agenda-footnote">Les publications X apparaissent dans le fil et « Voir plus » reste sur Mon Sport. Les liens internes du widget officiel peuvent cependant ouvrir X.</p>'
-  +'<p class="agenda-footnote">Mon Sport affiche uniquement les titres, dates, sources et liens. Le contenu intégral appartient à son éditeur.</p></section>';
+  +'<p class="agenda-footnote">Les publications de Jeu, set et maths sont affichées directement dans Mon Sport. Un lien discret permet de retrouver la source ; aucun lecteur X externe n’est nécessaire.</p>'
+  +'<p class="agenda-footnote">Les publications sont créditées à leur auteur. Les autres articles continuent de renvoyer à leur éditeur.</p></section>';
 }
-// Widget X officiel chargé seulement près des cartes visibles dans le fil.
-let xWidgetPromise=null;
-function loadXWidgets(){
- if(typeof document==='undefined'||typeof window==='undefined')
-  return Promise.reject(new Error('Document indisponible'));
- if(window.twttr?.widgets?.createTweet)return Promise.resolve(window.twttr);
- if(xWidgetPromise)return xWidgetPromise;
- xWidgetPromise=new Promise((resolve,reject)=>{
-  const script=document.createElement('script');
-  script.src='https://platform.twitter.com/widgets.js';
-  script.async=true;script.charset='utf-8';
-  const deadline=setTimeout(()=>reject(new Error('Lecteur X indisponible')),10000);
-  script.onload=()=>{
-   clearTimeout(deadline);
-   if(window.twttr?.widgets?.createTweet)resolve(window.twttr);
-   else reject(new Error('Lecteur X non initialisé'));
-  };
-  script.onerror=()=>{clearTimeout(deadline);reject(new Error('Chargement X bloqué'));};
-  document.head.appendChild(script);
- }).catch(error=>{xWidgetPromise=null;throw error;});
- return xWidgetPromise;
-}
-export function mountNewsFrames(root){
- if(!root||typeof window==='undefined')return;
- const cards=[...root.querySelectorAll('article.news-x-inline[data-x-post-id]')];
- if(!cards.length)return;
- const hydrate=async card=>{
-  const panel=card.querySelector('.jsm-official-embed');
-  if(!panel||panel.dataset.status==='loaded'||panel.dataset.status==='loading')return;
-  const id=card.dataset.xPostId;
-  const fallback=card.querySelector('.jsm-embed-fallback');
-  const status=panel.querySelector('.jsm-embed-status');
-  if(!/^\d{16,20}$/.test(String(id||'')))return;
-  panel.dataset.status='loading';
-  if(status)status.textContent='Chargement de la publication depuis X…';
-  try{
-   const twitter=await loadXWidgets();
-   if(!panel.isConnected)return;
-   const embedded=await Promise.race([
-    twitter.widgets.createTweet(id,panel,{theme:'dark',lang:'fr',dnt:true,align:'center'}),
-    new Promise((_,reject)=>setTimeout(()=>reject(new Error('Délai dépassé')),12000))
-   ]);
-   if(!panel.isConnected)return;
-   if(!embedded)throw new Error('Post non intégrable');
-   panel.dataset.status='loaded';
-   if(status)status.remove();
-  }catch{
-   if(!panel.isConnected)return;
-   panel.dataset.status='failed';
-   if(status)status.textContent='X bloque actuellement l’intégration de cette publication.';
-   if(fallback)fallback.hidden=false;
-  }
- };
- for(const card of cards){
-  const toggle=card.querySelector('[data-x-expand]');
-  if(toggle)toggle.addEventListener('click',()=>{
-   const expanded=card.classList.toggle('news-x-expanded');
-   toggle.setAttribute('aria-expanded',String(expanded));
-   toggle.innerHTML=expanded?'Voir moins <span aria-hidden="true">⌃</span>'
-    :'Voir plus <span aria-hidden="true">⌄</span>';
-  });
- }
- if(typeof IntersectionObserver!=='undefined'){
-  const observer=new IntersectionObserver(entries=>{
-   for(const entry of entries){
-    if(!entry.isIntersecting)continue;
-    observer.unobserve(entry.target);
-    hydrate(entry.target);
-   }
-  },{rootMargin:'450px 0px'});
-  for(const card of cards)observer.observe(card);
- }else{
-  for(const card of cards)hydrate(card);
- }
-}
-
 // Sources complémentaires directes : annonces ESPN avec description officielle.
 // Ce repli fonctionne même si le Cloudflare Worker n'a pas encore reçu
 // le champ 'description'. Il n'affiche que les articles citant des favoris.
