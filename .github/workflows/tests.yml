@@ -25,3 +25,25 @@ jobs:
         run: python -m pip install requests beautifulsoup4
       - name: Tests du collecteur ATP live
         run: python -m unittest discover -s tests -p '*_py_test.py'
+      - name: Examiner les champs ESPN reçus (diagnostic V14.7)
+        run: |
+          node --input-type=module <<'NODE'
+          for(const [id,path] of [['ligue1','soccer/fra.1'],['liga','soccer/esp.1'],['ucl','soccer/uefa.champions'],['nba','basketball/nba']]){
+            try {
+              const res=await fetch('https://site.api.espn.com/apis/v2/sports/'+path+'/standings', {signal:AbortSignal.timeout(10000)});
+              const body=await res.json();const groups=[];
+              function visit(v,parent=''){
+                if(!v||typeof v!=='object')return;
+                let name=v.name||v.displayName||parent;
+                let rows=Array.isArray(v.standings?.entries)?v.standings.entries:Array.isArray(v.entries)?v.entries:[];
+                if(rows.length)groups.push({name,count:rows.length,first:rows[0],last:rows[rows.length-1]});
+                for(const child of [...(v.children||[]),...(v.groups||[])])visit(child,name);
+              }
+              visit(body);console.log('ESPN_DIAG',id,'status',res.status,'groups',JSON.stringify(groups.map(g=>({name:g.name,count:g.count}))));
+              for(const group of groups.slice(0,2)){
+                const first=group.first||{};
+                console.log('ESPN_STAT',id,group.name,JSON.stringify({team:first.team?.displayName, stats:first.stats||first.statistics, keys:Object.keys(first)}).slice(0,6000));
+              }
+            } catch(e) {console.log('ESPN_ERROR',id,String(e));}
+          }
+          NODE
