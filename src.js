@@ -3,13 +3,13 @@ import {createOnceLoader} from './session-loader.js?v=14.9.0';
 import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=15.0.0';
 import {renderAgendaView} from './agenda-ui.js?v=15.0.0';
 import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=14.9.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=15.0.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=15.4.0';
 import {fetchAgendaFavorite} from './agenda-fetch.js?v=14.0.0';
 import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=14.0.0';
 import {extraProgramFor} from './verified-program.js?v=14.0.0';
 import {verifiedExtraFor} from './verified-extra-v11.js?v=14.0.0';
 import {coverageFor} from './coverage-v11.js?v=14.0.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,mountNewsFrames} from './news-view.js?v=15.3.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews} from './news-view.js?v=15.4.0';
 import {loadEventDetails,renderEventDetails} from './event-details.js?v=15.0.0';
 import {verified2026For} from './audit-2026.js?v=14.0.0';
 import {renderAudit2026} from './audit-ui.js?v=14.0.0';
@@ -506,7 +506,7 @@ function render(){
   +'<nav class="tabs" aria-label="Navigation principale">'+tabs.map(([id,label])=>
     '<button type="button" data-tab="'+id+'" aria-current="'+(id===active?'page':'false')+'" class="'+(id===active?'active':'')+'">'+label+'</button>').join('')+'</nav>'
   +'<div id="content">'+content()+'</div>'
-  +'<footer class="muted app-footer">Mon Sport V15.3 · Publications X directement dans les actualités</footer></main>';
+  +'<footer class="muted app-footer">Mon Sport V15.4 · Publications de tennis sans fenêtre X</footer></main>';
  document.querySelectorAll('[data-tab]').forEach(el=>el.onclick=()=>{
   active=el.dataset.tab;search='';sportFilter='Tous';render();
   if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded();
@@ -619,17 +619,27 @@ function bindContent(){
  document.querySelectorAll('img.article-thumb-image').forEach(image=>{
   image.addEventListener('error',()=>image.closest('.article-visual')?.classList.add('image-failed'),{once:true});
  });
- document.querySelectorAll('img.jsm-reader-image').forEach(image=>{
-  const fail=()=>image.closest('.jsm-reader-visual')?.classList.add('image-failed');
+ // Les photos d'un post s'affichent comme des médias ordinaires, sans iframe X.
+ document.querySelectorAll('img.jsm-native-image').forEach(image=>{
+  const fail=()=>{
+   image.hidden=true;
+   const label=image.closest('figure')?.querySelector('.jsm-native-image-error');
+   if(label)label.hidden=false;
+  };
   image.addEventListener('error',fail,{once:true});
   if(image.complete&&image.naturalWidth===0)fail();
+ });
+ document.querySelectorAll('video.jsm-native-video').forEach(video=>{
+  video.addEventListener('error',()=>{
+   video.insertAdjacentHTML('afterend','<p class="jsm-native-note">Vidéo temporairement indisponible depuis X.</p>');
+   video.hidden=true;
+  },{once:true});
  });
  // Si une URL Wikimedia ne charge pas, montrer immédiatement les initiales
  // plutôt qu'une image cassée.
  document.querySelectorAll('img.athlete-photo').forEach(img=>{
   img.addEventListener('error',()=>handlePhotoError(img));
  });
- mountNewsFrames(document.querySelector('#content'),safeUrl);
  document.querySelectorAll('[data-rank-select]').forEach(el=>el.onclick=()=>{
   rankingSelected=el.dataset.rankSelect;render();
  });

@@ -10,7 +10,7 @@ export function isSportsArticle(article){
  const title=clean(article.title||'');
  const text=title+' '+clean(article.excerpt||article.description||'');
  if(!title||PEOPLE.test(text))return false;
- if(article.source==='FFL')return true; // FFL : actualités satiriques sportives
+ if(article.source==='FFL'||article.source==='Jeu, set et maths')return true; // Deux éditeurs sportifs spécialisés
  return SPORTS.test(text)||!!article.favorite;
 }
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
@@ -76,11 +76,21 @@ export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date()}={}){
    return time>=cutoff&&time<=now.getTime()+600000&&
     /^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(String(p.link||''))&&
     String(p.title||'').trim().length>10;
-  }).slice(0,25).map(p=>({
-   title:String(p.title).slice(0,180),link:p.link,date:p.date,
-   source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
-   image:sourceImage(p.image)
-  }));
+  }).slice(0,25).map(p=>{
+   const photos=Array.isArray(p.images)?p.images
+    .filter(url=>/^https:\/\/pbs\.twimg\.com\/media\//.test(String(url||'')))
+    .slice(0,4).map(sourceImage).filter(Boolean):[];
+   const fallback=sourceImage(p.image);
+   const images=photos.length?photos:fallback?[fallback]:[];
+   const video=/^https:\/\/video\.twimg\.com\/[\w/.-]+\.mp4(?:\?[^\s]*)?$/.test(String(p.video||''))
+    ?String(p.video):'';
+   return {
+    title:String(p.title).slice(0,180),link:p.link,date:p.date,
+    source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
+    text:typeof p.text==='string'?p.text.slice(0,30000):'',
+    image:images[0]||'',images,video
+   };
+  });
  }catch{return [];}
 }
 export function findMatchArticles(item,news=[],now=new Date()){

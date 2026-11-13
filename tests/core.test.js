@@ -789,25 +789,35 @@ test('détail d’un ancien match : Wembanyama est recherché dans la feuille, s
  assert.doesNotMatch(html,/Autre joueur/);
 });
 
-test('Jeu, set et maths : lecture intégrée sans redirection obligatoire vers X',()=>{
- const post={title:'📊 Statistiques tennis : les performances du Masters',
+test('Jeu, set et maths : texte complet et toutes les images sans fenêtre X ni Voir plus',()=>{
+ const post={title:'📊 Statistiques tennis : un bref titre…',
+  text:'📊 Tableau des performances au Masters\n2001 : Serena Williams\n2008 : Venus Williams\n2026 : Mirra Andreeva',
   date:'2026-11-12T13:00:00Z',link:'https://x.com/JeuSetMaths/status/2120668453770305629',
   source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
-  image:'https://pbs.twimg.com/media/HW4gmtHWAAAJ12V.jpg?name=small&format=webp'};
+  images:['https://pbs.twimg.com/media/a.jpg?name=orig','https://pbs.twimg.com/media/b.png?name=orig'],
+  video:'https://video.twimg.com/amplify_video/2120297845689638912/vid/avc1/1080x598/example.mp4?tag=29'};
  const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
   esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
   safeUrl:x=>x,photos:{}});
- assert.match(html,/<article class="news-card news-post-card news-x-inline" data-x-post-id="2120668453770305629">/);
- assert.doesNotMatch(html,/<details/);
- assert.match(html,/class="news-x-viewport"/);
- assert.match(html,/data-x-expand="2120668453770305629"/);
- assert.match(html,/aria-expanded="false">Voir plus/);
- assert.match(html,/class="jsm-official-embed"/);
- assert.match(html,/Chargement du post directement dans le fil/);
- assert.match(html,/Impossible de charger le post depuis X/);
- assert.match(html,/Publication originale/);
- assert.doesNotMatch(html,/<iframe/);
+ assert.match(html,/<article class="news-card jsm-native-card">/);
+ assert.match(html,/class="jsm-native-text"/);
+ assert.match(html,/2001 : Serena Williams/);
+ assert.match(html,/2008 : Venus Williams/);
+ assert.match(html,/2026 : Mirra Andreeva/);
+ assert.equal((html.match(/class="jsm-native-image"/g)||[]).length,2);
+ assert.match(html,/class="jsm-native-video" controls playsinline/);
+ assert.match(html,/Source originale/);
+ assert.doesNotMatch(html,/Voir plus|Voir moins|<details|<iframe|news-x-viewport|data-x-expand/);
  assert.doesNotMatch(html,/class="news-plain-link"[^>]*href="https:\/\/x\.com/);
+});
+
+test('Ancien relevé X : affiche le titre sans inventer de contenu manquant',()=>{
+ const post={title:'📊 Une statistique ATP vérifiée',date:'2026-11-12T13:00:00Z',
+  link:'https://x.com/JeuSetMaths/status/2120668453770305629',source:'Jeu, set et maths',sport:'Tennis'};
+ const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
+  esc:x=>String(x),safeUrl:x=>x,photos:{}});
+ assert.match(html,/Seul le court extrait est actuellement disponible/);
+ assert.doesNotMatch(html,/Voir plus|<iframe/);
 });
 
 test('Autres médias : conserver la carte de lien éditeur classique',()=>{
@@ -821,18 +831,12 @@ test('Autres médias : conserver la carte de lien éditeur classique',()=>{
  assert.doesNotMatch(html,/class="news-post-card"/);
 });
 
-test('X dans le flux : widget officiel seulement près de l’écran et Voir plus interne',async()=>{
+test('Aucun widget X ni bouton qui ouvre la plateforme dans les posts',async()=>{
  const {readFile}=await import('node:fs/promises');
  const source=await readFile(new URL('../news-view.js',import.meta.url),'utf8');
- assert.match(source,/platform\.twitter\.com\/widgets\.js/);
- assert.match(source,/twitter\.widgets\.createTweet\(id,panel/);
- assert.match(source,/theme:'dark',lang:'fr',dnt:true/);
- assert.match(source,/new IntersectionObserver\(/);
- assert.match(source,/rootMargin:'450px 0px'/);
- assert.match(source,/card\.classList\.toggle\('news-x-expanded'\)/);
- assert.match(source,/toggle\.setAttribute\('aria-expanded',String\(expanded\)\)/);
- assert.match(source,/Voir moins/);
- assert.match(source,/if\(!panel\.isConnected\)return/);
- assert.match(source,/panel\.dataset\.status='failed'/);
- assert.doesNotMatch(source,/script\.src='https:\/\/x\.com/);
+ assert.doesNotMatch(source,/platform\.twitter\.com|createTweet|IntersectionObserver|data-x-expand|news-x-viewport/);
+ assert.match(source,/jsm-native-gallery/);
+ assert.match(source,/jsm-native-video/);
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.doesNotMatch(app,/mountNewsFrames/);
 });
