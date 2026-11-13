@@ -69,6 +69,7 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    competition,round:item.round||'',status:finished?'Terminé':status,finished,live,
    datePrecision:noExactHour?'jour':'heure',approximate:!!item.approxDate,
    uncertainParticipation:!!item.uncertainParticipation,
+   wembanyamaUnconfirmed:!!item.wembanyamaUnconfirmed,
    pendingResult,isCompetition:!!item.scheduledCompetition,
    endDate:item.endDate||null,participationLevel:item.participationLevel||null,
    notes:item.notes||'',cycleUnit:item.cycleUnit||null,
