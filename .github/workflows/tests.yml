@@ -46,3 +46,19 @@ jobs:
                 if nodes:print('POST_SELECTOR',selector,len(nodes),'SAMPLE',str(nodes[0])[:1000],flush=True)
             except Exception as e:print('POST_SOURCE_ERROR',url,str(e)[:200],flush=True)
           PY
+      - name: Diagnostic HTML des posts (temporaire)
+        run: |
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          soup=BeautifulSoup(requests.get('https://teapawt.org/JeuSetMaths',timeout=18).text,'html.parser')
+          a=soup.select_one('a[href*="/JeuSetMaths/status/2120668453770305629"]')
+          if a:
+            n=a
+            for level in range(6):
+              print('POST_ANCESTOR',level,n.name,n.get('class'),str(n)[:1900].replace('\\n',' ') if level in (2,4) else n.get_text(' ',strip=True)[:250],flush=True)
+              n=n.parent
+          for attr in ['.tweet','.tweet-content','.status','.post','.status-content','.tweet-item','.timeline-item','.profile-tweet']:
+            nodes=soup.select(attr)
+            if nodes:print('POST_CSS',attr,len(nodes),str(nodes[0])[:1500],flush=True)
+          PY
