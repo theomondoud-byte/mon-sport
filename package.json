@@ -1,0 +1,10 @@
+{
+  "name": "mon-sport",
+  "private": true,
+  "version": "14.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node --check src.js && node --check agenda-model.js && node --check rankings-view.js && node --check sports-articles.js && node --check worker/index.js"
+  }
+}
