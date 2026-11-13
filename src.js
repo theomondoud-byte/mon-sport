@@ -45,10 +45,20 @@ const save=()=>localStorage.setItem(KEY,JSON.stringify(favorites));
 const date=s=>{if(!s)return '';const d=new Date(s);return Number.isNaN(d.valueOf())?s:d.toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})};
 const filtered=()=>favorites.filter(f=>(sportFilter==='Tous'||f.sport===sportFilter)&&f.name.toLocaleLowerCase('fr').includes(search.toLocaleLowerCase('fr')));
 const tabs=[['semaine','🗓️ Semaine'],['favori','👤 Un favori'],['classements','🏆 Classements'],['actualites','📰 Articles'],['favoris','⭐ Favoris'],['parametres','⚙️ Réglages']];
+const sportEmoji=s=>{
+ const t=String(s||'').toLowerCase();
+ if(/tennis de table|ping.pong|wtt/.test(t))return '🏓';
+ if(/tennis|atp|wta/.test(t))return '🎾';
+ if(/basket|nba/.test(t))return '🏀';
+ if(/rugby/.test(t))return '🏉';
+ if(/cyclis|vélo/.test(t))return '🚴';
+ if(/natation/.test(t))return '🏊';
+ return '⚽';
+};
 function resultHtml(){
  if(loading&&!matches.length)return '<p class="muted">Récupération des résultats…</p>';
  const notes=scoreNotes.length?`<div class="notice"><strong>Couverture des résultats :</strong><br>${scoreNotes.map(esc).join('<br>')}</div>`:'';
- const cards=matches.length?matches.map(m=>`<div class="card"><div class="row"><span class="tag">${esc(m.favorite)}</span><small>${esc(m.status)}</small></div><h3>${esc(m.home)} — ${esc(m.away)}</h3><div class="row"><span class="score">${m.homeScore!==null&&m.awayScore!==null?esc(m.homeScore)+' – '+esc(m.awayScore):'Match à venir'}</span><small>${esc(date(m.date))}</small></div><small>Source : ${esc(m.source||'TheSportsDB')} · couverture partielle</small></div>`).join(''):'<p class="muted">Aucun événement récupéré actuellement. Vérifie les indications de couverture ci-dessous.</p>';
+ const cards=matches.length?matches.map(m=>`<div class="card"><div class="row"><span class="tag">${sportEmoji(m.competition||m.type||m.source||"Football")} ${esc(m.favorite)}</span><small>${esc(m.status)}</small></div><h3>${esc(m.home)} — ${esc(m.away)}</h3><div class="row"><span class="score">${m.homeScore!==null&&m.awayScore!==null?esc(m.homeScore)+' – '+esc(m.awayScore):'Match à venir'}</span><small>${esc(date(m.date))}</small></div><small>Source : ${esc(m.source||'TheSportsDB')} · couverture partielle</small></div>`).join(''):'<p class="muted">Aucun événement récupéré actuellement. Vérifie les indications de couverture ci-dessous.</p>';
  return `${errors.length?`<div class="notice">${esc(errors.join(' • '))}</div>`:''}${cards}${notes}`;
 }
 // ESPN : accès public non officiel, sans clé. Le paramètre dates=YYYYMMDD-YYYYMMDD
@@ -296,7 +306,7 @@ async function wembanyamaResults(teamEvents){
 function individualCard(m){
  const nba=m.type==='nba';
  const lines=nba?['pts','reb','ast','blk'].map((k,i)=>m.stats[k]===null?'':`<div class="stat-mini"><b>${esc(m.stats[k])}</b><small>${['PTS','REB','PD','CTR'][i]}</small></div>`).filter(Boolean).join(''):'';
- return `<article class="card individual"><div class="row wraprow"><span class="tag">${esc(m.favorite)}</span><small>${esc(date(m.date))}</small></div><h3>${esc(m.title)}</h3>${nba?`<div class="statline">${lines}</div>`:`<div class="tennis-score">${esc(m.score)}</div>`}<small>${esc([m.competition,m.round,m.status,m.source].filter(Boolean).join(' · '))}</small></article>`;
+ return `<article class="card individual"><div class="row wraprow"><span class="tag">${nba?"🏀":"🎾"} ${esc(m.favorite)}</span><small>${esc(date(m.date))}</small></div><h3>${esc(m.title)}</h3>${nba?`<div class="statline">${lines}</div>`:`<div class="tennis-score">${esc(m.score)}</div>`}<small>${esc([m.competition,m.round,m.status,m.source].filter(Boolean).join(' · '))}</small></article>`;
 }
 function individualHtml(limit=99){
  if(loading&&!individualResults.length)return '<p class="muted">Récupération des résultats individuels…</p>';
