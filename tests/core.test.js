@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
+import {createOnceLoader} from '../session-loader.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -522,11 +523,11 @@ test('toutes les colonnes ATP et Race du favori sont détaillées dans Stats',()
  const esc=s=>String(s).replaceAll('<','&lt;');
  const html=renderFavoriteStats({favorite:'Jannik Sinner',favoriteData:{name:'Jannik Sinner',sport:'Tennis'},
   now:new Date(),rankings,esc,safeUrl:x=>x});
- assert.match(html,/Classements et statistiques détaillées/);
+ assert.match(html,/Classements et statistiques/);
  assert.match(html,/ATP live/);
  assert.match(html,/Race ATP live/);
  for(const text of ['11020','11200','11500','9820','9990','10400','Finales ATP RR','Défaite Paris SF',
- 'Meilleur classement','Nationalité','Variation du rang','Variation des points','Tournoi précédent'])
+ 'Meilleur classement','Pays','Variation du rang','Variation des points','Tournoi précédent'])
   assert.ok(html.includes(text),text);
  assert.match(html,/data-view-ranking="atp"/);
  assert.match(html,/data-view-ranking="atprace"/);
@@ -603,4 +604,63 @@ test('Stats : une ancienne liste WTT non chargée ne se substitue pas au classem
   rankings:{},esc:x=>String(x),safeUrl:x=>x});
  assert.match(html,/Données du classement indisponibles/);
  assert.doesNotMatch(html,/6859/);
+});
+
+test('chargement de session : une seule requête pour plusieurs ouvertures d’onglets',async()=>{
+ let calls=0;
+ const loader=createOnceLoader(async force=>{
+  calls++;
+  await Promise.resolve();
+  return force?'actualisé':'chargé';
+ });
+ const results=await Promise.all([loader(),loader(),loader()]);
+ assert.deepEqual(results,['chargé','chargé','chargé']);
+ assert.equal(calls,1);
+ await loader();await loader();
+ assert.equal(calls,1,'Aucun nouveau chargement lors de la navigation');
+ assert.equal(await loader(true),'actualisé','Actualisation manuelle disponible');
+ assert.equal(calls,2);
+ await loader();
+ assert.equal(calls,2);
+});
+
+test('échec réseau : ne pas boucler au changement d’onglet, rafraîchissement manuel possible',async()=>{
+ let tries=0;
+ const loader=createOnceLoader(async()=>{tries++;throw Error('réseau');});
+ await assert.rejects(loader(),/réseau/);
+ await loader();assert.equal(tries,1);
+ await assert.rejects(loader(true),/réseau/);
+ assert.equal(tries,2);
+});
+
+test('Stats ATP/Race : profil et tournoi communs affichés une seule fois',()=>{
+ const snapshot=new Date().toISOString();
+ const primary={name:'Jannik Sinner',age:25,country:'ITA',rank:1,livePoints:10500,
+  careerHigh:'MC',movement:2,pointsChange:230,
+  tournament:'Finales ATP RR',previousTournaments:'Défaite Paris SF',
+  nextPoints:10600,maxPoints:11000};
+ const html=renderFavoriteStats({favorite:'Jannik Sinner',favoriteData:{name:'Jannik Sinner',sport:'Tennis'},
+  rankings:{atp:{rows:[primary],asOf:snapshot,live:true},
+   atprace:{rows:[{...primary,rank:2,livePoints:9200,nextPoints:9300,maxPoints:9750}],
+     asOf:snapshot,live:true}},
+  now:new Date(),esc:x=>String(x),safeUrl:x=>x});
+ const count=part=>html.split(part).length-1;
+ assert.equal(count('<span>Tournoi en cours</span>'),1);
+ assert.equal(count('<span>Tournoi précédent</span>'),1);
+ assert.equal(count('<span>Âge</span>'),1);
+ assert.equal(count('<span>Pays</span>'),1);
+ assert.equal(count('Finales ATP RR'),1);
+ assert.ok(html.includes('10500')&&html.includes('9200'));
+ assert.ok(html.includes('10600')&&html.includes('9300'));
+ assert.equal(count('<span>Points live</span>'),2,'Points propres à chaque classement conservés');
+ assert.doesNotMatch(html,/<b>—<\/b>/,'Ne pas multiplier les cases vides');
+});
+
+test('Stats football : ne plus répéter le nom de club dans une tuile Équipe',()=>{
+ const html=renderFavoriteRankingDetails({favorite:'PSG',rankingId:'ligue1',
+  rankings:{ligue1:{rows:[{name:'Paris Saint-Germain',rank:1,points:'25',played:'12',wins:'8'}],
+    asOf:new Date().toISOString(),live:true}},esc:x=>String(x),safeUrl:x=>x});
+ assert.doesNotMatch(html,/<span>Équipe<\/span>/);
+ assert.match(html,/<span>Victoires \(V\)<\/span>/);
+ assert.doesNotMatch(html,/<b>—<\/b>/);
 });

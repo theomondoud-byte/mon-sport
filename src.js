@@ -1,7 +1,8 @@
 import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=14.0.0';
+import {createOnceLoader} from './session-loader.js?v=14.9.0';
 import {makeAgenda} from './agenda-model.js?v=14.0.0';
-import {renderAgendaView} from './agenda-ui.js?v=14.8.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=14.8.0';
+import {renderAgendaView} from './agenda-ui.js?v=14.9.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=14.9.0';
 import {fetchFFLNews,findMatchArticles} from './sports-articles.js?v=14.0.0';
 import {fetchAgendaFavorite} from './agenda-fetch.js?v=14.0.0';
 import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=14.0.0';
@@ -39,6 +40,7 @@ const load=()=>{
  }catch{return DEFAULTS;}
 };
 let favorites=load(), workerUrl=(()=>{try{return localStorage.getItem(URL_KEY)||''}catch{return ''}})(),active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={},photoRequest=0,rankingSelected='atp',rankingsData={},rankingsLoading=false,rankAgeMax='',rankCountry='';
+let starting=true;
 const app=document.querySelector('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
@@ -386,15 +388,19 @@ async function refreshHistory(){
  }finally{if(id===historyRequest){historyLoading=false;render();}}
 }
 
-async function refreshRankings(force=false){
- if(rankingsLoading)return;
- rankingsLoading=true;if(active==='classements')render();
+// Les classements sont récupérés au démarrage, partagés par Classements et les fiches Stats.
+const loadRankingsOnce=createOnceLoader(async(force)=>{
+ rankingsLoading=true;if(!starting&&active==='classements')render();
  try{
   const retrieved=await fetchRankings({force});
   rankingsData={...rankingsData,...retrieved};
- }catch(e){console.warn('Classements ESPN indisponibles',e);}
- finally{rankingsLoading=false;if(active==='classements'||(active==='favori'&&favoritePhase==='stats'))render();}
-}
+ }catch(e){console.warn('Classements indisponibles',e);}
+ finally{
+  rankingsLoading=false;
+  if(!starting&&(active==='classements'||(active==='favori'&&favoritePhase==='stats')))render();
+ }
+});
+function refreshRankings(force=false){return loadRankingsOnce(force);}
 function newsHtml(){return renderNewsView({news,loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date()});}
 function linkHtml(f){const q=encodeURIComponent(f.name);return `<div class="fav"><div class="details"><b>${esc(f.name)}</b><br><small>${esc(f.sport)} · ${esc(f.type)}</small></div><a target="_blank" rel="noopener noreferrer" href="https://news.google.com/search?q=${q}&hl=fr&gl=FR&ceid=FR%3Afr">Actualités ↗</a></div>`}
 
@@ -420,21 +426,22 @@ function agendaPage(){
   esc,safeUrl,now:new Date()
  });
 }
-async function loadAgendaExpanded(force=false){
- if(active!=='favori')return;
+async function loadAgendaExpanded(force=false,preload=false){
+ if(preload&&(!agendaFavorite||!favorites.some(f=>f.name===agendaFavorite)))return;
+ if(active!=='favori'&&!preload)return;
  const selected=favorites.find(f=>f.name===agendaFavorite);
  if(!selected){agendaExtended=[];agendaExtendedFor='';return;}
  const mode=favoritePhase==='future'?'future':'past';
  const day=new Date().toISOString().slice(0,10);
  const cacheKey=selected.name+'|'+mode+'|'+day,local=agendaCache.get(cacheKey);
- if(!force&&local&&Date.now()-local.saved<15*60*1000){
+ if(!force&&local){
   agendaExtended=local.events;agendaExtendedFor=selected.name;agendaExtendedPhase=mode;
-  agendaExtendedMessage=local.message;agendaExtendedLoading=false;render();return;
+  agendaExtendedMessage=local.message;agendaExtendedLoading=false;if(!preload)render();return;
  }
  const token=++agendaRequest;
  agendaExtended=[];agendaExtendedFor=selected.name;agendaExtendedPhase=mode;
  agendaExtendedLoading=true;agendaExtendedMessage='';
- render();
+ if(!preload)render();
  try{
   const fetches=[
    fetchAgendaFavorite(selected,{
@@ -477,11 +484,19 @@ async function loadAgendaExpanded(force=false){
   if(token!==agendaRequest)return;
   agendaExtendedMessage='Calendrier étendu indisponible : '+String(e.message||e);
  }finally{
-  if(token===agendaRequest){agendaExtendedLoading=false;render();}
+  if(token===agendaRequest){agendaExtendedLoading=false;if(!preload)render();}
  }
 }
 
 function render(){
+ if(starting){
+  app.innerHTML='<main class="wrap startup-shell" role="status" aria-live="polite">'
+   +'<h1>⚡ Mon Sport</h1><div class="startup-spinner" aria-hidden="true"></div>'
+   +'<h2>Chargement des données sportives</h2>'
+   +'<p>Résultats, actualités et classements chargés une seule fois pour cette session.</p>'
+   +'</main>';
+  return;
+ }
  const sports=['Tous',...new Set(favorites.map(f=>f.sport))];
  app.innerHTML='<main class="wrap">'
   +'<header class="app-header app-header-v11"><h1>⚡ Mon Sport</h1>'
@@ -491,13 +506,13 @@ function render(){
   +'<nav class="tabs" aria-label="Navigation principale">'+tabs.map(([id,label])=>
     '<button type="button" data-tab="'+id+'" aria-current="'+(id===active?'page':'false')+'" class="'+(id===active?'active':'')+'">'+label+'</button>').join('')+'</nav>'
   +'<div id="content">'+content()+'</div>'
-  +'<footer class="muted app-footer">Mon Sport V14.7 · Classements multi-sports détaillés</footer></main>';
+  +'<footer class="muted app-footer">Mon Sport V14.9 · Chargement unique et fiches Stats simplifiées</footer></main>';
  document.querySelectorAll('[data-tab]').forEach(el=>el.onclick=()=>{
   active=el.dataset.tab;search='';sportFilter='Tous';render();
   if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded();
-  if(active==='classements')refreshRankings();
+  // Tableau déjà en mémoire : aucun rechargement au changement d'onglet.
  });
- document.querySelector('#refresh').onclick=()=>{refresh();if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded(true);if(active==='classements')refreshRankings(true);};
+ document.querySelector('#refresh').onclick=()=>{refresh();if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded(true);if(active==='classements'||(active==='favori'&&favoritePhase==='stats'))refreshRankings(true);};
  bindContent();
 }
 function content(){const sports=['Tous',...new Set(favorites.map(f=>f.sport))];if(active==='semaine'||active==='favori')return agendaPage();
@@ -622,23 +637,23 @@ function bindContent(){
  document.querySelectorAll('[data-rank-favorite]').forEach(el=>el.onclick=()=>{
   const name=el.dataset.rankFavorite;
   if(!favorites.some(f=>f.name===name))return;
-  agendaFavorite=name;favoritePhase='stats';active='favori';render();refreshRankings();
+  agendaFavorite=name;favoritePhase='stats';active='favori';render();
  });
  document.querySelectorAll('[data-view-ranking]').forEach(el=>el.onclick=()=>{
-  rankingSelected=el.dataset.viewRanking;active='classements';render();refreshRankings();
+  rankingSelected=el.dataset.viewRanking;active='classements';render();
  });
 
  document.querySelectorAll('[data-agenda-phase]').forEach(button=>button.onclick=()=>{
   if(active==='favori'){
    favoritePhase=button.dataset.agendaPhase;
    agendaRequest++;agendaExtended=[];agendaExtendedFor='';agendaExtendedPhase='';
-   render();if(favoritePhase!=='stats')loadAgendaExpanded();else refreshRankings();
+   render();if(favoritePhase!=='stats')loadAgendaExpanded();
   }else{weekPhase=button.dataset.agendaPhase;render();}
  });
  const picker=document.querySelector('#agendaFavorite');
  if(picker)picker.onchange=()=>{
   agendaFavorite=picker.value;agendaRequest++;agendaExtendedFor='';agendaExtendedPhase='';agendaExtended=[];agendaExtendedMessage='';
-  render();if(favoritePhase!=='stats')loadAgendaExpanded();else refreshRankings();
+  render();if(favoritePhase!=='stats')loadAgendaExpanded();
  };
  const auditChoice=document.querySelector('#auditChoice');if(auditChoice)auditChoice.onchange=()=>{auditSelected=auditChoice.value;render()};const auditButton=document.querySelector('#auditRun');if(auditButton)auditButton.onclick=runYearAudit;const sinnerButton=document.querySelector('#goSinnerHistory');if(sinnerButton)sinnerButton.onclick=()=>{active='resultats';historyFilter=favorites.find(f=>f.sport==='Tennis'&&/sinner/i.test(f.name))?.name||'Tous';historyYear='2026';historyAll=true;refreshHistory();document.querySelector('#historyFilter')?.scrollIntoView({behavior:'smooth'});};const ys=document.querySelector('#historyYear');if(ys)ys.onchange=()=>{historyYear=ys.value;historyAll=false;refreshHistory()};const go=document.querySelector('#goKouameHistory');if(go)go.onclick=()=>{active='resultats';historyFilter=favorites.find(f=>f.sport==='Tennis'&&/kouam/i.test(f.name))?.name||'Tous';historyYear='2026';historyAll=true;refreshHistory();document.querySelector('#historyFilter')?.scrollIntoView({behavior:'smooth'});};const hFilter=document.querySelector('#historyFilter');if(hFilter)hFilter.onchange=()=>{historyFilter=hFilter.value;historyAll=false;render()};const hToggle=document.querySelector('#historyToggle');if(hToggle)hToggle.onclick=()=>{historyAll=!historyAll;render()};const updateButton=document.querySelector('#checkUpdates');if(updateButton)updateButton.onclick=forceUpdate;const photoButton=document.querySelector('#refreshPhotos');if(photoButton)photoButton.onclick=async()=>{photoButton.disabled=true;const status=document.querySelector('#photoStatus');if(status)status.textContent='Recherche des portraits…';try{await reloadPhotos(true);}catch(e){if(status)status.textContent='Recherche indisponible : '+String(e.message||e);}finally{if(photoButton.isConnected)photoButton.disabled=false;}};document.querySelectorAll('[data-goto]').forEach(e=>e.onclick=()=>{active=e.dataset.goto;render()});document.querySelectorAll('[data-remove]').forEach(e=>e.onclick=()=>{favorites=favorites.filter(f=>f.id!==e.dataset.remove);save();render()});const add=document.querySelector('#addform');if(add)add.onsubmit=e=>{e.preventDefault();const data=new FormData(add),name=String(data.get('name')).trim();if(!name)return;favorites.push({id:crypto.randomUUID(),name,sport:data.get('sport'),type:data.get('type'),apiName:String(data.get('apiName')).trim()||name});save();render()};const sf=document.querySelector('#sportFilter');if(sf)sf.onchange=()=>{sportFilter=sf.value;document.querySelector('#favoriteList').innerHTML=favoriteRows();bindRemove()};const input=document.querySelector('#search');if(input)input.oninput=()=>{search=input.value;document.querySelector('#favoriteList').innerHTML=favoriteRows();bindRemove()};const settings=document.querySelector('#settingsform');if(settings)settings.onsubmit=e=>{e.preventDefault();const val=document.querySelector('#workerUrl').value.trim().replace(/\/$/,'');if(val&&!/^https:\/\/[^\s]+$/.test(val)){alert('Une URL HTTPS valide est nécessaire.');return}workerUrl=val;localStorage.setItem(URL_KEY,workerUrl);active='semaine';news=[];matches=[];individualResults=[];render();refresh()};const ex=document.querySelector('#export');if(ex)ex.onclick=()=>{const blob=new Blob([JSON.stringify(favorites,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mes-favoris-sport.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};const imp=document.querySelector('#import');if(imp)imp.onchange=async()=>{try{const data=JSON.parse(await imp.files[0].text());if(!Array.isArray(data)||data.some(f=>typeof f.name!=='string'||typeof f.sport!=='string'||!['équipe','sportif'].includes(f.type)))throw Error('Format invalide');favorites=data.slice(0,200).map(f=>({id:crypto.randomUUID(),name:f.name.slice(0,100),sport:f.sport.slice(0,50),type:f.type,apiName:String(f.apiName||f.name).slice(0,100)}));save();render()}catch(e){alert('Import impossible : '+e.message)}};const reset=document.querySelector('#reset');if(reset)reset.onclick=()=>{if(confirm('Réinitialiser tous les favoris ?')){favorites=DEFAULTS.map(f=>({...f,id:crypto.randomUUID()}));save();render()}}}
 async function forceUpdate(){
@@ -713,8 +728,32 @@ async function refresh(){
  }catch(e){errors.push('Actualisation impossible : '+String(e.message||e));}
  finally{loading=false;render();}
 }
-render();refresh();refreshHistory();
-reloadPhotos().catch(()=>{});
+// Chargement initial unique : l'utilisateur navigue ensuite dans les données en mémoire.
+async function startApp(){
+ render();
+ const tasks=Promise.allSettled([
+  refresh(),
+  refreshHistory(),
+  refreshRankings(),
+  loadAgendaExpanded(false,true)
+ ]);
+ // Une source lente ne doit pas immobiliser l'application indéfiniment.
+ let deadline;
+ try{
+  await Promise.race([tasks,new Promise(resolve=>{
+   deadline=setTimeout(resolve,22000);
+  })]);
+ }finally{
+  clearTimeout(deadline);
+  starting=false;render();
+ }
+ // Les photos s'appliquent à leurs cellules sans réinitialiser l'interface.
+ reloadPhotos().catch(()=>{});
+}
+startApp().catch(error=>{
+ console.warn('Initialisation partielle',error);
+ starting=false;render();
+});
 if('serviceWorker' in navigator){
  let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{

@@ -792,3 +792,17 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 @media(max-width:350px){
  .stat-ranking-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* V14.9 : un seul écran de chargement au démarrage de la session. */
+.startup-shell{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ text-align:center;gap:13px;padding:25px 18px}
+.startup-shell h1{font-size:1.85rem;color:#e6fff4;margin:0}
+.startup-shell h2{font-size:1.07rem;color:#baffdf;margin:0}
+.startup-shell p{max-width:330px;font-size:.81rem;color:#bad5e0;line-height:1.5;margin:0}
+.startup-spinner{height:39px;width:39px;border-radius:50%;border:4px solid #3a6773;
+ border-top-color:#a7f7d2;animation:startup-turn .9s linear infinite}
+@keyframes startup-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.startup-spinner{animation:none;border-top-color:#d5ffee}}
+/* Les tuiles inutiles ont été retirées ; privilégier l'information plutôt que les cases vides. */
+.stat-ranking-grid .stat-tile{min-height:61px}
+.stat-ranking-grid .stat-tile small{color:#bdd8e3}

@@ -1,3 +1,29 @@
+# Mon Sport V14.9 — chargement unique et Stats sans redondances
+
+## Au démarrage : un chargement, puis navigation fluide
+
+- Une page de chargement initiale présente une progression simple pendant que **résultats, actualités, historique, classements et premier calendrier de favori** sont récupérés en parallèle.
+- Le chargement initial ne bloque plus indéfiniment sur une source lente : au bout de 22 secondes maximum, l'interface devient accessible avec les données déjà reçues ; les derniers résultats peuvent arriver ensuite.
+- **Tous les classements sont mis en mémoire une seule fois pour la session** (chargements simultanés regroupés). Passer de « Résultats » à « Classements », puis à « Favoris → Stats » ne relance pas les requêtes sportives pour ces tableaux.
+- Les calendriers détaillés sont conservés en mémoire **pendant toute la session**, sans expiration automatique à chaque navigation. Le premier calendrier sélectionné est préchargé dès l'ouverture ; ceux des autres favoris sont récupérés lors de leur première consultation. Une fois consultés, on peut y revenir sans nouveau chargement.
+- Le bouton **↻** permet de demander une actualisation explicite, notamment sur l'onglet Classements ou Stats. Les résultats, la recherche historique et les photos continuent de pouvoir être actualisés lorsqu'on le demande.
+- La PWA charge les scripts, styles et icônes versionnés **directement depuis son précache** après installation. Le document et les données sportives restent prioritairement récupérés depuis le réseau à la nouvelle ouverture ; les ressources disposent du repli hors connexion.
+- Les photos sont appliquées progressivement aux images sans reconstruire les cartes ni interrompre la navigation.
+
+## Stats des favoris : informations regroupées
+
+- **Profil commun** : l'âge et le pays n'apparaissent qu'une fois, y compris lorsque le favori figure simultanément dans ATP, Race ATP et Next Gen.
+- **Tournois dédoublonnés** : si « Tournoi en cours » ou « Tournoi précédent » est identique dans plusieurs tableaux, l'information n'est affichée qu'une fois. Les points, classements et projections restent distincts pour chaque classement, car ils n'ont pas nécessairement la même signification.
+- **Valeurs absentes** : plutôt que d'empiler des cases « — », les données non communiquées n'engendrent pas de tuile.
+- **Favoris hors top 150** : plusieurs classements indisponibles ne provoquent plus autant de cartes d'erreur identiques. Une explication unique est affichée si aucun classement associé ne possède de données.
+- **Football et NBA** : suppression des tuiles « Équipe » répétant l'intitulé ; les statistiques utiles de chaque compétition demeurent visibles. Sources et dates conservées.
+
+## Vérifications
+
+Tests Node couvrant le cache de session, l'actualisation forcée, la non-répétition du profil et des tournois, les classements football et les favoris. Les 10 tests Python continuent de vérifier les collecteurs de tennis et de tennis de table. Mise à jour PWA et cache versionnés en V14.9.
+
+---
+
 # Mon Sport V14.8 — colonnes alignées et statistiques complètes des favoris
 
 ## Affichage des classements
