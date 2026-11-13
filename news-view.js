@@ -1,5 +1,5 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=15.9.0';
+import {filterSportsNews} from './sports-articles.js?v=16.0.0';
 // Mon Sport V15.9 — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -72,12 +72,14 @@ function newsSportName(article){
 }
 function matchesFavorite(article,favorite){
  if(article.favorite===favorite.name)return true;
- const haystack=normalized([article.title,article.excerpt,article.text,article.description].join(' '));
+ const haystack=' '+normalized([article.title,article.excerpt,article.text,article.description].join(' '))+' ';
  const aliases=[favorite.name,favorite.apiName].map(normalized).filter(value=>value.length>=3);
  return aliases.some(alias=>{
-  if(alias.length>=5&&haystack.includes(alias))return true;
-  const tokens=alias.split(' ').filter(word=>word.length>=5);
-  return tokens.some(word=>haystack.split(' ').includes(word));
+  // Une expression complète est fiable ; un nom composé ne doit jamais
+  // être associé sur son seul nom de famille (ex. un homonyme).
+  if(alias.includes(' '))return haystack.includes(' '+alias+' ');
+  if(alias==='psg')return haystack.includes(' psg ');
+  return alias.length>=6&&haystack.includes(' '+alias+' ');
  });
 }
 function videoCandidates(value){
