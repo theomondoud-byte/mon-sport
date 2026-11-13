@@ -23,7 +23,7 @@ const ASSETS = [
   './verified-extra-v11.js?v=14.0.0',
   './coverage-v11.js?v=14.0.0',
   './rankings-view.js?v=14.9.0',
-  './sports-articles.js?v=15.6.0',
+  './sports-articles.js?v=15.8.0',
   './sports-media.js?v=14.0.0',
   './data/jeu-set-et-maths-bundle.js?v=15.6.0', // Données embarquées, chargées sans fetch JSON.
   './data/jeu-set-et-maths.json', // Dernier relevé vérifié : disponible hors connexion sur Android.
