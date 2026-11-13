@@ -755,10 +755,8 @@ startApp().catch(error=>{
  starting=false;render();
 });
 if('serviceWorker' in navigator){
- let reloaded=false;
- navigator.serviceWorker.addEventListener('controllerchange',()=>{
-  if(!reloaded){reloaded=true;location.reload();}
- });
+ // Une mise à jour de la PWA ne doit JAMAIS recharger l'écran d'un favori.
+ // Le seul rechargement volontaire reste le bouton « Vérifier et recharger ».
  navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>{
   registration.update().catch(()=>{});
   document.addEventListener('visibilitychange',()=>{
