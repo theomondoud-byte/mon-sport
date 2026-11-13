@@ -2,7 +2,8 @@
 const API='https://www.thesportsdb.com/api/v1/json/123/';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET, OPTIONS','Access-Control-Allow-Headers':'Content-Type'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=300',...cors}});
-function decode(s=''){return s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'").trim()}
+const HTML_ENTITIES={"eacute":"é","egrave":"è","ecirc":"ê","euml":"ë","agrave":"à","acirc":"â","auml":"ä","ccedil":"ç","ocirc":"ô","oelig":"œ","ugrave":"ù","ucirc":"û","uuml":"ü","iuml":"ï","icirc":"î","yuml":"ÿ","Eacute":"É","Egrave":"È","Ecirc":"Ê","Euml":"Ë","Agrave":"À","Acirc":"Â","Auml":"Ä","Ccedil":"Ç","Ocirc":"Ô","Oelig":"Œ","Ugrave":"Ù","Ucirc":"Û","Uuml":"Ü","Iuml":"Ï","Icirc":"Î","Yuml":"Ÿ","nbsp":" ","rsquo":"’","lsquo":"‘","rdquo":"”","ldquo":"“","ndash":"–","mdash":"—","hellip":"…","euro":"€","apos":"'","quot":"\"","amp":"&","lt":"<","gt":">"};
+function decode(s=''){return String(s).replace(/<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>/g,'$1').replace(/&#(\\d+);/g,(_,n)=>String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/&([a-z]+);/gi,(all,name)=>HTML_ENTITIES[name]??all).trim()}
 function tag(xml,name){const pattern=new RegExp('<'+name+'(?:\\s[^>]*)?>([\\s\\S]*?)<\\/'+name+'>','i');return decode(xml.match(pattern)?.[1]||'')}
 function limit(s,n){return String(s||'').trim().slice(0,n)}
 async function getJson(url){const r=await fetch(url,{cf:{cacheTtl:900,cacheEverything:true},headers:{'User-Agent':'MonSport/1.0'}});if(!r.ok)throw Error('Source sportive HTTP '+r.status);return r.json()}
