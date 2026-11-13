@@ -26,7 +26,10 @@ function sameNewsStory(left,right){
  const a=titleTokens(left),b=titleTokens(right);
  if(Math.min(a.size,b.size)<4)return false;
  let common=0;for(const word of a)if(b.has(word))common++;
- return common/Math.min(a.size,b.size)>=.82&&common/(a.size+b.size-common)>=.62;
+ const overlap=common/Math.min(a.size,b.size),jaccard=common/(a.size+b.size-common);
+ const sameFavorite=left.favorite&&right.favorite&&normalized(left.favorite)===normalized(right.favorite);
+ if(sameFavorite)return common>=4&&overlap>=.66&&jaccard>=.5;
+ return overlap>=.82&&jaccard>=.62;
 }
 function newsRichness(article){
  return String(article.text||'').length+String(article.excerpt||article.description||'').length+String(article.title||'').length;
