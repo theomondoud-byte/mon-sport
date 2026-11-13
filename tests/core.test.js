@@ -1010,7 +1010,7 @@ test('V15.8 : la PWA charge les sources RSS et conserve la lecture vidéo X',asy
  const index=await readFile(new URL('../index.html',import.meta.url),'utf8');
  assert.match(index,/<meta name="referrer" content="no-referrer"\/>/);
  const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
- assert.match(sw,/mon-sport-v15-8/);
+ assert.match(sw,/mon-sport-v15-8-1/);
  assert.match(sw,/news-view\.js\?v=15\.8\.0/);
  assert.match(sw,/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
