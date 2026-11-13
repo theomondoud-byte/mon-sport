@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,fetchRankings,renderRankingsView} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -174,7 +174,7 @@ test('ATP affiché en colonnes : points live, mouvement de rang, perte dans le t
   esc:x=>String(x),safeUrl:x=>x});
  assert.match(html,/Pts live/);
  assert.match(html,/Δ rang/);
- assert.match(html,/Tournois précédents/);
+ assert.match(html,/Tournoi précédent/);
  assert.match(html,/Stockholm DF/);
  assert.match(html,/3215/);
  assert.match(html,/3300/);
@@ -263,9 +263,72 @@ test('tournois ATP observés pendant les 14 derniers jours : aucune date de matc
  assert.deepEqual(rows[0].tournamentHistory.map(r=>r.text),['Orléans QF','Stockholm 8e']);
  const html=renderRankingsView({selected:'atp',live:{atp:{rows:rows.slice(0,1),
   live:true,asOf:payload.fetchedAt}},favorites:[],esc:x=>String(x),safeUrl:x=>x});
- assert.match(html,/Tournois · 14 j/);
+ assert.match(html,/Tournoi en cours/);
+ assert.match(html,/Tournoi précédent/);
  assert.match(html,/Stockholm 8e/);
  assert.match(html,/Orléans QF/);
  assert.doesNotMatch(html,/Paris R32/);
  assert.match(html,/Observé/);
+});
+
+test('tournoi en cours et précédent : la source est prioritaire sur les anciens relevés',()=>{
+ const row={tournament:'Stockholm QF',previousTournaments:'Défaite Bâle R16',
+  tournamentHistory:[{text:'Stockholm QF',lastSeen:new Date().toISOString()},
+   {text:'Paris R32',lastSeen:new Date().toISOString()}]};
+ assert.deepEqual(tournamentColumns(row),{
+  current:'Stockholm QF',previous:'Défaite Bâle R16',previousObserved:false
+ });
+ assert.deepEqual(tournamentColumns({...row,previousTournaments:''}),{
+  current:'Stockholm QF',previous:'Paris R32',previousObserved:true
+ });
+ assert.deepEqual(tournamentColumns({tournament:'',previousTournaments:''}),{
+  current:'',previous:'',previousObserved:false
+ });
+});
+
+test('les cinq classements tennis utilisent un fichier top 150 live distinct, sans tableau statique',async()=>{
+ const ids=['atp','wta','atprace','wtarace','nextgen'];
+ const files=['atp-live.json','wta-live.json','atprace-live.json','wtarace-live.json','nextgen-live.json'];
+ const payload={fetchedAt:new Date().toISOString(),rows:Array.from({length:150},(_,i)=>({
+  rank:i+1,name:'Sportif '+(i+1),livePoints:9000-i,age:i===0?17:25,
+  country:i===0?'FRA':'ESP',movement:i===0?3:null,pointsChange:10,
+  tournament:i===0?'Monastir 8e':'',previousTournaments:i===1?'Défaite Stockholm R16':''
+ }))};
+ const calls=[];
+ const fetchFn=async path=>{
+  calls.push(String(path));
+  return {ok:files.some(file=>String(path)==='./data/'+file),status:503,json:async()=>payload};
+ };
+ const live=await fetchRankings({fetchFn,force:true});
+ for(let index=0;index<ids.length;index++){
+  const id=ids[index];
+  assert.ok(calls.includes('./data/'+files[index]));
+  assert.equal(live[id].rows.length,150);
+  assert.equal(live[id].rows[0].points,'9000');
+  assert.deepEqual(rankingRows(id,{}),[]);
+  const html=renderRankingsView({selected:id,live,favorites:[],ageMax:20,country:'FRA',
+   esc:x=>String(x),safeUrl:x=>x});
+  assert.match(html,/Tournoi en cours/);
+  assert.match(html,/Tournoi précédent/);
+  assert.match(html,/Monastir 8e/);
+  assert.match(html,/1 joueur sur 150/);
+  assert.ok(html.indexOf('option value="FRA"')<html.indexOf('option value="ESP"'));
+  assert.doesNotMatch(html,/Tournois · 14 j/);
+  assert.doesNotMatch(html,/Points officiels/);
+  if(['atp','wta'].includes(id))assert.match(html,/<span>MC<\/span>/);
+  else assert.doesNotMatch(html,/<span>MC<\/span>/);
+ }
+ assert.ok(!calls.some(url=>url.includes('tennis/wta/rankings')));
+});
+
+test('classement Race : tournois précédents et absence de MC fictif',()=>{
+ const html=renderRankingsView({selected:'nextgen',live:{nextgen:{
+  rows:[{rank:4,name:'Moïse Kouamé',age:17,country:'FRA',livePoints:423,
+   previousTournaments:'Défaite Monastir 1 8e',tournamentStatus:'defaite'}],
+  live:true,asOf:new Date().toISOString()}},favorites:[],
+  esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Défaite Monastir 1 8e/);
+ assert.match(html,/race-no-career/);
+ assert.match(html,/class="atp-status lost"/);
+ assert.doesNotMatch(html,/<span>MC<\/span>/);
 });

@@ -1,3 +1,22 @@
+# Mon Sport V14.5 — cinq classements de tennis live, même présentation
+
+**Depuis la V14.5, les cinq classements de tennis simple utilisent des relevés live français, chacun limité aux 150 premiers joueurs :**
+- ATP live : https://live-tennis.eu/fr/classement-atp-live
+- WTA live : https://live-tennis.eu/fr/classement-wta-live
+- Race ATP live : https://live-tennis.eu/fr/classement-atp-race
+- Race WTA live : https://live-tennis.eu/fr/classement-wta-race
+- Next Gen live : https://live-tennis.eu/fr/classement-atp-race-next-gen
+
+**Deux colonnes de tournois** : « Tournoi en cours » affiche la compétition indiquée comme actuelle par la source ; « Tournoi précédent » reprend le relevé explicite du fournisseur. Si cette dernière information est absente, Mon Sport peut afficher un tournoi vu dans ses précédents relevés (fenêtre de 14 jours), en le signalant par « Observé récemment ». Les observations ne sont pas des dates officielles de matchs. Les colonnes « Résultat », « Suiv. » et « Max » continuent à ne jamais inventer de résultats ou de projections.
+
+**Même ergonomie** pour les cinq classements : rang live, joueur, âge, pays, points, variation de places et de points, résultat du tournoi, projections et filtres « moins de X ans » et nationalité (🇫🇷 France en premier). Les classements Race et Next Gen ne montrent pas de colonne « MC » fictive, car cette donnée n'est pas fournie par leur source. Les tableaux défilent horizontalement sur mobile.
+
+**Collecte** : le workflow GitHub Actions récupère les cinq relevés depuis les sites publics toutes les six heures ; chaque tableau doit contenir 150 rangs vérifiés. Les derniers fichiers valides sont conservés lorsqu'une source échoue. Après 36 heures sans mise à jour, un tableau ne doit plus être présenté comme frais. Les fichiers sont publiés sur GitHub Pages avec le site.
+
+Le classement **WTT/ITTF** concerne le tennis de table, une autre discipline ; il reste sur ses données datées, sans chiffres live de tennis artificiellement appliqués.
+
+---
+
 # Mon Sport V14.4 — filtres tennis et tournois observés sur 14 jours
 
 - **Filtres au-dessus des classements ATP et WTA** : âge strictement inférieur à une limite choisie (de 16 à 51 ans), nationalité, ou les deux ensemble. La France figure toujours en tête des pays disponibles, les autres sont triés par leur nom français. Le tableau conserve les vrais rangs et précise le nombre de joueurs affichés. Le bouton **Effacer** rétablit tous les joueurs.
