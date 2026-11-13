@@ -39,7 +39,7 @@ const load=()=>{
   return result;
  }catch{return DEFAULTS;}
 };
-let favorites=load(), workerUrl=(()=>{try{return localStorage.getItem(URL_KEY)||''}catch{return ''}})(),active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={},photoRequest=0,rankingSelected='atp',rankingsData={},rankingsLoading=false,rankAgeMax='',rankCountry='',newsSourceFilter='Tous',newsSportFilter='Tous',newsFavoriteFilter='Tous';
+let favorites=load(), workerUrl=(()=>{try{return localStorage.getItem(URL_KEY)||''}catch{return ''}})(),active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={},photoRequest=0,rankingSelected='atp',rankingsData={},rankingsLoading=false,rankAgeMax='',rankCountry='',newsSelectedSources=[];
 let jeuSetMathsPosts=readAvailableJeuSetMathsNews(),jeuSetMathsPending=null;
 let starting=true;
 const app=document.querySelector('#app');
@@ -402,7 +402,7 @@ const loadRankingsOnce=createOnceLoader(async(force)=>{
  }
 });
 function refreshRankings(force=false){return loadRankingsOnce(force);}
-function newsHtml(){return renderNewsView({news:[...news,...jeuSetMathsPosts],loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date(),sourceFilter:newsSourceFilter,sportFilter:newsSportFilter,favoriteFilter:newsFavoriteFilter,favorites});}
+function newsHtml(){return renderNewsView({news:[...news,...jeuSetMathsPosts],loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date(),selectedSources:newsSelectedSources,favorites});}
 function loadJeuSetMathsPosts(){
  if(jeuSetMathsPending)return jeuSetMathsPending;
  // Le fil de tennis se charge indépendamment des API scores : l'attente
@@ -536,12 +536,18 @@ function render(){
   });
  };
  document.querySelectorAll('[data-news-source]').forEach(button=>button.onclick=()=>{
-  newsSourceFilter=button.dataset.newsSource||'Tous';render();
+  const name=button.dataset.newsSource;
+  newsSelectedSources=newsSelectedSources.includes(name)?newsSelectedSources.filter(x=>x!==name):[...newsSelectedSources,name];render();
  });
- const newsSport=document.querySelector('#newsSportFilter');
- if(newsSport)newsSport.onchange=()=>{newsSportFilter=newsSport.value;render();};
- const newsFavorite=document.querySelector('#newsFavoriteFilter');
- if(newsFavorite)newsFavorite.onchange=()=>{newsFavoriteFilter=newsFavorite.value;render();};
+ const allSources=document.querySelector('#newsSourcesAll');if(allSources)allSources.onclick=()=>{newsSelectedSources=[];render();};
+ document.querySelectorAll('[data-read-article]').forEach(button=>button.onclick=async()=>{
+  const link=button.dataset.readArticle,slot=document.querySelector('[data-article-content="'+CSS.escape(link)+'"]');
+  if(!slot)return;if(!workerUrl){slot.hidden=false;slot.textContent='Configure le Worker Cloudflare dans Réglages pour tenter la lecture intégrée.';return;}
+  button.disabled=true;button.textContent='Chargement du texte…';slot.hidden=false;slot.textContent='Récupération du contenu public…';
+  try{const data=await request('/api/article',{url:link});slot.textContent=data.text||'Le contenu intégral n’est pas publiquement accessible. Tu peux consulter la source originale.';}
+  catch(e){slot.textContent='Lecture intégrée indisponible : '+String(e.message||e);}
+  finally{button.disabled=false;button.textContent='Actualiser le texte';}
+ });
  bindContent();
 }
 function content(){const sports=['Tous',...new Set(favorites.map(f=>f.sport))];if(active==='semaine'||active==='favori')return agendaPage();
