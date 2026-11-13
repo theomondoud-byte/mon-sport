@@ -1,7 +1,7 @@
 name: Actualiser classement ATP live
 on:
   push:
-    branches: [main, feat/v14-atp-live-table]
+    branches: [main, 'feat/**']
     paths:
       - 'scripts/refresh_atp_live.py'
       - '.github/workflows/atp-live.yml'
