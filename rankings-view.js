@@ -1,5 +1,5 @@
-// Mon Sport V14 · Top 150 ESPN ATP/WTA, mouvement hebdomadaire et détails complets par équipe.
-// Tennis / WTT : relevés datés du 9 novembre 2026, NON « live ».
+// Mon Sport V14.3 · ATP uniquement live-tennis.eu (top 150), WTA ESPN et classements des équipes.
+// WTA, Race, Next Gen et WTT restent des relevés publiés, non live.
 // Football/NBA : accès direct aux tableaux ESPN, en cache pour 20 min.
 const ESPN='https://site.api.espn.com/apis/v2/sports/';
 export const RANKING_DATE='2026-11-09';
@@ -16,11 +16,6 @@ export const RANKINGS=[
  {id:'nbaouest',title:'NBA Ouest',sport:'Basketball',url:'https://www.nba.com/standings',source:'ESPN · NBA',mode:'espn',path:'basketball/nba',west:true}
 ];
 const fromTuple=(list)=>list.map(([name,rank,points])=>({name,rank,points:points==null?'':String(points)}));
-const ATP=fromTuple([
- ['Alexander Zverev',1,9550],['Jannik Sinner',2,9450],['Carlos Alcaraz',3,7100],
- ['Ben Shelton',4,5170],['Daniil Medvedev',5,3820],['Flavio Cobolli',6,3680],
- ['Arthur Fils',7,3625],['Frances Tiafoe',8,3390],['Alex de Minaur',9,3370],['Taylor Fritz',10,3285]
-]);
 const ATPRACE=fromTuple([
  ['Alexander Zverev',1,9350],['Jannik Sinner',2,7950],['Carlos Alcaraz',3,6100],
  ['Ben Shelton',4,5170],['Daniil Medvedev',5,3820],['Flavio Cobolli',6,3670],
