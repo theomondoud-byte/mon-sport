@@ -865,3 +865,33 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .news-x-viewport{max-height:320px}
  .news-x-expand{min-height:42px;font-size:.78rem}
 }
+
+/* V15.4 : posts natifs. Ni iframe X, ni fenêtre recadrée, ni bouton « Voir plus ». */
+.jsm-native-card{display:flex;flex-direction:column;gap:12px;padding:14px;overflow:visible;min-width:0}
+.jsm-native-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.jsm-native-header>div{display:flex;align-items:center;gap:10px;min-width:0}
+.jsm-native-avatar{width:36px;height:36px;border-radius:50%;background:#286875;display:grid;place-items:center;font-size:1.15rem;flex:none}
+.jsm-native-author{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.jsm-native-author b{font-size:.95rem;color:#e9fff5}
+.jsm-native-author small{font-size:.72rem;color:#bdd2df}
+.jsm-native-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.94rem;line-height:1.55;margin:0;color:#f4faff}
+.jsm-native-gallery{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:800px;margin:0 auto}
+.jsm-native-gallery.single{grid-template-columns:1fr;max-width:680px}
+.jsm-native-figure{margin:0;min-width:0;background:#112b3b;border-radius:10px;overflow:hidden;display:grid;place-items:center}
+.jsm-native-image{width:100%;height:auto;max-height:72vh;object-fit:contain;display:block}
+.jsm-native-image-error{font-size:.77rem;color:#bfd4dc;padding:12px}
+.jsm-native-figure:has(.jsm-native-image[hidden]){min-height:48px}
+.jsm-native-video{width:100%;max-width:680px;max-height:75vh;border-radius:11px;margin:auto;background:#081b29}
+.jsm-native-note{font-size:.76rem;line-height:1.45;color:#c8d4de;margin:0}
+.jsm-native-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ border-top:1px solid #35536b;padding-top:9px;font-size:.70rem;color:#b9cfdd}
+.jsm-native-footer a{color:#b3f3d7;text-decoration:underline}
+@media(max-width:550px){
+ .jsm-native-card{padding:10px;gap:10px}
+ .jsm-native-text{font-size:.86rem;line-height:1.5}
+ .jsm-native-header{gap:6px}
+ .jsm-native-avatar{height:32px;width:32px}
+ .jsm-native-gallery{gap:4px}
+ .jsm-native-image{max-height:64vh}
+ .jsm-native-footer{font-size:.67rem}
+}
