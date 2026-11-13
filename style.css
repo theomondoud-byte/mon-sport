@@ -765,3 +765,30 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
   grid-template-columns:var(--live-rank) var(--live-player) 24px 44px 34px 38px 118px 123px 41px 41px;
  }
 }
+
+/* V14.8 — toutes les données de classement dans l'onglet Stats des favoris. */
+.stat-rank-card{border:1px solid #376b77;background:#143449;border-radius:13px;padding:11px;display:grid;gap:10px;min-width:0}
+.stat-rank-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
+.stat-rank-head>div:first-child{display:flex;flex-direction:column;gap:3px;min-width:0}
+.stat-rank-head b{color:#e3fff2;font-size:.95rem}
+.stat-rank-head span{color:#f0dbc0;font-size:.76rem}
+.stat-rank-head small{font-size:.70rem;color:#aacecf;line-height:1.4}
+.stat-rank-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.stat-rank-actions a{color:#a8f4d3;text-decoration:underline;font-size:.73rem}
+.stat-rank-actions button{min-height:35px;padding:6px 9px;font-size:.73rem}
+.stat-ranking-grid{grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:7px}
+.stat-ranking-grid .stat-tile{min-height:73px;padding:9px 8px;border-radius:9px;gap:4px;overflow-wrap:anywhere}
+.stat-ranking-grid .stat-tile b{font-size:1.1rem;line-height:1.22}
+.stat-ranking-grid .stat-tile span{font-size:.72rem;line-height:1.2}
+.stat-ranking-grid .stat-tile small{font-size:.67rem;line-height:1.2}
+@media(max-width:550px){
+ .stat-rank-card{padding:8px;gap:8px}
+ .stat-ranking-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .stat-ranking-grid .stat-tile{min-height:65px;padding:7px 6px}
+ .stat-ranking-grid .stat-tile b{font-size:.99rem}
+ .stat-ranking-grid .stat-tile span{font-size:.66rem}
+ .stat-ranking-grid .stat-tile small{font-size:.62rem}
+}
+@media(max-width:350px){
+ .stat-ranking-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
