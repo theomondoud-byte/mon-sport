@@ -1,3 +1,27 @@
+# Mon Sport V15.0 — stabilité des écrans, Jeu Set et Maths et match NBA unique
+
+## Plus jamais d'écran de démarrage forcé pendant la consultation d'un joueur
+
+Le rechargement automatique à l'événement `controllerchange` du service worker a été supprimé. Quand une nouvelle version est installée en arrière-plan, le navigateur conserve **l'écran et la navigation de l'utilisateur**, sans appeler `location.reload()`. Le nouveau service worker n'utilise plus `clients.claim()` pour remplacer le contrôleur d'une page déjà ouverte. Une mise à jour volontaire reste possible via **Réglages → Vérifier et recharger**. Le chargement initial unique de V14.9 et le cache de session sont conservés.
+
+## Articles : derniers posts « Jeu, set et maths »
+
+Mon Sport propose désormais les publications de statistiques tennis du compte X [@JeuSetMaths](https://x.com/JeuSetMaths) dans le fil **Articles**, au milieu des liens FFL et ESPN, avec le pictogramme 🎾. Les posts sont affichés sous forme de **courts extraits** avec leur date, l'auteur et **un lien direct vers la publication originale**. Les médias restent facultatifs.
+
+Un collecteur Python lit périodiquement les publications publiques rendues sur [teapawt.org/JeuSetMaths](https://teapawt.org/JeuSetMaths), vérifie l'identifiant, l'auteur, la date encodée dans l'identifiant X et la période de **sept jours**, puis publie `data/jeu-set-et-maths.json`. Si cette source tierce est indisponible, l'application n'invente pas de nouveaux posts ; le lien vers le compte X reste disponible. La mise à jour est incluse dans le workflow prévu toutes les six heures.
+
+## Un seul match NBA, statistiques de l'équipe et du joueur au même endroit
+
+Les rencontres des **San Antonio Spurs** et les statistiques confirmées de **Victor Wembanyama** sont regroupées **par identifiant de rencontre ESPN**. L'onglet Résultats n'affiche plus une deuxième carte individuelle du même match. La rencontre unique est visible depuis les deux favoris et conserve le score des Spurs, le contexte du match et les statistiques publiées de Wembanyama (points, rebonds, passes, contres).
+
+Au clic sur **Résumé / Détail du match**, la fiche affiche les statistiques d'équipe et du joueur lorsqu'elles sont disponibles. Aucune participation de Wembanyama n'est supposée à partir du seul calendrier des Spurs : les matchs sans donnée individuelle affichent une information explicite. Les chiffres d'autres joueurs ne sont jamais attribués à Wembanyama par défaut.
+
+## Tests
+
+Les contrôles JavaScript vérifient le partage d'une rencontre NBA, sa présence chez les deux favoris, le rendu de la fiche détaillée, l'absence de rechargement spontané et le filtrage des posts. Les tests Python vérifient également l'auteur des posts, la fraîcheur, la date et les liens d'origine. Les tests existants des classements et du cache sont maintenus.
+
+---
+
 # Mon Sport V14.9 — chargement unique et Stats sans redondances
 
 ## Au démarrage : un chargement, puis navigation fluide

@@ -60,6 +60,29 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
    favorite:'FFL',image,excerpt:clean(p.excerpt?.rendered||'')};
  }).filter(Boolean).filter(isSportsArticle);
 }
+// Des posts publics vérifiés, extraits du compte @JeuSetMaths par le collecteur.
+// L'absence de données valides ne doit jamais produire de publications imaginaires.
+export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date()}={}){
+ try{
+  const response=await fetchFn('./data/jeu-set-et-maths.json',{
+   cache:'no-store',signal:AbortSignal.timeout(6000)
+  });
+  if(!response.ok)return [];
+  const data=await response.json();
+  if(!Array.isArray(data?.posts)||!data.source?.includes('x.com/JeuSetMaths'))return [];
+  const cutoff=now.getTime()-7*86400000;
+  return data.posts.filter(p=>{
+   const time=Date.parse(p?.date||'');
+   return time>=cutoff&&time<=now.getTime()+600000&&
+    /^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(String(p.link||''))&&
+    String(p.title||'').trim().length>10;
+  }).slice(0,25).map(p=>({
+   title:String(p.title).slice(0,180),link:p.link,date:p.date,
+   source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
+   image:sourceImage(p.image)
+  }));
+ }catch{return [];}
+}
 export function findMatchArticles(item,news=[],now=new Date()){
  const day=Date.parse(item.date||''),key=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
  if(!Number.isFinite(day))return [];

@@ -99,7 +99,7 @@ function parseScorers(body){
  }
  return output.slice(0,12);
 }
-function parsePlayerStats(box,kind,favorite){
+function parsePlayerStats(box,kind,favorite,strict=false){
  const output=[];
  for(const group of box?.players||[]){
   for(const cat of group.statistics||[]){
@@ -126,7 +126,7 @@ function parsePlayerStats(box,kind,favorite){
  // Limiter aux joueurs suivis quand la source possède de nombreux joueurs.
  const wanted=norm(favorite);
  const selected=output.filter(p=>norm(p.name).includes(wanted)||wanted.includes(norm(p.name)));
- return (selected.length?selected:output).slice(0,kind==='basketball'?5:4);
+ return (selected.length?selected:strict?[]:output).slice(0,kind==='basketball'?5:4);
 }
 // ESPN peut publier un article de match distinct de la simple boxscore.
 export function recapArticleFromESPN(body){
@@ -175,7 +175,7 @@ function dataFromEvent(event){
   put('Score en sets / jeux',event.score);
   put('Tour',event.round);
  }
- return {sport,teamStats:[],players:embedded.length?[{name:event.favorite,metrics:embedded}]:[],scorers:[],extra};
+ return {sport,teamStats:[],players:embedded.length?[{name:original.wembanyamaName||event.favorite,metrics:embedded}]:[],scorers:[],extra};
 }
 export async function loadEventDetails(event,{fetchFn=fetch}={}){
  const data=dataFromEvent(event);
@@ -194,9 +194,11 @@ export async function loadEventDetails(event,{fetchFn=fetch}={}){
   const r=await fetchFn(url,{signal:AbortSignal.timeout(12000),cache:'no-store'});
   if(!r.ok)throw Error('HTTP '+r.status);
   const body=await r.json();
+  const athleteName=origin.wembanyamaName||
+   (event.favorites||[]).find(name=>/wemban[yi]ama/i.test(name))||'';
   const parsed={
    ...data,article:recapArticleFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
-   players:parsePlayerStats(body.boxscore,data.sport,event.favorite),
+   players:parsePlayerStats(body.boxscore,data.sport,athleteName||event.favorite,!!athleteName),
    scorers:parseScorers(body),
    note:'ESPN · statistiques de la feuille de match disponibles selon la compétition.',
    sourceUrl:'https://www.espn.com/'

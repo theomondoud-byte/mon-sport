@@ -1,16 +1,16 @@
 import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=14.0.0';
 import {createOnceLoader} from './session-loader.js?v=14.9.0';
-import {makeAgenda} from './agenda-model.js?v=14.0.0';
-import {renderAgendaView} from './agenda-ui.js?v=14.9.0';
+import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=15.0.0';
+import {renderAgendaView} from './agenda-ui.js?v=15.0.0';
 import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=14.9.0';
-import {fetchFFLNews,findMatchArticles} from './sports-articles.js?v=14.0.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=15.0.0';
 import {fetchAgendaFavorite} from './agenda-fetch.js?v=14.0.0';
 import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=14.0.0';
 import {extraProgramFor} from './verified-program.js?v=14.0.0';
 import {verifiedExtraFor} from './verified-extra-v11.js?v=14.0.0';
 import {coverageFor} from './coverage-v11.js?v=14.0.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,mountNewsFrames} from './news-view.js?v=14.0.0';
-import {loadEventDetails,renderEventDetails} from './event-details.js?v=14.0.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews,mountNewsFrames} from './news-view.js?v=15.0.0';
+import {loadEventDetails,renderEventDetails} from './event-details.js?v=15.0.0';
 import {verified2026For} from './audit-2026.js?v=14.0.0';
 import {renderAudit2026} from './audit-ui.js?v=14.0.0';
 import {auditEspn2026} from './audit-espn-2026.js?v=14.0.0';
@@ -506,7 +506,7 @@ function render(){
   +'<nav class="tabs" aria-label="Navigation principale">'+tabs.map(([id,label])=>
     '<button type="button" data-tab="'+id+'" aria-current="'+(id===active?'page':'false')+'" class="'+(id===active?'active':'')+'">'+label+'</button>').join('')+'</nav>'
   +'<div id="content">'+content()+'</div>'
-  +'<footer class="muted app-footer">Mon Sport V14.9 · Chargement unique et fiches Stats simplifiées</footer></main>';
+  +'<footer class="muted app-footer">Mon Sport V15.0 · Posts tennis et fiches NBA fusionnées</footer></main>';
  document.querySelectorAll('[data-tab]').forEach(el=>el.onclick=()=>{
   active=el.dataset.tab;search='';sportFilter='Tous';render();
   if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded();
@@ -518,7 +518,7 @@ function render(){
 function content(){const sports=['Tous',...new Set(favorites.map(f=>f.sport))];if(active==='semaine'||active==='favori')return agendaPage();
 if(active==='classements')return renderRankingsView({selected:rankingSelected,live:rankingsData,favorites,loading:rankingsLoading,ageMax:rankAgeMax,country:rankCountry,esc,safeUrl});
 if(active==='accueil')return `${latestKouameHtml()}${latestSinnerHtml()}<section class="panel"><div class="row"><h2>🏆 Derniers résultats disponibles</h2><button class="button ghost" data-goto="resultats">Voir tout</button></div>${resultHtml()}</section><section class="panel"><div class="row"><h2>🎾🏀 Résultats individuels</h2><button class="button ghost" data-goto="resultats">Voir tout</button></div>${individualHtml(6)}</section><section class="panel"><div class="row"><h2>📰 Actualités récentes</h2><button class="button ghost" data-goto="actualites">Voir tout</button></div>${newsHtml()}</section><section class="panel"><h2>⭐ Accès rapide aux favoris</h2>${favorites.slice(0,6).map(linkHtml).join('')}</section>`;
-if(active==='resultats')return `${latestKouameHtml()}${latestSinnerHtml()}<section class="panel"><h2>🏆 Résultats et prochains matchs</h2><p class="sub">Scores ESPN pour PSG, Real Madrid et Spurs, avec tentative de couverture des coupes, des Bleus en football et du XV de France aux Six Nations. Les scores individuels de tennis et les statistiques NBA sont présentés plus bas. Données non officielles et non exhaustives.</p>${resultHtml()}</section><section class="panel"><h2>🎾 Tennis ATP / WTA et 🏀 statistiques NBA</h2><p class="sub">Matchs des sportifs suivis au tennis (21 derniers et 14 prochains jours) et statistiques de Victor Wembanyama sur les derniers matchs des Spurs. ESPN : source publique non officielle, couverture partielle.</p>${individualHtml()}</section><section class="panel"><h2>🎾 Historique des matchs — ATP, Challenger et ITF</h2><p class="sub">Moïse Kouamé et tes autres joueurs suivis : résultats historiques, scores et tournois. Les données sont partielles et les relevés manuels sont identifiés.</p>${historyHtml()}</section><section class="panel"><h2>🔎 Rechercher un résultat sur le web</h2>${favorites.map(f=>`<div class="fav"><span class="details">${esc(f.name)}</span><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=${encodeURIComponent(f.name+' dernier résultat sportif')}">Voir ↗</a></div>`).join('')}</section>`;
+if(active==='resultats')return `${latestKouameHtml()}${latestSinnerHtml()}<section class="panel"><h2>🏆 Résultats et prochains matchs</h2><p class="sub">Scores ESPN pour PSG, Real Madrid et Spurs, avec tentative de couverture des coupes, des Bleus en football et du XV de France aux Six Nations. Les statistiques de Wembanyama apparaissent dans le détail des matchs des Spurs. Données non officielles et non exhaustives.</p>${resultHtml()}</section><section class="panel"><h2>🎾 Tennis ATP / WTA et 🏀 détail NBA dans les matchs des Spurs</h2><p class="sub">Matchs des sportifs suivis au tennis (21 derniers et 14 prochains jours) et statistiques de Victor Wembanyama sur les derniers matchs des Spurs. ESPN : source publique non officielle, couverture partielle.</p>${individualHtml()}</section><section class="panel"><h2>🎾 Historique des matchs — ATP, Challenger et ITF</h2><p class="sub">Moïse Kouamé et tes autres joueurs suivis : résultats historiques, scores et tournois. Les données sont partielles et les relevés manuels sont identifiés.</p>${historyHtml()}</section><section class="panel"><h2>🔎 Rechercher un résultat sur le web</h2>${favorites.map(f=>`<div class="fav"><span class="details">${esc(f.name)}</span><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=${encodeURIComponent(f.name+' dernier résultat sportif')}">Voir ↗</a></div>`).join('')}</section>`;
 if(active==='bilan')return renderAudit2026({favorites,historyResults,yearAudit,yearLoading,yearMessage,auditSelected,esc,safeUrl,date});
 if(active==='actualites')return newsHtml();
 if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</h2><form id="addform"><input name="name" placeholder="Nom de l'équipe ou du sportif" maxlength="100" required/><select name="sport">${['Football','Tennis','Rugby','Basketball','Cyclisme','Natation','Tennis de table','Autre'].map(s=>`<option>${s}</option>`).join('')}</select><select name="type"><option value="sportif">Sportif</option><option value="équipe">Équipe</option></select><input name="apiName" placeholder="Nom API (facultatif)" maxlength="100"/><button class="button" type="submit">Ajouter aux favoris</button></form></section><section class="panel"><h2>⭐ Mes favoris (${favorites.length})</h2><select id="sportFilter">${sports.map(s=>`<option ${sportFilter===s?'selected':''}>${esc(s)}</option>`).join('')}</select><input class="search" id="search" value="${esc(search)}" placeholder="Rechercher un favori"/><div id="favoriteList">${favoriteRows()}</div></section>`;
@@ -693,7 +693,7 @@ async function refresh(){
  loading=true;errors=[];scoreNotes=[];individualNotes=[];render();
  try{
   const articles=workerUrl?favorites.slice(0,22):[];
-  const [espn,tennis,newsGroups,extraNews,fflNews]=await Promise.all([
+  const [espn,tennis,newsGroups,extraNews,fflNews,jeuSetMathsNews]=await Promise.all([
    espnResults(),
    tennisResults(),
    Promise.all(articles.map(async f=>{
@@ -709,7 +709,8 @@ async function refresh(){
     try{const response=await request('/api/news',{q:'site:fflose.com sport'});return (response.articles||[])
       .filter(a=>/^https:\/\/fflose\.com\//.test(a.link||''))
       .map(a=>({...a,favorite:'FFL',source:'FFL'}));}catch{return []}
-   })
+   }),
+   fetchJeuSetMathsNews().catch(()=>[])
   ]);
   scoreNotes.push(...espn.notes);
   const seen=new Set();
@@ -719,10 +720,13 @@ async function refresh(){
   }).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).slice(0,160);
   // Un échec d'une feuille de match NBA ne doit jamais bloquer les scores des clubs.
   const nba=await wembanyamaResults(matches);
-  individualResults=[...tennis.events,...nba.events].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+  const trackedWemby=favorites.find(f=>f.type==='sportif'&&f.sport==='Basketball'&&/wemban[yi]ama/i.test(cleanName(f.name)));
+  if(trackedWemby)matches=mergeSpursAndWembanyama(matches,nba.events,trackedWemby.name);
+  // Les stats NBA sont attachées à la rencontre Spurs : pas de seconde carte individuelle.
+  individualResults=tennis.events.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
   individualNotes.push(...tennis.notes,...nba.notes);
-  news=newsLastWeek([...newsGroups.flat(),...extraNews,...fflNews],new Date());
-  if(!workerUrl&&!news.length)errors.push('Aucun article reçu de la FFL ou d’ESPN. Le relais Cloudflare est facultatif.');
+  news=newsLastWeek([...newsGroups.flat(),...extraNews,...fflNews,...jeuSetMathsNews],new Date());
+  if(!workerUrl&&!news.length)errors.push('Aucun article reçu de FFL, ESPN ou Jeu, set et maths. Le relais Cloudflare est facultatif.');
   else if(!news.length)errors.push('Aucune actualité reçue du relais.');
   if(!matches.length&&!scoreNotes.length)scoreNotes.push('Aucune rencontre disponible pour PSG, Real Madrid ou Spurs sur la période consultée.');
  }catch(e){errors.push('Actualisation impossible : '+String(e.message||e));}
@@ -755,10 +759,8 @@ startApp().catch(error=>{
  starting=false;render();
 });
 if('serviceWorker' in navigator){
- let reloaded=false;
- navigator.serviceWorker.addEventListener('controllerchange',()=>{
-  if(!reloaded){reloaded=true;location.reload();}
- });
+ // Une mise à jour de la PWA ne doit JAMAIS recharger l'écran d'un favori.
+ // Le seul rechargement volontaire reste le bouton « Vérifier et recharger ».
  navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>{
   registration.update().catch(()=>{});
   document.addEventListener('visibilitychange',()=>{

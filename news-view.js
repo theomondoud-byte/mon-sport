@@ -1,5 +1,5 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=14.0.0';
+import {filterSportsNews} from './sports-articles.js?v=15.0.0';
 // Mon Sport V9 — dernières 7 journées, lecture à l'intérieur de la PWA.
 // Un titre RSS et un extrait librement fourni ne sont PAS un article intégral.
 // L'iframe de l'éditeur est tentée au clic ; l'éditeur peut refuser l'intégration.
@@ -24,9 +24,10 @@ export function safeExcerpt(value){
 export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date()}){
  const recent=newsLastWeek(news,now);
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span>'
-  +'<h2>Articles sportifs · favoris et FFL</h2>'
+  +'<h2>Articles et posts sportifs · favoris, FFL et Jeu, set et maths</h2>'
   +'<p>Sept derniers jours · du plus récent au plus ancien · sans actualités people.</p>'
-  +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Toutes les actualités FFL ↗</a></div>'
+  +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Actualités FFL ↗</a>'
+  +'<a class="news-ffl-link" href="https://x.com/JeuSetMaths" target="_blank" rel="noopener noreferrer">Posts de Jeu, set et maths ↗</a></div>'
   +'<div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Derniers 7 jours</span></div>';
  const cards=recent.map(n=>{
   const link=safeUrl(n.link);
@@ -45,6 +46,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article récent</h3><p>Les articles plus anciens que sept jours sont masqués.</p></div>')
   +(!hasWorker?'<p class="agenda-footnote">Sources : FFL et ESPN · flux complémentaires via Cloudflare si configuré.</p>':'')
+  +'<p class="agenda-footnote">Les posts X sont résumés en courts extraits avec lien vers la publication originale. Les sources peuvent être temporairement indisponibles.</p>'
   +'<p class="agenda-footnote">Mon Sport affiche uniquement les titres, dates, sources et liens. Le contenu intégral appartient à son éditeur.</p></section>';
 }
 // Compatibilité avec la navigation V9 : aucun iframe n'est utilisé en V10.
