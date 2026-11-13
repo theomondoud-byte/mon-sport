@@ -1,5 +1,5 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=15.0.0';
+import {filterSportsNews} from './sports-articles.js?v=15.4.0';
 // Mon Sport V15.4 — posts de tennis natifs, sans iframe X et sans « Voir plus ».
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -24,8 +24,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span>'
   +'<h2>Articles et posts sportifs · favoris, FFL et Jeu, set et maths</h2>'
   +'<p>Sept derniers jours · publications de tennis affichées ici avec leur texte et leurs médias, sans fenêtre X.</p>'
-  +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Actualités FFL ↗</a>'
-  +'<a class="news-ffl-link" href="https://x.com/JeuSetMaths" target="_blank" rel="noopener noreferrer">Posts de Jeu, set et maths ↗</a></div>'
+  +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Actualités FFL ↗</a></div>'
   +'<div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Derniers 7 jours</span></div>';
  const cards=recent.map(n=>{
   const link=safeUrl(n.link);
