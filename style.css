@@ -680,3 +680,15 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .standings-nba .standings-row{grid-template-columns:20px 112px 28px 28px 50px 44px 42px 48px 48px 48px 48px 48px 48px}
  .standings-table .standings-row>.rank-person{left:22px}
 }
+
+/* ITTF hebdomadaire : 150 hommes et 150 femmes, cinq colonnes utiles. */
+.standings-tabletennis .standings-row{grid-template-columns:28px 205px 59px 84px 60px}
+.standings-tabletennis .rank-country{font-size:.72rem}
+.standings-tabletennis .rank-data.rise{color:#a7f5d3;font-weight:850}
+.standings-tabletennis .rank-data.fall{color:#ffb0b0;font-weight:850}
+.standings-tabletennis .standings-row>.rank-person{left:32px}
+@media(max-width:550px){
+ .standings-tabletennis .standings-row{grid-template-columns:22px 120px 40px 59px 42px}
+ .standings-tabletennis .standings-row>.rank-person{left:24px}
+ .standings-tabletennis .rank-country{font-size:.66rem}
+}
