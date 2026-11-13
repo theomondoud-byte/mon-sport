@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Derniers posts publics du compte X @JeuSetMaths, avec liens originaux.
+"""Texte complet et médias des posts publics @JeuSetMaths pour Mon Sport.
 
 Lecture d'une page publique indexant les posts (pas de clé privée).
 Si la source échoue, aucune publication fictive ne remplace le dernier relevé.
@@ -55,22 +55,41 @@ def parse_posts(html, *, now=None):
         text = re.sub(r"\s+", " ", text).strip()
         if len(text) < 18 or text.startswith("@"):
             continue
-        # Présentation d'un extrait, et non copie complète des longs posts.
+        # Le titre court reste utile pour la liste, le contenu est stocké séparément.
         title = text[:170].rstrip()
         if len(text) > 170:
             title = title.rsplit(" ", 1)[0] + "…"
-        image = None
-        for img in item.select("img"):
-            url = str(img.get("src") or "")
-            if re.match(r"^https://pbs\.twimg\.com/media/", url):
-                image = url
+        # Tous les visuels d'origine fournis par le miroir, sans galerie X externe.
+        images = []
+        for link in item.select(".attachments a.still-image[href]"):
+            image_url = str(link.get("href") or "")
+            if (re.match(r"^https://pbs\.twimg\.com/media/[\w.-]+(?:\?[^\s]*)?$", image_url)
+                    and image_url not in images):
+                images.append(image_url)
+            if len(images) >= 4:
+                break
+        if not images:
+            for img in item.select(".attachments img[src]"):
+                image_url = str(img.get("src") or "")
+                if (re.match(r"^https://pbs\.twimg\.com/media/", image_url)
+                        and image_url not in images):
+                    images.append(image_url)
+                if len(images) >= 4:
+                    break
+        video = None
+        for source in item.select(".attachments video source[src]"):
+            video_url = str(source.get("src") or "")
+            if re.match(r"^https://video\.twimg\.com/[\w/.-]+\.mp4(?:\?[^\s]*)?$", video_url):
+                video = video_url
                 break
         used.add(id)
         output.append({
-            "title": title, "link": f"https://x.com/JeuSetMaths/status/{id}",
+            "title": title, "text": text[:12000],
+            "link": f"https://x.com/JeuSetMaths/status/{id}",
             "date": date.isoformat(), "source": "Jeu, set et maths",
             "favorite": "Jeu, set et maths", "sport": "Tennis",
-            "image": image
+            "image": images[0] if images else None,
+            "images": images, "video": video
         })
     return sorted(output, key=lambda x: x["date"], reverse=True)[:25]
 
