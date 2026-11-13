@@ -808,6 +808,9 @@ test('Jeu, set et maths : texte complet et toutes les images sans fenêtre X ni 
  assert.match(html,/2026 : Mirra Andreeva/);
  assert.equal((html.match(/class="jsm-native-image"/g)||[]).length,2);
  assert.match(html,/class="jsm-native-video" controls playsinline/);
+ assert.match(html,/referrerpolicy="no-referrer"/);
+ assert.match(html,/<source src="https:\/\/video\.twimg\.com\/amplify_video\/2120297845689638912\/vid\/avc1\/1080x598\/example\.mp4\?tag=29" type="video\/mp4"/);
+ assert.match(html,/<source src="https:\/\/video\.twimg\.com\/amplify_video\/2120297845689638912\/vid\/avc1\/1080x598\/example\.mp4" type="video\/mp4"/);
  assert.match(html,/Source originale/);
  assert.doesNotMatch(html,/Voir plus|Voir moins|<details|<iframe|news-x-viewport|data-x-expand/);
  assert.doesNotMatch(html,/class="news-plain-link"[^>]*href="https:\/\/x\.com/);
@@ -942,4 +945,77 @@ test('Workflow maintient à jour le module de secours des publications',async()=
  assert.match(workflow,/data\/jeu-set-et-maths-bundle\.js/);
  const source=await readFile(new URL('../sports-articles.js',import.meta.url),'utf8');
  assert.match(source,/import \{jeuSetMathsBundledData\}/);
+});
+
+test('V15.7 : un même sujet publié par deux médias ne remplit qu’une carte',()=>{
+ const now=new Date('2026-11-13T12:00:00Z');
+ const items=[
+  {title:'Victor Wembanyama inscrit 40 points face aux Lakers',
+   date:'2026-11-13T10:00:00Z',link:'https://espn.com/story/wemby-40',
+   source:'ESPN',favorite:'Victor Wembanyama',sport:'Basketball',excerpt:'Résumé court.'},
+  {title:'Victor Wembanyama marque 40 points contre les Lakers',
+   date:'2026-11-13T10:20:00Z',link:'https://basketusa.com/article/wemby-40',
+   source:'Basket USA',favorite:'Victor Wembanyama',sport:'Basketball',
+   excerpt:'Compte rendu complet de la même rencontre, avec un résumé détaillé et les statistiques.'},
+  {title:'Le PSG prépare son prochain match de Ligue 1',
+   date:'2026-11-13T09:00:00Z',link:'https://fflose.com/psg-match',
+   source:'FFL',favorite:'FFL',sport:'Football'}
+ ];
+ const result=newsLastWeek(items,now);
+ assert.equal(result.length,2);
+ assert.ok(result.some(n=>n.source==='Basket USA'));
+ assert.ok(result.some(n=>n.source==='FFL'));
+});
+
+test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
+ const now=new Date('2026-11-13T12:00:00Z');
+ const posts=[
+  {title:'📊 Mirra Andreeva et les statistiques du Masters WTA',
+   text:'Mirra Andreeva améliore ses statistiques au tennis.',
+   date:'2026-11-13T10:00:00Z',link:'https://x.com/JeuSetMaths/status/2120668453770305629',
+   source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis'},
+  {title:'Le PSG prépare son prochain match de Ligue 1',
+   date:'2026-11-13T09:00:00Z',link:'https://fflose.com/psg-match',
+   source:'FFL',favorite:'FFL',sport:'Football'},
+  {title:'Victor Wembanyama brille encore avec les Spurs',
+   date:'2026-11-13T08:00:00Z',link:'https://espn.com/nba/wemby',
+   source:'ESPN',favorite:'Victor Wembanyama',sport:'Basketball'}
+ ];
+ const args={news:posts,now,esc:x=>String(x),safeUrl:x=>x,photos:{},
+  favorites:[{name:'Mirra Andreeva',sport:'Tennis',apiName:'Mirra Andreeva'},
+   {name:'PSG',sport:'Football',apiName:'Paris Saint Germain'},
+   {name:'Victor Wembanyama',sport:'Basketball',apiName:'Victor Wembanyama'}]};
+ const all=renderNewsView(args);
+ assert.match(all,/data-news-source="FFL"/);
+ assert.match(all,/data-news-source="ESPN"/);
+ assert.match(all,/data-news-source="Jeu, set et maths"/);
+ assert.match(all,/Le PSG prépare/);
+ assert.match(all,/Victor Wembanyama brille/);
+ assert.match(all,/Mirra Andreeva et les statistiques/);
+ const ffl=renderNewsView({...args,sourceFilter:'FFL'});
+ assert.match(ffl,/Le PSG prépare/);
+ assert.doesNotMatch(ffl,/Victor Wembanyama brille/);
+ assert.doesNotMatch(ffl,/class="news-card jsm-native-card"/);
+ const basketball=renderNewsView({...args,sportFilter:'Basketball'});
+ assert.match(basketball,/Victor Wembanyama brille/);
+ assert.doesNotMatch(basketball,/Le PSG prépare/);
+ assert.doesNotMatch(basketball,/class="news-card jsm-native-card"/);
+ const wemby=renderNewsView({...args,favoriteFilter:'Victor Wembanyama'});
+ assert.match(wemby,/Victor Wembanyama brille/);
+ assert.doesNotMatch(wemby,/Le PSG prépare/);
+});
+
+test('V15.7 : la PWA supprime le Referer pour permettre la lecture des vidéos X',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const index=await readFile(new URL('../index.html',import.meta.url),'utf8');
+ assert.match(index,/<meta name="referrer" content="no-referrer"\/>/);
+ const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
+ assert.match(sw,/mon-sport-v15-7/);
+ assert.match(sw,/news-view\.js\?v=15\.7\.0/);
+ assert.match(sw,/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.match(app,/newsSourceFilter='Tous'/);
+ assert.match(app,/data-news-source/);
+ assert.match(app,/newsSportFilter/);
+ assert.match(app,/newsFavoriteFilter/);
 });
