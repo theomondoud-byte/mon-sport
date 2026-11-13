@@ -807,65 +807,6 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .stat-ranking-grid .stat-tile{min-height:61px}
 .stat-ranking-grid .stat-tile small{color:#bdd8e3}
 
-/* V15.1 — lecture des publications Jeu, set et maths dans l'application. */
-.news-post-card{overflow:hidden}
-.news-post-summary{display:flex!important;align-items:stretch;gap:12px;padding:11px!important;list-style:none;cursor:pointer}
-.news-post-summary::-webkit-details-marker{display:none}
-.news-post-summary:focus-visible{outline:3px solid #a3daff;outline-offset:-3px}
-.news-post-summary:hover{background:#1d4257}
-.news-post-summary .news-text{display:block;min-width:0;flex:1}
-.news-post-summary h3{margin:8px 0 7px}
-.news-post-summary .news-tap{display:flex;align-items:center;justify-content:space-between;gap:9px}
-.news-expand-chevron{display:inline-block;transition:transform .2s ease}
-.news-post-card[open] .news-expand-chevron{transform:rotate(180deg)}
-.jsm-reader{display:grid;gap:10px;padding:14px}
-.jsm-reader .news-excerpt{margin:0;font-size:.95rem;line-height:1.55;white-space:normal;overflow-wrap:anywhere}
-.jsm-reader-visual{max-width:640px;margin:2px auto;width:100%;border-radius:11px;overflow:hidden;background:#102637}
-.jsm-reader-image{display:block;width:100%;height:auto;max-height:76vh;object-fit:contain}
-.jsm-image-error{display:none;padding:14px;color:#cbd8e0;font-size:.83rem;text-align:center}
-.jsm-reader-visual.image-failed .jsm-reader-image{display:none}
-.jsm-reader-visual.image-failed .jsm-image-error{display:block}
-.jsm-reader .news-reading-info{font-size:.76rem;line-height:1.5;margin:0;color:#b3cdd7}
-.jsm-original-link{font-size:.81rem;color:#a9efd4;text-decoration:underline;justify-self:start}
-@media(max-width:580px){
- .news-post-summary{gap:9px;padding:9px!important}
- .jsm-reader{padding:10px;gap:9px}
- .jsm-reader .news-excerpt{font-size:.89rem}
- .jsm-reader-image{max-height:70vh}
-}
-@media(prefers-reduced-motion:reduce){.news-expand-chevron{transition:none}}
-
-/* V15.2 — post original intégré via le widget officiel X, à la demande. */
-.jsm-official-embed{width:100%;max-width:580px;min-width:0;margin:0 auto;min-height:40px}
-.jsm-official-embed iframe{max-width:100%!important}
-.jsm-embed-status,.jsm-embed-fallback{font-size:.83rem;line-height:1.5;color:#c7dbe3}
-.jsm-embed-status{margin:8px auto;text-align:center}
-.jsm-embed-fallback{padding:10px;background:#263e50;border-radius:9px}
-.jsm-embed-fallback[hidden]{display:none}
-.jsm-embed-fallback .news-excerpt{margin:6px 0}
-@media(max-width:550px){.jsm-official-embed{width:100%}.jsm-embed-status{font-size:.75rem}}
-
-/* V15.3 — publications X visibles dans le fil, expansion locale sans redirection. */
-.news-x-inline{display:flex;flex-direction:column;gap:8px;padding:11px 12px;min-width:0}
-.news-x-byline{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.news-x-viewport{position:relative;max-height:380px;overflow:hidden;min-width:0;transition:none}
-.news-x-viewport::after{content:"";pointer-events:none;position:absolute;left:0;right:0;bottom:0;height:58px;
- background:linear-gradient(to bottom,transparent,#143449)}
-.news-x-expanded .news-x-viewport{max-height:none;overflow:visible}
-.news-x-expanded .news-x-viewport::after{display:none}
-.news-x-inline .jsm-official-embed{max-width:580px;min-height:165px;width:100%;margin:0 auto}
-.news-x-inline .jsm-official-embed iframe{max-width:100%!important}
-.news-x-expand{border:1px solid #599594;border-radius:9px;background:#214d58;color:#e3fff4;
- font-size:.84rem;font-weight:800;cursor:pointer;min-height:38px;padding:7px 12px;align-self:stretch}
-.news-x-expand:focus-visible{outline:3px solid #b7f1e0;outline-offset:2px}
-.news-x-expand:hover{background:#306576}
-.news-x-inline>.jsm-original-link{align-self:center}
-@media(max-width:560px){
- .news-x-inline{padding:8px;gap:6px}
- .news-x-viewport{max-height:320px}
- .news-x-expand{min-height:42px;font-size:.78rem}
-}
-
 /* V15.4 : posts natifs. Ni iframe X, ni fenêtre recadrée, ni bouton « Voir plus ». */
 .jsm-native-card{display:flex;flex-direction:column;gap:12px;padding:14px;overflow:visible;min-width:0}
 .jsm-native-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
