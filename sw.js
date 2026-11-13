@@ -1,10 +1,10 @@
 // V15.5 : données d'articles incluses au cache PWA pour la lecture Android hors ligne.
-const CACHE = 'mon-sport-v15-5';
+const CACHE = 'mon-sport-v15-6';
 const ASSETS = [
   './',
   './index.html',
-  './style.css?v=15.5.0',
-  './src.js?v=15.5.0',
+  './style.css?v=15.6.0',
+  './src.js?v=15.6.0',
   './session-loader.js?v=14.9.0',
   './tennis-history.js?v=14.0.0',
   './audit-2026.js?v=14.0.0',
@@ -18,14 +18,14 @@ const ASSETS = [
   './match-details.js?v=14.0.0',
   './sports-profiles.js?v=14.0.0',
   './event-details.js?v=15.0.0',
-  './news-view.js?v=15.5.0',
+  './news-view.js?v=15.6.0',
   './verified-program.js?v=14.0.0',
   './verified-extra-v11.js?v=14.0.0',
   './coverage-v11.js?v=14.0.0',
   './rankings-view.js?v=14.9.0',
-  './sports-articles.js?v=15.5.0',
+  './sports-articles.js?v=15.6.0',
   './sports-media.js?v=14.0.0',
-  './data/jeu-set-et-maths.json', // Dernier relevé vérifié : disponible hors connexion sur Android.
+  './data/jeu-set-et-maths-bundle.js?v=15.6.0', // Données embarquées, chargées sans fetch JSON.\n  './data/jeu-set-et-maths.json', // Dernier relevé vérifié : disponible hors connexion sur Android.
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png'
