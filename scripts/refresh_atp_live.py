@@ -42,21 +42,26 @@ def parse(html, debug=False):
         live_points=integer(txt(cells[6]))
         movement=integer(txt(cells[7]))
         points_change=integer(txt(cells[8]))
-        tournament=txt(cells[9])[:120] if len(cells)>9 else ""
+        tournament=txt(cells[9])[:160] if len(cells)>9 else ""
+        previous_tournaments=txt(cells[10])[:240] if len(cells)>10 else ""
+        career_high=txt(cells[1])[:35] if len(cells)>1 else ""
+        # Une défaite ne se déduit jamais de la variation des points :
+        # elle est reconnue uniquement par une mention explicite de la source.
+        has_loss=bool(re.search(r"\\b(?:défaite|perdu|éliminé|lost(?: in)?)\\b",
+                                previous_tournaments,re.I))
+        status="defaite" if has_loss and not tournament else (
+            "en_lice" if tournament else "non_communique")
         next_points=integer(txt(cells[11])) if len(cells)>11 else None
         max_points=integer(txt(cells[12])) if len(cells)>12 else None
         if rank is None or not name or live_points is None or rank<1 or rank>150:
             continue
         if (next_points is not None and next_points<live_points) or (max_points is not None and max_points<live_points):
             raise RuntimeError("Projection incohérente pour "+name)
-        if debug and rank in (1,9,11,18,26,29,61,73,150):
-            print("CELL_DIAG", rank,
-                  [(i, c.get("class"), txt(c)[:125],c.get("title"),
-                    [d.get("title") for d in c.select("[title]")][:2]) for i,c in enumerate(cells)])
         row={"rank":rank,"name":name,"livePoints":live_points,
             "movement":movement,"pointsChange":points_change,
-            "age":age,"country":country,"tournament":tournament,
-            "nextPoints":next_points,"maxPoints":max_points}
+            "age":age,"country":country,"careerHigh":career_high,
+            "tournament":tournament,"previousTournaments":previous_tournaments,
+            "tournamentStatus":status,"nextPoints":next_points,"maxPoints":max_points}
         if debug and len(rows)<2: print("EXTRACTED_ROW",row)
         rows.append(row)
     rows=sorted({r["rank"]:r for r in rows}.values(),key=lambda r:r["rank"])
