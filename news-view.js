@@ -25,7 +25,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  const recent=newsLastWeek(news,now);
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span>'
   +'<h2>Articles et posts sportifs · favoris, FFL et Jeu, set et maths</h2>'
-  +'<p>Sept derniers jours · du plus récent au plus ancien · sans actualités people.</p>'
+  +'<p>Sept derniers jours · du plus récent au plus ancien · sans actualités people. Les posts de Jeu, set et maths se lisent directement ici.</p>'
   +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Actualités FFL ↗</a>'
   +'<a class="news-ffl-link" href="https://x.com/JeuSetMaths" target="_blank" rel="noopener noreferrer">Posts de Jeu, set et maths ↗</a></div>'
   +'<div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Derniers 7 jours</span></div>';
@@ -37,6 +37,26 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
   const image=sourceImage(n.image)||sourceImage(photos?.[n.favorite]?.src);
   const picture=image?'<span class="article-visual"><img class="article-thumb-image" loading="lazy" decoding="async" src="'+esc(image)+'" alt="" /><span class="article-image-fallback" aria-hidden="true">'+sport.icon+'</span></span>'
    :'<span class="article-visual article-visual-empty" aria-hidden="true">'+sport.icon+'</span>';
+  // Les publications du compte Jeu, set et maths s'ouvrent dans la PWA.
+  // Seuls l'extrait public et le visuel source sont affichés, sans copie intégrale.
+  if(n.source==='Jeu, set et maths'&&/^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(n.link||'')){
+   const fullImage=sourceImage(n.image);
+   const visual=fullImage?'<div class="jsm-reader-visual"><img class="jsm-reader-image" loading="lazy" decoding="async" src="'+esc(fullImage)+'" alt="Visuel du post de Jeu, set et maths, contenant éventuellement un graphique de statistiques de tennis" />'
+    +'<p class="jsm-image-error" role="status">Visuel indisponible depuis la source X.</p></div>':'';
+   return '<details class="news-card news-post-card">'
+    +'<summary class="news-post-summary">'+picture
+    +'<span class="news-text"><span class="news-card-top"><span class="news-sport" aria-label="Tennis">🎾 Tennis</span>'
+    +'<span class="news-date">'+esc(published)+'</span></span>'
+    +'<h3>'+esc(n.title)+'</h3><p class="news-source">Jeu, set et maths</p>'
+    +'<span class="news-tap">Voir le post dans Mon Sport <span class="news-expand-chevron" aria-hidden="true">⌄</span></span>'
+    +'</span></summary>'
+    +'<div class="news-reader jsm-reader"><p class="news-article-label">📊 JEU, SET ET MATHS</p>'
+    +'<p class="news-excerpt">'+esc(n.title)+'</p>'
+    +visual
+    +'<p class="news-reading-info">Extrait de la publication et visuel d’origine. Si le post contient davantage de texte, l’extrait ne le reproduit pas intégralement.</p>'
+    +'<a class="jsm-original-link" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Voir la publication originale sur X ↗</a>'
+    +'</div></details>';
+  }
   return '<article class="news-card news-link-card"><a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" class="news-plain-link">'
     +picture+'<span class="news-text"><span class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
     +'<span class="news-date">'+esc(published)+'</span></span>'
@@ -46,10 +66,10 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article récent</h3><p>Les articles plus anciens que sept jours sont masqués.</p></div>')
   +(!hasWorker?'<p class="agenda-footnote">Sources : FFL et ESPN · flux complémentaires via Cloudflare si configuré.</p>':'')
-  +'<p class="agenda-footnote">Les posts X sont résumés en courts extraits avec lien vers la publication originale. Les sources peuvent être temporairement indisponibles.</p>'
+  +'<p class="agenda-footnote">Les posts « Jeu, set et maths » s’ouvrent ici, avec leur extrait et leur visuel d’origine. Le lien X reste facultatif ; un contenu plus long peut nécessiter la source.</p>'
   +'<p class="agenda-footnote">Mon Sport affiche uniquement les titres, dates, sources et liens. Le contenu intégral appartient à son éditeur.</p></section>';
 }
-// Compatibilité avec la navigation V9 : aucun iframe n'est utilisé en V10.
+// Lecture intégrée des posts : aucun iframe externe, pas de sortie obligatoire vers X.
 export function mountNewsFrames(){}
 
 // Sources complémentaires directes : annonces ESPN avec description officielle.
