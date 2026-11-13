@@ -62,17 +62,20 @@ export function rankingForFavorite(favorite){
  if(name==='FC Barcelone'||name==='Real Madrid'||name==='Kylian Mbappé')return 'liga';
  return null;
 }
-export function rankingsForFavorite(favorite){
- const name=typeof favorite==='string'?favorite:favorite?.name;
- if(name==='Mirra Andreeva')return ['wta','wtarace'];
- if(name==='Rafael Jódar'||name==='Moïse Kouamé')return ['atp','atprace','nextgen'];
- if(['Arthur Fils','Jannik Sinner','Carlos Alcaraz'].includes(name))return ['atp','atprace'];
- if(['Félix Lebrun','Alexis Lebrun','Flavien Coton'].includes(name))return ['wtt'];
- if(name==='PSG')return ['ligue1','ucl'];
- if(name==='FC Barcelone'||name==='Real Madrid')return ['liga','ucl'];
- if(name==='San Antonio Spurs'||name==='Victor Wembanyama')return ['nbaouest'];
- if(name==='Kylian Mbappé')return ['liga','ucl'];
- return [];
+export function rankingsForFavorite(favorite,live={}){
+ const name=typeof favorite==='string'?favorite:favorite?.name||'';
+ const predefined=name==='Mirra Andreeva'?['wta','wtarace']:
+  ['Rafael Jódar','Moïse Kouamé'].includes(name)?['atp','atprace','nextgen']:
+  ['Arthur Fils','Jannik Sinner','Carlos Alcaraz'].includes(name)?['atp','atprace']:
+  ['Félix Lebrun','Alexis Lebrun','Flavien Coton'].includes(name)?['wtt']:
+  name==='PSG'?['ligue1','ucl']:
+  ['FC Barcelone','Real Madrid','Kylian Mbappé'].includes(name)?['liga','ucl']:
+  ['San Antonio Spurs','Victor Wembanyama'].includes(name)?['nbaouest']:[];
+ // Un favori créé par l'utilisateur est aussi reconnu lorsqu'il apparaît dans un classement chargé.
+ const direct=RANKINGS.filter(spec=>Array.isArray(live?.[spec.id]?.rows)&&
+  live[spec.id].rows.some(row=>norm(row.name)===norm(name)||
+   (knownTeams[name]||[]).some(alias=>norm(row.name)===norm(alias)))).map(spec=>spec.id);
+ return [...new Set([...predefined,...direct])];
 }
 const displayStat=(list,keys)=>{
  for(const key of keys){
@@ -363,7 +366,7 @@ export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
  const cards=rows.map(row=>{
   const fav=matchRankingFavorite(row.name,favorites);
   const name=fav?'<button type="button" class="rank-favorite-link" data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Favoris">'+esc(row.name)+'</button>':esc(row.name);
-  const who='<span class="rank-person">'+logo(row)+name+'</span>';
+  const who='<span class="rank-person" title="'+esc(row.name)+'">'+logo(row)+name+'</span>';
   if(tableTennis){
    const mv=row.movement;
    const mark=typeof mv==='number'?(mv>0?'▲ '+mv:mv<0?'▼ '+Math.abs(mv):'▬'):'—';
@@ -466,9 +469,10 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    const countryFlag=({'BLR':'🇧🇾','LAT':'🇱🇻','PHI':'🇵🇭','BOL':'🇧🇴','BUL':'🇧🇬','FIN':'🇫🇮','HKG':'🇭🇰','PER':'🇵🇪','PAR':'🇵🇾','DEN':'🇩🇰','LTU':'🇱🇹','GER':'🇩🇪','ITA':'🇮🇹','ESP':'🇪🇸','USA':'🇺🇸','FRA':'🇫🇷','RUS':'🇷🇺','AUS':'🇦🇺','SRB':'🇷🇸','GBR':'🇬🇧','NOR':'🇳🇴','MON':'🇲🇨','CAN':'🇨🇦','CHN':'🇨🇳','BRA':'🇧🇷','ARG':'🇦🇷','CZE':'🇨🇿','NED':'🇳🇱','POL':'🇵🇱','BEL':'🇧🇪','SUI':'🇨🇭','CHI':'🇨🇱','POR':'🇵🇹','KAZ':'🇰🇿','JPN':'🇯🇵','HUN':'🇭🇺','CRO':'🇭🇷','AUT':'🇦🇹','COL':'🇨🇴','GRE':'🇬🇷','RSA':'🇿🇦','SVK':'🇸🇰','UKR':'🇺🇦','ROU':'🇷🇴','TUR':'🇹🇷','BIH':'🇧🇦','GEO':'🇬🇪','IND':'🇮🇳'}[r.country]||'');
    return '<div class="rank-row atp-live-row '+(clickable?'rank-tracked':'')+'">'
     +'<span class="rank-place">'+esc(r.rank)+'</span>'
-    +'<span class="rank-person">'
+    +(hasCareer?'<span class="rank-career">'+career+'</span>':'')
+    +'<span class="rank-person" title="'+esc(r.name)+'">'
       +(countryFlag?'<span class="rank-flag-mobile" role="img" aria-label="'+esc(r.country)+'">'+countryFlag+'</span>':'')
-      +name+(hasCareer&&ch?'<span class="rank-career-inline '+(/^(NMC|MC|NCH|CH)/i.test(ch)?'best':'')+'" title="Meilleur classement : '+esc(ch)+'">'+esc(ch)+'</span>':'')
+      +name
     +'</span>'
     +cell(r.age,'rank-number','Âge selon le relevé')
     +'<span class="rank-country">'+countryFlag+' '+esc(r.country||'—')+'</span>'
@@ -525,7 +529,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    ?'<p class="rank-horizontal-hint">↔ Fais défiler pour voir les tournois et projections. Résultats signalés dans les deux colonnes de tournoi.</p>'
     +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : tableau défilant">'
     +'<div class="rank-table atp-live-table '+(hasCareer?'':'race-no-career')+'"><div class="rank-table-head atp-live-row">'
-    +'<span class="rank-place">#</span><span class="rank-person">'+(hasCareer?'Joueur · MC':'Joueur')+'</span><span>Âge</span><span class="rank-country">Pays</span><span>Pts</span><span>Δ rang</span><span>Δ pts</span>'
+    +'<span class="rank-place">#</span>'+(hasCareer?'<span class="rank-career">MC</span>':'')+'<span class="rank-person">Joueur</span><span>Âge</span><span class="rank-country">Pays</span><span>Pts</span><span>Δ rang</span><span>Δ pts</span>'
     +'<span>Tournoi en cours</span><span>Tournoi précédent</span><span>Suiv.</span><span>Max</span>'
     +'</div>'+cards+'</div></div>'
    :tennisColumns
