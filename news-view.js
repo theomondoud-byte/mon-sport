@@ -200,10 +200,10 @@ export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
    const description=safeExcerpt(a.description||a.story||'');
    const date=a.published||a.lastModified||'';
    const text=normalized(title+' '+description);
+   const words=new Set(text.split(/\\s+/));
    const fav=favorites.find(f=>aliases(f.name).some(alias=>{
     if(alias.includes(' '))return text.includes(alias);
-    if(alias==='psg')return /\\bpsg\\b/.test(text);
-    return alias.length>=6&&new RegExp('\\\\b'+alias.replace(/[.*+?^${'{}'}()|[\\]\\\\]/g,'\\\\const fav=favorites.find(f=>aliases(f.name).some(alias=>alias.length>3&&text.includes(alias)));')+'\\\\b').test(text);
+    return alias.length>=3&&words.has(alias);
    }));
    if(!fav||!/^https?:\/\//.test(link))return null;
    const image=(a.images||a.image||[]);
