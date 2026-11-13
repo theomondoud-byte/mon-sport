@@ -17,8 +17,11 @@ async function news(q){
  const articles=items.map(item=>{
   const date=tag(item,'pubDate'),time=Date.parse(date);
   if(!Number.isFinite(time)||time<start||time>now+600000)return null;
+  const media=item.match(/<media:(?:thumbnail|content)\\b[^>]*\\burl=["']([^"']+)["']/i)?.[1]
+   ||item.match(/<enclosure\\b[^>]*\\burl=["']([^"']+)["'][^>]*\\btype=["']image\\//i)?.[1]||'';
+  const image=decode(media);
   return {title:tag(item,'title'),link:tag(item,'link'),source:tag(item,'source')||'Google Actualités',date,
-   excerpt:plain(tag(item,'description')).slice(0,550)};
+   excerpt:plain(tag(item,'description')).slice(0,550),image:/^https:\/\//i.test(image)?image:''};
  }).filter(x=>x&&x.title&&/^https?:\/\//.test(x.link)).sort((x,y)=>Date.parse(y.date)-Date.parse(x.date));
  return {articles:articles.slice(0,12)};
 }
