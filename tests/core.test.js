@@ -1058,3 +1058,15 @@ test('V16.1 : une seule version pour tous les fichiers de la PWA',async()=>{
 test('V16.1 : les extraits décodent les entités numériques et compactent les espaces',()=>{
  assert.equal(safeExcerpt('L&#39;équipe   de&#x20;France\n\n gagne'),"L'équipe de France gagne");
 });
+
+test('V16.2 : ouverture immédiate avec les dernières données et actualisation en arrière-plan',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.match(app,/SNAPSHOT_KEY='monsport-snapshot-v1'/);
+ assert.match(app,/lastUpdated=Date\.now\(\);writeSnapshot\(\);/);
+ assert.match(app,/setTimeout\(resolve,starting\?4000:0\)/);
+ assert.doesNotMatch(app,/setTimeout\(resolve,22000\)/);
+ // Pas de rendu en arrière-plan pendant une saisie dans un formulaire.
+ assert.match(app,/function softRender\(\)/);
+ assert.match(app,/pendingRender=true;return;/);
+});
