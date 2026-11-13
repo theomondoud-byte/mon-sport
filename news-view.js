@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=16.0.0';
-// Mon Sport V15.9 — fil chronologique, sélection de sources et lecture intégrée.
+import {sportInfo,sourceImage} from './sports-media.js?v=16.1.0';
+import {filterSportsNews} from './sports-articles.js?v=16.1.0';
+// Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
 const normalized=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
@@ -51,7 +51,12 @@ export function newsLastWeek(items,now=new Date()){
   if(index<0)ordered.push(article);
   else if(newsRichness(article)>newsRichness(ordered[index]))ordered[index]=article;
  }
- return ordered.slice(0,100).sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published));
+ // Les publications Jeu, set et maths (25 max) sont toujours conservées,
+ // même si le fil des favoris dépasse la limite de 100 cartes.
+ const isMaths=n=>n.source==='Jeu, set et maths';
+ const maths=ordered.filter(isMaths).slice(0,25);
+ const others=ordered.filter(n=>!isMaths(n)).slice(0,100-maths.length);
+ return [...maths,...others].sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published));
 }
 function newsSourceName(article){
  const value=String(article.source||article.publisher||article.provider||'').trim();
@@ -95,10 +100,10 @@ function videoCandidates(value){
 const HTML_ENTITIES={"eacute":"é","egrave":"è","ecirc":"ê","euml":"ë","agrave":"à","acirc":"â","auml":"ä","ccedil":"ç","ocirc":"ô","oelig":"œ","ugrave":"ù","ucirc":"û","uuml":"ü","iuml":"ï","icirc":"î","yuml":"ÿ","Eacute":"É","Egrave":"È","Ecirc":"Ê","Euml":"Ë","Agrave":"À","Acirc":"Â","Auml":"Ä","Ccedil":"Ç","Ocirc":"Ô","Oelig":"Œ","Ugrave":"Ù","Ucirc":"Û","Uuml":"Ü","Iuml":"Ï","Icirc":"Î","Yuml":"Ÿ","nbsp":" ","rsquo":"’","lsquo":"‘","rdquo":"”","ldquo":"“","ndash":"–","mdash":"—","hellip":"…","euro":"€","apos":"'","quot":"\"","amp":"&","lt":"<","gt":">"};
 export function safeExcerpt(value){
  return String(value||'').replace(/<[^>]*>/g,' ')
-  .replace(/&#(\\d+);/g,(_,n)=>String.fromCodePoint(+n))
+  .replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(+n))
   .replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16)))
   .replace(/&([a-z]+);/gi,(all,name)=>HTML_ENTITIES[name]??all)
-  .replace(/\\s+/g,' ').trim().slice(0,600);
+  .replace(/\s+/g,' ').trim().slice(0,600);
 }
 export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[]}={}){
  const recentAll=newsLastWeek(news,now);

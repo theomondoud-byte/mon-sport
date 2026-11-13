@@ -5,7 +5,7 @@ import {makeAgenda,agendaMatches,mergeSpursAndWembanyama,shiftedMonths} from '..
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
-import {newsLastWeek,renderNewsView} from '../news-view.js';
+import {newsLastWeek,renderNewsView,safeExcerpt} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
@@ -881,8 +881,8 @@ test('Mobile : les posts statistiques restent visibles même avec 90 actualités
   source:'Jeu, set et maths',sport:'Tennis'
  }));
  const feed=newsLastWeek([...others,...maths],now);
- assert.equal(feed.filter(x=>x.source==='Jeu, set et maths').length,10);
- assert.ok(feed.length<=85);
+ assert.equal(feed.filter(x=>x.source==='Jeu, set et maths').length,15);
+ assert.ok(feed.length<=100);
 });
 
 test('Android : les posts se chargent indépendamment des scores ESPN',async()=>{
@@ -894,7 +894,7 @@ test('Android : les posts se chargent indépendamment des scores ESPN',async()=>
  assert.match(app,/refresh\(\),\s*loadJeuSetMathsPosts\(\),\s*refreshHistory\(\)/);
  const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
  assert.match(sw,/\.\/data\/jeu-set-et-maths\.json/);
- assert.match(sw,/\.\/data\/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
+ assert.match(sw,/\.\/data\/jeu-set-et-maths-bundle\.js\?v=/);
  const css=await readFile(new URL('../style.css',import.meta.url),'utf8');
  assert.match(css,/\.jsm-native-text\{white-space:pre-line/);
 });
@@ -998,7 +998,7 @@ test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
  assert.doesNotMatch(ffl,/class="news-card jsm-native-card"/);
  const espn=renderNewsView({...args,selectedSources:['ESPN']});
  assert.match(espn,/Victor Wembanyama brille/);
- assert.match(espn,/Le PSG prépare/);
+ assert.doesNotMatch(espn,/Le PSG prépare/);
  assert.doesNotMatch(espn,/class="news-card jsm-native-card"/);
  assert.doesNotMatch(all,/newsSportFilter|newsFavoriteFilter/);
  assert.match(all,/Tri chronologique/);
@@ -1009,9 +1009,9 @@ test('V15.8 : la PWA charge les sources RSS et conserve la lecture vidéo X',asy
  const index=await readFile(new URL('../index.html',import.meta.url),'utf8');
  assert.match(index,/<meta name="referrer" content="no-referrer"\/>/);
  const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
- assert.match(sw,/mon-sport-v15-9/);
- assert.match(sw,/news-view\.js\?v=15\.9\.0/);
- assert.match(sw,/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
+ assert.match(sw,/mon-sport-v\d+-\d+/);
+ assert.match(sw,/news-view\.js\?v=/);
+ assert.match(sw,/jeu-set-et-maths-bundle\.js\?v=/);
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
  assert.match(app,/newsSelectedSources=\[\]/);
  assert.match(app,/data-news-source/);
@@ -1032,4 +1032,29 @@ test('V15.8 : les extraits des médias RSS sont lisibles directement dans les ca
  assert.match(html,/Le jeune coureur français revient sur sa préparation et ses objectifs\./);
  assert.match(html,/Lire dans Mon Sport/);
  assert.match(html,/Cyclism'Actu/);
+});
+
+test('V16.1 : une seule version pour tous les fichiers de la PWA',async()=>{
+ const {readFile,readdir}=await import('node:fs/promises');
+ const root=new URL('../',import.meta.url);
+ const {APP_VERSION}=await import('../version.js');
+ const sw=await readFile(new URL('sw.js',root),'utf8');
+ const index=await readFile(new URL('index.html',root),'utf8');
+ const [major,minor]=APP_VERSION.split('.');
+ assert.match(sw,new RegExp(`const CACHE = 'mon-sport-v${major}-${minor}'`));
+ const modules=(await readdir(root)).filter(f=>f.endsWith('.js')&&f!=='sw.js');
+ const requested=new Set();
+ for(const file of [...modules,'index.html','sw.js']){
+  const text=file==='index.html'?index:file==='sw.js'?sw:await readFile(new URL(file,root),'utf8');
+  for(const [,ref,version] of text.matchAll(/\.\/([\w./-]+\.(?:js|css))\?v=(\d+\.\d+\.\d+)/g)){
+   assert.equal(version,APP_VERSION,`${file} référence ${ref} en v${version}`);
+   if(file!=='sw.js')requested.add(ref);
+  }
+ }
+ // Chaque fichier réellement demandé doit être disponible hors connexion.
+ for(const ref of requested)assert.ok(sw.includes(`'./${ref}?v=${APP_VERSION}'`),`${ref} absent du précache`);
+});
+
+test('V16.1 : les extraits décodent les entités numériques et compactent les espaces',()=>{
+ assert.equal(safeExcerpt('L&#39;équipe   de&#x20;France\n\n gagne'),"L'équipe de France gagne");
 });
