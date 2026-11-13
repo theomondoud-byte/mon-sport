@@ -1,94 +1,73 @@
-// V9 — deux blocs : identité & palmarès sourcés / forme sur 12 mois.
-// Aucun chiffre non daté ne prétend être un classement ou record à jour.
-import {agendaMatches,agendaWindow} from './agenda-model.js?v=12.0.0';
-import {matchVerdict} from './match-details.js?v=12.0.0';
-import {profileFor,keySportStats} from './sports-profiles.js?v=12.0.0';
-import {auditInfo} from './audit-2026.js?v=12.0.0';
-const fmt=day=>new Date(day).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
-const tile=(label,value,desc='',esc=x=>x)=>'<div class="stat-tile"><b>'+esc(String(value))+'</b><span>'+esc(label)+'</span>'
- +(desc?'<small>'+esc(desc)+'</small>':'')+'</div>';
-export function computeFavoriteStats(items,favorite,now=new Date()){
- const matches=agendaMatches(items,{view:'favori',phase:'past',favorite,now}).filter(m=>m.finished);
- const verdicts=matches.map(m=>matchVerdict(m,favorite));
- const wins=verdicts.filter(x=>x==='V').length,losses=verdicts.filter(x=>x==='D').length;
- const draws=verdicts.filter(x=>x==='N').length,known=wins+losses+draws;
- const categories=new Map;
- for(const m of matches)categories.set(m.competition,(categories.get(m.competition)||0)+1);
- const competitions=[...categories.entries()].sort((a,b)=>b[1]-a[1]).slice(0,6);
- const nba=matches.map(m=>m.stats).filter(s=>s&&s.pts!==null&&s.pts!==undefined);
- const averages={};
- for(const [id,label] of [['pts','Points'],['reb','Rebonds'],['ast','Passes'],['blk','Contres']]){
-  const values=nba.map(x=>Number(x[id])).filter(x=>Number.isFinite(x));
-  if(values.length)averages[label]={value:Math.round(values.reduce((a,b)=>a+b,0)*10/values.length)/10,samples:values.length};
+// Mon Sport V13 : statistiques publiées par les fournisseurs, pas de calcul
+// à partir de l'historique incomplet. Rangs ATP/WTA/Race/WTT DATÉS.
+import {profileFor} from './sports-profiles.js?v=13.0.0';
+import {auditInfo} from './audit-2026.js?v=13.0.0';
+import {RANKINGS,rankingForFavorite,rankingsForFavorite,rankingEntry,RANKING_DATE} from './rankings-view.js?v=13.0.0';
+const fmt=s=>new Date(s).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+const tile=(label,value,subtitle='',esc=s=>s)=>'<div class="stat-tile"><b>'+esc(String(value))+'</b><span>'+esc(label)+'</span>'
+ +(subtitle?'<small>'+esc(subtitle)+'</small>':'')+'</div>';
+export function renderFavoriteStats({favorite='',favoriteData=null,now=new Date(),rankings={},esc,safeUrl=(url)=>url}){
+ const who=favoriteData||{name:favorite,sport:'Autre'},profile=profileFor(favorite,now),audit=auditInfo(favorite);
+ const listed=rankingsForFavorite(who),key=rankingForFavorite(who);
+ const sourceLinks=[['Fiche du sportif / club',profile.source],['Résultats officiels',audit.url]];
+ const row=listed.map(id=>{
+  const spec=RANKINGS.find(x=>x.id===id),entry=rankingEntry(id,favorite,rankings);
+  if(!spec)return '';
+  return '<div class="stat-rank-link"><div><b>'+esc(spec.title)+'</b><span>'
+   +esc(entry?'#'+entry.rank+(entry.points?' · '+entry.points+' points':''):'Rang non disponible dans les données chargées')
+   +'</span></div><button class="button ghost" type="button" data-view-ranking="'+esc(spec.id)+'">Voir le classement ↗</button></div>';
+ }).join('');
+ const age=profile.age!==null?tile('Âge',profile.age+' ans','Né(e) le '+fmt(profile.born),esc):'';
+ const location=profile.country?tile('Pays',profile.country,'',esc):'';
+ const rankTiles=row||'<p class="stat-help">Pas de tableau international unique pour cette discipline. Consulte les feuilles officielles ci-dessous.</p>';
+ let officialStats='';
+ // Valeurs EXACTEMENT retranscrites des statistiques sources, non calculées.
+ if(favorite==='Mirra Andreeva'){
+  officialStats='<div class="stat-grid">'+tile('Victoires 2026',50,'WTA · au 12 nov. 2026',esc)
+   +tile('Défaites 2026',16,'WTA · 2026',esc)+tile('Titres en simple',3,'WTA · 2026',esc)+'</div>';
+  sourceLinks.push(['Stats de saison WTA','https://www.wtatennis.com/players/331809/mirra-andreeva/stats']);
  }
- return {events:matches.length,known,wins,losses,draws,winRate:known?Math.round(100*wins/known):null,
-  nbas:nba.length,averages,competitions,mostRecent:matches[0]||null,
-  from:agendaWindow('favori','past',now).from,to:agendaWindow('favori','past',now).to};
-}
-export function renderFavoriteStats({items=[],favorite='',favoriteData=null,now=new Date(),loading=false,esc}){
- const sports=favoriteData||{name:favorite,sport:'Autre',type:'sportif'};
- const profile=profileFor(favorite,now),recent=computeFavoriteStats(items,favorite,now),audit=auditInfo(favorite);
- const sources=[];
- const source=(url,label)=>{if(/^https:\/\//.test(url||'')&&!sources.some(s=>s.url===url))sources.push({url,label});};
- source(profile.source,'Fiche et palmarès');
- source(profile.rank?.source,'Classement officiel ou daté');
- source(audit.url,'Résultats et calendrier');
- const identity=[
-  profile.age!==null?tile('Âge',profile.age+' ans','Calculé au '+fmt(now),esc):'',
-  profile.rank?tile(profile.rank.label,profile.rank.value,'Au '+fmt(profile.rank.asOf),esc):'',
-  profile.country?tile('Pays',profile.country,'',esc):''
- ].join('');
- const info='<section class="stat-profile-section"><h3>👤 Profil et palmarès</h3>'
-  +'<div class="stat-grid">'+(identity||tile('Profil','Source externe','Âge ou rang non disponible',esc))+'</div>'
-  +'<div class="stat-sport-identity"><b>'+esc(profile.role||sports.sport)+'</b>'
-  +(profile.fact?'<p>'+esc(profile.fact)+'</p>':'')
-  +'<small>Repères vérifiés le 12 novembre 2026. Les classements sont des instantanés, pas du direct.</small></div></section>';
- const record=recent.known
-  ?'<p class="sub">Bilan limité aux '+recent.known+' rencontres dont une victoire, une défaite ou un nul est identifiable.</p>'
-  :'<p class="sub">La source n’a pas fourni assez de décisions de match pour calculer un vrai bilan V/D/N.</p>';
- const numbers=[
-  tile('Événements retrouvés',recent.events,'Ce n’est pas le total officiel',esc),
-  tile('Victoires',recent.known?recent.wins:'—','Matchs avec issue connue',esc),
-  tile('Défaites',recent.known?recent.losses:'—','Matchs avec issue connue',esc),
-  tile('Nuls',recent.known?recent.draws:'—','Si la discipline le permet',esc),
-  recent.winRate!==null?tile('Taux de victoire',recent.winRate+' %','Sur résultats avec verdict',esc):''
- ].join('');
- const specialty=keySportStats(sports,items,now).map(x=>tile(x.label,x.value,x.detail,esc)).join('');
- const nbas=Object.entries(recent.averages).map(([label,o])=>
-  tile('🏀 '+label,o.value,'Moyenne sur '+o.samples+' match(s) NBA vérifiés',esc)).join('');
- const comp=recent.competitions.map(([name,count])=>'<div class="stat-competition"><span>'+esc(name)+'</span><b>'+count+'</b></div>').join('');
- let sportNote='';
- switch(sports.sport){
- case 'Tennis':
-  sportNote='Tennis : classement ATP/WTA, âge et forme V/D. Aces, doubles fautes et balles de break figurent dans les fiches de match uniquement lorsque le fournisseur les publie.';break;
- case 'Tennis de table':
-  sportNote='Tennis de table : rang ITTF daté et palmarès. Les scores de sets sont conservés ; les points détaillés par set ne sont pas toujours disponibles.';break;
- case 'Natation':
-  sportNote='Natation : palmarès, records personnels et chronos sont essentiels ; un résultat de course ne se traduit pas automatiquement par une victoire/défaite.';break;
- case 'Cyclisme':
-  sportNote='Cyclisme : victoires, podiums, classements généraux et étapes ne doivent pas être additionnés comme autant de courses distinctes.';break;
- case 'Basketball':
-  sportNote='NBA : points, rebonds, passes et contres par match lorsque les feuilles individuelles sont accessibles. Les rencontres des Spurs ne prouvent pas la participation de Wembanyama.';break;
- case 'Rugby':
-  sportNote='Rugby : points marqués/encaissés ; les essais et statistiques de plaquages sont consultables lorsque les comptes rendus du match les publient.';break;
- case 'Football':
-  sportNote='Football : buts marqués/encaissés, bilan V/N/D, tirs, possession et buteurs sur les feuilles disponibles. Une rencontre du club ne certifie pas la présence d’un joueur.';break;
- default: sportNote='Statistiques adaptées aux données vérifiables publiées pour cette discipline.';
+ if(favorite==='Jannik Sinner'){
+  officialStats='<div class="stat-grid">'+tile('Victoires 2026',44,'TennisDB · 9 nov. 2026',esc)
+   +tile('Défaites 2026',3,'TennisDB · 9 nov. 2026',esc)
+   +tile('Titres 2026',6,'TennisDB · 9 nov. 2026',esc)+'</div>';
+  sourceLinks.push(['Bilan TennisDB','https://tennis-db.com/seasons-and-rankings?view=race']);
  }
- return '<section class="favorite-stats"><div class="stat-intro"><h3>Statistiques de '+esc(favorite)+'</h3>'
-  +'<p>Identité, classement et faits marquants + bilan des matchs retrouvés depuis le '+esc(fmt(recent.from))+'.</p></div>'
-  +info
-  +'<section class="stat-profile-section"><h3>📊 Forme et résultats · 12 derniers mois</h3>'
-  +(loading?'<p class="agenda-progress">Chargement des résultats de cette période…</p>':'')
-  +'<div class="stat-grid">'+numbers+(specialty||'')+'</div>'+record
-  +(nbas?'<h4 class="stat-heading">🏀 Moyennes individuelles NBA</h4><div class="stat-grid">'+nbas+'</div>':'')
-  +(comp?'<h4 class="stat-heading">Compétitions retrouvées</h4><div class="stat-competitions">'+comp+'</div>':'')
-  +(recent.mostRecent?'<div class="stat-latest"><span>Dernier événement retrouvé</span><b>'+esc(recent.mostRecent.title)+'</b>'
-   +'<small>'+esc(fmt(recent.mostRecent.date))+' · '+esc(recent.mostRecent.competition)+'</small></div>':'')
-  +'</section>'
-  +'<div class="stat-source-link"><span>Sources et classements</span><div class="stat-reference-list">'
-  +sources.map(s=>'<a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(s.label)+' ↗</a>').join('')
-  +'</div></div>'
-  +'<div class="agenda-footnote">'+esc(sportNote)+' Les statistiques calculées sont partielles et ne constituent pas un bilan officiel de carrière ou de saison.</div>'
-  +'</section>';
+ if(['Léon Marchand','Sauveur Cristofini'].includes(favorite)){
+  officialStats='<p class="stat-help">Chronos, records et médailles à consulter sur les résultats officiels de la fédération : pas de moyenne de temps reconstituée.</p>';
+ }
+ if(favorite==='Victor Wembanyama'){
+  officialStats='<div class="stat-grid">'+tile('Points / match',30.3,'NBA · 2026-27 · 12 nov. 2026',esc)
+   +tile('Rebonds / match',11.7,'NBA · 2026-27',esc)
+   +tile('Passes / match',2.8,'NBA · 2026-27',esc)
+   +tile('Contres / match',4.4,'NBA · 2026-27',esc)+'</div>';
+  sourceLinks.push(['Statistiques NBA officielles','https://www.nba.com/player/1641705/victor-wembanyama']);
+  sourceLinks.push(['Fiche statistiques ESPN','https://www.espn.com/nba/player/stats/_/id/5104157']);
+ }
+ if(favorite==='Kylian Mbappé'){
+  officialStats='<p class="stat-help">Buts, passes décisives et matchs joués sur les fiches officielles du club et de la sélection.</p>';
+  sourceLinks.push(['Fiche FFF','https://www.fff.fr/equipe-nationale/joueur/8566-mbappe-kylian/fiche.html']);
+ }
+ if(favorite==='Paul Seixas'){
+  officialStats='<p class="stat-help">Classements de courses, étapes et palmarès dans les résultats du cycliste, sans recompter ni convertir les points UCI.</p>';
+  sourceLinks.push(['Palmarès de course', 'https://www.procyclingstats.com/rider/paul-seixas']);
+ }
+ if(['Félix Lebrun','Alexis Lebrun','Flavien Coton'].includes(favorite)){
+  sourceLinks.push(['Classement international ITTF','https://www.ittf.com/ittf-table-tennis-world-ranking/']);
+ }
+ if(['FC Barcelone','PSG','Real Madrid','San Antonio Spurs'].includes(favorite)){
+  officialStats='<p class="stat-help">Le rang, les points et le bilan affichés dans « Classements » viennent des tableaux ESPN de la ligue.</p>';
+ }
+ const links=sourceLinks.filter(([,url],i,a)=>/^https:\/\//.test(String(url||''))&&a.findIndex(x=>x[1]===url)===i)
+  .map(([label,url])=>'<a href="'+esc(safeUrl(url))+'" target="_blank" rel="noopener noreferrer">'+esc(label)+' ↗</a>').join('');
+ return '<section class="favorite-stats source-native-stats"><h3>📊 '+esc(favorite)+'</h3>'
+  +'<div class="stat-profile-section"><h4>Profil · source sportive</h4>'
+  +'<div class="stat-grid">'+(age+location||tile('Sport',who.sport,'',esc))+'</div>'
+  +'<div class="stat-sport-identity"><b>'+esc(profile.role||who.sport||'Sportif')+'</b>'
+  +(profile.fact?'<p>'+esc(profile.fact)+'</p>':'')+'</div></div>'
+  +'<section class="stat-profile-section"><h4>Classements officiels</h4>'
+  +rankTiles+'<small>ATP, WTA, Next Gen, Race et ITTF : relevés du '+esc(fmt(RANKING_DATE))+' (non temps réel). Les classements d’équipe sont chargés depuis ESPN.</small></section>'
+  +(officialStats?'<section class="stat-profile-section"><h4>Statistiques publiées</h4>'+officialStats+'</section>':'')
+  +'<div class="stat-source-link"><span>Fiches officielles</span><div class="stat-reference-list">'+links+'</div></div>'
+  +'<p class="agenda-footnote">Pas de pourcentage ni de moyennes calculées depuis l’historique incomplet de Mon Sport.</p></section>';
 }

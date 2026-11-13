@@ -320,3 +320,58 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 
 .agenda-status.pending{background:#4e5260;color:#f6ebc4;border:1px solid #727c83}
 .agenda-event:has(.agenda-status.pending) .agenda-scoreline strong{color:#e8dca9;font-size:.92rem}
+
+
+/* V13 — tableau des classements, liens internes et articles au clic */
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;padding:1px 0 7px}
+.tabs button{flex:none;white-space:nowrap;font-size:.8rem;padding:9px 11px;min-height:43px}
+.rankings-shell{display:flex;flex-direction:column;gap:12px}
+.rankings-heading h2{font-size:1.35rem;margin:0}
+.rankings-heading p{font-size:.81rem;color:#b3cbd9;margin:3px 0}
+.rank-tabs{display:flex;gap:6px;overflow-x:auto;max-width:100%;padding:4px 2px 9px;scrollbar-width:thin}
+.rank-tabs button{border:1px solid #385f70;background:#123249;color:#c4dce8;border-radius:11px;
+ white-space:nowrap;flex:none;padding:10px 12px;font-weight:800;font-size:.78rem;min-height:43px}
+.rank-tabs button.selected{background:#246456;border-color:#84d8b2;color:#f0fffa}
+.rankings-source{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ font-size:.74rem;color:#acccd4}
+.rankings-source a{font-size:.78rem;font-weight:850;color:#97edc9}
+.rank-table{border:1px solid #396173;border-radius:14px;overflow:hidden;background:#0e2b40}
+.rank-table-head,.rank-row{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(75px,auto);
+ align-items:center;gap:11px;padding:9px 12px}
+.rank-table-head{background:#21495b;font-size:.72rem;color:#cce9eb;font-weight:850}
+.rank-table-head>span:last-child{text-align:right}
+.rank-row{border-top:1px solid #305366;min-height:48px}
+.rank-row:nth-child(2n){background:#13374b}
+.rank-row.rank-tracked{background:#1a5149}
+.rank-place{font-size:.88rem;font-weight:900;color:#b6cdd7;text-align:center}
+.rank-person{font-weight:750;min-width:0;overflow-wrap:anywhere;font-size:.88rem}
+.rank-person small{font-size:.69rem;color:#add3d6;display:block;font-weight:450;margin-top:3px}
+.rank-points{text-align:right;font-size:.84rem;font-weight:850;white-space:nowrap;color:#d9ffec;font-variant-numeric:tabular-nums}
+.rank-favorite-link{appearance:none;background:transparent;border:0;padding:4px 0;text-align:left;cursor:pointer;
+ color:#b5ffdf;font:inherit;font-weight:850;text-decoration:underline;text-decoration-color:#77cfac;text-underline-offset:3px}
+.rank-favorite-link:focus-visible,.rank-tabs button:focus-visible{outline:2px solid #a8ffe0;outline-offset:2px}
+.stat-rank-link{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:11px;
+ background:#13374b;border:1px solid #356578;border-radius:12px}
+.stat-rank-link>div{display:flex;flex-direction:column;gap:3px}
+.stat-rank-link b{font-size:.93rem;color:#e6fff7}
+.stat-rank-link span{font-size:.84rem;color:#b6d7dc}
+.stat-rank-link button{font-size:.73rem;min-height:36px;padding:6px 9px}
+.source-native-stats{display:grid;gap:12px}
+.source-native-stats .stat-profile-section>h4{margin:0;color:#e4f7f1;font-size:.99rem}
+.stat-help{font-size:.85rem;color:#bfdce6;line-height:1.55}
+.event-editorial{display:grid;gap:7px;padding:11px;margin-top:10px;border-radius:12px;
+ border:1px solid #3e726e;background:#123c43}
+.event-editorial h5{margin:0;color:#b4ffdb;font-size:.85rem}
+.event-editorial b{font-size:.91rem;color:#f4fffd}
+.event-editorial p{margin:4px 0;font-size:.82rem;color:#d0e1ec}
+.event-editorial a,.event-source-links a{display:block;font-size:.83rem;color:#a5e7fb;font-weight:800}
+.event-source-links{display:flex;flex-wrap:wrap;gap:9px;margin:11px 0}
+.event-source-links a{padding:7px 9px;border:1px solid #365f6f;border-radius:9px}
+.event-article-summary h4{font-size:.98rem;margin:5px 0}
+.event-article-summary p{font-size:.8rem;line-height:1.5;color:#bcd5df}
+@media(max-width:540px){
+ .rank-table-head,.rank-row{grid-template-columns:25px minmax(0,1fr) minmax(64px,auto);gap:8px;padding:9px 8px}
+ .rank-favorite-link{font-size:.86rem}
+ .rank-points{font-size:.8rem}
+ .rankings-source{align-items:flex-start}
+}

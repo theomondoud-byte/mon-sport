@@ -1,34 +1,48 @@
-# Mon Sport V12 — photos stables et matchs à vérifier
+# Mon Sport V13 — Classements et articles sportifs
 
-Application Android : https://theomondoud-byte.github.io/mon-sport/
+Application : https://theomondoud-byte.github.io/mon-sport/
 
-## Photos : correctifs Android
-- Les images arrivent une par une SANS reconstruire la page entière. Cela évite de recommencer le téléchargement des autres portraits.
-- Blasons ESPN en accès direct : Barça, Real Madrid, PSG, Spurs. Les deux sélections françaises sont recherchées dans les métadonnées ESPN et les images libres Wikipédia.
-- Wikimedia Commons : portrait confirmé de Paul Seixas aux Mondiaux 2026 ; photo de Moïse Kouamé à Roland-Garros 2026. Les autres noms sont testés contre Commons, puis Wikipédia libre.
-- Réglages → Rechercher les photos manquantes : efface seulement le cache des portraits et relance leur recherche.
-- En cas d'échec : essayer l'adresse d'image de secours, puis afficher les initiales. L'attribution est accessible via le lien de crédit.
-- Une image individuelle authentique et libre n'est pas garantie pour tous, notamment pour certains jeunes sportifs. Aucune photo d'un homonyme n'est utilisée.
+## Dix classements
+Nouvel onglet **🏆 Classements** :
+- **ATP, WTA, Race ATP vers Turin, Race WTA vers les Finals, Next Gen ATP, WTT/ITTF** : relevés directement issus des classements des organismes sportifs et publiés au **9 novembre 2026**, étiquetés **non temps réel**. Les classements sont donc des instantanés ; les liens renvoient aux listes complètes des organismes.
+- **Ligue 1, Liga, Ligue des champions, NBA conférence Ouest** : chargés depuis les classements ESPN, au moment de la consultation, via `/apis/v2/sports/…/standings`. Les données sont reprises telles que renvoyées, jamais recalculées. Si ESPN ne répond pas, le classement reste vide et un lien vers la source est affiché, plutôt que des points inventés.
+- Les joueurs/équipes **déjà suivis** sont mis en évidence ; toucher leur nom ouvre `Un favori → Statistiques` sur ce favori. Les rangs des autres personnes ne sont pas des liens internes.
+- Depuis `Un favori → Statistiques`, chaque lien **Voir le classement** ouvre directement le tableau correspondant.
 
-## Résultats officiels sans score
-- Les rencontres issues des calendriers V10/V11 restent dans « Passés » après leur date même si ESPN ou la fédération n'a pas publié de score.
-- Dans ce cas, la carte affiche « À vérifier » et « Résultat non disponible ». Aucun résultat n'est inventé.
-- Lorsqu'un résultat ESPN correspondant arrive, il prend le dessus sur cette entrée.
-- Pour un tournoi de plusieurs jours, la date de fin est retenue pour savoir quand le classer dans les résultats récents.
-- Les statistiques V/D/N et les moyennes n'incluent QUE les matchs effectivement terminés avec un score connu.
-- Les calendriers manuels sont des instantanés consultés le 12 novembre 2026, pas des flux directs.
+Références : https://www.atptour.com/en/rankings/singles , https://www.atptour.com/en/rankings/singles-race-to-turin , https://www.atptour.com/en/rankings/next-gen-race , https://www.wtatennis.com/rankings/singles , https://www.wtatennis.com/rankings/race-singles , https://www.ittf.com/ittf-table-tennis-world-ranking/ , https://tennis-db.com/seasons-and-rankings .
+
+**Race dans les fiches de tennis** : affichage des points et de la position ATP/WTA Race, et, pour Rafael Jódar et Moïse Kouamé, de la Next Gen. Les données datées du 9 novembre n'apparaissent pas comme des valeurs en direct.
+
+## Statistiques issues des sources
+Les statistiques de l'onglet favori ne recalculent plus les totaux ou moyennes sur les résultats incomplets enregistrés dans Mon Sport.
+
+Elles affichent : profil sourcé, âge/pays, positions et points de classement, faits marquants issus de la fédération, chiffres de saison uniquement si un fournisseur a publié un relevé daté, puis **liens directs aux fiches officielles**. Exemples : Mirra Andreeva (WTA), Jannik Sinner (TennisDB), Victor Wembanyama (NBA/ESPN). Pour les sports sans API gratuite ou classement comparable, les statistiques officielles sont accessibles via le lien source, sans valeurs inventées.
+
+Les chiffres de NBA de Wembanyama sont un relevé de saison 2026-27 arrêté au **12 novembre 2026**, pas une moyenne calculée par l'application.
+
+## Articles
+- Onglet renommé **📰 Articles**.
+- Affiche les articles sportifs des **7 derniers jours**, du plus récent au plus ancien.
+- Ajout du site humoristique sportif **Fédération Française de la Lose (FFL)** via son API WordPress publique, avec tentative de repli WordPress.com et via le relais Google News si configuré.
+- Filtre des titres et extraits **people / vie privée** ; les sports et résultats sont prioritaires.
+- Chaque carte conserve uniquement le titre, la date, la source et le lien vers l'éditeur, sans aperçu ni iframe bloquée.
+- Si le site FFL refuse l'accès à son API, il reste un **lien FFL** ; aucun article fictif n'est généré. Le code source du Cloudflare Worker n'est pas automatiquement redéployé.
+
+## Compte rendu d'une rencontre
+- Une carte de match ou de course se développe au clic. Elle contient son **compte rendu factuel** et les métriques spécifiques au sport effectivement trouvées.
+- Si le résumé ESPN renvoie un lien vers un **article de match**, celui-ci apparaît avec son titre et un lien de lecture.
+- L'application affiche les articles sportifs récents associés à la rencontre lorsqu'un rapprochement précis est possible ; sinon elle permet de retrouver un article dans Google Actualités et de consulter la source sportive originale.
+- Elle **n'invente pas** de déroulé de course, de buteur, de statistiques de break ou d'article de presse, et ne reproduit pas les articles sous droit d'auteur.
 
 ## Conservé
-- 20 favoris avec FC Barcelone et Sauveur Cristofini et leur migration sûre.
-- Semaine 7 jours et Un favori 12 mois, portraits, statistiques adaptées, détails des rencontres et actualités de la semaine.
-- Calendriers et archives ATP, WTA, FFTT, NBA, rugby, cyclisme et natation déjà disponibles.
-- Les favoris, l'URL du Worker Cloudflare et les données locales restent inchangés.
+20 favoris, photos et logos, résultats passés sur un an, programmes à venir, badges V/D, navigation « Passés » par défaut, configuration Cloudflare et données du téléphone.
 
-## Android et développement
-Réglages → Vérifier et recharger. La version doit afficher V12.
+## Installation
+Sur Android : Réglages → Vérifier et recharger. Nouvelle version du Service Worker `mon-sport-v13-0`, CSS et JS `?v=13.0.0`.
 
-Service Worker : mon-sport-v12-0, fichiers JavaScript et CSS version 12.0.0.
-
-Modules modifiés : src.js, photos.js, agenda-model.js, agenda-ui.js, match-details.js, stats-view.js, verified-program.js, verified-extra-v11.js, style.css, sw.js, index.html.
-
-La disponibilité de photos et de résultats complets pour chacun des 20 favoris reste dépendante des éditeurs sportifs.
+## Modules
+- `rankings-view.js` : tableaux, sources ESPN et instantanés tennis/WTT, navigation favorite.
+- `sports-articles.js` : flux FFL, filtre sportif / anti-people et articles associés.
+- `stats-view.js` : indicateurs copiés des fournisseurs + liens vers tableaux.
+- `src.js` et `agenda-ui.js` : onglet Classements, liens et compte rendus.
+- `event-details.js` : découverte des articles ESPN d'une rencontre.
