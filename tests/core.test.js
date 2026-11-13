@@ -1005,13 +1005,13 @@ test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
  assert.doesNotMatch(wemby,/Le PSG prépare/);
 });
 
-test('V15.7 : la PWA supprime le Referer pour permettre la lecture des vidéos X',async()=>{
+test('V15.8 : la PWA charge les sources RSS et conserve la lecture vidéo X',async()=>{
  const {readFile}=await import('node:fs/promises');
  const index=await readFile(new URL('../index.html',import.meta.url),'utf8');
  assert.match(index,/<meta name="referrer" content="no-referrer"\/>/);
  const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
- assert.match(sw,/mon-sport-v15-7/);
- assert.match(sw,/news-view\.js\?v=15\.7\.0/);
+ assert.match(sw,/mon-sport-v15-8/);
+ assert.match(sw,/news-view\.js\?v=15\.8\.0/);
  assert.match(sw,/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
  assert.match(app,/newsSourceFilter='Tous'/);
