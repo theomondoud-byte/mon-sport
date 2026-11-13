@@ -175,7 +175,7 @@ function dataFromEvent(event){
   put('Score en sets / jeux',event.score);
   put('Tour',event.round);
  }
- return {sport,teamStats:[],players:embedded.length?[{name:event.favorite,metrics:embedded}]:[],scorers:[],extra};
+ return {sport,teamStats:[],players:embedded.length?[{name:original.wembanyamaName||event.favorite,metrics:embedded}]:[],scorers:[],extra};
 }
 export async function loadEventDetails(event,{fetchFn=fetch}={}){
  const data=dataFromEvent(event);
@@ -196,7 +196,7 @@ export async function loadEventDetails(event,{fetchFn=fetch}={}){
   const body=await r.json();
   const parsed={
    ...data,article:recapArticleFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
-   players:parsePlayerStats(body.boxscore,data.sport,event.favorite),
+   players:parsePlayerStats(body.boxscore,data.sport,origin.wembanyamaName||event.favorite),
    scorers:parseScorers(body),
    note:'ESPN · statistiques de la feuille de match disponibles selon la compétition.',
    sourceUrl:'https://www.espn.com/'
