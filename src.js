@@ -3,7 +3,7 @@ import {createOnceLoader} from './session-loader.js?v=14.9.0';
 import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=15.0.0';
 import {renderAgendaView} from './agenda-ui.js?v=15.0.0';
 import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=14.9.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=15.4.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=15.5.0';
 import {fetchAgendaFavorite} from './agenda-fetch.js?v=14.0.0';
 import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=14.0.0';
 import {extraProgramFor} from './verified-program.js?v=14.0.0';
@@ -40,6 +40,7 @@ const load=()=>{
  }catch{return DEFAULTS;}
 };
 let favorites=load(), workerUrl=(()=>{try{return localStorage.getItem(URL_KEY)||''}catch{return ''}})(),active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={},photoRequest=0,rankingSelected='atp',rankingsData={},rankingsLoading=false,rankAgeMax='',rankCountry='';
+let jeuSetMathsPosts=readCachedJeuSetMathsNews(),jeuSetMathsPending=null;
 let starting=true;
 const app=document.querySelector('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -401,7 +402,20 @@ const loadRankingsOnce=createOnceLoader(async(force)=>{
  }
 });
 function refreshRankings(force=false){return loadRankingsOnce(force);}
-function newsHtml(){return renderNewsView({news,loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date()});}
+function newsHtml(){return renderNewsView({news:[...news,...jeuSetMathsPosts],loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date()});}
+function loadJeuSetMathsPosts(){
+ if(jeuSetMathsPending)return jeuSetMathsPending;
+ // Le fil de tennis se charge indépendamment des API scores : l'attente
+ // d'un résultat ESPN ne doit plus masquer les publications sur téléphone.
+ jeuSetMathsPending=fetchJeuSetMathsNews().then(posts=>{
+  if(posts.length){
+   jeuSetMathsPosts=posts;
+   if(!starting&&(active==='actualites'||active==='accueil'))render();
+  }
+  return posts;
+ }).catch(()=>[]).finally(()=>{jeuSetMathsPending=null;});
+ return jeuSetMathsPending;
+}
 function linkHtml(f){const q=encodeURIComponent(f.name);return `<div class="fav"><div class="details"><b>${esc(f.name)}</b><br><small>${esc(f.sport)} · ${esc(f.type)}</small></div><a target="_blank" rel="noopener noreferrer" href="https://news.google.com/search?q=${q}&hl=fr&gl=FR&ceid=FR%3Afr">Actualités ↗</a></div>`}
 
 function agendaItems(){
@@ -512,7 +526,7 @@ function render(){
   if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded();
   // Tableau déjà en mémoire : aucun rechargement au changement d'onglet.
  });
- document.querySelector('#refresh').onclick=()=>{refresh();if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded(true);if(active==='classements'||(active==='favori'&&favoritePhase==='stats'))refreshRankings(true);};
+ document.querySelector('#refresh').onclick=()=>{loadJeuSetMathsPosts();refresh();if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded(true);if(active==='classements'||(active==='favori'&&favoritePhase==='stats'))refreshRankings(true);};
  bindContent();
 }
 function content(){const sports=['Tous',...new Set(favorites.map(f=>f.sport))];if(active==='semaine'||active==='favori')return agendaPage();
@@ -708,7 +722,7 @@ async function refresh(){
  loading=true;errors=[];scoreNotes=[];individualNotes=[];render();
  try{
   const articles=workerUrl?favorites.slice(0,22):[];
-  const [espn,tennis,newsGroups,extraNews,fflNews,jeuSetMathsNews]=await Promise.all([
+  const [espn,tennis,newsGroups,extraNews,fflNews]=await Promise.all([
    espnResults(),
    tennisResults(),
    Promise.all(articles.map(async f=>{
@@ -725,7 +739,6 @@ async function refresh(){
       .filter(a=>/^https:\/\/fflose\.com\//.test(a.link||''))
       .map(a=>({...a,favorite:'FFL',source:'FFL'}));}catch{return []}
    }),
-   fetchJeuSetMathsNews().catch(()=>[])
   ]);
   scoreNotes.push(...espn.notes);
   const seen=new Set();
@@ -740,9 +753,9 @@ async function refresh(){
   // Les stats NBA sont attachées à la rencontre Spurs : pas de seconde carte individuelle.
   individualResults=tennis.events.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
   individualNotes.push(...tennis.notes,...nba.notes);
-  news=newsLastWeek([...newsGroups.flat(),...extraNews,...fflNews,...jeuSetMathsNews],new Date());
-  if(!workerUrl&&!news.length)errors.push('Aucun article reçu de FFL, ESPN ou Jeu, set et maths. Le relais Cloudflare est facultatif.');
-  else if(!news.length)errors.push('Aucune actualité reçue du relais.');
+  news=newsLastWeek([...newsGroups.flat(),...extraNews,...fflNews],new Date());
+  if(!workerUrl&&!news.length&&!jeuSetMathsPosts.length)errors.push('Aucun article reçu de FFL, ESPN ou Jeu, set et maths. Le relais Cloudflare est facultatif.');
+  else if(!news.length&&!jeuSetMathsPosts.length)errors.push('Aucune actualité reçue du relais.');
   if(!matches.length&&!scoreNotes.length)scoreNotes.push('Aucune rencontre disponible pour PSG, Real Madrid ou Spurs sur la période consultée.');
  }catch(e){errors.push('Actualisation impossible : '+String(e.message||e));}
  finally{loading=false;render();}
@@ -752,6 +765,7 @@ async function startApp(){
  render();
  const tasks=Promise.allSettled([
   refresh(),
+  loadJeuSetMathsPosts(),
   refreshHistory(),
   refreshRankings(),
   loadAgendaExpanded(false,true)
