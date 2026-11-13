@@ -4,6 +4,16 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V16.4 — articles pertinents, texte FFL complet et vignettes nettes
+
+- **Pertinence** (hors FFL et Jeu, set et maths) : seuls les comptes rendus de matchs joués et les records de tes favoris sont gardés. Avant-matchs, programmes TV, pronostics, interviews, blessures et transferts sont écartés ; le favori doit être le sujet de l'article (cité dans le titre). Un bandeau indique combien d'articles ont été écartés, avec « Afficher quand même ».
+- **Accents** : réparation des codes dont le flux a supprimé le « & » (« apporteacute; » → « apporté »), côté appli et côté Worker.
+- **FFL** : texte complet récupéré via l'API WordPress du site, lisible dans l'appli sans passer par le Worker. Le Worker lit aussi les sites WordPress via leur API et les données schema.org, au lieu de couper le texte au premier bloc imbriqué.
+- **Vignettes** : taille fixe (carré à gauche sur ordinateur, bandeau 16:9 sur mobile) au lieu d'une colonne étirée sur toute la hauteur de l'article déplié ; bande fine avec le pictogramme du sport sans image.
+- Plus d'espace parasite avant les virgules et les points du texte intégral.
+
+---
+
 # Mon Sport V16.3 — articles lisibles, favoris liés visibles et cartes redessinées
 
 - **Accents et apostrophes** : les titres, extraits et textes intégraux décodent toutes les entités HTML, y compris lorsqu'un flux les encode deux fois (`&amp;eacute;`). Le Worker Cloudflare applique le même décodage ; la mention « … lire la suite » des extraits est retirée.

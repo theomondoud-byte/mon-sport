@@ -5,7 +5,7 @@ import {makeAgenda,agendaMatches,mergeSpursAndWembanyama,shiftedMonths} from '..
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
-import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite} from '../news-view.js';
+import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
@@ -826,7 +826,7 @@ test('Ancien relevé X : affiche le titre sans inventer de contenu manquant',()=
 });
 
 test('Autres médias : conserver la carte de lien éditeur classique',()=>{
- const post={title:'Article sportif PSG et Ligue 1',
+ const post={title:'Ligue 1 : le PSG s’impose 2-0 face à Lens',
   date:'2026-11-12T13:00:00Z',link:'https://www.espn.com/soccer/',
   source:'ESPN',favorite:'PSG',sport:'Football'};
  const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
@@ -977,7 +977,7 @@ test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
   {title:'Le PSG prépare son prochain match de Ligue 1',
    date:'2026-11-13T09:00:00Z',link:'https://fflose.com/psg-match',
    source:'FFL',favorite:'FFL',sport:'Football'},
-  {title:'Victor Wembanyama brille encore avec les Spurs',
+  {title:'Victor Wembanyama marque 34 points avec les Spurs',
    date:'2026-11-13T08:00:00Z',link:'https://espn.com/nba/wemby',
    source:'ESPN',favorite:'Victor Wembanyama',sport:'Basketball'}
  ];
@@ -990,14 +990,14 @@ test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
  assert.match(all,/data-news-source="ESPN"/);
  assert.match(all,/data-news-source="Jeu, set et maths"/);
  assert.match(all,/Le PSG prépare/);
- assert.match(all,/Victor Wembanyama brille/);
+ assert.match(all,/Victor Wembanyama marque 34 points/);
  assert.match(all,/Mirra Andreeva améliore ses statistiques/);
  const ffl=renderNewsView({...args,selectedSources:['FFL']});
  assert.match(ffl,/Le PSG prépare/);
- assert.doesNotMatch(ffl,/Victor Wembanyama brille/);
+ assert.doesNotMatch(ffl,/Victor Wembanyama marque 34 points/);
  assert.doesNotMatch(ffl,/class="news-card jsm-native-card"/);
  const espn=renderNewsView({...args,selectedSources:['ESPN']});
- assert.match(espn,/Victor Wembanyama brille/);
+ assert.match(espn,/Victor Wembanyama marque 34 points/);
  assert.doesNotMatch(espn,/Le PSG prépare/);
  assert.doesNotMatch(espn,/class="news-card jsm-native-card"/);
  assert.doesNotMatch(all,/newsSportFilter|newsFavoriteFilter/);
@@ -1021,7 +1021,7 @@ test('V15.8 : la PWA charge les sources RSS et conserve la lecture vidéo X',asy
 
 test('V15.8 : les extraits des médias RSS sont lisibles directement dans les cartes',()=>{
  const html=renderNewsView({news:[{
-  title:'Paul Seixas prépare sa prochaine course',
+  title:'Paul Seixas remporte le chrono et bat le record de l’épreuve',
   link:'https://www.cyclismactu.net/test',
   date:'2026-11-13T10:00:00.000Z',
   source:"Cyclism'Actu",sport:'Cyclisme',favorite:'Paul Seixas',
@@ -1098,4 +1098,53 @@ test('V16.3 : un article de tennis n’est jamais lié à l’équipe de France 
   now:new Date('2026-11-13T12:00:00Z'),esc:x=>String(x),safeUrl:x=>x,photos:{},favorites});
  assert.doesNotMatch(html,/Chidekh/);
  assert.match(html,/news-favorite[^>]*>⭐ Jannik Sinner/);
+});
+
+test('V16.4 : les accents dont le flux a supprimé le « & » sont réparés',()=>{
+ assert.equal(safeExcerpt('Cobolli a apporteacute; son soutien agrave; Zverev, reacute;cemment propulseacute; nrsquo;est ndeg;7'),
+  'Cobolli a apporté son soutien à Zverev, récemment propulsé n’est n°7');
+ assert.equal(decodeEntities('Chidekh &amp;eacute;limine'),'Chidekh élimine');
+});
+
+test('V16.4 : seuls les résultats de matchs et les records des favoris sont gardés',()=>{
+ const favs=[{name:'Jannik Sinner',sport:'Tennis'},{name:'Victor Wembanyama',sport:'Basketball'},
+  {name:'PSG',sport:'Football',apiName:'Paris Saint Germain'},{name:'Léon Marchand',sport:'Natation'}];
+ const keep=(title,sport,excerpt='')=>!!relevantFavoriteNews({title,sport,excerpt},favs);
+ assert.equal(keep('ATP Finals : Cobolli : "Alcaraz et Sinner restent plus forts que Zverev mais..."','Tennis'),false);
+ assert.equal(keep('Sinner affrontera Alcaraz en finale : horaire et chaîne TV','Tennis'),false);
+ assert.equal(keep('Wembanyama blessé, forfait contre les Lakers','Basketball'),false);
+ assert.equal(keep('Mercato : le PSG prépare une offre pour un attaquant','Football'),false);
+ assert.equal(keep('Wembanyama: what to watch tonight vs Lakers','Basketball'),false);
+ assert.equal(keep('ATP Finals : Sinner s’impose face à Zverev (6-4, 6-3)','Tennis'),true);
+ assert.equal(keep('Victor Wembanyama signe un triple-double historique','Basketball'),true);
+ assert.equal(keep('Léon Marchand bat le record du monde du 400 m 4 nages','Natation'),true);
+ assert.equal(keep('Ligue 1 : le PSG écrase Lyon (4-0)','Football'),true);
+ assert.equal(keep('Spurs beat Lakers as Wembanyama scores 35 points','Basketball'),true);
+});
+
+test('V16.4 : articles écartés signalés et affichables, FFL et JSM jamais filtrés',()=>{
+ const now=new Date('2026-11-13T12:00:00Z');
+ const news=[
+  {title:'Sinner affrontera Alcaraz : horaire et chaîne TV',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/a',date:'2026-11-13T10:00:00Z'},
+  {title:'Sinner s’impose 6-4 6-3',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/b',date:'2026-11-13T09:00:00Z'},
+  {title:'Un joueur rate tout ce qu’il entreprend',source:'FFL',favorite:'FFL',link:'https://fflose.com/x',date:'2026-11-13T08:00:00Z',text:'Premier paragraphe.\nSecond paragraphe.'}];
+ const args={news,now,esc:x=>String(x),safeUrl:x=>x,photos:{},favorites:[{name:'Jannik Sinner',sport:'Tennis'}]};
+ const html=renderNewsView(args);
+ assert.doesNotMatch(html,/horaire et chaîne TV/);
+ assert.match(html,/Sinner s’impose/);
+ assert.match(html,/1 article sur tes favoris écarté/);
+ assert.match(html,/id="newsShowAll"/);
+ // FFL : texte complet embarqué, lisible sans le Worker.
+ assert.match(html,/data-local-text="1"/);
+ assert.match(html,/<p>Premier paragraphe\.<\/p><p>Second paragraphe\.<\/p>/);
+ assert.match(renderNewsView({...args,showAllRelated:true}),/horaire et chaîne TV/);
+});
+
+test('V16.4 : contenu WordPress converti en paragraphes',()=>{
+ assert.equal(htmlToText('<p>Il a rat&eacute; <strong>tout</strong>.</p><figure><img src="x"><figcaption>Légende</figcaption></figure><p>Encore.</p>'),'Il a raté tout.\nEncore.');
+});
+
+test('V16.4 : pas d’espace parasite avant la ponctuation dans le texte intégral',()=>{
+ assert.deepEqual(articleParagraphs('Avant de jouer ses premiers ATP Finals , Flavio Cobolli a soutenu Alexander Zverev .'),
+  ['Avant de jouer ses premiers ATP Finals, Flavio Cobolli a soutenu Alexander Zverev.']);
 });

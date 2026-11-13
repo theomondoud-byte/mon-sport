@@ -1,5 +1,5 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=16.3.0';
-import {filterSportsNews} from './sports-articles.js?v=16.3.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=16.4.0';
+import {filterSportsNews} from './sports-articles.js?v=16.4.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -135,6 +135,17 @@ function videoCandidates(value){
  return [...new Set(candidates)];
 }
 const HTML_ENTITIES={"AElig":"Æ","Aacute":"Á","Acirc":"Â","Agrave":"À","Alpha":"Α","Aring":"Å","Atilde":"Ã","Auml":"Ä","Beta":"Β","Ccedil":"Ç","Chi":"Χ","Dagger":"‡","Delta":"Δ","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Epsilon":"Ε","Eta":"Η","Euml":"Ë","Gamma":"Γ","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iota":"Ι","Iuml":"Ï","Kappa":"Κ","Lambda":"Λ","Mu":"Μ","Ntilde":"Ñ","Nu":"Ν","OElig":"Œ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Omega":"Ω","Omicron":"Ο","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","Phi":"Φ","Pi":"Π","Prime":"″","Psi":"Ψ","Rho":"Ρ","Scaron":"Š","Sigma":"Σ","THORN":"Þ","Tau":"Τ","Theta":"Θ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Upsilon":"Υ","Uuml":"Ü","Xi":"Ξ","Yacute":"Ý","Yuml":"Ÿ","Zeta":"Ζ","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","alefsym":"ℵ","alpha":"α","amp":"&","and":"∧","ang":"∠","aring":"å","asymp":"≈","atilde":"ã","auml":"ä","bdquo":"„","beta":"β","brvbar":"¦","bull":"•","cap":"∩","ccedil":"ç","cedil":"¸","cent":"¢","chi":"χ","circ":"ˆ","clubs":"♣","cong":"≅","copy":"©","crarr":"↵","cup":"∪","curren":"¤","dArr":"⇓","dagger":"†","darr":"↓","deg":"°","delta":"δ","diams":"♦","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","empty":"∅","emsp":" ","ensp":" ","epsilon":"ε","equiv":"≡","eta":"η","eth":"ð","euml":"ë","euro":"€","exist":"∃","fnof":"ƒ","forall":"∀","frac12":"½","frac14":"¼","frac34":"¾","frasl":"⁄","gamma":"γ","ge":"≥","gt":">","hArr":"⇔","harr":"↔","hearts":"♥","hellip":"…","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","image":"ℑ","infin":"∞","int":"∫","iota":"ι","iquest":"¿","isin":"∈","iuml":"ï","kappa":"κ","lArr":"⇐","lambda":"λ","lang":"〈","laquo":"«","larr":"←","lceil":"⌈","ldquo":"“","le":"≤","lfloor":"⌊","lowast":"∗","loz":"◊","lrm":"‎","lsaquo":"‹","lsquo":"‘","lt":"<","macr":"¯","mdash":"—","micro":"µ","middot":"·","minus":"−","mu":"μ","nabla":"∇","nbsp":" ","ndash":"–","ne":"≠","ni":"∋","not":"¬","notin":"∉","nsub":"⊄","ntilde":"ñ","nu":"ν","oacute":"ó","ocirc":"ô","oelig":"œ","ograve":"ò","oline":"‾","omega":"ω","omicron":"ο","oplus":"⊕","or":"∨","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","otimes":"⊗","ouml":"ö","para":"¶","part":"∂","permil":"‰","perp":"⊥","phi":"φ","pi":"π","piv":"ϖ","plusmn":"±","pound":"£","prime":"′","prod":"∏","prop":"∝","psi":"ψ","quot":"\"","rArr":"⇒","radic":"√","rang":"〉","raquo":"»","rarr":"→","rceil":"⌉","rdquo":"”","real":"ℜ","reg":"®","rfloor":"⌋","rho":"ρ","rlm":"‏","rsaquo":"›","rsquo":"’","sbquo":"‚","scaron":"š","sdot":"⋅","sect":"§","shy":"­","sigma":"σ","sigmaf":"ς","sim":"∼","spades":"♠","sub":"⊂","sube":"⊆","sum":"∑","sup":"⊃","sup1":"¹","sup2":"²","sup3":"³","supe":"⊇","szlig":"ß","tau":"τ","there4":"∴","theta":"θ","thetasym":"ϑ","thinsp":" ","thorn":"þ","tilde":"˜","times":"×","trade":"™","uArr":"⇑","uacute":"ú","uarr":"↑","ucirc":"û","ugrave":"ù","uml":"¨","upsih":"ϒ","upsilon":"υ","uuml":"ü","weierp":"℘","xi":"ξ","yacute":"ý","yen":"¥","yuml":"ÿ","zeta":"ζ","zwj":"‍","zwnj":"‌","apos":"'"};
+// Certains flux (Tennis Actu « social ») suppriment le « & » des entités :
+// « apporteacute; » doit redevenir « apporté », « agrave; » « à ».
+const BARE_ENTITY=/(?<!&)([aeiouycnAEIOUYCN])(acute|grave|circ|uml|cedil|tilde);|(?<!&)(oe|OE|ae|AE)lig;|(?<!&)(nbsp|rsquo|lsquo|rdquo|ldquo|laquo|raquo|hellip|ndash|mdash|deg|euro|quot|apos);|(?<!&)#(\d{2,5});/g;
+function repairBareEntities(text){
+ return text.replace(BARE_ENTITY,(all,letter,accent,lig,named,code)=>{
+  if(letter)return HTML_ENTITIES[letter+accent]??all;
+  if(lig)return HTML_ENTITIES[lig+'lig']??all;
+  if(named)return HTML_ENTITIES[named]??all;
+  return String.fromCodePoint(+code);
+ });
+}
 // Décodage répété : certains flux encodent deux fois (&amp;eacute; → &eacute; → é).
 export function decodeEntities(value){
  let text=String(value||'');
@@ -145,7 +156,15 @@ export function decodeEntities(value){
   if(next===text)break;
   text=next;
  }
- return text;
+ return repairBareEntities(text);
+}
+// HTML d'article (WordPress) → texte en paragraphes.
+export function htmlToText(html){
+ return decodeEntities(String(html||'')
+  .replace(/<(script|style|figure|figcaption|iframe|noscript|svg)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
+  .replace(/<(?:br|\/p|\/h[1-6]|\/li|\/blockquote|\/div)\b[^>]*>/gi,'\n')
+  .replace(/<[^>]+>/g,''))
+  .replace(/[ \t]+/g,' ').replace(/ +([,.)])/g,'$1').replace(/\n\s*/g,'\n').replace(/\n{2,}/g,'\n').trim().slice(0,20000);
 }
 const TRAILING_NOISE=/\s*(?:…|\.\.\.|\[…\]|\[\.\.\.\])?\s*(?:lire la suite|read more|voir plus)\.?\s*$/i;
 export function safeExcerpt(value){
@@ -156,16 +175,49 @@ export function safeExcerpt(value){
 const RELATED_SECTION=/\n\s*(?:[àa] lire aussi|lire aussi|sur le même sujet|à voir aussi|voir aussi)\b[\s\S]*$/i;
 export function articleParagraphs(text){
  const clean=decodeEntities(String(text||'')).replace(/\r/g,'').replace(RELATED_SECTION,'');
- return clean.split(/\n+/).map(p=>p.replace(/\s+/g,' ').trim()).filter(p=>p.length>1);
+ return clean.split(/\n+/).map(p=>p.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').replace(/([(«“"]) +/g,'$1').trim()).filter(p=>p.length>1);
 }
 export function renderArticleBody(text,esc){
  const paragraphs=articleParagraphs(text);
  if(!paragraphs.length)return '';
  return paragraphs.map(p=>'<p>'+esc(p)+'</p>').join('');
 }
-export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[]}={}){
+// Pertinence (hors FFL et Jeu, set et maths) : on garde les comptes rendus
+// de matchs joués et les records, on écarte avant-matchs, interviews,
+// programmes TV, pronostics et rumeurs de transfert.
+const RESULT_WORDS=/\b(s impose|l emporte|bat|battu|battue|bats|victoire|vainqueur|gagne|remporte|remportee?|elimine|eliminee?|elimination|qualifie|qualifiee?|sacre|sacree?|titre|champion|championne|medaille|podium|defaite|s incline|renverse|domine|ecrase|corrige|triomphe|match nul|score|buteur|marque|doublé|double|triple double|double double|points|rebonds|passes decisives|chrono|beat|beats|beaten|defeat|defeats|defeated|win|wins|won|victory|rout|routs|edge|edges|tops|outlast|scores|scored|rebounds|assists|advance|advances|eliminated|loses|lost|falls|title|clinch|clinches)\b/;
+const RECORD_WORDS=/\b(record|records|historique|histoire|inedit|premier joueur|premiere joueuse|plus jeune|career high|franchise record|first player|youngest|all time|milestone)\b/;
+const SCORE_PATTERN=/\b\d{1,3}\s?[-–]\s?\d{1,3}\b/;
+const OFF_TOPIC=/\b(affrontera|affronter|affronte ce|se frottera|defiera|avant le match|avant de jouer|programme|horaire|a quelle heure|chaine|diffusion|en direct|pronostic|pronostics|cote|cotes|compo|composition probable|mercato|transfert|rumeur|contrat|prolongation|interview|confie|estime|selon lui|reagit|conference de presse|blessure|blesse|forfait|preview|how to watch|odds|picks|prediction|betting|injury|injured|trade|rumor|contract|what to watch|ce qu il faut savoir)\b/;
+export function articleRelevance(article){
+ const title=normalized(article.title),body=normalized([article.excerpt,article.description].join(' '));
+ const all=title+' '+body;
+ const record=RECORD_WORDS.test(all);
+ const result=RESULT_WORDS.test(all)||SCORE_PATTERN.test(String(article.title||'')+' '+String(article.excerpt||''));
+ const quoted=/^[«"“]|:\s*[«"“]/.test(String(article.title||'').trim());
+ const offTopic=OFF_TOPIC.test(title)||quoted||/\?\s*$/.test(String(article.title||'').trim());
+ if(record)return 'record';
+ if(offTopic)return '';
+ return result?'résultat':'';
+}
+function favoriteInTitle(article,favorite){
+ const title=' '+normalized(article.title)+' ';
+ return favoriteAliases(favorite).some(alias=>alias.includes(' ')||alias==='psg'||alias.length>=5?title.includes(' '+alias+' '):false);
+}
+export function relevantFavoriteNews(article,favorites){
+ const favorite=findFavorite(article,favorites);
+ if(!favorite)return null;
+ // Le favori doit être le sujet : présent dans le titre (ou extrait + score).
+ const central=favoriteInTitle(article,favorite)||SCORE_PATTERN.test(String(article.excerpt||''));
+ return central&&articleRelevance(article)?favorite:null;
+}
+export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false}={}){
  const recentAll=newsLastWeek(news,now);
- const visible=recentAll.filter(n=>['FFL','Jeu, set et maths'].includes(newsSourceName(n))||favorites.some(f=>matchesFavorite(n,f)));
+ const always=n=>['FFL','Jeu, set et maths'].includes(newsSourceName(n));
+ const linked=recentAll.filter(n=>!always(n)&&findFavorite(n,favorites));
+ const relevant=new Set(linked.filter(n=>relevantFavoriteNews(n,favorites)));
+ const hidden=linked.length-relevant.size;
+ const visible=recentAll.filter(n=>always(n)||relevant.has(n)||(showAllRelated&&linked.includes(n)));
  const sourceOptions=[...new Set(visible.map(newsSourceName))].sort((a,b)=>a.localeCompare(b,'fr'));
  const counts=new Map();for(const n of visible)counts.set(newsSourceName(n),(counts.get(newsSourceName(n))||0)+1);
  const chosen=selectedSources.length?selectedSources:[];
@@ -174,7 +226,8 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  const sourceButton=name=>'<button type="button" class="news-source-chip '+(chosen.includes(name)?'active':'')+'" data-news-source="'+esc(name)+'" aria-pressed="'+(chosen.includes(name)?'true':'false')+'">'+esc(name)+' <span>'+(counts.get(name)||0)+'</span></button>';
  const sourceControls='<div class="news-filter-block"><span class="news-filter-label">Sources à afficher</span><div class="news-source-filters" role="group" aria-label="Sélectionner les sources">'+sourceOptions.map(sourceButton).join('')+'</div><button type="button" class="button ghost" id="newsSourcesAll">Toutes les sources</button></div>';
  const ordered=recent;
- const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths sont toujours inclus. Les autres médias ne montrent que les articles liés à tes favoris. Choisis les sources à afficher.</p><div class="jsm-feed-indicator" role="status">🎾 Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+sourceControls+'</div><div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Tri chronologique · plus récent d’abord</span></div>';
+ const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths sont toujours inclus. Pour les autres médias : uniquement les résultats de matchs et les records de tes favoris.</p><div class="jsm-feed-indicator" role="status">🎾 Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+sourceControls+'</div><div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Tri chronologique · plus récent d’abord</span></div>'
+  +(hidden>0?'<div class="news-hidden-note"><span>'+(showAllRelated?hidden+' article'+(hidden>1?'s':'')+' hors résultats/records affiché'+(hidden>1?'s':''):hidden+' article'+(hidden>1?'s':'')+' sur tes favoris écarté'+(hidden>1?'s':'')+' (avant-match, interview, transfert…)')+'</span><button type="button" class="button ghost" id="newsShowAll">'+(showAllRelated?'Masquer':'Afficher quand même')+'</button></div>':'');
  const cards=ordered.map(n=>{
   const link=safeUrl(n.link);
   if(link==='#')return '';
@@ -208,7 +261,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" aria-label="Source originale sur X">Source originale ↗</a></footer>'
     +'</article>';
   }
-  const favorite=findFavorite(n,favorites);
+  const favorite=always(n)?null:findFavorite(n,favorites);
   const excerpt=safeExcerpt(n.excerpt||n.description);
   return '<article class="news-card news-link-card'+(favorite?' has-favorite':'')+'">'
     +picture+'<div class="news-text"><div class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
@@ -217,8 +270,8 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +(excerpt?'<p class="news-excerpt">'+esc(excerpt)+'</p>':'')
     +'<div class="news-meta"><span class="news-source">'+esc(newsSourceName(n))+'</span>'
     +(favorite?'<span class="news-favorite" title="Article lié à un favori">⭐ '+esc(favorite.name)+'</span>':'')+'</div>'
-    +'<div class="news-actions"><button type="button" class="button news-read-inline" data-read-article="'+esc(link)+'">Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a></div>'
-    +'<div class="news-fulltext" data-article-content="'+esc(link)+'" hidden></div></div></article>';
+    +'<div class="news-actions"><button type="button" class="button news-read-inline" data-read-article="'+esc(link)+'"'+(n.text?' data-local-text="1"':'')+'>Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a></div>'
+    +'<div class="news-fulltext" data-article-content="'+esc(link)+'" hidden>'+(n.text?renderArticleBody(n.text,esc):'')+'</div></div></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article pour les sources sélectionnées</h3><p>Essaie de sélectionner d’autres sources.</p></div>')
