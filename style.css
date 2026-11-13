@@ -593,3 +593,90 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .atp-live-table.race-no-career .atp-live-row{grid-template-columns:var(--live-rank) var(--live-player)
   27px 44px 50px 43px 45px 122px 125px 45px 45px}
 }
+
+/* V14.7 — davantage de statistiques visibles, surtout sur téléphone. */
+/* Tennis : le meilleur classement rejoint le nom ; le drapeau remplace la colonne Pays sur mobile. */
+.atp-live-table{--live-rank:25px;--live-player:174px;--live-gap:3px}
+.atp-live-table .atp-live-row,.atp-live-table.race-no-career .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-player) 32px 54px 57px 48px 49px 150px 158px 49px 49px;
+ gap:var(--live-gap);padding:5px 5px;min-height:40px
+}
+.atp-live-table .atp-live-row>.rank-person,
+.atp-live-table.race-no-career .atp-live-row>.rank-person{left:calc(var(--live-rank) + var(--live-gap))}
+.atp-live-table .rank-person{flex-wrap:wrap;gap:2px;font-size:.72rem;line-height:1.18}
+.atp-live-table .rank-country{font-size:.67rem;white-space:nowrap}
+.atp-live-table .rank-data{font-size:.69rem;line-height:1.19}
+.atp-live-table .rank-tournament{font-size:.68rem;line-height:1.17}
+.atp-live-table .rank-table-head{font-size:.63rem;line-height:1.1}
+.atp-live-table .rank-number{font-size:.69rem}
+.atp-live-table .rank-movement{font-size:.59rem;padding:1px 2px}
+.rank-career-inline{display:inline-flex;align-items:center;justify-content:center;background:#35596b;
+ color:#e8f8ff;border-radius:3px;padding:0 3px;font-size:.57rem;font-weight:800;line-height:1.45}
+.rank-career-inline.best{background:#966919;color:#fff1c6}
+.rank-flag-mobile{display:none}
+.atp-live-table .tourney-status{font-size:.57rem;line-height:1.1;padding:1px 3px;margin-top:2px}
+.atp-live-table .tourney-loss-symbol{font-size:.67rem}
+.rank-table-scroll{scrollbar-width:thin}
+/* Football : vraie table des 18/20/36 équipes et statistiques vérifiées ESPN. */
+.standings-table{width:max-content;min-width:100%;border:0;border-radius:0;overflow:visible}
+.standings-table .standings-row{display:grid;align-items:center;gap:4px;padding:7px 7px;min-height:42px}
+.standings-table .rank-table-head{font-size:.66rem;line-height:1.17}
+.standings-table .rank-data{font-size:.74rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.standings-table .rank-number{text-align:right}
+.standings-table .rank-person{display:flex;align-items:center;gap:5px;line-height:1.24;font-size:.78rem;min-width:0}
+.standings-table .rank-favorite-link{font-size:inherit;line-height:inherit}
+.standings-football .standings-row{grid-template-columns:28px 200px repeat(6,39px) 54px 54px 50px}
+.standings-nba .standings-row{grid-template-columns:28px 208px 38px 38px 64px 57px 56px 67px 65px 65px 65px 65px 65px}
+.standings-table .standings-row>.rank-place,.standings-table .standings-row>.rank-person{position:sticky;
+ align-self:stretch;display:flex;align-items:center;background:#0e2b40;z-index:2}
+.standings-table .standings-row>.rank-place{left:0;justify-content:center}
+.standings-table .standings-row>.rank-person{left:32px}
+.standings-table .standings-row:nth-child(even)>.rank-place,
+.standings-table .standings-row:nth-child(even)>.rank-person{background:#13374b}
+.standings-table .rank-tracked>.rank-place,.standings-table .rank-tracked>.rank-person{background:#1a5149}
+.standings-table .rank-table-head>.rank-place,.standings-table .rank-table-head>.rank-person{background:#21495b;z-index:4}
+.standings-team-logo{width:22px;height:22px;object-fit:contain;flex:none}
+.standings-table .rank-points-highlight{font-weight:900;color:#dcffef;background:rgba(34,137,108,.22);
+ border-radius:3px}
+.standings-nba .rank-percent{font-weight:850;color:#c7f6e2}
+.standings-nba .rank-streak{font-weight:800}
+.standings-tabletennis .standings-row{grid-template-columns:35px 200px 90px}
+.standings-tabletennis .standings-row>.rank-person{left:39px}
+@media(max-width:550px){
+ .atp-live-table{--live-rank:22px;--live-player:104px;--live-gap:2px}
+ .atp-live-table .atp-live-row,.atp-live-table.race-no-career .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-player) 25px 47px 36px 40px 125px 130px 42px 42px;
+  gap:var(--live-gap);padding:4px 3px;min-height:38px
+ }
+ .atp-live-table .rank-country,.atp-live-table .rank-table-head .rank-country{display:none}
+ .atp-live-table .rank-person{font-size:.66rem;line-height:1.12;column-gap:2px}
+ .atp-live-table .rank-favorite-link{font-size:inherit;padding:0}
+ .atp-live-table .rank-flag-mobile{display:inline;font-size:.65rem;line-height:1}
+ .atp-live-table .rank-table-head{font-size:.58rem;line-height:1.05}
+ .atp-live-table .rank-data,.atp-live-table .rank-number{font-size:.65rem;line-height:1.15}
+ .atp-live-table .rank-tournament{font-size:.65rem;line-height:1.13}
+ .atp-live-table .rank-place{font-size:.65rem}
+ .atp-live-table .rank-movement{font-size:.55rem;padding:0 1px}
+ .atp-live-table .tourney-status{font-size:.55rem}
+ .rank-career-inline{font-size:.53rem;padding:0 2px}
+ .rank-table-scroll{border-radius:7px}
+ .standings-table .standings-row{gap:2px;padding:5px 3px;min-height:38px}
+ .standings-table .rank-table-head{font-size:.60rem;line-height:1.12}
+ .standings-table .rank-data{font-size:.68rem}
+ .standings-table .rank-person{font-size:.71rem;gap:3px;line-height:1.15}
+ .standings-team-logo{width:17px;height:17px}
+ .standings-football .standings-row{grid-template-columns:22px 116px repeat(6,29px) 42px 39px 40px}
+ .standings-nba .standings-row{grid-template-columns:22px 126px 30px 30px 52px 46px 43px 52px 52px 52px 52px 52px 52px}
+ .standings-table .standings-row>.rank-person{left:24px}
+ .standings-tabletennis .standings-row{grid-template-columns:26px 141px 68px}
+ .standings-tabletennis .standings-row>.rank-person{left:28px}
+}
+@media(max-width:360px){
+ .atp-live-table{--live-rank:20px;--live-player:95px;--live-gap:2px}
+ .atp-live-table .atp-live-row,.atp-live-table.race-no-career .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-player) 24px 44px 34px 38px 118px 123px 41px 41px
+ }
+ .standings-football .standings-row{grid-template-columns:20px 105px repeat(6,27px) 40px 37px 36px}
+ .standings-nba .standings-row{grid-template-columns:20px 112px 28px 28px 50px 44px 42px 48px 48px 48px 48px 48px 48px}
+ .standings-table .standings-row>.rank-person{left:22px}
+}
