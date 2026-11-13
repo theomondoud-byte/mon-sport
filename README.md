@@ -1,3 +1,29 @@
+# Mon Sport V15.8 — sources éditoriales RSS ciblées par sport et favoris
+
+## Sources RSS dans Articles
+
+Le relais Cloudflare propose désormais `GET /api/sports-news`, qui agrège les flux RSS publics Tennis Actu, Franceinfo (tennis, football, rugby, cyclisme, natation et tennis de table), Basket USA, TrashTalk et Cyclism'Actu. Les flux sont récupérés côté serveur pour éviter CORS, limités aux sept derniers jours, dédoublonnés par URL et identifiés par média et discipline. Les articles sont associés à un favori seulement si son nom est réellement présent dans le titre ou l'extrait ; les autres restent classés par sport. Les états de chaque flux sont renvoyés par le relais pour faciliter le diagnostic.
+
+Le flux RSS sert à afficher les métadonnées, l'extrait fourni par l'éditeur et le lien original. Mon Sport ne copie pas automatiquement les corps complets des articles. La lecture intégrale reste chez le média, sauf autorisation explicite. Les flux non confirmés ou les sites officiels sans RSS exploitable (FFN, FFTT) ne sont pas activés comme sources d'articles. L'agrégation est facultative tant que le Worker Cloudflare n'a pas été mis à jour avec `worker/index.js`.
+
+## Médias activés dans le collecteur
+
+- Tennis : Tennis Actu, Franceinfo.
+- Football : Franceinfo.
+- Basket : Basket USA, TrashTalk.
+- Rugby : Franceinfo.
+- Cyclisme : Cyclism'Actu, Franceinfo.
+- Natation : Franceinfo.
+- Tennis de table : Franceinfo.
+
+Les flux sont interrogés individuellement : l'échec d'un éditeur ne bloque pas les autres. Les articles sont limités à sept jours, dédoublonnés et ajoutés au même fil que FFL, Jeu, set et maths et ESPN.
+
+## Déploiement du relais
+
+Après publication GitHub Pages, mettre également à jour le Cloudflare Worker avec le fichier `worker/index.js` pour activer `/api/sports-news`. Tant que cette étape n'est pas faite dans le compte Cloudflare, le fil existant continue de fonctionner sans les nouveaux flux RSS.
+
+---
+
 # Mon Sport V15.7 — vidéos X lisibles et actualités filtrables par média
 
 ## Lecture vidéo X
