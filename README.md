@@ -1,3 +1,36 @@
+# Mon Sport V15.7 — vidéos X lisibles et actualités filtrables par média
+
+## Lecture vidéo X
+
+Les vidéos natives du compte « Jeu, set et maths » sont servies par `video.twimg.com`. Le CDN X peut renvoyer HTTP 403 aux lecteurs externes lorsqu'un en-tête `Referer` indique le site qui intègre la vidéo. V15.7 pose donc une politique de référence `no-referrer` dès le document HTML, sans désactiver les contrôles vidéo. Le lecteur garde le MP4 original et essaie aussi une variante sans le paramètre `tag` lorsque le CDN refuse la première URL. Les vidéos restent lues dans le lecteur natif du navigateur, avec les contrôles tactiles et un lien de secours vers la publication originale.
+
+## Fil Articles
+
+Le fil reste **Tous les médias** par défaut. Trois filtres indépendants permettent de réduire le flux :
+- **Média** : tous les éditeurs ensemble ou un seul éditeur.
+- **Sport** : tennis, football, basket, rugby, cyclisme, natation, tennis de table, etc.
+- **Favori** : uniquement les articles associés à un sportif ou une équipe suivis.
+
+Les trois dernières publications Jeu, set et maths restent épinglées en tête quand elles font partie du filtre. Les cartes conservent leur source. Le filtrage ne déclenche pas de rechargement des résultats sportifs.
+
+Le dédoublonnage retire les URL canoniquement identiques et les titres très proches publiés à moins de 36 heures d'intervalle ; pour un même favori, la version au résumé le plus complet est conservée. Il reste volontairement conservateur pour ne pas fusionner deux actualités différentes sur le même joueur.
+
+## Médias candidats (non activés dans le flux à ce stade)
+
+La liste de départ proposée est volontairement courte : une source spécialisée et, lorsque cela apporte quelque chose, une source généraliste gratuite. Les flux RSS sont récupérés côté serveur lors de leur future intégration, pas directement depuis le navigateur (évite les erreurs CORS). Les titres et liens peuvent être affichés dans Mon Sport ; le texte intégral reste consulté chez l'éditeur, sauf autorisation explicite de republication.
+
+- **Tennis** : Tennis Actu (`https://www.tennisactu.net/rss_social.xml`) et Franceinfo Tennis (`https://www.franceinfo.fr/sports/tennis.rss`).
+- **Football** : Foot Mercato (flux RSS officiel annoncé par l'éditeur) et Franceinfo Foot (`https://www.franceinfo.fr/sports/foot.rss`).
+- **Basket / NBA / Spurs / Wembanyama** : Basket USA (`https://www.basketusa.com/feed/`) ; TrashTalk (`https://trashtalk.co/feed/`) en complément plus éditorial.
+- **Rugby** : Rugby365 (`https://www.rugby365.fr/feed`) et Franceinfo Rugby (`https://www.franceinfo.fr/sports/rugby.rss`).
+- **Cyclisme** : Cyclism'Actu (`https://www.cyclismactu.net/rss_social.xml`) et Franceinfo Cyclisme (`https://www.franceinfo.fr/sports/cyclisme.rss`).
+- **Natation** : FFN (`https://www.ffnatation.fr/actualites/actu-grand-public`) et Franceinfo Natation (`https://www.franceinfo.fr/sports/natation.rss`).
+- **Tennis de table** : FFTT (`https://www.fftt.com/actualites/`) et Franceinfo Tennis de table (`https://www.franceinfo.fr/sports/tennis-de-table.rss`).
+
+Les sources payantes ou dont l'accès intégral est incertain ne sont pas retenues dans cette proposition. Les flux de Franceinfo par sport sont recensés comme actifs en novembre 2026 ; les flux Tennis Actu, Basket USA, TrashTalk, Rugby365 et Cyclism'Actu ont également été signalés comme actifs lors des vérifications publiques récentes. Chaque flux sera contrôlé avant activation, puis les articles seront associés aux favoris à partir du nom, de ses alias et du sport. Un filtre anti-doublon inter-médias évitera les reprises quasi identiques.
+
+---
+
 # Mon Sport V15.6 — publications « Jeu, set et maths » intégrées au téléphone
 
 ## Correction du problème persistant sur Android
