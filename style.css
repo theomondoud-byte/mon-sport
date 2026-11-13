@@ -887,3 +887,5 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .news-context-filters select{font-size:.77rem;padding:7px 6px}
  .jsm-native-video{max-height:62vh;aspect-ratio:9/16}
 }
+
+.news-fulltext{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;color:var(--text,#e8eef5);background:rgba(8,20,34,.48);border:1px solid rgba(150,190,210,.2);border-radius:12px;padding:14px;margin-top:12px;max-height:70vh;overflow:auto;font-size:.92rem}.news-read-inline{margin-top:8px}.news-tap{display:inline-block;margin:10px 0 0 12px}.news-source-filters{display:flex;flex-wrap:wrap;gap:8px}.news-filter-block{margin:12px 0}.news-filter-label{display:block;margin-bottom:8px;font-size:.8rem;font-weight:800}
