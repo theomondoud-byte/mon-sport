@@ -1,5 +1,5 @@
 // V14 : classements et flux d'articles sportifs, nouveaux modules en précache.
-const CACHE = 'mon-sport-v14-0';
+const CACHE = 'mon-sport-v14-1';
 const ASSETS = [
   './',
   './index.html',
@@ -23,6 +23,7 @@ const ASSETS = [
   './coverage-v11.js?v=14.0.0',
   './rankings-view.js?v=14.0.0',
   './sports-articles.js?v=14.0.0',
+  './sports-media.js?v=14.0.0',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png'
