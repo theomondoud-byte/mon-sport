@@ -415,7 +415,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    ?'<p class="rank-horizontal-hint">↔ Fais défiler pour voir les tournois et projections. Résultats signalés dans les deux colonnes de tournoi.</p>'
     +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : tableau défilant">'
     +'<div class="rank-table atp-live-table '+(hasCareer?'':'race-no-career')+'"><div class="rank-table-head atp-live-row">'
-    +'<span>#</span>'+(hasCareer?'<span>MC</span>':'')+'<span>Joueur</span><span>Âge</span><span>Pays</span><span>Pts live</span><span>Δ rang</span><span>Δ pts</span>'
+    +'<span class="rank-place">#</span>'+(hasCareer?'<span class="rank-career">MC</span>':'')+'<span class="rank-person">Joueur</span><span>Âge</span><span>Pays</span><span>Pts</span><span>Δ rang</span><span>Δ pts</span>'
     +'<span>Tournoi en cours</span><span>Tournoi précédent</span><span>Suiv.</span><span>Max</span>'
     +'</div>'+cards+'</div></div>'
    :tennisColumns
