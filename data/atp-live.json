@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-13T09:43:01.765690+00:00",
+  "fetchedAt": "2026-11-13T10:03:13.098089+00:00",
   "rows": [
     {
       "rank": 1,
@@ -15,7 +15,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 2,
@@ -30,7 +36,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 3,
@@ -45,7 +52,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 4,
@@ -60,7 +73,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 5,
@@ -75,7 +94,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 6,
@@ -90,7 +115,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 7,
@@ -105,7 +136,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 8,
@@ -120,7 +157,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 9,
@@ -135,7 +178,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 0 D)",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 10,
@@ -150,7 +199,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 11,
@@ -165,7 +215,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 3215,
-      "maxPoints": 3300
+      "maxPoints": 3300,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (8e )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 12,
@@ -180,7 +236,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 13,
@@ -195,7 +252,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 14,
@@ -210,7 +268,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 15,
@@ -225,7 +284,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 16,
@@ -240,7 +300,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 17,
@@ -255,7 +316,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 18,
@@ -270,7 +332,8 @@
       "previousTournaments": "Défaite Stockholm 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 19,
@@ -285,7 +348,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 20,
@@ -300,7 +364,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 21,
@@ -315,7 +380,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 22,
@@ -330,7 +396,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 23,
@@ -345,7 +412,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 24,
@@ -360,7 +428,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 25,
@@ -375,7 +444,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 26,
@@ -390,7 +460,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 1860,
-      "maxPoints": 1945
+      "maxPoints": 1945,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (QF )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 27,
@@ -405,7 +481,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 28,
@@ -420,7 +497,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 29,
@@ -435,7 +513,8 @@
       "previousTournaments": "Défaite Stockholm 8e (16e )",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 30,
@@ -450,7 +529,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 31,
@@ -465,7 +545,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 1640,
-      "maxPoints": 1725
+      "maxPoints": 1725,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (QF )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 32,
@@ -480,7 +566,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 33,
@@ -495,7 +582,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 34,
@@ -510,7 +598,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 35,
@@ -525,7 +614,8 @@
       "previousTournaments": "Défaite Stockholm QF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 36,
@@ -540,7 +630,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 37,
@@ -555,7 +646,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 38,
@@ -570,7 +662,8 @@
       "previousTournaments": "Défaite Stockholm QF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 39,
@@ -585,7 +678,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 40,
@@ -600,7 +694,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 41,
@@ -615,7 +710,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 42,
@@ -630,7 +726,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 43,
@@ -645,7 +742,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 44,
@@ -660,7 +758,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 45,
@@ -675,7 +774,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 46,
@@ -690,7 +790,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 47,
@@ -705,7 +806,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 48,
@@ -720,7 +822,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 1197,
-      "maxPoints": 1282
+      "maxPoints": 1282,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (QF )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 49,
@@ -735,7 +843,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 50,
@@ -750,7 +859,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 51,
@@ -765,7 +875,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 52,
@@ -780,7 +891,8 @@
       "previousTournaments": "Défaite Stockholm 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 53,
@@ -795,7 +907,8 @@
       "previousTournaments": "Défaite Orléans 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 54,
@@ -810,7 +923,8 @@
       "previousTournaments": "Défaite Stockholm 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 55,
@@ -825,7 +939,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 56,
@@ -840,7 +955,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 57,
@@ -855,7 +971,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 58,
@@ -870,7 +987,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 59,
@@ -885,7 +1003,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 60,
@@ -900,7 +1019,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 61,
@@ -915,7 +1035,8 @@
       "previousTournaments": "Défaite Qualif. Stockholm T2 Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 62,
@@ -930,7 +1051,8 @@
       "previousTournaments": "Défaite Orléans 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 63,
@@ -945,7 +1067,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 64,
@@ -960,7 +1083,8 @@
       "previousTournaments": "Défaite Stockholm 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 65,
@@ -975,7 +1099,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 66,
@@ -990,7 +1115,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 67,
@@ -1005,7 +1131,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 68,
@@ -1020,7 +1147,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 69,
@@ -1035,7 +1163,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 70,
@@ -1050,7 +1179,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 71,
@@ -1065,7 +1195,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 72,
@@ -1080,7 +1211,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 73,
@@ -1095,7 +1227,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 822,
-      "maxPoints": 912
+      "maxPoints": 912,
+      "tournamentHistory": [
+        {
+          "text": "Orléans QF (16e )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 74,
@@ -1110,7 +1248,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 75,
@@ -1125,7 +1264,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 76,
@@ -1140,7 +1280,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 77,
@@ -1155,7 +1296,8 @@
       "previousTournaments": "Défaite Stockholm 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 78,
@@ -1170,7 +1312,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 79,
@@ -1185,7 +1328,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 80,
@@ -1200,7 +1344,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 81,
@@ -1215,7 +1360,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 82,
@@ -1230,7 +1376,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 83,
@@ -1245,7 +1392,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 84,
@@ -1260,7 +1408,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 85,
@@ -1275,7 +1424,8 @@
       "previousTournaments": "Défaite Qualif. Stockholm T2",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 86,
@@ -1290,7 +1440,8 @@
       "previousTournaments": "Défaite Orléans 8e (16e )",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 87,
@@ -1305,7 +1456,8 @@
       "previousTournaments": "Défaite Qualif. Stockholm T2",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 88,
@@ -1320,7 +1472,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 89,
@@ -1335,7 +1488,8 @@
       "previousTournaments": "Défaite Orléans 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 90,
@@ -1350,7 +1504,8 @@
       "previousTournaments": "Défaite Qualif. Stockholm T1",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 91,
@@ -1365,7 +1520,8 @@
       "previousTournaments": "Défaite Orléans 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 92,
@@ -1380,7 +1536,8 @@
       "previousTournaments": "Qualif. Stockholm V Défaite Stockholm 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 93,
@@ -1395,7 +1552,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 94,
@@ -1410,7 +1568,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 95,
@@ -1425,7 +1584,8 @@
       "previousTournaments": "Défaite Knoxville 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 96,
@@ -1440,7 +1600,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 639,
-      "maxPoints": 729
+      "maxPoints": 729,
+      "tournamentHistory": [
+        {
+          "text": "Orléans QF (8e )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 97,
@@ -1455,7 +1621,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 98,
@@ -1470,7 +1637,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 99,
@@ -1485,7 +1653,8 @@
       "previousTournaments": "Qualif. Stockholm V Défaite Stockholm QF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 100,
@@ -1500,7 +1669,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 101,
@@ -1515,7 +1685,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 616,
-      "maxPoints": 669
+      "maxPoints": 669,
+      "tournamentHistory": [
+        {
+          "text": "Knoxville QF",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 102,
@@ -1530,7 +1706,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 103,
@@ -1545,7 +1722,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 104,
@@ -1560,7 +1738,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 105,
@@ -1575,7 +1754,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 106,
@@ -1590,7 +1770,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 107,
@@ -1605,7 +1786,8 @@
       "previousTournaments": "Défaite Lima 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 108,
@@ -1620,7 +1802,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 109,
@@ -1635,7 +1818,8 @@
       "previousTournaments": "Qualif. Stockholm V Défaite Stockholm 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 110,
@@ -1650,7 +1834,8 @@
       "previousTournaments": "Défaite Orléans 16e (8e )",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 111,
@@ -1665,7 +1850,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 112,
@@ -1680,7 +1866,8 @@
       "previousTournaments": "Défaite Orléans 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 113,
@@ -1695,7 +1882,8 @@
       "previousTournaments": "Défaite Knoxville 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 114,
@@ -1710,7 +1898,8 @@
       "previousTournaments": "Défaite Lima 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 115,
@@ -1725,7 +1914,8 @@
       "previousTournaments": "Défaite Brisbane 3 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 116,
@@ -1740,7 +1930,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 117,
@@ -1755,7 +1946,8 @@
       "previousTournaments": "Défaite Orléans 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 118,
@@ -1770,7 +1962,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 503,
-      "maxPoints": 556
+      "maxPoints": 556,
+      "tournamentHistory": [
+        {
+          "text": "Brisbane 3 QF (16e )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 119,
@@ -1785,7 +1983,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 120,
@@ -1800,7 +1999,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 121,
@@ -1815,7 +2015,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 497,
-      "maxPoints": 587
+      "maxPoints": 587,
+      "tournamentHistory": [
+        {
+          "text": "Orléans QF",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 122,
@@ -1830,7 +2036,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 487,
-      "maxPoints": 540
+      "maxPoints": 540,
+      "tournamentHistory": [
+        {
+          "text": "Matsuyama QF",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 123,
@@ -1845,7 +2057,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 124,
@@ -1860,7 +2073,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 481,
-      "maxPoints": 571
+      "maxPoints": 571,
+      "tournamentHistory": [
+        {
+          "text": "Orléans QF (16e )",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 125,
@@ -1875,7 +2094,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 480,
-      "maxPoints": 570
+      "maxPoints": 570,
+      "tournamentHistory": [
+        {
+          "text": "Orléans QF",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 126,
@@ -1890,7 +2115,8 @@
       "previousTournaments": "Qualif. Stockholm V Défaite Stockholm 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 127,
@@ -1905,7 +2131,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 128,
@@ -1920,7 +2147,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 459,
-      "maxPoints": 512
+      "maxPoints": 512,
+      "tournamentHistory": [
+        {
+          "text": "Knoxville QF",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 129,
@@ -1935,7 +2168,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 130,
@@ -1950,7 +2184,8 @@
       "previousTournaments": "Défaite Orléans 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 131,
@@ -1965,7 +2200,13 @@
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 446,
-      "maxPoints": 499
+      "maxPoints": 499,
+      "tournamentHistory": [
+        {
+          "text": "Lima QF",
+          "lastSeen": "2026-11-13T10:03:12.940713+00:00"
+        }
+      ]
     },
     {
       "rank": 132,
@@ -1980,7 +2221,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 133,
@@ -1995,7 +2237,8 @@
       "previousTournaments": "Défaite Monastir 1 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 134,
@@ -2010,7 +2253,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 135,
@@ -2025,7 +2269,8 @@
       "previousTournaments": "Défaite Lima 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 136,
@@ -2040,7 +2285,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 137,
@@ -2055,7 +2301,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 138,
@@ -2070,7 +2317,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 139,
@@ -2085,7 +2333,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 140,
@@ -2100,7 +2349,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 141,
@@ -2115,7 +2365,8 @@
       "previousTournaments": "Défaite Orléans 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 142,
@@ -2130,7 +2381,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 143,
@@ -2145,7 +2397,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 144,
@@ -2160,7 +2413,8 @@
       "previousTournaments": "Défaite Brisbane 3 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 145,
@@ -2175,7 +2429,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 146,
@@ -2190,7 +2445,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 147,
@@ -2205,7 +2461,8 @@
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 148,
@@ -2220,7 +2477,8 @@
       "previousTournaments": "Défaite Lima 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 149,
@@ -2235,7 +2493,8 @@
       "previousTournaments": "Défaite Knoxville 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 150,
@@ -2250,7 +2509,8 @@
       "previousTournaments": "Défaite Knoxville 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": null
+      "maxPoints": null,
+      "tournamentHistory": []
     }
   ]
 }
