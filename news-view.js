@@ -174,8 +174,10 @@ export function renderNewsView({
   return '<article class="news-card news-link-card"><a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" class="news-plain-link">'
     +picture+'<span class="news-text"><span class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
     +'<span class="news-date">'+esc(published)+'</span></span>'
-    +'<h3>'+esc(n.title)+'</h3><p class="news-source">'+esc(newsSourceName(n))+'</p>'
-    +'<span class="news-tap">Lire l’article chez l’éditeur ↗</span></span></a></article>';
+    +'<h3>'+esc(n.title)+'</h3>'
+    +(safeExcerpt(n.excerpt||n.description)?'<p class="news-excerpt">'+esc(safeExcerpt(n.excerpt||n.description))+'</p>':'')
+    +'<p class="news-source">'+esc(newsSourceName(n))+'</p>'
+    +'<span class="news-tap">Ouvrir chez l’éditeur ↗</span></span></a></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article pour ces filtres</h3><p>Essaie « Tous les médias », « Tous les sports » ou « Tous les favoris ».</p></div>')
