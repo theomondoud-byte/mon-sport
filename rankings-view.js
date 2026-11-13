@@ -12,7 +12,8 @@ export const RANKINGS=[
  {id:'ligue1',title:'Ligue 1',sport:'Football',url:'https://www.espn.com/soccer/standings/_/league/fra.1',source:'ESPN',mode:'espn',path:'soccer/fra.1'},
  {id:'liga',title:'Liga',sport:'Football',url:'https://www.espn.com/soccer/standings/_/league/esp.1',source:'ESPN',mode:'espn',path:'soccer/esp.1'},
  {id:'ucl',title:'Ligue des champions',sport:'Football',url:'https://www.uefa.com/uefachampionsleague/standings/',source:'ESPN · UEFA',mode:'espn',path:'soccer/uefa.champions'},
- {id:'wtt',title:'WTT / ITTF',sport:'Tennis de table',url:'https://www.ittf.com/ittf-table-tennis-world-ranking/',source:'ITTF · semaine 46',mode:'snapshot'},
+ {id:'wtt',title:'WTT hommes',sport:'Tennis de table',url:'https://www.eleventabletennis.com/rankings',source:'Classement ITTF · Eleven',mode:'wtt-weekly',file:'wtt-men.json'},
+ {id:'wttwomen',title:'WTT femmes',sport:'Tennis de table',url:'https://www.eleventabletennis.com/rankings',source:'Classement ITTF · Eleven',mode:'wtt-weekly',file:'wtt-women.json'},
  {id:'nbaouest',title:'NBA Ouest',sport:'Basketball',url:'https://www.nba.com/standings',source:'ESPN · NBA',mode:'espn',path:'basketball/nba',west:true}
 ];
 const fromTuple=(list)=>list.map(([name,rank,points])=>({name,rank,points:points==null?'':String(points)}));
@@ -113,6 +114,24 @@ export function parseESPNTennisRankings(body){
   };
  }).filter(Boolean).sort((a,b)=>a.rank-b.rank).slice(0,150);
 }
+// Le tennis de table suit une publication hebdomadaire, pas un classement live.
+export function parseWTTRankings(payload,now=new Date()){
+ const age=now.getTime()-Date.parse(payload?.fetchedAt||'');
+ if(!Number.isFinite(age)||age<0||age>14*86400000||!Array.isArray(payload?.rows)||payload.rows.length<150)
+  return null;
+ const seen=new Set(),rows=[];
+ for(const raw of payload.rows.slice(0,150)){
+  const rank=Number(raw?.rank),points=Number(raw?.points);
+  const name=String(raw?.name||'').trim().slice(0,120),country=String(raw?.country||'').trim().toUpperCase();
+  if(!name||seen.has(norm(name))||!Number.isInteger(rank)||rank<1||
+   !Number.isInteger(points)||points<0||!/^[A-Z]{3}$/.test(country))return null;
+  if(rows.length&&rank<rows[rows.length-1].rank)return null;
+  seen.add(norm(name));
+  rows.push({name,rank,points:String(points),country,movement:Number.isInteger(raw.movement)?raw.movement:null,
+   source:'Classement ITTF hebdomadaire'});
+ }
+ return rows.length===150?rows:null;
+}
 export function parseESPNStandings(body,{west=false}={}){
  const groups=extractGroups(body);
  const picked=west?groups.filter(g=>/western|(?:^|\b)west(?:ern)?(?:\b|$)/i.test(String(g.name))):groups;
@@ -177,6 +196,26 @@ export async function fetchRankings({fetchFn=fetch,force=false}={}){
    const saved=savedRanking(spec.id);
    result[spec.id]=saved?{...saved,live:false,stale:true,error:'Dernière copie enregistrée · mise à jour indisponible'}
     :{rows:[],error:'Classement indisponible depuis ESPN.',live:false};
+  }
+ }));
+ // ITTF : deux classements hebdomadaires, conservés localement avec leur semaine.
+ await Promise.all(RANKINGS.filter(x=>x.mode==='wtt-weekly').map(async spec=>{
+  const cached=cache.get(spec.id);
+  if(!force&&cached&&Date.now()-cached.at<20*60000){result[spec.id]=cached.result;return;}
+  try{
+   const res=await fetchFn('./data/'+spec.file,{cache:'no-store',signal:AbortSignal.timeout(7000)});
+   if(!res.ok)throw Error('ITTF '+res.status);
+   const payload=await res.json(),rows=parseWTTRankings(payload);
+   if(!rows)throw Error('Classement ITTF incomplet ou trop ancien');
+   const value={rows,asOf:payload.fetchedAt,week:Number.isInteger(payload.week)?payload.week:null,
+    source:payload.source,kind:'wtt-weekly',live:true};
+   cache.set(spec.id,{result:value,at:Date.now()});storeRanking(spec.id,value);result[spec.id]=value;
+  }catch{
+   const saved=savedRanking(spec.id);
+   const age=saved?.asOf?Date.now()-Date.parse(saved.asOf):Infinity;
+   const usable=saved?.kind==='wtt-weekly'&&age>=0&&age<=14*86400000;
+   result[spec.id]=usable?{...saved,live:false,stale:true,error:'Dernier relevé hebdomadaire enregistré'}
+    :{rows:[],live:false,kind:'wtt-weekly',error:'Classement hebdomadaire ITTF indisponible'};
   }
  }));
  // Les cinq tableaux tennis proviennent directement des relevés live français.
