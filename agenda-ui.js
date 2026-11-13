@@ -1,12 +1,12 @@
-import {sportInfo} from './sports-media.js?v=16.4.0';
+import {sportInfo} from './sports-media.js?v=16.5.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=16.4.0';
-import {auditInfo} from './audit-2026.js?v=16.4.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=16.4.0';
-import {renderFavoriteStats} from './stats-view.js?v=16.4.0';
-import {photoInitials} from './photos.js?v=16.4.0';
-import {nextCompetitionNote} from './verified-program.js?v=16.4.0';
-import {coverageFor} from './coverage-v11.js?v=16.4.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=16.5.0';
+import {auditInfo} from './audit-2026.js?v=16.5.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=16.5.0';
+import {renderFavoriteStats} from './stats-view.js?v=16.5.0';
+import {photoInitials} from './photos.js?v=16.5.0';
+import {nextCompetitionNote} from './verified-program.js?v=16.5.0';
+import {coverageFor} from './coverage-v11.js?v=16.5.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -25,7 +25,7 @@ function verdictChip(item,name,esc){
  const className=result==='V'?'win':result==='D'?'loss':'draw';
  return '<span class="agenda-verdict '+className+'" aria-label="'+esc(result==='V'?'Victoire':result==='D'?'Défaite':'Match nul')+'">'+result+'</span>';
 }
-function eventHtml(item,esc,safeUrl,photos,chosen){
+function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
  const isFuture=!item.finished;
  const state=item.pendingResult?'À vérifier':item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
  const people=item.favorites.map(name=>{
@@ -57,6 +57,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +'<h3>'+esc(item.title)+'</h3>'
    +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong>'+(timing?'<span>'+esc(timing)+'</span>':'')+'</div>'
    +'<div class="agenda-detail">'+esc([item.competition,item.round].filter(Boolean).join(' · '))+'</div>'
+   +resultExtrasHtml(item,esc,safeUrl,extras)
    +'<div class="agenda-open-hint"><span>'+(item.pendingResult?'Voir la source':item.isCompetition?'Voir le programme':'Résumé')+'</span><span aria-hidden="true">⌄</span></div>'
    +'</summary>'
    +'<div class="agenda-recap"><h4>'+esc(recap.title)+'</h4><p>'+esc(recap.text)+'</p>'
@@ -66,6 +67,28 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +'<div class="agenda-recap-source">Source : '+esc(recap.source)+' '+sourceLink+'</div>'
    +'<div class="detail-live-slot" aria-live="polite"></div></div>'
    +'</details>';
+}
+// Résumé d'article et replay pour un résultat terminé.
+function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
+ if(!item.finished||item.pendingResult||item.isCompetition)return '';
+ const article=summaryFor?.(item);
+ const media=mediaFor?.(item)||{};
+ let summary='';
+ if(article&&(article.excerpt||article.title)){
+  summary='<div class="result-summary"><p>'+esc(article.excerpt||article.title)+'</p>'
+   +'<a class="result-summary-source" href="'+esc(safeUrl(article.link))+'" target="_blank" rel="noopener noreferrer" data-stop>📰 '+esc(article.source)+' · Lire l’article ↗</a></div>';
+ }else if(media.recap?.excerpt){
+  summary='<div class="result-summary"><p lang="en">'+esc(media.recap.excerpt)+'</p>'
+   +'<a class="result-summary-source" href="'+esc(safeUrl(media.recap.link))+'" target="_blank" rel="noopener noreferrer" data-stop>📰 ESPN (en anglais) · Lire le compte rendu ↗</a></div>';
+ }
+ const video=(media.videos||[]).find(v=>v.src);
+ const page=(media.videos||[]).find(v=>v.page);
+ const q=encodeURIComponent(String(item.title||'').replace(/—/g,' ')+' résumé '+new Date(item.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}));
+ const replay=video
+  ?'<button type="button" class="result-replay" data-play-video="'+esc(video.src)+'" data-poster="'+esc(video.poster||'')+'" data-stop>▶ Voir le résumé vidéo</button><div class="result-video-slot"></div>'
+  :page?'<a class="result-replay ghost" href="'+esc(safeUrl(page.page))+'" target="_blank" rel="noopener noreferrer" data-stop>▶ Résumé vidéo sur ESPN ↗</a>'
+  :'<a class="result-replay ghost" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener noreferrer" data-stop>🔎 Chercher le résumé vidéo ↗</a>';
+ return summary+'<div class="result-replay-row">'+replay+'</div>';
 }
 function placeholderMissing(missing,esc,safeUrl){
  if(!missing.length)return '';
@@ -78,7 +101,7 @@ function placeholderMissing(missing,esc,safeUrl){
 }
 export function renderAgendaView({
  view='semaine',phase='future',favorite='',favorites=[],items=[],loading=false,
- extendedLoading=false,extendedError='',notes=[],photos={},rankings={},esc,safeUrl,now=new Date()
+ extendedLoading=false,extendedError='',notes=[],photos={},rankings={},esc,safeUrl,now=new Date(),summaryFor=null,mediaFor=null
 }){
  const single=view==='favori';
  const which=single?(favorites.find(f=>f.name===favorite)||favorites[0]):null;
@@ -113,7 +136,7 @@ export function renderAgendaView({
   +'<span>'+esc(period)+'</span></div>';
  const missing=single||loading?[]:agendaCoverage(favorites,cards).missing;
  const details=groupAgenda(cards).map(g=>'<section class="agenda-day-group"><h3 class="agenda-day">'+esc(fullDay(g.day))+'</h3>'
-  +g.items.map(e=>eventHtml(e,esc,safeUrl,photos,single?chosen:null)).join('')+'</section>').join('');
+  +g.items.map(e=>eventHtml(e,esc,safeUrl,photos,single?chosen:null,{summaryFor,mediaFor})).join('')+'</section>').join('');
  const empty=!cards.length&&!loading&&!extendedLoading?'<div class="agenda-empty"><div class="agenda-empty-icon">📅</div>'
   +'<h3>Aucun événement trouvé</h3><p>Les sources peuvent être incomplètes.</p>'
   +(single?'<a href="'+esc(safeUrl(auditInfo(chosen).url))+'" target="_blank" rel="noopener noreferrer">Vérifier le calendrier source ↗</a>':'')+'</div>':'';

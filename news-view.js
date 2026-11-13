@@ -1,5 +1,5 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=16.4.0';
-import {filterSportsNews} from './sports-articles.js?v=16.4.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=16.5.0';
+import {filterSportsNews} from './sports-articles.js?v=16.5.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -108,21 +108,24 @@ export function sportCompatible(article,favorite){
  if(!sport||!favorite.sport||['Sport','Autre'].includes(sport))return true;
  return sport===favorite.sport;
 }
-export function matchesFavorite(article,favorite){
- if(!sportCompatible(article,favorite))return false;
- if(article.favorite===favorite.name)return true;
- const haystack=' '+normalized([article.title,article.excerpt,article.text,article.description].join(' '))+' ';
+export function titleMentions(article,favorite){
+ const title=' '+normalized(article.title)+' ';
  return favoriteAliases(favorite).some(alias=>{
   // Une expression complète est fiable ; un mot seul doit être assez long
   // et entier (jamais une sous-chaîne d'un autre nom).
-  if(alias.includes(' '))return haystack.includes(' '+alias+' ');
-  if(alias==='psg')return haystack.includes(' psg ');
-  return alias.length>=5&&haystack.includes(' '+alias+' ');
+  if(alias.includes(' '))return title.includes(' '+alias+' ');
+  if(alias==='psg')return title.includes(' psg ');
+  return alias.length>=5&&title.includes(' '+alias+' ');
  });
 }
+// Un article parle d'un favori si son nom figure dans le titre (et que le sport concorde).
+export function matchesFavorite(article,favorite){
+ return sportCompatible(article,favorite)&&titleMentions(article,favorite);
+}
 export function findFavorite(article,favorites=[]){
- return favorites.find(f=>f.name===article.favorite&&sportCompatible(article,f))
-  ||favorites.find(f=>matchesFavorite(article,f))||null;
+ const preferred=favorites.find(f=>f.name===article.favorite);
+ if(preferred&&matchesFavorite(article,preferred))return preferred;
+ return favorites.find(f=>matchesFavorite(article,f))||null;
 }
 function videoCandidates(value){
  const url=String(value||'');
@@ -158,13 +161,42 @@ export function decodeEntities(value){
  }
  return repairBareEntities(text);
 }
-// HTML d'article (WordPress) → texte en paragraphes.
+// HTML d'article (WordPress…) → blocs : paragraphes, citations intégrées
+// (tweets, Instagram) et images. Rien n'est jeté sauf scripts et décor.
+const NOISE_LINE=/^(?:partager|share|tweet|tweeter|imprimer|print|publicit[ée]|advertisement|lire aussi|à lire aussi|a lire aussi|voir aussi|crédit photo.*|©.*|pic\.twitter\.com\/\w+)$/i;
+const NOISE_IMAGE=/gravatar\.com|s\.w\.org\/images\/core\/emoji|\/emoji\/|pixel|spacer|blank\.gif|logo|avatar|icon/i;
+export function htmlToBlocks(html,base=''){
+ const resolve=src=>{try{const u=new URL(decodeEntities(src),base||undefined);return u.protocol==='https:'?u.href:''}catch{return ''}};
+ const marked=String(html||'')
+  .replace(/<(script|style|noscript|svg|form|button|nav|aside)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
+  .replace(/<img\b[^>]*>/gi,tag=>{
+   const src=(tag.match(/\b(?:data-lazy-src|data-src|data-orig-file|src)=["']([^"']+)["']/i)||[])[1]||'';
+   const url=resolve(src);
+   const width=+((tag.match(/\bwidth=["']?(\d+)/i)||[])[1]||0);
+   return url&&!NOISE_IMAGE.test(url)&&!(width&&width<80)?'\n[[IMG '+url+']]\n':' ';
+  })
+  .replace(/<\/?(?:a|span|strong|em|b|i|u|mark|small|sup|sub|abbr|time|cite)\b[^>]*>/gi,'')
+  .replace(/<(?:br|\/p|\/h[1-6]|\/li|\/blockquote|\/div|\/figure|\/figcaption|\/section|\/tr)\b[^>]*>/gi,'\n')
+  .replace(/<[^>]+>/g,' ');
+ const blocks=[],seen=new Set();
+ for(const raw of decodeEntities(marked).replace(/\r/g,'').split(/\n+/)){
+  const line=raw.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').replace(/([(«“"]) +/g,'$1').trim();
+  if(!line)continue;
+  const img=line.match(/^\[\[IMG (\S+)\]\]$/);
+  if(img){if(!seen.has(img[1])&&blocks.filter(b=>b.type==='img').length<12){seen.add(img[1]);blocks.push({type:'img',src:img[1]});}continue;}
+  if(/^(?:[àa] lire aussi|lire aussi|sur le même sujet)\b/i.test(line))break;
+  if(line.length<2||NOISE_LINE.test(line))continue;
+  blocks.push({type:'p',text:line.slice(0,3000)});
+ }
+ return blocks.slice(0,200);
+}
 export function htmlToText(html){
- return decodeEntities(String(html||'')
-  .replace(/<(script|style|figure|figcaption|iframe|noscript|svg)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
-  .replace(/<(?:br|\/p|\/h[1-6]|\/li|\/blockquote|\/div)\b[^>]*>/gi,'\n')
-  .replace(/<[^>]+>/g,''))
-  .replace(/[ \t]+/g,' ').replace(/ +([,.)])/g,'$1').replace(/\n\s*/g,'\n').replace(/\n{2,}/g,'\n').trim().slice(0,20000);
+ return htmlToBlocks(html).filter(b=>b.type==='p').map(b=>b.text).join('\n').slice(0,20000);
+}
+export function renderBlocks(blocks,esc){
+ return (Array.isArray(blocks)?blocks:[]).map(b=>b.type==='img'&&/^https:\/\//.test(String(b.src||''))
+  ?'<figure class="news-body-figure"><img class="news-body-image" loading="lazy" decoding="async" src="'+esc(b.src)+'" alt="" /></figure>'
+  :b.type==='p'?'<p>'+esc(b.text)+'</p>':'').join('');
 }
 const TRAILING_NOISE=/\s*(?:…|\.\.\.|\[…\]|\[\.\.\.\])?\s*(?:lire la suite|read more|voir plus)\.?\s*$/i;
 export function safeExcerpt(value){
@@ -200,16 +232,37 @@ export function articleRelevance(article){
  if(offTopic)return '';
  return result?'résultat':'';
 }
-function favoriteInTitle(article,favorite){
- const title=' '+normalized(article.title)+' ';
- return favoriteAliases(favorite).some(alias=>alias.includes(' ')||alias==='psg'||alias.length>=5?title.includes(' '+alias+' '):false);
-}
 export function relevantFavoriteNews(article,favorites){
  const favorite=findFavorite(article,favorites);
- if(!favorite)return null;
- // Le favori doit être le sujet : présent dans le titre (ou extrait + score).
- const central=favoriteInTitle(article,favorite)||SCORE_PATTERN.test(String(article.excerpt||''));
- return central&&articleRelevance(article)?favorite:null;
+ return favorite&&articleRelevance(article)?favorite:null;
+}
+// Article de presse correspondant à un résultat : publié entre 6 h avant et
+// 3 jours après le match, citant le favori ou l'adversaire dans le titre.
+const GENERIC_WORDS=new Set(['match','matchs','coupe','championnat','tennis','france','course','tournoi','finals','final','finale','open','masters','ligue','league','cup','round','groupe','phase','journee','saison','club','team','united','city','real','sporting','olympique','athletic']);
+export function matchSummaryArticle(item,news=[],favorites=[]){
+ const day=Date.parse(item.date||'');
+ if(!Number.isFinite(day))return null;
+ const favNames=item.favorites||[item.favorite];
+ const favs=favorites.filter(f=>favNames.includes(f.name));
+ const favWords=new Set(favs.flatMap(f=>favoriteAliases(f)).flatMap(a=>a.split(' ')));
+ const opponents=normalized(item.title).split(/\s+/).filter(w=>w.length>=4&&!favWords.has(w)&&!GENERIC_WORDS.has(w));
+ let best=null,bestScore=0;
+ for(const n of news){
+  const source=newsSourceName(n);
+  if(source==='FFL'||source==='Jeu, set et maths')continue;
+  const published=Date.parse(n.date||n.published||'');
+  if(!Number.isFinite(published)||published<day-6*3600000||published>day+3*86400000)continue;
+  const title=' '+normalized(n.title)+' ';
+  const favHit=favs.some(f=>matchesFavorite(n,f));
+  const oppHits=opponents.filter(w=>title.includes(' '+w+' ')).length;
+  if(!favHit&&!oppHits)continue;
+  const relevance=articleRelevance(n);
+  const score=(favHit?2:0)+Math.min(oppHits,2)*2+(relevance?2:0)+(safeExcerpt(n.excerpt||n.description)?1:0)-(published-day)/86400000*0.3;
+  // Il faut le favori ET (l'adversaire ou un vrai compte rendu).
+  if(favHit&&(oppHits||relevance)&&score>bestScore){best=n;bestScore=score;}
+ }
+ if(!best)return null;
+ return {title:decodeEntities(best.title),excerpt:safeExcerpt(best.excerpt||best.description),link:best.link,source:newsSourceName(best),image:best.image||''};
 }
 export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false}={}){
  const recentAll=newsLastWeek(news,now);
@@ -233,9 +286,13 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
   if(link==='#')return '';
   const published=new Date(n.date||n.published).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
   const sport=sportInfo(n.sport,n.favorite,n.title,n.excerpt);
-  const image=sourceImage(n.image)||sourceImage(photos?.[n.favorite]?.src);
-  const picture=image?'<span class="article-visual"><img class="article-thumb-image" loading="lazy" decoding="async" src="'+esc(image)+'" alt="" /><span class="article-image-fallback" aria-hidden="true">'+sport.icon+'</span></span>'
-   :'<span class="article-visual article-visual-empty" aria-hidden="true">'+sport.icon+'</span>';
+  const linkedFavorite=findFavorite(n,favorites);
+  const firstBodyImage=(Array.isArray(n.blocks)?n.blocks:[]).find(b=>b.type==='img')?.src;
+  const image=sourceImage(n.image)||sourceImage(firstBodyImage)||sourceImage(photos?.[linkedFavorite?.name||n.favorite]?.src);
+  const sportClass='sport-'+normalized(sport.name).replace(/\s+/g,'-');
+  const picture='<span class="article-visual '+sportClass+(image?'':' article-visual-empty')+'">'
+   +(image?'<img class="article-thumb-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+esc(image)+'" alt="" />':'')
+   +'<span class="article-image-fallback" aria-hidden="true">'+sport.icon+'</span></span>';
   if(n.source==='Jeu, set et maths'&&/^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(n.link||'')){
    const fullText=String(n.text||'').trim();
    const images=(Array.isArray(n.images)&&n.images.length?n.images:n.image?[n.image]:[])
@@ -261,7 +318,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" aria-label="Source originale sur X">Source originale ↗</a></footer>'
     +'</article>';
   }
-  const favorite=always(n)?null:findFavorite(n,favorites);
+  const favorite=always(n)?null:linkedFavorite;
   const excerpt=safeExcerpt(n.excerpt||n.description);
   return '<article class="news-card news-link-card'+(favorite?' has-favorite':'')+'">'
     +picture+'<div class="news-text"><div class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
@@ -270,8 +327,8 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +(excerpt?'<p class="news-excerpt">'+esc(excerpt)+'</p>':'')
     +'<div class="news-meta"><span class="news-source">'+esc(newsSourceName(n))+'</span>'
     +(favorite?'<span class="news-favorite" title="Article lié à un favori">⭐ '+esc(favorite.name)+'</span>':'')+'</div>'
-    +'<div class="news-actions"><button type="button" class="button news-read-inline" data-read-article="'+esc(link)+'"'+(n.text?' data-local-text="1"':'')+'>Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a></div>'
-    +'<div class="news-fulltext" data-article-content="'+esc(link)+'" hidden>'+(n.text?renderArticleBody(n.text,esc):'')+'</div></div></article>';
+    +'<div class="news-actions"><button type="button" class="button news-read-inline" data-read-article="'+esc(link)+'"'+(n.text||n.blocks?.length?' data-local-text="1"':'')+'>Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a></div>'
+    +'<div class="news-fulltext" data-article-content="'+esc(link)+'" hidden>'+(n.blocks?.length?renderBlocks(n.blocks,esc):n.text?renderArticleBody(n.text,esc):'')+'</div></div></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article pour les sources sélectionnées</h3><p>Essaie de sélectionner d’autres sources.</p></div>')
@@ -299,7 +356,7 @@ export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
    const title=a.headline||a.title||'';
    const description=safeExcerpt(a.description||a.story||'');
    const date=a.published||a.lastModified||'';
-   const text=normalized(title+' '+description);
+   const text=normalized(title);
    const words=new Set(text.split(/\s+/));
    const sport=leagueSport(path);
    const fav=favorites.find(f=>sportCompatible({sport},f)&&aliases(f).some(alias=>{
@@ -320,7 +377,8 @@ export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
    const body=await response.json();
    return (body.articles||[]).map(article=>{
     const cleaned={...article,title:decodeEntities(article.title),excerpt:safeExcerpt(article.excerpt),source:article.source||'Média sportif'};
-    const favorite=favorites.find(f=>matchesFavorite({...cleaned,favorite:''},f));
+    if(cleaned.source==='FFL')return {...cleaned,favorite:'FFL'};
+    const favorite=favorites.find(f=>matchesFavorite(cleaned,f));
     return {...cleaned,...(favorite?{favorite:favorite.name}:{})};
    });
   }catch{return []}

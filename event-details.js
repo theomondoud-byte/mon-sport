@@ -135,7 +135,7 @@ export function recapArticleFromESPN(body){
   const title=a.headline||a.title||'';
   const link=a.links?.web?.href||a.links?.mobile?.href||a.link||a.url||'';
   if(title&&/^https:\/\/(?:www\.)?espn\.(?:com|co\.uk)\//i.test(link)){
-   const excerpt=String(a.description||a.summary||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,180);
+   const excerpt=String(a.description||a.summary||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,400);
    return {title,link,excerpt,source:'ESPN'};
   }
  }
@@ -148,6 +148,25 @@ export function recapArticleFromESPN(body){
    return {title:'Compte rendu du match (ESPN)',link:url,excerpt:'',source:'ESPN'};
  }
  return null;
+}
+// Résumés vidéo publiés par ESPN pour la rencontre (MP4 lisible dans la page).
+export function videosFromESPN(body){
+ const list=[...(Array.isArray(body?.videos)?body.videos:[]),...(Array.isArray(body?.highlights)?body.highlights:[])];
+ const out=[];
+ for(const v of list){
+  const src=v?.links?.source?.HD?.href||v?.links?.source?.href||v?.links?.source?.full?.href||'';
+  const page=v?.links?.web?.href||v?.links?.mobile?.href||'';
+  if(!/^https:\/\//.test(src)&&!/^https:\/\//.test(page))continue;
+  out.push({title:String(v.headline||v.title||'Résumé vidéo').slice(0,160),src:/^https:\/\/[^\s]+\.mp4(?:\?|$)/i.test(src)?src:'',
+   page:/^https:\/\//.test(page)?page:'',poster:/^https:\/\//.test(v.thumbnail||'')?v.thumbnail:'',duration:+v.duration||0});
+ }
+ return out.slice(0,3);
+}
+export function hasEspnSheet(event){
+ const origin=event.origin||{};
+ const path=origin.leaguePath||origin.espnLeague||'';
+ const id=origin.espnEventId||event.espnEventId;
+ return /^((soccer|basketball|rugby|tennis)\/[a-zA-Z0-9_.]+)$/.test(path)&&/^[a-zA-Z0-9_-]{1,60}$/.test(String(id||''));
 }
 function dataFromEvent(event){
  const original=event.origin||{};
@@ -197,7 +216,7 @@ export async function loadEventDetails(event,{fetchFn=fetch}={}){
   const athleteName=origin.wembanyamaName||
    (event.favorites||[]).find(name=>/wemban[yi]ama/i.test(name))||'';
   const parsed={
-   ...data,article:recapArticleFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
+   ...data,article:recapArticleFromESPN(body),videos:videosFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
    players:parsePlayerStats(body.boxscore,data.sport,athleteName||event.favorite,!!athleteName),
    scorers:parseScorers(body),
    note:'ESPN · statistiques de la feuille de match disponibles selon la compétition.',
@@ -229,5 +248,7 @@ export function renderEventDetails(info,esc){
   +'<b>'+esc(info.article.title)+'</b>'
   +(info.article.excerpt?'<p>'+esc(info.article.excerpt)+'</p>':'')
   +'<a href="'+esc(info.article.link)+'" target="_blank" rel="noopener noreferrer">Lire le compte rendu ESPN ↗</a></div>':'';
- return title+article+extras+scores+scorers+players+'<p class="agenda-recap-note">'+esc(info.note||'Couverture partielle.')+'</p>';
+ const video=info.videos?.find(v=>v.src);
+ const replay=video?'<div class="event-editorial"><h5>▶ Résumé vidéo</h5><video class="result-video" controls playsinline preload="none"'+(video.poster?' poster="'+esc(video.poster)+'"':'')+' src="'+esc(video.src)+'"></video><small>'+esc(video.title)+' · ESPN</small></div>':'';
+ return title+replay+article+extras+scores+scorers+players+'<p class="agenda-recap-note">'+esc(info.note||'Couverture partielle.')+'</p>';
 }

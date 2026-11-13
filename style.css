@@ -923,3 +923,26 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 
 .news-hidden-note{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.8rem;color:#b1c9d3;background:#10283a;border:1px dashed #36596b;border-radius:12px;padding:8px 12px}
 .news-hidden-note .button{min-height:32px;padding:5px 11px;font-size:.78rem}
+
+/* V16.5 — résumé d'article et replay dans les résultats ; visuels d'articles. */
+.result-summary{margin:10px 0 2px;padding:10px 12px;background:#0f2b3c;border:1px solid #2c5163;border-radius:12px}
+.result-summary p{margin:0 0 6px;font-size:.86rem;line-height:1.5;color:#d6e8f1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.result-summary-source{font-size:.76rem;font-weight:750;color:#9fe9c9;text-decoration:none}
+.result-summary-source:hover{text-decoration:underline}
+.result-replay-row{margin:8px 0 2px;display:grid;gap:8px}
+.result-replay{justify-self:start;display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:6px 12px;border-radius:10px;border:0;background:var(--accent);color:#06281c;font-weight:800;font-size:.82rem;text-decoration:none;cursor:pointer}
+.result-replay.ghost{background:#1f3c52;color:#e6f6ff;border:1px solid #3b6276;font-weight:700}
+.result-video{width:100%;max-height:60vh;border-radius:12px;background:#000;display:block}
+.event-editorial small{display:block;margin-top:6px;color:#a9c2d0;font-size:.74rem}
+.news-body-figure{margin:12px 0}
+.news-body-image{display:block;width:100%;max-height:70vh;object-fit:contain;border-radius:10px;background:#0b1f2e}
+.news-link-card>.article-visual.sport-tennis{background:linear-gradient(135deg,#1d5a4a,#0f3242)}
+.news-link-card>.article-visual.sport-football{background:linear-gradient(135deg,#1f5a2e,#0f3242)}
+.news-link-card>.article-visual.sport-basketball{background:linear-gradient(135deg,#7a3c18,#2a2033)}
+.news-link-card>.article-visual.sport-rugby{background:linear-gradient(135deg,#5a2a1d,#1b2b44)}
+.news-link-card>.article-visual.sport-cyclisme{background:linear-gradient(135deg,#6b5418,#1b2b44)}
+.news-link-card>.article-visual.sport-natation{background:linear-gradient(135deg,#145a8a,#0f3242)}
+.news-link-card>.article-visual.sport-tennis-de-table{background:linear-gradient(135deg,#7a1f2d,#1b2b44)}
+.news-link-card>.article-visual.sport-sport{background:linear-gradient(135deg,#2c4a63,#0f2234)}
+.news-link-card>.article-visual .article-image-fallback{font-size:2.6rem;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+@media(max-width:600px){.news-link-card>.article-visual-empty,.news-link-card>.article-visual.image-failed{aspect-ratio:16/9;height:auto;max-height:150px;font-size:2.4rem}}

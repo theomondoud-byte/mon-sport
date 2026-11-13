@@ -4,6 +4,16 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V16.5 — résultats avec résumé et vidéo, articles illustrés, FFL complet
+
+- **Résultats** : chaque match terminé affiche, sans ouvrir la carte, le résumé d'un article de presse (article français du fil en priorité, sinon compte rendu ESPN) avec un lien vers l'article, et un bouton **▶ Voir le résumé vidéo** qui lit la vidéo ESPN dans la carte quand elle existe. Sinon, lien de recherche du résumé vidéo. La vidéo apparaît aussi dans le détail du match.
+- **FFL** : articles récupérés par le Worker (sans blocage CORS), texte complet conservé avec les tweets et citations intégrés, et images de l'article. Repli sur le flux RSS complet.
+- **Images** : le Worker complète chaque article sans image avec l'image de partage de la page (og:image) ; à défaut, portrait du favori ou illustration colorée du sport.
+- **Favoris** : un article d'un média (hors FFL et Jeu, set et maths) n'est lié à un favori que si son nom figure dans le titre.
+- Lecture intégrée : texte et images de l'article, extraction WordPress par slug en repli.
+
+---
+
 # Mon Sport V16.4 — articles pertinents, texte FFL complet et vignettes nettes
 
 - **Pertinence** (hors FFL et Jeu, set et maths) : seuls les comptes rendus de matchs joués et les records de tes favoris sont gardés. Avant-matchs, programmes TV, pronostics, interviews, blessures et transferts sont écartés ; le favori doit être le sujet de l'article (cité dans le titre). Un bandeau indique combien d'articles ont été écartés, avec « Afficher quand même ».

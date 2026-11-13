@@ -5,7 +5,7 @@ import {makeAgenda,agendaMatches,mergeSpursAndWembanyama,shiftedMonths} from '..
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
-import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText} from '../news-view.js';
+import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
@@ -1076,7 +1076,7 @@ test('V16.3 : entités HTML décodées, même encodées deux fois, côté client
  assert.equal(safeExcerpt('<p>Cl&eacute;ment &agrave; Knoxville … lire la suite</p>'),'Clément à Knoxville');
  const {readFile}=await import('node:fs/promises');
  const worker=await readFile(new URL('../worker/index.js',import.meta.url),'utf8');
- assert.match(worker,/body=decode\(body\)/);
+ assert.match(worker,/function toBlocks\(html,base\)/);
  assert.match(worker,/"eacute":"é"/);
 });
 
@@ -1141,10 +1141,45 @@ test('V16.4 : articles écartés signalés et affichables, FFL et JSM jamais fil
 });
 
 test('V16.4 : contenu WordPress converti en paragraphes',()=>{
- assert.equal(htmlToText('<p>Il a rat&eacute; <strong>tout</strong>.</p><figure><img src="x"><figcaption>Légende</figcaption></figure><p>Encore.</p>'),'Il a raté tout.\nEncore.');
+ assert.equal(htmlToText('<p>Il a rat&eacute; <strong>tout</strong>.</p><figure><img src="x"><figcaption>Légende</figcaption></figure><p>Encore.</p>'),'Il a raté tout.\nLégende\nEncore.');
 });
 
 test('V16.4 : pas d’espace parasite avant la ponctuation dans le texte intégral',()=>{
  assert.deepEqual(articleParagraphs('Avant de jouer ses premiers ATP Finals , Flavio Cobolli a soutenu Alexander Zverev .'),
   ['Avant de jouer ses premiers ATP Finals, Flavio Cobolli a soutenu Alexander Zverev.']);
+});
+
+test('V16.5 : un article parle d’un favori seulement si son nom est dans le titre',()=>{
+ const favs=[{name:'Jannik Sinner',sport:'Tennis'},{name:'PSG',sport:'Football',apiName:'Paris Saint Germain'}];
+ assert.equal(findFavorite({title:'Zverev file en demi-finale',excerpt:'Il a battu Sinner en deux sets',sport:'Tennis'},favs),null);
+ assert.equal(findFavorite({title:'Zverev file en demi-finale',favorite:'Jannik Sinner',sport:'Tennis'},favs),null);
+ assert.equal(findFavorite({title:'Sinner file en demi-finale',sport:'Tennis'},favs)?.name,'Jannik Sinner');
+ assert.equal(findFavorite({title:'Le Paris Saint-Germain gagne 3-0',sport:'Football'},favs)?.name,'PSG');
+});
+
+test('V16.5 : texte complet FFL avec tweets intégrés et images',()=>{
+ const blocks=htmlToBlocks('<p>Début.</p><figure class="wp-block-embed"><blockquote class="twitter-tweet"><p>Le tweet <a href="#">@compte</a></p>— Nom (@compte)</blockquote></figure><p><img src="/wp-content/uploads/a.jpg" width="900"><img src="https://secure.gravatar.com/x.png"></p><p>Partager</p><p>Fin.</p>','https://fflose.com/article/');
+ assert.deepEqual(blocks,[{type:'p',text:'Début.'},{type:'p',text:'Le tweet @compte'},{type:'p',text:'— Nom (@compte)'},{type:'img',src:'https://fflose.com/wp-content/uploads/a.jpg'},{type:'p',text:'Fin.'}]);
+});
+
+test('V16.5 : chaque carte d’article a un visuel, image ou illustration du sport',()=>{
+ const html=renderNewsView({news:[{title:'Sinner s’impose 6-4 6-3',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/b',date:'2026-11-13T09:00:00Z'},
+  {title:'Rien ne va plus',source:'FFL',favorite:'FFL',link:'https://fflose.com/x',date:'2026-11-13T08:00:00Z',blocks:[{type:'p',text:'Texte.'},{type:'img',src:'https://fflose.com/wp-content/uploads/b.jpg'}]}],
+  now:new Date('2026-11-13T12:00:00Z'),esc:x=>String(x),safeUrl:x=>x,photos:{'Jannik Sinner':{src:'https://example.org/sinner.jpg'}},favorites:[{name:'Jannik Sinner',sport:'Tennis'}]});
+ assert.match(html,/src="https:\/\/example\.org\/sinner\.jpg"/);
+ assert.match(html,/class="article-thumb-image"[^>]*src="https:\/\/fflose\.com\/wp-content\/uploads\/b\.jpg"/);
+ assert.match(html,/<figure class="news-body-figure"><img class="news-body-image"/);
+});
+
+test('V16.5 : résumé d’article associé à un résultat de match',()=>{
+ const item={title:'Paris Saint-Germain — Olympique Lyonnais',date:'2026-11-09T20:00:00Z',favorite:'PSG',favorites:['PSG']};
+ const favorites=[{name:'PSG',sport:'Football',apiName:'Paris Saint Germain'}];
+ const news=[
+  {title:'Le PSG prépare la réception de Lyon',sport:'Football',source:'Franceinfo',link:'https://x/1',date:'2026-11-08T10:00:00Z',excerpt:'Avant-match.'},
+  {title:'Ligue 1 : le PSG écrase Lyonnais et Lyon (4-0)',sport:'Football',source:'Franceinfo',link:'https://x/2',date:'2026-11-09T22:30:00Z',excerpt:'Les Parisiens ont dominé de bout en bout.'},
+  {title:'La lose du PSG',source:'FFL',link:'https://fflose.com/y',date:'2026-11-10T08:00:00Z'}];
+ const found=matchSummaryArticle(item,news,favorites);
+ assert.equal(found.link,'https://x/2');
+ assert.equal(found.excerpt,'Les Parisiens ont dominé de bout en bout.');
+ assert.equal(matchSummaryArticle({...item,date:'2026-10-01T20:00:00Z'},news,favorites),null);
 });

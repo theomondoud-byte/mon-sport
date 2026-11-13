@@ -1,6 +1,6 @@
-import {sourceImage} from './sports-media.js?v=16.4.0';
-import {htmlToText} from './news-view.js?v=16.4.0';
-import {jeuSetMathsBundledData} from './data/jeu-set-et-maths-bundle.js?v=16.4.0';
+import {sourceImage} from './sports-media.js?v=16.5.0';
+import {htmlToBlocks} from './news-view.js?v=16.5.0';
+import {jeuSetMathsBundledData} from './data/jeu-set-et-maths-bundle.js?v=16.5.0';
 // FFL (Fédération française de la Lose) : articles de sport uniquement.
 // WordPress REST expose titre, date et URL; pas de copie intégrale des articles.
 export const FFL_HOME='https://fflose.com/';
@@ -16,6 +16,10 @@ export function isSportsArticle(article){
  return SPORTS.test(text)||!!article.favorite||/^(Tennis|Football|Basketball|Rugby|Cyclisme|Natation|Tennis de table)$/.test(String(article.sport||''));
 }
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
+function ffBody(html,link){
+ const blocks=htmlToBlocks(html,link);
+ return {blocks,text:blocks.filter(b=>b.type==='p').map(b=>b.text).join('\n')};
+}
 export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
  const endpoints=[
   'https://fflose.com/wp-json/wp/v2/posts?per_page=40&_embed=1&_fields=date,date_gmt,link,title,excerpt,content,slug,jetpack_featured_media_url,_embedded',
@@ -59,7 +63,7 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
   const image=sourceImage(media?.media_details?.sizes?.thumbnail?.source_url||media?.source_url||
    p.jetpack_featured_media_url||p.thumbnail||p.enclosure?.link);
   return {title,link,date:new Date(timestamp).toISOString(),source:'FFL',
-   favorite:'FFL',image,excerpt:clean(p.excerpt?.rendered||''),text:htmlToText(p.content?.rendered||'')};
+   favorite:'FFL',image,excerpt:clean(p.excerpt?.rendered||''),...ffBody(p.content?.rendered||'',link)};
  }).filter(Boolean).filter(isSportsArticle);
 }
 // Des posts publics vérifiés, extraits du compte @JeuSetMaths par le collecteur.

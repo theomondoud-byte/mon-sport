@@ -44,6 +44,85 @@ function feedImage(item){
  const url=decode(match?.[1]||'');
  return /^https:\/\//i.test(url)?url:'';
 }
+
+// --- Articles en blocs (texte + images + tweets intégrés), partagé FFL / lecture intégrée.
+const NOISE_LINE=/^(?:partager|share|tweet|tweeter|imprimer|print|publicit[ée]|advertisement|crédit photo.*|©.*|pic\.twitter\.com\/\w+)$/i;
+const NOISE_IMAGE=/gravatar\.com|s\.w\.org\/images\/core\/emoji|\/emoji\/|pixel|spacer|blank\.gif|logo|avatar|icon/i;
+function toBlocks(html,base){
+ const resolve=src=>{try{const u=new URL(decode(src),base);return u.protocol==='https:'?u.href:''}catch{return ''}};
+ const marked=String(html||'')
+  .replace(/<(script|style|noscript|svg|form|button|nav|aside|header|footer)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
+  .replace(/<img\b[^>]*>/gi,tag=>{
+   const src=(tag.match(/\b(?:data-lazy-src|data-src|data-orig-file|src)=["']([^"']+)["']/i)||[])[1]||'';
+   const url=resolve(src),width=+((tag.match(/\bwidth=["']?(\d+)/i)||[])[1]||0);
+   return url&&!NOISE_IMAGE.test(url)&&!(width&&width<80)?'\n[[IMG '+url+']]\n':' ';
+  })
+  .replace(/<\/?(?:a|span|strong|em|b|i|u|mark|small|sup|sub|abbr|time|cite)\b[^>]*>/gi,'')
+  .replace(/<(?:br|\/p|\/h[1-6]|\/li|\/blockquote|\/div|\/figure|\/figcaption|\/section|\/tr)\b[^>]*>/gi,'\n')
+  .replace(/<[^>]+>/g,' ');
+ const blocks=[],seen=new Set();
+ for(const raw of decode(marked).replace(/\r/g,'').split(/\n+/)){
+  const line=raw.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').trim();
+  if(!line)continue;
+  const img=line.match(/^\[\[IMG (\S+)\]\]$/);
+  if(img){if(!seen.has(img[1])&&blocks.filter(b=>b.type==='img').length<12){seen.add(img[1]);blocks.push({type:'img',src:img[1]});}continue;}
+  if(/^(?:[àa] lire aussi|lire aussi|sur le même sujet)\b/i.test(line))break;
+  if(line.length<2||NOISE_LINE.test(line))continue;
+  blocks.push({type:'p',text:line.slice(0,3000)});
+ }
+ return blocks.slice(0,200);
+}
+const blocksText=blocks=>blocks.filter(b=>b.type==='p').map(b=>b.text).join('\n');
+// Image de partage d'une page (og:image / twitter:image), mise en cache 1 jour.
+async function pageImage(link){
+ try{
+  const r=await fetch(link,{headers:{'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'text/html'},cf:{cacheTtl:86400,cacheEverything:true},signal:AbortSignal.timeout(5000)});
+  if(!r.ok)return '';
+  const head=(await r.text()).slice(0,250000);
+  const m=head.match(/<meta[^>]+(?:property|name)=["'](?:og:image(?::secure_url)?|twitter:image)["'][^>]+content=["']([^"']+)["']/i)
+   ||head.match(/<meta[^>]+content=["']([^"']+)["'][^>]+(?:property|name)=["'](?:og:image|twitter:image)["']/i);
+  const url=decode(m?.[1]||'');
+  return /^https:\/\//i.test(url)?new URL(url,link).href:'';
+ }catch{return ''}
+}
+async function withImages(articles,limit=40){
+ const missing=articles.filter(a=>!a.image).slice(0,limit);
+ for(let i=0;i<missing.length;i+=8){
+  await Promise.all(missing.slice(i,i+8).map(async a=>{a.image=await pageImage(a.link);}));
+ }
+ return articles;
+}
+// FFL : récupéré côté serveur (pas de CORS), texte complet et image à la une.
+async function fflNews(start,now){
+ const headers={'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'application/json'};
+ try{
+  const r=await fetch('https://fflose.com/wp-json/wp/v2/posts?per_page=30&_embed=1&_fields=date_gmt,link,title,excerpt,content,jetpack_featured_media_url,_embedded',{headers,cf:{cacheTtl:600,cacheEverything:true},signal:AbortSignal.timeout(9000)});
+  if(!r.ok)throw Error('FFL HTTP '+r.status);
+  const posts=await r.json();
+  return posts.map(p=>{
+   const time=Date.parse((p.date_gmt||'')+'Z');
+   if(!Number.isFinite(time)||time<start||time>now+600000||!/^https:\/\/fflose\.com\//.test(p.link||''))return null;
+   const blocks=toBlocks(p.content?.rendered||'',p.link),media=p._embedded?.['wp:featuredmedia']?.[0];
+   return {title:decode(String(p.title?.rendered||'').replace(/<[^>]+>/g,'')),link:p.link,date:new Date(time).toISOString(),source:'FFL',
+    excerpt:decode(String(p.excerpt?.rendered||'').replace(/<[^>]+>/g,' ')).replace(/\s+/g,' ').trim().slice(0,600),
+    image:media?.media_details?.sizes?.medium_large?.source_url||media?.source_url||p.jetpack_featured_media_url||blocks.find(b=>b.type==='img')?.src||'',
+    blocks,text:blocksText(blocks)};
+  }).filter(Boolean);
+ }catch(e){
+  // Repli : flux RSS complet (content:encoded).
+  const r=await fetch('https://fflose.com/feed/',{headers:{...headers,'Accept':'application/rss+xml, text/xml'},cf:{cacheTtl:600,cacheEverything:true},signal:AbortSignal.timeout(9000)});
+  if(!r.ok)throw Error('FFL indisponible ('+String(e.message||e)+')');
+  const xml=await r.text();
+  return feedItems(xml).map(item=>{
+   const link=feedLink(item),time=Date.parse(xmlValue(item,['pubDate']));
+   if(!Number.isFinite(time)||time<start||time>now+600000||!/^https:\/\/fflose\.com\//.test(link))return null;
+   const raw=(item.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/i)?.[1]||'').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1');
+   const blocks=toBlocks(raw,link);
+   return {title:xmlValue(item,['title']),link,date:new Date(time).toISOString(),source:'FFL',excerpt:xmlValue(item,['description']).slice(0,600),
+    image:feedImage(item)||blocks.find(b=>b.type==='img')?.src||'',blocks,text:blocksText(blocks)};
+  }).filter(Boolean);
+ }
+}
 async function curatedSportsNews(){
  const now=Date.now(),start=now-7*86400000;
  const settled=await Promise.allSettled(RSS_FEEDS.map(async feed=>{
@@ -60,16 +139,20 @@ async function curatedSportsNews(){
   }).filter(Boolean);
   return articles;
  }));
- const articles=settled.flatMap(result=>result.status==='fulfilled'?result.value:[]);
+ const ffl=await fflNews(start,now).then(value=>({ok:true,value}),error=>({ok:false,value:[],error:String(error.message||error)}));
+ const articles=[...settled.flatMap(result=>result.status==='fulfilled'?result.value:[]),...ffl.value];
  const unique=new Map();
  for(const article of articles){const key=article.link.split('#')[0];if(!unique.has(key))unique.set(key,article);}
- return {articles:[...unique.values()].sort((a,b)=>Date.parse(b.date)-Date.parse(a.date)).slice(0,60),
-  feeds:RSS_FEEDS.map((feed,index)=>({source:feed.name,sport:feed.sport,ok:settled[index].status==='fulfilled',count:settled[index].status==='fulfilled'?settled[index].value.length:0}))};
+ const sorted=[...unique.values()].sort((a,b)=>Date.parse(b.date)-Date.parse(a.date)).slice(0,90);
+ await withImages(sorted);
+ return {articles:sorted,
+  feeds:[...RSS_FEEDS.map((feed,index)=>({source:feed.name,sport:feed.sport,ok:settled[index].status==='fulfilled',count:settled[index].status==='fulfilled'?settled[index].value.length:0})),
+   {source:'FFL',sport:'',ok:ffl.ok,count:ffl.value.length,...(ffl.error?{error:ffl.error}:{})}]};
 }
 
 async function articleText(rawUrl){
  let url;try{url=new URL(rawUrl)}catch{return {text:''}}
- const allowed=['tennisactu.net','franceinfo.fr','basketusa.com','trashtalk.co','cyclismactu.net','fflose.com','espn.com'];
+ const allowed=['tennisactu.net','franceinfo.fr','basketusa.com','trashtalk.co','cyclismactu.net','fflose.com','espn.com','lequipe.fr','eurosport.fr','rugbyrama.fr','rmcsport.bfmtv.com'];
  if(url.protocol!=='https:'||!allowed.some(host=>url.hostname===host||url.hostname.endsWith('.'+host)))throw Error('Source non autorisée pour la lecture intégrée');
  const response=await fetch(url.href,{headers:{'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'text/html'},redirect:'follow',signal:AbortSignal.timeout(12000)});
  if(!response.ok)throw Error('Article inaccessible (HTTP '+response.status+')');
@@ -83,6 +166,13 @@ async function articleText(rawUrl){
  if(wpLink){
   try{const r=await fetch(wpLink+'?_fields=content',{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(8000)});if(r.ok)candidateBody=(await r.json())?.content?.rendered||'';}catch{}
  }
+ // WordPress sans lien JSON dans la page : recherche par slug.
+ if(!candidateBody&&/wp-content|wp-json/i.test(html)){
+  const slug=finalUrl.pathname.split('/').filter(Boolean).pop()||'';
+  if(/^[\w%-]+$/.test(slug)){
+   try{const r=await fetch(finalUrl.origin+'/wp-json/wp/v2/posts?slug='+encodeURIComponent(decodeURIComponent(slug))+'&_fields=content',{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(8000)});if(r.ok)candidateBody=(await r.json())?.[0]?.content?.rendered||'';}catch{}
+  }
+ }
  // 2. Données structurées schema.org (articleBody).
  if(!candidateBody){
   for(const m of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)){
@@ -92,13 +182,9 @@ async function articleText(rawUrl){
  // 3. Repli : le plus long bloc <article>/<main> (greedy pour les blocs imbriqués).
  const candidates=[...html.matchAll(/<(article|main)\b[^>]*>([\s\S]*)<\/\1>/gi)].map(m=>m[2]);
  let body=candidateBody||candidates.sort((a,b)=>b.length-a.length)[0]||html;
- body=body.replace(/<(script|style|nav|header|footer|aside|form|noscript|svg|iframe)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
-  .replace(/<(?:br|\/p|\/h[1-6]|\/li|\/div|\/section)\b[^>]*>/gi,'\n')
-  .replace(/<\/?(?:a|span|strong|em|b|i|u|mark|small|sup|sub|abbr|time)\b[^>]*>/gi,'')
-  .replace(/<[^>]+>/g,' ')
-  .replace(/[ \t]+/g,' ').replace(/\n\s*/g,'\n').replace(/\n{3,}/g,'\n\n').trim();
- body=decode(body).replace(/ +([,.)])/g,'$1').replace(/\n\s*(?:[àa] lire aussi|lire aussi|sur le même sujet)\b[\s\S]*$/i,'').trim();
- return {text:body.slice(0,18000),truncated:body.length>18000,source:finalUrl.hostname};
+ const blocks=toBlocks(body,finalUrl.href);
+ const text=blocksText(blocks);
+ return {text:text.slice(0,18000),truncated:text.length>18000,blocks,source:finalUrl.hostname};
 }
 async function team(name){const found=await getJson(API+'searchteams.php?t='+encodeURIComponent(name));const teams=found.teams||[];const normalized=name.toLocaleLowerCase();const t=teams.find(x=>x.strTeam?.toLocaleLowerCase()===normalized)||teams[0];if(!t?.idTeam)return {events:[],note:'Équipe introuvable via API gratuite'};const calls=await Promise.allSettled(['eventslast.php?id=','eventsnext.php?id='].map(s=>getJson(API+s+encodeURIComponent(t.idTeam))));const raw=calls.flatMap(r=>r.status==='fulfilled'?(r.value.results||r.value.events||[]):[]);const events=raw.map(e=>({id:e.idEvent,home:e.strHomeTeam||'',away:e.strAwayTeam||'',homeScore:e.intHomeScore??null,awayScore:e.intAwayScore??null,date:e.strTimestamp||(e.dateEvent?e.dateEvent+'T'+(e.strTime||'12:00:00'):'') ,status:e.strStatus||((e.intHomeScore!==null&&e.intHomeScore!==undefined)?'Terminé':'À venir')}));return {events,note:'L’API gratuite peut ne renvoyer que certains matchs à domicile.'}}
 async function news(q){
