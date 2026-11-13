@@ -515,3 +515,16 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .atp-filter-count{width:100%}
  .atp-live-table .atp-live-row{grid-template-columns:32px 37px 148px 38px 62px 68px 67px 65px 205px 175px 96px 69px 69px}
 }
+
+/* V14.5 — ATP, WTA, Race ATP/WTA, Next Gen : deux colonnes de tournois cohérentes. */
+.atp-live-table .atp-live-row{grid-template-columns:38px 48px 230px 48px 75px 88px 82px 80px 240px 240px 113px 80px 80px}
+.atp-live-table.race-no-career .atp-live-row{grid-template-columns:38px 230px 48px 75px 88px 82px 80px 240px 240px 113px 80px 80px}
+.atp-live-table.race-no-career .atp-live-row>.rank-person{left:46px}
+.atp-live-table .rank-tournament{font-size:.78rem;line-height:1.5}
+.atp-live-table .tour-observed{display:block;width:max-content;max-width:100%;margin-bottom:4px;
+ border:1px solid #4e8294;border-radius:5px;padding:1px 5px;background:#294858;color:#c4e7ec;font-size:.66rem;font-weight:700}
+@media(max-width:550px){
+ .atp-live-table .atp-live-row{grid-template-columns:32px 37px 148px 38px 62px 68px 67px 65px 185px 185px 96px 69px 69px}
+ .atp-live-table.race-no-career .atp-live-row{grid-template-columns:32px 148px 38px 62px 68px 67px 65px 185px 185px 96px 69px 69px}
+ .atp-live-table.race-no-career .atp-live-row>.rank-person{left:37px}
+}
