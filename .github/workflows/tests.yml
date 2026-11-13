@@ -25,3 +25,24 @@ jobs:
         run: python -m pip install requests beautifulsoup4
       - name: Tests du collecteur ATP live
         run: python -m unittest discover -s tests -p '*_py_test.py'
+      - name: Diagnostic flux Jeu Set et Maths (temporaire)
+        run: |
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          for url in ['https://www.instalker.org/JeuSetMaths','https://teapawt.org/JeuSetMaths','https://rsshub.app/twitter/user/JeuSetMaths']:
+            try:
+              r=requests.get(url,timeout=13,headers={'User-Agent':'Mozilla/5.0'})
+              soup=BeautifulSoup(r.text,'html.parser')
+              print('POST_SOURCE',url,r.status_code,len(r.content),r.url,flush=True)
+              print('POST_TITLE',soup.title.get_text(' ',strip=True)[:110] if soup.title else '-',flush=True)
+              for a in soup.find_all('a',href=True):
+                if '/status/' in a['href'] and ('JeuSetMaths' in a['href'] or 'jeusetmaths' in a['href'].lower()):
+                  print('POST_LINK',a['href'][:200],'PARENT',a.parent.get_text(' ',strip=True)[:120],flush=True)
+                  if sum(1 for x in soup.select('a[href*="/status/"]'))>100:break
+              for node in soup.select('time')[:3]:print('POST_TIME',str(node)[:200],flush=True)
+              for selector in ['.tweet','.tweet-body','.timeline-item','.post','.tweet-content']:
+                nodes=soup.select(selector)
+                if nodes:print('POST_SELECTOR',selector,len(nodes),'SAMPLE',str(nodes[0])[:1000],flush=True)
+            except Exception as e:print('POST_SOURCE_ERROR',url,str(e)[:200],flush=True)
+          PY
