@@ -746,7 +746,7 @@ async function refresh(){
      return (data.articles||[]).slice(0,6).map(a=>({...a,favorite:f.name}));
     }catch{return []}
    })),
-   fetchSportsNews(favorites).catch(()=>[]),
+   fetchSportsNews(favorites,new Date(),workerUrl).catch(()=>[]),
    fetchFFLNews().catch(async()=>{
     // Repli Google News site: FFL si l'API WordPress refuse CORS.
     if(!workerUrl)return [];
