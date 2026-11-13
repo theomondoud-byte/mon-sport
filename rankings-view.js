@@ -117,9 +117,9 @@ export function parseESPNStandings(body,{west=false}={}){
  const groups=extractGroups(body);
  const picked=west?groups.filter(g=>/western|(?:^|\b)west(?:ern)?(?:\b|$)/i.test(String(g.name))):groups;
  if(west&&!picked.length)return [];
- const raw=(picked.length?picked:groups).flatMap(g=>g.rows);
+ const raw=(picked.length?picked:groups).flatMap(g=>g.rows.map(item=>({item,group:g.name})));
  const used=new Set(),out=[];
- for(const item of raw){
+ for(const {item,group} of raw){
   const team=item.team||item.athlete||{};
   const name=team.displayName||team.name||item.displayName||'';
   if(!name||used.has(norm(name)))continue;used.add(norm(name));
@@ -135,14 +135,28 @@ export function parseESPNStandings(body,{west=false}={}){
   const goalsFor=displayStat(stats,['pointsFor','goalsFor','GF','goalsScored']);
   const goalsAgainst=displayStat(stats,['pointsAgainst','goalsAgainst','GA','goalsConceded']);
   const diff=displayStat(stats,['pointDifferential','goalDifference','goalDifferential','goalDiff','GD']);
+  const pct=west?displayStat(stats,['winPercent','PCT']):'';
+  const gamesBehind=west?displayStat(stats,['gamesBehind','GB']):'';
+  const streak=west?displayStat(stats,['streak','STRK']):'';
+  const home=west?displayStat(stats,['home','HOME']):'';
+  const away=west?displayStat(stats,['road','away','AWAY']):'';
+  const lastTen=west?displayStat(stats,['last ten games','Last 10 Games','last10','L10']):'';
+  const avgPointsFor=west?displayStat(stats,['avgPointsFor','PPG']):'';
+  const avgPointsAgainst=west?displayStat(stats,['avgPointsAgainst','OPP PPG']):'';
+  const avgDiff=west?displayStat(stats,['differential','DIFF']):'';
+  const rankChange=west?'':displayStat(stats,['rankChange']);
+  const logos=Array.isArray(team.logos)?team.logos:[];
+  const logo=String(logos.find(logo=>/^https:\/\//i.test(logo?.href||''))?.href||'');
   out.push({name,rank:displayed,points:points.trim(),played,diff,wins,draws,losses,goalsFor,goalsAgainst,
+   pct,gamesBehind,streak,home,away,lastTen,avgPointsFor,avgPointsAgainst,avgDiff,rankChange,group,logo,
    detail:(west?[played?played+' MJ':'']:[
     played?played+' J':'',wins!==''?wins+' V':'',draws!==''?draws+' N':'',losses!==''?losses+' D':'',
     goalsFor!==''?'BP '+goalsFor:'',goalsAgainst!==''?'BC '+goalsAgainst:'',diff?'Diff. '+diff:''
    ]).filter(Boolean).join(' · '),
    source:'ESPN'});
  }
- return out.sort((a,b)=>(a.rank??Infinity)-(b.rank??Infinity));
+ return out.sort((a,b)=>String(a.group||'').localeCompare(String(b.group||''))||
+  (a.rank??Infinity)-(b.rank??Infinity));
 }
 export async function fetchRankings({fetchFn=fetch,force=false}={}){
  const result={};
