@@ -27,18 +27,18 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install requests beautifulsoup4
-      - name: Inspecter les autres classements tennis live
-        run: python scripts/refresh_tennis_live.py --diagnose
+      - name: Collecter les classements WTA, Race ATP/WTA et Next Gen
+        run: python -m scripts.refresh_tennis_live
       - name: Collecter les données live avec validation
         run: python scripts/refresh_atp_live.py --debug
       - name: Conserver le dernier relevé sur main
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/v14-5-classements-tennis-unifies'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/atp-live.json
+          git add data/atp-live.json data/wta-live.json data/atprace-live.json data/wtarace-live.json data/nextgen-live.json
           if ! git diff --cached --quiet; then
-            git commit -m 'data: actualiser ATP live (source publique)'
+            git commit -m 'data: actualiser les cinq classements tennis live français'
             git push
           fi
   deploy:
