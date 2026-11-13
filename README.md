@@ -1,3 +1,23 @@
+# Mon Sport V14 — fiabilité, hors connexion et tests
+
+> Version en préparation sur la branche `feat/v14-fiabilite-tests-ergonomie`. La version publique reste inchangée jusqu'à validation de la pull request.
+
+## Nouveautés V14
+- Validation et nettoyage des favoris enregistrés lors du chargement : champs essentiels vérifiés, maximum 200 favoris, identifiants manquants recréés, noms limités. En cas de stockage local indisponible, un avertissement apparaît lors de la sauvegarde.
+- Classements ESPN : aucun rang reconstruit à partir de l'ordre des lignes si la source ne fournit pas de rang. Les bilans NBA incomplets ne sont pas affichés comme complets.
+- Agenda : les compétitions passées sans résultat confirmé sont triées selon leur date de fin lorsqu'elle est connue.
+- Interface : indicateur hors connexion, conservation des informations consultables depuis le cache, actualisation réseau suspendue hors ligne.
+- Vérification : `npm test` exécute des tests de non-régression sans dépendance. `npm run check` vérifie la syntaxe. Workflow GitHub Actions sur les branches et pull requests.
+
+## Points à vérifier avant fusion
+1. Sur Android, lancer l'application en ligne puis hors connexion, et vérifier l'apparition du bandeau.
+2. Contrôler la présence des 20 favoris existants, ainsi que l'import/export et la persistance locale.
+3. Parcourir les dix classements, vérifier l'absence de rang fictif si ESPN ne répond pas.
+4. Vérifier les flux d'articles depuis le téléphone (CORS, Cloudflare, ESPN, FFL) et l'installation PWA.
+5. Attendre les résultats verts du workflow `Tests Mon Sport` avant publication.
+
+---
+
 # Mon Sport V13 — Classements et articles sportifs
 
 Application : https://theomondoud-byte.github.io/mon-sport/
