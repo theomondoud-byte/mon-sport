@@ -3,19 +3,17 @@ import {filterSportsNews} from './sports-articles.js?v=15.6.0';
 // Mon Sport V15.6 — dernières publications tennis intégrées au chargement Android.
 const HOUR=3600000;
 const DAY=24*HOUR;
-const HOUR=3600000;
-const DAY=24*HOUR;
-const normalized=value=>String(value||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const normalized=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const STOPWORDS=new Set(['avec','dans','pour','contre','chez','face','apres','avant','plus','moins','mais','sur','ses','son','sa','les','des','une','un','du','de','la','le','et','est','aux','par','qui','que','en','au','a','d']);
 function titleTokens(article){
- return new Set(normalized(article.title).split(/\\s+/).filter(word=>word.length>=3&&!STOPWORDS.has(word)));
+ return new Set(normalized(article.title).split(/\s+/).filter(word=>word.length>=3&&!STOPWORDS.has(word)));
 }
 function canonicalNewsLink(value){
  try{
   const url=new URL(String(value||''));
   url.hash='';
   for(const key of [...url.searchParams.keys()])if(/^utm_|^fbclid$|^gclid$|^ref$/i.test(key))url.searchParams.delete(key);
-  return (url.hostname.replace(/^www\\./,'')+url.pathname.replace(/\\/$/,'')+url.search).toLowerCase();
+  return (url.hostname.replace(/^www\./,'')+url.pathname.replace(/\/$/,'')+url.search).toLowerCase();
  }catch{return String(value||'').split('#')[0].toLowerCase();}
 }
 function sameNewsStory(left,right){
@@ -39,8 +37,6 @@ export function newsLastWeek(items,now=new Date()){
   const t=Date.parse(n.date||n.published||'');
   return Number.isFinite(t)&&t>=start&&t<=end+10*60*1000&&n.title&&n.link;
  }).sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published));
- // Éliminer les doublons entre éditeurs : même URL, ou titre quasi identique
- // publié dans les 36 h. Garder la version avec le texte le plus complet.
  const ordered=[];
  for(const article of candidates){
   const index=ordered.findIndex(previous=>sameNewsStory(previous,article));
@@ -56,7 +52,7 @@ function newsSourceName(article){
  const value=String(article.source||article.publisher||article.provider||'').trim();
  if(value&&value!=='Éditeur')return value;
  try{
-  const host=new URL(article.link).hostname.replace(/^www\\./,'');
+  const host=new URL(article.link).hostname.replace(/^www\./,'');
   if(host.includes('fflose.com'))return 'FFL';
   if(host.includes('espn.com'))return 'ESPN';
   if(host.includes('tennisactu.net'))return 'Tennis Actu';
@@ -81,7 +77,7 @@ function matchesFavorite(article,favorite){
 }
 function videoCandidates(value){
  const url=String(value||'');
- if(!/^https:\\/\\/video\\.twimg\\.com\\/[\\w/.-]+\\.mp4(?:\\?[^\\s]*)?$/.test(url))return [];
+ if(!/^https:\/\/video\.twimg\.com\/[\w/.-]+\.mp4(?:\?[^\s]*)?$/.test(url))return [];
  const candidates=[url];
  try{
   const fallback=new URL(url);fallback.searchParams.delete('tag');
