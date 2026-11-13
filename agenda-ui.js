@@ -41,7 +41,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    '<span><strong>'+esc(st.value)+'</strong> '+esc(st.name)+'</span>').join('')+'</div>':'';
  const flags=(item.approximate?'<span class="agenda-caution">Date approximative · semaine du tournoi</span>':'')
    +(item.uncertainParticipation?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'')
-   +(chosen&&/wemban[yi]ama/i.test(chosen)&&item.wembanyamaUnconfirmed
+   +(chosen&&/wemban[yi]ama/i.test(chosen)&&!item.finished&&item.wembanyamaUnconfirmed
     ?'<span class="agenda-caution">Match des Spurs : la participation de Wembanyama n’est pas confirmée pour cette rencontre</span>':'');
  const sourceLink=recap.url&&safeUrl(recap.url)!=='#'
   ?'<a href="'+esc(safeUrl(recap.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a>':'';
