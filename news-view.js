@@ -15,7 +15,7 @@ export function newsLastWeek(items,now=new Date()){
  // Le flux personnalisé peut être très rempli : garder une place pour les
  // derniers posts de statistiques, même avec de nombreux favoris sur mobile.
  const top=ordered.slice(0,60);
- const maths=ordered.filter(n=>n.source==='Jeu, set et maths').slice(0,12);
+ const maths=ordered.filter(n=>n.source==='Jeu, set et maths').slice(0,25);
  return [...new Map([...top,...maths].map(n=>[n.link,n])).values()]
   .sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published));
 }
