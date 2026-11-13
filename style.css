@@ -848,3 +848,14 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .jsm-native-figure{width:100%}
  .jsm-native-image{height:auto;max-height:none;object-fit:contain}
 }
+
+/* V15.6 — présence du flux Jeu, set et maths confirmée sur téléphone. */
+.jsm-feed-indicator{display:flex;align-items:center;flex-wrap:wrap;gap:6px;
+ font-size:.78rem;line-height:1.35;color:#d7f4e7;margin:7px 0;padding:8px 10px;
+ background:#174155;border:1px solid #376b71;border-radius:9px}
+.jsm-feed-indicator b{font-weight:850;color:#d2ffe3}
+.jsm-feed-indicator button{min-height:30px;font-size:.72rem;padding:4px 9px;margin-left:auto}
+@media(max-width:550px){
+ .jsm-feed-indicator{font-size:.73rem;padding:8px;gap:4px}
+ .jsm-feed-indicator button{padding:4px 6px}
+}
