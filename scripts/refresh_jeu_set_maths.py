@@ -84,7 +84,7 @@ def parse_posts(html, *, now=None):
                 break
         used.add(id)
         output.append({
-            "title": title, "text": text[:12000],
+            "title": title, "text": text[:30000],
             "link": f"https://x.com/JeuSetMaths/status/{id}",
             "date": date.isoformat(), "source": "Jeu, set et maths",
             "favorite": "Jeu, set et maths", "sport": "Tennis",
