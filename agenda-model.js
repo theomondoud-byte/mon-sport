@@ -48,6 +48,10 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   const names=title.split(' — ').map(type==='tennis'?personKey:norm).sort().join('|');
   const eventKey=item.id?.startsWith('agenda-espn-')?'event:'+item.id.replace(/^agenda-espn-/,'')
     :item.id?.startsWith('espn-')?'event:'+item.id.replace(/^espn-/,''):null;
+  // Les statistiques de Wembanyama et les scores des Spurs proviennent de
+  // la même rencontre ESPN : une seule fiche, quel que soit le favori consulté.
+  const nbaId=String(item.espnEventId||item.id?.match(/^(?:wemby-)?espn-([A-Za-z0-9_-]+)$/)?.[1]||'');
+  const sameNbaMatch=nbaId&&(/basketball\/nba/.test(String(item.leaguePath||''))||item.type==='nba');
   // En simple, une même rencontre ATP peut être livrée à la fois par ESPN,
   // les archives et le relevé manuel avec des noms abrégés.
   const alias=str=>norm(str).replace(/\bsouth africa\b/g,'afrique du sud').replace(/\bargentina\b/g,'argentine')
@@ -55,7 +59,8 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    .replace(/\bfc barcelona\b/g,'barca').replace(/\bfc barcelone\b/g,'barca')
    .replace(/\bbarcelona\b/g,'barca').replace(/\batletico de madrid\b/g,'atletico madrid');
   const teams=item.home&&item.away?[alias(item.home),alias(item.away)].sort().join('|'):null;
-  const key=teams&&!item.scheduledCompetition?'fixture:'+day+':'+teams
+  const key=sameNbaMatch?'nba-espn:'+nbaId
+   :teams&&!item.scheduledCompetition?'fixture:'+day+':'+teams
    :eventKey&&type!=='tennis'?eventKey
    :type==='tennis'?'tennis:'+day+':'+names
    :type+':'+day+':'+names+':'+norm(competition);
@@ -79,6 +84,16 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   if(seen.has(row.key)){
    const existing=seen.get(row.key);
    existing.favorites=[...new Set([...existing.favorites,...row.favorites])];
+   // Ne jamais perdre le score d'équipe ; déplacer seulement les statistiques
+   // individuelles confirmées vers la même fiche de rencontre.
+   if(row.stats&&!existing.stats)existing.stats=row.stats;
+   if(existing.type==='nba'&&row.type==='team'){
+    existing.title=row.title;existing.score=row.score;existing.type='team';
+    existing.origin={...row.origin,stats:existing.stats};
+    existing.sourceUrl=row.sourceUrl||existing.sourceUrl;
+   }else if(row.stats&&existing.origin&&!existing.origin.stats){
+    existing.origin={...existing.origin,stats:row.stats};
+   }
    continue;
   }
   seen.set(row.key,row);
