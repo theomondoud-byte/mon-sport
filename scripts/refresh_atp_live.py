@@ -30,7 +30,10 @@ def parse(html, debug=False):
     if table is None:
         tables=soup.select("table")
         if debug: print("TABLES",len(tables),[(i,t.get("class"),t.get("id"),len(t.select("tr")),txt(t)[:110]) for i,t in enumerate(tables)])
-        table=next((t for t in tables if t.select_one("td.t-name")),None)
+        table=next((t for t in tables if len(t.select("tr"))>=150),None)
+        if debug and table:
+            for tr in table.select("tr")[0:11]:
+                print("EXAMPLE",[(c.name,c.get("class"),txt(c)[:75],c.get("title")) for c in tr.find_all(["td","th"],recursive=False)][:18])
     if table is None: raise RuntimeError("tableau HTML introuvable")
     rows=[]
     for tr in table.select("tr"):
