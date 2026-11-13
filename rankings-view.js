@@ -1,5 +1,5 @@
-// Mon Sport V14.5 · Cinq classements de tennis live FR (top 150), autres sports inchangés.
-// Tennis de table WTT : relevé daté, distinct du tennis ATP/WTA.
+// Mon Sport V14.7 · Tennis compact, football et NBA ESPN détaillés, ITTF hebdomadaire top 150.
+// WTT : top 150 hebdomadaire hommes/femmes ; repli partiel daté si la source échoue.
 // Football/NBA : accès direct aux tableaux ESPN, en cache pour 20 min.
 const ESPN='https://site.api.espn.com/apis/v2/sports/';
 export const RANKING_DATE='2026-11-09';
