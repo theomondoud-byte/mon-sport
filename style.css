@@ -890,22 +890,33 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .jsm-native-video{max-height:62vh;aspect-ratio:9/16}
 }
 
-.news-fulltext{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;color:var(--text,#e8eef5);background:rgba(8,20,34,.48);border:1px solid rgba(150,190,210,.2);border-radius:12px;padding:14px;margin-top:12px;max-height:70vh;overflow:auto;font-size:.92rem}.news-read-inline{margin-top:8px}.news-tap{display:inline-block;margin:10px 0 0 12px}.news-source-filters{display:flex;flex-wrap:wrap;gap:8px}.news-filter-block{margin:12px 0}.news-filter-label{display:block;margin-bottom:8px;font-size:.8rem;font-weight:800}
+.news-read-inline{margin-top:8px}.news-tap{display:inline-block;margin:10px 0 0 12px}.news-source-filters{display:flex;flex-wrap:wrap;gap:8px}.news-filter-block{margin:12px 0}.news-filter-label{display:block;margin-bottom:8px;font-size:.8rem;font-weight:800}
 
 
-/* V16.0 — cartes d'actualité et lecture intégrée plus lisibles. */
-.news-link-card{display:grid;grid-template-columns:minmax(112px,26%) minmax(0,1fr);align-items:stretch;gap:0;min-width:0}
-.news-link-card>.article-visual{display:block;position:relative;min-height:150px;max-height:220px;overflow:hidden;background:#10283b}
-.news-link-card .article-thumb-image{display:block;width:100%;height:100%;min-height:150px;max-height:220px;object-fit:cover}
-.news-link-card .news-text{padding:14px 16px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
-.news-link-card .news-card-top{width:100%;gap:8px}
-.news-link-card h3{font-size:1rem;line-height:1.35;margin:2px 0;color:#f3fbff;overflow-wrap:anywhere}
-.news-link-card .news-excerpt{font-size:.84rem;line-height:1.5;color:#c8dce8;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.news-link-card .news-source{font-size:.72rem;color:#9fbfce;margin:0}
-.news-link-card .news-read-inline{margin:2px 0 0;min-height:38px;padding:7px 12px}
-.news-link-card .news-tap{margin:0;font-size:.74rem}
-.news-fulltext{grid-column:1/-1;width:100%;box-sizing:border-box;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75;color:#e8f3fa;background:#0b2030;border:1px solid #34566a;border-radius:12px;padding:clamp(14px,2.5vw,22px);margin:8px 0 0;max-height:68vh;overflow:auto;font-size:.94rem}
-.news-reader-note{font-size:.75rem;color:#a9c5d3;margin:12px 0 0;border-top:1px solid #34566a;padding-top:8px}
-.news-link-card .news-sport{display:inline-flex;align-items:center;gap:5px;background:#24546a;color:#e6f7ff;border-radius:999px;padding:5px 9px;font-size:.72rem;font-weight:750}
-.news-link-card .news-date{color:#b8cedb;font-variant-numeric:tabular-nums}
-@media(max-width:600px){.news-link-card{grid-template-columns:1fr}.news-link-card>.article-visual{min-height:0;height:176px;max-height:176px}.news-link-card .article-thumb-image{min-height:0;height:176px;max-height:176px;object-fit:cover}.news-link-card .news-text{padding:12px;gap:8px}.news-link-card h3{font-size:.96rem}.news-link-card .news-excerpt{-webkit-line-clamp:4}.news-fulltext{font-size:.88rem;line-height:1.7;padding:13px;max-height:65vh}}
+/* V16.3 — cartes d'actualité : vignette, méta, favori lié et lecture en paragraphes. */
+.news-link-card{display:grid;grid-template-columns:132px minmax(0,1fr);gap:0;min-width:0;background:#122d41;border:1px solid #2f5265;transition:border-color .15s}
+.news-link-card:hover{border-color:#4f8a93}
+.news-link-card.has-favorite{border-left:4px solid var(--accent)}
+.news-link-card>.article-visual{display:grid;place-items:center;position:relative;width:100%;min-width:0;min-height:100%;overflow:hidden;background:#0d2234;border-radius:0;font-size:2.2rem}
+.news-link-card>.article-visual .article-image-fallback{display:block;line-height:1;opacity:.85}
+.news-link-card .article-thumb-image{z-index:1}
+.news-link-card>.article-visual.image-failed .article-thumb-image{display:none}
+.news-link-card .article-thumb-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.news-link-card .news-text{padding:14px 16px 12px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.news-link-card .news-card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%}
+.news-link-card .news-sport{display:inline-flex;align-items:center;gap:5px;background:#1f4a5e;color:#e6f7ff;border-radius:999px;padding:4px 9px;font-size:.7rem;font-weight:750}
+.news-link-card .news-date{color:#a9c2d0;font-size:.74rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.news-link-card h3{font-size:1.02rem;line-height:1.35;margin:0;color:#f3fbff;overflow-wrap:anywhere;font-weight:800}
+.news-link-card .news-excerpt{font-size:.86rem;line-height:1.55;color:#c8dce8;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-size:.74rem}
+.news-link-card .news-source{margin:0;color:#9fbfce;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.68rem}
+.news-favorite{display:inline-flex;align-items:center;gap:4px;background:#1d4a3c;color:#c9ffe4;border:1px solid #2f6f58;border-radius:999px;padding:3px 9px;font-size:.72rem;font-weight:750}
+.news-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:2px}
+.news-link-card .news-read-inline{margin:0;min-height:36px;padding:7px 14px;font-size:.84rem;border-radius:10px}
+.news-link-card .news-tap{margin:0;font-size:.78rem;color:#9fe9c9;text-decoration:none;font-weight:700;border:0;padding:0}
+.news-link-card .news-tap:hover{text-decoration:underline}
+.news-fulltext{width:100%;box-sizing:border-box;margin:4px 0 0;padding:4px 0 0;border-top:1px solid #2f5265;color:#e8f3fa;font-size:.95rem;line-height:1.7}
+.news-fulltext p{margin:10px 0;overflow-wrap:anywhere}
+.news-fulltext p:first-child{margin-top:8px}
+.news-reader-note{font-size:.78rem;color:#a9c5d3;margin:8px 0 0;line-height:1.5}
+@media(max-width:600px){.news-link-card{grid-template-columns:1fr}.news-link-card>.article-visual{min-height:0;height:168px}.news-link-card>.article-visual-empty,.news-link-card>.article-visual.image-failed{height:60px;font-size:1.7rem}.news-link-card .news-text{padding:12px;gap:7px}.news-link-card h3{font-size:.97rem}.news-link-card .news-excerpt{-webkit-line-clamp:4}.news-fulltext{font-size:.9rem;line-height:1.65}.news-actions{gap:10px}.news-link-card .news-read-inline{flex:1;text-align:center}}

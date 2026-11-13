@@ -1,5 +1,5 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=16.2.0';
-import {filterSportsNews} from './sports-articles.js?v=16.2.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=16.3.0';
+import {filterSportsNews} from './sports-articles.js?v=16.3.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -75,17 +75,54 @@ function newsSourceName(article){
 function newsSportName(article){
  return String(article.sport||sportInfo(article.favorite,article.title,article.excerpt,article.text).name||'Autre');
 }
-function matchesFavorite(article,favorite){
+const KNOWN_ALIASES={
+ 'PSG':['psg','paris saint-germain','paris saint germain','paris sg'],
+ 'Real Madrid':['real madrid'],
+ 'FC Barcelone':['fc barcelona','barcelona','barcelone','barça','barca'],
+ 'San Antonio Spurs':['san antonio spurs','spurs'],
+ 'Victor Wembanyama':['victor wembanyama','wembanyama','wemby'],
+ 'Kylian Mbappé':['kylian mbappe','mbappe'],
+ 'Équipe de France de football':['equipe de france','les bleus','bleus'],
+ 'XV de France':['xv de france','equipe de france rugby','france rugby','les bleus du rugby'],
+ 'Arthur Fils':['arthur fils'],
+ 'Jannik Sinner':['jannik sinner','sinner'],
+ 'Carlos Alcaraz':['carlos alcaraz','alcaraz'],
+ 'Rafael Jódar':['rafael jodar','jodar'],
+ 'Moïse Kouamé':['moise kouame','kouame'],
+ 'Mirra Andreeva':['mirra andreeva','andreeva'],
+ 'Léon Marchand':['leon marchand','marchand'],
+ 'Sauveur Cristofini':['sauveur cristofini','cristofini'],
+ 'Félix Lebrun':['felix lebrun'],
+ 'Alexis Lebrun':['alexis lebrun'],
+ 'Flavien Coton':['flavien coton'],
+ 'Paul Seixas':['paul seixas','seixas']
+};
+export function favoriteAliases(favorite){
+ const base=[favorite.name,favorite.apiName,...(KNOWN_ALIASES[favorite.name]||[])];
+ return [...new Set(base.map(normalized).filter(alias=>alias.length>=3))];
+}
+// Un favori de football ne peut pas être associé à un article de tennis :
+// « équipe de France » en Coupe Davis n'est pas l'équipe de France de football.
+export function sportCompatible(article,favorite){
+ const sport=String(article.sport||'').trim();
+ if(!sport||!favorite.sport||['Sport','Autre'].includes(sport))return true;
+ return sport===favorite.sport;
+}
+export function matchesFavorite(article,favorite){
+ if(!sportCompatible(article,favorite))return false;
  if(article.favorite===favorite.name)return true;
  const haystack=' '+normalized([article.title,article.excerpt,article.text,article.description].join(' '))+' ';
- const aliases=[favorite.name,favorite.apiName].map(normalized).filter(value=>value.length>=3);
- return aliases.some(alias=>{
-  // Une expression complète est fiable ; un nom composé ne doit jamais
-  // être associé sur son seul nom de famille (ex. un homonyme).
+ return favoriteAliases(favorite).some(alias=>{
+  // Une expression complète est fiable ; un mot seul doit être assez long
+  // et entier (jamais une sous-chaîne d'un autre nom).
   if(alias.includes(' '))return haystack.includes(' '+alias+' ');
   if(alias==='psg')return haystack.includes(' psg ');
-  return alias.length>=6&&haystack.includes(' '+alias+' ');
+  return alias.length>=5&&haystack.includes(' '+alias+' ');
  });
+}
+export function findFavorite(article,favorites=[]){
+ return favorites.find(f=>f.name===article.favorite&&sportCompatible(article,f))
+  ||favorites.find(f=>matchesFavorite(article,f))||null;
 }
 function videoCandidates(value){
  const url=String(value||'');
@@ -97,13 +134,34 @@ function videoCandidates(value){
  }catch{}
  return [...new Set(candidates)];
 }
-const HTML_ENTITIES={"eacute":"é","egrave":"è","ecirc":"ê","euml":"ë","agrave":"à","acirc":"â","auml":"ä","ccedil":"ç","ocirc":"ô","oelig":"œ","ugrave":"ù","ucirc":"û","uuml":"ü","iuml":"ï","icirc":"î","yuml":"ÿ","Eacute":"É","Egrave":"È","Ecirc":"Ê","Euml":"Ë","Agrave":"À","Acirc":"Â","Auml":"Ä","Ccedil":"Ç","Ocirc":"Ô","Oelig":"Œ","Ugrave":"Ù","Ucirc":"Û","Uuml":"Ü","Iuml":"Ï","Icirc":"Î","Yuml":"Ÿ","nbsp":" ","rsquo":"’","lsquo":"‘","rdquo":"”","ldquo":"“","ndash":"–","mdash":"—","hellip":"…","euro":"€","apos":"'","quot":"\"","amp":"&","lt":"<","gt":">"};
+const HTML_ENTITIES={"AElig":"Æ","Aacute":"Á","Acirc":"Â","Agrave":"À","Alpha":"Α","Aring":"Å","Atilde":"Ã","Auml":"Ä","Beta":"Β","Ccedil":"Ç","Chi":"Χ","Dagger":"‡","Delta":"Δ","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Epsilon":"Ε","Eta":"Η","Euml":"Ë","Gamma":"Γ","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iota":"Ι","Iuml":"Ï","Kappa":"Κ","Lambda":"Λ","Mu":"Μ","Ntilde":"Ñ","Nu":"Ν","OElig":"Œ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Omega":"Ω","Omicron":"Ο","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","Phi":"Φ","Pi":"Π","Prime":"″","Psi":"Ψ","Rho":"Ρ","Scaron":"Š","Sigma":"Σ","THORN":"Þ","Tau":"Τ","Theta":"Θ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Upsilon":"Υ","Uuml":"Ü","Xi":"Ξ","Yacute":"Ý","Yuml":"Ÿ","Zeta":"Ζ","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","alefsym":"ℵ","alpha":"α","amp":"&","and":"∧","ang":"∠","aring":"å","asymp":"≈","atilde":"ã","auml":"ä","bdquo":"„","beta":"β","brvbar":"¦","bull":"•","cap":"∩","ccedil":"ç","cedil":"¸","cent":"¢","chi":"χ","circ":"ˆ","clubs":"♣","cong":"≅","copy":"©","crarr":"↵","cup":"∪","curren":"¤","dArr":"⇓","dagger":"†","darr":"↓","deg":"°","delta":"δ","diams":"♦","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","empty":"∅","emsp":" ","ensp":" ","epsilon":"ε","equiv":"≡","eta":"η","eth":"ð","euml":"ë","euro":"€","exist":"∃","fnof":"ƒ","forall":"∀","frac12":"½","frac14":"¼","frac34":"¾","frasl":"⁄","gamma":"γ","ge":"≥","gt":">","hArr":"⇔","harr":"↔","hearts":"♥","hellip":"…","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","image":"ℑ","infin":"∞","int":"∫","iota":"ι","iquest":"¿","isin":"∈","iuml":"ï","kappa":"κ","lArr":"⇐","lambda":"λ","lang":"〈","laquo":"«","larr":"←","lceil":"⌈","ldquo":"“","le":"≤","lfloor":"⌊","lowast":"∗","loz":"◊","lrm":"‎","lsaquo":"‹","lsquo":"‘","lt":"<","macr":"¯","mdash":"—","micro":"µ","middot":"·","minus":"−","mu":"μ","nabla":"∇","nbsp":" ","ndash":"–","ne":"≠","ni":"∋","not":"¬","notin":"∉","nsub":"⊄","ntilde":"ñ","nu":"ν","oacute":"ó","ocirc":"ô","oelig":"œ","ograve":"ò","oline":"‾","omega":"ω","omicron":"ο","oplus":"⊕","or":"∨","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","otimes":"⊗","ouml":"ö","para":"¶","part":"∂","permil":"‰","perp":"⊥","phi":"φ","pi":"π","piv":"ϖ","plusmn":"±","pound":"£","prime":"′","prod":"∏","prop":"∝","psi":"ψ","quot":"\"","rArr":"⇒","radic":"√","rang":"〉","raquo":"»","rarr":"→","rceil":"⌉","rdquo":"”","real":"ℜ","reg":"®","rfloor":"⌋","rho":"ρ","rlm":"‏","rsaquo":"›","rsquo":"’","sbquo":"‚","scaron":"š","sdot":"⋅","sect":"§","shy":"­","sigma":"σ","sigmaf":"ς","sim":"∼","spades":"♠","sub":"⊂","sube":"⊆","sum":"∑","sup":"⊃","sup1":"¹","sup2":"²","sup3":"³","supe":"⊇","szlig":"ß","tau":"τ","there4":"∴","theta":"θ","thetasym":"ϑ","thinsp":" ","thorn":"þ","tilde":"˜","times":"×","trade":"™","uArr":"⇑","uacute":"ú","uarr":"↑","ucirc":"û","ugrave":"ù","uml":"¨","upsih":"ϒ","upsilon":"υ","uuml":"ü","weierp":"℘","xi":"ξ","yacute":"ý","yen":"¥","yuml":"ÿ","zeta":"ζ","zwj":"‍","zwnj":"‌","apos":"'"};
+// Décodage répété : certains flux encodent deux fois (&amp;eacute; → &eacute; → é).
+export function decodeEntities(value){
+ let text=String(value||'');
+ for(let pass=0;pass<3;pass++){
+  const next=text.replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(+n))
+   .replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16)))
+   .replace(/&([a-zA-Z][a-zA-Z0-9]{1,8});/g,(all,name)=>HTML_ENTITIES[name]??all);
+  if(next===text)break;
+  text=next;
+ }
+ return text;
+}
+const TRAILING_NOISE=/\s*(?:…|\.\.\.|\[…\]|\[\.\.\.\])?\s*(?:lire la suite|read more|voir plus)\.?\s*$/i;
 export function safeExcerpt(value){
- return String(value||'').replace(/<[^>]*>/g,' ')
-  .replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(+n))
-  .replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16)))
-  .replace(/&([a-z]+);/gi,(all,name)=>HTML_ENTITIES[name]??all)
-  .replace(/\s+/g,' ').trim().slice(0,600);
+ return decodeEntities(String(value||'').replace(/<[^>]*>/g,' '))
+  .replace(/\s+/g,' ').trim().replace(TRAILING_NOISE,'').trim().slice(0,600);
+}
+// Texte intégral : paragraphes propres, sans la rubrique « À lire aussi » de fin.
+const RELATED_SECTION=/\n\s*(?:[àa] lire aussi|lire aussi|sur le même sujet|à voir aussi|voir aussi)\b[\s\S]*$/i;
+export function articleParagraphs(text){
+ const clean=decodeEntities(String(text||'')).replace(/\r/g,'').replace(RELATED_SECTION,'');
+ return clean.split(/\n+/).map(p=>p.replace(/\s+/g,' ').trim()).filter(p=>p.length>1);
+}
+export function renderArticleBody(text,esc){
+ const paragraphs=articleParagraphs(text);
+ if(!paragraphs.length)return '';
+ return paragraphs.map(p=>'<p>'+esc(p)+'</p>').join('');
 }
 export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[]}={}){
  const recentAll=newsLastWeek(news,now);
@@ -150,13 +208,17 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" aria-label="Source originale sur X">Source originale ↗</a></footer>'
     +'</article>';
   }
-  return '<article class="news-card news-link-card">'
-    +picture+'<span class="news-text"><span class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
-    +'<span class="news-date">'+esc(published)+'</span></span>'
-    +'<h3>'+esc(n.title)+'</h3>'
-    +(safeExcerpt(n.excerpt||n.description)?'<p class="news-excerpt">'+esc(safeExcerpt(n.excerpt||n.description))+'</p>':'')
-    +'<p class="news-source">'+esc(newsSourceName(n))+'</p>'
-    +'<button type="button" class="button ghost news-read-inline" data-read-article="'+esc(link)+'">Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a><div class="news-fulltext" data-article-content="'+esc(link)+'" hidden></div></span></article>';
+  const favorite=findFavorite(n,favorites);
+  const excerpt=safeExcerpt(n.excerpt||n.description);
+  return '<article class="news-card news-link-card'+(favorite?' has-favorite':'')+'">'
+    +picture+'<div class="news-text"><div class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
+    +'<span class="news-date">'+esc(published)+'</span></div>'
+    +'<h3>'+esc(decodeEntities(n.title))+'</h3>'
+    +(excerpt?'<p class="news-excerpt">'+esc(excerpt)+'</p>':'')
+    +'<div class="news-meta"><span class="news-source">'+esc(newsSourceName(n))+'</span>'
+    +(favorite?'<span class="news-favorite" title="Article lié à un favori">⭐ '+esc(favorite.name)+'</span>':'')+'</div>'
+    +'<div class="news-actions"><button type="button" class="button news-read-inline" data-read-article="'+esc(link)+'">Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a></div>'
+    +'<div class="news-fulltext" data-article-content="'+esc(link)+'" hidden></div></div></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article pour les sources sélectionnées</h3><p>Essaie de sélectionner d’autres sources.</p></div>')
@@ -172,28 +234,8 @@ const SPORTS_NEWS=[
  'basketball/nba','tennis/atp','tennis/wta'
 ];
 export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
- const aliases=name=>({
-  'PSG':['psg','paris saint-germain','paris saint germain'],
-  'Real Madrid':['real madrid'],
-  'FC Barcelone':['fc barcelona','barcelona','barcelone'],
-  'San Antonio Spurs':['san antonio spurs','spurs'],
-  'Victor Wembanyama':['victor wembanyama','wembanyama'],
-  'Kylian Mbappé':['kylian mbappe','mbappe'],
-  'Équipe de France de football':['equipe de france','france football','les bleus'],
-  'XV de France':['xv de france','equipe de france rugby','france rugby'],
-  'Arthur Fils':['arthur fils'],
-  'Jannik Sinner':['jannik sinner','sinner'],
-  'Carlos Alcaraz':['carlos alcaraz','alcaraz'],
-  'Rafael Jódar':['rafael jodar','jodar'],
-  'Moïse Kouamé':['moise kouame','kouame'],
-  'Mirra Andreeva':['mirra andreeva','andreeva'],
-  'Léon Marchand':['leon marchand','marchand'],
-  'Sauveur Cristofini':['sauveur cristofini'],
-  'Félix Lebrun':['felix lebrun'],
-  'Alexis Lebrun':['alexis lebrun'],
-  'Flavien Coton':['flavien coton'],
-  'Paul Seixas':['paul seixas','seixas']
- }[name]||[normalized(name)]).map(normalized);
+ const aliases=favorite=>favoriteAliases(favorite);
+ const leagueSport=path=>path.startsWith('soccer/')?'Football':path.startsWith('basketball/')?'Basketball':path.startsWith('tennis/')?'Tennis':'';
  const settled=await Promise.allSettled(SPORTS_NEWS.map(async path=>{
   const url='https://site.api.espn.com/apis/site/v2/sports/'+path+'/news?limit=30';
   const r=await fetch(url,{signal:AbortSignal.timeout(9000),cache:'no-store'});
@@ -205,15 +247,16 @@ export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
    const description=safeExcerpt(a.description||a.story||'');
    const date=a.published||a.lastModified||'';
    const text=normalized(title+' '+description);
-   const words=new Set(text.split(/\\s+/));
-   const fav=favorites.find(f=>aliases(f.name).some(alias=>{
+   const words=new Set(text.split(/\s+/));
+   const sport=leagueSport(path);
+   const fav=favorites.find(f=>sportCompatible({sport},f)&&aliases(f).some(alias=>{
     if(alias.includes(' '))return text.includes(alias);
-    return alias.length>=3&&words.has(alias);
+    return alias.length>=5&&words.has(alias);
    }));
    if(!fav||!/^https?:\/\//.test(link))return null;
    const image=(a.images||a.image||[]);
    const editorial=Array.isArray(image)?image.find(v=>v?.url||v?.href):image;
-   return {title,link,date,source:'ESPN',favorite:fav.name,sport:fav.sport,excerpt:description,image:sourceImage(editorial?.url||editorial?.href||editorial)};
+   return {title,link,date,source:'ESPN',favorite:fav.name,sport:sport||fav.sport,excerpt:description,image:sourceImage(editorial?.url||editorial?.href||editorial)};
   }).filter(Boolean);
  }));
 
@@ -223,9 +266,9 @@ export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
    if(!response.ok)throw Error('Flux RSS '+response.status);
    const body=await response.json();
    return (body.articles||[]).map(article=>{
-    const text=normalized([article.title,article.excerpt].join(' '));
-    const favorite=favorites.find(f=>aliases(f.name).some(alias=>alias.length>=5&&text.includes(alias)));
-    return {...article,...(favorite?{favorite:favorite.name}:{}),source:article.source||'Média sportif'};
+    const cleaned={...article,title:decodeEntities(article.title),excerpt:safeExcerpt(article.excerpt),source:article.source||'Média sportif'};
+    const favorite=favorites.find(f=>matchesFavorite({...cleaned,favorite:''},f));
+    return {...cleaned,...(favorite?{favorite:favorite.name}:{})};
    });
   }catch{return []}
  })():[];

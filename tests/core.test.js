@@ -5,7 +5,7 @@ import {makeAgenda,agendaMatches,mergeSpursAndWembanyama,shiftedMonths} from '..
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
-import {newsLastWeek,renderNewsView,safeExcerpt} from '../news-view.js';
+import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
@@ -927,7 +927,7 @@ test('Mobile : même avec d’autres articles, 3 posts X apparaissent immédiate
  const posts=readBundledJeuSetMathsNews({now});
  const html=renderNewsView({news:[...articles,...posts],now,esc:x=>String(x),safeUrl:x=>x,photos:{},favorites:[{name:'PSG',sport:'Football'}]});
  const posJsm=html.indexOf('class="news-card jsm-native-card"');
- const posArticle=html.indexOf('class="news-card news-link-card"');
+ const posArticle=html.indexOf('class="news-card news-link-card');
  assert.ok(posJsm>=0&&posArticle>=0);
  assert.ok((html.match(/class="news-card jsm-native-card"/g)||[]).length>=15);
 });
@@ -1069,4 +1069,33 @@ test('V16.2 : ouverture immédiate avec les dernières données et actualisation
  // Pas de rendu en arrière-plan pendant une saisie dans un formulaire.
  assert.match(app,/function softRender\(\)/);
  assert.match(app,/pendingRender=true;return;/);
+});
+
+test('V16.3 : entités HTML décodées, même encodées deux fois, côté client et côté Worker',async()=>{
+ assert.equal(decodeEntities('L&amp;eacute;quipe r&eacute;ussit &agrave; &amp;#39;x&amp;#39; n&deg;7 &euro;'),"L'équipe réussit à 'x' n°7 €".replace("L'équipe","Léquipe"));
+ assert.equal(safeExcerpt('<p>Cl&eacute;ment &agrave; Knoxville … lire la suite</p>'),'Clément à Knoxville');
+ const {readFile}=await import('node:fs/promises');
+ const worker=await readFile(new URL('../worker/index.js',import.meta.url),'utf8');
+ assert.match(worker,/body=decode\(body\)/);
+ assert.match(worker,/"eacute":"é"/);
+});
+
+test('V16.3 : le texte intégral est découpé en paragraphes sans la rubrique « À lire aussi »',()=>{
+ const text='L&#39;Am&eacute;rique r&eacute;ussit.\n\nEn quart, Draxl (n&deg;7).\nA lire aussi...\nWTA FINALS\nMladenovic joue';
+ assert.deepEqual(articleParagraphs(text),["L'Amérique réussit.",'En quart, Draxl (n°7).']);
+});
+
+test('V16.3 : un article de tennis n’est jamais lié à l’équipe de France de football',()=>{
+ const favorites=[{name:'Équipe de France de football',sport:'Football',apiName:'France'},
+  {name:'Arthur Fils',sport:'Tennis',apiName:'Arthur Fils'},{name:'Jannik Sinner',sport:'Tennis',apiName:'Jannik Sinner'}];
+ const chidekh={title:'Chidekh peut venger l’équipe de France de Coupe Davis',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/a',date:'2026-11-13T10:00:00Z'};
+ assert.equal(findFavorite(chidekh,favorites),null);
+ assert.equal(findFavorite({title:'Sinner s’impose à Turin',sport:'Tennis'},favorites)?.name,'Jannik Sinner');
+ assert.equal(findFavorite({title:'Les Bleus affrontent l’Ukraine',sport:'Football'},favorites)?.name,'Équipe de France de football');
+ // Un favori mal attribué par une ancienne version du relais est ignoré si le sport ne correspond pas.
+ assert.equal(findFavorite({...chidekh,favorite:'Équipe de France de football'},favorites),null);
+ const html=renderNewsView({news:[chidekh,{title:'Sinner s’impose à Turin',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/b',date:'2026-11-13T09:00:00Z'}],
+  now:new Date('2026-11-13T12:00:00Z'),esc:x=>String(x),safeUrl:x=>x,photos:{},favorites});
+ assert.doesNotMatch(html,/Chidekh/);
+ assert.match(html,/news-favorite[^>]*>⭐ Jannik Sinner/);
 });

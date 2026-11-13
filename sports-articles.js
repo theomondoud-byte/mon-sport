@@ -1,5 +1,5 @@
-import {sourceImage} from './sports-media.js?v=16.2.0';
-import {jeuSetMathsBundledData} from './data/jeu-set-et-maths-bundle.js?v=16.2.0';
+import {sourceImage} from './sports-media.js?v=16.3.0';
+import {jeuSetMathsBundledData} from './data/jeu-set-et-maths-bundle.js?v=16.3.0';
 // FFL (Fédération française de la Lose) : articles de sport uniquement.
 // WordPress REST expose titre, date et URL; pas de copie intégrale des articles.
 export const FFL_HOME='https://fflose.com/';

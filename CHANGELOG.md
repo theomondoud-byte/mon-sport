@@ -4,6 +4,17 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V16.3 — articles lisibles, favoris liés visibles et cartes redessinées
+
+- **Accents et apostrophes** : les titres, extraits et textes intégraux décodent toutes les entités HTML, y compris lorsqu'un flux les encode deux fois (`&amp;eacute;`). Le Worker Cloudflare applique le même décodage ; la mention « … lire la suite » des extraits est retirée.
+- **Texte intégral** : affiché en paragraphes, sans défilement interne ; la rubrique « À lire aussi » de fin d'article est écartée. Le bouton devient « Masquer le texte » une fois le contenu chargé.
+- **Rapprochement avec les favoris** : un article n'est lié à un favori que si le sport correspond (un article de Coupe Davis n'est plus rattaché à l'équipe de France de football). FFL et Jeu, set et maths restent toujours affichés ; les autres médias n'apparaissent que s'ils citent un favori.
+- **Favori lié visible** : chaque carte affiche un badge « ⭐ Nom du favori » et une bordure verte.
+- **Cartes** : vignette sur toute la colonne (pictogramme du sport en attendant l'image), métadonnées regroupées (source, favori), actions alignées.
+- Correction d'une expression régulière doublement échappée dans le filtrage des actualités ESPN.
+
+---
+
 # Documentation (application inchangée, toujours en V16.2)
 
 - Le README décrit désormais l'application, son architecture, le développement et le déploiement.
