@@ -324,8 +324,8 @@ test('les cinq classements tennis utilisent un fichier top 150 live distinct, sa
   assert.ok(html.indexOf('option value="FRA"')<html.indexOf('option value="ESP"'));
   assert.doesNotMatch(html,/Tournois · 14 j/);
   assert.doesNotMatch(html,/Points officiels/);
-  if(['atp','wta'].includes(id))assert.match(html,/Joueur · MC/);
-  else assert.doesNotMatch(html,/Joueur · MC/);
+  if(['atp','wta'].includes(id))assert.match(html,/<span class="rank-career">MC<\/span>/);
+  else assert.doesNotMatch(html,/<span class="rank-career">MC<\/span>/);
  }
  assert.ok(!calls.some(url=>url.includes('tennis/wta/rankings')));
 });
@@ -339,7 +339,7 @@ test('classement Race : tournois précédents et absence de MC fictif',()=>{
  assert.match(html,/Défaite Monastir 1 8e/);
  assert.match(html,/race-no-career/);
  assert.match(html,/class="rank-data rank-tournament tourney-previous is-loss"/);
- assert.doesNotMatch(html,/Joueur · MC/);
+ assert.doesNotMatch(html,/<span class="rank-career">MC<\/span>/);
 });
 
 test('les résultats sont intégrés aux deux colonnes de tournois',()=>{
@@ -495,16 +495,17 @@ test('ITTF : 150 hommes et 150 femmes avec pays, points et variation hebdomadair
  assert.equal(parseWTTRankings({...payload,rows:payload.rows.slice(0,149)}),null);
 });
 
-test('tennis mobile : le meilleur classement et le drapeau sont placés avec le joueur',()=>{
+test('tennis mobile : MC et joueur séparés, drapeau toujours visible',()=>{
  const html=renderRankingsView({selected:'atp',live:{atp:{
   rows:[{rank:3,name:'Félix Exemple',country:'FRA',age:21,careerHigh:'MC',
    livePoints:4200,movement:1,pointsChange:40}],
   live:true,asOf:new Date().toISOString()}},favorites:[],esc:x=>String(x),safeUrl:x=>x});
- assert.match(html,/Joueur · MC/);
- assert.match(html,/class="rank-career-inline best"/);
+ assert.match(html,/<span class="rank-career">MC<\/span>/);
+ assert.match(html,/class="atp-career best"/);
  assert.match(html,/class="rank-flag-mobile"/);
  assert.match(html,/🇫🇷/);
- assert.doesNotMatch(html,/<span class="rank-career">/);
+ assert.match(html,/class="rank-person" title="Félix Exemple"/);
+ assert.doesNotMatch(html,/rank-career-inline/);
 });
 
 test('toutes les colonnes ATP et Race du favori sont détaillées dans Stats',()=>{
