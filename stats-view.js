@@ -17,8 +17,10 @@ export function renderFavoriteRankingDetails({favorite,rankingId,rankings={},esc
  const spec=RANKINGS.find(r=>r.id===rankingId);
  if(!spec)return '';
  const team=rankAssociation(rankingId,favorite);
- const row=rankingEntry(rankingId,team,rankings);
  const snapshot=rankings[rankingId],isTeam=team!==favorite,kind=spec.mode;
+ // Pas de remplacement par un ancien instantané quand le classement live n'est pas chargé.
+ const row=snapshot?.rows?.length?rankingEntry(rankingId,team,rankings):
+  spec.mode==='snapshot'?rankingEntry(rankingId,team,rankings):null;
  const date=snapshot?.asOf&&Number.isFinite(Date.parse(snapshot.asOf))
   ?new Date(snapshot.asOf).toLocaleString('fr-FR',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):null;
  const provenance=kind==='tennis-live'?'Classement tennis live · copie actualisée périodiquement':
@@ -40,7 +42,7 @@ export function renderFavoriteRankingDetails({favorite,rankingId,rankings={},esc
  addRank('Rang',row.rank);
  if(kind==='tennis-live'){
   const cols=tournamentColumns(row),status=tournamentStatusInColumns(row,cols);
-  add('Meilleur classement (MC)',row.careerHigh||'—');
+  if(['atp','wta'].includes(rankingId))add('Meilleur classement (MC)',row.careerHigh||'—');
   add('Âge',row.age==null?'—':row.age+' ans');
   add('Nationalité',row.country);
   add('Points live',row.livePoints);
