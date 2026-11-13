@@ -24,6 +24,7 @@ def diagnose():
   if table:
    examples=0
    for tr in table.select('tr'):
+    if not tr.select_one('td.rk'): continue
     cells=tr.find_all('td',recursive=False)
     if cells:
      print("ROW",key,[(i,td.get('class'),' '.join(td.stripped_strings)[:70]) for i,td in enumerate(cells[:14])],flush=True)
