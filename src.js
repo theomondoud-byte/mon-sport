@@ -24,8 +24,9 @@ const load=()=>{
  try{
   const saved=JSON.parse(localStorage.getItem(KEY));
   if(!Array.isArray(saved)){localStorage.setItem(MIGRATION_V11,'1');return DEFAULTS;}
-  if(localStorage.getItem(MIGRATION_V11)==='1')return saved;
-  const result=[...saved];
+  const valid=saved.filter(f=>f&&typeof f.name==='string'&&f.name.trim()&&typeof f.sport==='string'&&['équipe','sportif'].includes(f.type)).slice(0,200).map(f=>({id:typeof f.id==='string'&&f.id?f.id:crypto.randomUUID(),name:f.name.slice(0,100),sport:f.sport.slice(0,50),type:f.type,apiName:String(f.apiName||f.name).slice(0,100)}));
+  if(localStorage.getItem(MIGRATION_V11)==='1')return valid.length?valid:DEFAULTS;
+  const result=[...valid];
   for(const name of ADDED_V11){
    if(!result.some(f=>f.name===name)){
     const item=DEFAULTS.find(f=>f.name===name);
@@ -37,11 +38,11 @@ const load=()=>{
   return result;
  }catch{return DEFAULTS;}
 };
-let favorites=load(), workerUrl=localStorage.getItem(URL_KEY)||'',active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={},photoRequest=0,rankingSelected='atp',rankingsData={},rankingsLoading=false;
+let favorites=load(), workerUrl=(()=>{try{return localStorage.getItem(URL_KEY)||''}catch{return ''}})(),active='semaine',sportFilter='Tous',search='',loading=false,news=[],matches=[],individualResults=[],individualNotes=[],errors=[],scoreNotes=[],historyResults=tennisSnapshot2026(favorites),historyNotes=[],historyLoading=false,historyFilter=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':'Tous',historyAll=false,historyYear='2026',historyRequest=0,auditSelected='Moïse Kouamé',yearAudit=null,yearLoading=false,yearMessage='',weekPhase='past',favoritePhase='past',agendaFavorite=favorites.some(f=>f.name==='Moïse Kouamé')?'Moïse Kouamé':favorites[0]?.name||'',agendaExtended=[],agendaExtendedFor='',agendaExtendedPhase='',agendaExtendedLoading=false,agendaExtendedMessage='',agendaRequest=0,agendaCache=new Map(),photoMap={},photoRequest=0,rankingSelected='atp',rankingsData={},rankingsLoading=false;
 const app=document.querySelector('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
-const save=()=>localStorage.setItem(KEY,JSON.stringify(favorites));
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(favorites));return true;}catch{alert('Stockage local indisponible : les changements de favoris ne seront pas conservés.');return false;}};
 const date=s=>{if(!s)return '';const d=new Date(s);return Number.isNaN(d.valueOf())?s:d.toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})};
 const filtered=()=>favorites.filter(f=>(sportFilter==='Tous'||f.sport===sportFilter)&&f.name.toLocaleLowerCase('fr').includes(search.toLocaleLowerCase('fr')));
 const tabs=[['semaine','🗓️ Semaine'],['favori','👤 Un favori'],['classements','🏆 Classements'],['actualites','📰 Articles'],['favoris','⭐ Favoris'],['parametres','⚙️ Réglages']];
