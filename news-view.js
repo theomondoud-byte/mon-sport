@@ -193,29 +193,25 @@ const SPORTS_NEWS=[
 export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
  const aliases=name=>({
   'PSG':['psg','paris saint-germain','paris saint germain'],
-  'Real Madrid':['real madrid','madrid'],
-  'San Antonio Spurs':['san antonio spurs','spurs'],
-  'Victor Wembanyama':['wembanyama'],
-  'Kylian Mbappé':['mbappe','mbappé'],
-  'Moïse Kouamé':['kouamé','kouame'],
-  'Rafael Jódar':['jódar','jodar'],
-  'Mirra Andreeva':['andreeva'],
-  'Équipe de France de football':['equipe de france','france football','les bleus'],
-  'FC Barcelone':['fc barcelona','barcelona','barcelone'],
   'Real Madrid':['real madrid'],
+  'FC Barcelone':['fc barcelona','barcelona','barcelone'],
+  'San Antonio Spurs':['san antonio spurs','spurs'],
+  'Victor Wembanyama':['victor wembanyama','wembanyama'],
+  'Kylian Mbappé':['kylian mbappe','mbappe'],
+  'Équipe de France de football':['equipe de france','france football','les bleus'],
+  'XV de France':['xv de france','equipe de france rugby','france rugby'],
   'Arthur Fils':['arthur fils'],
   'Jannik Sinner':['jannik sinner','sinner'],
   'Carlos Alcaraz':['carlos alcaraz','alcaraz'],
   'Rafael Jódar':['rafael jodar','jodar'],
-  'Moïse Kouamé':['moise kouame','kouame','kouame moise'],
+  'Moïse Kouamé':['moise kouame','kouame'],
   'Mirra Andreeva':['mirra andreeva','andreeva'],
   'Léon Marchand':['leon marchand','marchand'],
-  'Sauveur Cristofini':['sauveur cristofini','cristofini'],
+  'Sauveur Cristofini':['sauveur cristofini'],
   'Félix Lebrun':['felix lebrun'],
   'Alexis Lebrun':['alexis lebrun'],
-  'Flavien Coton':['flavien coton','coton'],
-  'Paul Seixas':['paul seixas','seixas'],
-  'XV de France':['xv de france','equipe de france rugby','france rugby']
+  'Flavien Coton':['flavien coton'],
+  'Paul Seixas':['paul seixas','seixas']
  }[name]||[normalized(name)]).map(normalized);
  const settled=await Promise.allSettled(SPORTS_NEWS.map(async path=>{
   const url='https://site.api.espn.com/apis/site/v2/sports/'+path+'/news?limit=30';
