@@ -252,6 +252,7 @@ export function filterTennisRankingRows(rows,{ageMax='',country=''}={}){
 }
 const COUNTRY_FR={
  FRA:'France',GER:'Allemagne',ITA:'Italie',ESP:'Espagne',USA:'États-Unis',GBR:'Royaume-Uni',
+ BLR:'Biélorussie',LAT:'Lettonie',PHI:'Philippines',
  AUS:'Australie',ARG:'Argentine',AUT:'Autriche',BEL:'Belgique',BIH:'Bosnie-Herzégovine',
  BOL:'Bolivie',BRA:'Brésil',BUL:'Bulgarie',CAN:'Canada',CHI:'Chili',CHN:'Chine',
  COL:'Colombie',CRO:'Croatie',CZE:'Tchéquie',DEN:'Danemark',FIN:'Finlande',
@@ -314,7 +315,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
  const cards=displayedRows.map(r=>{
   const fav=matchRankingFavorite(r.name,favorites);
   const clickable=!!fav;
-  const attrs=clickable?' data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Un favori"':'';
+  const attrs=clickable?' data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Favoris"':'';
   const name=clickable?'<button type="button" class="rank-favorite-link"'+attrs+'>'+esc(r.name)+' <span aria-hidden="true">↗</span></button>':'<span>'+esc(r.name)+'</span>';
   const portrait=spec.mode==='tennis-espn'&&/^https:\/\//.test(r.image||'')
    ?'<img class="rank-player-photo" src="'+esc(safeUrl(r.image))+'" loading="lazy" decoding="async" alt="" />':'';
