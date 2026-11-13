@@ -1,3 +1,4 @@
+import {sportInfo} from './sports-media.js?v=14.0.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
 import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=14.0.0';
 import {auditInfo} from './audit-2026.js?v=14.0.0';
@@ -27,9 +28,13 @@ function verdictChip(item,name,esc){
 function eventHtml(item,esc,safeUrl,photos,chosen){
  const isFuture=!item.finished;
  const state=item.pendingResult?'À vérifier':item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
- const people=item.favorites.map(name=>
-  '<span class="agenda-person-tag">'+avatar(name,photos,esc,safeUrl)
-  +'<span>'+esc(name)+'</span>'+verdictChip(item,name,esc)+'</span>').join('');
+ const people=item.favorites.map(name=>{
+  const sport=sportInfo(name,item.competition,item.type);
+  return '<span class="agenda-person-tag compact" title="'+esc(name)+' · '+esc(sport.name)+'" aria-label="'+esc(name)+' · '+esc(sport.name)+'">'
+   +avatar(name,photos,esc,safeUrl)
+   +'<span class="event-sport-icon" aria-hidden="true">'+sport.icon+'</span>'
+   +verdictChip(item,name,esc)+'</span>';
+ }).join('');
  const primary=chosen&&item.favorites.includes(chosen)?chosen:item.favorites[0];
  const recap=summaryForMatch(item,primary);
  const stats=recap.stats.length?'<div class="agenda-recap-stats">'+recap.stats.map(st=>
