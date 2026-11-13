@@ -47,7 +47,7 @@ def parse(html, debug=False):
         career_high=txt(cells[1])[:35] if len(cells)>1 else ""
         # Une défaite ne se déduit jamais de la variation des points :
         # elle est reconnue uniquement par une mention explicite de la source.
-        has_loss=bool(re.search(r"\\b(?:défaite|perdu|éliminé|lost(?: in)?)\\b",
+        has_loss=bool(re.search(r"\b(?:défaite|perdu|éliminé|lost(?: in)?)\b",
                                 previous_tournaments,re.I))
         status="defaite" if has_loss and not tournament else (
             "en_lice" if tournament else "non_communique")
