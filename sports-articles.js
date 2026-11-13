@@ -12,7 +12,7 @@ export function isSportsArticle(article){
  const text=title+' '+clean(article.excerpt||article.description||'');
  if(!title||PEOPLE.test(text))return false;
  if(article.source==='FFL'||article.source==='Jeu, set et maths')return true; // Deux éditeurs sportifs spécialisés
- return SPORTS.test(text)||!!article.favorite;
+ return SPORTS.test(text)||!!article.favorite||/^(Tennis|Football|Basketball|Rugby|Cyclisme|Natation|Tennis de table)$/.test(String(article.sport||''));
 }
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
 export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){

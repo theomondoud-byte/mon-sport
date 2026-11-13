@@ -174,7 +174,9 @@ export function renderNewsView({
   return '<article class="news-card news-link-card"><a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" class="news-plain-link">'
     +picture+'<span class="news-text"><span class="news-card-top"><span class="news-sport" aria-label="'+esc(sport.name)+'"><span aria-hidden="true">'+sport.icon+'</span> '+esc(sport.name)+'</span>'
     +'<span class="news-date">'+esc(published)+'</span></span>'
-    +'<h3>'+esc(n.title)+'</h3><p class="news-source">'+esc(newsSourceName(n))+'</p>'
+    +'<h3>'+esc(n.title)+'</h3>'
+    +(safeExcerpt(n.excerpt||n.description)?'<p class="news-excerpt">'+esc(safeExcerpt(n.excerpt||n.description))+'</p>':'')
+    +'<p class="news-source">'+esc(newsSourceName(n))+'</p>'
     +'<span class="news-tap">Lire l’article chez l’éditeur ↗</span></span></a></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
@@ -190,17 +192,28 @@ const SPORTS_NEWS=[
  'soccer/esp.1','soccer/fra.1','soccer/uefa.champions',
  'basketball/nba','tennis/atp','tennis/wta'
 ];
-export async function fetchSportsNews(favorites,now=new Date()){
+export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
  const aliases=name=>({
   'PSG':['psg','paris saint-germain','paris saint germain'],
-  'Real Madrid':['real madrid','madrid'],
+  'Real Madrid':['real madrid'],
+  'FC Barcelone':['fc barcelona','barcelona','barcelone'],
   'San Antonio Spurs':['san antonio spurs','spurs'],
-  'Victor Wembanyama':['wembanyama'],
-  'Kylian Mbappé':['mbappe','mbappé'],
-  'Moïse Kouamé':['kouamé','kouame'],
-  'Rafael Jódar':['jódar','jodar'],
-  'Mirra Andreeva':['andreeva'],
-  'Équipe de France de football':['france football','les bleus']
+  'Victor Wembanyama':['victor wembanyama','wembanyama'],
+  'Kylian Mbappé':['kylian mbappe','mbappe'],
+  'Équipe de France de football':['equipe de france','france football','les bleus'],
+  'XV de France':['xv de france','equipe de france rugby','france rugby'],
+  'Arthur Fils':['arthur fils'],
+  'Jannik Sinner':['jannik sinner','sinner'],
+  'Carlos Alcaraz':['carlos alcaraz','alcaraz'],
+  'Rafael Jódar':['rafael jodar','jodar'],
+  'Moïse Kouamé':['moise kouame','kouame'],
+  'Mirra Andreeva':['mirra andreeva','andreeva'],
+  'Léon Marchand':['leon marchand','marchand'],
+  'Sauveur Cristofini':['sauveur cristofini'],
+  'Félix Lebrun':['felix lebrun'],
+  'Alexis Lebrun':['alexis lebrun'],
+  'Flavien Coton':['flavien coton'],
+  'Paul Seixas':['paul seixas','seixas']
  }[name]||[normalized(name)]).map(normalized);
  const settled=await Promise.allSettled(SPORTS_NEWS.map(async path=>{
   const url='https://site.api.espn.com/apis/site/v2/sports/'+path+'/news?limit=30';
@@ -220,5 +233,18 @@ export async function fetchSportsNews(favorites,now=new Date()){
    return {title,link,date,source:'ESPN',favorite:fav.name,sport:fav.sport,excerpt:description,image:sourceImage(editorial?.url||editorial?.href||editorial)};
   }).filter(Boolean);
  }));
- return newsLastWeek(settled.flatMap(x=>x.status==='fulfilled'?x.value:[]),now);
+
+ const curated=workerUrl?await (async()=>{
+  try{
+   const response=await fetch(new URL('/api/sports-news',workerUrl),{signal:AbortSignal.timeout(12000),cache:'no-store'});
+   if(!response.ok)throw Error('Flux RSS '+response.status);
+   const body=await response.json();
+   return (body.articles||[]).map(article=>{
+    const text=normalized([article.title,article.excerpt].join(' '));
+    const favorite=favorites.find(f=>aliases(f.name).some(alias=>alias.length>=5&&text.includes(alias)));
+    return {...article,...(favorite?{favorite:favorite.name}:{}),source:article.source||'Média sportif'};
+   });
+  }catch{return []}
+ })():[];
+ return newsLastWeek([...settled.flatMap(x=>x.status==='fulfilled'?x.value:[]),...curated],now);
 }

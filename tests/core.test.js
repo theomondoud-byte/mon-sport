@@ -1005,17 +1005,32 @@ test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
  assert.doesNotMatch(wemby,/Le PSG prépare/);
 });
 
-test('V15.7 : la PWA supprime le Referer pour permettre la lecture des vidéos X',async()=>{
+test('V15.8 : la PWA charge les sources RSS et conserve la lecture vidéo X',async()=>{
  const {readFile}=await import('node:fs/promises');
  const index=await readFile(new URL('../index.html',import.meta.url),'utf8');
  assert.match(index,/<meta name="referrer" content="no-referrer"\/>/);
  const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
- assert.match(sw,/mon-sport-v15-7/);
- assert.match(sw,/news-view\.js\?v=15\.7\.0/);
+ assert.match(sw,/mon-sport-v15-8/);
+ assert.match(sw,/news-view\.js\?v=15\.8\.0/);
  assert.match(sw,/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
  assert.match(app,/newsSourceFilter='Tous'/);
  assert.match(app,/data-news-source/);
  assert.match(app,/newsSportFilter/);
  assert.match(app,/newsFavoriteFilter/);
+});
+
+test('V15.8 : les extraits des médias RSS sont lisibles directement dans les cartes',()=>{
+ const html=renderNewsView({news:[{
+  title:'Paul Seixas prépare sa prochaine course',
+  link:'https://www.cyclismactu.net/test',
+  date:'2026-11-13T10:00:00.000Z',
+  source:"Cyclism'Actu",sport:'Cyclisme',
+  excerpt:'Le jeune coureur français revient sur sa préparation et ses objectifs.'
+ }],now:new Date('2026-11-13T12:00:00Z'),
+  esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
+  safeUrl:x=>x,photos:{},favorites:[]});
+ assert.match(html,/Le jeune coureur français revient sur sa préparation et ses objectifs\./);
+ assert.match(html,/Lire l’article chez l’éditeur/);
+ assert.match(html,/Cyclism'Actu/);
 });
