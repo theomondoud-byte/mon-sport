@@ -130,6 +130,46 @@ async function fflNews(start,now){
   return items;
  }
 }
+
+// --- Résumé vidéo YouTube d'un match : recherche « équipe A équipe B résumé »
+// publiée cette semaine ; on ne garde qu'une vidéo dont le titre cite les deux
+// camps et annonce un résumé (highlights, temps forts…), de moins de 25 min.
+const plainText=v=>String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const stem4=w=>w.slice(0,4);
+function videoRenderers(node,out=[]){
+ if(!node||typeof node!=='object')return out;
+ if(node.videoRenderer)out.push(node.videoRenderer);
+ for(const value of Object.values(node))if(value&&typeof value==='object')videoRenderers(value,out);
+ return out;
+}
+function durationSeconds(text){return String(text||'').split(':').reduce((t,p)=>t*60+(+p||0),0);}
+async function highlight(query,teams){
+ const url='https://www.youtube.com/results?search_query='+encodeURIComponent(query)+'&sp=EgIIAw%253D%253D&hl=fr&gl=FR';
+ const r=await fetch(url,{headers:{'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36','Accept-Language':'fr-FR,fr;q=0.9','Cookie':'SOCS=CAI; CONSENT=YES+'},cf:{cacheTtl:3600,cacheEverything:true},signal:AbortSignal.timeout(9000)});
+ if(!r.ok)throw Error('YouTube HTTP '+r.status);
+ const html=await r.text();
+ const raw=html.match(/var ytInitialData\s*=\s*(\{[\s\S]*?\});\s*<\/script>/)?.[1];
+ if(!raw)return {video:null,reason:'résultats illisibles'};
+ const sides=teams.map(t=>plainText(t).split(/[^a-z0-9]+/).filter(w=>w.length>=4).map(stem4)).filter(s=>s.length);
+ const wanted=/resume|highlights|temps forts|extended|all goals|tous les buts|best of|meilleurs moments/;
+ // Chaînes officielles (diffuseurs, ligues, fédérations, clubs) d'abord ;
+ // une autre chaîne certifiée par YouTube seulement en dernier recours.
+ const official=/ligue 1|bein|canal|prime video|tf1|\bfff\b|equipe de france|france ?tv|france 2|france 3|\bm6\b|rmc|l ?equipe|laliga|espn|fox sports|cbs sports|tnt sports|\bnba\b|\bwta\b|\batp\b|tennis tv|roland|france rugby|world rugby|six nations|eurosport|dazn|\buefa\b|\bfifa\b|\bpsg\b|paris saint|real madrid|fc barcelona|spurs|\bwtt\b|ittf|world aquatics|\buci\b|sky sports|bt sport|movistar|dazn/;
+ let fallback=null;
+ for(const v of videoRenderers(JSON.parse(raw)).slice(0,25)){
+  const title=(v.title?.runs||[]).map(x=>x.text).join('')||v.title?.simpleText||'';
+  const words=new Set(plainText(title).split(/[^a-z0-9]+/).filter(w=>w.length>=4).map(stem4));
+  const seconds=durationSeconds(v.lengthText?.simpleText);
+  const verified=JSON.stringify(v.ownerBadges||[]).includes('VERIFIED');
+  if(!v.videoId||!verified||!wanted.test(plainText(title))||!sides.every(s=>s.some(w=>words.has(w)))||!seconds||seconds>1500)continue;
+  const channel=v.ownerText?.runs?.[0]?.text||'';
+  const video={id:v.videoId,title,channel,official:official.test(plainText(channel)),published:v.publishedTimeText?.simpleText||'',duration:v.lengthText?.simpleText||''};
+  if(video.official)return {video};
+  fallback=fallback||video;
+ }
+ if(fallback)return {video:fallback};
+ return {video:null};
+}
 async function curatedSportsNews(){
  const now=Date.now(),start=now-7*86400000;
  const settled=await Promise.allSettled(RSS_FEEDS.map(async feed=>{
@@ -219,4 +259,4 @@ export default {async fetch(request){if(request.method==='OPTIONS')return new Re
  const response=json(await curatedSportsNews());
  if(cache)await cache.put(key,new Response(response.clone().body,{headers:{...Object.fromEntries(response.headers),'Cache-Control':'public, max-age=600'}}));
  return response;
-}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};
+}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};

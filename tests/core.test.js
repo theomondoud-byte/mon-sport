@@ -1239,3 +1239,19 @@ test('V16.8 : les émoticônes WordPress restent dans le texte et ne servent jam
  const blocks=htmlToBlocks('<p>Quelle soirée <img draggable="false" role="img" class="emoji" alt="🌭" src="https://s.w.org/images/core/emoji/17.0.2/72x72/1f32d.png"> !</p>','https://fflose.com/a/');
  assert.deepEqual(blocks,[{type:'p',text:'Quelle soirée 🌭 !'}]);
 });
+
+test('V16.9 : résumé vidéo YouTube intégré quand ESPN n’en publie pas',async()=>{
+ const {renderAgendaView}=await import('../agenda-ui.js');
+ const item={key:'k1',title:'Italy — France',date:'2026-11-12T19:45:00Z',day:'2026-11-12',finished:true,favorite:'Équipe de France de football',favorites:['Équipe de France de football'],score:'3 – 1',competition:'Ligue des nations',type:'football'};
+ const html=renderAgendaView({view:'semaine',phase:'past',favorites:[{name:'Équipe de France de football',sport:'Football'}],items:[item],esc:x=>String(x),safeUrl:x=>x,now:new Date('2026-11-13T12:00:00Z'),
+  mediaFor:()=>({videos:[],youtube:{id:'CpkujKwL7d4',title:'Italy vs France Highlights',channel:'FOX Sports',official:true,duration:'15:39'}})});
+ assert.match(html,/data-youtube-id="CpkujKwL7d4"/);
+ assert.match(html,/FOX Sports · 15:39/);
+ const unofficial=renderAgendaView({view:'semaine',phase:'past',favorites:[{name:'Équipe de France de football',sport:'Football'}],items:[item],esc:x=>String(x),safeUrl:x=>x,now:new Date('2026-11-13T12:00:00Z'),
+  mediaFor:()=>({videos:[],youtube:{id:'Peb6zQmKS78',channel:'CHEFON FF',official:false}})});
+ assert.match(unofficial,/chaîne non officielle/);
+ const {readFile}=await import('node:fs/promises');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.match(app,/youtube-nocookie\.com\/embed\//);
+ assert.match(app,/strict-origin-when-cross-origin/);
+});

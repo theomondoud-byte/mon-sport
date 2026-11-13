@@ -1,6 +1,6 @@
 // Mon Sport V8 : recherche élargie uniquement lors de l'ouverture « Un favori ».
 // Les rencontres ne sont créées que si ESPN retourne date, adversaires et état.
-import {shiftedMonths} from './agenda-model.js?v=16.8.0';
+import {shiftedMonths} from './agenda-model.js?v=16.9.0';
 const humanSource=s=>s.startsWith('soccer/')?'https://www.espn.com/soccer/scoreboard'
   :s.startsWith('basketball/')?'https://www.espn.com/nba/scoreboard'
   :'https://www.espn.com/scores';

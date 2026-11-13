@@ -4,6 +4,14 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V16.9 — résumés vidéo pour la plupart des matchs
+
+- ESPN ne publie pas de vidéo pour la Ligue des nations, la Ligue 1 ou le tennis (droits). Quand ESPN n'a pas de vidéo, le relais cherche le résumé sur YouTube (publié cette semaine) et ne garde qu'une vidéo dont le titre cite les deux camps et annonce un résumé (« résumé », « highlights », « temps forts »…), de moins de 25 min, sur une chaîne certifiée — en privilégiant les chaînes officielles (diffuseurs, ligues, fédérations, clubs). Une chaîne non officielle est signalée comme telle.
+- La vidéo se lit directement dans la carte du match (lecteur YouTube sans cookies) ; la chaîne et la durée sont indiquées.
+- Sur les 17 matchs de la semaine : 13 résumés vidéo (dont Italie–France, France–Fidji, Alcaraz, Andreeva), contre 6 avant.
+
+---
+
 # Mon Sport V16.8 — icônes des sources et vraies images FFL
 
 - **Icônes des sources** : pastille ronde aux couleurs de chaque média (FFL, Jeu, set et maths, ESPN, Tennis Actu, Franceinfo, Basket USA, TrashTalk, Cyclism'Actu ; monogramme automatique pour les autres), dans les filtres, les cartes d'articles, les posts Jeu, set et maths et les résumés de résultats. Intégrées à l'appli : aucune image distante, disponibles hors connexion.

@@ -1,20 +1,20 @@
-import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=16.8.0';
-import {createOnceLoader} from './session-loader.js?v=16.8.0';
-import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=16.8.0';
-import {renderAgendaView} from './agenda-ui.js?v=16.8.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=16.8.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=16.8.0';
-import {fetchAgendaFavorite} from './agenda-fetch.js?v=16.8.0';
-import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=16.8.0';
-import {extraProgramFor} from './verified-program.js?v=16.8.0';
-import {verifiedExtraFor} from './verified-extra-v11.js?v=16.8.0';
-import {coverageFor} from './coverage-v11.js?v=16.8.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle} from './news-view.js?v=16.8.0';
-import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=16.8.0';
-import {verified2026For} from './audit-2026.js?v=16.8.0';
-import {renderAudit2026} from './audit-ui.js?v=16.8.0';
-import {auditEspn2026} from './audit-espn-2026.js?v=16.8.0';
-import {APP_LABEL} from './version.js?v=16.8.0';
+import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=16.9.0';
+import {createOnceLoader} from './session-loader.js?v=16.9.0';
+import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=16.9.0';
+import {renderAgendaView} from './agenda-ui.js?v=16.9.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=16.9.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=16.9.0';
+import {fetchAgendaFavorite} from './agenda-fetch.js?v=16.9.0';
+import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=16.9.0';
+import {extraProgramFor} from './verified-program.js?v=16.9.0';
+import {verifiedExtraFor} from './verified-extra-v11.js?v=16.9.0';
+import {coverageFor} from './coverage-v11.js?v=16.9.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle} from './news-view.js?v=16.9.0';
+import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=16.9.0';
+import {verified2026For} from './audit-2026.js?v=16.9.0';
+import {renderAudit2026} from './audit-ui.js?v=16.9.0';
+import {auditEspn2026} from './audit-espn-2026.js?v=16.9.0';
+import {APP_LABEL} from './version.js?v=16.9.0';
 const DEFAULTS = [
  ['Real Madrid','Football','équipe','Real Madrid'],['FC Barcelone','Football','équipe','FC Barcelona'],['PSG','Football','équipe','Paris Saint Germain'],['San Antonio Spurs','Basketball','équipe','San Antonio Spurs'],
  ['Victor Wembanyama','Basketball','sportif'],['Léon Marchand','Natation','sportif'],['Sauveur Cristofini','Natation','sportif'],['Félix Lebrun','Tennis de table','sportif'],['Alexis Lebrun','Tennis de table','sportif'],['Flavien Coton','Tennis de table','sportif'],['Paul Seixas','Cyclisme','sportif'],['Kylian Mbappé','Football','sportif'],['Équipe de France de football','Football','équipe','France'],['XV de France','Rugby','équipe','France Rugby'],['Arthur Fils','Tennis','sportif'],['Jannik Sinner','Tennis','sportif'],['Carlos Alcaraz','Tennis','sportif'],['Rafael Jódar','Tennis','sportif'],['Moïse Kouamé','Tennis','sportif'],['Mirra Andreeva','Tennis','sportif']
@@ -485,16 +485,28 @@ function agendaPage(){
 let mediaLoading=false;
 async function prefetchEventMedia(){
  if(mediaLoading||!navigator.onLine)return;
- const since=Date.now()-10*86400000;
- const todo=agendaItems().filter(item=>item.finished&&!item.pendingResult&&Date.parse(item.date)>=since
-  &&hasEspnSheet(item)&&!eventMedia.has(item.key)).slice(0,15);
+ const since=Date.now()-8*86400000;
+ const todo=agendaItems().filter(item=>item.finished&&!item.pendingResult&&!item.isCompetition&&Date.parse(item.date)>=since
+  &&!eventMedia.has(item.key)).slice(0,20);
  if(!todo.length)return;
  mediaLoading=true;
  try{
-  await Promise.allSettled(todo.map(async item=>{
-   const details=await loadEventDetails(item);
-   eventMedia.set(item.key,{recap:details.article||null,videos:details.videos||[]});
-  }));
+  // 4 matchs à la fois : la feuille ESPN (compte rendu, vidéo ESPN), puis
+  // le résumé vidéo YouTube quand ESPN n'en publie pas.
+  for(let i=0;i<todo.length;i+=4){
+   await Promise.allSettled(todo.slice(i,i+4).map(async item=>{
+    const media={recap:null,videos:[],youtube:null};
+    if(hasEspnSheet(item)){
+     try{const details=await loadEventDetails(item);media.recap=details.article||null;media.videos=details.videos||[];}catch{}
+    }
+    const sides=String(item.title||'').split(/\s+[—–-]\s+/).map(x=>x.trim()).filter(Boolean);
+    if(!media.videos.some(v=>v.src)&&workerUrl&&sides.length===2){
+     const tennis=/tennis/i.test(String(item.type||'')+' '+String(item.origin?.leaguePath||''))&&!/table/i.test(String(item.type||''));
+     try{const data=await request('/api/highlight',{q:sides.join(' ')+(tennis?' highlights':' résumé'),teams:sides.join('|')});media.youtube=data.video||null;}catch{}
+    }
+    eventMedia.set(item.key,media);
+   }));
+  }
  }finally{mediaLoading=false;}
  if(active==='semaine'||active==='favori')softRender();
 }
@@ -624,7 +636,7 @@ if(active==='resultats')return `${latestKouameHtml()}${latestSinnerHtml()}<secti
 if(active==='bilan')return renderAudit2026({favorites,historyResults,yearAudit,yearLoading,yearMessage,auditSelected,esc,safeUrl,date});
 if(active==='actualites')return newsHtml();
 if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</h2><form id="addform"><input name="name" placeholder="Nom de l'équipe ou du sportif" maxlength="100" required/><select name="sport">${['Football','Tennis','Rugby','Basketball','Cyclisme','Natation','Tennis de table','Autre'].map(s=>`<option>${s}</option>`).join('')}</select><select name="type"><option value="sportif">Sportif</option><option value="équipe">Équipe</option></select><input name="apiName" placeholder="Nom API (facultatif)" maxlength="100"/><button class="button" type="submit">Ajouter aux favoris</button></form></section><section class="panel"><h2>⭐ Mes favoris (${favorites.length})</h2><select id="sportFilter">${sports.map(s=>`<option ${sportFilter===s?'selected':''}>${esc(s)}</option>`).join('')}</select><input class="search" id="search" value="${esc(search)}" placeholder="Rechercher un favori"/><div id="favoriteList">${favoriteRows()}</div></section>`;
-return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Icônes des sources, vraies images FFL, résultats avec résumé et vidéo.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
+return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Résumés vidéo intégrés pour la plupart des matchs, icônes des sources, vraies images FFL.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
 function favoriteRows(){
  return filtered().map(f=>{
   const img=photoMap[f.name]?.src;
@@ -734,6 +746,22 @@ function bindContent(){
   },{once:true});
   slot.replaceChildren(video);button.textContent='✕ Fermer la vidéo';
   video.play().catch(()=>{});
+ }));
+ document.querySelectorAll('[data-youtube-id]').forEach(button=>button.addEventListener('click',event=>{
+  event.preventDefault();event.stopPropagation();
+  const slot=button.parentElement.querySelector('.result-video-slot');
+  if(!slot)return;
+  if(slot.firstChild){slot.replaceChildren();button.textContent='▶ Voir le résumé vidéo';return;}
+  const id=button.dataset.youtubeId;
+  if(!/^[\w-]{6,20}$/.test(id))return;
+  const frame=document.createElement('iframe');
+  frame.className='result-youtube';
+  frame.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+  frame.title='Résumé vidéo';frame.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';frame.allowFullscreen=true;
+  // YouTube exige un référent pour les vidéos intégrées (la page est en no-referrer).
+  frame.referrerPolicy='strict-origin-when-cross-origin';
+  frame.loading='lazy';
+  slot.replaceChildren(frame);button.textContent='✕ Fermer la vidéo';
  }));
  // Image d'article indisponible : afficher uniquement le pictogramme sportif.
  document.querySelectorAll('img.article-thumb-image').forEach(image=>{
