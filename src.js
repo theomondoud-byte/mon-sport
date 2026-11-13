@@ -434,7 +434,7 @@ async function loadAgendaExpanded(force=false,preload=false){
  const mode=favoritePhase==='future'?'future':'past';
  const day=new Date().toISOString().slice(0,10);
  const cacheKey=selected.name+'|'+mode+'|'+day,local=agendaCache.get(cacheKey);
- if(!force&&local&&Date.now()-local.saved<15*60*1000){
+ if(!force&&local){
   agendaExtended=local.events;agendaExtendedFor=selected.name;agendaExtendedPhase=mode;
   agendaExtendedMessage=local.message;agendaExtendedLoading=false;if(!preload)render();return;
  }
@@ -512,7 +512,7 @@ function render(){
   if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded();
   // Tableau déjà en mémoire : aucun rechargement au changement d'onglet.
  });
- document.querySelector('#refresh').onclick=()=>{refresh();if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded(true);if(active==='classements')refreshRankings(true);};
+ document.querySelector('#refresh').onclick=()=>{refresh();if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded(true);if(active==='classements'||(active==='favori'&&favoritePhase==='stats'))refreshRankings(true);};
  bindContent();
 }
 function content(){const sports=['Tous',...new Set(favorites.map(f=>f.sport))];if(active==='semaine'||active==='favori')return agendaPage();
@@ -731,14 +731,22 @@ async function refresh(){
 // Chargement initial unique : l'utilisateur navigue ensuite dans les données en mémoire.
 async function startApp(){
  render();
- await Promise.allSettled([
+ const tasks=Promise.allSettled([
   refresh(),
   refreshHistory(),
   refreshRankings(),
   loadAgendaExpanded(false,true)
  ]);
- starting=false;
- render();
+ // Une source lente ne doit pas immobiliser l'application indéfiniment.
+ let deadline;
+ try{
+  await Promise.race([tasks,new Promise(resolve=>{
+   deadline=setTimeout(resolve,22000);
+  })]);
+ }finally{
+  clearTimeout(deadline);
+  starting=false;render();
+ }
  // Les photos s'appliquent à leurs cellules sans réinitialiser l'interface.
  reloadPhotos().catch(()=>{});
 }
