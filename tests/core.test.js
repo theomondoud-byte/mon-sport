@@ -1223,3 +1223,19 @@ test('V16.6 : compte rendu NBA (lien http) accepté, article sur un seul club re
   news:{articles:[{headline:"Trent Alexander-Arnold's dream move to Real Madrid is turning sour",links:{web:{href:'https://www.espn.com/soccer/story/9'}}}]}};
  assert.equal(recapArticleFromESPN(liga),null);
 });
+
+test('V16.8 : chaque source a son icône, dans les cartes et les filtres',async()=>{
+ const {sourceStyle}=await import('../source-icons.js');
+ for(const name of ['FFL','Jeu, set et maths','ESPN','Tennis Actu','Franceinfo','Basket USA','TrashTalk',"Cyclism'Actu"])
+  assert.ok(sourceStyle(name).label&&sourceStyle(name).bg.startsWith('#'),name);
+ assert.equal(sourceStyle('lequipe.fr').label,'LF');
+ const html=renderNewsView({news:[{title:'Sinner s’impose 6-4 6-3',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/b',date:'2026-11-13T09:00:00Z'}],
+  now:new Date('2026-11-13T12:00:00Z'),esc:x=>String(x),safeUrl:x=>x,photos:{},favorites:[{name:'Jannik Sinner',sport:'Tennis'}]});
+ assert.match(html,/news-source-chip[^>]*><span class="source-icon small"[^>]*>TA<\/span>Tennis Actu/);
+ assert.match(html,/<span class="news-source"><span class="source-icon"[^>]*>TA<\/span>Tennis Actu/);
+});
+
+test('V16.8 : les émoticônes WordPress restent dans le texte et ne servent jamais d’image',()=>{
+ const blocks=htmlToBlocks('<p>Quelle soirée <img draggable="false" role="img" class="emoji" alt="🌭" src="https://s.w.org/images/core/emoji/17.0.2/72x72/1f32d.png"> !</p>','https://fflose.com/a/');
+ assert.deepEqual(blocks,[{type:'p',text:'Quelle soirée 🌭 !'}]);
+});

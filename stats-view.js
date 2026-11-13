@@ -1,7 +1,7 @@
 // Mon Sport V14.9 : données de classement par favori, provenant des mêmes relevés que l'onglet Classements.
-import {profileFor} from './sports-profiles.js?v=16.7.0';
-import {auditInfo} from './audit-2026.js?v=16.7.0';
-import {RANKINGS,rankingForFavorite,rankingsForFavorite,rankingEntry,tournamentColumns,tournamentStatusInColumns,RANKING_DATE} from './rankings-view.js?v=16.7.0';
+import {profileFor} from './sports-profiles.js?v=16.8.0';
+import {auditInfo} from './audit-2026.js?v=16.8.0';
+import {RANKINGS,rankingForFavorite,rankingsForFavorite,rankingEntry,tournamentColumns,tournamentStatusInColumns,RANKING_DATE} from './rankings-view.js?v=16.8.0';
 const fmt=s=>new Date(s).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
 const tile=(label,value,subtitle='',esc=s=>s)=>'<div class="stat-tile"><b>'+esc(String(value))+'</b><span>'+esc(label)+'</span>'
  +(subtitle?'<small>'+esc(subtitle)+'</small>':'')+'</div>';

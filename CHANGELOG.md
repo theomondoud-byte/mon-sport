@@ -4,6 +4,13 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V16.8 — icônes des sources et vraies images FFL
+
+- **Icônes des sources** : pastille ronde aux couleurs de chaque média (FFL, Jeu, set et maths, ESPN, Tennis Actu, Franceinfo, Basket USA, TrashTalk, Cyclism'Actu ; monogramme automatique pour les autres), dans les filtres, les cartes d'articles, les posts Jeu, set et maths et les résumés de résultats. Intégrées à l'appli : aucune image distante, disponibles hors connexion.
+- **Images FFL** : la vignette était la première image du flux RSS, presque toujours une émoticône WordPress de 72 px agrandie. Le relais prend maintenant l'image à la une de la page (og:image, 1920×1080). Les émoticônes sont remises dans le texte sous forme d'emoji.
+
+---
+
 # Mon Sport V16.7 — vérifié sur les vraies données
 
 - **Articles** : le relais met en cache sa réponse 10 min et limite à 5 s la recherche d'images ; l'appli attend jusqu'à 25 s. Au démarrage à froid, le délai de 12 s pouvait faire perdre tous les articles (FFL compris).

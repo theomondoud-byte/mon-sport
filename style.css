@@ -909,7 +909,7 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .news-link-card h3{font-size:1.02rem;line-height:1.35;margin:0;color:#f3fbff;overflow-wrap:anywhere;font-weight:800}
 .news-link-card .news-excerpt{font-size:.86rem;line-height:1.55;color:#c8dce8;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .news-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-size:.74rem}
-.news-link-card .news-source{margin:0;color:#9fbfce;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.68rem}
+.news-link-card .news-source{margin:0;color:#b9d2de;font-weight:750;letter-spacing:.02em;font-size:.74rem;display:inline-flex;align-items:center;gap:6px}
 .news-favorite{display:inline-flex;align-items:center;gap:4px;background:#1d4a3c;color:#c9ffe4;border:1px solid #2f6f58;border-radius:999px;padding:3px 9px;font-size:.72rem;font-weight:750}
 .news-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:2px}
 .news-link-card .news-read-inline{margin:0;min-height:36px;padding:7px 14px;font-size:.84rem;border-radius:10px}
@@ -946,3 +946,14 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .news-link-card>.article-visual.sport-sport{background:linear-gradient(135deg,#2c4a63,#0f2234)}
 .news-link-card>.article-visual .article-image-fallback{font-size:2.6rem;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
 @media(max-width:600px){.news-link-card>.article-visual-empty,.news-link-card>.article-visual.image-failed{aspect-ratio:16/9;height:auto;max-height:150px;font-size:2.4rem}}
+
+/* V16.8 — icônes des sources. */
+.source-icon{--size:20px;display:inline-grid;place-items:center;flex:none;width:var(--size);height:var(--size);border-radius:50%;background:var(--src-bg);color:var(--src-fg);font:800 calc(var(--size)*.5)/1 system-ui,-apple-system,Roboto,Arial,sans-serif;letter-spacing:-.02em;box-shadow:0 0 0 1.5px rgba(255,255,255,.14);vertical-align:middle}
+.source-icon.long{font-size:calc(var(--size)*.36)}
+.source-icon.small{--size:18px}
+.source-icon.large{--size:38px}
+.news-source-chip .source-icon{margin-right:2px}
+.result-summary-source{display:inline-flex;align-items:center;gap:6px}
+.jsm-native-header>div>.source-icon{margin-right:2px}
+.news-source-chip .source-icon{color:var(--src-fg);font-size:calc(var(--size)*.5);font-weight:800}
+.news-source-chip .source-icon.long{font-size:calc(var(--size)*.36)}

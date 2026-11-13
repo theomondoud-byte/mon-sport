@@ -39,10 +39,10 @@ function feedLink(item){
  return item.match(/<link\b[^>]*href=["']([^"']+)["']/i)?.[1]||'';
 }
 function feedImage(item){
- const match=item.match(/<(?:media:thumbnail|media:content|enclosure)\b[^>]*url=["']([^"']+)["']/i)
-  ||item.match(/<img\b[^>]*src=["']([^"']+)["']/i);
- const url=decode(match?.[1]||'');
- return /^https:\/\//i.test(url)?url:'';
+ const media=item.match(/<(?:media:thumbnail|media:content|enclosure)\b[^>]*url=["']([^"']+)["']/i)?.[1];
+ const inline=[...item.matchAll(/<img\b[^>]*src=["']([^"']+)["'][^>]*>/gi)].find(m=>!/wp-smiley|emoji|gravatar|width=["']?(?:[1-7]?\d)["' ]/i.test(m[0]))?.[1];
+ const url=decode(media||inline||'');
+ return /^https:\/\//i.test(url)&&!NOISE_IMAGE.test(url)?url:'';
 }
 
 // --- Articles en blocs (texte + images + tweets intégrés), partagé FFL / lecture intégrée.
@@ -53,6 +53,7 @@ function toBlocks(html,base){
  const marked=String(html||'')
   .replace(/<(script|style|noscript|svg|form|button|nav|aside|header|footer)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
   .replace(/<img\b[^>]*>/gi,tag=>{
+   if(/wp-smiley|emoji|s\.w\.org\/images\/core\/emoji/i.test(tag))return (tag.match(/\balt=["']([^"']*)["']/i)||[])[1]||'';
    const src=(tag.match(/\b(?:data-lazy-src|data-src|data-orig-file|src)=["']([^"']+)["']/i)||[])[1]||'';
    const url=resolve(src),width=+((tag.match(/\bwidth=["']?(\d+)/i)||[])[1]||0);
    return url&&!NOISE_IMAGE.test(url)&&!(width&&width<80)?'\n[[IMG '+url+']]\n':' ';
@@ -116,14 +117,17 @@ async function fflNews(start,now){
   const r=await fetch('https://fflose.com/feed/',{headers:{...headers,'Accept':'application/rss+xml, text/xml'},cf:{cacheTtl:600,cacheEverything:true},signal:AbortSignal.timeout(9000)});
   if(!r.ok)throw Error('FFL indisponible ('+String(e.message||e)+')');
   const xml=await r.text();
-  return feedItems(xml).map(item=>{
+  const items=feedItems(xml).map(item=>{
    const link=feedLink(item),time=Date.parse(xmlValue(item,['pubDate']));
    if(!Number.isFinite(time)||time<start||time>now+600000||!/^https:\/\/fflose\.com\//.test(link))return null;
    const raw=(item.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/i)?.[1]||'').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1');
    const blocks=toBlocks(raw,link);
    return {title:xmlValue(item,['title']),link,date:new Date(time).toISOString(),source:'FFL',excerpt:xmlValue(item,['description']).slice(0,600),
-    image:feedImage(item)||blocks.find(b=>b.type==='img')?.src||'',blocks,text:blocksText(blocks)};
+    image:'',fallbackImage:blocks.find(b=>b.type==='img')?.src||'',blocks,text:blocksText(blocks)};
   }).filter(Boolean);
+  // Image à la une = og:image de la page (1920×1080), en parallèle et en cache 1 jour.
+  await Promise.all(items.map(async a=>{a.image=await pageImage(a.link)||a.fallbackImage;delete a.fallbackImage;}));
+  return items;
  }
 }
 async function curatedSportsNews(){

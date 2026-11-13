@@ -1,5 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=16.7.0';
-import {filterSportsNews} from './sports-articles.js?v=16.7.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=16.8.0';
+import {filterSportsNews} from './sports-articles.js?v=16.8.0';
+import {sourceIcon} from './source-icons.js?v=16.8.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -170,6 +171,7 @@ export function htmlToBlocks(html,base=''){
  const marked=String(html||'')
   .replace(/<(script|style|noscript|svg|form|button|nav|aside)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
   .replace(/<img\b[^>]*>/gi,tag=>{
+   if(/wp-smiley|emoji|s\.w\.org\/images\/core\/emoji/i.test(tag))return (tag.match(/\balt=["']([^"']*)["']/i)||[])[1]||'';
    const src=(tag.match(/\b(?:data-lazy-src|data-src|data-orig-file|src)=["']([^"']+)["']/i)||[])[1]||'';
    const url=resolve(src);
    const width=+((tag.match(/\bwidth=["']?(\d+)/i)||[])[1]||0);
@@ -286,7 +288,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  const chosen=selectedSources.length?selectedSources:[];
  const recent=visible.filter(n=>!chosen.length||chosen.includes(newsSourceName(n)));
  const mathsTotal=visible.filter(n=>n.source==='Jeu, set et maths').length;
- const sourceButton=name=>'<button type="button" class="news-source-chip '+(chosen.includes(name)?'active':'')+'" data-news-source="'+esc(name)+'" aria-pressed="'+(chosen.includes(name)?'true':'false')+'">'+esc(name)+' <span>'+(counts.get(name)||0)+'</span></button>';
+ const sourceButton=name=>'<button type="button" class="news-source-chip '+(chosen.includes(name)?'active':'')+'" data-news-source="'+esc(name)+'" aria-pressed="'+(chosen.includes(name)?'true':'false')+'">'+sourceIcon(name,esc,'small')+esc(name)+' <span>'+(counts.get(name)||0)+'</span></button>';
  const sourceControls='<div class="news-filter-block"><span class="news-filter-label">Sources à afficher</span><div class="news-source-filters" role="group" aria-label="Sélectionner les sources">'+sourceOptions.map(sourceButton).join('')+'</div><button type="button" class="button ghost" id="newsSourcesAll">Toutes les sources</button></div>';
  const ordered=recent;
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths sont toujours inclus. Pour les autres médias : uniquement les résultats de matchs et les records de tes favoris.</p><div class="jsm-feed-indicator" role="status">🎾 Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+sourceControls+'</div><div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Tri chronologique · plus récent d’abord</span></div>'
@@ -318,7 +320,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +'<p>Ton navigateur ne peut pas lire cette vidéo. <a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Ouvrir la publication originale ↗</a></p></video>'
     +'<p class="jsm-video-hint">Si le lecteur reste bloqué, <a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">ouvrir la publication originale ↗</a>.</p>':'';
    return '<article class="news-card jsm-native-card">'
-    +'<header class="jsm-native-header"><div><span class="jsm-native-avatar" aria-hidden="true">📊</span>'
+    +'<header class="jsm-native-header"><div>'+sourceIcon('Jeu, set et maths',esc,'large')
     +'<span class="jsm-native-author"><b>Jeu, set et maths</b><small>@JeuSetMaths · 🎾 Tennis</small></span></div>'
     +'<time class="news-date" datetime="'+esc(n.date||'')+'">'+esc(published)+'</time></header>'
     +'<p class="jsm-native-text">'+esc(fullText||n.title)+'</p>'
@@ -335,7 +337,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +'<span class="news-date">'+esc(published)+'</span></div>'
     +'<h3>'+esc(decodeEntities(n.title))+'</h3>'
     +(excerpt?'<p class="news-excerpt">'+esc(excerpt)+'</p>':'')
-    +'<div class="news-meta"><span class="news-source">'+esc(newsSourceName(n))+'</span>'
+    +'<div class="news-meta"><span class="news-source">'+sourceIcon(newsSourceName(n),esc)+esc(newsSourceName(n))+'</span>'
     +(favorite?'<span class="news-favorite" title="Article lié à un favori">⭐ '+esc(favorite.name)+'</span>':'')+'</div>'
     +'<div class="news-actions"><button type="button" class="button news-read-inline" data-read-article="'+esc(link)+'"'+(n.text||n.blocks?.length?' data-local-text="1"':'')+'>Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a></div>'
     +'<div class="news-fulltext" data-article-content="'+esc(link)+'" hidden>'+(n.blocks?.length?renderBlocks(n.blocks,esc):n.text?renderArticleBody(n.text,esc):'')+'</div></div></article>';

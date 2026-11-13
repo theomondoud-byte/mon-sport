@@ -1,12 +1,13 @@
-import {sportInfo} from './sports-media.js?v=16.7.0';
+import {sourceIcon} from './source-icons.js?v=16.8.0';
+import {sportInfo} from './sports-media.js?v=16.8.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=16.7.0';
-import {auditInfo} from './audit-2026.js?v=16.7.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=16.7.0';
-import {renderFavoriteStats} from './stats-view.js?v=16.7.0';
-import {photoInitials} from './photos.js?v=16.7.0';
-import {nextCompetitionNote} from './verified-program.js?v=16.7.0';
-import {coverageFor} from './coverage-v11.js?v=16.7.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=16.8.0';
+import {auditInfo} from './audit-2026.js?v=16.8.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=16.8.0';
+import {renderFavoriteStats} from './stats-view.js?v=16.8.0';
+import {photoInitials} from './photos.js?v=16.8.0';
+import {nextCompetitionNote} from './verified-program.js?v=16.8.0';
+import {coverageFor} from './coverage-v11.js?v=16.8.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -76,10 +77,10 @@ function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
  let summary='';
  if(article&&(article.excerpt||article.title)){
   summary='<div class="result-summary"><p>'+esc(article.excerpt||article.title)+'</p>'
-   +'<a class="result-summary-source" href="'+esc(safeUrl(article.link))+'" target="_blank" rel="noopener noreferrer" data-stop>📰 '+esc(article.source)+' · Lire l’article ↗</a></div>';
+   +'<a class="result-summary-source" href="'+esc(safeUrl(article.link))+'" target="_blank" rel="noopener noreferrer" data-stop>'+sourceIcon(article.source,esc,'small')+esc(article.source)+' · Lire l’article ↗</a></div>';
  }else if(media.recap?.excerpt){
   summary='<div class="result-summary"><p lang="en">'+esc(media.recap.excerpt)+'</p>'
-   +'<a class="result-summary-source" href="'+esc(safeUrl(media.recap.link))+'" target="_blank" rel="noopener noreferrer" data-stop>📰 ESPN (en anglais) · Lire le compte rendu ↗</a></div>';
+   +'<a class="result-summary-source" href="'+esc(safeUrl(media.recap.link))+'" target="_blank" rel="noopener noreferrer" data-stop>'+sourceIcon('ESPN',esc,'small')+'ESPN (en anglais) · Lire le compte rendu ↗</a></div>';
  }
  const video=(media.videos||[]).find(v=>v.src);
  const page=(media.videos||[]).find(v=>v.page);
