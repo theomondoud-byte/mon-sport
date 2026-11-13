@@ -47,3 +47,22 @@ jobs:
             } catch(e) {console.log('ESPN_ERROR',id,String(e));}
           }
           NODE
+      - name: Examiner un classement de tennis de table public (diagnostic)
+        run: |
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          url='https://www.eleventabletennis.com/rankings'
+          try:
+              r=requests.get(url,timeout=20,headers={'User-Agent':'Mozilla/5.0 (MonSport sports rankings personal dashboard)'})
+              print('WTT_HTTP',r.status_code,'BYTES',len(r.content),'REDIRECT',r.url)
+              soup=BeautifulSoup(r.text,'html.parser')
+              print('WTT_TITLE',soup.title.get_text(' ',strip=True) if soup.title else '')
+              tables=soup.select('table')
+              print('WTT_TABLES',[(t.get('id'),t.get('class'),len(t.select('tr'))) for t in tables[:12]])
+              for t in tables[:2]:
+                  print('WTT_HEAD',[(r.get_text(' ',strip=True)[:120]) for r in t.select('tr')[:4]])
+              for text in soup.find_all(string=lambda x:x and 'Wang Manyu' in x)[:3]:
+                  print('WTT_SAMPLE',str(text.parent.parent.get_text(' ',strip=True))[:250])
+          except Exception as error: print('WTT_ERROR',str(error))
+          PY
