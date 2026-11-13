@@ -110,9 +110,10 @@ export function agendaMatches(events,{view='semaine',phase='future',favorite=nul
   return dt>=lo&&dt<hi||(e.live&&dt>=lo-4*3600000&&dt<=hi);
  });
  // Prochains matchs chronologiques ; résultats passés du plus récent au plus ancien.
+ const relevantTime=e=>Date.parse(phase==='past'&&e.pendingResult&&e.endDate?e.endDate:e.date);
  return wanted.sort((a,b)=>phase==='past'
-  ?Date.parse(b.date)-Date.parse(a.date)
-  :Date.parse(a.date)-Date.parse(b.date));
+  ?relevantTime(b)-relevantTime(a)
+  :relevantTime(a)-relevantTime(b));
 }
 export function groupAgenda(events){
  const map=new Map;
