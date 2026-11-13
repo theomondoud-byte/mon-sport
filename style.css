@@ -375,3 +375,6 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .rank-points{font-size:.8rem}
  .rankings-source{align-items:flex-start}
 }
+
+/* V14 : indication réseau lisible sans bloquer les écrans en cache. */
+.connection-notice{margin:8px 0 12px;padding:10px 13px;border:1px solid #bd9561;border-radius:10px;background:#342a1d;color:#ffe4b8;font-size:.85rem;line-height:1.4}
