@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,fetchRankings,renderRankingsView} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -160,7 +160,7 @@ test('classement ATP live : 150 lignes sans points officiels ESPN',()=>{
  assert.equal(parseATPLiveSnapshot(payload,new Date('2026-11-16T10:00:00Z')),null);
 });
 
-test('ATP affiché en colonnes : points live, mouvement de rang, perte dans le tournoi',()=>{
+test('ATP compact : points live, mouvement de rang et défaite dans la colonne précédente',()=>{
  const now=new Date();
  const html=renderRankingsView({selected:'atp',live:{atp:{
   rows:[{rank:11,name:'Taylor Fritz',points:'3150',livePoints:3150,
@@ -175,11 +175,13 @@ test('ATP affiché en colonnes : points live, mouvement de rang, perte dans le t
  assert.match(html,/Pts live/);
  assert.match(html,/Δ rang/);
  assert.match(html,/Tournoi précédent/);
+ assert.doesNotMatch(html,/<span>Résultat<\/span>/);
  assert.match(html,/Stockholm DF/);
  assert.match(html,/3215/);
  assert.match(html,/3300/);
  assert.match(html,/Défaite Stockholm 8e/);
- assert.match(html,/class="atp-status lost">Défaite/);
+ assert.match(html,/class="rank-data rank-tournament tourney-previous is-loss"/);
+ assert.match(html,/class="tourney-loss-symbol"/);
  assert.match(html,/▼ 1/);
  assert.match(html,/rank-table-scroll/);
  assert.doesNotMatch(html,/<details class="rank-live-details"/);
@@ -265,6 +267,7 @@ test('tournois ATP observés pendant les 14 derniers jours : aucune date de matc
   live:true,asOf:payload.fetchedAt}},favorites:[],esc:x=>String(x),safeUrl:x=>x});
  assert.match(html,/Tournoi en cours/);
  assert.match(html,/Tournoi précédent/);
+ assert.doesNotMatch(html,/<span>Résultat<\/span>/);
  assert.match(html,/Stockholm 8e/);
  assert.match(html,/Orléans QF/);
  assert.doesNotMatch(html,/Paris R32/);
@@ -310,6 +313,7 @@ test('les cinq classements tennis utilisent un fichier top 150 live distinct, sa
    esc:x=>String(x),safeUrl:x=>x});
   assert.match(html,/Tournoi en cours/);
   assert.match(html,/Tournoi précédent/);
+ assert.doesNotMatch(html,/<span>Résultat<\/span>/);
   assert.match(html,/Monastir 8e/);
   assert.match(html,/1 joueur sur 150/);
   assert.ok(html.indexOf('option value="FRA"')<html.indexOf('option value="ESP"'));
@@ -329,6 +333,62 @@ test('classement Race : tournois précédents et absence de MC fictif',()=>{
   esc:x=>String(x),safeUrl:x=>x});
  assert.match(html,/Défaite Monastir 1 8e/);
  assert.match(html,/race-no-career/);
- assert.match(html,/class="atp-status lost"/);
+ assert.match(html,/class="rank-data rank-tournament tourney-previous is-loss"/);
  assert.doesNotMatch(html,/<span>MC<\/span>/);
+});
+
+test('les résultats sont intégrés aux deux colonnes de tournois',()=>{
+ const live={
+  atp:{rows:[
+   {rank:1,name:'Actif',country:'FRA',age:20,livePoints:1500,
+    tournament:'Stockholm DF',previousTournaments:'',tournamentStatus:'en_lice'},
+   {rank:2,name:'Éliminé',country:'FRA',age:22,livePoints:1200,
+    tournament:'',previousTournaments:'Défaite Bâle 8e',tournamentStatus:'defaite'},
+   {rank:3,name:'Défaite sans détail',country:'FRA',age:19,livePoints:990,
+    tournament:'',previousTournaments:'',tournamentStatus:'defaite'},
+   {rank:4,name:'Inconnu',country:'FRA',age:18,livePoints:800,
+    tournament:'',previousTournaments:'',tournamentStatus:'non_communique'}],
+   live:true,asOf:new Date().toISOString()}
+ };
+ const html=renderRankingsView({selected:'atp',live,favorites:[],
+  esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/<span>Tournoi en cours<\/span><span>Tournoi précédent<\/span><span>Suiv\.<\/span>/);
+ assert.doesNotMatch(html,/<span>Résultat<\/span>/);
+ assert.doesNotMatch(html,/atp-status unknown/);
+ assert.match(html,/Stockholm DF<\/span><small class="tourney-status playing"/);
+ assert.match(html,/Défaite Bâle 8e/);
+ assert.match(html,/class="tourney-loss-symbol"/);
+ assert.match(html,/class="tourney-status lost">✕ Défaite<\/small>/);
+ assert.match(html,/>Inconnu<\/span>/);
+});
+
+test('les résultats source sont classés sans doublon de défaite',()=>{
+ const previous=tournamentColumns({previousTournaments:'Défaite Stockholm 8e'});
+ assert.deepEqual(tournamentStatusInColumns({tournamentStatus:'defaite'},previous),{
+  current:'',previous:'defaite',previousAlreadySaysLoss:true
+ });
+ const current=tournamentColumns({tournament:'Finales WTA RR',previousTournaments:'Défaite Bâle R16'});
+ assert.deepEqual(tournamentStatusInColumns({tournamentStatus:'en_lice'},current),{
+  current:'en_lice',previous:'defaite',previousAlreadySaysLoss:true
+ });
+ assert.deepEqual(tournamentStatusInColumns({tournamentStatus:'non_communique'},{
+  current:'',previous:'',previousObserved:false
+ }),{current:'',previous:'',previousAlreadySaysLoss:false});
+});
+
+test('les cinq classements tennis conservent le tableau compact sans colonne Résultat',()=>{
+ const ids=['atp','wta','atprace','wtarace','nextgen'];
+ for(const id of ids){
+  const html=renderRankingsView({selected:id,live:{[id]:{
+   rows:[{rank:3,name:'Joueur suivi',age:20,country:'FRA',livePoints:2100,
+    tournament:'Stockholm DF',previousTournaments:'Défaite Metz 16e',
+    tournamentStatus:'en_lice'}],live:true,asOf:new Date().toISOString()
+  }},favorites:[],esc:x=>String(x),safeUrl:x=>x});
+  assert.match(html,/class="rank-data rank-tournament tourney-current"/);
+  assert.match(html,/class="rank-data rank-tournament tourney-previous is-loss"/);
+  assert.match(html,/class="tourney-status playing"/);
+  assert.match(html,/Défaite Metz 16e/);
+  assert.doesNotMatch(html,/<span>Résultat<\/span>/);
+  assert.match(html,/rank-table-scroll/);
+ }
 });
