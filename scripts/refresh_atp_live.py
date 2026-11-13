@@ -26,31 +26,40 @@ def integer(value):
 
 def parse(html, debug=False):
     soup=BeautifulSoup(html,"html.parser")
-    table=soup.select_one("tbody.flags")
-    if table is None:
-        tables=soup.select("table")
-        if debug: print("TABLES",len(tables),[(i,t.get("class"),t.get("id"),len(t.select("tr")),txt(t)[:110]) for i,t in enumerate(tables)])
-        table=next((t for t in tables if len(t.select("tr"))>=150),None)
-        if debug and table:
-            for tr in table.select("tr")[0:11]:
-                print("EXAMPLE",[(c.name,c.get("class"),txt(c)[:75],c.get("title")) for c in tr.find_all(["td","th"],recursive=False)][:18])
-    if table is None: raise RuntimeError("tableau HTML introuvable")
+    table=soup.select_one("table#t900") or soup.select_one("table#u868")
+    if not table: raise RuntimeError("Tableau ATP live absent")
     rows=[]
     for tr in table.select("tr"):
         cells=tr.find_all("td",recursive=False)
-        if not cells: continue
-        if debug and len(rows)<2:
-            print("RAW_ROW",[(c.get("class"),txt(c)[:100],c.get("title")) for c in cells])
-        rank=integer(txt(tr.select_one("td.rank.first") or tr.select_one("td.rank")))
-        name=txt(tr.select_one("td.t-name"))
-        points=integer(txt(tr.select_one("td.long-point")))
-        if rank is None or not name or points is None or rank>150: continue
-        # Les données supplémentaires ne sont conservées que lorsque les cellules
-        # de la source peuvent être identifiées sans ambiguïté.
-        rows.append({"rank":rank,"name":name,"livePoints":points})
-    rows=sorted({r["rank"]:r for r in rows}.values(), key=lambda r:r["rank"])
-    if len(rows)<140: raise RuntimeError(f"Seulement {len(rows)} rangs lisibles, conservation du précédent relevé")
-    return rows[:150]
+        # En-tête, publicités et menus du site : ignorés.
+        if len(cells)<10 or not cells[0].get("class") or "rk" not in cells[0].get("class"):
+            continue
+        rank=integer(txt(cells[0]))
+        name=txt(cells[3])
+        age=integer(txt(cells[4]))
+        country=txt(cells[5])
+        live_points=integer(txt(cells[6]))
+        movement=integer(txt(cells[7]))
+        points_change=integer(txt(cells[8]))
+        tournament=txt(cells[9])[:120]
+        next_points=integer(txt(cells[11])) if len(cells)>11 else None
+        max_points=integer(txt(cells[12])) if len(cells)>12 else None
+        if rank is None or not name or live_points is None or rank<1 or rank>150:
+            continue
+        if (next_points is not None and next_points<live_points) or (max_points is not None and max_points<live_points):
+            raise RuntimeError("Projection incohérente pour "+name)
+        row={"rank":rank,"name":name,"livePoints":live_points,
+            "movement":movement,"pointsChange":points_change,
+            "age":age,"country":country,"tournament":tournament,
+            "nextPoints":next_points,"maxPoints":max_points}
+        if debug and len(rows)<2: print("EXTRACTED_ROW",row)
+        rows.append(row)
+    rows=sorted({r["rank"]:r for r in rows}.values(),key=lambda r:r["rank"])
+    if len(rows)!=150 or [r["rank"] for r in rows]!=list(range(1,151)):
+        raise RuntimeError(f"Top 150 incomplet : {len(rows)} positions fiables")
+    if not all(r["livePoints"]>0 for r in rows):
+        raise RuntimeError("Points ATP live invalides")
+    return rows
 
 def main():
     args=argparse.ArgumentParser()
@@ -60,7 +69,7 @@ def main():
     response=requests.get(SOURCE,headers=HEADERS,timeout=25)
     print("SOURCE_HTTP",response.status_code,"HTML_BYTES",len(response.content))
     response.raise_for_status()
-    rows=parse(response.text,debug=ns.debug)
+    rows=parse(response.content.decode('utf-8',errors='replace'),debug=ns.debug)
     print("PARSED",len(rows),"TOP",rows[:2])
     data={"source":SOURCE,"fetchedAt":datetime.now(timezone.utc).isoformat(),"rows":rows}
     if not ns.dry_run:
