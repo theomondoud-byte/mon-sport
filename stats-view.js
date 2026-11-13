@@ -94,7 +94,7 @@ export function renderFavoriteRankingDetails({favorite,rankingId,rankings={},esc
 }
 export function renderFavoriteStats({favorite='',favoriteData=null,now=new Date(),rankings={},esc,safeUrl=(url)=>url}){
  const who=favoriteData||{name:favorite,sport:'Autre'},profile=profileFor(favorite,now),audit=auditInfo(favorite);
- const listed=rankingsForFavorite(who),key=rankingForFavorite(who);
+ const listed=rankingsForFavorite(who,rankings);
  const sourceLinks=[['Fiche du sportif / club',profile.source],['Résultats officiels',audit.url]];
  const row=listed.map(id=>renderFavoriteRankingDetails({favorite,rankingId:id,rankings,esc,safeUrl})).join('');
  const age=profile.age!==null?tile('Âge',profile.age+' ans','Né(e) le '+fmt(profile.born),esc):'';
