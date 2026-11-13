@@ -105,6 +105,7 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  const mathsTotal=visible.filter(n=>n.source==='Jeu, set et maths').length;
  const sourceButton=name=>'<button type="button" class="news-source-chip '+(chosen.includes(name)?'active':'')+'" data-news-source="'+esc(name)+'" aria-pressed="'+(chosen.includes(name)?'true':'false')+'">'+esc(name)+' <span>'+(counts.get(name)||0)+'</span></button>';
  const sourceControls='<div class="news-filter-block"><span class="news-filter-label">Sources à afficher</span><div class="news-source-filters" role="group" aria-label="Sélectionner les sources">'+sourceOptions.map(sourceButton).join('')+'</div><button type="button" class="button ghost" id="newsSourcesAll">Toutes les sources</button></div>';
+ const ordered=recent;
  const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths sont toujours inclus. Les autres médias ne montrent que les articles liés à tes favoris. Choisis les sources à afficher.</p><div class="jsm-feed-indicator" role="status">🎾 Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+sourceControls+'</div><div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Tri chronologique · plus récent d’abord</span></div>';
  const cards=ordered.map(n=>{
   const link=safeUrl(n.link);
