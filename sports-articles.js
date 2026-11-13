@@ -10,7 +10,7 @@ export function isSportsArticle(article){
  const title=clean(article.title||'');
  const text=title+' '+clean(article.excerpt||article.description||'');
  if(!title||PEOPLE.test(text))return false;
- if(article.source==='FFL')return true; // FFL : actualités satiriques sportives
+ if(article.source==='FFL'||article.source==='Jeu, set et maths')return true; // Deux éditeurs sportifs spécialisés
  return SPORTS.test(text)||!!article.favorite;
 }
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
