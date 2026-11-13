@@ -5,7 +5,7 @@ import {makeAgenda,agendaMatches,mergeSpursAndWembanyama,shiftedMonths} from '..
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
-import {newsLastWeek} from '../news-view.js';
+import {newsLastWeek,renderNewsView} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
@@ -787,4 +787,34 @@ test('détail d’un ancien match : Wembanyama est recherché dans la feuille, s
  assert.match(html,/Victor Wembanyama/);
  assert.match(html,/>27<\/b>/);
  assert.doesNotMatch(html,/Autre joueur/);
+});
+
+test('Jeu, set et maths : lecture intégrée sans redirection obligatoire vers X',()=>{
+ const post={title:'📊 Statistiques tennis : les performances du Masters',
+  date:'2026-11-12T13:00:00Z',link:'https://x.com/JeuSetMaths/status/2120668453770305629',
+  source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
+  image:'https://pbs.twimg.com/media/HW4gmtHWAAAJ12V.jpg?name=small&format=webp'};
+ const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
+  esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
+  safeUrl:x=>x,photos:{}});
+ assert.match(html,/<details class="news-card news-post-card">/);
+ assert.match(html,/<summary class="news-post-summary">/);
+ assert.match(html,/Voir le post dans Mon Sport/);
+ assert.match(html,/class="jsm-reader-image"/);
+ assert.match(html,/class="news-excerpt"/);
+ assert.match(html,/Visuel indisponible depuis la source X/);
+ assert.match(html,/Voir la publication originale sur X/);
+ assert.doesNotMatch(html,/<iframe/);
+ assert.doesNotMatch(html,/class="news-plain-link"[^>]*href="https:\/\/x\.com/);
+});
+
+test('Autres médias : conserver la carte de lien éditeur classique',()=>{
+ const post={title:'Article sportif PSG et Ligue 1',
+  date:'2026-11-12T13:00:00Z',link:'https://www.espn.com/soccer/',
+  source:'ESPN',favorite:'PSG',sport:'Football'};
+ const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
+  esc:x=>String(x),safeUrl:x=>x,photos:{}});
+ assert.match(html,/class="news-card news-link-card"/);
+ assert.match(html,/Lire l’article chez l’éditeur/);
+ assert.doesNotMatch(html,/class="news-post-card"/);
 });
