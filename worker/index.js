@@ -23,7 +23,7 @@ function xmlValue(xml,names){
  for(const name of names){
   const escaped=name;
   const match=xml.match(new RegExp('<'+escaped+'(?:\\s[^>]*)?>([\\s\\S]*?)<\\/'+escaped+'>','i'));
-  if(match)return decode(match[1].replace(/<[^>]+>/g,' ')).replace(/\\s+/g,' ').trim();
+  if(match){const raw=match[1].replace(/<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>/g,'$1');return decode(raw.replace(/<[^>]+>/g,' ')).replace(/\\s+/g,' ').trim();}
  }
  return '';
 }
