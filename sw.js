@@ -51,6 +51,15 @@ self.addEventListener('fetch', event => {
   const request = event.request;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
   event.respondWith((async () => {
+    const url = new URL(request.url);
+    // Scripts et styles versionnés : réponse instantanée depuis le précache.
+    // Les documents et fichiers de classement restent en réseau d'abord.
+    const versionedAsset=request.mode!=='navigate'&&
+      /\.(?:js|css|png|svg|webp|webmanifest)$/i.test(url.pathname);
+    if(versionedAsset){
+      const saved = await caches.match(request);
+      if(saved)return saved;
+    }
     try {
       const response = await fetch(request, {cache: 'no-store'});
       if (response.ok) {
