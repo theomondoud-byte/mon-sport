@@ -20,7 +20,7 @@ def mock_ranking(kind):
             cells = [str(i), "", f"✓ Joueur {i}", "20", "FRA",
                      points, movement, diff, current, previous, next_points, max_points]
         result.append("<tr>" + "".join(
-            f'<td class="{["rk"]+[""]*(len(cells)-1) if n > 0 else ["rk"]}">' + c + "</td>"
+            '<td class="rk">' + c + "</td>"
             if n == 0 else f"<td>{c}</td>"
             for n,c in enumerate(cells)
         ) + "</tr>")
