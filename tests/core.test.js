@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -462,4 +462,46 @@ test('les colonnes sportives absentes deviennent des tirets, sans chiffres ficti
  assert.match(html,/Club incomplet/);
  assert.match(html,/class="rank-data rank-number">—<\/span>/);
  assert.match(html,/class="rank-data rank-number rank-points-highlight">3<\/span>/);
+});
+
+test('ITTF : 150 hommes et 150 femmes avec pays, points et variation hebdomadaire',async()=>{
+ const payload={fetchedAt:new Date().toISOString(),week:46,source:'https://www.eleventabletennis.com/rankings',
+  rows:Array.from({length:150},(_,i)=>({rank:i+1,name:'WTT sportif '+(i+1),
+   country:i===2?'FRA':'JPN',points:7600-i,movement:i===2?-1:i===1?1:0}))};
+ const rows=parseWTTRankings(payload);
+ assert.equal(rows.length,150);
+ assert.equal(rows[2].country,'FRA');
+ assert.equal(rows[2].movement,-1);
+ const requested=[];
+ const fetchFn=async url=>{
+  requested.push(String(url));
+  return {ok:String(url).includes('wtt-'),status:200,json:async()=>payload};
+ };
+ const live=await fetchRankings({fetchFn,force:true});
+ for(const id of ['wtt','wttwomen']){
+  assert.equal(live[id].rows.length,150);
+  assert.equal(live[id].week,46);
+  const html=renderRankingsView({selected:id,live,favorites:[],esc:x=>String(x),safeUrl:x=>x});
+  assert.match(html,/standings-tabletennis/);
+  assert.match(html,/Pays/);
+  assert.match(html,/Δ rang/);
+  assert.match(html,/WTT sportif 3/);
+  assert.match(html,/▼ 1/);
+  assert.match(html,/semaine 46/);
+ }
+ assert.ok(requested.includes('./data/wtt-men.json'));
+ assert.ok(requested.includes('./data/wtt-women.json'));
+ assert.equal(parseWTTRankings({...payload,rows:payload.rows.slice(0,149)}),null);
+});
+
+test('tennis mobile : le meilleur classement et le drapeau sont placés avec le joueur',()=>{
+ const html=renderRankingsView({selected:'atp',live:{atp:{
+  rows:[{rank:3,name:'Félix Exemple',country:'FRA',age:21,careerHigh:'MC',
+   livePoints:4200,movement:1,pointsChange:40}],
+  live:true,asOf:new Date().toISOString()}},favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Joueur · MC/);
+ assert.match(html,/class="rank-career-inline best"/);
+ assert.match(html,/class="rank-flag-mobile"/);
+ assert.match(html,/🇫🇷/);
+ assert.doesNotMatch(html,/<span class="rank-career">/);
 });
