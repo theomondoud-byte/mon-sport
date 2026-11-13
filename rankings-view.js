@@ -355,7 +355,7 @@ export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
  };
  const pctCell=value=>cell(pct(value),'rank-percent','Pourcentage de victoires');
  const streak=value=>{const v=String(value||'');return /^W\d+$/i.test(v)?'V'+v.slice(1):/^L\d+$/i.test(v)?'D'+v.slice(1):v;};
- const head=tableTennis?['#','Joueur','Pts']:
+ const head=tableTennis?['#','Joueur','Pays','Pts','Δ rang']:
   nba?['#','Équipe','V','D','%','Écart','Série','10 der.','Dom.','Ext.','PP/m','PA/m','Diff./m']:
   ['#','Club','J','V','N','D','BP','BC','Diff.','Pts','Δ rang'];
  const logo=r=>/^https:\/\//i.test(r.logo||'')
@@ -364,7 +364,13 @@ export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
   const fav=matchRankingFavorite(row.name,favorites);
   const name=fav?'<button type="button" class="rank-favorite-link" data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Favoris">'+esc(row.name)+'</button>':esc(row.name);
   const who='<span class="rank-person">'+logo(row)+name+'</span>';
-  if(tableTennis)return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who+cell(row.points,'rank-number')+'</div>';
+  if(tableTennis){
+   const mv=row.movement;
+   const mark=typeof mv==='number'?(mv>0?'▲ '+mv:mv<0?'▼ '+Math.abs(mv):'▬'):'—';
+   return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who
+    +cell(row.country,'rank-country')+cell(row.points,'rank-number')
+    +'<span class="rank-data rank-number '+(mv>0?'rise':mv<0?'fall':'')+'">'+esc(mark)+'</span></div>';
+  }
   if(nba)return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who
    +cell(row.wins,'rank-number')+cell(row.losses,'rank-number')+pctCell(row.pct)
    +cell(row.gamesBehind,'rank-number')+cell(streak(row.streak),'rank-streak')
@@ -380,7 +386,7 @@ export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
    +cell(row.diff,'rank-number')+cell(row.points,'rank-number rank-points-highlight')
    +'<span class="rank-data rank-number">'+movement+'</span></div>';
  }).join('');
- const captions=tableTennis?['Rang','Joueur','Points']:nba?head:head;
+ const captions=head;
  return '<div class="rank-horizontal-hint">↔ Glisse horizontalement pour afficher toutes les statistiques.</div>'
   +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Tableau détaillé '+esc(spec.title)+' ; défilement horizontal">'
   +'<div class="rank-table standings-table standings-'+mode+'">'
@@ -398,6 +404,11 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
  const saved=live[spec.id];
  const asOf=saved?.asOf?new Date(saved.asOf).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
  const label=spec.mode==='snapshot'?'Relevé du 9 novembre 2026 · pas en direct'
+  :spec.mode==='wtt-weekly'?(saved?.live
+    ?'Classement ITTF · semaine '+(saved.week||'non précisée')+' · consulté le '+asOf
+    :saved?.stale?'Dernier classement ITTF enregistré le '+asOf+' · hors connexion'
+    :spec.id==='wtt'?'Relevé partiel du 9 novembre 2026 · classement hebdomadaire indisponible'
+    :'Classement ITTF hebdomadaire indisponible')
   :saved?.stale?'Dernier relevé '+spec.title+' sauvegardé le '+asOf+' · connexion indisponible'
   :saved?.live?(tennisLive?'Relevé '+spec.title+' du '+asOf+' · actualisation toutes les six heures':'Classement ESPN consulté le '+asOf)
   :'Classement non disponible depuis la source';
@@ -526,7 +537,8 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
     ?'NBA Ouest : V/D, pourcentage, écart au leader, série, dix derniers matchs, bilan domicile/extérieur, points marqués/encaissés et différence moyenne par match, selon ESPN. '
     :'Football : J, V, N, D, buts pour/contre, différence, points et variation de rang, selon ESPN. ')
     +'« — » signifie que la statistique n’est pas fournie par la source. Statistiques actualisées depuis ESPN ; horodatage de la consultation affiché ci-dessus.</p>':'')
-  +(spec.id==='wtt'?'<p class="agenda-footnote">Tennis de table : relevé daté, limité aux joueurs vérifiés. Sans source récente complémentaire, aucun rang ni évolution fictif.</p>':'')
+  +(spec.mode==='wtt-weekly'?'<p class="agenda-footnote">Tennis de table : top 150 '+(spec.id==='wtt'?'hommes':'femmes')+' du classement mondial ITTF hebdomadaire repris par Eleven. Pays, points et évolution par rapport à la semaine précédente selon la source. Ce n’est pas un classement en direct. '
+    +'<a href="https://www.ittf.com/rankings/" target="_blank" rel="noopener noreferrer">Source officielle ITTF ↗</a>.</p>':'')
   +(tennisLive?'<p class="agenda-footnote">'+esc(spec.title)+' : relevé du '+esc(asOf||'non communiqué')
     +' sur '+esc(spec.source)+'. Tournoi en cours et tournoi précédent sont deux colonnes distinctes. '
     +'Lorsque la source ne mentionne pas de tournoi précédent, un ancien tournoi observé par Mon Sport dans les 14 derniers jours peut apparaître avec l’étiquette « Observé récemment ». '
