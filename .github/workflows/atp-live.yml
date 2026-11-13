@@ -4,6 +4,7 @@ on:
     branches: [main, 'feat/**']
     paths:
       - 'scripts/refresh_atp_live.py'
+      - 'scripts/refresh_tennis_live.py'
       - '.github/workflows/atp-live.yml'
   workflow_dispatch:
   schedule:
@@ -26,6 +27,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install requests beautifulsoup4
+      - name: Inspecter les autres classements tennis live
+        run: python scripts/refresh_tennis_live.py --diagnose
       - name: Collecter les données live avec validation
         run: python scripts/refresh_atp_live.py --debug
       - name: Conserver le dernier relevé sur main
