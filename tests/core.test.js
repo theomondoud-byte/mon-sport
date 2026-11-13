@@ -1,7 +1,8 @@
+import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,rankingRows} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,rankingRows} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -61,4 +62,55 @@ test('articles : retirer les actualités trop anciennes',()=>{
  {title:'Match de football',link:'https://example.com/ancien',date:'2026-10-20T10:00:00Z',favorite:'PSG'}
  ];
  assert.equal(newsLastWeek(items,now).length,1);
+});
+
+test('ESPN ATP : 150 positions réelles et progression hebdomadaire',()=>{
+ const ranks=Array.from({length:155},(_,i)=>({
+  current:i+1,previous:i+3,points:5000-i,
+  athlete:{displayName:'Joueur '+(i+1),age:20,citizenshipCountry:'FRA'}
+ }));
+ const rows=parseESPNTennisRankings({rankings:[{ranks}]});
+ assert.equal(rows.length,150);
+ assert.equal(rows[0].rank,1);
+ assert.equal(rows[0].movement,2);
+ assert.equal(rows[149].rank,150);
+ assert.equal(rows[0].livePoints,null); // ne pas inventer des projections ATP
+});
+
+test('ESPN WTA : rang incomplet et doublons exclus',()=>{
+ const rows=parseESPNTennisRankings({rankings:[{ranks:[
+  {current:1,previous:2,points:3300,athlete:{displayName:'Joueuse A'}},
+  {current:2,previous:4,points:3100,athlete:{displayName:'Joueuse A'}},
+  {current:null,points:2900,athlete:{displayName:'Joueuse B'}}
+ ]}]});
+ assert.equal(rows.length,1);
+ assert.equal(rows[0].movement,1);
+});
+
+test('football : J, V, N, D, BP, BC et différence de buts',()=>{
+ const stats=[['rank',1],['points',22],['gamesPlayed',10],['wins',7],
+ ['ties',1],['losses',2],['pointsFor',21],['pointsAgainst',9],['goalDifference',12]]
+  .map(([name,value])=>({name,value}));
+ const rows=parseESPNStandings({entries:[{team:{name:'Club A'},stats}]});
+ assert.equal(rows[0].points,'22');
+ assert.equal(rows[0].wins,'7');
+ assert.equal(rows[0].draws,'1');
+ assert.equal(rows[0].losses,'2');
+ assert.match(rows[0].detail,/7 V/);
+ assert.match(rows[0].detail,/1 N/);
+ assert.match(rows[0].detail,/2 D/);
+ assert.match(rows[0].detail,/BP 21/);
+});
+
+test('sports : une icône cohérente selon la discipline',()=>{
+ assert.equal(sportInfo('Tennis de table').icon,'🏓');
+ assert.equal(sportInfo('Real Madrid').icon,'⚽');
+ assert.equal(sportInfo('Victor Wembanyama').icon,'🏀');
+ assert.equal(sportInfo('Natation').icon,'🏊');
+});
+
+test('photos : seulement des URL HTTPS externes',()=>{
+ assert.equal(sourceImage('javascript:alert(1)'),'');
+ assert.equal(sourceImage('http://example.com/image.jpg'),'');
+ assert.equal(sourceImage('https://example.com/image.jpg'),'https://example.com/image.jpg');
 });
