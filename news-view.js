@@ -181,7 +181,7 @@ export function renderNewsView({
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article pour ces filtres</h3><p>Essaie « Tous les médias », « Tous les sports » ou « Tous les favoris ».</p></div>')
-  +(!hasWorker?'<p class="agenda-footnote">Sources : FFL, ESPN et Jeu, set et maths · flux complémentaires via Cloudflare si configuré.</p>':'')
+  +(!hasWorker?'<p class="agenda-footnote">Les flux RSS Tennis Actu, Franceinfo, Basket USA, TrashTalk et Cyclism'Actu nécessitent l’URL du Worker Cloudflare dans Paramétrage. Sans cette URL, seuls les flux FFL, ESPN et Jeu, set et maths sont affichés.</p>':'')
   +'<p class="agenda-footnote">Les publications de Jeu, set et maths sont affichées directement dans Mon Sport. Un lien discret permet de retrouver la source ; aucun lecteur X externe n’est nécessaire.</p>'
   +'<p class="agenda-footnote">Les publications sont créditées à leur auteur. Les autres articles continuent de renvoyer à leur éditeur.</p></section>';
 }
