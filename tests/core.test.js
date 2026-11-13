@@ -1,12 +1,14 @@
 import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
+import {makeAgenda,agendaMatches,mergeSpursAndWembanyama,shiftedMonths} from '../agenda-model.js';
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
 import {newsLastWeek} from '../news-view.js';
-import {isSportsArticle} from '../sports-articles.js';
+import {isSportsArticle,fetchJeuSetMathsNews} from '../sports-articles.js';
+import {renderAgendaView} from '../agenda-ui.js';
+import {renderEventDetails} from '../event-details.js';
 
 test('décalage de mois en fin de mois',()=>{
  assert.equal(shiftedMonths(new Date(2026,0,31),1).getDate(),28);
@@ -663,4 +665,81 @@ test('Stats football : ne plus répéter le nom de club dans une tuile Équipe',
  assert.doesNotMatch(html,/<span>Équipe<\/span>/);
  assert.match(html,/<span>Victoires \(V\)<\/span>/);
  assert.doesNotMatch(html,/<b>—<\/b>/);
+});
+
+test('Spurs et Wembanyama : un seul événement par identifiant ESPN, statistiques conservées',()=>{
+ const team={
+  id:'espn-401999001',espnEventId:'401999001',leaguePath:'basketball/nba',
+  favorite:'San Antonio Spurs',home:'San Antonio Spurs',away:'Chicago Bulls',
+  date:'2026-11-11T22:00:00Z',homeScore:124,awayScore:119,
+  status:'Terminé',competition:'NBA',source:'ESPN NBA'
+ };
+ const player={
+  type:'nba',id:'wemby-espn-401999001',espnEventId:'401999001',leaguePath:'basketball/nba',
+  favorite:'Victor Wembanyama',title:'San Antonio Spurs — Chicago Bulls',
+  date:team.date,status:'Terminé',stats:{pts:'32',reb:'13',ast:'6',blk:'4'}
+ };
+ const combined=mergeSpursAndWembanyama([team],[player],'Victor Wembanyama');
+ assert.equal(combined.length,1);
+ assert.equal(combined[0].stats.pts,'32');
+ assert.ok(combined[0].additionalFavorites.includes('Victor Wembanyama'));
+ const events=makeAgenda({teams:combined,individuals:[player]});
+ assert.equal(events.length,1,'La même rencontre est fusionnée, pas répétée');
+ assert.equal(events[0].type,'team');
+ assert.equal(events[0].score,'124 – 119');
+ assert.equal(events[0].stats.pts,'32');
+ assert.ok(events[0].favorites.includes('San Antonio Spurs'));
+ assert.ok(events[0].favorites.includes('Victor Wembanyama'));
+ assert.equal(agendaMatches(events,{view:'favori',phase:'past',favorite:'Victor Wembanyama',
+  now:new Date('2026-11-13T12:00:00Z')}).length,1);
+ const html=renderAgendaView({view:'favori',phase:'past',favorite:'Victor Wembanyama',
+  favorites:[{name:'San Antonio Spurs',sport:'Basketball'},{name:'Victor Wembanyama',sport:'Basketball'}],
+  items:events,photos:{},rankings:{},esc:x=>String(x),safeUrl:x=>x,now:new Date('2026-11-13T12:00:00Z')});
+ assert.match(html,/124 – 119/);
+ assert.match(html,/32/);
+ assert.match(html,/13/);
+ assert.equal((html.match(/data-event-detail=/g)||[]).length,1);
+});
+
+test('Wembanyama : présence non confirmée lorsque le match Spurs n’a pas de feuille individuelle',()=>{
+ const team={id:'espn-401999002',espnEventId:'401999002',leaguePath:'basketball/nba',
+  favorite:'San Antonio Spurs',home:'San Antonio Spurs',away:'Utah Jazz',
+  date:'2026-11-15T18:00:00Z',status:'À venir',competition:'NBA'};
+ const row=mergeSpursAndWembanyama([team],[],'Victor Wembanyama')[0];
+ assert.equal(row.wembanyamaUnconfirmed,true);
+ const events=makeAgenda({teams:[row]});
+ const html=renderAgendaView({view:'favori',phase:'future',favorite:'Victor Wembanyama',
+  favorites:[{name:'Victor Wembanyama',sport:'Basketball'}],items:events,photos:{},rankings:{},
+  esc:x=>String(x),safeUrl:x=>x,now:new Date('2026-11-13T12:00:00Z')});
+ assert.match(html,/participation de Wembanyama n’est pas confirmée/);
+ assert.equal((html.match(/data-event-detail=/g)||[]).length,1);
+});
+
+test('Jeu Set et Maths : uniquement les posts vérifiés et datés dans les articles',async()=>{
+ const date=new Date('2026-11-13T10:00:00Z').toISOString();
+ const raw={source:'https://x.com/JeuSetMaths',posts:[
+  {title:'📊 Statistique du jour en tennis et classement ATP',
+   date,link:'https://x.com/JeuSetMaths/status/2120668453770305629',image:null},
+  {title:'Ceci ne provient pas du compte',
+   date,link:'https://x.com/Imposteur/status/2120668453770305629'},
+  {title:'📊 Annonce vieille de la semaine dernière',
+   date:'2026-10-30T10:00:00Z',link:'https://x.com/JeuSetMaths/status/2120068453770305629'}
+ ]};
+ const posts=await fetchJeuSetMathsNews({
+  fetchFn:async()=>({ok:true,json:async()=>raw}),
+  now:new Date('2026-11-13T12:00:00Z')
+ });
+ assert.equal(posts.length,1);
+ assert.equal(posts[0].source,'Jeu, set et maths');
+ assert.match(posts[0].link,/x.com\/JeuSetMaths\/status/);
+ const feed=newsLastWeek(posts,new Date('2026-11-13T12:00:00Z'));
+ assert.equal(feed.length,1);
+});
+
+test('aucun rechargement spontané de page lors du remplacement du service worker',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const source=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.doesNotMatch(source,/controllerchange[\s\S]{0,150}location\.reload\(/);
+ assert.match(source,/async function forceUpdate\(/,'Rechargement volontaire reste accessible');
+ assert.match(source,/location\.replace\(url\.href\)/);
 });
