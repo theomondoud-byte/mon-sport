@@ -6,7 +6,7 @@ L’application ne dépend plus du chargement simultané des scores ESPN pour af
 
 - Le fichier `data/jeu-set-et-maths.json` est désormais inclus dans le **précache PWA**, pour rester lisible lors d’une connexion mobile instable.
 - Sur Safari iOS et d'anciens navigateurs Android, le chargement évite désormais l’API `AbortSignal.timeout()`, dont le support peut être incomplet.
-- Si le flux de favoris contient beaucoup d’articles, jusqu’à **douze publications « Jeu, set et maths »** sont préservées dans le fil pour éviter qu’elles ne soient évincées de la sélection.
+- Si le flux de favoris contient beaucoup d’articles, jusqu’à **vingt-cinq publications « Jeu, set et maths »** sont préservées dans le fil pour éviter qu’elles ne soient évincées de la sélection.
 - Une mise à jour automatique **n'interrompt jamais un écran déjà ouvert** ; sur une PWA mobile déjà installée, une action volontaire **Réglages → Vérifier et recharger** est nécessaire une fois pour récupérer V15.5.
 
 ## Texte et mise en page
