@@ -98,9 +98,12 @@ export function readCachedJeuSetMathsNews({storage=browserStorage(),now=new Date
 }
 export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date(),storage=browserStorage()}={}){
  const cached=readCachedJeuSetMathsNews({storage,now});
+ // AbortSignal.timeout n'existe pas sur certains anciens navigateurs mobiles.
+ const controller=typeof AbortController==='function'?new AbortController():null;
+ const deadline=controller?setTimeout(()=>controller.abort(),9500):null;
  try{
   const response=await fetchFn('./data/jeu-set-et-maths.json',{
-   cache:'no-store',signal:AbortSignal.timeout(9500)
+   cache:'no-store',...(controller?{signal:controller.signal}:{})
   });
   if(!response.ok)return cached;
   const data=await response.json();
@@ -109,6 +112,7 @@ export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date(),storage
   try{storage?.setItem(JSM_CACHE_KEY,JSON.stringify(data));}catch{}
   return fresh;
  }catch{return cached;}
+ finally{if(deadline!==null)clearTimeout(deadline);}
 }
 export function findMatchArticles(item,news=[],now=new Date()){
  const day=Date.parse(item.date||''),key=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
