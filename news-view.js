@@ -141,10 +141,10 @@ export function renderNewsView({
   const image=sourceImage(n.image)||sourceImage(photos?.[n.favorite]?.src);
   const picture=image?'<span class="article-visual"><img class="article-thumb-image" loading="lazy" decoding="async" src="'+esc(image)+'" alt="" /><span class="article-image-fallback" aria-hidden="true">'+sport.icon+'</span></span>'
    :'<span class="article-visual article-visual-empty" aria-hidden="true">'+sport.icon+'</span>';
-  if(n.source==='Jeu, set et maths'&&/^https:\\/\\/x\\.com\\/JeuSetMaths\\/status\\/\\d{16,20}$/.test(n.link||'')){
+  if(n.source==='Jeu, set et maths'&&/^https:\/\/x\.com\/JeuSetMaths\/status\/\d{16,20}$/.test(n.link||'')){
    const fullText=String(n.text||'').trim();
    const images=(Array.isArray(n.images)&&n.images.length?n.images:n.image?[n.image]:[])
-    .filter(x=>/^https:\\/\\/pbs\\.twimg\\.com\\/media\\//.test(String(x||''))).slice(0,4);
+    .filter(x=>/^https:\/\/pbs\.twimg\.com\/media\//.test(String(x||''))).slice(0,4);
    const videoUrls=videoCandidates(n.video);
    const gallery=images.length?'<div class="jsm-native-gallery '+(images.length>1?'multi':'single')+'">'
     +images.map((url,i)=>'<figure class="jsm-native-figure">'
