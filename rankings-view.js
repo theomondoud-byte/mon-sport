@@ -345,7 +345,7 @@ export function rankingEntry(id,name,live={}){
 }
 // Colonnes spécifiques à chaque sport : ESPN pour football/NBA, ITTF pour tennis de table.
 export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
- const nba=!!spec.west,tableTennis=spec.id==='wtt',mode=tableTennis?'tabletennis':nba?'nba':'football';
+ const nba=!!spec.west,tableTennis=spec.mode==='wtt-weekly',mode=tableTennis?'tabletennis':nba?'nba':'football';
  const blank=value=>value===undefined||value===null||value===''||value==='-'?'—':String(value);
  const cell=(value,extra='',hint='')=>'<span class="rank-data '+extra+'"'+(hint?' title="'+esc(hint)+'"':'')+'>'+esc(blank(value))+'</span>';
  const pct=value=>{
