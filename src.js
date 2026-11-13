@@ -527,6 +527,14 @@ function render(){
   // Tableau déjà en mémoire : aucun rechargement au changement d'onglet.
  });
  document.querySelector('#refresh').onclick=()=>{loadJeuSetMathsPosts();refresh();if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded(true);if(active==='classements'||(active==='favori'&&favoritePhase==='stats'))refreshRankings(true);};
+ const postsRefresh=document.querySelector('#jsmRefresh');
+ if(postsRefresh)postsRefresh.onclick=()=>{
+  postsRefresh.disabled=true;
+  postsRefresh.textContent='Actualisation…';
+  loadJeuSetMathsPosts().finally(()=>{
+   if(postsRefresh.isConnected){postsRefresh.disabled=false;postsRefresh.textContent='↻ Posts';}
+  });
+ };
  bindContent();
 }
 function content(){const sports=['Tous',...new Set(favorites.map(f=>f.sport))];if(active==='semaine'||active==='favori')return agendaPage();
