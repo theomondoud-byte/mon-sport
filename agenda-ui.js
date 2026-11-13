@@ -1,6 +1,6 @@
 import {sportInfo} from './sports-media.js?v=14.0.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=14.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=15.0.0';
 import {auditInfo} from './audit-2026.js?v=14.0.0';
 import {matchVerdict,summaryForMatch} from './match-details.js?v=14.0.0';
 import {renderFavoriteStats} from './stats-view.js?v=14.9.0';
