@@ -185,7 +185,6 @@ const SPORTS_NEWS=[
  'soccer/esp.1','soccer/fra.1','soccer/uefa.champions',
  'basketball/nba','tennis/atp','tennis/wta'
 ];
-const normalized=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 export async function fetchSportsNews(favorites,now=new Date()){
  const aliases=name=>({
   'PSG':['psg','paris saint-germain','paris saint germain'],
