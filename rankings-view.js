@@ -213,6 +213,8 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   const clickable=!!fav;
   const attrs=clickable?' data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Un favori"':'';
   const name=clickable?'<button type="button" class="rank-favorite-link"'+attrs+'>'+esc(r.name)+' <span aria-hidden="true">↗</span></button>':'<span>'+esc(r.name)+'</span>';
+  const portrait=spec.mode==='tennis-espn'&&/^https:\/\//.test(r.image||'')
+   ?'<img class="rank-player-photo" src="'+esc(safeUrl(r.image))+'" loading="lazy" decoding="async" alt="" />':'';
   const number=r.rank!==null&&r.rank!==undefined&&Number.isFinite(Number(r.rank))?String(r.rank):'—';
   const movement=typeof r.movement==='number'
    ?'<span class="rank-movement '+(r.movement>0?'up':r.movement<0?'down':'flat')+'" aria-label="'+
@@ -234,7 +236,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    +'<div>Maximum possible : <b>'+(r.maxPoints??'Non disponible')+'</b></div>'
    +'<p>Les projections de tournoi nécessitent un flux ATP live distinct : aucune valeur n’est estimée.</p></details>':'';
   return '<div class="rank-row '+(clickable?'rank-tracked':'')+'"><span class="rank-place">'+esc(number)+'</span>'
-   +'<span class="rank-person">'+name+movement+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+tennisDetail+liveDetail+'</span>'
+   +'<span class="rank-person">'+portrait+name+movement+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+tennisDetail+liveDetail+'</span>'
    +'<b class="rank-points">'+esc(r.points||'—')+'</b></div>';
  }).join('');
  const tracked=spec.mode==='snapshot'?favorites.map(f=>({name:f.name,entry:rankingEntry(spec.id,f.name)}))
