@@ -32,7 +32,7 @@ def parse(html, debug=False):
     for tr in table.select("tr"):
         cells=tr.find_all("td",recursive=False)
         # En-tête, publicités et menus du site : ignorés.
-        if len(cells)<10 or not cells[0].get("class") or "rk" not in cells[0].get("class"):
+        if len(cells)<7 or not cells[0].get("class") or "rk" not in cells[0].get("class"):
             continue
         rank=integer(txt(cells[0]))
         name=txt(cells[3])
@@ -41,7 +41,7 @@ def parse(html, debug=False):
         live_points=integer(txt(cells[6]))
         movement=integer(txt(cells[7]))
         points_change=integer(txt(cells[8]))
-        tournament=txt(cells[9])[:120]
+        tournament=txt(cells[9])[:120] if len(cells)>9 else ""
         next_points=integer(txt(cells[11])) if len(cells)>11 else None
         max_points=integer(txt(cells[12])) if len(cells)>12 else None
         if rank is None or not name or live_points is None or rank<1 or rank>150:
@@ -55,6 +55,7 @@ def parse(html, debug=False):
         if debug and len(rows)<2: print("EXTRACTED_ROW",row)
         rows.append(row)
     rows=sorted({r["rank"]:r for r in rows}.values(),key=lambda r:r["rank"])
+    if debug: print("MISSING",sorted(set(range(1,151))-{r["rank"] for r in rows}))
     if len(rows)!=150 or [r["rank"] for r in rows]!=list(range(1,151)):
         raise RuntimeError(f"Top 150 incomplet : {len(rows)} positions fiables")
     if not all(r["livePoints"]>0 for r in rows):
