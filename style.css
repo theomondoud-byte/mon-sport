@@ -815,7 +815,7 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .jsm-native-author{display:flex;flex-direction:column;min-width:0;line-height:1.25}
 .jsm-native-author b{font-size:.95rem;color:#e9fff5}
 .jsm-native-author small{font-size:.72rem;color:#bdd2df}
-.jsm-native-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.94rem;line-height:1.55;margin:0;color:#f4faff}
+.jsm-native-text{white-space:pre-line;overflow-wrap:break-word;word-break:normal;font-size:.94rem;line-height:1.55;margin:0;color:#f4faff;max-width:100%;min-width:0;text-align:left}
 .jsm-native-gallery{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:800px;margin:0 auto}
 .jsm-native-gallery.single{grid-template-columns:1fr;max-width:680px}
 .jsm-native-figure{margin:0;min-width:0;background:#112b3b;border-radius:10px;overflow:hidden;display:grid;place-items:center}
@@ -835,4 +835,16 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .jsm-native-gallery{gap:4px}
  .jsm-native-image{max-height:64vh}
  .jsm-native-footer{font-size:.67rem}
+}
+
+/* V15.5 : les ruptures de ligne de la publication sont conservées sur Android. */
+.jsm-native-card{width:100%;max-width:100%;box-sizing:border-box}
+.jsm-native-text{white-space:pre-line!important;overflow-wrap:break-word!important;word-break:normal!important;
+ line-break:auto;hyphens:none;text-wrap:pretty}
+.jsm-native-gallery,.jsm-native-video{max-width:100%;min-width:0}
+@media(max-width:550px){
+ .jsm-native-text{font-size:.89rem;line-height:1.55}
+ .jsm-native-gallery.multi{grid-template-columns:1fr}
+ .jsm-native-figure{width:100%}
+ .jsm-native-image{height:auto;max-height:none;object-fit:contain}
 }
