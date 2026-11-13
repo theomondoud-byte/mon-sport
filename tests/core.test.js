@@ -1255,3 +1255,44 @@ test('V16.9 : résumé vidéo YouTube intégré quand ESPN n’en publie pas',as
  assert.match(app,/youtube-nocookie\.com\/embed\//);
  assert.match(app,/strict-origin-when-cross-origin/);
 });
+
+test('V17.0 : rugby international en direct via World Rugby et actualisation pendant les matchs',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.match(app,/request\('\/api\/rugby-live'/);
+ assert.match(app,/'South Africa':'Afrique du Sud'/);
+ assert.match(app,/function scheduleLiveRefresh\(\)/);
+ const worker=await readFile(new URL('../worker/index.js',import.meta.url),'utf8');
+ assert.match(worker,/api\.wr-rims-prod\.pulselive\.com\/rugby\/v3\/match/);
+ // Le match World Rugby remplace la fiche manuelle du même jour (mêmes équipes).
+ const {makeAgenda}=await import('../agenda-model.js');
+ const items=makeAgenda({teams:[{id:'wr-1',home:'France',away:'Afrique du Sud',homeScore:'21',awayScore:'19',date:'2026-11-13T20:10:00.000Z',status:'Terminé',favorite:'XV de France',competition:'Championnat des Nations 2026',source:'World Rugby (direct)'}],
+  individuals:[],history:[],verified:[],expanded:[{id:'v10-rugby-sa-13',favorite:'XV de France',date:'2026-11-13T21:10:00+01:00',title:'France — Afrique du Sud',competition:'Championnat des Nations 2026',status:'À venir',type:'rugby',home:'France',away:'Afrique du Sud',score:''}]});
+ const rugby=items.filter(i=>i.favorites.includes('XV de France'));
+ assert.equal(rugby.length,1);
+ assert.equal(rugby[0].finished,true);
+ assert.match(rugby[0].score,/21/);
+});
+
+test('V17.0 : articles À lire / Lus',()=>{
+ const now=new Date('2026-11-13T12:00:00Z');
+ const news=[{title:'Sinner s’impose 6-4 6-3',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/a',date:'2026-11-13T09:00:00Z'},
+  {title:'La lose du jour',source:'FFL',favorite:'FFL',link:'https://fflose.com/b',date:'2026-11-13T08:00:00Z'}];
+ const args={news,now,esc:x=>String(x),safeUrl:x=>x,photos:{},favorites:[{name:'Jannik Sinner',sport:'Tennis'}]};
+ const readKeys=new Set(['fflose.com/b']);
+ const unread=renderNewsView({...args,readKeys});
+ assert.match(unread,/data-news-view="unread"[^>]*>À lire <span>1<\/span>/);
+ assert.match(unread,/data-news-view="read"[^>]*>Lus <span>1<\/span>/);
+ assert.match(unread,/Sinner s’impose/);
+ assert.doesNotMatch(unread,/La lose du jour/);
+ assert.match(unread,/class="news-swipe" data-article-key="tennisactu\.net\/a"/);
+ assert.match(unread,/data-mark-read="tennisactu\.net\/a"/);
+ const read=renderNewsView({...args,readKeys,readView:'read'});
+ assert.match(read,/La lose du jour/);
+ assert.doesNotMatch(read,/Sinner s’impose/);
+ // Article ouvert pendant la visite : reste dans « À lire » jusqu'au changement d'onglet.
+ const keep=renderNewsView({...args,readKeys:new Set(['fflose.com/b','tennisactu.net/a']),keepVisible:new Set(['tennisactu.net/a'])});
+ assert.match(keep,/Sinner s’impose/);
+ const done=renderNewsView({...args,readKeys:new Set(['fflose.com/b','tennisactu.net/a'])});
+ assert.match(done,/Tout est lu/);
+});

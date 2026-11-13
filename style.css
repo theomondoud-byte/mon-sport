@@ -959,3 +959,21 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .news-source-chip .source-icon.long{font-size:calc(var(--size)*.36)}
 .result-youtube{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;display:block}
 .result-video-meta{color:#a9c2d0;font-size:.74rem;margin-top:-2px}
+
+/* V17.0 — articles À lire / Lus et glissement. */
+.news-read-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0 4px;padding:4px;background:#0c2131;border:1px solid #2c4a5c;border-radius:14px}
+.news-read-tabs button{min-height:40px;border:0;border-radius:10px;background:transparent;color:#c7dbe6;font-weight:750;font-size:.92rem;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.news-read-tabs button span{min-width:24px;padding:2px 7px;border-radius:999px;background:#1d3a4e;font-size:.75rem;font-variant-numeric:tabular-nums}
+.news-read-tabs button.active{background:var(--accent);color:#06281c}
+.news-read-tabs button.active span{background:rgba(6,40,28,.18);color:#06281c}
+.news-mark-all{min-height:34px;padding:5px 11px;font-size:.8rem}
+.news-swipe-hint{margin:-4px 0 2px;font-size:.74rem;color:#93b1c0}
+.news-swipe{position:relative;min-width:0;max-width:100%;border-radius:17px;touch-action:pan-y;transition:opacity .2s,max-height .22s,margin .22s}
+.news-swipe-action{position:absolute;inset:0;border-radius:17px;display:flex;align-items:center;justify-content:flex-end;padding-right:22px;background:linear-gradient(90deg,transparent 30%,#1f7a55);color:#eafff5;font-weight:850;font-size:.95rem;opacity:calc(var(--swipe,0) * 1.2)}
+.news-swipe>.news-card{position:relative;transition:transform .22s ease}
+.news-swipe.swiping>.news-card{transition:none}
+.news-swipe.news-swipe-out{opacity:0;pointer-events:none}
+.news-mark{position:absolute;top:10px;right:10px;z-index:2;width:34px;height:34px;border-radius:50%;border:1px solid #3b6276;background:rgba(10,30,44,.82);color:#d9f7ea;font-weight:900;font-size:1rem;display:grid;place-items:center;cursor:pointer}
+.news-mark:hover{background:#1f7a55;border-color:#2f9b6e}
+.news-link-card .news-card-top{padding-right:40px}
+.jsm-native-header{padding-right:40px}

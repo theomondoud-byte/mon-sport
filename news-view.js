@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=16.9.0';
-import {filterSportsNews} from './sports-articles.js?v=16.9.0';
-import {sourceIcon} from './source-icons.js?v=16.9.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.0.0';
+import {filterSportsNews} from './sports-articles.js?v=17.0.0';
+import {sourceIcon} from './source-icons.js?v=17.0.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -17,6 +17,7 @@ function canonicalNewsLink(value){
   return (url.hostname.replace(/^www\./,'')+url.pathname.replace(/\/$/,'')+url.search).toLowerCase();
  }catch{return String(value||'').split('#')[0].toLowerCase();}
 }
+export function articleKey(article){return canonicalNewsLink(article?.link);}
 function sameNewsStory(left,right){
  if(canonicalNewsLink(left.link)===canonicalNewsLink(right.link))return true;
  const leftDate=Date.parse(left.date||left.published||''),rightDate=Date.parse(right.date||right.published||'');
@@ -276,24 +277,34 @@ export function matchSummaryArticle(item,news=[],favorites=[]){
  if(!best)return null;
  return {title:decodeEntities(best.title),excerpt:safeExcerpt(best.excerpt||best.description),link:best.link,source:newsSourceName(best),image:best.image||''};
 }
-export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false}={}){
+export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false,readKeys=new Set(),readView='unread',keepVisible=new Set()}={}){
  const recentAll=newsLastWeek(news,now);
  const always=n=>['FFL','Jeu, set et maths'].includes(newsSourceName(n));
  const linked=recentAll.filter(n=>!always(n)&&findFavorite(n,favorites));
  const relevant=new Set(linked.filter(n=>relevantFavoriteNews(n,favorites)));
  const hidden=linked.length-relevant.size;
  const visible=recentAll.filter(n=>always(n)||relevant.has(n)||(showAllRelated&&linked.includes(n)));
- const sourceOptions=[...new Set(visible.map(newsSourceName))].sort((a,b)=>a.localeCompare(b,'fr'));
- const counts=new Map();for(const n of visible)counts.set(newsSourceName(n),(counts.get(newsSourceName(n))||0)+1);
+ // Un article ouvert reste visible dans « À lire » jusqu'au prochain passage
+ // dans l'onglet, pour ne pas disparaître pendant la lecture.
+ const isRead=n=>readKeys.has(articleKey(n))&&!keepVisible.has(articleKey(n));
+ const unreadList=visible.filter(n=>!isRead(n)),readList=visible.filter(isRead);
+ const section=readView==='read'?readList:unreadList;
+ const sourceOptions=[...new Set(section.map(newsSourceName))].sort((a,b)=>a.localeCompare(b,'fr'));
+ const counts=new Map();for(const n of section)counts.set(newsSourceName(n),(counts.get(newsSourceName(n))||0)+1);
  const chosen=selectedSources.length?selectedSources:[];
- const recent=visible.filter(n=>!chosen.length||chosen.includes(newsSourceName(n)));
+ const recent=section.filter(n=>!chosen.length||chosen.includes(newsSourceName(n)));
  const mathsTotal=visible.filter(n=>n.source==='Jeu, set et maths').length;
  const sourceButton=name=>'<button type="button" class="news-source-chip '+(chosen.includes(name)?'active':'')+'" data-news-source="'+esc(name)+'" aria-pressed="'+(chosen.includes(name)?'true':'false')+'">'+sourceIcon(name,esc,'small')+esc(name)+' <span>'+(counts.get(name)||0)+'</span></button>';
  const sourceControls='<div class="news-filter-block"><span class="news-filter-label">Sources à afficher</span><div class="news-source-filters" role="group" aria-label="Sélectionner les sources">'+sourceOptions.map(sourceButton).join('')+'</div><button type="button" class="button ghost" id="newsSourcesAll">Toutes les sources</button></div>';
  const ordered=recent;
- const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths sont toujours inclus. Pour les autres médias : uniquement les résultats de matchs et les records de tes favoris.</p><div class="jsm-feed-indicator" role="status">🎾 Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+sourceControls+'</div><div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Tri chronologique · plus récent d’abord</span></div>'
+ const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths sont toujours inclus. Pour les autres médias : uniquement les résultats de matchs et les records de tes favoris.</p><div class="jsm-feed-indicator" role="status">🎾 Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+'<div class="news-read-tabs" role="tablist" aria-label="Articles lus ou non">'
+   +'<button type="button" role="tab" data-news-view="unread" aria-selected="'+(readView!=='read')+'" class="'+(readView!=='read'?'active':'')+'">À lire <span>'+unreadList.length+'</span></button>'
+   +'<button type="button" role="tab" data-news-view="read" aria-selected="'+(readView==='read')+'" class="'+(readView==='read'?'active':'')+'">Lus <span>'+readList.length+'</span></button></div>'
+   +sourceControls+'</div><div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+(readView==='read'?' lu'+(recent.length!==1?'s':''):' à lire')+'</strong>'
+   +(readView!=='read'&&recent.length?'<button type="button" class="button ghost news-mark-all" id="newsMarkAll">✓ Tout marquer comme lu</button>':'<span>Tri chronologique · plus récent d’abord</span>')+'</div>'
+   +'<p class="news-swipe-hint">Tri chronologique, plus récent d’abord · '+(readView!=='read'?'glisse un article vers la gauche pour le ranger dans « Lus ».':'glisse un article vers la gauche pour le remettre dans « À lire ».')+'</p>'
   +(hidden>0?'<div class="news-hidden-note"><span>'+(showAllRelated?hidden+' article'+(hidden>1?'s':'')+' hors résultats/records affiché'+(hidden>1?'s':''):hidden+' article'+(hidden>1?'s':'')+' sur tes favoris écarté'+(hidden>1?'s':'')+' (avant-match, interview, transfert…)')+'</span><button type="button" class="button ghost" id="newsShowAll">'+(showAllRelated?'Masquer':'Afficher quand même')+'</button></div>':'');
- const cards=ordered.map(n=>{
+ const cardHtml=n=>{
   const link=safeUrl(n.link);
   if(link==='#')return '';
   const published=new Date(n.date||n.published).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
@@ -341,9 +352,20 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
     +(favorite?'<span class="news-favorite" title="Article lié à un favori">⭐ '+esc(favorite.name)+'</span>':'')+'</div>'
     +'<div class="news-actions"><button type="button" class="button news-read-inline" data-read-article="'+esc(link)+'"'+(n.text||n.blocks?.length?' data-local-text="1"':'')+'>Lire dans Mon Sport</button><a class="news-tap" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Source originale ↗</a></div>'
     +'<div class="news-fulltext" data-article-content="'+esc(link)+'" hidden>'+(n.blocks?.length?renderBlocks(n.blocks,esc):n.text?renderArticleBody(n.text,esc):'')+'</div></div></article>';
+ };
+ const cards=ordered.map(n=>{
+  const card=cardHtml(n);
+  if(!card)return '';
+  const key=articleKey(n),read=readView==='read';
+  return '<div class="news-swipe" data-article-key="'+esc(key)+'">'
+   +'<div class="news-swipe-action" aria-hidden="true">'+(read?'↩ À lire':'✓ Lu')+'</div>'
+   +card.replace(/<\/article>$/,'<button type="button" class="news-mark" data-mark-read="'+esc(key)+'" aria-label="'+(read?'Remettre dans À lire':'Marquer comme lu')+'">'+(read?'↩':'✓')+'</button></article>')
+   +'</div>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
-  +(cards||'<div class="agenda-empty"><h3>Aucun article pour les sources sélectionnées</h3><p>Essaie de sélectionner d’autres sources.</p></div>')
+  +(cards||(readView!=='read'&&!unreadList.length&&visible.length
+   ?'<div class="agenda-empty"><h3>Tout est lu 🎉</h3><p>Les nouveaux articles apparaîtront ici. Les articles lus restent dans l’onglet « Lus ».</p></div>'
+   :'<div class="agenda-empty"><h3>Aucun article ici</h3><p>Essaie de sélectionner d’autres sources.</p></div>'))
   +(!hasWorker?'<p class="agenda-footnote">Les flux RSS Tennis Actu, Franceinfo, Basket USA, TrashTalk et Cyclism’Actu nécessitent l’URL du Worker Cloudflare dans Paramétrage. Sans cette URL, seuls les flux FFL, ESPN et Jeu, set et maths sont affichés.</p>':'')
   +'<p class="agenda-footnote">Les publications de Jeu, set et maths sont affichées directement dans Mon Sport. Un lien discret permet de retrouver la source ; aucun lecteur X externe n’est nécessaire.</p>'
   +'<p class="agenda-footnote">Les publications sont créditées à leur auteur. Les autres articles continuent de renvoyer à leur éditeur.</p></section>';

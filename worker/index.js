@@ -143,6 +143,9 @@ function videoRenderers(node,out=[]){
  return out;
 }
 function durationSeconds(text){return String(text||'').split(':').reduce((t,p)=>t*60+(+p||0),0);}
+async function embeddable(id){
+ try{const r=await fetch('https://www.youtube.com/oembed?format=json&url='+encodeURIComponent('https://www.youtube.com/watch?v='+id),{cf:{cacheTtl:86400,cacheEverything:true},signal:AbortSignal.timeout(4000)});return r.ok;}catch{return true}
+}
 async function highlight(query,teams){
  const url='https://www.youtube.com/results?search_query='+encodeURIComponent(query)+'&sp=EgIIAw%253D%253D&hl=fr&gl=FR';
  const r=await fetch(url,{headers:{'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36','Accept-Language':'fr-FR,fr;q=0.9','Cookie':'SOCS=CAI; CONSENT=YES+'},cf:{cacheTtl:3600,cacheEverything:true},signal:AbortSignal.timeout(9000)});
@@ -163,12 +166,34 @@ async function highlight(query,teams){
   const verified=JSON.stringify(v.ownerBadges||[]).includes('VERIFIED');
   if(!v.videoId||!verified||!wanted.test(plainText(title))||!sides.every(s=>s.some(w=>words.has(w)))||!seconds||seconds>1500)continue;
   const channel=v.ownerText?.runs?.[0]?.text||'';
+  // Chaînes régionales dont les vidéos sont bloquées hors de leur pays.
+  if(/bein sports (?:usa|us|canada|australia|asia|mena|xtra)|sportsnet|\btsn\b|optus|stan sport|fubo|peacock|paramount|nbc sports|espn australia|supersport/.test(plainText(channel)))continue;
+  // Intégration interdite par la chaîne : oEmbed renvoie 401/403.
+  if(!(await embeddable(v.videoId)))continue;
   const video={id:v.videoId,title,channel,official:official.test(plainText(channel)),published:v.publishedTimeText?.simpleText||'',duration:v.lengthText?.simpleText||''};
   if(video.official)return {video};
   fallback=fallback||video;
  }
  if(fallback)return {video:fallback};
  return {video:null};
+}
+
+// --- Rugby international en direct : API publique de World Rugby (site world.rugby).
+async function rugbyLive(day){
+ const start=new Date(day+'T00:00:00Z'),end=new Date(start.getTime()+2*86400000);
+ const iso=d=>d.toISOString().slice(0,10);
+ const url='https://api.wr-rims-prod.pulselive.com/rugby/v3/match?startDate='+iso(new Date(start.getTime()-86400000))+'&endDate='+iso(end)+'&sort=asc&pageSize=100&page=0';
+ const r=await fetch(url,{headers:{'Accept':'application/json','User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)'},cf:{cacheTtl:30,cacheEverything:true},signal:AbortSignal.timeout(9000)});
+ if(!r.ok)throw Error('World Rugby HTTP '+r.status);
+ const body=await r.json();
+ const matches=(body.content||[]).map(m=>({
+  id:String(m.matchId||''),start:m.time?.millis?new Date(m.time.millis).toISOString():'',
+  status:m.status||'',clock:m.clock?.label||m.clock?.secs||'',
+  competition:m.competition||m.events?.[0]?.label||'',venue:m.venue?.name||'',
+  teams:(m.teams||[]).map(t=>({name:t?.name||'',abbreviation:t?.abbreviation||''})),
+  scores:Array.isArray(m.scores)?m.scores:[]
+ })).filter(m=>m.teams.length===2);
+ return {matches};
 }
 async function curatedSportsNews(){
  const now=Date.now(),start=now-7*86400000;
@@ -259,4 +284,4 @@ export default {async fetch(request){if(request.method==='OPTIONS')return new Re
  const response=json(await curatedSportsNews());
  if(cache)await cache.put(key,new Response(response.clone().body,{headers:{...Object.fromEntries(response.headers),'Cache-Control':'public, max-age=600'}}));
  return response;
-}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};
+}if(u.pathname==='/api/rugby-live'){const day=limit(u.searchParams.get('date'),10);if(!/^\d{4}-\d{2}-\d{2}$/.test(day))return json({error:'Date attendue AAAA-MM-JJ'},400);return new Response(JSON.stringify(await rugbyLive(day)),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30',...cors}});}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};

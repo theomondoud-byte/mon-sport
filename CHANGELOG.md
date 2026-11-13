@@ -4,6 +4,15 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.0 — articles « À lire » / « Lus » et rugby international en direct
+
+- **Articles à lire / lus** : deux onglets avec compteurs. Un article ouvert (« Lire dans Mon Sport » ou lien source) passe dans « Lus » ; il reste visible pendant la lecture et rejoint « Lus » au prochain passage dans l'onglet. Glisser un article vers la gauche (ou toucher ✓) le range dans « Lus » ; dans « Lus », le même geste le remet dans « À lire ». « Tout marquer comme lu » vide la liste en une fois. État mémorisé sur l'appareil (21 jours).
+- **Rugby en direct** : le Championnat des Nations n'est pas couvert par ESPN. Les matchs du XV de France viennent désormais de l'API publique de World Rugby (score et statut en direct) et remplacent la fiche de calendrier du même match.
+- **Actualisation automatique** toutes les 60 s tant qu'un match d'un favori est en cours (et au retour dans l'appli).
+- **Résumés vidéo** : les chaînes régionales dont les vidéos sont bloquées hors de leur pays (beIN SPORTS USA…) et les vidéos non intégrables sont écartées ; lien « Ouvrir sur YouTube » en secours.
+
+---
+
 # Mon Sport V16.9 — résumés vidéo pour la plupart des matchs
 
 - ESPN ne publie pas de vidéo pour la Ligue des nations, la Ligue 1 ou le tennis (droits). Quand ESPN n'a pas de vidéo, le relais cherche le résumé sur YouTube (publié cette semaine) et ne garde qu'une vidéo dont le titre cite les deux camps et annonce un résumé (« résumé », « highlights », « temps forts »…), de moins de 25 min, sur une chaîne certifiée — en privilégiant les chaînes officielles (diffuseurs, ligues, fédérations, clubs). Une chaîne non officielle est signalée comme telle.
