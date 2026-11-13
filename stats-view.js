@@ -110,11 +110,17 @@ export function renderFavoriteStats({favorite='',favoriteData=null,now=new Date(
  const primary=listed.map(id=>rankingEntry(id,favorite,rankings))
   .find(entry=>entry&&(entry.age!=null||entry.country))||null;
  const seen=new Set();
- const row=listed.map(id=>renderFavoriteRankingDetails({favorite,rankingId:id,rankings,seen,esc,safeUrl})).join('');
+ const usable=listed.filter(id=>{
+  const entity=rankAssociation(id,favorite);
+  return Array.isArray(rankings[id]?.rows)&&rankings[id].rows.length&&
+   rankingEntry(id,entity,rankings);
+ });
+ // Pas trois encarts « classement indisponible » si un joueur est absent de plusieurs top 150.
+ const row=usable.map(id=>renderFavoriteRankingDetails({favorite,rankingId:id,rankings,seen,esc,safeUrl})).join('');
  const ageValue=profile.age!=null?profile.age:primary?.age;
  const age=ageValue!=null?tile('Âge',ageValue+' ans',profile.born?'Né(e) le '+fmt(profile.born):'',esc):'';
  const location=profile.country?tile('Pays',profile.country,'',esc):primary?.country?tile('Pays',primary.country,'',esc):'';
- const rankTiles=row||'<p class="stat-help">Pas de tableau international unique pour cette discipline. Consulte les feuilles officielles ci-dessous.</p>';
+ const rankTiles=row||'<p class="stat-help">Aucune entrée correspondante disponible dans les classements chargés (top 150 ou classements d’équipes). Consulte les sources officielles ci-dessous.</p>';
  let officialStats='';
  // Valeurs EXACTEMENT retranscrites des statistiques sources, non calculées.
  if(favorite==='Mirra Andreeva'){
