@@ -200,7 +200,22 @@ export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
   'Moïse Kouamé':['kouamé','kouame'],
   'Rafael Jódar':['jódar','jodar'],
   'Mirra Andreeva':['andreeva'],
-  'Équipe de France de football':['france football','les bleus']
+  'Équipe de France de football':['equipe de france','france football','les bleus'],
+  'FC Barcelone':['fc barcelona','barcelona','barcelone'],
+  'Real Madrid':['real madrid'],
+  'Arthur Fils':['arthur fils'],
+  'Jannik Sinner':['jannik sinner','sinner'],
+  'Carlos Alcaraz':['carlos alcaraz','alcaraz'],
+  'Rafael Jódar':['rafael jodar','jodar'],
+  'Moïse Kouamé':['moise kouame','kouame','kouame moise'],
+  'Mirra Andreeva':['mirra andreeva','andreeva'],
+  'Léon Marchand':['leon marchand','marchand'],
+  'Sauveur Cristofini':['sauveur cristofini','cristofini'],
+  'Félix Lebrun':['felix lebrun'],
+  'Alexis Lebrun':['alexis lebrun'],
+  'Flavien Coton':['flavien coton','coton'],
+  'Paul Seixas':['paul seixas','seixas'],
+  'XV de France':['xv de france','equipe de france rugby','france rugby']
  }[name]||[normalized(name)]).map(normalized);
  const settled=await Promise.allSettled(SPORTS_NEWS.map(async path=>{
   const url='https://site.api.espn.com/apis/site/v2/sports/'+path+'/news?limit=30';
