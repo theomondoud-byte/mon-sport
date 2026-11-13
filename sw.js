@@ -1,5 +1,5 @@
-// V15.8 : lecture vidéo X sans Referer et filtres de sources.
-const CACHE = 'mon-sport-v15-8';
+// V15.8.1 : actualisation des sources éditoriales et libellés de version.
+const CACHE = 'mon-sport-v15-8-1';
 const ASSETS = [
   './',
   './index.html',
