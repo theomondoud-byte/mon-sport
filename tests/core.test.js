@@ -832,7 +832,7 @@ test('Autres médias : conserver la carte de lien éditeur classique',()=>{
  const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
   esc:x=>String(x),safeUrl:x=>x,photos:{}});
  assert.match(html,/class="news-card news-link-card"/);
- assert.match(html,/Lire l’article chez l’éditeur/);
+ assert.match(html,/Lire dans Mon Sport/);
  assert.doesNotMatch(html,/class="news-post-card"/);
 });
 
@@ -992,15 +992,15 @@ test('V15.7 : Tous les médias réunis, puis filtre exclusif par média',()=>{
  assert.match(all,/Le PSG prépare/);
  assert.match(all,/Victor Wembanyama brille/);
  assert.match(all,/Mirra Andreeva améliore ses statistiques/);
- const ffl=renderNewsView({...args,sourceFilter:'FFL'});
+ const ffl=renderNewsView({...args,selectedSources:['FFL']});
  assert.match(ffl,/Le PSG prépare/);
  assert.doesNotMatch(ffl,/Victor Wembanyama brille/);
  assert.doesNotMatch(ffl,/class="news-card jsm-native-card"/);
- const basketball=renderNewsView({...args,sportFilter:'Basketball'});
+ const basketball=renderNewsView({...args,selectedSources:['ESPN']});
  assert.match(basketball,/Victor Wembanyama brille/);
  assert.doesNotMatch(basketball,/Le PSG prépare/);
  assert.doesNotMatch(basketball,/class="news-card jsm-native-card"/);
- const wemby=renderNewsView({...args,favoriteFilter:'Victor Wembanyama'});
+ const wemby=renderNewsView({...args,selectedSources:['ESPN']});
  assert.match(wemby,/Victor Wembanyama brille/);
  assert.doesNotMatch(wemby,/Le PSG prépare/);
 });
@@ -1014,10 +1014,10 @@ test('V15.8 : la PWA charge les sources RSS et conserve la lecture vidéo X',asy
  assert.match(sw,/news-view\.js\?v=15\.8\.0/);
  assert.match(sw,/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
- assert.match(app,/newsSourceFilter='Tous'/);
+ assert.match(app,/newsSelectedSources=\[\]/);
  assert.match(app,/data-news-source/);
- assert.match(app,/newsSportFilter/);
- assert.match(app,/newsFavoriteFilter/);
+ assert.match(app,/data-read-article/);
+ assert.match(app,/api\/article/);
 });
 
 test('V15.8 : les extraits des médias RSS sont lisibles directement dans les cartes',()=>{
