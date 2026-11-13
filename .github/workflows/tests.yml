@@ -66,3 +66,15 @@ jobs:
                   print('WTT_SAMPLE',str(text.parent.parent.get_text(' ',strip=True))[:250])
           except Exception as error: print('WTT_ERROR',str(error))
           PY
+      - name: Inspecter une ligne du classement de tennis de table
+        run: |
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          html=requests.get('https://www.eleventabletennis.com/rankings',timeout=20,headers={'User-Agent':'Mozilla/5.0'}).text
+          soup=BeautifulSoup(html,'html.parser')
+          for n,t in enumerate(soup.select('table.rk-table')):
+            print('WTT_LIVE_TABLE',n,'parent',t.parent.get('class'),t.parent.get('id'))
+            for tr in t.select('tr')[1:4]:
+              print('WTT_LIVE_ROW',n,[(x.name,x.get('class'),x.get_text(' ',strip=True)[:70],str(x)[:200]) for x in tr.find_all(['th','td'],recursive=False)])
+          PY
