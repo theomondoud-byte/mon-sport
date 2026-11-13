@@ -1,7 +1,7 @@
 name: Actualiser classement ATP live
 on:
   push:
-    branches: [feat/v14-atp-live-table]
+    branches: [main, feat/v14-atp-live-table]
     paths:
       - 'scripts/refresh_atp_live.py'
       - '.github/workflows/atp-live.yml'
@@ -10,6 +10,11 @@ on:
     - cron: '17 */6 * * *'
 permissions:
   contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -22,7 +27,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install requests beautifulsoup4
       - name: Collecter les données live avec validation
-        run: python scripts/refresh_atp_live.py --debug
+        run: python scripts/refresh_atp_live.py
       - name: Conserver le dernier relevé sur main
         if: github.ref == 'refs/heads/main'
         run: |
