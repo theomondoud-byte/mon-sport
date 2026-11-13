@@ -4,7 +4,7 @@
 const ESPN='https://site.api.espn.com/apis/v2/sports/';
 export const RANKING_DATE='2026-11-09';
 export const RANKINGS=[
- {id:'atp',title:'ATP',sport:'Tennis',url:'https://www.atptour.com/en/rankings/singles/live',source:'ESPN · classement ATP publié',mode:'tennis-espn',tour:'atp'},
+ {id:'atp',title:'ATP live',sport:'Tennis',url:'https://live-tennis.eu/fr/classement-atp-live',source:'Live Tennis',mode:'tennis-live',tour:'atp'},
  {id:'wta',title:'WTA',sport:'Tennis',url:'https://www.wtatennis.com/rankings/singles',source:'ESPN · classement WTA publié',mode:'tennis-espn',tour:'wta'},
  {id:'atprace',title:'Race ATP',sport:'Tennis',url:'https://www.atptour.com/en/rankings/singles-race-to-turin',source:'ATP · Race Turin',mode:'snapshot'},
  {id:'wtarace',title:'Race WTA',sport:'Tennis',url:'https://www.wtatennis.com/rankings/race-singles',source:'WTA · Race Finals',mode:'snapshot'},
@@ -186,17 +186,27 @@ export async function fetchRankings({fetchFn=fetch,force=false}={}){
     :{rows:[],error:'Classement indisponible depuis ESPN.',live:false};
   }
  }));
- // Enrichissement indépendant : ne pas substituer des chiffres non vérifiés.
- if(result.atp?.rows?.length){
+ // ATP : seule la source live française est affichée, sans fusion avec un classement officiel.
+ const cached=cache.get('atp');
+ if(!force&&cached&&Date.now()-cached.at<20*60000){
+  result.atp=cached.result;
+ }else{
   try{
    const response=await fetchFn('./data/atp-live.json',{cache:'no-store',signal:AbortSignal.timeout(7000)});
-   if(response.ok){
-    const payload=await response.json();
-    const joined=mergeATPLiveRows(result.atp.rows,payload);
-    if(joined.matched>=100)result.atp={...result.atp,rows:joined.rows,
-     liveFeedAsOf:joined.asOf,liveFeedSource:payload.source,liveFeedMatched:joined.matched};
-   }
-  }catch{/* Continuer avec les points officiels si la source ATP live est indisponible. */}
+   if(!response.ok)throw Error('Relevé ATP live HTTP '+response.status);
+   const payload=await response.json();
+   const rows=parseATPLiveSnapshot(payload);
+   if(!rows)throw Error('Relevé ATP live invalide ou trop ancien');
+   const value={rows,asOf:payload.fetchedAt,live:true,kind:'tennis-live',source:payload.source};
+   cache.set('atp',{result:value,at:Date.now()});
+   storeRanking('atp',value);result.atp=value;
+  }catch{
+   const saved=savedRanking('atp');
+   const fresh=saved?.kind==='tennis-live'&&Number.isFinite(Date.parse(saved.asOf))&&
+    Date.now()-Date.parse(saved.asOf)<=36*3600000&&Date.now()>=Date.parse(saved.asOf);
+   result.atp=fresh?{...saved,live:false,stale:true,error:'Dernier relevé ATP live disponible sur cet appareil'}
+    :{rows:[],live:false,kind:'tennis-live',error:'Classement ATP live indisponible'};
+  }
  }
  return result;
 }
@@ -221,6 +231,32 @@ export function mergeATPLiveRows(officialRows,payload,now=new Date()){
    nextPoints:projected(other.nextPoints),maxPoints:projected(other.maxPoints)};
  });
  return {rows,asOf:payload.fetchedAt,matched};
+}
+// Le fichier collecté est un instantané du seul classement ATP live (jamais ESPN).
+export function parseATPLiveSnapshot(payload,now=new Date()){
+ const at=Date.parse(payload?.fetchedAt||''),age=now.getTime()-at;
+ if(!Number.isFinite(at)||age<0||age>36*3600000||!Array.isArray(payload?.rows)||payload.rows.length!==150)
+  return null;
+ const seen=new Set(),rows=[];
+ for(const raw of payload.rows){
+  if(!Number.isInteger(raw?.rank)||raw.rank<1||raw.rank>150||seen.has(raw.rank)||
+    !raw.name||!Number.isInteger(raw.livePoints)||raw.livePoints<0)return null;
+  seen.add(raw.rank);
+  const positive=value=>Number.isInteger(value)&&value>=0?value:null;
+  rows.push({
+   rank:raw.rank,name:String(raw.name).slice(0,120),points:String(raw.livePoints),
+   livePoints:raw.livePoints,age:positive(raw.age),country:String(raw.country||'').slice(0,6),
+   careerHigh:String(raw.careerHigh||'').slice(0,35),
+   movement:Number.isInteger(raw.movement)?raw.movement:null,
+   pointsChange:Number.isInteger(raw.pointsChange)?raw.pointsChange:null,
+   tournament:String(raw.tournament||'').slice(0,160),
+   previousTournaments:String(raw.previousTournaments||'').slice(0,240),
+   tournamentStatus:['defaite','en_lice','non_communique'].includes(raw.tournamentStatus)
+    ?raw.tournamentStatus:'non_communique',
+   nextPoints:positive(raw.nextPoints),maxPoints:positive(raw.maxPoints),source:'Live Tennis'
+  });
+ }
+ return rows.sort((x,y)=>x.rank-y.rank);
 }
 export function rankingRows(id,live={}){
  const data=live?.[id];
