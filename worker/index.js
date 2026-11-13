@@ -49,7 +49,7 @@ async function curatedSportsNews(){
    const title=xmlValue(item,['title']),link=feedLink(item);
    const rawDate=xmlValue(item,['pubDate','published','updated','dc:date']);
    const time=Date.parse(rawDate),description=xmlValue(item,['description','summary','content:encoded','content']);
-   if(!title||!/^https?:\\/\\//i.test(link)||!Number.isFinite(time)||time<start||time>now+600000)return null;
+   if(!title||!/^https?:\/\//i.test(link)||!Number.isFinite(time)||time<start||time>now+600000)return null;
    return {title,link,date:new Date(time).toISOString(),source:feed.name,sport:feed.sport,
     excerpt:description.slice(0,600),image:feedImage(item)};
   }).filter(Boolean);
