@@ -1,3 +1,21 @@
+# Mon Sport V15.4 — publications lisibles directement, sans « Voir plus » de X
+
+Les publications du compte **Jeu, set et maths** apparaissent désormais comme des **articles natifs de Mon Sport** dans le flux d’actualités. L’application n’intègre plus de fenêtre/iframe X, ni son bouton interne « Voir plus » (qui redirigeait vers X). Le bouton « Voir plus » de Mon Sport a également été supprimé : **le texte du post est visible d’emblée, sans limitation de hauteur ni clic nécessaire**.
+
+- Le collecteur `scripts/refresh_jeu_set_maths.py` conserve maintenant, séparément du titre abrégé, **tout le texte disponible dans le relevé public**, jusqu’à 30 000 caractères ; les relevés précédents qui n’ont qu’un titre sont identifiés comme tels jusqu’à leur actualisation.
+- Les **photos d’origine** apparaissent directement sous le texte (jusqu’à quatre visuels par post, en qualité `orig` lorsque la source les donne). Les vidéos MP4 fournies par la source utilisent le **lecteur vidéo natif** du téléphone, sans widget X.
+- Tous les médias sont chargés à la demande, uniquement lorsqu’ils sont visibles. En cas d’échec, l’application affiche un message plutôt qu’un visuel cassé.
+- Le lien vers la publication originale reste disponible en bas de chaque article pour attribution et vérification, mais ne s’ouvre jamais automatiquement.
+- Une **source tierce** (miroir public de X) fournit le contenu collecté et peut ne pas exposer tous les médias ou l’ensemble d’une conversation ; aucun média ni texte absent n’est inventé.
+- Le filtrage du flux conserve toutes les publications d’un compte consacré aux statistiques sportives, même si elles ne contiennent pas explicitement le mot « tennis ».
+- Les autres actualités ESPN et FFL ne changent pas. Versions CSS, JS et cache Android **V15.4**.
+
+## Contrôles
+
+Les tests de régression vérifient l’absence de widget X et de « Voir plus », le rendu du texte, des galeries de plusieurs photos, des vidéos et des relevés anciens ; les tests Python valident les URLs des médias et la récupération du texte complet. La publication est réalisée par GitHub Pages.
+
+---
+
 # Mon Sport V15.3 — publications X directement dans le flux d'actualité
 
 Les posts **Jeu, set et maths** sont maintenant **intégrés directement entre les autres articles** dans l'onglet Articles : il n'est plus nécessaire de cliquer sur chaque carte pour lancer le lecteur officiel X.
