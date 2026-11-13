@@ -440,3 +440,49 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .tennis-rank-table .rank-data{font-size:.76rem}
  .tennis-rank-table .rank-person{font-size:.77rem}
 }
+
+/* V14.3 · ATP : uniquement le classement live, fidèle aux colonnes de la source FR. */
+.atp-live-table{width:max-content;min-width:100%;border:0;border-radius:0;overflow:visible}
+.atp-live-table .atp-live-row{display:grid;grid-template-columns:38px 48px 230px 48px 75px 88px 82px 80px 230px 230px 113px 80px 80px;gap:8px;align-items:center;padding:10px 9px;min-height:51px}
+.atp-live-table .rank-table-head{font-size:.68rem;background:#20465a}
+.atp-live-table .rank-table-head>span{font-weight:850}
+.atp-live-table .rank-data{font-variant-numeric:tabular-nums;font-size:.83rem;font-weight:700}
+.atp-live-table .rank-tournament{font-weight:500;font-size:.76rem;overflow-wrap:anywhere;line-height:1.4}
+.atp-live-table .rank-number{text-align:right}
+.atp-live-table .rank-person{line-height:1.38;font-size:.82rem}
+.atp-live-table .rank-country{white-space:nowrap;font-size:.77rem}
+.atp-live-table .rank-career{font-size:.73rem;text-align:center}
+.atp-career{font-size:.66rem;border-radius:4px;padding:2px 3px;background:#365668;color:#e4f6fb;font-weight:800}
+.atp-career.best{background:#aa7721;color:#fff7d4}
+.atp-live-table .rank-data.negative{color:#ff9999}
+.atp-live-table .rank-data.positive{color:#a5f6c1}
+.atp-live-table .atp-movement{text-align:center}
+.atp-live-table .atp-movement .rank-movement{margin:0}
+.atp-status{display:inline-block;white-space:nowrap;border-radius:7px;padding:4px 6px;font-size:.69rem;font-weight:800}
+.atp-status.lost{color:#ffd3d3;background:#593039;border:1px solid #93515a}
+.atp-status.playing{color:#a9f2d0;background:#1b4d3c;border:1px solid #38795e}
+.atp-status.unknown{color:#c4d4da;background:#284554}
+.atp-live-table .atp-live-row>.rank-place,
+.atp-live-table .atp-live-row>.rank-career,
+.atp-live-table .atp-live-row>.rank-person{position:sticky;align-self:stretch;display:flex;align-items:center;z-index:2;background:#0e2b40}
+.atp-live-table .atp-live-row>.rank-place{left:0;justify-content:center}
+.atp-live-table .atp-live-row>.rank-career{left:46px;justify-content:center}
+.atp-live-table .atp-live-row>.rank-person{left:102px;flex-wrap:wrap;column-gap:5px}
+.atp-live-table .atp-live-row:nth-child(2n)>.rank-place,
+.atp-live-table .atp-live-row:nth-child(2n)>.rank-career,
+.atp-live-table .atp-live-row:nth-child(2n)>.rank-person{background:#13374b}
+.atp-live-table .atp-live-row.rank-tracked>.rank-place,
+.atp-live-table .atp-live-row.rank-tracked>.rank-career,
+.atp-live-table .atp-live-row.rank-tracked>.rank-person{background:#1a5149}
+.atp-live-table .rank-table-head>.rank-place,
+.atp-live-table .rank-table-head>.rank-career,
+.atp-live-table .rank-table-head>.rank-person{background:#20465a}
+@media(max-width:550px){
+ .atp-live-table .atp-live-row{grid-template-columns:32px 37px 148px 38px 62px 68px 67px 65px 168px 175px 96px 69px 69px;gap:5px;padding:8px 5px}
+ .atp-live-table .atp-live-row>.rank-career{left:37px}
+ .atp-live-table .atp-live-row>.rank-person{left:79px}
+ .atp-live-table .rank-person{font-size:.78rem}
+ .atp-live-table .rank-data{font-size:.75rem}
+ .atp-live-table .rank-country{font-size:.72rem}
+ .atp-live-table .rank-tournament{font-size:.73rem}
+}

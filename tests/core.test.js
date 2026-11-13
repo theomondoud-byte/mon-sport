@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,renderRankingsView} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -132,17 +132,81 @@ test('ATP live : relier 150 rangs contrôlés et conserver les points officiels'
  assert.deepEqual(mergeATPLiveRows([{name:'Test'}],payload,new Date('2026-11-17T12:00:00Z')).rows,[{name:'Test'}]);
 });
 
-test('classement ATP présenté en colonnes sans panneau dépliable',()=>{
+test('classement ATP live : 150 lignes sans points officiels ESPN',()=>{
+ const now=new Date('2026-11-13T10:00:00Z');
+ const payload={source:'https://live-tennis.eu/fr/classement-atp-live',
+  fetchedAt:'2026-11-13T09:00:00Z',
+  rows:Array.from({length:150},(_,i)=>({
+   rank:i+1,name:'Joueur '+(i+1),livePoints:9350-i,age:29,country:'GER',
+   movement:i===0?2:null,pointsChange:i===0?-200:null,
+   tournament:i===0?'Finales ATP RR':'',
+   previousTournaments:i===1?'Défaite Stockholm 8e':'',
+   tournamentStatus:i===0?'en_lice':i===1?'defaite':'non_communique',
+   nextPoints:i===0?3215:null,maxPoints:i===0?3300:null,
+   careerHigh:i===0?'MC':'1'
+  }))};
+ const rows=parseATPLiveSnapshot(payload,now);
+ assert.equal(rows.length,150);
+ assert.equal(rows[0].rank,1);
+ assert.equal(rows[0].points,'9350');
+ assert.equal(rows[0].movement,2);
+ assert.equal(rows[0].tournamentStatus,'en_lice');
+ assert.equal(rows[1].tournamentStatus,'defaite');
+ assert.equal(rows[1].previousTournaments,'Défaite Stockholm 8e');
+ assert.equal(rows[0].careerHigh,'MC');
+ assert.equal(rows[0].nextPoints,3215);
+ assert.deepEqual(rankingRows('atp',{}),[]);
+ assert.equal(parseATPLiveSnapshot({...payload,rows:payload.rows.slice(0,149)},now),null);
+ assert.equal(parseATPLiveSnapshot(payload,new Date('2026-11-16T10:00:00Z')),null);
+});
+
+test('ATP affiché en colonnes : points live, mouvement de rang, perte dans le tournoi',()=>{
  const now=new Date();
  const html=renderRankingsView({selected:'atp',live:{atp:{
-  rows:[{rank:1,name:'Alexander Zverev',points:'9550',livePoints:9350,
-   pointsChange:-200,age:29,country:'GER',movementLive:0,tournament:'ATP Finals RR'}],
-  liveFeedAsOf:now.toISOString(),liveFeedMatched:150,live:true,asOf:now.toISOString()}},
-  favorites:[],esc:x=>String(x),safeUrl:x=>x});
- assert.match(html,/Officiels/);
- assert.match(html,/Tournoi en cours/);
- assert.match(html,/9350/);
- assert.match(html,/ATP Finals RR/);
+  rows:[{rank:11,name:'Taylor Fritz',points:'3150',livePoints:3150,
+   movement:-1,pointsChange:-135,careerHigh:'4',age:29,country:'USA',
+   previousTournaments:'',tournamentStatus:'en_lice',tournament:'Stockholm DF',
+   nextPoints:3215,maxPoints:3300},
+   {rank:18,name:'Casper Ruud',points:'2435',livePoints:2435,
+   movement:null,careerHigh:'2',country:'NOR',age:27,
+   tournament:'',previousTournaments:'Défaite Stockholm 8e',tournamentStatus:'defaite'}],
+  live:true,kind:'tennis-live',asOf:now.toISOString()}},favorites:[],
+  esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Pts live/);
+ assert.match(html,/Δ rang/);
+ assert.match(html,/Tournois précédents/);
+ assert.match(html,/Stockholm DF/);
+ assert.match(html,/3215/);
+ assert.match(html,/3300/);
+ assert.match(html,/Défaite Stockholm 8e/);
+ assert.match(html,/class="atp-status lost">Défaite/);
+ assert.match(html,/▼ 1/);
  assert.match(html,/rank-table-scroll/);
  assert.doesNotMatch(html,/<details class="rank-live-details"/);
+ assert.doesNotMatch(html,/Points officiels/);
+});
+
+test('les classements football continuent de s’afficher sans données ATP',()=>{
+ const html=renderRankingsView({selected:'ligue1',live:{ligue1:{
+  rows:[{rank:1,name:'PSG',points:'28',detail:'12 J · 9 V · 1 N · 2 D'}],
+  live:true,asOf:new Date().toISOString()}},
+  favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/PSG/);
+ assert.match(html,/9 V/);
+});
+
+test('récupération ATP sans requête au classement officiel ESPN',async()=>{
+ const payload={fetchedAt:new Date().toISOString(),
+  rows:Array.from({length:150},(_,i)=>({rank:i+1,name:'Joueur '+i,livePoints:5000-i}))};
+ const requested=[];
+ const fetchFn=async url=>{
+  requested.push(String(url));
+  const ok=String(url)==='./data/atp-live.json';
+  return {ok,status:ok?200:503,json:async()=>payload};
+ };
+ const data=await fetchRankings({fetchFn,force:true});
+ assert.equal(data.atp.rows.length,150);
+ assert.equal(data.atp.rows[0].points,'5000');
+ assert.ok(requested.includes('./data/atp-live.json'));
+ assert.ok(requested.every(url=>!url.includes('tennis/atp/rankings')));
 });

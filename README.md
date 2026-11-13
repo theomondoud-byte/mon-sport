@@ -1,3 +1,17 @@
+# V14.3 — Classement ATP 100 % live (13 novembre 2026)
+
+L'onglet **ATP live** affiche maintenant **uniquement le top 150 du relevé [live-tennis.eu en français](https://live-tennis.eu/fr/classement-atp-live)**. Le classement ATP hebdomadaire ESPN n'est plus utilisé pour remplir ce tableau et n'est pas affiché en colonne.
+
+Colonnes : rang live, meilleur classement (MC), joueur, âge, pays, points live, **variation de places**, **variation nette des points**, tournoi en cours, tournois précédents, **statut du résultat**, points après le prochain match gagné et maximum possible. Le tableau défile horizontalement sur mobile, avec les principales informations du joueur accessibles sur la gauche.
+
+Le statut **Défaite** est extrait d'une mention explicite de la colonne « Tournois précédents », jamais de la variation des points. **En lice / prévu** signifie qu'un tournoi en cours est cité, pas que la victoire ou la présence sur le court a été confirmée. **Non indiqué** signifie que la source ne permet pas de conclure. Les cas où les qualifications puis la défaite du tableau principal concernent la même compétition sont pris en compte. Il n'existe pas de date individuelle de match garantie dans ce flux : ne pas présenter les défaites comme datées exactement de cette semaine.
+
+Le relevé est contrôlé (150 rangs distincts, points cohérents) puis publié automatiquement toutes les six heures. Le tableau affiche l'horodatage de la copie ; après 36 heures sans données nouvelles, les informations ne sont plus qualifiées de live. En cas de panne réseau, seule une copie locale récente et explicitement marquée peut être proposée.
+
+Les classements WTA et des autres disciplines conservent leurs sources et leur comportement précédents. Tests Node et Python couvrent le classement, les variations, le statut des défaites, les projections et l'intégrité du top 150.
+
+---
+
 ## V14.2 — Tableau ATP live en colonnes
 
 - Navigation : `Semaine` devient **Résultats** ; `Un favori` devient **Favoris** ; l'ancien onglet de gestion `Favoris` devient **Gérer mes suivis**.

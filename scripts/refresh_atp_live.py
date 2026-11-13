@@ -14,7 +14,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-SOURCE="https://live-tennis.eu/en/atp-live-ranking"
+SOURCE="https://live-tennis.eu/fr/classement-atp-live"
 DEST=Path("data/atp-live.json")
 HEADERS={"User-Agent":"Mozilla/5.0 (compatible; MonSport/14.1; personal sports dashboard)"}
 
@@ -24,6 +24,26 @@ def txt(el):
 def integer(value):
     value=str(value or "").replace("\u00a0","").replace(",","").replace(" ","").replace("−","-")
     return int(value) if re.fullmatch(r"[-+]?\d+",value) else None
+
+def tournament_status(current, previous):
+    """Statut fondé sur une défaite explicitement publiée par la source.
+
+    Une victoire en qualification ne signifie pas qu'un joueur est toujours en lice
+    s'il a ensuite perdu dans le tableau principal du même tournoi.
+    """
+    loss=bool(re.search(r"\b(?:défaite|perdu|éliminé|lost(?: in)?)\b", previous, re.I))
+    if not current:
+        return "defaite" if loss else "non_communique"
+    if not loss:
+        return "en_lice"
+    def names(text):
+        letters=unicodedata.normalize("NFKD",text.lower())
+        clean="".join(c for c in letters if not unicodedata.combining(c))
+        stop={"defaite","perdu","elimine","lost","qualif","finale","finales",
+              "finals","tournoi","round","victory","victoire"}
+        return {w for w in re.findall(r"[a-z]{4,}",clean) if w not in stop}
+    # Le lieu commun est un signal explicite du même tournoi, pas une déduction des points.
+    return "defaite" if names(current)&names(previous) else "en_lice"
 
 def parse(html, debug=False):
     soup=BeautifulSoup(html,"html.parser")
@@ -42,7 +62,10 @@ def parse(html, debug=False):
         live_points=integer(txt(cells[6]))
         movement=integer(txt(cells[7]))
         points_change=integer(txt(cells[8]))
-        tournament=txt(cells[9])[:120] if len(cells)>9 else ""
+        tournament=txt(cells[9])[:160] if len(cells)>9 else ""
+        previous_tournaments=txt(cells[10])[:240] if len(cells)>10 else ""
+        career_high=txt(cells[1])[:35] if len(cells)>1 else ""
+        status=tournament_status(tournament,previous_tournaments)
         next_points=integer(txt(cells[11])) if len(cells)>11 else None
         max_points=integer(txt(cells[12])) if len(cells)>12 else None
         if rank is None or not name or live_points is None or rank<1 or rank>150:
@@ -51,8 +74,9 @@ def parse(html, debug=False):
             raise RuntimeError("Projection incohérente pour "+name)
         row={"rank":rank,"name":name,"livePoints":live_points,
             "movement":movement,"pointsChange":points_change,
-            "age":age,"country":country,"tournament":tournament,
-            "nextPoints":next_points,"maxPoints":max_points}
+            "age":age,"country":country,"careerHigh":career_high,
+            "tournament":tournament,"previousTournaments":previous_tournaments,
+            "tournamentStatus":status,"nextPoints":next_points,"maxPoints":max_points}
         if debug and len(rows)<2: print("EXTRACTED_ROW",row)
         rows.append(row)
     rows=sorted({r["rank"]:r for r in rows}.values(),key=lambda r:r["rank"])
@@ -73,6 +97,8 @@ def main():
     response.raise_for_status()
     rows=parse(response.content.decode('utf-8',errors='replace'),debug=ns.debug)
     print("PARSED",len(rows),"TOP",rows[:2])
+    losses=[(r["name"],r["previousTournaments"]) for r in rows if r["tournamentStatus"]=="defaite"]
+    print("DEFAITES_DETECTEES",len(losses),"EXEMPLES",losses[:3])
     print("PROJECTIONS",sum(r["nextPoints"] is not None for r in rows),
           "MAX",sum(r["maxPoints"] is not None for r in rows))
     # Diagnostiquer la concordance réelle avec les joueurs du classement ESPN.
