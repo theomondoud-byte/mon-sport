@@ -889,3 +889,21 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 }
 
 .news-fulltext{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;color:var(--text,#e8eef5);background:rgba(8,20,34,.48);border:1px solid rgba(150,190,210,.2);border-radius:12px;padding:14px;margin-top:12px;max-height:70vh;overflow:auto;font-size:.92rem}.news-read-inline{margin-top:8px}.news-tap{display:inline-block;margin:10px 0 0 12px}.news-source-filters{display:flex;flex-wrap:wrap;gap:8px}.news-filter-block{margin:12px 0}.news-filter-label{display:block;margin-bottom:8px;font-size:.8rem;font-weight:800}
+
+
+/* V16.0 — cartes d'actualité et lecture intégrée plus lisibles. */
+.news-link-card{display:grid;grid-template-columns:minmax(112px,26%) minmax(0,1fr);align-items:stretch;gap:0;min-width:0}
+.news-link-card>.article-visual{display:block;position:relative;min-height:150px;max-height:220px;overflow:hidden;background:#10283b}
+.news-link-card .article-thumb-image{display:block;width:100%;height:100%;min-height:150px;max-height:220px;object-fit:cover}
+.news-link-card .news-text{padding:14px 16px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.news-link-card .news-card-top{width:100%;gap:8px}
+.news-link-card h3{font-size:1rem;line-height:1.35;margin:2px 0;color:#f3fbff;overflow-wrap:anywhere}
+.news-link-card .news-excerpt{font-size:.84rem;line-height:1.5;color:#c8dce8;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-link-card .news-source{font-size:.72rem;color:#9fbfce;margin:0}
+.news-link-card .news-read-inline{margin:2px 0 0;min-height:38px;padding:7px 12px}
+.news-link-card .news-tap{margin:0;font-size:.74rem}
+.news-fulltext{grid-column:1/-1;width:100%;box-sizing:border-box;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75;color:#e8f3fa;background:#0b2030;border:1px solid #34566a;border-radius:12px;padding:clamp(14px,2.5vw,22px);margin:8px 0 0;max-height:68vh;overflow:auto;font-size:.94rem}
+.news-reader-note{font-size:.75rem;color:#a9c5d3;margin:12px 0 0;border-top:1px solid #34566a;padding-top:8px}
+.news-link-card .news-sport{display:inline-flex;align-items:center;gap:5px;background:#24546a;color:#e6f7ff;border-radius:999px;padding:5px 9px;font-size:.72rem;font-weight:750}
+.news-link-card .news-date{color:#b8cedb;font-variant-numeric:tabular-nums}
+@media(max-width:600px){.news-link-card{grid-template-columns:1fr}.news-link-card>.article-visual{min-height:0;height:176px;max-height:176px}.news-link-card .article-thumb-image{min-height:0;height:176px;max-height:176px;object-fit:cover}.news-link-card .news-text{padding:12px;gap:8px}.news-link-card h3{font-size:.96rem}.news-link-card .news-excerpt{-webkit-line-clamp:4}.news-fulltext{font-size:.88rem;line-height:1.7;padding:13px;max-height:65vh}}
