@@ -1,3 +1,30 @@
+# Mon Sport V14.8 — colonnes alignées et statistiques complètes des favoris
+
+## Affichage des classements
+
+- Les **classements ATP et WTA** présentent à nouveau le **meilleur classement (MC)** dans une colonne séparée du **joueur**. Les classements Race ATP/WTA et Next Gen ne créent pas de MC fictif lorsque la source ne le donne pas.
+- **Un joueur par ligne** : noms affichés sans retour à la ligne, avec points de suspension si l'écran est trop étroit. Le nom complet reste accessible par l'infobulle et le libellé accessible.
+- **Colonnes centrées** : les en-têtes et données sont alignés au centre, y compris les rangs, points, variations, tournois, buts, statistiques NBA et WTT. Le rang, le MC (lorsqu'il existe) et le nom restent visibles lors du défilement horizontal.
+- Les tableaux conservent leur format compact pour téléphone et le défilement horizontal plutôt que de masquer des chiffres importants.
+
+## Onglet Favoris → Stats
+
+Chaque favori reprend **les statistiques détaillées des classements auxquels il est lié**, directement depuis la même donnée chargée que l'onglet Classements :
+
+- **ATP, WTA, Race, Next Gen** : rang, MC lorsque disponible, âge, nationalité, points live, évolution de rang et de points, tournois en cours/précédent, statut de tournoi et projections « prochain / maximum » uniquement lorsqu'elles sont transmises.
+- **Football (Ligue 1, Liga, Champions League)** : rang, points, matchs joués, victoires/nuls/défaites, buts marqués/encaissés, différence de buts et variation du rang.
+- **NBA Ouest** : rang, victoires/défaites, pourcentage, retard au leader, série, dix derniers matchs, bilans domicile/extérieur et moyennes de points.
+- **Tennis de table ITTF** : rang, pays, points, évolution hebdomadaire et semaine du relevé.
+- La **source**, la **date de récupération** et les éventuels problèmes d'actualisation sont visibles pour chaque classement, avec un lien vers son tableau complet.
+- Les classements de **Real Madrid associés à Mbappé**, et ceux des **San Antonio Spurs associés à Wembanyama**, sont clairement indiqués comme **classements d'équipe**, pas comme statistiques individuelles.
+- Les favoris personnalisés sont aussi reconnus lorsqu'ils apparaissent dans un classement déjà chargé, y compris WTT femmes. En l'absence de données, un message explicite remplace tout chiffre inventé.
+
+## Déploiement et vérifications
+
+Le module Stats et le module Agenda utilisent les importations actualisées, avec renouvellement du cache PWA V14.8. Les tests Node couvrent les correspondances, les tableaux centrés dans le DOM et les relevés des classements par sport ; les tests Python de collecte restent conservés. Les vérifications de syntaxe et les tests GitHub Actions passent avant la fusion.
+
+---
+
 # Mon Sport V14.7 — tableaux multi-sports et densité mobile
 
 ## Tennis : davantage de colonnes visibles sur téléphone
