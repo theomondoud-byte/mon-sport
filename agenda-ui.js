@@ -25,6 +25,8 @@ function verdictChip(item,name,esc){
  return '<span class="agenda-verdict '+className+'" aria-label="'+esc(result==='V'?'Victoire':result==='D'?'Défaite':'Match nul')+'">'+result+'</span>';
 }
 function eventHtml(item,esc,safeUrl,photos,chosen){
+ const kind=String(item.type||item.sport||item.competition||'').toLowerCase();
+ const icon=/table|wtt|ping.pong/.test(kind)?'🏓':/tennis|atp|wta/.test(kind)?'🎾':/basket|nba/.test(kind)?'🏀':/rugby/.test(kind)?'🏉':/cyclis|vélo/.test(kind)?'🚴':/natation/.test(kind)?'🏊':'⚽';
  const isFuture=!item.finished;
  const state=item.pendingResult?'À vérifier':item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
  const people=item.favorites.map(name=>
@@ -47,7 +49,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen){
    +'<summary class="agenda-event-clickable">'
    +'<div class="agenda-event-top"><div class="agenda-people">'+people+'</div>'
    +(item.finished?'':'<span class="agenda-status '+(item.pendingResult?'pending':item.live?'live':'upcoming')+'">'+esc(state)+'</span>')+'</div>'
-   +'<h3>'+esc(item.title)+'</h3>'
+   +'<h3><span aria-hidden="true">'+icon+'</span> '+esc(item.title)+'</h3>'
    +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong>'+(timing?'<span>'+esc(timing)+'</span>':'')+'</div>'
    +'<div class="agenda-detail">'+esc([item.competition,item.round].filter(Boolean).join(' · '))+'</div>'
    +'<div class="agenda-open-hint"><span>'+(item.pendingResult?'Voir la source':item.isCompetition?'Voir le programme':'Résumé')+'</span><span aria-hidden="true">⌄</span></div>'
