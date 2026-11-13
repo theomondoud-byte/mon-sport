@@ -46,8 +46,8 @@ self.addEventListener('activate', event => {
   })());
 });
 
-// Réseau d'abord, y compris pour index.html et src.js.
-// Le cache reste disponible pour la consultation hors ligne.
+// Réseau d'abord pour le document et les relevés ; cache d'abord pour les scripts
+// et styles versionnés de la PWA. Les pages ouvertes ne sont jamais rechargées.
 self.addEventListener('fetch', event => {
   const request = event.request;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
