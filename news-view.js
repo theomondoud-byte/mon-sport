@@ -92,10 +92,13 @@ function videoCandidates(value){
  }catch{}
  return [...new Set(candidates)];
 }
+const HTML_ENTITIES={"eacute":"é","egrave":"è","ecirc":"ê","euml":"ë","agrave":"à","acirc":"â","auml":"ä","ccedil":"ç","ocirc":"ô","oelig":"œ","ugrave":"ù","ucirc":"û","uuml":"ü","iuml":"ï","icirc":"î","yuml":"ÿ","Eacute":"É","Egrave":"È","Ecirc":"Ê","Euml":"Ë","Agrave":"À","Acirc":"Â","Auml":"Ä","Ccedil":"Ç","Ocirc":"Ô","Oelig":"Œ","Ugrave":"Ù","Ucirc":"Û","Uuml":"Ü","Iuml":"Ï","Icirc":"Î","Yuml":"Ÿ","nbsp":" ","rsquo":"’","lsquo":"‘","rdquo":"”","ldquo":"“","ndash":"–","mdash":"—","hellip":"…","euro":"€","apos":"'","quot":"\"","amp":"&","lt":"<","gt":">"};
 export function safeExcerpt(value){
- return String(value||'').replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;/gi,' ')
-  .replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'")
-  .replace(/\s+/g,' ').trim().slice(0,600);
+ return String(value||'').replace(/<[^>]*>/g,' ')
+  .replace(/&#(\\d+);/g,(_,n)=>String.fromCodePoint(+n))
+  .replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16)))
+  .replace(/&([a-z]+);/gi,(all,name)=>HTML_ENTITIES[name]??all)
+  .replace(/\\s+/g,' ').trim().slice(0,600);
 }
 export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[]}={}){
  const recentAll=newsLastWeek(news,now);
