@@ -7,6 +7,7 @@ on:
       - 'scripts/refresh_tennis_live.py'
       - 'scripts/refresh_wtt.py'
       - 'scripts/refresh_jeu_set_maths.py'
+      - 'scripts/build_jeu_set_maths_bundle.py'
       - '.github/workflows/atp-live.yml'
   workflow_dispatch:
   schedule:
@@ -39,13 +40,15 @@ jobs:
       - name: Collecter les posts Jeu, set et maths
         run: python scripts/refresh_jeu_set_maths.py
         continue-on-error: true
+      - name: Générer le module de secours pour l'application Android
+        run: python scripts/build_jeu_set_maths_bundle.py
       - name: Conserver le dernier relevé sur main
         if: github.ref == 'refs/heads/main'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/atp-live.json data/wta-live.json data/atprace-live.json data/wtarace-live.json data/nextgen-live.json
-          for file in data/wtt-men.json data/wtt-women.json data/jeu-set-et-maths.json; do
+          for file in data/wtt-men.json data/wtt-women.json data/jeu-set-et-maths.json data/jeu-set-et-maths-bundle.js; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
