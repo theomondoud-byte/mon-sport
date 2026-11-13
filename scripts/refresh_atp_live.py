@@ -29,7 +29,7 @@ def parse(html, debug=False):
     table=soup.select_one("tbody.flags")
     if table is None:
         tables=soup.select("table")
-        if debug: print("TABLES",len(tables),[(t.get("class"),len(t.select("tr"))) for t in tables[:6]])
+        if debug: print("TABLES",len(tables),[(i,t.get("class"),t.get("id"),len(t.select("tr")),txt(t)[:110]) for i,t in enumerate(tables)])
         table=next((t for t in tables if t.select_one("td.t-name")),None)
     if table is None: raise RuntimeError("tableau HTML introuvable")
     rows=[]
