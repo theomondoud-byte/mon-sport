@@ -172,7 +172,7 @@ test('ATP compact : points live, mouvement de rang et défaite dans la colonne p
    tournament:'',previousTournaments:'Défaite Stockholm 8e',tournamentStatus:'defaite'}],
   live:true,kind:'tennis-live',asOf:now.toISOString()}},favorites:[],
   esc:x=>String(x),safeUrl:x=>x});
- assert.match(html,/Pts live/);
+ assert.match(html,/<span>Pts<\/span>/);
  assert.match(html,/Δ rang/);
  assert.match(html,/Tournoi précédent/);
  assert.doesNotMatch(html,/<span>Résultat<\/span>/);
@@ -319,8 +319,8 @@ test('les cinq classements tennis utilisent un fichier top 150 live distinct, sa
   assert.ok(html.indexOf('option value="FRA"')<html.indexOf('option value="ESP"'));
   assert.doesNotMatch(html,/Tournois · 14 j/);
   assert.doesNotMatch(html,/Points officiels/);
-  if(['atp','wta'].includes(id))assert.match(html,/<span>MC<\/span>/);
-  else assert.doesNotMatch(html,/<span>MC<\/span>/);
+  if(['atp','wta'].includes(id))assert.match(html,/<span class="rank-career">MC<\/span>/);
+  else assert.doesNotMatch(html,/<span class="rank-career">MC<\/span>/);
  }
  assert.ok(!calls.some(url=>url.includes('tennis/wta/rankings')));
 });
@@ -334,7 +334,7 @@ test('classement Race : tournois précédents et absence de MC fictif',()=>{
  assert.match(html,/Défaite Monastir 1 8e/);
  assert.match(html,/race-no-career/);
  assert.match(html,/class="rank-data rank-tournament tourney-previous is-loss"/);
- assert.doesNotMatch(html,/<span>MC<\/span>/);
+ assert.doesNotMatch(html,/<span class="rank-career">MC<\/span>/);
 });
 
 test('les résultats sont intégrés aux deux colonnes de tournois',()=>{
