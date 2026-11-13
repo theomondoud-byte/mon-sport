@@ -36,7 +36,7 @@ jobs:
         run: python scripts/refresh_wtt.py
         continue-on-error: true
       - name: Conserver le dernier relevé sur main
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/v14-7-sports-rankings-responsive'
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
