@@ -1,14 +1,14 @@
-// Mon Sport V14.4 · ATP uniquement live-tennis.eu (top 150), WTA ESPN et classements des équipes.
-// WTA, Race, Next Gen et WTT restent des relevés publiés, non live.
+// Mon Sport V14.5 · Cinq classements de tennis live FR (top 150), autres sports inchangés.
+// Tennis de table WTT : relevé daté, distinct du tennis ATP/WTA.
 // Football/NBA : accès direct aux tableaux ESPN, en cache pour 20 min.
 const ESPN='https://site.api.espn.com/apis/v2/sports/';
 export const RANKING_DATE='2026-11-09';
 export const RANKINGS=[
- {id:'atp',title:'ATP live',sport:'Tennis',url:'https://live-tennis.eu/fr/classement-atp-live',source:'Live Tennis',mode:'tennis-live',tour:'atp'},
- {id:'wta',title:'WTA',sport:'Tennis',url:'https://www.wtatennis.com/rankings/singles',source:'ESPN · classement WTA publié',mode:'tennis-espn',tour:'wta'},
- {id:'atprace',title:'Race ATP',sport:'Tennis',url:'https://www.atptour.com/en/rankings/singles-race-to-turin',source:'ATP · Race Turin',mode:'snapshot'},
- {id:'wtarace',title:'Race WTA',sport:'Tennis',url:'https://www.wtatennis.com/rankings/race-singles',source:'WTA · Race Finals',mode:'snapshot'},
- {id:'nextgen',title:'Next Gen',sport:'Tennis',url:'https://www.atptour.com/en/rankings/next-gen-race',source:'ATP · Next Gen',mode:'snapshot'},
+ {id:'atp',title:'ATP live',sport:'Tennis',url:'https://live-tennis.eu/fr/classement-atp-live',source:'Live Tennis',mode:'tennis-live',file:'atp-live.json'},
+ {id:'wta',title:'WTA live',sport:'Tennis',url:'https://live-tennis.eu/fr/classement-wta-live',source:'Live Tennis',mode:'tennis-live',file:'wta-live.json'},
+ {id:'atprace',title:'Race ATP live',sport:'Tennis',url:'https://live-tennis.eu/fr/classement-atp-race',source:'Live Tennis',mode:'tennis-live',file:'atprace-live.json'},
+ {id:'wtarace',title:'Race WTA live',sport:'Tennis',url:'https://live-tennis.eu/fr/classement-wta-race',source:'Live Tennis',mode:'tennis-live',file:'wtarace-live.json'},
+ {id:'nextgen',title:'Next Gen live',sport:'Tennis',url:'https://live-tennis.eu/fr/classement-atp-race-next-gen',source:'Live Tennis',mode:'tennis-live',file:'nextgen-live.json'},
  {id:'ligue1',title:'Ligue 1',sport:'Football',url:'https://www.espn.com/soccer/standings/_/league/fra.1',source:'ESPN',mode:'espn',path:'soccer/fra.1'},
  {id:'liga',title:'Liga',sport:'Football',url:'https://www.espn.com/soccer/standings/_/league/esp.1',source:'ESPN',mode:'espn',path:'soccer/esp.1'},
  {id:'ucl',title:'Ligue des champions',sport:'Football',url:'https://www.uefa.com/uefachampionsleague/standings/',source:'ESPN · UEFA',mode:'espn',path:'soccer/uefa.champions'},
@@ -16,29 +16,13 @@ export const RANKINGS=[
  {id:'nbaouest',title:'NBA Ouest',sport:'Basketball',url:'https://www.nba.com/standings',source:'ESPN · NBA',mode:'espn',path:'basketball/nba',west:true}
 ];
 const fromTuple=(list)=>list.map(([name,rank,points])=>({name,rank,points:points==null?'':String(points)}));
-const ATPRACE=fromTuple([
- ['Alexander Zverev',1,9350],['Jannik Sinner',2,7950],['Carlos Alcaraz',3,6100],
- ['Ben Shelton',4,5170],['Daniil Medvedev',5,3820],['Flavio Cobolli',6,3670],
- ['Arthur Fils',7,3625],['Frances Tiafoe',8,3390],['Rafael Jódar',9,3234],['Alex de Minaur',10,3170]
-]);
-const NEXTGEN=fromTuple([
- ['Rafael Jódar',1,3234],['João Fonseca',2,1200],['Martin Landaluce',3,822],
- ['Moïse Kouamé',4,419],['Federico Cinà',5,415],['Rei Sakamoto',6,405],
- ['Darwin Blanch',7,380],['Jan Kumstat',8,341],['Joel Schwaerzler',9,334],
- ['Felix Balshaw',10,322],['Nicolai Budkov Kjaer',11,321]
-]);
-const WTA=fromTuple([
- ['Elena Rybakina',1,8099],['Aryna Sabalenka',2,6485],['Mirra Andreeva',3,6306],
- ['Coco Gauff',4,5763],['Jessica Pegula',5,5760],['Elina Svitolina',6,5121],
- ['Karolína Muchová',7,4665],['Linda Nosková',8,4343]
-]);
 const WTT=fromTuple([
  ['Sora Matsushima',1,7598],['Tomokazu Harimoto',2,6963],['Félix Lebrun',3,6859],
  ['Wang Chuqin',4,6297],['Lin Yun-Ju',5,5870],['Truls Möregårdh',6,5630],
  ['Hugo Calderano',7,4830],['Jang Woojin',8,4236],['Alexis Lebrun',9,3750],
  ['Lin Shidong',10,3686],['Flavien Coton',23,1864]
 ]);
-export const SNAPSHOTS={atprace:ATPRACE,wtarace:WTA,nextgen:NEXTGEN,wtt:WTT};
+export const SNAPSHOTS={wtt:WTT};
 const TENNIS_API='https://site.api.espn.com/apis/site/v2/sports/tennis/';
 const cache=new Map();
 // Le classement consulté peut être relu hors connexion, toujours accompagné de sa date.
@@ -181,31 +165,31 @@ export async function fetchRankings({fetchFn=fetch,force=false}={}){
     :{rows:[],error:'Classement indisponible depuis ESPN.',live:false};
   }
  }));
- // ATP : seule la source live française est affichée, sans fusion avec un classement officiel.
- const cached=cache.get('atp');
- if(!force&&cached&&Date.now()-cached.at<20*60000){
-  result.atp=cached.result;
- }else{
+ // Les cinq tableaux tennis proviennent directement des relevés live français.
+ await Promise.all(RANKINGS.filter(spec=>spec.mode==='tennis-live').map(async spec=>{
+  const saved=cache.get(spec.id);
+  if(!force&&saved&&Date.now()-saved.at<20*60000){result[spec.id]=saved.result;return;}
   try{
-   const response=await fetchFn('./data/atp-live.json',{cache:'no-store',signal:AbortSignal.timeout(7000)});
-   if(!response.ok)throw Error('Relevé ATP live HTTP '+response.status);
+   const response=await fetchFn('./data/'+spec.file,{cache:'no-store',signal:AbortSignal.timeout(7000)});
+   if(!response.ok)throw Error('Relevé '+spec.id+' HTTP '+response.status);
    const payload=await response.json();
    const rows=parseATPLiveSnapshot(payload);
-   if(!rows)throw Error('Relevé ATP live invalide ou trop ancien');
+   if(!rows)throw Error('Relevé '+spec.id+' incomplet ou périmé');
    const value={rows,asOf:payload.fetchedAt,live:true,kind:'tennis-live',source:payload.source};
-   cache.set('atp',{result:value,at:Date.now()});
-   storeRanking('atp',value);result.atp=value;
+   cache.set(spec.id,{result:value,at:Date.now()});
+   storeRanking(spec.id,value);result[spec.id]=value;
   }catch{
-   const saved=savedRanking('atp');
-   const fresh=saved?.kind==='tennis-live'&&Number.isFinite(Date.parse(saved.asOf))&&
-    Date.now()-Date.parse(saved.asOf)<=36*3600000&&Date.now()>=Date.parse(saved.asOf);
-   result.atp=fresh?{...saved,live:false,stale:true,error:'Dernier relevé ATP live disponible sur cet appareil'}
-    :{rows:[],live:false,kind:'tennis-live',error:'Classement ATP live indisponible'};
+   const saved=savedRanking(spec.id);
+   const age=saved?.asOf?Date.now()-Date.parse(saved.asOf):Infinity;
+   const fresh=saved?.kind==='tennis-live'&&age>=0&&age<=36*3600000;
+   result[spec.id]=fresh?{...saved,live:false,stale:true,error:'Dernier relevé enregistré localement'}
+    :{rows:[],live:false,kind:'tennis-live',error:'Classement '+spec.id+' live indisponible'};
   }
- }
+ }));
+
  return result;
 }
-// Relevé indépendant et daté : la liste hebdomadaire ESPN reste la référence.
+// Compatibilité avec les vues historiques ; les cinq tableaux actuels sont entièrement live.
 export function mergeATPLiveRows(officialRows,payload,now=new Date()){
  const asOf=Date.parse(payload?.fetchedAt||''),age=now.getTime()-asOf;
  if(!Number.isFinite(asOf)||age<0||age>36*3600000||!Array.isArray(payload?.rows)||payload.rows.length<140)
@@ -227,7 +211,7 @@ export function mergeATPLiveRows(officialRows,payload,now=new Date()){
  });
  return {rows,asOf:payload.fetchedAt,matched};
 }
-// Le fichier collecté est un instantané du seul classement ATP live (jamais ESPN).
+// Schéma commun aux cinq classements live (jamais de rangs inventés ou de données ESPN).
 export function parseATPLiveSnapshot(payload,now=new Date()){
  const at=Date.parse(payload?.fetchedAt||''),age=now.getTime()-at;
  if(!Number.isFinite(at)||age<0||age>36*3600000||!Array.isArray(payload?.rows)||payload.rows.length!==150)
