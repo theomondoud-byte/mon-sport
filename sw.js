@@ -1,5 +1,5 @@
-// V14 : classements et flux d'articles sportifs, nouveaux modules en précache.
-const CACHE = 'mon-sport-v15-4';
+// V15.5 : données d'articles incluses au cache PWA pour la lecture Android hors ligne.
+const CACHE = 'mon-sport-v15-5';
 const ASSETS = [
   './',
   './index.html',
@@ -25,6 +25,7 @@ const ASSETS = [
   './rankings-view.js?v=14.9.0',
   './sports-articles.js?v=15.4.0',
   './sports-media.js?v=14.0.0',
+  './data/jeu-set-et-maths.json', // Dernier relevé vérifié : disponible hors connexion sur Android.
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png'
