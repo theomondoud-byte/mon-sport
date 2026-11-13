@@ -1,7 +1,7 @@
 name: Tests Mon Sport
 on:
   push:
-    branches: [main, 'feat/**', 'fix/**']
+    branches: [main, 'feat/**']
   pull_request:
     branches: [main]
 permissions:
@@ -25,16 +25,3 @@ jobs:
         run: python -m pip install requests beautifulsoup4
       - name: Tests du collecteur ATP live
         run: python -m unittest discover -s tests -p '*_py_test.py'
-      - name: Diagnostic lignes et medias Jeu Set Maths (temporaire)
-        run: |
-          python - <<'PY'
-          import requests
-          from bs4 import BeautifulSoup
-          r=requests.get('https://teapawt.org/JeuSetMaths',timeout=16,headers={'User-Agent':'Mozilla/5.0'})
-          soup=BeautifulSoup(r.text,'html.parser')
-          for item in soup.select('.timeline-item[data-username=JeuSetMaths]')[:4]:
-            node=item.select_one('.tweet-content')
-            print('JSM_DIAG',str(item.select_one('a.tweet-link').get('href')),'breaks',len(node.select('br')),'paragraphs',len(node.select('p')),'blocks',len(node.select('div')))
-            print('JSM_HTML',str(node)[:2600].replace('\\n','\\n'))
-            print('JSM_TEXT_SPACES',repr(node.get_text(' ',strip=True))[:1000])
-          PY
