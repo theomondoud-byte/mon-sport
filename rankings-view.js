@@ -275,7 +275,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
  const saved=live[spec.id];
  const asOf=saved?.asOf?new Date(saved.asOf).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
  const label=spec.mode==='snapshot'?'Relevé du 9 novembre 2026 · pas en direct'
-  :saved?.stale?'Copie enregistrée le '+asOf+' · peut être périmée'
+  :saved?.stale?'Dernier relevé ATP live sauvegardé le '+asOf+' · accès réseau indisponible'
   :saved?.live?(atpLive?'Relevé ATP live du '+asOf+' · actualisation périodique':spec.mode==='tennis-espn'?'Classement WTA ESPN consulté le '+asOf+' · non live':'Classement ESPN consulté le '+asOf)
   :'Classement non disponible depuis la source';
  const nav='<div class="rank-tabs" role="group" aria-label="Types de classements">'+RANKINGS.map(r=>
@@ -372,10 +372,11 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    ?'<p class="rank-horizontal-hint">↔ Fais défiler le tableau vers la droite pour voir les projections.</p><div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : défilement horizontal"><div class="rank-table tennis-rank-table"><div class="rank-table-head tennis-rank-row"><span>Rang</span><span>Joueur · variation</span><span>Officiels</span><span>Live</span><span>Δ pts</span><span>Tournoi en cours</span><span>Prochain</span><span>Maximum</span></div>'+cards+'</div></div>'
    :'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>')
   :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
-  +(spec.id==='atp'?'<p class="agenda-footnote">'
-    +(saved?.liveFeedAsOf?'Complément ATP live relevé le '+esc(new Date(saved.liveFeedAsOf).toLocaleString('fr-FR'))+' · '+esc(saved.liveFeedMatched)+' joueurs rapprochés. '
-     :'Relevé ATP live indisponible : seules les données officielles sont affichées. ')
-    +'Δ pts = variation nette des points (gains et retraits), pas uniquement les points gagnés dans le tournoi. Prochain et Maximum sont renseignés seulement lorsqu’une projection existe. '
-    +'<a href="https://live-tennis.eu/en/atp-live-ranking" target="_blank" rel="noopener noreferrer">Source ATP live ↗</a>.</p>':'')
-  +'<p class="agenda-footnote">ATP/WTA : top 150 officiel ESPN ; les colonnes WTA de projections ne sont pas encore alimentées. Race/Next Gen/WTT : instantanés partiels. Football : J, V, N, D, BP et BC selon ESPN.</p></section>';
+  +(atpLive?'<p class="agenda-footnote">ATP live : relevé du '+esc(asOf||'non communiqué')
+    +' · classement uniquement live-tennis.eu, pas de points officiels ajoutés. '
+    +'Δ rang = variation depuis le dernier classement officiel ; Δ pts = variation nette des points. '
+    +'La mention Défaite vient de la source, dans les tournois déjà disputés. En lice / prévu signifie que le tournoi figure dans la colonne en cours ; aucun résultat n’est supposé. '
+    +'Suiv. et Max ne sont affichés que si le fournisseur les publie. '
+    +'<a href="https://live-tennis.eu/fr/classement-atp-live" target="_blank" rel="noopener noreferrer">Consulter le classement ATP live original ↗</a>.</p>':'')
+  +'<p class="agenda-footnote">WTA : top 150 publié depuis ESPN, projections live non intégrées. Race/Next Gen/WTT : instantanés partiels. Football : J, V, N, D, BP et BC selon ESPN.</p></section>';
 }
