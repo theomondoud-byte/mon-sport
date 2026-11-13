@@ -20,13 +20,15 @@ def diagnose():
   soup=BeautifulSoup(response.content,'html.parser')
   tables=[(t.get('id'),len(t.select('tr'))) for t in soup.select('table')]
   print("TABLES",key,tables[:20],flush=True)
-  table=next((t for t in soup.select('table') if len(t.select('tr'))>12),None)
+  table=soup.select_one('table#t900') or soup.select_one('table#u868')
   if table:
-   for tr in table.select('tr')[:7]:
+   examples=0
+   for tr in table.select('tr'):
     cells=tr.find_all('td',recursive=False)
     if cells:
      print("ROW",key,[(i,td.get('class'),' '.join(td.stripped_strings)[:70]) for i,td in enumerate(cells[:14])],flush=True)
-     break
+     examples+=1
+     if examples>=3: break
 
 if __name__=="__main__":
  parser=argparse.ArgumentParser()
