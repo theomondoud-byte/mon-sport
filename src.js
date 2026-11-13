@@ -487,10 +487,11 @@ function render(){
   +'<header class="app-header app-header-v11"><h1>⚡ Mon Sport</h1>'
   +'<div class="header-actions"><span class="header-count">'+favorites.length+' favoris</span>'
   +'<button id="refresh" class="button refresh-btn" '+(loading?'disabled':'')+' aria-label="Actualiser les résultats">'+(loading?'…':'↻')+'</button></div></header>'
+  +(!navigator.onLine?'<div class="connection-notice" role="status">📴 Hors connexion : données conservées disponibles, actualisation suspendue.</div>':'')
   +'<nav class="tabs" aria-label="Navigation principale">'+tabs.map(([id,label])=>
     '<button type="button" data-tab="'+id+'" aria-current="'+(id===active?'page':'false')+'" class="'+(id===active?'active':'')+'">'+label+'</button>').join('')+'</nav>'
   +'<div id="content">'+content()+'</div>'
-  +'<footer class="muted app-footer">Mon Sport V13 · Classements et articles</footer></main>';
+  +'<footer class="muted app-footer">Mon Sport V14 · Fiabilité et accessibilité</footer></main>';
  document.querySelectorAll('[data-tab]').forEach(el=>el.onclick=()=>{
   active=el.dataset.tab;search='';sportFilter='Tous';render();
   if(active==='favori'&&favoritePhase!=='stats')loadAgendaExpanded();
@@ -506,7 +507,7 @@ if(active==='resultats')return `${latestKouameHtml()}${latestSinnerHtml()}<secti
 if(active==='bilan')return renderAudit2026({favorites,historyResults,yearAudit,yearLoading,yearMessage,auditSelected,esc,safeUrl,date});
 if(active==='actualites')return newsHtml();
 if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</h2><form id="addform"><input name="name" placeholder="Nom de l'équipe ou du sportif" maxlength="100" required/><select name="sport">${['Football','Tennis','Rugby','Basketball','Cyclisme','Natation','Tennis de table','Autre'].map(s=>`<option>${s}</option>`).join('')}</select><select name="type"><option value="sportif">Sportif</option><option value="équipe">Équipe</option></select><input name="apiName" placeholder="Nom API (facultatif)" maxlength="100"/><button class="button" type="submit">Ajouter aux favoris</button></form></section><section class="panel"><h2>⭐ Mes favoris (${favorites.length})</h2><select id="sportFilter">${sports.map(s=>`<option ${sportFilter===s?'selected':''}>${esc(s)}</option>`).join('')}</select><input class="search" id="search" value="${esc(search)}" placeholder="Rechercher un favori"/><div id="favoriteList">${favoriteRows()}</div></section>`;
-return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version V13. Classements et articles. Favoris conservés.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
+return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version V14. Fiabilité des données et tests automatiques. Favoris conservés.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
 function favoriteRows(){
  return filtered().map(f=>{
   const img=photoMap[f.name]?.src;
@@ -663,6 +664,7 @@ function bindRemove(){document.querySelectorAll('[data-remove]').forEach(e=>e.on
 async function request(path,params){const u=new URL(workerUrl+path);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));const response=await fetch(u,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('HTTP '+response.status);return response.json()}
 async function refresh(){
  if(loading)return;
+ if(!navigator.onLine){errors=['Hors connexion : les dernières données disponibles restent affichées.'];render();return;}
  loading=true;errors=[];scoreNotes=[];individualNotes=[];render();
  try{
   const articles=workerUrl?favorites.slice(0,22):[];
@@ -715,3 +717,7 @@ if('serviceWorker' in navigator){
   });
  }).catch(()=>{});
 }
+
+// Mise à jour du bandeau réseau sans rechargement : les données locales restent consultables.
+window.addEventListener('online',()=>render());
+window.addEventListener('offline',()=>render());
