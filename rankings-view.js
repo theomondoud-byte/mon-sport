@@ -1,11 +1,11 @@
-// Mon Sport V13 · Classements officiels/sources et liens croisés vers les favoris.
+// Mon Sport V14 · Top 150 ESPN ATP/WTA, mouvement hebdomadaire et détails complets par équipe.
 // Tennis / WTT : relevés datés du 9 novembre 2026, NON « live ».
 // Football/NBA : accès direct aux tableaux ESPN, en cache pour 20 min.
 const ESPN='https://site.api.espn.com/apis/v2/sports/';
 export const RANKING_DATE='2026-11-09';
 export const RANKINGS=[
- {id:'atp',title:'ATP',sport:'Tennis',url:'https://www.atptour.com/en/rankings/singles',source:'TennisDB · ATP',mode:'snapshot'},
- {id:'wta',title:'WTA',sport:'Tennis',url:'https://www.wtatennis.com/rankings/singles',source:'WTA',mode:'snapshot'},
+ {id:'atp',title:'ATP',sport:'Tennis',url:'https://www.atptour.com/en/rankings/singles/live',source:'ESPN · classement ATP publié',mode:'tennis-espn',tour:'atp'},
+ {id:'wta',title:'WTA',sport:'Tennis',url:'https://www.wtatennis.com/rankings/singles',source:'ESPN · classement WTA publié',mode:'tennis-espn',tour:'wta'},
  {id:'atprace',title:'Race ATP',sport:'Tennis',url:'https://www.atptour.com/en/rankings/singles-race-to-turin',source:'ATP · Race Turin',mode:'snapshot'},
  {id:'wtarace',title:'Race WTA',sport:'Tennis',url:'https://www.wtatennis.com/rankings/race-singles',source:'WTA · Race Finals',mode:'snapshot'},
  {id:'nextgen',title:'Next Gen',sport:'Tennis',url:'https://www.atptour.com/en/rankings/next-gen-race',source:'ATP · Next Gen',mode:'snapshot'},
@@ -43,7 +43,8 @@ const WTT=fromTuple([
  ['Hugo Calderano',7,4830],['Jang Woojin',8,4236],['Alexis Lebrun',9,3750],
  ['Lin Shidong',10,3686],['Flavien Coton',23,1864]
 ]);
-export const SNAPSHOTS={atp:ATP,wta:WTA,atprace:ATPRACE,wtarace:WTA,nextgen:NEXTGEN,wtt:WTT};
+export const SNAPSHOTS={atprace:ATPRACE,wtarace:WTA,nextgen:NEXTGEN,wtt:WTT};
+const TENNIS_API='https://site.api.espn.com/apis/site/v2/sports/tennis/';
 const cache=new Map();
 const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[^a-z0-9]/g,' ').trim().replace(/\s+/g,' ');
@@ -102,6 +103,27 @@ function extractGroups(node,out=[],seen=new Set(),parent=''){
  for(const child of [...(node.children||[]),...(node.groups||[])])extractGroups(child,out,seen,name);
  return out;
 }
+// ESPN classements hebdomadaires : 150 entrées dans les flux ATP/WTA.
+export function parseESPNTennisRankings(body){
+ const entries=(body?.rankings||[]).flatMap(group=>Array.isArray(group?.ranks)?group.ranks:[]);
+ const used=new Set();
+ return entries.map(row=>{
+  const athlete=row.athlete||{},rank=Number(row.current),previous=Number(row.previous);
+  const points=Number(row.points);
+  const name=athlete.displayName||[athlete.firstName,athlete.lastName].filter(Boolean).join(' ');
+  if(!name||!Number.isFinite(rank)||rank<1||rank>150||!Number.isFinite(points)||used.has(norm(name)))return null;
+  used.add(norm(name));
+  return {
+   name,rank,points:String(points),previousRank:Number.isFinite(previous)&&previous>0?previous:null,
+   movement:Number.isFinite(previous)&&previous>0?previous-rank:null,
+   age:Number.isFinite(Number(athlete.age))&&athlete.age!=null?Number(athlete.age):null,
+   country:String(athlete.citizenshipCountry||''),flag:String(athlete.flag||''),
+   image:String(athlete.headshot||''),source:'ESPN · classement publié',
+   officialPoints:points,livePoints:null,nextPoints:null,maxPoints:null,tournament:'',
+   earnedPoints:null,droppingPoints:null
+  };
+ }).filter(Boolean).sort((a,b)=>a.rank-b.rank).slice(0,150);
+}
 export function parseESPNStandings(body,{west=false}={}){
  const groups=extractGroups(body);
  const picked=west?groups.filter(g=>/western|(?:^|\b)west(?:ern)?(?:\b|$)/i.test(String(g.name))):groups;
@@ -116,28 +138,37 @@ export function parseESPNStandings(body,{west=false}={}){
   const rank=Number(displayStat(stats,['rank','playoffSeed','seed'])||item.rank||item.rankDisplayValue||'');
   // Ne jamais inventer un rang quand ESPN ne le fournit pas.
   const displayed=Number.isFinite(rank)&&rank>0?rank:null;
-  const wins=displayStat(stats,['wins','W']),losses=displayStat(stats,['losses','L']);
+  const wins=displayStat(stats,['wins','W','win']),draws=displayStat(stats,['ties','draws','draw','D']),
+  losses=displayStat(stats,['losses','L','loss']);
   const points=west?(wins&&losses?wins+' V · '+losses+' D':'')
    :displayStat(stats,['points','PTS','totalPoints']);
-  const played=displayStat(stats,['gamesPlayed','GP','played']);
+  const played=displayStat(stats,['gamesPlayed','GP','played','matchesPlayed','MP']);
+  const goalsFor=displayStat(stats,['pointsFor','goalsFor','GF','goalsScored']);
+  const goalsAgainst=displayStat(stats,['pointsAgainst','goalsAgainst','GA','goalsConceded']);
   const diff=displayStat(stats,['pointDifferential','goalDifference','goalDifferential','goalDiff','GD']);
-  out.push({name,rank:displayed,points:points.trim(),played,diff,
-   detail:[played?played+' matchs':'',diff?'Diff. '+diff:''].filter(Boolean).join(' · '),
+  out.push({name,rank:displayed,points:points.trim(),played,diff,wins,draws,losses,goalsFor,goalsAgainst,
+   detail:(west?[played?played+' MJ':'']:[
+    played?played+' J':'',wins!==''?wins+' V':'',draws!==''?draws+' N':'',losses!==''?losses+' D':'',
+    goalsFor!==''?'BP '+goalsFor:'',goalsAgainst!==''?'BC '+goalsAgainst:'',diff?'Diff. '+diff:''
+   ]).filter(Boolean).join(' · '),
    source:'ESPN'});
  }
  return out.sort((a,b)=>(a.rank??Infinity)-(b.rank??Infinity));
 }
 export async function fetchRankings({fetchFn=fetch,force=false}={}){
  const result={};
- await Promise.all(RANKINGS.filter(x=>x.mode==='espn').map(async spec=>{
+ await Promise.all(RANKINGS.filter(x=>x.mode==='espn'||x.mode==='tennis-espn').map(async spec=>{
   const saved=cache.get(spec.id);
   if(!force&&saved&&Date.now()-saved.at<20*60000){result[spec.id]=saved.result;return;}
   try{
-   const res=await fetchFn(ESPN+spec.path+'/standings',{cache:'no-store',signal:AbortSignal.timeout(10000)});
+   const url=spec.mode==='tennis-espn'?TENNIS_API+spec.tour+'/rankings':ESPN+spec.path+'/standings';
+   const res=await fetchFn(url,{cache:'no-store',signal:AbortSignal.timeout(10000)});
    if(!res.ok)throw Error('ESPN '+res.status);
-   const data=parseESPNStandings(await res.json(),{west:!!spec.west});
+   const body=await res.json();
+   const data=spec.mode==='tennis-espn'?parseESPNTennisRankings(body):parseESPNStandings(body,{west:!!spec.west});
    if(!data.length)throw Error('Tableau vide');
-   const value={rows:data,asOf:new Date().toISOString(),live:true};
+   const value={rows:data,asOf:new Date().toISOString(),live:true,
+    kind:spec.mode==='tennis-espn'?'published':'standings'};
    cache.set(spec.id,{result:value,at:Date.now()});result[spec.id]=value;
   }catch(e){result[spec.id]={rows:[],error:'Classement indisponible depuis ESPN.',live:false};}
  }));
@@ -156,7 +187,8 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
  const spec=RANKINGS.find(r=>r.id===selected)||RANKINGS[0];
  const rows=rankingRows(spec.id,live);
  const label=spec.mode==='snapshot'?'Relevé du 9 novembre 2026 · pas en direct'
-  :live[spec.id]?.live?'Classement ESPN consulté récemment':'Classement non disponible en direct';
+  :live[spec.id]?.live?(spec.mode==='tennis-espn'?'Classement hebdomadaire ESPN consulté · pas un calcul live':'Classement ESPN consulté récemment')
+  :'Classement non disponible depuis la source';
  const nav='<div class="rank-tabs" role="group" aria-label="Types de classements">'+RANKINGS.map(r=>
   '<button type="button" data-rank-select="'+esc(r.id)+'" class="'+(r.id===spec.id?'selected':'')+'" aria-pressed="'+(r.id===spec.id?'true':'false')+'">'+esc(r.title)+'</button>').join('')+'</div>';
  const cards=rows.map(r=>{
@@ -165,18 +197,37 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   const attrs=clickable?' data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Un favori"':'';
   const name=clickable?'<button type="button" class="rank-favorite-link"'+attrs+'>'+esc(r.name)+' <span aria-hidden="true">↗</span></button>':'<span>'+esc(r.name)+'</span>';
   const number=r.rank!==null&&r.rank!==undefined&&Number.isFinite(Number(r.rank))?String(r.rank):'—';
+  const movement=typeof r.movement==='number'
+   ?'<span class="rank-movement '+(r.movement>0?'up':r.movement<0?'down':'flat')+'" aria-label="'+
+    esc(r.movement>0?r.movement+' places gagnées':r.movement<0?Math.abs(r.movement)+' places perdues':'Classement stable')+'">'+
+    (r.movement>0?'▲ '+r.movement:r.movement<0?'▼ '+Math.abs(r.movement):'▬')+'</span>':'';
+  const isTennis=spec.mode==='tennis-espn';
+  const tennisDetail=isTennis?'<span class="rank-extras">'
+   +(r.country?'<span>'+esc(r.country)+'</span>':'')
+   +(r.age!=null?'<span>'+esc(r.age)+' ans</span>':'')
+   +(r.previousRank?'<span>Rang préc. : '+esc(r.previousRank)+'</span>':'')
+   +'</span>':'';
+  const liveDetail=isTennis?'<details class="rank-live-details"><summary>Détails des points et du tournoi</summary>'
+   +'<div>Points officiels : <b>'+esc(r.points)+'</b></div>'
+   +'<div>Points live : <b>'+(r.livePoints??'Non disponible')+'</b></div>'
+   +'<div>Points gagnés cette semaine : <b>'+(r.earnedPoints??'Non disponible')+'</b></div>'
+   +'<div>Points à défendre : <b>'+(r.droppingPoints??'Non disponible')+'</b></div>'
+   +'<div>Tournoi en cours : <b>'+esc(r.tournament||'Non communiqué')+'</b></div>'
+   +'<div>Points après prochaine victoire : <b>'+(r.nextPoints??'Non disponible')+'</b></div>'
+   +'<div>Maximum possible : <b>'+(r.maxPoints??'Non disponible')+'</b></div>'
+   +'<p>Les projections de tournoi nécessitent un flux ATP live distinct : aucune valeur n’est estimée.</p></details>':'';
   return '<div class="rank-row '+(clickable?'rank-tracked':'')+'"><span class="rank-place">'+esc(number)+'</span>'
-   +'<span class="rank-person">'+name+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+'</span>'
+   +'<span class="rank-person">'+name+movement+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+tennisDetail+liveDetail+'</span>'
    +'<b class="rank-points">'+esc(r.points||'—')+'</b></div>';
  }).join('');
  const tracked=spec.mode==='snapshot'?favorites.map(f=>({name:f.name,entry:rankingEntry(spec.id,f.name)}))
   .filter(x=>x.entry&&!rows.some(r=>norm(r.name)===norm(x.name))):[];
  return '<section class="rankings-shell"><div class="rankings-heading"><h2>🏆 Classements</h2>'
-  +'<p>Ouvre directement la fiche d’un de tes favoris en touchant son nom.</p></div>'
+  +'<p>Ouvre la fiche d’un favori par son nom. Déplie un joueur pour connaître les points vérifiables et les données live disponibles.</p></div>'
   +nav+'<div class="rankings-source"><span>'+esc(label)+'</span>'
   +'<a href="'+esc(safeUrl(spec.url))+'" target="_blank" rel="noopener noreferrer">Voir le classement complet ↗</a></div>'
   +(loading?'<p class="agenda-progress">Actualisation des classements…</p>':'')
   +(cards?'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>'
   :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
-  +'<p class="agenda-footnote">Les tableaux ATP/WTA/Race/Next Gen/WTT sont des relevés datés, directement issus des publications citées. Les ligues et la NBA sont chargées depuis ESPN quand le réseau le permet.</p></section>';
+  +'<p class="agenda-footnote">ATP et WTA : top 150 du dernier classement publié reçu depuis ESPN, avec points et évolution hebdomadaire (pas un rang live). Les colonnes ATP tournoi/points projetés restent indisponibles sans source live vérifiable. Race/Next Gen/WTT : relevés datés et non exhaustifs. Football : J, V, N, D, BP, BC selon les données transmises par ESPN.</p></section>';
 }
