@@ -9,11 +9,21 @@
 - Interface : indicateur hors connexion, conservation des informations consultables depuis le cache, actualisation réseau suspendue hors ligne.
 - Vérification : `npm test` exécute des tests de non-régression sans dépendance. `npm run check` vérifie la syntaxe. Workflow GitHub Actions sur les branches et pull requests.
 
+## Classements et visuels (extension V14 du 13 novembre 2026)
+- **ATP et WTA, simple : top 150** chargé depuis les classements ESPN, sans conserver le top 10 incomplet en repli. Les derniers tableaux chargés avec succès sont enregistrés dans le navigateur avec l'heure de consultation ; s'ils sont montrés hors ligne, l'interface les signale comme des copies possiblement périmées.
+- **Progression hebdomadaire** : l'évolution du rang est calculée à partir des champs `current` et `previous` transmis par ESPN (une hausse de rang affiche ▲, une baisse ▼).
+- **Fiches ATP/WTA dépliables** : âge, pays, rang précédent, points officiels, détail des champs de tournoi. Les points en cours, points défendus, points au prochain tour et maximum possible restent marqués « Non disponible » car ESPN ne les fournit pas. Une source ATP live existe mais n'est pas intégrée sans flux vérifiable et accessible. Aucun chiffre fictif n'est projeté.
+- **Race ATP/WTA, Next Gen, WTT** : les relevés antérieurs restent partiels, identifiés comme non exhaustifs. Le top 150 n'est donc garanti que sur les classements simples ATP/WTA si ESPN renvoie ses 150 entrées.
+- **Football** : rang, points, matchs joués (J), victoires (V), nuls (N), défaites (D), buts marqués/encaissés (BP/BC) et différence de buts si ces statistiques sont envoyées par ESPN.
+- **Articles** : miniatures ESPN ou WordPress/FFL, miniatures RSS lorsqu'elles sont fournies par le flux, et portrait du favori en secours si disponible. Sinon, pictogramme sportif lisible.
+- **Résultats** : dans les badges, portraits/logo et pictogramme du sport remplacent le nom du favori (accessible en info-bulle et pour les lecteurs d'écran). Le titre du match et les verdicts sont conservés.
+- **PWA** : le module `sports-media.js` est préchargé, cache version `mon-sport-v14-1`.
+
 ## Points à vérifier avant fusion
 1. Sur Android, lancer l'application en ligne puis hors connexion, et vérifier l'apparition du bandeau.
 2. Contrôler la présence des 20 favoris existants, ainsi que l'import/export et la persistance locale.
-3. Parcourir les dix classements, vérifier l'absence de rang fictif si ESPN ne répond pas.
-4. Vérifier les flux d'articles depuis le téléphone (CORS, Cloudflare, ESPN, FFL) et l'installation PWA.
+3. Vérifier le chargement des 150 premiers ATP/WTA, le mouvement hebdomadaire, les statistiques V/N/D et les classements Race marqués non exhaustifs.
+4. Vérifier les miniatures d'articles depuis le téléphone (CORS, Cloudflare, ESPN, FFL), le repli sur icône et l'installation PWA.
 5. Attendre les résultats verts du workflow `Tests Mon Sport` avant publication.
 
 ---
