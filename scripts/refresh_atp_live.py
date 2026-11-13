@@ -82,6 +82,8 @@ def main():
     response.raise_for_status()
     rows=parse(response.content.decode('utf-8',errors='replace'),debug=ns.debug)
     print("PARSED",len(rows),"TOP",rows[:2])
+    losses=[(r["name"],r["previousTournaments"]) for r in rows if r["tournamentStatus"]=="defaite"]
+    print("DEFAITES_DETECTEES",len(losses),"EXEMPLES",losses[:3])
     print("PROJECTIONS",sum(r["nextPoints"] is not None for r in rows),
           "MAX",sum(r["maxPoints"] is not None for r in rows))
     # Diagnostiquer la concordance réelle avec les joueurs du classement ESPN.
