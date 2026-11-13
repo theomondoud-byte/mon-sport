@@ -27,6 +27,22 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
    if(Array.isArray(value)){posts=value;break;}
   }catch{}
  }
+ if(!posts){
+  // Troisième secours : conversion du flux RSS public, sans clé privée.
+  try{
+   const rss='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent('https://fflose.com/feed/');
+   const response=await fetchFn(rss,{signal:AbortSignal.timeout(9000),cache:'no-store'});
+   if(response.ok){
+    const obj=await response.json();
+    if(Array.isArray(obj.items))posts=obj.items.map(i=>({
+     title:{rendered:i.title||''},date_gmt:(()=>{
+      const time=Date.parse(i.pubDate||'');
+      return Number.isFinite(time)?new Date(time).toISOString().replace(/Z$/,''):'';})(),
+     link:i.link,excerpt:{rendered:i.description||''}
+    }));
+   }
+  }catch{}
+ }
  if(!posts)throw Error('Flux FFL indisponible');
  const start=now.getTime()-7*86400000,end=now.getTime()+10*60000;
  return posts.map(p=>{
