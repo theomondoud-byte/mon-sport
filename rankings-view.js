@@ -414,10 +414,11 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    :tennisColumns
    ?'<p class="rank-horizontal-hint">↔ Fais défiler le tableau vers la droite pour voir les projections.</p><div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : défilement horizontal"><div class="rank-table tennis-rank-table"><div class="rank-table-head tennis-rank-row"><span>Rang</span><span>Joueur · variation</span><span>Officiels</span><span>Live</span><span>Δ pts</span><span>Tournoi en cours</span><span>Prochain</span><span>Maximum</span></div>'+cards+'</div></div>'
    :'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>')
-  :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
+  :rows.length&&filterEnabled?'<div class="agenda-empty"><h3>Aucun joueur ne correspond aux filtres</h3><p>Choisis un autre âge ou une autre nationalité, ou efface les filtres.</p></div>'
+   :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
   +(atpLive?'<p class="agenda-footnote">ATP live : relevé du '+esc(asOf||'non communiqué')
     +' · les tournois affichés sur 14 jours sont ceux observés dans les relevés successifs de Mon Sport ; il ne s’agit pas de dates officielles de matchs. L’historique se construit progressivement. '
-    +' · classement uniquement live-tennis.eu, pas de points officiels ajoutés. '
+    +'Classement uniquement live-tennis.eu, sans points officiels ajoutés. '
     +'Δ rang = variation depuis le dernier classement officiel ; Δ pts = variation nette des points. '
     +'La mention Défaite vient de la source, dans les tournois déjà disputés. En lice / prévu signifie que le tournoi figure dans la colonne en cours ; aucun résultat n’est supposé. '
     +'Suiv. et Max ne sont affichés que si le fournisseur les publie. '
