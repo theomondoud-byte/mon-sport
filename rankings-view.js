@@ -114,8 +114,10 @@ export function parseESPNStandings(body,{west=false}={}){
   if(!name||used.has(norm(name)))continue;used.add(norm(name));
   const stats=item.stats||item.statistics||[];
   const rank=Number(displayStat(stats,['rank','playoffSeed','seed'])||item.rank||item.rankDisplayValue||'');
-  const displayed=Number.isFinite(rank)&&rank>0?rank:out.length+1;
-  const points=west?displayStat(stats,['wins','W'])+' V · '+displayStat(stats,['losses','L'])+' D'
+  // Ne jamais inventer un rang quand ESPN ne le fournit pas.
+  const displayed=Number.isFinite(rank)&&rank>0?rank:null;
+  const wins=displayStat(stats,['wins','W']),losses=displayStat(stats,['losses','L']);
+  const points=west?(wins&&losses?wins+' V · '+losses+' D':'')
    :displayStat(stats,['points','PTS','totalPoints']);
   const played=displayStat(stats,['gamesPlayed','GP','played']);
   const diff=displayStat(stats,['pointDifferential','goalDifference','goalDifferential','goalDiff','GD']);
@@ -123,7 +125,7 @@ export function parseESPNStandings(body,{west=false}={}){
    detail:[played?played+' matchs':'',diff?'Diff. '+diff:''].filter(Boolean).join(' · '),
    source:'ESPN'});
  }
- return out.sort((a,b)=>a.rank-b.rank);
+ return out.sort((a,b)=>(a.rank??Infinity)-(b.rank??Infinity));
 }
 export async function fetchRankings({fetchFn=fetch,force=false}={}){
  const result={};
@@ -162,7 +164,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   const clickable=!!fav;
   const attrs=clickable?' data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Un favori"':'';
   const name=clickable?'<button type="button" class="rank-favorite-link"'+attrs+'>'+esc(r.name)+' <span aria-hidden="true">↗</span></button>':'<span>'+esc(r.name)+'</span>';
-  const number=Number.isFinite(Number(r.rank))?String(r.rank):'—';
+  const number=r.rank!==null&&r.rank!==undefined&&Number.isFinite(Number(r.rank))?String(r.rank):'—';
   return '<div class="rank-row '+(clickable?'rank-tracked':'')+'"><span class="rank-place">'+esc(number)+'</span>'
    +'<span class="rank-person">'+name+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+'</span>'
    +'<b class="rank-points">'+esc(r.points||'—')+'</b></div>';
