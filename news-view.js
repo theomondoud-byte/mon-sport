@@ -177,7 +177,7 @@ export function renderNewsView({
     +'<h3>'+esc(n.title)+'</h3>'
     +(safeExcerpt(n.excerpt||n.description)?'<p class="news-excerpt">'+esc(safeExcerpt(n.excerpt||n.description))+'</p>':'')
     +'<p class="news-source">'+esc(newsSourceName(n))+'</p>'
-    +'<span class="news-tap">Ouvrir chez l’éditeur ↗</span></span></a></article>';
+    +'<span class="news-tap">Lire l’article chez l’éditeur ↗</span></span></a></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article pour ces filtres</h3><p>Essaie « Tous les médias », « Tous les sports » ou « Tous les favoris ».</p></div>')
