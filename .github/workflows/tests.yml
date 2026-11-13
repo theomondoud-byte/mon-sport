@@ -25,3 +25,20 @@ jobs:
         run: python -m pip install requests beautifulsoup4
       - name: Tests du collecteur ATP live
         run: python -m unittest discover -s tests -p '*_py_test.py'
+      - name: Inspecter les pièces jointes des posts publics (diagnostic temporaire)
+        run: |
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          html=requests.get('https://teapawt.org/JeuSetMaths',timeout=20,headers={'User-Agent':'Mozilla/5.0'}).text
+          soup=BeautifulSoup(html,'html.parser')
+          for item in soup.select('.timeline-item[data-username=JeuSetMaths]')[:6]:
+              content=item.select_one('.tweet-content')
+              print('POST_INSPECT',item.get('class'),'chars',len(content.get_text(' ',strip=True)) if content else '-',flush=True)
+              for tag in item.select('img,video,source, a[href*="/media/"], a[href*="/status/"]')[:16]:
+                  print('POST_TAG',tag.name,'class',tag.get('class'),'src',str(tag.get('src') or tag.get('data-src') or tag.get('href') or '')[:200], 'alt',tag.get('alt'),flush=True)
+              for node in item.find_all(class_=True):
+                  cl=' '.join(node.get('class',[]))
+                  if any(w in cl for w in ('attachment','gallery','media','video')):
+                      print('POST_MEDIA_NODE',node.name,cl,'attrs',str({k:v for k,v in node.attrs.items() if k not in ('class','style')})[:260],flush=True)
+          PY
