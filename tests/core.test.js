@@ -852,7 +852,7 @@ test('Mobile : posts Jeu Set Maths conservés si le réseau se coupe, dans les 7
  const values=new Map(),storage={getItem:key=>values.get(key)||null,setItem:(key,value)=>values.set(key,value)};
  const online=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>({ok:true,json:async()=>raw})});
  assert.ok(online.length>=20,'Le module embarqué contient déjà les posts réels');
- assert.ok(online.some(p=>p.title===raw.posts[0].title));
+ assert.ok(online.some(p=>p.link===raw.posts[0].link));
  assert.equal(readCachedJeuSetMathsNews({now,storage}).length,1);
  const offline=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>{throw Error('hors ligne');}});
  assert.deepEqual(offline,online);
