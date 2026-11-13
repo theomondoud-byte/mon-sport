@@ -1,7 +1,7 @@
 import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=14.0.0';
 import {makeAgenda} from './agenda-model.js?v=14.0.0';
-import {renderAgendaView} from './agenda-ui.js?v=14.0.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=14.7.0';
+import {renderAgendaView} from './agenda-ui.js?v=14.8.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=14.8.0';
 import {fetchFFLNews,findMatchArticles} from './sports-articles.js?v=14.0.0';
 import {fetchAgendaFavorite} from './agenda-fetch.js?v=14.0.0';
 import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=14.0.0';
@@ -622,7 +622,7 @@ function bindContent(){
  document.querySelectorAll('[data-rank-favorite]').forEach(el=>el.onclick=()=>{
   const name=el.dataset.rankFavorite;
   if(!favorites.some(f=>f.name===name))return;
-  agendaFavorite=name;favoritePhase='stats';active='favori';render();
+  agendaFavorite=name;favoritePhase='stats';active='favori';render();refreshRankings();
  });
  document.querySelectorAll('[data-view-ranking]').forEach(el=>el.onclick=()=>{
   rankingSelected=el.dataset.viewRanking;active='classements';render();refreshRankings();
