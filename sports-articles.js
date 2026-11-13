@@ -15,8 +15,8 @@ export function isSportsArticle(article){
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
 export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
  const endpoints=[
-  'https://fflose.com/wp-json/wp/v2/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug',
-  'https://public-api.wordpress.com/wp/v2/sites/fflose.com/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug'
+  'https://fflose.com/wp-json/wp/v2/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug,jetpack_featured_media_url,_embedded',
+  'https://public-api.wordpress.com/wp/v2/sites/fflose.com/posts?per_page=40&_fields=date,date_gmt,link,title,excerpt,slug,jetpack_featured_media_url,_embedded'
  ];
  let posts=null;
  for(const endpoint of endpoints){
@@ -38,7 +38,7 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
      title:{rendered:i.title||''},date_gmt:(()=>{
       const time=Date.parse(i.pubDate||'');
       return Number.isFinite(time)?new Date(time).toISOString().replace(/Z$/,''):'';})(),
-     link:i.link,excerpt:{rendered:i.description||''}
+     link:i.link,image:i.thumbnail||i.enclosure?.link||'',excerpt:{rendered:i.description||''}
     }));
    }
   }catch{}
@@ -53,7 +53,7 @@ export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
   const link=p.link;
   if(!/^https:\/\/fflose\.com\//.test(String(link||'')))return null;
   return {title,link,date:new Date(timestamp).toISOString(),source:'FFL',
-   favorite:'FFL',excerpt:clean(p.excerpt?.rendered||'')};
+   favorite:'FFL',sport:'Sport',image:p.jetpack_featured_media_url||p._embedded?.['wp:featuredmedia']?.[0]?.source_url||p.image||'',excerpt:clean(p.excerpt?.rendered||'')};
  }).filter(Boolean).filter(isSportsArticle);
 }
 export function findMatchArticles(item,news=[],now=new Date()){
