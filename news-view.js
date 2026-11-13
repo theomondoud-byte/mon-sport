@@ -1,5 +1,5 @@
 import {sportInfo,sourceImage} from './sports-media.js?v=14.0.0';
-import {filterSportsNews} from './sports-articles.js?v=14.0.0';
+import {filterSportsNews} from './sports-articles.js?v=15.0.0';
 // Mon Sport V9 — dernières 7 journées, lecture à l'intérieur de la PWA.
 // Un titre RSS et un extrait librement fourni ne sont PAS un article intégral.
 // L'iframe de l'éditeur est tentée au clic ; l'éditeur peut refuser l'intégration.
