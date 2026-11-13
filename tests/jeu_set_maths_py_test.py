@@ -2,6 +2,10 @@
 import unittest
 from datetime import datetime, timezone, timedelta
 from scripts.refresh_jeu_set_maths import parse_posts, timestamp_from_id, TWITTER_EPOCH_MS
+from scripts.build_jeu_set_maths_bundle import build
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import json
 
 
 def post_id(instant, serial=10):
@@ -100,6 +104,28 @@ class SocialPostsTests(unittest.TestCase):
         self.assertEqual(row['text'],original)
         self.assertNotIn('\n',row['title'])
         self.assertIn('▪️ 2001 : Serena Williams',row['title'])
+
+
+    def test_verified_feed_is_packaged_for_offline_mobile_app(self):
+        with TemporaryDirectory() as folder:
+            source=Path(folder)/"posts.json"
+            target=Path(folder)/"posts.js"
+            source.write_text(json.dumps({
+                "source":"https://x.com/JeuSetMaths",
+                "fetchedAt":"2026-11-13T12:00:00Z",
+                "posts":[{"title":"Jeu Set Maths - statistique ATP",
+                          "text":"Série de résultats\\nDeuxième ligne",
+                          "link":"https://x.com/JeuSetMaths/status/2120668453770305629"}]
+            },ensure_ascii=False),encoding="utf-8")
+            self.assertEqual(build(source,target),1)
+            module=target.read_text(encoding="utf-8")
+            self.assertTrue(module.startswith("// Généré depuis"))
+            self.assertIn("export const jeuSetMathsBundledData =",module)
+            self.assertIn("2120668453770305629",module)
+            self.assertIn("Série de résultats",module)
+            source.write_text(json.dumps({"source":"https://x.com/Imposteur","posts":[]}),encoding="utf-8")
+            with self.assertRaises(ValueError):
+                build(source,target)
 
 
 if __name__ == '__main__':
