@@ -73,7 +73,7 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    endDate:item.endDate||null,participationLevel:item.participationLevel||null,
    notes:item.notes||'',cycleUnit:item.cycleUnit||null,
    source,sourceUrl:item.sourceUrl||'',type,stats:item.stats||null,
-   favorites:[item.favorite],origin:item
+   favorites:[item.favorite,...(item.additionalFavorites||[])],origin:item
   });
  }
  // Préférence pour un résultat exact ou une source directe, mais jamais
@@ -99,6 +99,21 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   seen.set(row.key,row);
  }
  return [...seen.values()];
+}
+// Associer les statistiques individuelles confirmées au match ESPN des Spurs.
+// Pas de deuxième carte NBA pour Wembanyama ni de présence présumée lorsqu'il n'a pas joué.
+export function mergeSpursAndWembanyama(matches=[],playerEvents=[],playerName='Victor Wembanyama'){
+ const byId=new Map((playerEvents||[]).filter(e=>e?.type==='nba'&&e.espnEventId)
+  .map(e=>[String(e.espnEventId),e]));
+ return (matches||[]).map(match=>{
+  if(match.leaguePath!=='basketball/nba'||!(/spurs/i.test(match.favorite||'')||
+   /san antonio spurs/i.test([match.home,match.away].join(' '))))return match;
+  const player=byId.get(String(match.espnEventId||match.id?.replace(/^espn-/,'')||''));
+  return {...match,
+   additionalFavorites:[...new Set([...(match.additionalFavorites||[]),playerName])],
+   ...(player?.stats?{stats:player.stats,wembanyamaName:playerName}:{}),
+   wembanyamaUnconfirmed:!player?.stats};
+ });
 }
 export function agendaMatches(events,{view='semaine',phase='future',favorite=null,now=new Date()}={}){
  const w=agendaWindow(view,phase,now),lo=w.from.getTime(),hi=w.to.getTime();
