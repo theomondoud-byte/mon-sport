@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
@@ -581,4 +581,26 @@ test('Stats : absence de données classées n’affiche pas de faux rangs',()=>{
   esc:x=>String(x),safeUrl:x=>x});
  assert.match(html,/Données du classement indisponibles/);
  assert.doesNotMatch(html,/Rang.*#0/);
+});
+
+test('un favori personnalisé retrouve ses classements exacts, y compris ITTF femmes',()=>{
+ const live={
+  wttwomen:{rows:[{name:'Wang Manyu',rank:1,points:'9265',country:'CHN',movement:0}],
+   week:46,asOf:new Date().toISOString(),live:true},
+  liga:{rows:[{name:'Club ajouté',rank:10,wins:'3',points:'15'}],asOf:new Date().toISOString(),live:true}
+ };
+ assert.deepEqual(rankingsForFavorite({name:'Wang Manyu',sport:'Tennis de table'},live),['wttwomen']);
+ assert.deepEqual(rankingsForFavorite({name:'Club ajouté',sport:'Football'},live),['liga']);
+ const rendered=renderFavoriteStats({favorite:'Wang Manyu',favoriteData:{name:'Wang Manyu',sport:'Tennis de table'},
+  rankings:live,now:new Date(),esc:x=>String(x),safeUrl:x=>x});
+ assert.match(rendered,/WTT femmes/);
+ assert.match(rendered,/9265/);
+ assert.match(rendered,/data-view-ranking="wttwomen"/);
+});
+
+test('Stats : une ancienne liste WTT non chargée ne se substitue pas au classement hebdomadaire',()=>{
+ const html=renderFavoriteRankingDetails({favorite:'Félix Lebrun',rankingId:'wtt',
+  rankings:{},esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Données du classement indisponibles/);
+ assert.doesNotMatch(html,/6859/);
 });
