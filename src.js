@@ -395,7 +395,7 @@ async function refreshRankings(force=false){
  }catch(e){console.warn('Classements ESPN indisponibles',e);}
  finally{rankingsLoading=false;if(active==='classements'||(active==='favori'&&favoritePhase==='stats'))render();}
 }
-function newsHtml(){return renderNewsView({news,loading,hasWorker:!!workerUrl,esc,safeUrl,now:new Date()});}
+function newsHtml(){return renderNewsView({news,loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date()});}
 function linkHtml(f){const q=encodeURIComponent(f.name);return `<div class="fav"><div class="details"><b>${esc(f.name)}</b><br><small>${esc(f.sport)} · ${esc(f.type)}</small></div><a target="_blank" rel="noopener noreferrer" href="https://news.google.com/search?q=${q}&hl=fr&gl=FR&ceid=FR%3Afr">Actualités ↗</a></div>`}
 
 function agendaItems(){
@@ -599,6 +599,10 @@ function bindContent(){
     if(card.isConnected)slot.textContent='Données détaillées indisponibles : '+String(e.message||e);
    }
   });
+ });
+ // Image d'article indisponible : afficher uniquement le pictogramme sportif.
+ document.querySelectorAll('img.article-thumb-image').forEach(image=>{
+  image.addEventListener('error',()=>image.closest('.article-visual')?.classList.add('image-failed'),{once:true});
  });
  // Si une URL Wikimedia ne charge pas, montrer immédiatement les initiales
  // plutôt qu'une image cassée.
