@@ -1191,3 +1191,35 @@ test('V16.6 : l’encart « À lire aussi : … » de FFL ne coupe plus l’arti
  assert.deepEqual(articleParagraphs('Texte.\nA lire aussi...\nWTA FINALS\nAutre titre'),['Texte.']);
  assert.deepEqual(articleParagraphs('Début.\nÀ lire aussi : Autre article\nSuite.'),['Début.','Suite.']);
 });
+
+test('V16.6 : un résultat ne reçoit que l’article de CE match (cas réels)',()=>{
+ const favorites=[{name:'San Antonio Spurs',sport:'Basketball'},{name:'Carlos Alcaraz',sport:'Tennis'},{name:'Équipe de France de football',sport:'Football',apiName:'France'}];
+ const news=[
+  {title:'Warriors visit Spurs Friday in NBA Cup group stage',excerpt:'Golden State Warriors (8-4, sixth in the Western Conference) vs. San Antonio Spurs (9-3)',sport:'Basketball',source:'ESPN',link:'https://espn.com/1',date:'2026-11-12T10:00:00Z'},
+  {title:'Carlos Alcaraz wins his fifth title of the year',excerpt:'Alcaraz beat Ben Shelton 7-6 7-5 in the final.',sport:'Tennis',source:'ESPN',link:'https://espn.com/2',date:'2026-11-09T18:00:00Z'},
+  {title:'L’équipe de France battue par l’Italie en Ligue des nations',excerpt:'Les Bleus ont manqué de précision à Milan.',sport:'Football',source:'Franceinfo',link:'https://franceinfo.fr/3',date:'2026-11-12T22:30:00Z'}];
+ const at=(title,date,fav)=>matchSummaryArticle({title,date,favorites:[fav]},news,favorites)?.link||null;
+ assert.equal(at('Chicago Bulls — San Antonio Spurs','2026-11-12T01:00:00Z','San Antonio Spurs'),null);
+ assert.equal(at('Carlos Alcaraz — Ben Shelton','2026-11-09T15:00:00Z','Carlos Alcaraz'),'https://espn.com/2');
+ assert.equal(at('Carlos Alcaraz — Casper Ruud','2026-11-08T15:00:00Z','Carlos Alcaraz'),null);
+ assert.equal(at('Italy — France','2026-11-12T19:45:00Z','Équipe de France de football'),'https://franceinfo.fr/3');
+ assert.equal(relevantFavoriteNews(news[0],favorites),null);
+});
+
+test('V16.6 : le compte rendu ESPN ignore les articles génériques de la ligue',async()=>{
+ const {recapArticleFromESPN}=await import('../event-details.js');
+ const header={competitions:[{competitors:[{team:{displayName:'Paris Saint-Germain',shortDisplayName:'PSG'}},{team:{displayName:'Troyes'}}]}]};
+ const generic={headline:'Who is the best soccer player in the world?',links:{web:{href:'https://www.espn.com/soccer/story/1'}}};
+ assert.equal(recapArticleFromESPN({header,news:{articles:[generic]}}),null);
+ assert.equal(recapArticleFromESPN({header,news:{articles:[generic,{headline:'PSG edge Troyes 1-0',description:'A late goal.',links:{web:{href:'https://www.espn.com/soccer/report/2'}}}]}})?.title,'PSG edge Troyes 1-0');
+});
+
+test('V16.6 : compte rendu NBA (lien http) accepté, article sur un seul club refusé',async()=>{
+ const {recapArticleFromESPN}=await import('../event-details.js');
+ const nba={header:{competitions:[{competitors:[{team:{displayName:'Chicago Bulls'}},{team:{displayName:'San Antonio Spurs'}}]}]},
+  article:{headline:'Wembanyama, Harper lead Spurs to 10th straight win, 124-119 over Bulls',description:'Victor Wembanyama scored 32 points.',links:{web:{href:'http://www.espn.com/nba/recap?gameId=401909969'}}}};
+ assert.equal(recapArticleFromESPN(nba)?.link,'https://www.espn.com/nba/recap?gameId=401909969');
+ const liga={header:{competitions:[{competitors:[{team:{displayName:'Valencia'}},{team:{displayName:'Real Madrid'}}]}]},
+  news:{articles:[{headline:"Trent Alexander-Arnold's dream move to Real Madrid is turning sour",links:{web:{href:'https://www.espn.com/soccer/story/9'}}}]}};
+ assert.equal(recapArticleFromESPN(liga),null);
+});

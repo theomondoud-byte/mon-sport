@@ -77,7 +77,7 @@ const blocksText=blocks=>blocks.filter(b=>b.type==='p').map(b=>b.text).join('\n'
 // Image de partage d'une page (og:image / twitter:image), mise en cache 1 jour.
 async function pageImage(link){
  try{
-  const r=await fetch(link,{headers:{'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'text/html'},cf:{cacheTtl:86400,cacheEverything:true},signal:AbortSignal.timeout(5000)});
+  const r=await fetch(link,{headers:{'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'text/html'},cf:{cacheTtl:86400,cacheEverything:true},signal:AbortSignal.timeout(3000)});
   if(!r.ok)return '';
   const head=(await r.text()).slice(0,250000);
   const m=head.match(/<meta[^>]+(?:property|name)=["'](?:og:image(?::secure_url)?|twitter:image)["'][^>]+content=["']([^"']+)["']/i)
@@ -86,10 +86,12 @@ async function pageImage(link){
   return /^https:\/\//i.test(url)?new URL(url,link).href:'';
  }catch{return ''}
 }
-async function withImages(articles,limit=40){
+// Budget de 5 s : au-delà, les articles restants gardent l'illustration du sport.
+async function withImages(articles,limit=60,budget=5000){
+ const started=Date.now();
  const missing=articles.filter(a=>!a.image).slice(0,limit);
- for(let i=0;i<missing.length;i+=8){
-  await Promise.all(missing.slice(i,i+8).map(async a=>{a.image=await pageImage(a.link);}));
+ for(let i=0;i<missing.length&&Date.now()-started<budget;i+=12){
+  await Promise.all(missing.slice(i,i+12).map(async a=>{a.image=await pageImage(a.link);}));
  }
  return articles;
 }
@@ -206,4 +208,11 @@ async function news(q){
  }).filter(x=>x&&x.title&&/^https?:\/\//.test(x.link)).sort((x,y)=>Date.parse(y.date)-Date.parse(x.date));
  return {articles:articles.slice(0,12)};
 }
-export default {async fetch(request){if(request.method==='OPTIONS')return new Response(null,{headers:cors});if(request.method!=='GET')return json({error:'Méthode non autorisée'},405);const u=new URL(request.url);try{if(u.pathname==='/api/sports-news')return json(await curatedSportsNews());if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};
+export default {async fetch(request){if(request.method==='OPTIONS')return new Response(null,{headers:cors});if(request.method!=='GET')return json({error:'Méthode non autorisée'},405);const u=new URL(request.url);try{if(u.pathname==='/api/sports-news'){
+ const cache=typeof caches!=='undefined'?caches.default:null,key=new Request('https://cache.mon-sport/sports-news-v2');
+ const hit=cache&&!u.searchParams.has('fresh')?await cache.match(key):null;
+ if(hit)return hit;
+ const response=json(await curatedSportsNews());
+ if(cache)await cache.put(key,new Response(response.clone().body,{headers:{...Object.fromEntries(response.headers),'Cache-Control':'public, max-age=600'}}));
+ return response;
+}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};

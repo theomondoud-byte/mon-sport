@@ -1,5 +1,5 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=16.6.0';
-import {filterSportsNews} from './sports-articles.js?v=16.6.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=16.7.0';
+import {filterSportsNews} from './sports-articles.js?v=16.7.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -222,12 +222,12 @@ export function renderArticleBody(text,esc){
 const RESULT_WORDS=/\b(s impose|l emporte|bat|battu|battue|bats|victoire|vainqueur|gagne|remporte|remportee?|elimine|eliminee?|elimination|qualifie|qualifiee?|sacre|sacree?|titre|champion|championne|medaille|podium|defaite|s incline|renverse|domine|ecrase|corrige|triomphe|match nul|score|buteur|marque|doublé|double|triple double|double double|points|rebonds|passes decisives|chrono|beat|beats|beaten|defeat|defeats|defeated|win|wins|won|victory|rout|routs|edge|edges|tops|outlast|scores|scored|rebounds|assists|advance|advances|eliminated|loses|lost|falls|title|clinch|clinches)\b/;
 const RECORD_WORDS=/\b(record|records|historique|histoire|inedit|premier joueur|premiere joueuse|plus jeune|career high|franchise record|first player|youngest|all time|milestone)\b/;
 const SCORE_PATTERN=/\b\d{1,3}\s?[-–]\s?\d{1,3}\b/;
-const OFF_TOPIC=/\b(affrontera|affronter|affronte ce|se frottera|defiera|avant le match|avant de jouer|programme|horaire|a quelle heure|chaine|diffusion|en direct|pronostic|pronostics|cote|cotes|compo|composition probable|mercato|transfert|rumeur|contrat|prolongation|interview|confie|estime|selon lui|reagit|conference de presse|blessure|blesse|forfait|preview|how to watch|odds|picks|prediction|betting|injury|injured|trade|rumor|contract|what to watch|ce qu il faut savoir)\b/;
+const OFF_TOPIC=/\b(affrontera|affronter|affronte ce|se frottera|defiera|avant le match|avant de jouer|programme|horaire|a quelle heure|chaine|diffusion|en direct|pronostic|pronostics|cote|cotes|compo|composition probable|mercato|transfert|rumeur|contrat|prolongation|interview|confie|estime|selon lui|reagit|conference de presse|blessure|blesse|forfait|preview|how to watch|odds|picks|prediction|betting|injury|injured|trade|rumor|contract|what to watch|ce qu il faut savoir|visit|visits|host|hosts|take on|takes on|to face|faces|square off|matchup|slate|fantasy|best player|ranking the|power rankings|grades)\b/;
 export function articleRelevance(article){
  const title=normalized(article.title),body=normalized([article.excerpt,article.description].join(' '));
  const all=title+' '+body;
  const record=RECORD_WORDS.test(all);
- const result=RESULT_WORDS.test(all)||SCORE_PATTERN.test(String(article.title||'')+' '+String(article.excerpt||''));
+ const result=RESULT_WORDS.test(all)||SCORE_PATTERN.test(String(article.title||''));
  const quoted=/^[«"“]|:\s*[«"“]/.test(String(article.title||'').trim());
  const offTopic=OFF_TOPIC.test(title)||quoted||/\?\s*$/.test(String(article.title||'').trim());
  if(record)return 'record';
@@ -241,27 +241,35 @@ export function relevantFavoriteNews(article,favorites){
 // Article de presse correspondant à un résultat : publié entre 6 h avant et
 // 3 jours après le match, citant le favori ou l'adversaire dans le titre.
 const GENERIC_WORDS=new Set(['match','matchs','coupe','championnat','tennis','france','course','tournoi','finals','final','finale','open','masters','ligue','league','cup','round','groupe','phase','journee','saison','club','team','united','city','real','sporting','olympique','athletic']);
+// Mots d'un nom propre comparés par leurs 4 premières lettres (Italy/Italie, Fiji/Fidji…).
+const stem=w=>w.slice(0,4);
+function mentions(text,words){
+ const tokens=new Set(normalized(text).split(/\s+/).filter(w=>w.length>=4).map(stem));
+ return words.filter(w=>tokens.has(stem(w))).length;
+}
 export function matchSummaryArticle(item,news=[],favorites=[]){
  const day=Date.parse(item.date||'');
  if(!Number.isFinite(day))return null;
  const favNames=item.favorites||[item.favorite];
  const favs=favorites.filter(f=>favNames.includes(f.name));
- const favWords=new Set(favs.flatMap(f=>favoriteAliases(f)).flatMap(a=>a.split(' ')));
- const opponents=normalized(item.title).split(/\s+/).filter(w=>w.length>=4&&!favWords.has(w)&&!GENERIC_WORDS.has(w));
+ const favWords=new Set(favs.flatMap(f=>favoriteAliases(f)).flatMap(a=>a.split(' ')).map(stem));
+ const opponents=[...new Set(normalized(item.title).split(/\s+/).filter(w=>w.length>=4&&!favWords.has(stem(w))&&!GENERIC_WORDS.has(w)))];
+ if(!opponents.length)return null;
  let best=null,bestScore=0;
  for(const n of news){
   const source=newsSourceName(n);
   if(source==='FFL'||source==='Jeu, set et maths')continue;
   const published=Date.parse(n.date||n.published||'');
-  if(!Number.isFinite(published)||published<day-6*3600000||published>day+3*86400000)continue;
-  const title=' '+normalized(n.title)+' ';
-  const favHit=favs.some(f=>matchesFavorite(n,f));
-  const oppHits=opponents.filter(w=>title.includes(' '+w+' ')).length;
-  if(!favHit&&!oppHits)continue;
+  if(!Number.isFinite(published)||published<day-6*3600000||published>day+2*86400000)continue;
+  if(!favs.some(f=>sportCompatible(n,f)))continue;
+  const favHit=favs.some(f=>titleMentions(n,f)||mentions(n.title,favoriteAliases(f).flatMap(a=>a.split(' ')).filter(w=>w.length>=5)));
+  const oppTitle=mentions(n.title,opponents),oppText=mentions(n.excerpt||n.description,opponents);
+  // Le favori ET l'adversaire doivent être cités ; un avant-match est écarté.
+  if(!favHit||!(oppTitle||oppText))continue;
   const relevance=articleRelevance(n);
-  const score=(favHit?2:0)+Math.min(oppHits,2)*2+(relevance?2:0)+(safeExcerpt(n.excerpt||n.description)?1:0)-(published-day)/86400000*0.3;
-  // Il faut le favori ET (l'adversaire ou un vrai compte rendu).
-  if(favHit&&(oppHits||relevance)&&score>bestScore){best=n;bestScore=score;}
+  if(!relevance&&OFF_TOPIC.test(normalized(n.title)))continue;
+  const score=oppTitle*3+oppText+(relevance?2:0)+(safeExcerpt(n.excerpt||n.description)?1:0)-(published-day)/86400000;
+  if(score>bestScore){best=n;bestScore=score;}
  }
  if(!best)return null;
  return {title:decodeEntities(best.title),excerpt:safeExcerpt(best.excerpt||best.description),link:best.link,source:newsSourceName(best),image:best.image||''};
@@ -374,7 +382,7 @@ export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
 
  const curated=workerUrl?await (async()=>{
   try{
-   const response=await fetch(new URL('/api/sports-news',workerUrl),{signal:AbortSignal.timeout(12000),cache:'no-store'});
+   const response=await fetch(new URL('/api/sports-news',workerUrl),{signal:AbortSignal.timeout(25000),cache:'no-store'});
    if(!response.ok)throw Error('Flux RSS '+response.status);
    const body=await response.json();
    return (body.articles||[]).map(article=>{

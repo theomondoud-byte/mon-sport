@@ -1,20 +1,20 @@
-import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=16.6.0';
-import {createOnceLoader} from './session-loader.js?v=16.6.0';
-import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=16.6.0';
-import {renderAgendaView} from './agenda-ui.js?v=16.6.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=16.6.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=16.6.0';
-import {fetchAgendaFavorite} from './agenda-fetch.js?v=16.6.0';
-import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=16.6.0';
-import {extraProgramFor} from './verified-program.js?v=16.6.0';
-import {verifiedExtraFor} from './verified-extra-v11.js?v=16.6.0';
-import {coverageFor} from './coverage-v11.js?v=16.6.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle} from './news-view.js?v=16.6.0';
-import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=16.6.0';
-import {verified2026For} from './audit-2026.js?v=16.6.0';
-import {renderAudit2026} from './audit-ui.js?v=16.6.0';
-import {auditEspn2026} from './audit-espn-2026.js?v=16.6.0';
-import {APP_LABEL} from './version.js?v=16.6.0';
+import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=16.7.0';
+import {createOnceLoader} from './session-loader.js?v=16.7.0';
+import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=16.7.0';
+import {renderAgendaView} from './agenda-ui.js?v=16.7.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=16.7.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=16.7.0';
+import {fetchAgendaFavorite} from './agenda-fetch.js?v=16.7.0';
+import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=16.7.0';
+import {extraProgramFor} from './verified-program.js?v=16.7.0';
+import {verifiedExtraFor} from './verified-extra-v11.js?v=16.7.0';
+import {coverageFor} from './coverage-v11.js?v=16.7.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle} from './news-view.js?v=16.7.0';
+import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=16.7.0';
+import {verified2026For} from './audit-2026.js?v=16.7.0';
+import {renderAudit2026} from './audit-ui.js?v=16.7.0';
+import {auditEspn2026} from './audit-espn-2026.js?v=16.7.0';
+import {APP_LABEL} from './version.js?v=16.7.0';
 const DEFAULTS = [
  ['Real Madrid','Football','équipe','Real Madrid'],['FC Barcelone','Football','équipe','FC Barcelona'],['PSG','Football','équipe','Paris Saint Germain'],['San Antonio Spurs','Basketball','équipe','San Antonio Spurs'],
  ['Victor Wembanyama','Basketball','sportif'],['Léon Marchand','Natation','sportif'],['Sauveur Cristofini','Natation','sportif'],['Félix Lebrun','Tennis de table','sportif'],['Alexis Lebrun','Tennis de table','sportif'],['Flavien Coton','Tennis de table','sportif'],['Paul Seixas','Cyclisme','sportif'],['Kylian Mbappé','Football','sportif'],['Équipe de France de football','Football','équipe','France'],['XV de France','Rugby','équipe','France Rugby'],['Arthur Fils','Tennis','sportif'],['Jannik Sinner','Tennis','sportif'],['Carlos Alcaraz','Tennis','sportif'],['Rafael Jódar','Tennis','sportif'],['Moïse Kouamé','Tennis','sportif'],['Mirra Andreeva','Tennis','sportif']
@@ -728,6 +728,10 @@ function bindContent(){
   if(button.dataset.poster)video.poster=button.dataset.poster;
   video.src=button.dataset.playVideo;
   video.addEventListener('click',e=>e.stopPropagation());
+  video.addEventListener('error',()=>{
+   const page=button.dataset.videoPage;
+   slot.innerHTML=page&&page!=='#'?'<a class="result-replay ghost" href="'+esc(page)+'" target="_blank" rel="noopener noreferrer">▶ Ouvrir la vidéo sur ESPN ↗</a>':'<p class="news-reader-note">Vidéo indisponible sur cet appareil.</p>';
+  },{once:true});
   slot.replaceChildren(video);button.textContent='✕ Fermer la vidéo';
   video.play().catch(()=>{});
  }));
@@ -823,24 +827,13 @@ async function refresh(){
  if(!navigator.onLine){errors=['Hors connexion : les dernières données disponibles restent affichées.'];render();return;}
  loading=true;errors=[];softRender();
  try{
-  const articles=workerUrl?favorites.slice(0,22):[];
-  const [espn,tennis,newsGroups,extraNews,fflNews]=await Promise.all([
+  // Google Actualités refuse les requêtes du relais Cloudflare (HTTP 503) :
+  // les médias passent par /api/sports-news, FFL directement ou par le relais.
+  const [espn,tennis,extraNews,fflNews]=await Promise.all([
    espnResults(),
    tennisResults(),
-   Promise.all(articles.map(async f=>{
-    try{
-     const data=await request('/api/news',{q:f.name+' '+f.sport});
-     return (data.articles||[]).slice(0,6).map(a=>({...a,favorite:f.name}));
-    }catch{return []}
-   })),
    fetchSportsNews(favorites,new Date(),workerUrl).catch(()=>[]),
-   fetchFFLNews().catch(async()=>{
-    // Repli Google News site: FFL si l'API WordPress refuse CORS.
-    if(!workerUrl)return [];
-    try{const response=await request('/api/news',{q:'site:fflose.com sport'});return (response.articles||[])
-      .filter(a=>/^https:\/\/fflose\.com\//.test(a.link||''))
-      .map(a=>({...a,favorite:'FFL',source:'FFL'}));}catch{return []}
-   }),
+   fetchFFLNews().catch(()=>[]),
   ]);
   scoreNotes=[...espn.notes];individualNotes=[];
   const seen=new Set();
@@ -855,7 +848,7 @@ async function refresh(){
   // Les stats NBA sont attachées à la rencontre Spurs : pas de seconde carte individuelle.
   individualResults=tennis.events.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
   individualNotes.push(...tennis.notes,...nba.notes);
-  news=newsLastWeek([...newsGroups.flat(),...extraNews,...fflNews],new Date());
+  news=newsLastWeek([...extraNews,...fflNews],new Date());
   if(!workerUrl&&!news.length&&!jeuSetMathsPosts.length)errors.push('Aucun article reçu de FFL, ESPN ou Jeu, set et maths. Le relais Cloudflare est facultatif.');
   else if(!news.length&&!jeuSetMathsPosts.length)errors.push('Aucune actualité reçue du relais.');
   if(!matches.length&&!scoreNotes.length)scoreNotes.push('Aucune rencontre disponible pour PSG, Real Madrid ou Spurs sur la période consultée.');

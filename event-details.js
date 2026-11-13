@@ -130,12 +130,18 @@ function parsePlayerStats(box,kind,favorite,strict=false){
 }
 // ESPN peut publier un article de match distinct de la simple boxscore.
 export function recapArticleFromESPN(body){
- const candidates=[body?.article,...(body?.news?.articles||[]),...(body?.articles||[])].filter(Boolean);
+ // Seul le compte rendu du match compte : les « news » d'une feuille ESPN
+ // sont souvent des articles génériques de la ligue.
+ const plain=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const sides=(body?.header?.competitions?.[0]?.competitors||[]).map(c=>[c.team?.displayName,c.team?.shortDisplayName,c.team?.name,c.athlete?.displayName,c.athlete?.shortName].filter(Boolean).map(plain));
+ // Article hors compte rendu : les DEUX camps doivent figurer dans le titre.
+ const aboutMatch=a=>{const h=plain(a.headline||a.title);return sides.length>=2&&sides.every(names=>names.some(t=>t.length>=3&&h.includes(t)));};
+ const candidates=[body?.article,...(body?.news?.articles||[]).filter(a=>/recap/i.test(a.type||'')||aboutMatch(a))].filter(Boolean);
  for(const a of candidates){
   const title=a.headline||a.title||'';
-  const link=a.links?.web?.href||a.links?.mobile?.href||a.link||a.url||'';
+  const link=String(a.links?.web?.href||a.links?.mobile?.href||a.link||a.url||'').replace(/^http:\/\//,'https://');
   if(title&&/^https:\/\/(?:www\.)?espn\.(?:com|co\.uk)\//i.test(link)){
-   const excerpt=String(a.description||a.summary||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,400);
+   const excerpt=String(a.description||a.summary||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().replace(/^[—–-]\s*/,'').slice(0,400);
    return {title,link,excerpt,source:'ESPN'};
   }
  }
@@ -143,7 +149,7 @@ export function recapArticleFromESPN(body){
  const competition=body?.header?.competitions?.[0]||{};
  for(const l of competition.links||[]){
   const rel=String(l.rel?.join(' ')||l.text||'');
-  const url=l.href||l.url||'';
+  const url=String(l.href||l.url||'').replace(/^http:\/\//,'https://');
   if(/recap|article|report|compte rendu/i.test(rel)&&/^https:\/\/(?:www\.)?espn\.(?:com|co\.uk)\//i.test(url))
    return {title:'Compte rendu du match (ESPN)',link:url,excerpt:'',source:'ESPN'};
  }

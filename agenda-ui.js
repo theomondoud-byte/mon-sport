@@ -1,12 +1,12 @@
-import {sportInfo} from './sports-media.js?v=16.6.0';
+import {sportInfo} from './sports-media.js?v=16.7.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=16.6.0';
-import {auditInfo} from './audit-2026.js?v=16.6.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=16.6.0';
-import {renderFavoriteStats} from './stats-view.js?v=16.6.0';
-import {photoInitials} from './photos.js?v=16.6.0';
-import {nextCompetitionNote} from './verified-program.js?v=16.6.0';
-import {coverageFor} from './coverage-v11.js?v=16.6.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=16.7.0';
+import {auditInfo} from './audit-2026.js?v=16.7.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=16.7.0';
+import {renderFavoriteStats} from './stats-view.js?v=16.7.0';
+import {photoInitials} from './photos.js?v=16.7.0';
+import {nextCompetitionNote} from './verified-program.js?v=16.7.0';
+import {coverageFor} from './coverage-v11.js?v=16.7.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -85,7 +85,7 @@ function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
  const page=(media.videos||[]).find(v=>v.page);
  const q=encodeURIComponent(String(item.title||'').replace(/—/g,' ')+' résumé '+new Date(item.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}));
  const replay=video
-  ?'<button type="button" class="result-replay" data-play-video="'+esc(video.src)+'" data-poster="'+esc(video.poster||'')+'" data-stop>▶ Voir le résumé vidéo</button><div class="result-video-slot"></div>'
+  ?'<button type="button" class="result-replay" data-play-video="'+esc(video.src)+'" data-video-page="'+esc(safeUrl(video.page||''))+'" data-poster="'+esc(video.poster||'')+'" data-stop>▶ Voir le résumé vidéo</button><div class="result-video-slot"></div>'
   :page?'<a class="result-replay ghost" href="'+esc(safeUrl(page.page))+'" target="_blank" rel="noopener noreferrer" data-stop>▶ Résumé vidéo sur ESPN ↗</a>'
   :'<a class="result-replay ghost" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener noreferrer" data-stop>🔎 Chercher le résumé vidéo ↗</a>';
  return summary+'<div class="result-replay-row">'+replay+'</div>';

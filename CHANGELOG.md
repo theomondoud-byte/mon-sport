@@ -4,6 +4,16 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V16.7 — vérifié sur les vraies données
+
+- **Articles** : le relais met en cache sa réponse 10 min et limite à 5 s la recherche d'images ; l'appli attend jusqu'à 25 s. Au démarrage à froid, le délai de 12 s pouvait faire perdre tous les articles (FFL compris).
+- Les 20 appels Google Actualités par actualisation sont supprimés : Google refuse le relais Cloudflare (HTTP 503).
+- **Résultats** : un article n'est associé à un match que s'il cite le favori ET l'adversaire (Italy/Italie reconnus). Le compte rendu ESPN n'utilise plus les articles génériques de la ligue ; les comptes rendus NBA (liens http) sont acceptés. Sur les vrais matchs de la semaine : 10 résumés, tous corrects, et 6 vidéos.
+- Avant-matchs anglais écartés (« visit », « host », « slate »…), et les bilans de saison « (8-4) » ne comptent plus comme un score.
+- Vidéo illisible sur l'appareil : lien de repli vers la vidéo sur ESPN.
+
+---
+
 # Mon Sport V16.6 — texte FFL réellement complet (vérifié sur le vrai flux)
 
 - Le site FFL bloque son API WordPress (401) : le Worker lit le flux RSS complet, qui contient tout l'article.
