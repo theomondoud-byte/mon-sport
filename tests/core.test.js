@@ -197,7 +197,8 @@ test('les classements football continuent de s’afficher sans données ATP',()=
  assert.match(html,/Club/);
  assert.match(html,/>V<\/span>/);
  assert.match(html,/standings-football/);
- assert.match(html,/class="rank-data rank-number">9<\/span>/);
+ assert.match(html,/PSG/);
+ assert.match(html,/class="rank-data rank-number">—<\/span>/);
 });
 
 test('récupération ATP sans requête au classement officiel ESPN',async()=>{
