@@ -62,17 +62,20 @@ export function rankingForFavorite(favorite){
  if(name==='FC Barcelone'||name==='Real Madrid'||name==='Kylian Mbappé')return 'liga';
  return null;
 }
-export function rankingsForFavorite(favorite){
- const name=typeof favorite==='string'?favorite:favorite?.name;
- if(name==='Mirra Andreeva')return ['wta','wtarace'];
- if(name==='Rafael Jódar'||name==='Moïse Kouamé')return ['atp','atprace','nextgen'];
- if(['Arthur Fils','Jannik Sinner','Carlos Alcaraz'].includes(name))return ['atp','atprace'];
- if(['Félix Lebrun','Alexis Lebrun','Flavien Coton'].includes(name))return ['wtt'];
- if(name==='PSG')return ['ligue1','ucl'];
- if(name==='FC Barcelone'||name==='Real Madrid')return ['liga','ucl'];
- if(name==='San Antonio Spurs'||name==='Victor Wembanyama')return ['nbaouest'];
- if(name==='Kylian Mbappé')return ['liga','ucl'];
- return [];
+export function rankingsForFavorite(favorite,live={}){
+ const name=typeof favorite==='string'?favorite:favorite?.name||'';
+ const predefined=name==='Mirra Andreeva'?['wta','wtarace']:
+  ['Rafael Jódar','Moïse Kouamé'].includes(name)?['atp','atprace','nextgen']:
+  ['Arthur Fils','Jannik Sinner','Carlos Alcaraz'].includes(name)?['atp','atprace']:
+  ['Félix Lebrun','Alexis Lebrun','Flavien Coton'].includes(name)?['wtt']:
+  name==='PSG'?['ligue1','ucl']:
+  ['FC Barcelone','Real Madrid','Kylian Mbappé'].includes(name)?['liga','ucl']:
+  ['San Antonio Spurs','Victor Wembanyama'].includes(name)?['nbaouest']:[];
+ // Un favori créé par l'utilisateur est aussi reconnu lorsqu'il apparaît dans un classement chargé.
+ const direct=RANKINGS.filter(spec=>Array.isArray(live?.[spec.id]?.rows)&&
+  live[spec.id].rows.some(row=>norm(row.name)===norm(name)||
+   (knownTeams[name]||[]).some(alias=>norm(row.name)===norm(alias)))).map(spec=>spec.id);
+ return [...new Set([...predefined,...direct])];
 }
 const displayStat=(list,keys)=>{
  for(const key of keys){
