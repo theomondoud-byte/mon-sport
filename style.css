@@ -859,3 +859,31 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .jsm-feed-indicator{font-size:.73rem;padding:8px;gap:4px}
  .jsm-feed-indicator button{padding:4px 6px}
 }
+
+/* V15.7 — filtres des médias sportifs, adaptés aux écrans tactiles. */
+.news-filter-block{display:grid;gap:7px;margin:12px 0 9px;min-width:0}
+.news-filter-label{font-size:.74rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#b9d6e3}
+.news-source-filters{display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-width:0}
+.news-source-chip{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:6px 11px;
+ border:1px solid #426579;border-radius:999px;background:#122d43;color:#dbeaf3;font:inherit;font-size:.78rem;
+ cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s}
+.news-source-chip span{font-size:.68rem;color:#a9c7d7;font-variant-numeric:tabular-nums}
+.news-source-chip.active{background:#1d5b60;border-color:#69c8aa;color:#f2fff9;font-weight:800}
+.news-source-chip:focus-visible{outline:2px solid #b4e6ff;outline-offset:2px}
+.news-context-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0 12px}
+.news-context-filters label{display:grid;gap:5px;font-size:.75rem;font-weight:750;color:#c7dbe6;min-width:0}
+.news-context-filters select{width:100%;min-width:0;min-height:38px;border:1px solid #426579;border-radius:9px;
+ background:#10283b;color:#f0f8fc;padding:7px 9px;font:inherit;font-size:.82rem}
+.jsm-native-video{display:block;width:100%;max-width:760px;max-height:75vh;aspect-ratio:16/9;
+ object-fit:contain;background:#050d15;border-radius:12px;margin:4px auto}
+.jsm-video-hint{font-size:.74rem;color:#b9d2df;text-align:center;margin:-5px 0 0}
+.jsm-video-hint a{color:#b8f2d8;text-decoration:underline}
+@media(max-width:550px){
+ .news-source-filters{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;
+  padding:2px 0 7px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+ .news-source-chip{flex:none;min-height:36px;padding:7px 10px;font-size:.76rem}
+ .news-context-filters{gap:7px}
+ .news-context-filters label{font-size:.71rem}
+ .news-context-filters select{font-size:.77rem;padding:7px 6px}
+ .jsm-native-video{max-height:62vh;aspect-ratio:9/16}
+}
