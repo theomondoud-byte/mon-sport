@@ -1,3 +1,15 @@
+# Mon Sport V15.3 — publications X directement dans le flux d'actualité
+
+Les posts **Jeu, set et maths** sont maintenant **intégrés directement entre les autres articles** dans l'onglet Articles : il n'est plus nécessaire de cliquer sur chaque carte pour lancer le lecteur officiel X.
+
+- Les publications X sont chargées automatiquement **lorsque leur carte entre dans la zone visible** (ou à proximité). Le chargement progressif évite de ralentir l'arrivée du flux et les autres onglets.
+- Un bouton **« Voir plus »** de Mon Sport agrandit la publication **sur la même page**, et **« Voir moins »** la replie, sans quitter le fil. Le lecteur officiel X affiche le contenu et les médias qu'il autorise à intégrer.
+- Le bouton Mon Sport ne contrôle pas les liens internes de l'iframe X : certaines actions propres au widget X peuvent continuer à ouvrir la plateforme.
+- En cas de blocage de l'intégration par X ou le navigateur, l'application explique la limitation et conserve un extrait et un lien vers la publication originale.
+- Les articles FFL/ESPN gardent leur fonctionnement. La PWA est versionnée V15.3 pour activer l'affichage sur Android.
+
+---
+
 # Mon Sport V15.2 — publications complètes de « Jeu, set et maths » intégrées
 
 En ouvrant une publication du compte **@JeuSetMaths** dans l'onglet **Articles**, Mon Sport essaie désormais de charger directement **le post original complet, avec son texte, ses images et ses vidéos**, via l'[intégration officielle de X](https://help.x.com/fr/using-x/how-to-embed-a-post).
