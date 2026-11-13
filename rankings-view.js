@@ -366,7 +366,7 @@ export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
  const cards=rows.map(row=>{
   const fav=matchRankingFavorite(row.name,favorites);
   const name=fav?'<button type="button" class="rank-favorite-link" data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Favoris">'+esc(row.name)+'</button>':esc(row.name);
-  const who='<span class="rank-person">'+logo(row)+name+'</span>';
+  const who='<span class="rank-person" title="'+esc(row.name)+'">'+logo(row)+name+'</span>';
   if(tableTennis){
    const mv=row.movement;
    const mark=typeof mv==='number'?(mv>0?'▲ '+mv:mv<0?'▼ '+Math.abs(mv):'▬'):'—';
