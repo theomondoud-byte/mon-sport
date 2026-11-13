@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,rankingRows} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,renderRankingsView} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -113,4 +113,36 @@ test('photos : seulement des URL HTTPS externes',()=>{
  assert.equal(sourceImage('javascript:alert(1)'),'');
  assert.equal(sourceImage('http://example.com/image.jpg'),'');
  assert.equal(sourceImage('https://example.com/image.jpg'),'https://example.com/image.jpg');
+});
+
+test('ATP live : relier 150 rangs contrôlés et conserver les points officiels',()=>{
+ const now=new Date('2026-11-13T10:00:00Z');
+ const payload={fetchedAt:'2026-11-13T09:00:00Z',rows:Array.from({length:150},(_,i)=>({
+  rank:i+1,name:i===0?'Alexander Zverev':'Joueur '+i,livePoints:9350-i,
+  movement:i===0?2:0,pointsChange:i===0?-200:0,
+  tournament:i===0?'ATP Finals RR':'',nextPoints:i===0?null:9450-i,maxPoints:i===0?null:9600-i
+ }))};
+ const joined=mergeATPLiveRows([{rank:1,name:'Alexander Zverev',points:'9550'}],payload,now);
+ assert.equal(joined.matched,1);
+ assert.equal(joined.rows[0].points,'9550');
+ assert.equal(joined.rows[0].livePoints,9350);
+ assert.equal(joined.rows[0].pointsChange,-200);
+ assert.equal(joined.rows[0].nextPoints,null);
+ assert.equal(joined.rows[0].movementLive,2);
+ assert.deepEqual(mergeATPLiveRows([{name:'Test'}],payload,new Date('2026-11-17T12:00:00Z')).rows,[{name:'Test'}]);
+});
+
+test('classement ATP présenté en colonnes sans panneau dépliable',()=>{
+ const now=new Date();
+ const html=renderRankingsView({selected:'atp',live:{atp:{
+  rows:[{rank:1,name:'Alexander Zverev',points:'9550',livePoints:9350,
+   pointsChange:-200,age:29,country:'GER',movementLive:0,tournament:'ATP Finals RR'}],
+  liveFeedAsOf:now.toISOString(),liveFeedMatched:150,live:true,asOf:now.toISOString()}},
+  favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Officiels/);
+ assert.match(html,/Tournoi en cours/);
+ assert.match(html,/9350/);
+ assert.match(html,/ATP Finals RR/);
+ assert.match(html,/rank-table-scroll/);
+ assert.doesNotMatch(html,/<details class="rank-live-details"/);
 });

@@ -412,3 +412,31 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 }
 
 .rank-player-photo{display:inline-block;width:28px;height:28px;object-fit:cover;border-radius:50%;vertical-align:middle;margin-right:6px;background:#315265;border:1px solid #456f7e}
+
+/* Classement ATP/WTA en colonnes : scroll horizontal et contexte visible. */
+.rank-horizontal-hint{font-size:.75rem;color:#b1dfe4;margin:10px 0 5px}
+.rank-table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;border:1px solid #386375;border-radius:13px}
+.rank-table-scroll:focus-visible{outline:3px solid #9feccb;outline-offset:3px}
+.tennis-rank-table{width:max-content;min-width:100%;border:0;border-radius:0;overflow:visible}
+.tennis-rank-table .tennis-rank-row{display:grid;grid-template-columns:44px 230px 94px 84px 81px 205px 85px 85px;gap:9px;padding:10px 12px;align-items:center}
+.tennis-rank-table .rank-table-head{font-size:.71rem;position:sticky;top:0;z-index:4}
+.tennis-rank-table .rank-row{min-height:54px}
+.tennis-rank-table .rank-place{font-size:.86rem}
+.tennis-rank-table .rank-place small{display:block;font-size:.61rem;color:#9ae8cb;font-weight:600}
+.tennis-rank-table .rank-person{font-size:.84rem;line-height:1.32}
+.tennis-rank-table .rank-person small{font-size:.7rem;margin-top:4px}
+.tennis-rank-table .rank-data{font-size:.84rem;font-weight:700;line-height:1.35;white-space:normal}
+.tennis-rank-table .rank-number{text-align:right;font-variant-numeric:tabular-nums}
+.tennis-rank-table .rank-tournament{font-weight:550;font-size:.75rem;white-space:normal}
+.tennis-rank-table .tennis-rank-row>.rank-place{position:sticky;left:0;background:#0e2b40;z-index:2;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.tennis-rank-table .tennis-rank-row>.rank-person{position:sticky;left:44px;background:#0e2b40;z-index:2;align-self:stretch;display:block;padding-top:4px}
+.tennis-rank-table .rank-row:nth-child(2n)>.rank-place,.tennis-rank-table .rank-row:nth-child(2n)>.rank-person{background:#13374b}
+.tennis-rank-table .rank-tracked>.rank-place,.tennis-rank-table .rank-tracked>.rank-person{background:#1a5149!important}
+.tennis-rank-table .rank-table-head>.rank-place,.tennis-rank-table .rank-table-head>.rank-person{background:#21495b}
+@media(max-width:550px){
+ .tennis-rank-table .tennis-rank-row{grid-template-columns:36px 150px 76px 76px 70px 160px 76px 76px;gap:7px;padding:9px 6px}
+ .tennis-rank-table .tennis-rank-row>.rank-person{left:36px}
+ .tennis-rank-table .rank-player-photo{width:24px;height:24px}
+ .tennis-rank-table .rank-data{font-size:.76rem}
+ .tennis-rank-table .rank-person{font-size:.77rem}
+}
