@@ -830,7 +830,7 @@ test('Autres médias : conserver la carte de lien éditeur classique',()=>{
   date:'2026-11-12T13:00:00Z',link:'https://www.espn.com/soccer/',
   source:'ESPN',favorite:'PSG',sport:'Football'};
  const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
-  esc:x=>String(x),safeUrl:x=>x,photos:{}});
+  esc:x=>String(x),safeUrl:x=>x,photos:{},favorites:[{name:'PSG',sport:'Football'}]});
  assert.match(html,/class="news-read-inline"|Lire dans Mon Sport/);
  assert.match(html,/Lire dans Mon Sport/);
  assert.doesNotMatch(html,/class="news-post-card"/);
@@ -925,7 +925,7 @@ test('Mobile : même avec d’autres articles, 3 posts X apparaissent immédiate
   source:'ESPN',sport:'Football',favorite:'PSG'
  }));
  const posts=readBundledJeuSetMathsNews({now});
- const html=renderNewsView({news:[...articles,...posts],now,esc:x=>String(x),safeUrl:x=>x,photos:{}});
+ const html=renderNewsView({news:[...articles,...posts],now,esc:x=>String(x),safeUrl:x=>x,photos:{},favorites:[{name:'PSG',sport:'Football'}]});
  const posJsm=html.indexOf('class="news-card jsm-native-card"');
  const posArticle=html.indexOf('class="news-card news-link-card"');
  assert.ok(posJsm>=0&&posArticle>=0);
@@ -1030,6 +1030,6 @@ test('V15.8 : les extraits des médias RSS sont lisibles directement dans les ca
   esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
   safeUrl:x=>x,photos:{},favorites:[{name:'Paul Seixas',sport:'Cyclisme'}]});
  assert.match(html,/Le jeune coureur français revient sur sa préparation et ses objectifs\./);
- assert.match(html,/Lire l’article chez l’éditeur/);
+ assert.match(html,/Lire dans Mon Sport/);
  assert.match(html,/Cyclism'Actu/);
 });
