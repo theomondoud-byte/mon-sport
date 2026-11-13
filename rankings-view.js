@@ -245,6 +245,11 @@ export function parseATPLiveSnapshot(payload,now=new Date()){
    movement:Number.isInteger(raw.movement)?raw.movement:null,
    pointsChange:Number.isInteger(raw.pointsChange)?raw.pointsChange:null,
    tournament:String(raw.tournament||'').slice(0,160),
+   tournamentHistory:(Array.isArray(raw.tournamentHistory)?raw.tournamentHistory:[])
+    .filter(e=>e&&typeof e.text==='string'&&e.text.trim()&&
+      Number.isFinite(Date.parse(e.lastSeen||''))&&now.getTime()>=Date.parse(e.lastSeen)&&
+      now.getTime()-Date.parse(e.lastSeen)<14*86400000)
+    .slice(0,10).map(e=>({text:e.text.slice(0,160),lastSeen:e.lastSeen})),
    previousTournaments:String(raw.previousTournaments||'').slice(0,240),
    tournamentStatus:['defaite','en_lice','non_communique'].includes(raw.tournamentStatus)
     ?raw.tournamentStatus:'non_communique',
@@ -253,6 +258,26 @@ export function parseATPLiveSnapshot(payload,now=new Date()){
  }
  return rows.sort((x,y)=>x.rank-y.rank);
 }
+// Filtres communs aux tableaux ATP live et WTA. L'âge est strictement inférieur.
+export function filterTennisRankingRows(rows,{ageMax='',country=''}={}){
+ const max=ageMax!==''&&ageMax!==null&&Number.isInteger(Number(ageMax))?Number(ageMax):null;
+ const nation=String(country||'').trim().toUpperCase();
+ return (Array.isArray(rows)?rows:[]).filter(r=>
+  (max===null||(Number.isFinite(Number(r.age))&&r.age!==null&&r.age!==undefined&&Number(r.age)<max))&&
+  (!nation||String(r.country||'').trim().toUpperCase()===nation));
+}
+const COUNTRY_FR={
+ FRA:'France',GER:'Allemagne',ITA:'Italie',ESP:'Espagne',USA:'États-Unis',GBR:'Royaume-Uni',
+ AUS:'Australie',ARG:'Argentine',AUT:'Autriche',BEL:'Belgique',BIH:'Bosnie-Herzégovine',
+ BOL:'Bolivie',BRA:'Brésil',BUL:'Bulgarie',CAN:'Canada',CHI:'Chili',CHN:'Chine',
+ COL:'Colombie',CRO:'Croatie',CZE:'Tchéquie',DEN:'Danemark',FIN:'Finlande',
+ GEO:'Géorgie',GRE:'Grèce',HKG:'Hong Kong',HUN:'Hongrie',JPN:'Japon',
+ KAZ:'Kazakhstan',LTU:'Lituanie',MON:'Monaco',NED:'Pays-Bas',NOR:'Norvège',
+ PAR:'Paraguay',PER:'Pérou',POL:'Pologne',POR:'Portugal',RSA:'Afrique du Sud',
+ RUS:'Russie',SRB:'Serbie',SUI:'Suisse',SVK:'Slovaquie',TUR:'Turquie',
+ UKR:'Ukraine',ROU:'Roumanie',IND:'Inde',MEX:'Mexique',URU:'Uruguay',
+ SLO:'Slovénie',SWE:'Suède',TPE:'Taïwan',TUN:'Tunisie'
+};
 export function rankingRows(id,live={}){
  const data=live?.[id];
  if(data?.rows?.length)return data.rows;
@@ -262,9 +287,11 @@ export function rankingEntry(id,name,live={}){
  return rankingRows(id,live).find(x=>norm(x.name)===norm(name)||
   (knownTeams[name]||[]).some(alias=>norm(x.name)===norm(alias)))||null;
 }
-export function renderRankingsView({selected='atp',live={},favorites=[],loading=false,esc,safeUrl}){
+export function renderRankingsView({selected='atp',live={},favorites=[],loading=false,ageMax='',country='',esc,safeUrl}){
  const spec=RANKINGS.find(r=>r.id===selected)||RANKINGS[0];
  const rows=rankingRows(spec.id,live);
+ const filterEnabled=spec.mode==='tennis-live'||spec.mode==='tennis-espn';
+ const displayedRows=filterEnabled?filterTennisRankingRows(rows,{ageMax,country}):rows;
  const tennisColumns=spec.mode==='tennis-espn';
  const atpLive=spec.mode==='tennis-live';
  const saved=live[spec.id];
@@ -275,7 +302,22 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   :'Classement non disponible depuis la source';
  const nav='<div class="rank-tabs" role="group" aria-label="Types de classements">'+RANKINGS.map(r=>
   '<button type="button" data-rank-select="'+esc(r.id)+'" class="'+(r.id===spec.id?'selected':'')+'" aria-pressed="'+(r.id===spec.id?'true':'false')+'">'+esc(r.title)+'</button>').join('')+'</div>';
- const cards=rows.map(r=>{
+ const localeCompare=(a,b)=>a.localeCompare(b,'fr',{sensitivity:'base'});
+ const nations=filterEnabled?[...new Set(rows.map(r=>String(r.country||'').toUpperCase()).filter(Boolean))]
+  .sort((a,b)=>a==='FRA'?-1:b==='FRA'?1:localeCompare(COUNTRY_FR[a]||a,COUNTRY_FR[b]||b)):[];
+ const ages=Array.from({length:36},(_,i)=>i+16);
+ const filterPanel=filterEnabled?'<div class="atp-filters" aria-label="Filtres des classements tennis">'
+  +'<label for="rankAgeMax">Âge maximum <select id="rankAgeMax"><option value="">Tous les âges</option>'
+  +ages.map(n=>'<option value="'+n+'" '+(String(ageMax)===String(n)?'selected':'')+'>Moins de '+n+' ans</option>').join('')
+  +'</select></label>'
+  +'<label for="rankCountry">Nationalité <select id="rankCountry"><option value="">Toutes les nationalités</option>'
+  +nations.map(code=>'<option value="'+esc(code)+'" '+(country===code?'selected':'')+'>'
+    +(code==='FRA'?'🇫🇷 ':'')+esc(COUNTRY_FR[code]||code)+'</option>').join('')
+  +'</select></label>'
+  +'<button type="button" class="atp-filter-clear" id="rankFilterReset" '+(!ageMax&&!country?'disabled':'')+'>Effacer</button>'
+  +'<span class="atp-filter-count" role="status" aria-live="polite">'+displayedRows.length+' joueur'
+  +(displayedRows.length!==1?'s':'')+' sur '+rows.length+'</span></div>':'';
+ const cards=displayedRows.map(r=>{
   const fav=matchRankingFavorite(r.name,favorites);
   const clickable=!!fav;
   const attrs=clickable?' data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Un favori"':'';
@@ -315,7 +357,13 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
     +cell(r.livePoints,'rank-number','Points ATP live')
     +'<span class="rank-data atp-movement">'+rankMove+'</span>'
     +cell(r.pointsChange==null?null:signed(r.pointsChange),'rank-number '+(r.pointsChange<0?'negative':r.pointsChange>0?'positive':''),'Variation nette des points par rapport au classement officiel précédent')
-    +cell(r.tournament||null,'rank-tournament','Tournoi où le joueur est encore inscrit')
+    +'<span class="rank-data rank-tournament atp-tourneys">'
+    +(r.tournament?'<span class="atp-tourneys-item current"><small>Actuel</small>'+esc(r.tournament)+'</span>':'')
+    +(Array.isArray(r.tournamentHistory)?r.tournamentHistory.filter(item=>item.text?.trim()&&
+      item.text.trim()!==String(r.tournament||'').trim()).map(item=>
+      '<span class="atp-tourneys-item recent" title="Tournoi observé le '+esc(new Date(item.lastSeen).toLocaleDateString('fr-FR'))+'">'
+      +'<small>Observé</small>'+esc(item.text)+'</span>').join(''):'')
+    +(!r.tournament&&!(r.tournamentHistory||[]).length?'—':'')+'</span>'
     +cell(r.previousTournaments||null,'rank-tournament','Épreuves déjà terminées ou résultats enregistrés par la source')
     +'<span class="rank-data">'+status+'</span>'
     +cell(r.nextPoints,'rank-number','Total des points après une victoire au prochain match')
@@ -353,7 +401,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   .filter(x=>x.entry&&!rows.some(r=>norm(r.name)===norm(x.name))):[];
  return '<section class="rankings-shell"><div class="rankings-heading"><h2>🏆 Classements</h2>'
   +'<p>Le nom d’un favori reste cliquable. Un tiret signifie que la source ne communique pas la valeur.</p></div>'
-  +nav+'<div class="rankings-source"><span>'+esc(label)+'</span>'
+  +nav+filterPanel+'<div class="rankings-source"><span>'+esc(label)+'</span>'
   +'<a href="'+esc(safeUrl(spec.url))+'" target="_blank" rel="noopener noreferrer">Voir le classement complet ↗</a></div>'
   +(loading?'<p class="agenda-progress">Actualisation des classements…</p>':'')
   +(cards?(atpLive
@@ -361,13 +409,14 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
     +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement ATP live : tableau défilant">'
     +'<div class="rank-table atp-live-table"><div class="rank-table-head atp-live-row">'
     +'<span>#</span><span>MC</span><span>Joueur</span><span>Âge</span><span>Pays</span><span>Pts live</span><span>Δ rang</span><span>Δ pts</span>'
-    +'<span>Tournoi en cours</span><span>Tournois précédents</span><span>Résultat</span><span>Suiv.</span><span>Max</span>'
+    +'<span>Tournois · 14 j</span><span>Tournois précédents</span><span>Résultat</span><span>Suiv.</span><span>Max</span>'
     +'</div>'+cards+'</div></div>'
    :tennisColumns
    ?'<p class="rank-horizontal-hint">↔ Fais défiler le tableau vers la droite pour voir les projections.</p><div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : défilement horizontal"><div class="rank-table tennis-rank-table"><div class="rank-table-head tennis-rank-row"><span>Rang</span><span>Joueur · variation</span><span>Officiels</span><span>Live</span><span>Δ pts</span><span>Tournoi en cours</span><span>Prochain</span><span>Maximum</span></div>'+cards+'</div></div>'
    :'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>')
   :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
   +(atpLive?'<p class="agenda-footnote">ATP live : relevé du '+esc(asOf||'non communiqué')
+    +' · les tournois affichés sur 14 jours sont ceux observés dans les relevés successifs de Mon Sport ; il ne s’agit pas de dates officielles de matchs. L’historique se construit progressivement. '
     +' · classement uniquement live-tennis.eu, pas de points officiels ajoutés. '
     +'Δ rang = variation depuis le dernier classement officiel ; Δ pts = variation nette des points. '
     +'La mention Défaite vient de la source, dans les tournois déjà disputés. En lice / prévu signifie que le tournoi figure dans la colonne en cours ; aucun résultat n’est supposé. '
