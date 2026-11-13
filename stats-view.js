@@ -13,7 +13,7 @@ const rankAssociation=(id,favorite)=>{
  if(favorite==='Kylian Mbappé'&&['liga','ucl'].includes(id))return 'Real Madrid';
  return favorite;
 };
-export function renderFavoriteRankingDetails({favorite,rankingId,rankings={},esc,safeUrl=(url)=>url}){
+export function renderFavoriteRankingDetails({favorite,rankingId,rankings={},seen=null,esc,safeUrl=(url)=>url}){
  const spec=RANKINGS.find(r=>r.id===rankingId);
  if(!spec)return '';
  const team=rankAssociation(rankingId,favorite);
@@ -37,31 +37,42 @@ export function renderFavoriteRankingDetails({favorite,rankingId,rankings={},esc
  if(!row)return '<section class="stat-rank-card">'+heading
   +'<p class="stat-help">Données du classement indisponibles pour ce favori. Aucun chiffre n’est estimé.</p></section>';
  const items=[];
- const add=(label,value,help='')=>items.push(tile(label,shown(value),help,esc));
- const addRank=(label,value)=>add(label,value===null||value===undefined?'—':'#'+value);
+ // On masque les champs non communiqués ; ils n'apportent aucune information.
+ const add=(label,value,help='',keepEmpty=false)=>{
+  const text=shown(value);
+  if(!keepEmpty&&text==='—')return;
+  items.push(tile(label,text,help,esc));
+ };
+ const addOnce=(key,label,value,help='')=>{
+  const text=shown(value);
+  if(text==='—')return;
+  const dedupeKey=key+':'+text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  if(seen?.has(dedupeKey))return;
+  if(seen)seen.add(dedupeKey);
+  add(label,text,help);
+ };
+ const addRank=(label,value)=>add(label,value===null||value===undefined?'—':'#'+value,'',true);
  addRank('Rang',row.rank);
  if(kind==='tennis-live'){
   const cols=tournamentColumns(row),status=tournamentStatusInColumns(row,cols);
-  if(['atp','wta'].includes(rankingId))add('Meilleur classement (MC)',row.careerHigh||'—');
-  add('Âge',row.age==null?'—':row.age+' ans');
-  add('Nationalité',row.country);
+  if(['atp','wta'].includes(rankingId))add('Meilleur classement (MC)',row.careerHigh);
+  // Âge et nationalité sont regroupés dans le profil commun, une seule fois.
   add('Points live',row.livePoints);
   add('Variation du rang',signed(row.movement));
   add('Variation des points',signed(row.pointsChange));
-  add('Tournoi en cours',cols.current||'—',status.current?'En lice / prévu':'');
-  add('Tournoi précédent',cols.previous||'—',status.previous?'Défaite signalée':cols.previousObserved?'Observé récemment':'');
+  addOnce('tournoi','Tournoi en cours',cols.current,status.current?'En lice / prévu':'');
+  addOnce('tournoi','Tournoi précédent',cols.previous,status.previous?'Défaite signalée':cols.previousObserved?'Observé récemment':'');
   add('Points après prochaine victoire',row.nextPoints);
   add('Maximum possible',row.maxPoints);
  }else if(kind==='wtt-weekly'||rankingId==='wtt'){
-  add('Nationalité',row.country);
   add('Points ITTF',row.points);
   add('Évolution hebdomadaire',signed(row.movement));
  }else if(spec.west){
   const pct=Number(row.pct);
   const percent=row.pct===null||row.pct===undefined||row.pct===''||!Number.isFinite(pct)||pct<0||pct>1
    ?'—':new Intl.NumberFormat('fr-FR',{style:'percent',minimumFractionDigits:1,maximumFractionDigits:1}).format(pct);
-  add('Équipe',row.name);
-  add('Conférence',row.group||'Ouest');
+  // Le nom de l'équipe figure déjà dans l'en-tête du classement.
+
   add('Victoires',row.wins);
   add('Défaites',row.losses);
   add('Pourcentage de victoires',percent);
@@ -75,8 +86,7 @@ export function renderFavoriteRankingDetails({favorite,rankingId,rankings={},esc
   add('Points encaissés / match',row.avgPointsAgainst);
   add('Différence moyenne / match',row.avgDiff);
  }else if(kind==='espn'){
-  add('Équipe',row.name);
-  if(row.group)add('Groupe / phase',row.group);
+  if(row.group&&row.group!==spec.title)add('Groupe / phase',row.group);
   add('Points',row.points);
   add('Matchs joués (J)',row.played);
   add('Victoires (V)',row.wins);
@@ -96,9 +106,14 @@ export function renderFavoriteStats({favorite='',favoriteData=null,now=new Date(
  const who=favoriteData||{name:favorite,sport:'Autre'},profile=profileFor(favorite,now),audit=auditInfo(favorite);
  const listed=rankingsForFavorite(who,rankings);
  const sourceLinks=[['Fiche du sportif / club',profile.source],['Résultats officiels',audit.url]];
- const row=listed.map(id=>renderFavoriteRankingDetails({favorite,rankingId:id,rankings,esc,safeUrl})).join('');
- const age=profile.age!==null?tile('Âge',profile.age+' ans','Né(e) le '+fmt(profile.born),esc):'';
- const location=profile.country?tile('Pays',profile.country,'',esc):'';
+ // Une identité partagée en haut de page : ne pas répéter âge et pays dans ATP/Race/WTT.
+ const primary=listed.map(id=>rankingEntry(id,favorite,rankings))
+  .find(entry=>entry&&(entry.age!=null||entry.country))||null;
+ const seen=new Set();
+ const row=listed.map(id=>renderFavoriteRankingDetails({favorite,rankingId:id,rankings,seen,esc,safeUrl})).join('');
+ const ageValue=profile.age!=null?profile.age:primary?.age;
+ const age=ageValue!=null?tile('Âge',ageValue+' ans',profile.born?'Né(e) le '+fmt(profile.born):'',esc):'';
+ const location=profile.country?tile('Pays',profile.country,'',esc):primary?.country?tile('Pays',primary.country,'',esc):'';
  const rankTiles=row||'<p class="stat-help">Pas de tableau international unique pour cette discipline. Consulte les feuilles officielles ci-dessous.</p>';
  let officialStats='';
  // Valeurs EXACTEMENT retranscrites des statistiques sources, non calculées.
@@ -135,9 +150,6 @@ export function renderFavoriteStats({favorite='',favoriteData=null,now=new Date(
  if(['Félix Lebrun','Alexis Lebrun','Flavien Coton'].includes(favorite)){
   sourceLinks.push(['Classement international ITTF','https://www.ittf.com/ittf-table-tennis-world-ranking/']);
  }
- if(['FC Barcelone','PSG','Real Madrid','San Antonio Spurs'].includes(favorite)){
-  officialStats='<p class="stat-help">Le rang, les points et le bilan affichés dans « Classements » viennent des tableaux ESPN de la ligue.</p>';
- }
  const links=sourceLinks.filter(([,url],i,a)=>/^https:\/\//.test(String(url||''))&&a.findIndex(x=>x[1]===url)===i)
   .map(([label,url])=>'<a href="'+esc(safeUrl(url))+'" target="_blank" rel="noopener noreferrer">'+esc(label)+' ↗</a>').join('');
  return '<section class="favorite-stats source-native-stats"><h3>📊 '+esc(favorite)+'</h3>'
@@ -145,8 +157,8 @@ export function renderFavoriteStats({favorite='',favoriteData=null,now=new Date(
   +'<div class="stat-grid">'+(age+location||tile('Sport',who.sport,'',esc))+'</div>'
   +'<div class="stat-sport-identity"><b>'+esc(profile.role||who.sport||'Sportif')+'</b>'
   +(profile.fact?'<p>'+esc(profile.fact)+'</p>':'')+'</div></div>'
-  +'<section class="stat-profile-section"><h4>Classements et statistiques détaillées</h4>'
-  +rankTiles+'<small>Chaque ligne reprend les données actuellement disponibles dans « Classements ». Les relevés de tennis et d’ITTF portent leur date ; le football et la NBA viennent d’ESPN. « — » = valeur non fournie.</small></section>'
+  +'<section class="stat-profile-section"><h4>Classements et statistiques</h4>'
+  +rankTiles+'<small>Valeurs vérifiées des classements, regroupées sans répéter le profil ni les tournois identiques. Chaque classement conserve ses propres points et variations.</small></section>'
   +(officialStats?'<section class="stat-profile-section"><h4>Statistiques publiées</h4>'+officialStats+'</section>':'')
   +'<div class="stat-source-link"><span>Fiches officielles</span><div class="stat-reference-list">'+links+'</div></div>'
   +'<p class="agenda-footnote">Pas de pourcentage ni de moyennes calculées depuis l’historique incomplet de Mon Sport.</p></section>';
