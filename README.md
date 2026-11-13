@@ -1,3 +1,13 @@
+# Mon Sport V14.6 — classements tennis plus lisibles sur smartphone
+
+**Résultats intégrés aux tournois.** Pour ATP, WTA, Race ATP, Race WTA et Next Gen, la colonne « Résultat » est supprimée. Un indicateur **« En lice / prévu »** figure directement sous le « Tournoi en cours » lorsque la source l'indique ; la **défaite** est signalée et mise en évidence dans « Tournoi précédent ». Si le libellé source contient déjà « Défaite », l'interface n'ajoute pas une deuxième mention textuelle identique. Aucune victoire, défaite ou présence certaine en compétition n'est déduite d'une variation de points.
+
+**Affichage mobile resserré.** Police et interlignes légèrement diminués, cellules et marges compactées, largeur des colonnes réduite, alignement des nombres préservé. Le nom du joueur et son rang restent visibles pendant le défilement horizontal ; les colonnes « Suiv. » et « Max » restent accessibles sur la droite. Les cinq tableaux tennis bénéficient de la même présentation compacte, y compris les Race et Next Gen sans colonne MC.
+
+**Fiabilité.** Les sources live, les vrais rangs, les 150 premières positions, les filtres d'âge et de nationalité restent inchangés. Les états vides restent marqués par un tiret et la provenance des tournois « Observé récemment » est conservée. Tests de non-régression du placement des résultats et du rendu des cinq classements.
+
+---
+
 # Mon Sport V14.5 — cinq classements de tennis live, même présentation
 
 **Depuis la V14.5, les cinq classements de tennis simple utilisent des relevés live français, chacun limité aux 150 premiers joueurs :**

@@ -272,6 +272,15 @@ export function tournamentColumns(row){
  return {current,previous:fromSource||String(observed?.text||'').trim(),
   previousObserved:!fromSource&&!!observed};
 }
+// Place les résultats dans les colonnes de tournoi, sans ajouter de colonne dédiée.
+export function tournamentStatusInColumns(row,columns=tournamentColumns(row)){
+ const sourceLoss=/\b(?:défaite|perdu|éliminé|lost)\b/i.test(columns.previous||'');
+ return {
+  current:row?.tournamentStatus==='en_lice'&&!!columns.current?'en_lice':'',
+  previous:row?.tournamentStatus==='defaite'||sourceLoss?'defaite':'',
+  previousAlreadySaysLoss:sourceLoss
+ };
+}
 export function rankingRows(id,live={}){
  const data=live?.[id];
  if(data?.rows?.length)return data.rows;
@@ -336,11 +345,14 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    const cell=(value,klass='',hint='')=>'<span class="rank-data '+klass+'" title="'+esc(hint)+'">'+esc(asText(value))+'</span>';
    const move=r.movement;
    const rankMove=typeof move==='number'?'<span class="rank-movement '+(move>0?'up':move<0?'down':'flat')+'" aria-label="'+esc(move>0?'Gain de '+move+' places':move<0?'Perte de '+Math.abs(move)+' places':'Classement inchangé')+'">'+(move>0?'▲ '+move:move<0?'▼ '+Math.abs(move):'▬')+'</span>':cell(null,'rank-missing','Mouvement non communiqué');
-   const status=r.tournamentStatus==='defaite'
-    ?'<span class="atp-status lost">Défaite</span>'
-    :r.tournamentStatus==='en_lice'?'<span class="atp-status playing">En lice / prévu</span>'
-    :'<span class="atp-status unknown">Non indiqué</span>';
    const tournaments=tournamentColumns(r);
+   const placement=tournamentStatusInColumns(r,tournaments);
+   const currentStatus=placement.current
+    ?'<small class="tourney-status playing" title="Compétition en cours ou à venir d’après la source">● En lice / prévu</small>':'';
+   const previousStatus=placement.previous
+    ?(placement.previousAlreadySaysLoss
+      ?'<small class="tourney-loss-symbol" aria-label="Défaite signalée" title="Défaite signalée">✕</small>'
+      :'<small class="tourney-status lost">✕ Défaite</small>') : '';
    const ch=r.careerHigh||'';
    const career=ch?'<span class="atp-career '+(/^(NMC|MC|NCH|CH)/i.test(ch)?'best':'')+'">'+esc(ch)+'</span>':'—';
    const countryFlag=({'BLR':'🇧🇾','LAT':'🇱🇻','PHI':'🇵🇭','BOL':'🇧🇴','BUL':'🇧🇬','FIN':'🇫🇮','HKG':'🇭🇰','PER':'🇵🇪','PAR':'🇵🇾','DEN':'🇩🇰','LTU':'🇱🇹','GER':'🇩🇪','ITA':'🇮🇹','ESP':'🇪🇸','USA':'🇺🇸','FRA':'🇫🇷','RUS':'🇷🇺','AUS':'🇦🇺','SRB':'🇷🇸','GBR':'🇬🇧','NOR':'🇳🇴','MON':'🇲🇨','CAN':'🇨🇦','CHN':'🇨🇳','BRA':'🇧🇷','ARG':'🇦🇷','CZE':'🇨🇿','NED':'🇳🇱','POL':'🇵🇱','BEL':'🇧🇪','SUI':'🇨🇭','CHI':'🇨🇱','POR':'🇵🇹','KAZ':'🇰🇿','JPN':'🇯🇵','HUN':'🇭🇺','CRO':'🇭🇷','AUT':'🇦🇹','COL':'🇨🇴','GRE':'🇬🇷','RSA':'🇿🇦','SVK':'🇸🇰','UKR':'🇺🇦','ROU':'🇷🇴','TUR':'🇹🇷','BIH':'🇧🇦','GEO':'🇬🇪','IND':'🇮🇳'}[r.country]||'');
@@ -353,11 +365,14 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
     +cell(r.livePoints,'rank-number','Points du classement '+spec.title)
     +'<span class="rank-data atp-movement">'+rankMove+'</span>'
     +cell(r.pointsChange==null?null:signed(r.pointsChange),'rank-number '+(r.pointsChange<0?'negative':r.pointsChange>0?'positive':''),'Variation nette des points par rapport au classement officiel précédent')
-    +cell(tournaments.current||null,'rank-tournament','Tournoi en cours indiqué par la source')
-    +'<span class="rank-data rank-tournament">'+(tournaments.previous
-      ?(tournaments.previousObserved?'<small class="tour-observed">Observé récemment</small>':'')
-       +esc(tournaments.previous):'—')+'</span>'
-    +'<span class="rank-data">'+status+'</span>'
+    +'<span class="rank-data rank-tournament tourney-current" title="Tournoi en cours selon la source">'
+      +(tournaments.current?'<span class="tourney-text">'+esc(tournaments.current)+'</span>':'—')
+      +currentStatus+'</span>'
+    +'<span class="rank-data rank-tournament tourney-previous '+(placement.previous?'is-loss':'')+'">'
+      +previousStatus
+      +(tournaments.previousObserved?'<small class="tour-observed">Observé récemment</small>':'')
+      +(tournaments.previous?'<span class="tourney-text">'+esc(tournaments.previous)+'</span>':placement.previous?'':'—')
+      +'</span>'
     +cell(r.nextPoints,'rank-number','Total des points après une victoire au prochain match')
     +cell(r.maxPoints,'rank-number','Maximum de points possible dans le tournoi')
     +'</div>';
@@ -397,11 +412,11 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   +'<a href="'+esc(safeUrl(spec.url))+'" target="_blank" rel="noopener noreferrer">Voir le classement complet ↗</a></div>'
   +(loading?'<p class="agenda-progress">Actualisation des classements…</p>':'')
   +(cards?(tennisLive
-   ?'<p class="rank-horizontal-hint">↔ Défilement horizontal : classement live, évolution, tournois, résultat et projections.</p>'
+   ?'<p class="rank-horizontal-hint">↔ Fais défiler pour voir les tournois et projections. Résultats signalés dans les deux colonnes de tournoi.</p>'
     +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : tableau défilant">'
     +'<div class="rank-table atp-live-table '+(hasCareer?'':'race-no-career')+'"><div class="rank-table-head atp-live-row">'
-    +'<span>#</span>'+(hasCareer?'<span>MC</span>':'')+'<span>Joueur</span><span>Âge</span><span>Pays</span><span>Pts live</span><span>Δ rang</span><span>Δ pts</span>'
-    +'<span>Tournoi en cours</span><span>Tournoi précédent</span><span>Résultat</span><span>Suiv.</span><span>Max</span>'
+    +'<span class="rank-place">#</span>'+(hasCareer?'<span class="rank-career">MC</span>':'')+'<span class="rank-person">Joueur</span><span>Âge</span><span>Pays</span><span>Pts</span><span>Δ rang</span><span>Δ pts</span>'
+    +'<span>Tournoi en cours</span><span>Tournoi précédent</span><span>Suiv.</span><span>Max</span>'
     +'</div>'+cards+'</div></div>'
    :tennisColumns
    ?'<p class="rank-horizontal-hint">↔ Fais défiler le tableau vers la droite pour voir les projections.</p><div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : défilement horizontal"><div class="rank-table tennis-rank-table"><div class="rank-table-head tennis-rank-row"><span>Rang</span><span>Joueur · variation</span><span>Officiels</span><span>Live</span><span>Δ pts</span><span>Tournoi en cours</span><span>Prochain</span><span>Maximum</span></div>'+cards+'</div></div>'
@@ -412,7 +427,7 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
     +' sur '+esc(spec.source)+'. Tournoi en cours et tournoi précédent sont deux colonnes distinctes. '
     +'Lorsque la source ne mentionne pas de tournoi précédent, un ancien tournoi observé par Mon Sport dans les 14 derniers jours peut apparaître avec l’étiquette « Observé récemment ». '
     +'Les dates d’observation ne sont pas des dates de match. Δ rang = évolution depuis le dernier classement officiel ; Δ pts = variation nette des points. '
-    +'Défaite est affiché uniquement si la source signale une défaite. Suiv. et Max n’affichent que les projections publiées. '
+    +'Les statuts « En lice / prévu » et « Défaite » sont intégrés aux deux colonnes de tournoi, sans déduire une défaite d’une variation de points. Suiv. et Max n’affichent que les projections publiées. '
     +'<a href="'+esc(safeUrl(spec.url))+'" target="_blank" rel="noopener noreferrer">Voir la source live ↗</a>.</p>':'')
   +'<p class="agenda-footnote">ATP, WTA, Race ATP, Race WTA et Next Gen : top 150 live vérifié. WTT / ITTF est un classement de tennis de table distinct et reste un relevé daté. Football : J, V, N, D, BP et BC selon ESPN.</p></section>';
 }

@@ -528,3 +528,68 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .atp-live-table.race-no-career .atp-live-row{grid-template-columns:32px 148px 38px 62px 68px 67px 65px 185px 185px 96px 69px 69px}
  .atp-live-table.race-no-career .atp-live-row>.rank-person{left:37px}
 }
+
+/* V14.6 : classement tennis compact. Résultats au sein des deux colonnes tournoi. */
+.atp-live-table{
+ --live-rank:32px;--live-career:38px;--live-player:185px;--live-gap:4px;
+}
+.atp-live-table .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-career) var(--live-player)
+  37px 58px 61px 56px 60px 165px 170px 54px 54px;
+ gap:var(--live-gap);padding:6px 6px;min-height:44px;
+}
+.atp-live-table.race-no-career .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-player)
+  37px 58px 61px 56px 60px 165px 170px 54px 54px;
+}
+.atp-live-table .rank-table-head{font-size:.66rem;line-height:1.15}
+.atp-live-table .rank-table-head>span{min-width:0;overflow-wrap:break-word}
+.atp-live-table .rank-row{line-height:1.25}
+.atp-live-table .rank-place{font-size:.78rem}
+.atp-live-table .rank-person{font-size:.76rem;line-height:1.24;min-width:0}
+.atp-live-table .rank-favorite-link{font-size:inherit;line-height:1.25}
+.atp-live-table .rank-data{font-size:.74rem;line-height:1.25;min-width:0}
+.atp-live-table .rank-country{font-size:.69rem;white-space:normal;min-width:0;line-height:1.2}
+.atp-live-table .rank-number{font-size:.73rem}
+.atp-live-table .rank-tournament{font-size:.73rem;line-height:1.27;overflow-wrap:break-word}
+.atp-live-table .rank-movement{font-size:.62rem;padding:2px 3px;white-space:nowrap}
+.atp-live-table .atp-career{font-size:.62rem;padding:1px 2px}
+.atp-live-table .atp-live-row>.rank-career{left:calc(var(--live-rank) + var(--live-gap))}
+.atp-live-table .atp-live-row>.rank-person{left:calc(var(--live-rank) + var(--live-career) + var(--live-gap) + var(--live-gap));column-gap:2px}
+.atp-live-table.race-no-career .atp-live-row>.rank-person{left:calc(var(--live-rank) + var(--live-gap))}
+.atp-live-table .rank-table-head>.rank-place,.atp-live-table .rank-table-head>.rank-career,
+.atp-live-table .rank-table-head>.rank-person{z-index:5;background:#20465a}
+.atp-live-table .tourney-current,.atp-live-table .tourney-previous{display:block;min-width:0}
+.atp-live-table .tourney-text{overflow-wrap:anywhere}
+.atp-live-table .tourney-previous.is-loss .tourney-text{color:#ffd3d3}
+.atp-live-table .tourney-status{display:block;width:max-content;max-width:100%;border-radius:4px;
+ padding:2px 4px;margin-top:3px;font-size:.61rem;font-weight:750;line-height:1.2}
+.atp-live-table .tourney-status.playing{color:#b1f3d3;background:#1a5040}
+.atp-live-table .tourney-status.lost{color:#ffd5d5;background:#603039;margin:0 0 3px}
+.atp-live-table .tourney-loss-symbol{display:inline-block;margin-right:4px;color:#ffb3b3;font-size:.75rem;font-weight:900}
+.atp-live-table .tour-observed{font-size:.6rem;margin-bottom:3px;padding:1px 3px}
+@media(max-width:550px){
+ .atp-live-table{--live-rank:26px;--live-career:27px;--live-player:116px;--live-gap:3px}
+ .atp-live-table .atp-live-row{grid-template-columns:var(--live-rank) var(--live-career) var(--live-player)
+  29px 49px 53px 46px 48px 132px 138px 47px 47px;
+  gap:var(--live-gap);padding:5px 4px;min-height:44px}
+ .atp-live-table.race-no-career .atp-live-row{grid-template-columns:var(--live-rank) var(--live-player)
+  29px 49px 53px 46px 48px 132px 138px 47px 47px}
+ .atp-live-table .rank-table-head{font-size:.61rem;line-height:1.15}
+ .atp-live-table .rank-person{font-size:.70rem;line-height:1.2}
+ .atp-live-table .rank-data{font-size:.70rem}
+ .atp-live-table .rank-number,.atp-live-table .rank-country{font-size:.69rem}
+ .atp-live-table .rank-tournament{font-size:.69rem;line-height:1.24}
+ .atp-live-table .rank-place{font-size:.70rem}
+ .atp-live-table .rank-movement{font-size:.61rem;padding:1px 2px}
+ .atp-live-table .atp-career{font-size:.59rem}
+ .atp-live-table .tourney-status{font-size:.59rem}
+ .rank-horizontal-hint{margin:6px 0 4px;font-size:.71rem}
+}
+@media(max-width:360px){
+ .atp-live-table{--live-rank:23px;--live-career:25px;--live-player:104px;--live-gap:3px}
+ .atp-live-table .atp-live-row{grid-template-columns:var(--live-rank) var(--live-career) var(--live-player)
+  27px 44px 50px 43px 45px 122px 125px 45px 45px}
+ .atp-live-table.race-no-career .atp-live-row{grid-template-columns:var(--live-rank) var(--live-player)
+  27px 44px 50px 43px 45px 122px 125px 45px 45px}
+}
