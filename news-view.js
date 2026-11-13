@@ -41,7 +41,7 @@ function newsRichness(article){
 }
 export function newsLastWeek(items,now=new Date()){
  const end=now.getTime(),start=end-7*DAY;
- const candidates=filterSportsNews(Array.isArray(items)?items:[]).filter(n=>{
+ const candidates=(Array.isArray(items)?items:[]).filter(n=>{
   const t=Date.parse(n.date||n.published||'');
   return Number.isFinite(t)&&t>=start&&t<=end+10*60*1000&&n.title&&n.link;
  }).sort((a,b)=>Date.parse(b.date||b.published)-Date.parse(a.date||a.published));
