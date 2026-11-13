@@ -44,6 +44,49 @@ class SocialPostsTests(unittest.TestCase):
         self.assertEqual(len(posts),1)
         self.assertLessEqual(len(posts[0]['title']),172)
         self.assertNotIn(long,posts[0]['title'])
+        self.assertEqual(posts[0]['text'],long.strip())
+
+
+    def test_all_images_and_video_from_the_original_post(self):
+        now=datetime(2026,11,13,12,tzinfo=timezone.utc)
+        ident=post_id(now-timedelta(minutes=9))
+        html=(
+          f'<div class="timeline-item" data-username="JeuSetMaths">'
+          f'<a class="tweet-link" href="/JeuSetMaths/status/{ident}"></a>'
+          '<div class="tweet-content">📊 Le post complet contient plusieurs chiffres et graphiques.</div>'
+          '<div class="attachments"><div class="gallery-row">'
+          '<a class="still-image" href="https://pbs.twimg.com/media/graph1.jpg?name=orig">'
+          '<img src="https://pbs.twimg.com/media/graph1.jpg?name=small"></a>'
+          '<a class="still-image" href="https://pbs.twimg.com/media/graph2.png?name=orig">'
+          '<img src="https://pbs.twimg.com/media/graph2.png?name=small"></a>'
+          '</div><video><source src="https://video.twimg.com/amplify_video/123/vid/avc1/1280x720/a.mp4?tag=1"></video>'
+          '</div></div>'
+        )
+        posts=parse_posts(html,now=now)
+        self.assertEqual(len(posts),1)
+        self.assertEqual(posts[0]['text'],'📊 Le post complet contient plusieurs chiffres et graphiques.')
+        self.assertEqual(posts[0]['images'],[
+            'https://pbs.twimg.com/media/graph1.jpg?name=orig',
+            'https://pbs.twimg.com/media/graph2.png?name=orig'])
+        self.assertEqual(posts[0]['image'],posts[0]['images'][0])
+        self.assertEqual(posts[0]['video'],
+                         'https://video.twimg.com/amplify_video/123/vid/avc1/1280x720/a.mp4?tag=1')
+
+    def test_external_media_are_not_embedded(self):
+        now=datetime(2026,11,13,12,tzinfo=timezone.utc)
+        ident=post_id(now-timedelta(minutes=8))
+        html=(
+          f'<div class="timeline-item" data-username="JeuSetMaths">'
+          f'<a class="tweet-link" href="/JeuSetMaths/status/{ident}"></a>'
+          '<div class="tweet-content">📊 Quelques chiffres tennis sont disponibles.</div>'
+          '<div class="attachments">'
+          '<a class="still-image" href="https://evil.example/media/a.jpg"></a>'
+          '<video><source src="https://evil.example/video.mp4"></video></div></div>'
+        )
+        posts=parse_posts(html,now=now)
+        self.assertEqual(len(posts),1)
+        self.assertEqual(posts[0]['images'],[])
+        self.assertIsNone(posts[0]['video'])
 
 
 if __name__ == '__main__':
