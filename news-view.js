@@ -190,7 +190,7 @@ const SPORTS_NEWS=[
  'soccer/esp.1','soccer/fra.1','soccer/uefa.champions',
  'basketball/nba','tennis/atp','tennis/wta'
 ];
-export async function fetchSportsNews(favorites,now=new Date()){
+export async function fetchSportsNews(favorites,now=new Date(),workerUrl=''){
  const aliases=name=>({
   'PSG':['psg','paris saint-germain','paris saint germain'],
   'Real Madrid':['real madrid','madrid'],
@@ -220,5 +220,18 @@ export async function fetchSportsNews(favorites,now=new Date()){
    return {title,link,date,source:'ESPN',favorite:fav.name,sport:fav.sport,excerpt:description,image:sourceImage(editorial?.url||editorial?.href||editorial)};
   }).filter(Boolean);
  }));
- return newsLastWeek(settled.flatMap(x=>x.status==='fulfilled'?x.value:[]),now);
+
+ const curated=workerUrl?await (async()=>{
+  try{
+   const response=await fetch(new URL('/api/sports-news',workerUrl),{signal:AbortSignal.timeout(12000),cache:'no-store'});
+   if(!response.ok)throw Error('Flux RSS '+response.status);
+   const body=await response.json();
+   return (body.articles||[]).map(article=>{
+    const text=normalized([article.title,article.excerpt].join(' '));
+    const favorite=favorites.find(f=>aliases(f.name).some(alias=>alias.length>=5&&text.includes(alias)));
+    return {...article,...(favorite?{favorite:favorite.name}:{}),source:article.source||'Média sportif'};
+   });
+  }catch{return []}
+ })():[];
+ return newsLastWeek([...settled.flatMap(x=>x.status==='fulfilled'?x.value:[]),...curated],now);
 }
