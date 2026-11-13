@@ -1,3 +1,28 @@
+# Mon Sport V14.7 — tableaux multi-sports et densité mobile
+
+## Tennis : davantage de colonnes visibles sur téléphone
+
+Les cinq tableaux ATP, WTA, Race ATP, Race WTA et Next Gen conservent leurs 150 rangs et leurs sources live. Sur smartphone, **MC** (lorsque disponible) est maintenant intégré au nom du joueur, et le pays apparaît en **drapeau dans la même cellule** : deux colonnes distinctes disparaissent, sans perte d’information. Les autres colonnes sont rétrécies avec des polices, espacements et marges plus compacts. Le rang et le nom restent fixes pendant le défilement horizontal ; le tableau est accessible au clavier.
+
+## Football et NBA : statistiques ESPN en colonnes
+
+- **Ligue 1, Liga, Ligue des champions** : rang, équipe, rencontres jouées (J), victoires (V), matchs nuls (N), défaites (D), buts marqués (BP), encaissés (BC), différence de buts (Diff.), points (Pts), et changement de rang (Δ rang) si ESPN le transmet. Les classements de l'UEFA conservent le groupe ou la phase ESPN si plusieurs groupes sont présents.
+- **NBA Ouest** : rang, franchise, victoires, défaites, pourcentage, matchs de retard sur le leader (Écart), série en cours (V/D), bilan des dix derniers matchs, matchs domicile/extérieur, moyenne de points marqués, encaissés et différence moyenne par match. Seules les quinze franchises de la conférence Ouest remontent dans le tableau.
+- Les logos des équipes sont montrés lorsque le flux ESPN fournit une URL HTTPS. Une valeur absente s'affiche **« — »**, jamais une valeur reconstruite à partir de l'ordre du tableau. Les tableaux restent défilables horizontalement sur téléphone avec rang et équipe visibles à gauche.
+
+## Tennis de table : deux classements hebdomadaires ITTF top 150
+
+- **WTT hommes et WTT femmes** remplacent l'ancienne liste partielle pour les internautes connectés : 150 athlètes chacun, avec rang, pays, points, et places gagnées/perdues depuis la publication précédente.
+- Les valeurs sont reprises du classement **hebdomadaire ITTF** consulté par [Eleven Table Tennis](https://www.eleventabletennis.com/rankings), et peuvent être comparées à [l'ITTF](https://www.ittf.com/rankings/).
+- Ce classement n'est **pas live** : il est publié par semaine, puis collecté avec date, semaine et source. Le collecteur valide les 150 entrées, noms uniques, points et ordre des rangs avant de publier les fichiers `data/wtt-men.json` et `data/wtt-women.json`. Un relevé vieux de plus de quatorze jours n'est pas présenté comme récent.
+- En cas d'indisponibilité temporaire, un cache récent est identifié comme tel. Pour les hommes uniquement, l'ancien relevé partiel reste un repli explicite, daté du 9 novembre 2026.
+
+## Validation et publication
+
+`npm test` vérifie notamment les statistiques NBA et football, les tableaux WTT et le regroupement MC/drapeau sur mobile. Les tests Python valident les tableaux hebdomadaires ITTF. Les diagnostics réseau temporaires ont été retirés des tests ordinaires. Le workflow de collecte actualise les cinq fichiers tennis live et les deux classements ITTF, puis republie GitHub Pages à chaque actualisation validée sur `main`.
+
+---
+
 # Mon Sport V14.6 — classements tennis plus lisibles sur smartphone
 
 **Résultats intégrés aux tournois.** Pour ATP, WTA, Race ATP, Race WTA et Next Gen, la colonne « Résultat » est supprimée. Un indicateur **« En lice / prévu »** figure directement sous le « Tournoi en cours » lorsque la source l'indique ; la **défaite** est signalée et mise en évidence dans « Tournoi précédent ». Si le libellé source contient déjà « Défaite », l'interface n'ajoute pas une deuxième mention textuelle identique. Aucune victoire, défaite ou présence certaine en compétition n'est déduite d'une variation de points.

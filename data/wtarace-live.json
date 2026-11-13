@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-13T10:32:39.414390+00:00",
+  "fetchedAt": "2026-11-13T11:07:38.768023+00:00",
   "rows": [
     {
       "rank": 1,
@@ -35,7 +35,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (1 V / 1 D)",
-          "lastSeen": "2026-11-13T10:32:39.414390+00:00"
+          "lastSeen": "2026-11-13T11:07:38.768023+00:00"
         }
       ]
     },
@@ -56,7 +56,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (2 V / 0 D)",
-          "lastSeen": "2026-11-13T10:32:39.414390+00:00"
+          "lastSeen": "2026-11-13T11:07:38.768023+00:00"
         }
       ]
     },
@@ -93,7 +93,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T10:32:39.414390+00:00"
+          "lastSeen": "2026-11-13T11:07:38.768023+00:00"
         }
       ]
     },
@@ -114,7 +114,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (1 V / 1 D)",
-          "lastSeen": "2026-11-13T10:32:39.414390+00:00"
+          "lastSeen": "2026-11-13T11:07:38.768023+00:00"
         }
       ]
     },
@@ -135,7 +135,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (0 V / 2 D)",
-          "lastSeen": "2026-11-13T10:32:39.414390+00:00"
+          "lastSeen": "2026-11-13T11:07:38.768023+00:00"
         }
       ]
     },
@@ -156,7 +156,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T10:32:39.414390+00:00"
+          "lastSeen": "2026-11-13T11:07:38.768023+00:00"
         }
       ]
     },
@@ -2241,7 +2241,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 DF",
-          "lastSeen": "2026-11-13T10:32:39.414390+00:00"
+          "lastSeen": "2026-11-13T11:07:38.768023+00:00"
         }
       ]
     },

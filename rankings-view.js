@@ -1,5 +1,5 @@
-// Mon Sport V14.5 · Cinq classements de tennis live FR (top 150), autres sports inchangés.
-// Tennis de table WTT : relevé daté, distinct du tennis ATP/WTA.
+// Mon Sport V14.7 · Tennis compact, football et NBA ESPN détaillés, ITTF hebdomadaire top 150.
+// WTT : top 150 hebdomadaire hommes/femmes ; repli partiel daté si la source échoue.
 // Football/NBA : accès direct aux tableaux ESPN, en cache pour 20 min.
 const ESPN='https://site.api.espn.com/apis/v2/sports/';
 export const RANKING_DATE='2026-11-09';
@@ -12,7 +12,8 @@ export const RANKINGS=[
  {id:'ligue1',title:'Ligue 1',sport:'Football',url:'https://www.espn.com/soccer/standings/_/league/fra.1',source:'ESPN',mode:'espn',path:'soccer/fra.1'},
  {id:'liga',title:'Liga',sport:'Football',url:'https://www.espn.com/soccer/standings/_/league/esp.1',source:'ESPN',mode:'espn',path:'soccer/esp.1'},
  {id:'ucl',title:'Ligue des champions',sport:'Football',url:'https://www.uefa.com/uefachampionsleague/standings/',source:'ESPN · UEFA',mode:'espn',path:'soccer/uefa.champions'},
- {id:'wtt',title:'WTT / ITTF',sport:'Tennis de table',url:'https://www.ittf.com/ittf-table-tennis-world-ranking/',source:'ITTF · semaine 46',mode:'snapshot'},
+ {id:'wtt',title:'WTT hommes',sport:'Tennis de table',url:'https://www.eleventabletennis.com/rankings',source:'Classement ITTF · Eleven',mode:'wtt-weekly',file:'wtt-men.json'},
+ {id:'wttwomen',title:'WTT femmes',sport:'Tennis de table',url:'https://www.eleventabletennis.com/rankings',source:'Classement ITTF · Eleven',mode:'wtt-weekly',file:'wtt-women.json'},
  {id:'nbaouest',title:'NBA Ouest',sport:'Basketball',url:'https://www.nba.com/standings',source:'ESPN · NBA',mode:'espn',path:'basketball/nba',west:true}
 ];
 const fromTuple=(list)=>list.map(([name,rank,points])=>({name,rank,points:points==null?'':String(points)}));
@@ -113,13 +114,31 @@ export function parseESPNTennisRankings(body){
   };
  }).filter(Boolean).sort((a,b)=>a.rank-b.rank).slice(0,150);
 }
+// Le tennis de table suit une publication hebdomadaire, pas un classement live.
+export function parseWTTRankings(payload,now=new Date()){
+ const age=now.getTime()-Date.parse(payload?.fetchedAt||'');
+ if(!Number.isFinite(age)||age<0||age>14*86400000||!Array.isArray(payload?.rows)||payload.rows.length<150)
+  return null;
+ const seen=new Set(),rows=[];
+ for(const raw of payload.rows.slice(0,150)){
+  const rank=Number(raw?.rank),points=Number(raw?.points);
+  const name=String(raw?.name||'').trim().slice(0,120),country=String(raw?.country||'').trim().toUpperCase();
+  if(!name||seen.has(norm(name))||!Number.isInteger(rank)||rank<1||
+   !Number.isInteger(points)||points<0||!/^[A-Z]{3}$/.test(country))return null;
+  if(rows.length&&rank<rows[rows.length-1].rank)return null;
+  seen.add(norm(name));
+  rows.push({name,rank,points:String(points),country,movement:Number.isInteger(raw.movement)?raw.movement:null,
+   source:'Classement ITTF hebdomadaire'});
+ }
+ return rows.length===150?rows:null;
+}
 export function parseESPNStandings(body,{west=false}={}){
  const groups=extractGroups(body);
  const picked=west?groups.filter(g=>/western|(?:^|\b)west(?:ern)?(?:\b|$)/i.test(String(g.name))):groups;
  if(west&&!picked.length)return [];
- const raw=(picked.length?picked:groups).flatMap(g=>g.rows);
+ const raw=(picked.length?picked:groups).flatMap(g=>g.rows.map(item=>({item,group:g.name})));
  const used=new Set(),out=[];
- for(const item of raw){
+ for(const {item,group} of raw){
   const team=item.team||item.athlete||{};
   const name=team.displayName||team.name||item.displayName||'';
   if(!name||used.has(norm(name)))continue;used.add(norm(name));
@@ -135,14 +154,28 @@ export function parseESPNStandings(body,{west=false}={}){
   const goalsFor=displayStat(stats,['pointsFor','goalsFor','GF','goalsScored']);
   const goalsAgainst=displayStat(stats,['pointsAgainst','goalsAgainst','GA','goalsConceded']);
   const diff=displayStat(stats,['pointDifferential','goalDifference','goalDifferential','goalDiff','GD']);
+  const pct=west?displayStat(stats,['winPercent','PCT']):'';
+  const gamesBehind=west?displayStat(stats,['gamesBehind','GB']):'';
+  const streak=west?displayStat(stats,['streak','STRK']):'';
+  const home=west?displayStat(stats,['home','HOME']):'';
+  const away=west?displayStat(stats,['road','away','AWAY']):'';
+  const lastTen=west?displayStat(stats,['last ten games','Last 10 Games','last10','L10']):'';
+  const avgPointsFor=west?displayStat(stats,['avgPointsFor','PPG']):'';
+  const avgPointsAgainst=west?displayStat(stats,['avgPointsAgainst','OPP PPG']):'';
+  const avgDiff=west?displayStat(stats,['differential','DIFF']):'';
+  const rankChange=west?'':displayStat(stats,['rankChange']);
+  const logos=Array.isArray(team.logos)?team.logos:[];
+  const logo=String(logos.find(logo=>/^https:\/\//i.test(logo?.href||''))?.href||'');
   out.push({name,rank:displayed,points:points.trim(),played,diff,wins,draws,losses,goalsFor,goalsAgainst,
+   pct,gamesBehind,streak,home,away,lastTen,avgPointsFor,avgPointsAgainst,avgDiff,rankChange,group,logo,
    detail:(west?[played?played+' MJ':'']:[
     played?played+' J':'',wins!==''?wins+' V':'',draws!==''?draws+' N':'',losses!==''?losses+' D':'',
     goalsFor!==''?'BP '+goalsFor:'',goalsAgainst!==''?'BC '+goalsAgainst:'',diff?'Diff. '+diff:''
    ]).filter(Boolean).join(' · '),
    source:'ESPN'});
  }
- return out.sort((a,b)=>(a.rank??Infinity)-(b.rank??Infinity));
+ return out.sort((a,b)=>String(a.group||'').localeCompare(String(b.group||''))||
+  (a.rank??Infinity)-(b.rank??Infinity));
 }
 export async function fetchRankings({fetchFn=fetch,force=false}={}){
  const result={};
@@ -163,6 +196,26 @@ export async function fetchRankings({fetchFn=fetch,force=false}={}){
    const saved=savedRanking(spec.id);
    result[spec.id]=saved?{...saved,live:false,stale:true,error:'Dernière copie enregistrée · mise à jour indisponible'}
     :{rows:[],error:'Classement indisponible depuis ESPN.',live:false};
+  }
+ }));
+ // ITTF : deux classements hebdomadaires, conservés localement avec leur semaine.
+ await Promise.all(RANKINGS.filter(x=>x.mode==='wtt-weekly').map(async spec=>{
+  const cached=cache.get(spec.id);
+  if(!force&&cached&&Date.now()-cached.at<20*60000){result[spec.id]=cached.result;return;}
+  try{
+   const res=await fetchFn('./data/'+spec.file,{cache:'no-store',signal:AbortSignal.timeout(7000)});
+   if(!res.ok)throw Error('ITTF '+res.status);
+   const payload=await res.json(),rows=parseWTTRankings(payload);
+   if(!rows)throw Error('Classement ITTF incomplet ou trop ancien');
+   const value={rows,asOf:payload.fetchedAt,week:Number.isInteger(payload.week)?payload.week:null,
+    source:payload.source,kind:'wtt-weekly',live:true};
+   cache.set(spec.id,{result:value,at:Date.now()});storeRanking(spec.id,value);result[spec.id]=value;
+  }catch{
+   const saved=savedRanking(spec.id);
+   const age=saved?.asOf?Date.now()-Date.parse(saved.asOf):Infinity;
+   const usable=saved?.kind==='wtt-weekly'&&age>=0&&age<=14*86400000;
+   result[spec.id]=usable?{...saved,live:false,stale:true,error:'Dernier relevé hebdomadaire enregistré'}
+    :{rows:[],live:false,kind:'wtt-weekly',error:'Classement hebdomadaire ITTF indisponible'};
   }
  }));
  // Les cinq tableaux tennis proviennent directement des relevés live français.
@@ -290,6 +343,56 @@ export function rankingEntry(id,name,live={}){
  return rankingRows(id,live).find(x=>norm(x.name)===norm(name)||
   (knownTeams[name]||[]).some(alias=>norm(x.name)===norm(alias)))||null;
 }
+// Colonnes spécifiques à chaque sport : ESPN pour football/NBA, ITTF pour tennis de table.
+export function renderOtherRankingTable({spec,rows,favorites=[],esc,safeUrl}){
+ const nba=!!spec.west,tableTennis=spec.mode==='wtt-weekly',mode=tableTennis?'tabletennis':nba?'nba':'football';
+ const blank=value=>value===undefined||value===null||value===''||value==='-'?'—':String(value);
+ const cell=(value,extra='',hint='')=>'<span class="rank-data '+extra+'"'+(hint?' title="'+esc(hint)+'"':'')+'>'+esc(blank(value))+'</span>';
+ const pct=value=>{
+  const number=Number(value);
+  return value==null||value===''||!Number.isFinite(number)||number<0||number>1?'—':
+   new Intl.NumberFormat('fr-FR',{style:'percent',minimumFractionDigits:1,maximumFractionDigits:1}).format(number);
+ };
+ const pctCell=value=>cell(pct(value),'rank-percent','Pourcentage de victoires');
+ const streak=value=>{const v=String(value||'');return /^W\d+$/i.test(v)?'V'+v.slice(1):/^L\d+$/i.test(v)?'D'+v.slice(1):v;};
+ const head=tableTennis?['#','Joueur','Pays','Pts','Δ rang']:
+  nba?['#','Équipe','V','D','%','Écart','Série','10 der.','Dom.','Ext.','PP/m','PA/m','Diff./m']:
+  ['#','Club','J','V','N','D','BP','BC','Diff.','Pts','Δ rang'];
+ const logo=r=>/^https:\/\//i.test(r.logo||'')
+  ?'<img class="standings-team-logo" loading="lazy" decoding="async" src="'+esc(safeUrl(r.logo))+'" alt="" />':'';
+ const cards=rows.map(row=>{
+  const fav=matchRankingFavorite(row.name,favorites);
+  const name=fav?'<button type="button" class="rank-favorite-link" data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Favoris">'+esc(row.name)+'</button>':esc(row.name);
+  const who='<span class="rank-person">'+logo(row)+name+'</span>';
+  if(tableTennis){
+   const mv=row.movement;
+   const mark=typeof mv==='number'?(mv>0?'▲ '+mv:mv<0?'▼ '+Math.abs(mv):'▬'):'—';
+   return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who
+    +cell(row.country,'rank-country')+cell(row.points,'rank-number')
+    +'<span class="rank-data rank-number '+(mv>0?'rise':mv<0?'fall':'')+'">'+esc(mark)+'</span></div>';
+  }
+  if(nba)return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who
+   +cell(row.wins,'rank-number')+cell(row.losses,'rank-number')+pctCell(row.pct)
+   +cell(row.gamesBehind,'rank-number')+cell(streak(row.streak),'rank-streak')
+   +cell(row.lastTen,'rank-number')+cell(row.home,'rank-number')+cell(row.away,'rank-number')
+   +cell(row.avgPointsFor,'rank-number')+cell(row.avgPointsAgainst,'rank-number')
+   +cell(row.avgDiff,'rank-number')+'</div>';
+  const n=Number(row.rankChange),valid=row.rankChange!==''&&row.rankChange!=null&&Number.isFinite(n);
+  const movement=valid&&n!==0?' <span class="rank-movement '+(n>0?'up':'down')+'">'+
+   (n>0?'▲ ':'▼ ')+Math.abs(n)+'</span>':valid?'▬':'—';
+  return '<div class="rank-row standings-row">'+cell(row.rank,'rank-place')+who
+   +cell(row.played,'rank-number')+cell(row.wins,'rank-number')+cell(row.draws,'rank-number')
+   +cell(row.losses,'rank-number')+cell(row.goalsFor,'rank-number')+cell(row.goalsAgainst,'rank-number')
+   +cell(row.diff,'rank-number')+cell(row.points,'rank-number rank-points-highlight')
+   +'<span class="rank-data rank-number">'+movement+'</span></div>';
+ }).join('');
+ const captions=head;
+ return '<div class="rank-horizontal-hint">↔ Glisse horizontalement pour afficher toutes les statistiques.</div>'
+  +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Tableau détaillé '+esc(spec.title)+' ; défilement horizontal">'
+  +'<div class="rank-table standings-table standings-'+mode+'">'
+  +'<div class="rank-table-head standings-row">'+captions.map((label,i)=>'<span class="'+(i===0?'rank-place':i===1?'rank-person':'')+'">'+esc(label)+'</span>').join('')+'</div>'
+  +cards+'</div></div>';
+}
 export function renderRankingsView({selected='atp',live={},favorites=[],loading=false,ageMax='',country='',esc,safeUrl}){
  const spec=RANKINGS.find(r=>r.id===selected)||RANKINGS[0];
  const rows=rankingRows(spec.id,live);
@@ -301,6 +404,11 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
  const saved=live[spec.id];
  const asOf=saved?.asOf?new Date(saved.asOf).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
  const label=spec.mode==='snapshot'?'Relevé du 9 novembre 2026 · pas en direct'
+  :spec.mode==='wtt-weekly'?(saved?.live
+    ?'Classement ITTF · semaine '+(saved.week||'non précisée')+' · consulté le '+asOf
+    :saved?.stale?'Dernier classement ITTF enregistré le '+asOf+' · hors connexion'
+    :spec.id==='wtt'?'Relevé partiel du 9 novembre 2026 · classement hebdomadaire indisponible'
+    :'Classement ITTF hebdomadaire indisponible')
   :saved?.stale?'Dernier relevé '+spec.title+' sauvegardé le '+asOf+' · connexion indisponible'
   :saved?.live?(tennisLive?'Relevé '+spec.title+' du '+asOf+' · actualisation toutes les six heures':'Classement ESPN consulté le '+asOf)
   :'Classement non disponible depuis la source';
@@ -358,8 +466,10 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    const countryFlag=({'BLR':'🇧🇾','LAT':'🇱🇻','PHI':'🇵🇭','BOL':'🇧🇴','BUL':'🇧🇬','FIN':'🇫🇮','HKG':'🇭🇰','PER':'🇵🇪','PAR':'🇵🇾','DEN':'🇩🇰','LTU':'🇱🇹','GER':'🇩🇪','ITA':'🇮🇹','ESP':'🇪🇸','USA':'🇺🇸','FRA':'🇫🇷','RUS':'🇷🇺','AUS':'🇦🇺','SRB':'🇷🇸','GBR':'🇬🇧','NOR':'🇳🇴','MON':'🇲🇨','CAN':'🇨🇦','CHN':'🇨🇳','BRA':'🇧🇷','ARG':'🇦🇷','CZE':'🇨🇿','NED':'🇳🇱','POL':'🇵🇱','BEL':'🇧🇪','SUI':'🇨🇭','CHI':'🇨🇱','POR':'🇵🇹','KAZ':'🇰🇿','JPN':'🇯🇵','HUN':'🇭🇺','CRO':'🇭🇷','AUT':'🇦🇹','COL':'🇨🇴','GRE':'🇬🇷','RSA':'🇿🇦','SVK':'🇸🇰','UKR':'🇺🇦','ROU':'🇷🇴','TUR':'🇹🇷','BIH':'🇧🇦','GEO':'🇬🇪','IND':'🇮🇳'}[r.country]||'');
    return '<div class="rank-row atp-live-row '+(clickable?'rank-tracked':'')+'">'
     +'<span class="rank-place">'+esc(r.rank)+'</span>'
-    +(hasCareer?'<span class="rank-career">'+career+'</span>':'')
-    +'<span class="rank-person">'+name+'</span>'
+    +'<span class="rank-person">'
+      +(countryFlag?'<span class="rank-flag-mobile" role="img" aria-label="'+esc(r.country)+'">'+countryFlag+'</span>':'')
+      +name+(hasCareer&&ch?'<span class="rank-career-inline '+(/^(NMC|MC|NCH|CH)/i.test(ch)?'best':'')+'" title="Meilleur classement : '+esc(ch)+'">'+esc(ch)+'</span>':'')
+    +'</span>'
     +cell(r.age,'rank-number','Âge selon le relevé')
     +'<span class="rank-country">'+countryFlag+' '+esc(r.country||'—')+'</span>'
     +cell(r.livePoints,'rank-number','Points du classement '+spec.title)
@@ -415,14 +525,20 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
    ?'<p class="rank-horizontal-hint">↔ Fais défiler pour voir les tournois et projections. Résultats signalés dans les deux colonnes de tournoi.</p>'
     +'<div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : tableau défilant">'
     +'<div class="rank-table atp-live-table '+(hasCareer?'':'race-no-career')+'"><div class="rank-table-head atp-live-row">'
-    +'<span class="rank-place">#</span>'+(hasCareer?'<span class="rank-career">MC</span>':'')+'<span class="rank-person">Joueur</span><span>Âge</span><span>Pays</span><span>Pts</span><span>Δ rang</span><span>Δ pts</span>'
+    +'<span class="rank-place">#</span><span class="rank-person">'+(hasCareer?'Joueur · MC':'Joueur')+'</span><span>Âge</span><span class="rank-country">Pays</span><span>Pts</span><span>Δ rang</span><span>Δ pts</span>'
     +'<span>Tournoi en cours</span><span>Tournoi précédent</span><span>Suiv.</span><span>Max</span>'
     +'</div>'+cards+'</div></div>'
    :tennisColumns
    ?'<p class="rank-horizontal-hint">↔ Fais défiler le tableau vers la droite pour voir les projections.</p><div class="rank-table-scroll" tabindex="0" role="region" aria-label="Classement '+esc(spec.title)+' : défilement horizontal"><div class="rank-table tennis-rank-table"><div class="rank-table-head tennis-rank-row"><span>Rang</span><span>Joueur · variation</span><span>Officiels</span><span>Live</span><span>Δ pts</span><span>Tournoi en cours</span><span>Prochain</span><span>Maximum</span></div>'+cards+'</div></div>'
-   :'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>')
+   :renderOtherRankingTable({spec,rows:displayedRows,favorites,esc,safeUrl}))
   :rows.length&&filterEnabled?'<div class="agenda-empty"><h3>Aucun joueur ne correspond aux filtres</h3><p>Choisis un autre âge ou une autre nationalité, ou efface les filtres.</p></div>'
    :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
+  +(spec.mode==='espn'?'<p class="agenda-footnote">'+(spec.west
+    ?'NBA Ouest : V/D, pourcentage, écart au leader, série, dix derniers matchs, bilan domicile/extérieur, points marqués/encaissés et différence moyenne par match, selon ESPN. '
+    :'Football : J, V, N, D, buts pour/contre, différence, points et variation de rang, selon ESPN. ')
+    +'« — » signifie que la statistique n’est pas fournie par la source. Statistiques actualisées depuis ESPN ; horodatage de la consultation affiché ci-dessus.</p>':'')
+  +(spec.mode==='wtt-weekly'?'<p class="agenda-footnote">Tennis de table : top 150 '+(spec.id==='wtt'?'hommes':'femmes')+' du classement mondial ITTF hebdomadaire repris par Eleven. Pays, points et évolution par rapport à la semaine précédente selon la source. Ce n’est pas un classement en direct. '
+    +'<a href="https://www.ittf.com/rankings/" target="_blank" rel="noopener noreferrer">Source officielle ITTF ↗</a>.</p>':'')
   +(tennisLive?'<p class="agenda-footnote">'+esc(spec.title)+' : relevé du '+esc(asOf||'non communiqué')
     +' sur '+esc(spec.source)+'. Tournoi en cours et tournoi précédent sont deux colonnes distinctes. '
     +'Lorsque la source ne mentionne pas de tournoi précédent, un ancien tournoi observé par Mon Sport dans les 14 derniers jours peut apparaître avec l’étiquette « Observé récemment ». '

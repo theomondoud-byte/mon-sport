@@ -1,10 +1,11 @@
-name: Actualiser classement ATP live
+name: Actualiser les classements tennis et tennis de table
 on:
   push:
     branches: [main, 'feat/**']
     paths:
       - 'scripts/refresh_atp_live.py'
       - 'scripts/refresh_tennis_live.py'
+      - 'scripts/refresh_wtt.py'
       - '.github/workflows/atp-live.yml'
   workflow_dispatch:
   schedule:
@@ -31,14 +32,20 @@ jobs:
         run: python -m scripts.refresh_tennis_live
       - name: Collecter les données live avec validation
         run: python scripts/refresh_atp_live.py --debug
+      - name: Actualiser le classement ITTF top 150 hommes et femmes
+        run: python scripts/refresh_wtt.py
+        continue-on-error: true
       - name: Conserver le dernier relevé sur main
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/v14-5-classements-tennis-unifies'
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/atp-live.json data/wta-live.json data/atprace-live.json data/wtarace-live.json data/nextgen-live.json
+          for file in data/wtt-men.json data/wtt-women.json; do
+            if [ -f "$file" ]; then git add "$file"; fi
+          done
           if ! git diff --cached --quiet; then
-            git commit -m 'data: actualiser les cinq classements tennis live français'
+            git commit -m 'data: actualiser les classements tennis et ITTF vérifiés'
             git push
           fi
   deploy:

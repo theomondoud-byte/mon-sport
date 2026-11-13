@@ -2,7 +2,7 @@ import {sportInfo,sourceImage} from '../sports-media.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
-import {parseESPNStandings,parseESPNTennisRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,fetchRankings,renderRankingsView} from '../rankings-view.js';
+import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -194,7 +194,11 @@ test('les classements football continuent de s’afficher sans données ATP',()=
   live:true,asOf:new Date().toISOString()}},
   favorites:[],esc:x=>String(x),safeUrl:x=>x});
  assert.match(html,/PSG/);
- assert.match(html,/9 V/);
+ assert.match(html,/Club/);
+ assert.match(html,/>V<\/span>/);
+ assert.match(html,/standings-football/);
+ assert.match(html,/PSG/);
+ assert.match(html,/class="rank-data rank-number">—<\/span>/);
 });
 
 test('récupération ATP sans requête au classement officiel ESPN',async()=>{
@@ -319,8 +323,8 @@ test('les cinq classements tennis utilisent un fichier top 150 live distinct, sa
   assert.ok(html.indexOf('option value="FRA"')<html.indexOf('option value="ESP"'));
   assert.doesNotMatch(html,/Tournois · 14 j/);
   assert.doesNotMatch(html,/Points officiels/);
-  if(['atp','wta'].includes(id))assert.match(html,/<span class="rank-career">MC<\/span>/);
-  else assert.doesNotMatch(html,/<span class="rank-career">MC<\/span>/);
+  if(['atp','wta'].includes(id))assert.match(html,/Joueur · MC/);
+  else assert.doesNotMatch(html,/Joueur · MC/);
  }
  assert.ok(!calls.some(url=>url.includes('tennis/wta/rankings')));
 });
@@ -334,7 +338,7 @@ test('classement Race : tournois précédents et absence de MC fictif',()=>{
  assert.match(html,/Défaite Monastir 1 8e/);
  assert.match(html,/race-no-career/);
  assert.match(html,/class="rank-data rank-tournament tourney-previous is-loss"/);
- assert.doesNotMatch(html,/<span class="rank-career">MC<\/span>/);
+ assert.doesNotMatch(html,/Joueur · MC/);
 });
 
 test('les résultats sont intégrés aux deux colonnes de tournois',()=>{
@@ -391,4 +395,113 @@ test('les cinq classements tennis conservent le tableau compact sans colonne Ré
   assert.doesNotMatch(html,/<span>Résultat<\/span>/);
   assert.match(html,/rank-table-scroll/);
  }
+});
+
+test('football : tableau détaillé avec valeurs ESPN réellement fournies',()=>{
+ const standings=Array.from({length:2},(_,i)=>({
+  team:{displayName:i?'Marseille':'Paris Saint-Germain',logos:[{href:'https://a.espncdn.com/i/teamlogo.png'}]},
+  stats:[['rank',i+1],['rankChange',i?0:1],['points',25-i*3],['gamesPlayed',12],
+   ['wins',8-i],['ties',1+i],['losses',3],['pointsFor',20-i],['pointsAgainst',10+i],
+   ['pointDifferential',10-2*i]].map(([name,value])=>({name,value,displayValue:String(value)}))
+ }));
+ const rows=parseESPNStandings({children:[{name:'French Ligue 1 2026-27',standings:{entries:standings}}]});
+ assert.equal(rows.length,2);
+ assert.equal(rows[0].played,'12');
+ assert.equal(rows[0].wins,'8');
+ assert.equal(rows[0].draws,'1');
+ assert.equal(rows[0].losses,'3');
+ assert.equal(rows[0].goalsFor,'20');
+ assert.equal(rows[0].goalsAgainst,'10');
+ assert.equal(rows[0].diff,'10');
+ assert.equal(rows[0].rankChange,'1');
+ assert.equal(rows[0].logo,'https://a.espncdn.com/i/teamlogo.png');
+ const html=renderRankingsView({selected:'ligue1',live:{ligue1:{rows,live:true,asOf:new Date().toISOString()}},
+  favorites:[],esc:x=>String(x).replaceAll('<','&lt;'),safeUrl:x=>x});
+ for(const h of ['J','V','N','D','BP','BC','Diff.','Pts','Δ rang'])assert.match(html,new RegExp(h));
+ assert.match(html,/standings-football/);
+ assert.match(html,/Paris Saint-Germain/);
+ assert.match(html,/▲ 1/);
+});
+
+test('NBA : pourcentage, écart, séries et domicile/extérieur ne sont pas inventés',()=>{
+ const entries=(conference)=>[{
+  team:{displayName:conference==='Western Conference'?'San Antonio Spurs':'Milwaukee Bucks'},
+  stats:[
+   {name:'playoffSeed',displayValue:'5'}, {name:'wins',displayValue:'9'},
+   {name:'losses',displayValue:'4'},{name:'winPercent',displayValue:'.692'},
+   {name:'gamesBehind',displayValue:'2.5'},{name:'streak',displayValue:'W3'},
+   {name:'home',displayValue:'5-2'},{name:'road',displayValue:'4-2'},
+   {name:'last 10 games',displayValue:'7-3'},
+   {name:'avgPointsFor',displayValue:'118.5'},
+   {name:'avgPointsAgainst',displayValue:'113.1'},
+   {name:'differential',displayValue:'+5.4'}
+  ]
+ }];
+ const body={children:['Eastern Conference','Western Conference'].map(name=>({name,standings:{entries:entries(name)}}))};
+ const rows=parseESPNStandings(body,{west:true});
+ assert.equal(rows.length,1);assert.equal(rows[0].name,'San Antonio Spurs');
+ assert.equal(rows[0].pct,'.692');assert.equal(rows[0].gamesBehind,'2.5');
+ assert.equal(rows[0].streak,'W3');assert.equal(rows[0].home,'5-2');
+ assert.equal(rows[0].away,'4-2');assert.equal(rows[0].lastTen,'7-3');
+ assert.equal(rows[0].avgPointsFor,'118.5');
+ const html=renderRankingsView({selected:'nbaouest',live:{nbaouest:{rows,live:true,asOf:new Date().toISOString()}},
+  favorites:[{name:'San Antonio Spurs'}],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/standings-nba/);
+ assert.match(html,/69,2/);
+ assert.match(html,/Domicile|Dom\./);
+ assert.match(html,/V3/);
+ assert.match(html,/7-3/);
+ assert.match(html,/San Antonio Spurs/);
+ assert.doesNotMatch(html,/Milwaukee Bucks/);
+});
+
+test('les colonnes sportives absentes deviennent des tirets, sans chiffres fictifs',()=>{
+ const html=renderRankingsView({selected:'liga',live:{liga:{rows:[{
+  rank:1,name:'Club incomplet',points:'3',wins:'1',losses:'',draws:'',played:''
+ }],live:true,asOf:new Date().toISOString()}},favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Club incomplet/);
+ assert.match(html,/class="rank-data rank-number">—<\/span>/);
+ assert.match(html,/class="rank-data rank-number rank-points-highlight">3<\/span>/);
+});
+
+test('ITTF : 150 hommes et 150 femmes avec pays, points et variation hebdomadaire',async()=>{
+ const payload={fetchedAt:new Date().toISOString(),week:46,source:'https://www.eleventabletennis.com/rankings',
+  rows:Array.from({length:150},(_,i)=>({rank:i+1,name:'WTT sportif '+(i+1),
+   country:i===2?'FRA':'JPN',points:7600-i,movement:i===2?-1:i===1?1:0}))};
+ const rows=parseWTTRankings(payload);
+ assert.equal(rows.length,150);
+ assert.equal(rows[2].country,'FRA');
+ assert.equal(rows[2].movement,-1);
+ const requested=[];
+ const fetchFn=async url=>{
+  requested.push(String(url));
+  return {ok:String(url).includes('wtt-'),status:200,json:async()=>payload};
+ };
+ const live=await fetchRankings({fetchFn,force:true});
+ for(const id of ['wtt','wttwomen']){
+  assert.equal(live[id].rows.length,150);
+  assert.equal(live[id].week,46);
+  const html=renderRankingsView({selected:id,live,favorites:[],esc:x=>String(x),safeUrl:x=>x});
+  assert.match(html,/standings-tabletennis/);
+  assert.match(html,/Pays/);
+  assert.match(html,/Δ rang/);
+  assert.match(html,/WTT sportif 3/);
+  assert.match(html,/▼ 1/);
+  assert.match(html,/semaine 46/);
+ }
+ assert.ok(requested.includes('./data/wtt-men.json'));
+ assert.ok(requested.includes('./data/wtt-women.json'));
+ assert.equal(parseWTTRankings({...payload,rows:payload.rows.slice(0,149)}),null);
+});
+
+test('tennis mobile : le meilleur classement et le drapeau sont placés avec le joueur',()=>{
+ const html=renderRankingsView({selected:'atp',live:{atp:{
+  rows:[{rank:3,name:'Félix Exemple',country:'FRA',age:21,careerHigh:'MC',
+   livePoints:4200,movement:1,pointsChange:40}],
+  live:true,asOf:new Date().toISOString()}},favorites:[],esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Joueur · MC/);
+ assert.match(html,/class="rank-career-inline best"/);
+ assert.match(html,/class="rank-flag-mobile"/);
+ assert.match(html,/🇫🇷/);
+ assert.doesNotMatch(html,/<span class="rank-career">/);
 });

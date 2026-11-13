@@ -1,0 +1,1058 @@
+{
+  "source": "https://www.eleventabletennis.com/rankings",
+  "officialSource": "https://www.ittf.com/rankings/",
+  "fetchedAt": "2026-11-13T11:07:41.433592+00:00",
+  "week": 46,
+  "rows": [
+    {
+      "rank": 1,
+      "name": "Wang Manyu",
+      "country": "CHN",
+      "points": 9265,
+      "movement": 0
+    },
+    {
+      "rank": 2,
+      "name": "Sun Yingsha",
+      "country": "CHN",
+      "points": 8575,
+      "movement": 0
+    },
+    {
+      "rank": 3,
+      "name": "Miwa Harimoto",
+      "country": "JPN",
+      "points": 6889,
+      "movement": 0
+    },
+    {
+      "rank": 4,
+      "name": "Kuai Man",
+      "country": "CHN",
+      "points": 6030,
+      "movement": 0
+    },
+    {
+      "rank": 5,
+      "name": "Wang Yidi",
+      "country": "CHN",
+      "points": 5260,
+      "movement": 0
+    },
+    {
+      "rank": 6,
+      "name": "Hina Hayata",
+      "country": "JPN",
+      "points": 4770,
+      "movement": 0
+    },
+    {
+      "rank": 7,
+      "name": "Chen Xingtong",
+      "country": "CHN",
+      "points": 4660,
+      "movement": 0
+    },
+    {
+      "rank": 8,
+      "name": "Chen Yi",
+      "country": "CHN",
+      "points": 4335,
+      "movement": 0
+    },
+    {
+      "rank": 9,
+      "name": "Hitomi Sato",
+      "country": "JPN",
+      "points": 4220,
+      "movement": 0
+    },
+    {
+      "rank": 10,
+      "name": "Satsuki Odo",
+      "country": "JPN",
+      "points": 3710,
+      "movement": 1
+    },
+    {
+      "rank": 11,
+      "name": "Sabine Winter",
+      "country": "GER",
+      "points": 3565,
+      "movement": 2
+    },
+    {
+      "rank": 12,
+      "name": "Zhu Yuling",
+      "country": "MAC",
+      "points": 3500,
+      "movement": -2
+    },
+    {
+      "rank": 13,
+      "name": "Shin Yubin",
+      "country": "KOR",
+      "points": 3270,
+      "movement": -1
+    },
+    {
+      "rank": 14,
+      "name": "Honoka Hashimoto",
+      "country": "JPN",
+      "points": 2924,
+      "movement": 0
+    },
+    {
+      "rank": 15,
+      "name": "Shi Xunyao",
+      "country": "CHN",
+      "points": 2495,
+      "movement": 0
+    },
+    {
+      "rank": 16,
+      "name": "Han Ying",
+      "country": "GER",
+      "points": 2350,
+      "movement": 0
+    },
+    {
+      "rank": 17,
+      "name": "Joo Cheonhui",
+      "country": "KOR",
+      "points": 2125,
+      "movement": 0
+    },
+    {
+      "rank": 18,
+      "name": "Miyu Nagasaki",
+      "country": "JPN",
+      "points": 2070,
+      "movement": 0
+    },
+    {
+      "rank": 19,
+      "name": "Miyuu Kihara",
+      "country": "JPN",
+      "points": 1955,
+      "movement": 0
+    },
+    {
+      "rank": 20,
+      "name": "Adriana Diaz",
+      "country": "PUR",
+      "points": 1872,
+      "movement": 0
+    },
+    {
+      "rank": 21,
+      "name": "Hana Goda",
+      "country": "EGY",
+      "points": 1820,
+      "movement": 2
+    },
+    {
+      "rank": 22,
+      "name": "Bernadette Szőcs",
+      "country": "ROU",
+      "points": 1745,
+      "movement": -1
+    },
+    {
+      "rank": 23,
+      "name": "Sakura Yokoi",
+      "country": "JPN",
+      "points": 1700,
+      "movement": -1
+    },
+    {
+      "rank": 24,
+      "name": "Qin Yuxuan",
+      "country": "CHN",
+      "points": 1570,
+      "movement": 0
+    },
+    {
+      "rank": 25,
+      "name": "Miu Hirano",
+      "country": "JPN",
+      "points": 1525,
+      "movement": 1
+    },
+    {
+      "rank": 26,
+      "name": "Elizabet Abraamian",
+      "country": "RUS",
+      "points": 1435,
+      "movement": 1
+    },
+    {
+      "rank": 27,
+      "name": "Nina Mittelham",
+      "country": "GER",
+      "points": 1384,
+      "movement": 1
+    },
+    {
+      "rank": 28,
+      "name": "Annett Kaufmann",
+      "country": "GER",
+      "points": 1293,
+      "movement": 1
+    },
+    {
+      "rank": 29,
+      "name": "Dina Meshref",
+      "country": "EGY",
+      "points": 1234,
+      "movement": 1
+    },
+    {
+      "rank": 30,
+      "name": "Lily Zhang",
+      "country": "USA",
+      "points": 1223,
+      "movement": 1
+    },
+    {
+      "rank": 31,
+      "name": "Bruna Takahashi",
+      "country": "BRA",
+      "points": 1221,
+      "movement": 2
+    },
+    {
+      "rank": 32,
+      "name": "Mima Ito",
+      "country": "JPN",
+      "points": 1210,
+      "movement": -7
+    },
+    {
+      "rank": 33,
+      "name": "Kim Nayeong",
+      "country": "KOR",
+      "points": 1198,
+      "movement": -1
+    },
+    {
+      "rank": 34,
+      "name": "Cheng I-Ching",
+      "country": "TPE",
+      "points": 1140,
+      "movement": 0
+    },
+    {
+      "rank": 35,
+      "name": "Jia Nan Yuan",
+      "country": "FRA",
+      "points": 1132,
+      "movement": 0
+    },
+    {
+      "rank": 36,
+      "name": "Peng Yu-han",
+      "country": "TPE",
+      "points": 1081,
+      "movement": 0
+    },
+    {
+      "rank": 37,
+      "name": "Kaho Akae",
+      "country": "JPN",
+      "points": 1000,
+      "movement": 2
+    },
+    {
+      "rank": 38,
+      "name": "Anna Hursey",
+      "country": "WAL",
+      "points": 966,
+      "movement": 2
+    },
+    {
+      "rank": 39,
+      "name": "Prithika Pavade",
+      "country": "FRA",
+      "points": 963,
+      "movement": -2
+    },
+    {
+      "rank": 40,
+      "name": "Margaryta Pesotska",
+      "country": "UKR",
+      "points": 954,
+      "movement": 4
+    },
+    {
+      "rank": 41,
+      "name": "Natalia Bajor",
+      "country": "POL",
+      "points": 953,
+      "movement": 1
+    },
+    {
+      "rank": 42,
+      "name": "Yangzi Liu",
+      "country": "AUS",
+      "points": 935,
+      "movement": -1
+    },
+    {
+      "rank": 43,
+      "name": "Elizabeta Samara",
+      "country": "ROU",
+      "points": 855,
+      "movement": -5
+    },
+    {
+      "rank": 44,
+      "name": "Mo Zhang",
+      "country": "CAN",
+      "points": 840,
+      "movement": -1
+    },
+    {
+      "rank": 45,
+      "name": "Doo Hoi Kem",
+      "country": "HKG",
+      "points": 832,
+      "movement": 0
+    },
+    {
+      "rank": 46,
+      "name": "Zhu Sibing",
+      "country": "CHN",
+      "points": 824,
+      "movement": 0
+    },
+    {
+      "rank": 47,
+      "name": "Huang Yu-Jie",
+      "country": "TPE",
+      "points": 820,
+      "movement": 0
+    },
+    {
+      "rank": 48,
+      "name": "He Zhuojia",
+      "country": "CHN",
+      "points": 799,
+      "movement": 0
+    },
+    {
+      "rank": 49,
+      "name": "Yeh Yi-Tian",
+      "country": "TPE",
+      "points": 799,
+      "movement": 0
+    },
+    {
+      "rank": 50,
+      "name": "Sofia Polcanova",
+      "country": "AUT",
+      "points": 738,
+      "movement": 0
+    },
+    {
+      "rank": 51,
+      "name": "Orawan Paranang",
+      "country": "THA",
+      "points": 712,
+      "movement": 1
+    },
+    {
+      "rank": 52,
+      "name": "Chien Tung-Chuan",
+      "country": "TPE",
+      "points": 705,
+      "movement": 1
+    },
+    {
+      "rank": 53,
+      "name": "Amy Wang",
+      "country": "USA",
+      "points": 690,
+      "movement": 1
+    },
+    {
+      "rank": 54,
+      "name": "Li Yu-Jhun",
+      "country": "TPE",
+      "points": 670,
+      "movement": 1
+    },
+    {
+      "rank": 55,
+      "name": "Lee Eunhye",
+      "country": "KOR",
+      "points": 665,
+      "movement": -4
+    },
+    {
+      "rank": 56,
+      "name": "Zeng Jian",
+      "country": "SGP",
+      "points": 654,
+      "movement": 0
+    },
+    {
+      "rank": 57,
+      "name": "Su Tsz Tung",
+      "country": "HKG",
+      "points": 633,
+      "movement": 0
+    },
+    {
+      "rank": 58,
+      "name": "Maria Xiao",
+      "country": "ESP",
+      "points": 615,
+      "movement": 0
+    },
+    {
+      "rank": 59,
+      "name": "Yang Ha Eun",
+      "country": "KOR",
+      "points": 579,
+      "movement": 1
+    },
+    {
+      "rank": 60,
+      "name": "Andreea Dragoman",
+      "country": "ROU",
+      "points": 575,
+      "movement": 1
+    },
+    {
+      "rank": 61,
+      "name": "Manika Batra",
+      "country": "IND",
+      "points": 567,
+      "movement": 1
+    },
+    {
+      "rank": 62,
+      "name": "Sachi Aoki",
+      "country": "JPN",
+      "points": 565,
+      "movement": 1
+    },
+    {
+      "rank": 63,
+      "name": "Yoo Yerin",
+      "country": "KOR",
+      "points": 555,
+      "movement": 4
+    },
+    {
+      "rank": 64,
+      "name": "Constantina Psihogios",
+      "country": "AUS",
+      "points": 545,
+      "movement": 0
+    },
+    {
+      "rank": 65,
+      "name": "Sreeja Akula",
+      "country": "IND",
+      "points": 530,
+      "movement": 0
+    },
+    {
+      "rank": 66,
+      "name": "Charlotte Lutz",
+      "country": "FRA",
+      "points": 528,
+      "movement": 0
+    },
+    {
+      "rank": 67,
+      "name": "Misuzu Takeya",
+      "country": "JPN",
+      "points": 525,
+      "movement": -8
+    },
+    {
+      "rank": 68,
+      "name": "Fu Yu",
+      "country": "POR",
+      "points": 511,
+      "movement": 15
+    },
+    {
+      "rank": 69,
+      "name": "Elena Zaharia",
+      "country": "ROU",
+      "points": 510,
+      "movement": 0
+    },
+    {
+      "rank": 70,
+      "name": "Minhyung Jee",
+      "country": "AUS",
+      "points": 505,
+      "movement": -2
+    },
+    {
+      "rank": 71,
+      "name": "Kim Seongjin",
+      "country": "KOR",
+      "points": 505,
+      "movement": 5
+    },
+    {
+      "rank": 72,
+      "name": "Saki Shibata",
+      "country": "JPN",
+      "points": 496,
+      "movement": -2
+    },
+    {
+      "rank": 73,
+      "name": "Xiaona Shan",
+      "country": "GER",
+      "points": 485,
+      "movement": -2
+    },
+    {
+      "rank": 74,
+      "name": "Sally Moyland",
+      "country": "USA",
+      "points": 477,
+      "movement": -2
+    },
+    {
+      "rank": 75,
+      "name": "Diya Chitale",
+      "country": "IND",
+      "points": 471,
+      "movement": -2
+    },
+    {
+      "rank": 76,
+      "name": "Zong Geman",
+      "country": "CHN",
+      "points": 470,
+      "movement": -2
+    },
+    {
+      "rank": 77,
+      "name": "Ser Lin Qian",
+      "country": "SGP",
+      "points": 469,
+      "movement": -2
+    },
+    {
+      "rank": 78,
+      "name": "Yashaswini Ghorpade",
+      "country": "IND",
+      "points": 456,
+      "movement": -1
+    },
+    {
+      "rank": 79,
+      "name": "Jieni Shao",
+      "country": "POR",
+      "points": 446,
+      "movement": 2
+    },
+    {
+      "rank": 80,
+      "name": "Xiaoxin Yang",
+      "country": "MON",
+      "points": 445,
+      "movement": -2
+    },
+    {
+      "rank": 81,
+      "name": "Linda Bergstrom",
+      "country": "SWE",
+      "points": 433,
+      "movement": -2
+    },
+    {
+      "rank": 82,
+      "name": "Giorgia Piccolin",
+      "country": "ITA",
+      "points": 427,
+      "movement": -2
+    },
+    {
+      "rank": 83,
+      "name": "Fan Shuhan",
+      "country": "CHN",
+      "points": 408,
+      "movement": -1
+    },
+    {
+      "rank": 84,
+      "name": "Christina Kallberg",
+      "country": "SWE",
+      "points": 405,
+      "movement": 0
+    },
+    {
+      "rank": 85,
+      "name": "Tin-Tin Ho",
+      "country": "ENG",
+      "points": 395,
+      "movement": 0
+    },
+    {
+      "rank": 86,
+      "name": "Yuna Ojio",
+      "country": "JPN",
+      "points": 393,
+      "movement": 0
+    },
+    {
+      "rank": 87,
+      "name": "Tsai Yun-En",
+      "country": "TPE",
+      "points": 390,
+      "movement": 0
+    },
+    {
+      "rank": 88,
+      "name": "Rin Mende",
+      "country": "JPN",
+      "points": 379,
+      "movement": 0
+    },
+    {
+      "rank": 89,
+      "name": "Yuka Kaneyoshi",
+      "country": "JPN",
+      "points": 378,
+      "movement": 0
+    },
+    {
+      "rank": 90,
+      "name": "Gaia Monfardini",
+      "country": "ITA",
+      "points": 372,
+      "movement": 0
+    },
+    {
+      "rank": 91,
+      "name": "Katarzyna Wegrzyn",
+      "country": "POL",
+      "points": 361,
+      "movement": 1
+    },
+    {
+      "rank": 92,
+      "name": "Hana Arapovic",
+      "country": "CRO",
+      "points": 360,
+      "movement": -1
+    },
+    {
+      "rank": 93,
+      "name": "Sarah De Nutte",
+      "country": "LUX",
+      "points": 352,
+      "movement": 0
+    },
+    {
+      "rank": 94,
+      "name": "Wang Xiaotong",
+      "country": "CHN",
+      "points": 344,
+      "movement": 0
+    },
+    {
+      "rank": 95,
+      "name": "Syndrela Das",
+      "country": "IND",
+      "points": 341,
+      "movement": 0
+    },
+    {
+      "rank": 96,
+      "name": "Ng Wing Lam",
+      "country": "HKG",
+      "points": 330,
+      "movement": 1
+    },
+    {
+      "rank": 97,
+      "name": "Lea Rakovac",
+      "country": "CRO",
+      "points": 325,
+      "movement": -1
+    },
+    {
+      "rank": 98,
+      "name": "Zauresh Akasheva",
+      "country": "KAZ",
+      "points": 324,
+      "movement": 0
+    },
+    {
+      "rank": 99,
+      "name": "Park Gahyeon",
+      "country": "KOR",
+      "points": 323,
+      "movement": 0
+    },
+    {
+      "rank": 100,
+      "name": "Jie Li",
+      "country": "NED",
+      "points": 312,
+      "movement": 0
+    },
+    {
+      "rank": 101,
+      "name": "Xia Lian Ni",
+      "country": "LUX",
+      "points": 309,
+      "movement": 0
+    },
+    {
+      "rank": 102,
+      "name": "Divyanshi Bhowmick",
+      "country": "IND",
+      "points": 307,
+      "movement": 0
+    },
+    {
+      "rank": 103,
+      "name": "Vlada Voronina",
+      "country": "RUS",
+      "points": 305,
+      "movement": 0
+    },
+    {
+      "rank": 104,
+      "name": "Lee Seungeun",
+      "country": "KOR",
+      "points": 304,
+      "movement": 0
+    },
+    {
+      "rank": 105,
+      "name": "Asuka Sasao",
+      "country": "JPN",
+      "points": 297,
+      "movement": 0
+    },
+    {
+      "rank": 106,
+      "name": "Sutirtha Mukherjee",
+      "country": "IND",
+      "points": 297,
+      "movement": 0
+    },
+    {
+      "rank": 107,
+      "name": "Lee Daeun",
+      "country": "KOR",
+      "points": 295,
+      "movement": 0
+    },
+    {
+      "rank": 108,
+      "name": "Tatiana Kukulkova",
+      "country": "SVK",
+      "points": 290,
+      "movement": 0
+    },
+    {
+      "rank": 109,
+      "name": "Ayhika Mukherjee",
+      "country": "IND",
+      "points": 289,
+      "movement": 0
+    },
+    {
+      "rank": 110,
+      "name": "Kotomi Omoda",
+      "country": "JPN",
+      "points": 287,
+      "movement": 2
+    },
+    {
+      "rank": 111,
+      "name": "Audrey Zarif",
+      "country": "FRA",
+      "points": 280,
+      "movement": 0
+    },
+    {
+      "rank": 112,
+      "name": "Camille Lutz",
+      "country": "FRA",
+      "points": 275,
+      "movement": 1
+    },
+    {
+      "rank": 113,
+      "name": "Mariam Alhodaby",
+      "country": "EGY",
+      "points": 270,
+      "movement": -3
+    },
+    {
+      "rank": 114,
+      "name": "Daniela Ortega",
+      "country": "CHI",
+      "points": 269,
+      "movement": 0
+    },
+    {
+      "rank": 115,
+      "name": "Tan Zhao Yun",
+      "country": "SGP",
+      "points": 263,
+      "movement": 0
+    },
+    {
+      "rank": 116,
+      "name": "Sabina Surjan",
+      "country": "SRB",
+      "points": 262,
+      "movement": 0
+    },
+    {
+      "rank": 117,
+      "name": "Veronika Matiunina",
+      "country": "UKR",
+      "points": 261,
+      "movement": 0
+    },
+    {
+      "rank": 118,
+      "name": "Giulia Takahashi",
+      "country": "BRA",
+      "points": 260,
+      "movement": 0
+    },
+    {
+      "rank": 119,
+      "name": "Ece Harac",
+      "country": "TUR",
+      "points": 244,
+      "movement": 0
+    },
+    {
+      "rank": 120,
+      "name": "Han Feier",
+      "country": "CHN",
+      "points": 239,
+      "movement": 0
+    },
+    {
+      "rank": 121,
+      "name": "Loy Ming Ying",
+      "country": "SGP",
+      "points": 235,
+      "movement": 4
+    },
+    {
+      "rank": 122,
+      "name": "Filippa Bergand",
+      "country": "SWE",
+      "points": 235,
+      "movement": -1
+    },
+    {
+      "rank": 123,
+      "name": "Tania Morice",
+      "country": "ALG",
+      "points": 234,
+      "movement": 3
+    },
+    {
+      "rank": 124,
+      "name": "Zhu Ziyu",
+      "country": "CHN",
+      "points": 231,
+      "movement": -2
+    },
+    {
+      "rank": 125,
+      "name": "Brianna Burgos",
+      "country": "PUR",
+      "points": 231,
+      "movement": -2
+    },
+    {
+      "rank": 126,
+      "name": "Nithya Mani",
+      "country": "IND",
+      "points": 229,
+      "movement": -2
+    },
+    {
+      "rank": 127,
+      "name": "Ryu Hanna",
+      "country": "KOR",
+      "points": 221,
+      "movement": 0
+    },
+    {
+      "rank": 128,
+      "name": "Izabela Lupulesku",
+      "country": "SRB",
+      "points": 219,
+      "movement": 0
+    },
+    {
+      "rank": 129,
+      "name": "Jiamuwa Wu",
+      "country": "AUS",
+      "points": 218,
+      "movement": 0
+    },
+    {
+      "rank": 130,
+      "name": "Kim Kum Yong",
+      "country": "PRK",
+      "points": 217,
+      "movement": 0
+    },
+    {
+      "rank": 131,
+      "name": "Barbora Varady",
+      "country": "SVK",
+      "points": 214,
+      "movement": 0
+    },
+    {
+      "rank": 132,
+      "name": "Laura Watanabe",
+      "country": "BRA",
+      "points": 210,
+      "movement": 0
+    },
+    {
+      "rank": 133,
+      "name": "Liu Ziling",
+      "country": "CHN",
+      "points": 205,
+      "movement": 0
+    },
+    {
+      "rank": 134,
+      "name": "Cocona Muramatsu",
+      "country": "JPN",
+      "points": 204,
+      "movement": 0
+    },
+    {
+      "rank": 135,
+      "name": "Chen Min-Hsin",
+      "country": "TPE",
+      "points": 203,
+      "movement": 10
+    },
+    {
+      "rank": 136,
+      "name": "Yang Yiyun",
+      "country": "CHN",
+      "points": 202,
+      "movement": -1
+    },
+    {
+      "rank": 137,
+      "name": "Jocelyn Lam",
+      "country": "NZL",
+      "points": 200,
+      "movement": -1
+    },
+    {
+      "rank": 138,
+      "name": "Nicole Arlia",
+      "country": "ITA",
+      "points": 195,
+      "movement": -1
+    },
+    {
+      "rank": 139,
+      "name": "Sayali Wani",
+      "country": "IND",
+      "points": 192,
+      "movement": -1
+    },
+    {
+      "rank": 140,
+      "name": "Chunli Li",
+      "country": "NZL",
+      "points": 190,
+      "movement": -1
+    },
+    {
+      "rank": 141,
+      "name": "Yuan Wan",
+      "country": "GER",
+      "points": 189,
+      "movement": -1
+    },
+    {
+      "rank": 142,
+      "name": "Maria Panfilova",
+      "country": "RUS",
+      "points": 185,
+      "movement": -1
+    },
+    {
+      "rank": 143,
+      "name": "Claire Picard",
+      "country": "FRA",
+      "points": 185,
+      "movement": -1
+    },
+    {
+      "rank": 144,
+      "name": "Rachel Moret",
+      "country": "SUI",
+      "points": 185,
+      "movement": -1
+    },
+    {
+      "rank": 145,
+      "name": "Franziska Schreiner",
+      "country": "GER",
+      "points": 184,
+      "movement": -1
+    },
+    {
+      "rank": 146,
+      "name": "Swastika Ghosh",
+      "country": "IND",
+      "points": 183,
+      "movement": 0
+    },
+    {
+      "rank": 147,
+      "name": "Taneesha Kotecha",
+      "country": "IND",
+      "points": 181,
+      "movement": 0
+    },
+    {
+      "rank": 148,
+      "name": "Paulina Vega",
+      "country": "CHI",
+      "points": 177,
+      "movement": 0
+    },
+    {
+      "rank": 149,
+      "name": "Hend Fathy",
+      "country": "EGY",
+      "points": 175,
+      "movement": 0
+    },
+    {
+      "rank": 150,
+      "name": "Debora Vivarelli",
+      "country": "ITA",
+      "points": 175,
+      "movement": 0
+    }
+  ]
+}
