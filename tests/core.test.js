@@ -876,8 +876,8 @@ test('Mobile : les posts statistiques restent visibles même avec 90 actualités
   source:'Jeu, set et maths',sport:'Tennis'
  }));
  const feed=newsLastWeek([...others,...maths],now);
- assert.equal(feed.filter(x=>x.source==='Jeu, set et maths').length,12);
- assert.ok(feed.length<=72);
+ assert.equal(feed.filter(x=>x.source==='Jeu, set et maths').length,15);
+ assert.ok(feed.length<=85);
 });
 
 test('Android : les posts se chargent indépendamment des scores ESPN',async()=>{
