@@ -194,7 +194,7 @@ test('les classements football continuent de s’afficher sans données ATP',()=
   live:true,asOf:new Date().toISOString()}},
   favorites:[],esc:x=>String(x),safeUrl:x=>x});
  assert.match(html,/PSG/);
- assert.match(html,/Équipe/);
+ assert.match(html,/Club/);
  assert.match(html,/>V<\/span>/);
  assert.match(html,/standings-football/);
  assert.match(html,/class="rank-data rank-number">9<\/span>/);
