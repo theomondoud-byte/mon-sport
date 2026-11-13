@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-13T15:24:01.943762+00:00",
+  "fetchedAt": "2026-11-13T18:59:56.168154+00:00",
   "rows": [
     {
       "rank": 1,
@@ -35,7 +35,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 0 D)",
@@ -60,7 +60,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (1 V / 1 D)",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
@@ -97,7 +97,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
@@ -118,7 +118,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (1 V / 1 D)",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
@@ -139,7 +139,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
@@ -160,7 +160,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (0 V / 2 D)",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
@@ -1366,28 +1366,37 @@
     },
     {
       "rank": 84,
+      "name": "Bianca Andreescu",
+      "age": 26,
+      "country": "CAN",
+      "livePoints": 856,
+      "careerHigh": "4",
+      "movement": 16,
+      "pointsChange": 79,
+      "tournament": "Sopo F",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 900,
+      "maxPoints": 900,
+      "tournamentHistory": [
+        {
+          "text": "Sopo F",
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+        },
+        {
+          "text": "Sopo DF",
+          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 85,
       "name": "Harriet Dart",
       "age": 30,
       "country": "GBR",
       "livePoints": 854,
       "careerHigh": "70",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 85,
-      "name": "Tereza Valentová",
-      "age": 19,
-      "country": "CZE",
-      "livePoints": 853,
-      "careerHigh": "42",
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1398,12 +1407,12 @@
     },
     {
       "rank": 86,
-      "name": "Polina Kudermetova",
-      "age": 23,
-      "country": "UZB",
-      "livePoints": 852,
-      "careerHigh": "54",
-      "movement": null,
+      "name": "Tereza Valentová",
+      "age": 19,
+      "country": "CZE",
+      "livePoints": 853,
+      "careerHigh": "42",
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1414,12 +1423,12 @@
     },
     {
       "rank": 87,
-      "name": "Panna Udvardy",
-      "age": 28,
-      "country": "HUN",
-      "livePoints": 848,
-      "careerHigh": "59",
-      "movement": null,
+      "name": "Polina Kudermetova",
+      "age": 23,
+      "country": "UZB",
+      "livePoints": 852,
+      "careerHigh": "54",
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1430,12 +1439,12 @@
     },
     {
       "rank": 88,
-      "name": "Petra Marčinko",
-      "age": 20,
-      "country": "CRO",
-      "livePoints": 845,
-      "careerHigh": "45",
-      "movement": null,
+      "name": "Panna Udvardy",
+      "age": 28,
+      "country": "HUN",
+      "livePoints": 848,
+      "careerHigh": "59",
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1446,12 +1455,12 @@
     },
     {
       "rank": 89,
-      "name": "Léolia Jeanjean",
-      "age": 31,
-      "country": "FRA",
-      "livePoints": 841,
-      "careerHigh": "MC",
-      "movement": null,
+      "name": "Petra Marčinko",
+      "age": 20,
+      "country": "CRO",
+      "livePoints": 845,
+      "careerHigh": "45",
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1462,12 +1471,12 @@
     },
     {
       "rank": 90,
-      "name": "Aliaksandra Sasnovich",
-      "age": 32,
-      "country": "BLR",
-      "livePoints": 839,
-      "careerHigh": "29",
-      "movement": null,
+      "name": "Léolia Jeanjean",
+      "age": 31,
+      "country": "FRA",
+      "livePoints": 841,
+      "careerHigh": "89",
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1478,12 +1487,12 @@
     },
     {
       "rank": 91,
-      "name": "Maya Joint",
-      "age": 20,
-      "country": "AUS",
-      "livePoints": 832,
-      "careerHigh": "28",
-      "movement": 1,
+      "name": "Aliaksandra Sasnovich",
+      "age": 32,
+      "country": "BLR",
+      "livePoints": 839,
+      "careerHigh": "29",
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1494,12 +1503,12 @@
     },
     {
       "rank": 92,
-      "name": "Taylor Townsend",
-      "age": 30,
-      "country": "USA",
-      "livePoints": 831,
-      "careerHigh": "46",
-      "movement": 1,
+      "name": "Maya Joint",
+      "age": 20,
+      "country": "AUS",
+      "livePoints": 832,
+      "careerHigh": "28",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1510,12 +1519,12 @@
     },
     {
       "rank": 93,
-      "name": "Viktorija Golubic",
-      "age": 34,
-      "country": "SUI",
+      "name": "Taylor Townsend",
+      "age": 30,
+      "country": "USA",
       "livePoints": 831,
-      "careerHigh": "35",
-      "movement": 1,
+      "careerHigh": "46",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1526,13 +1535,13 @@
     },
     {
       "rank": 94,
-      "name": "Taylah Preston",
-      "age": 21,
-      "country": "AUS",
-      "livePoints": 828,
-      "careerHigh": "83",
-      "movement": -3,
-      "pointsChange": -8,
+      "name": "Viktorija Golubic",
+      "age": 34,
+      "country": "SUI",
+      "livePoints": 831,
+      "careerHigh": "35",
+      "movement": null,
+      "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
@@ -1542,24 +1551,19 @@
     },
     {
       "rank": 95,
-      "name": "Bianca Andreescu",
-      "age": 26,
-      "country": "CAN",
-      "livePoints": 824,
-      "careerHigh": "4",
-      "movement": 5,
-      "pointsChange": 47,
-      "tournament": "Sopo DF",
+      "name": "Taylah Preston",
+      "age": 21,
+      "country": "AUS",
+      "livePoints": 828,
+      "careerHigh": "83",
+      "movement": -4,
+      "pointsChange": -8,
+      "tournament": "",
       "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 856,
-      "maxPoints": 900,
-      "tournamentHistory": [
-        {
-          "text": "Sopo DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
-        }
-      ]
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 96,
@@ -1746,11 +1750,11 @@
       "careerHigh": "NMC (112)",
       "movement": 12,
       "pointsChange": 47,
-      "tournament": "Sopo DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 751,
-      "maxPoints": 795,
+      "tournament": "",
+      "previousTournaments": "Défaite Sopo DF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Sopo DF",
@@ -2175,7 +2179,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 DF (16e )",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
@@ -2388,7 +2392,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
