@@ -729,11 +729,13 @@ test('Jeu Set et Maths : uniquement les posts vérifiés et datés dans les arti
   fetchFn:async()=>({ok:true,json:async()=>raw}),
   now:new Date('2026-11-13T12:00:00Z')
  });
- assert.equal(posts.length,1);
- assert.equal(posts[0].source,'Jeu, set et maths');
- assert.match(posts[0].link,/x.com\/JeuSetMaths\/status/);
+ assert.ok(posts.length>=20,'Le relevé intégré complète le post fourni');
+ assert.ok(posts.every(p=>p.source==='Jeu, set et maths'));
+ assert.ok(posts.every(p=>/^https:\/\/x\.com\/JeuSetMaths\/status\//.test(p.link)));
+ assert.ok(posts.some(p=>p.link===raw.posts[0].link));
+ assert.ok(posts.every(p=>!p.link.includes('Imposteur')));
  const feed=newsLastWeek(posts,new Date('2026-11-13T12:00:00Z'));
- assert.equal(feed.length,1);
+ assert.ok(feed.length>=20);
 });
 
 test('aucun rechargement spontané de page lors du remplacement du service worker',async()=>{
