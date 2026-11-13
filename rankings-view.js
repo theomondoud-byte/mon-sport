@@ -118,8 +118,13 @@ export function parseESPNStandings(body,{west=false}={}){
   const points=west?displayStat(stats,['wins','W'])+' V · '+displayStat(stats,['losses','L'])+' D'
    :displayStat(stats,['points','PTS','totalPoints']);
   const played=displayStat(stats,['gamesPlayed','GP','played']);
+  const wins=displayStat(stats,['wins','W','win']);
+  const draws=displayStat(stats,['ties','draws','D','draw']);
+  const losses=displayStat(stats,['losses','L','loss']);
+  const goalsFor=displayStat(stats,['pointsFor','goalsFor','goals','GF']);
+  const goalsAgainst=displayStat(stats,['pointsAgainst','goalsAgainst','GA']);
   const diff=displayStat(stats,['pointDifferential','goalDifference','goalDifferential','goalDiff','GD']);
-  out.push({name,rank:displayed,points:points.trim(),played,diff,
+  out.push({name,rank:displayed,points:points.trim(),played,wins,draws,losses,goalsFor,goalsAgainst,diff,
    detail:[played?played+' matchs':'',diff?'Diff. '+diff:''].filter(Boolean).join(' · '),
    source:'ESPN'});
  }
@@ -163,8 +168,10 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   const attrs=clickable?' data-rank-favorite="'+esc(fav)+'" title="Ouvrir '+esc(fav)+' dans Un favori"':'';
   const name=clickable?'<button type="button" class="rank-favorite-link"'+attrs+'>'+esc(r.name)+' <span aria-hidden="true">↗</span></button>':'<span>'+esc(r.name)+'</span>';
   const number=Number.isFinite(Number(r.rank))?String(r.rank):'—';
+  const football=spec.sport==='Football';
+  const extra=football?'<span class="rank-football-stats" aria-label="Bilan"><span>MJ '+esc(r.played||'—')+'</span><span>V '+esc(r.wins||'—')+'</span><span>N '+esc(r.draws||'—')+'</span><span>D '+esc(r.losses||'—')+'</span><span>BP '+esc(r.goalsFor||'—')+'</span><span>BC '+esc(r.goalsAgainst||'—')+'</span><span>Diff '+esc(r.diff||'—')+'</span></span>':'';
   return '<div class="rank-row '+(clickable?'rank-tracked':'')+'"><span class="rank-place">'+esc(number)+'</span>'
-   +'<span class="rank-person">'+name+(r.detail?'<small>'+esc(r.detail)+'</small>':'')+'</span>'
+   +'<span class="rank-person">'+name+(football?extra:(r.detail?'<small>'+esc(r.detail)+'</small>':''))+'</span>'
    +'<b class="rank-points">'+esc(r.points||'—')+'</b></div>';
  }).join('');
  const tracked=spec.mode==='snapshot'?favorites.map(f=>({name:f.name,entry:rankingEntry(spec.id,f.name)}))
@@ -176,5 +183,6 @@ export function renderRankingsView({selected='atp',live={},favorites=[],loading=
   +(loading?'<p class="agenda-progress">Actualisation des classements…</p>':'')
   +(cards?'<div class="rank-table"><div class="rank-table-head"><span>#</span><span>Club / joueur</span><span>'+esc(spec.west?'Bilan':'Points')+'</span></div>'+cards+'</div>'
   :'<div class="agenda-empty"><h3>Source non accessible</h3><p>Consulte le tableau officiel avec le lien ci-dessus. Aucun rang fictif n’est affiché.</p></div>')
+  +'<p class="agenda-footnote">'+(spec.sport==='Tennis'?'Top 150 : les relevés locaux ne contiennent pas encore 150 joueurs. Le lien officiel donne accès au classement complet. Les points live, points à défendre et projections ne sont pas fournis par cette source et ne sont pas inventés.':'')+'</p>'
   +'<p class="agenda-footnote">Les tableaux ATP/WTA/Race/Next Gen/WTT sont des relevés datés, directement issus des publications citées. Les ligues et la NBA sont chargées depuis ESPN quand le réseau le permet.</p></section>';
 }
