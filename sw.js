@@ -1,10 +1,10 @@
-// V15.9 : tri chronologique, filtres sources et lecture intégrée.
+// V16.0 : tri chronologique, filtres sources et lecture intégrée.
 const CACHE = 'mon-sport-v16-0';
 const ASSETS = [
   './',
   './index.html',
-  './style.css?v=15.9.0',
-  './src.js?v=15.9.0',
+  './style.css?v=16.0.0',
+  './src.js?v=16.0.0',
   './session-loader.js?v=14.9.0',
   './tennis-history.js?v=14.0.0',
   './audit-2026.js?v=14.0.0',
