@@ -87,7 +87,7 @@ export function renderAgendaView({
  const cards=stats?[]:agendaMatches(items,{view,phase:periodPhase,favorite:single?chosen:null,now});
  const period=dateLabel(periodWindow.from,{day:'numeric',month:'short',year:'numeric'})
   +' — '+dateLabel(periodWindow.to,{day:'numeric',month:'short',year:'numeric'});
- const header='<div class="agenda-head"><h2>'+(single?'Un favori':'Tous mes favoris')+'</h2></div>';
+ const header='<div class="agenda-head"><h2>'+(single?'Favoris':'Tous mes favoris')+'</h2></div>';
  const select=single?'<div class="agenda-controls"><label class="agenda-label" for="agendaFavorite">Choisir mon favori</label>'
   +'<select id="agendaFavorite" class="agenda-select">'+favorites.map(f=>
    '<option value="'+esc(f.name)+'" '+(f.name===chosen?'selected':'')+'>'+esc(f.name)+' · '+esc(f.sport)+'</option>').join('')+'</select></div>':'';
