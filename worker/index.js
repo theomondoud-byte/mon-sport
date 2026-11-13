@@ -27,17 +27,17 @@ function xmlValue(xml,names){
  }
  return '';
 }
-function feedItems(xml){return xml.match(/<(?:item|entry)\\b[^>]*>[\\s\\S]*?<\\/(?:item|entry)>/gi)||[];}
+function feedItems(xml){return xml.match(/<(?:item|entry)\b[^>]*>[\s\S]*?<\/(?:item|entry)>/gi)||[];}
 function feedLink(item){
  const value=xmlValue(item,['link']);
- if(/^https?:\\/\\//i.test(value))return value;
- return item.match(/<link\\b[^>]*href=["']([^"']+)["']/i)?.[1]||'';
+ if(/^https?:\/\//i.test(value))return value;
+ return item.match(/<link\b[^>]*href=["']([^"']+)["']/i)?.[1]||'';
 }
 function feedImage(item){
- const match=item.match(/<(?:media:thumbnail|media:content|enclosure)\\b[^>]*url=["']([^"']+)["']/i)
-  ||item.match(/<img\\b[^>]*src=["']([^"']+)["']/i);
+ const match=item.match(/<(?:media:thumbnail|media:content|enclosure)\b[^>]*url=["']([^"']+)["']/i)
+  ||item.match(/<img\b[^>]*src=["']([^"']+)["']/i);
  const url=decode(match?.[1]||'');
- return /^https:\\/\\//i.test(url)?url:'';
+ return /^https:\/\//i.test(url)?url:'';
 }
 async function curatedSportsNews(){
  const now=Date.now(),start=now-7*86400000;
