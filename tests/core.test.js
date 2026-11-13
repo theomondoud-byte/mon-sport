@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeAgenda,agendaMatches,shiftedMonths} from '../agenda-model.js';
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
+import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {newsLastWeek} from '../news-view.js';
 import {isSportsArticle} from '../sports-articles.js';
 
@@ -504,4 +505,79 @@ test('tennis mobile : le meilleur classement et le drapeau sont placés avec le 
  assert.match(html,/class="rank-flag-mobile"/);
  assert.match(html,/🇫🇷/);
  assert.doesNotMatch(html,/<span class="rank-career">/);
+});
+
+test('toutes les colonnes ATP et Race du favori sont détaillées dans Stats',()=>{
+ const date=new Date().toISOString();
+ const rankings={
+  atp:{rows:[{rank:2,name:'Jannik Sinner',careerHigh:'MC',age:25,country:'ITA',
+   livePoints:11020,movement:1,pointsChange:500,tournament:'Finales ATP RR',
+   previousTournaments:'Défaite Paris SF',tournamentStatus:'en_lice',
+   nextPoints:11200,maxPoints:11500}],asOf:date,live:true},
+  atprace:{rows:[{rank:1,name:'Jannik Sinner',age:25,country:'ITA',livePoints:9820,
+   movement:3,pointsChange:240,tournament:'Finales ATP RR',
+   previousTournaments:'Paris DF',nextPoints:9990,maxPoints:10400}],asOf:date,live:true}
+ };
+ const esc=s=>String(s).replaceAll('<','&lt;');
+ const html=renderFavoriteStats({favorite:'Jannik Sinner',favoriteData:{name:'Jannik Sinner',sport:'Tennis'},
+  now:new Date(),rankings,esc,safeUrl:x=>x});
+ assert.match(html,/Classements et statistiques détaillées/);
+ assert.match(html,/ATP live/);
+ assert.match(html,/Race ATP live/);
+ for(const text of ['11020','11200','11500','9820','9990','10400','Finales ATP RR','Défaite Paris SF',
+ 'Meilleur classement','Nationalité','Variation du rang','Variation des points','Tournoi précédent'])
+  assert.ok(html.includes(text),text);
+ assert.match(html,/data-view-ranking="atp"/);
+ assert.match(html,/data-view-ranking="atprace"/);
+ assert.doesNotMatch(html,/ATP, WTA, Next Gen, Race et ITTF : relevés du/);
+});
+
+test('Stats d’un club : intégrer tous les champs de football ESPN',()=>{
+ const html=renderFavoriteRankingDetails({favorite:'PSG',rankingId:'ligue1',
+  rankings:{ligue1:{rows:[{name:'Paris Saint-Germain',rank:1,group:'Ligue 1',
+   points:'24',played:'12',wins:'8',draws:'0',losses:'4',goalsFor:'27',goalsAgainst:'11',
+   diff:'+16',rankChange:'2'}],live:true,asOf:new Date().toISOString()}},
+  esc:x=>String(x),safeUrl:x=>x});
+ for(const value of ['Points','Matchs joués','Victoires','Matchs nuls','Défaites',
+  'Buts marqués','Buts encaissés','Différence de buts','Variation du rang','+2','27','11'])
+  assert.ok(html.includes(value),value);
+ assert.match(html,/data-view-ranking="ligue1"/);
+ assert.match(html,/Source/);
+});
+
+test('Stats d’un sportif NBA/football : préciser le classement collectif',()=>{
+ const rankings={
+  nbaouest:{rows:[{name:'San Antonio Spurs',rank:5,wins:'9',losses:'4',pct:'.692',
+   gamesBehind:'2.5',streak:'W3',lastTen:'7-3',home:'5-2',away:'4-2',
+   avgPointsFor:'118.5',avgPointsAgainst:'113.1',avgDiff:'+5.4'}],asOf:new Date().toISOString()},
+  liga:{rows:[{name:'Real Madrid',rank:3,points:'28',wins:'9',draws:'1',losses:'2'}],asOf:new Date().toISOString()}
+ };
+ const w=renderFavoriteRankingDetails({favorite:'Victor Wembanyama',rankingId:'nbaouest',
+  rankings,esc:x=>String(x),safeUrl:x=>x});
+ assert.match(w,/Classement de son équipe : San Antonio Spurs/);
+ for(const value of ['69,2','2.5','10 derniers matchs','5-2','4-2','118.5','113.1','Différence moyenne'])
+  assert.ok(w.includes(value),value);
+ const m=renderFavoriteRankingDetails({favorite:'Kylian Mbappé',rankingId:'liga',
+  rankings,esc:x=>String(x),safeUrl:x=>x});
+ assert.match(m,/Classement de son équipe : Real Madrid/);
+ assert.match(m,/>28<\/b>/);
+});
+
+test('ITTF : le rang et les variations hebdomadaires alimentent Stats',()=>{
+ const html=renderFavoriteRankingDetails({favorite:'Félix Lebrun',rankingId:'wtt',
+  rankings:{wtt:{rows:[{name:'Félix Lebrun',rank:3,country:'FRA',points:'6859',movement:-1}],
+   week:46,asOf:new Date().toISOString(),live:true}},
+  esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Classement ITTF hebdomadaire/);
+ assert.match(html,/semaine 46/);
+ assert.match(html,/6859/);
+ assert.match(html,/Évolution hebdomadaire/);
+ assert.match(html,/>-1<\/b>/);
+});
+
+test('Stats : absence de données classées n’affiche pas de faux rangs',()=>{
+ const html=renderFavoriteRankingDetails({favorite:'PSG',rankingId:'ucl',rankings:{},
+  esc:x=>String(x),safeUrl:x=>x});
+ assert.match(html,/Données du classement indisponibles/);
+ assert.doesNotMatch(html,/Rang.*#0/);
 });
