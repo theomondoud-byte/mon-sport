@@ -87,7 +87,7 @@ export async function fetchJeuSetMathsNews({fetchFn=fetch,now=new Date()}={}){
    return {
     title:String(p.title).slice(0,180),link:p.link,date:p.date,
     source:'Jeu, set et maths',favorite:'Jeu, set et maths',sport:'Tennis',
-    text:typeof p.text==='string'?p.text.slice(0,12000):'',
+    text:typeof p.text==='string'?p.text.slice(0,30000):'',
     image:images[0]||'',images,video
    };
   });
