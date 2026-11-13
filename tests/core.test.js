@@ -6,7 +6,7 @@ import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForF
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
 import {newsLastWeek,renderNewsView} from '../news-view.js';
-import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
+import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
 
@@ -729,11 +729,13 @@ test('Jeu Set et Maths : uniquement les posts vérifiés et datés dans les arti
   fetchFn:async()=>({ok:true,json:async()=>raw}),
   now:new Date('2026-11-13T12:00:00Z')
  });
- assert.equal(posts.length,1);
- assert.equal(posts[0].source,'Jeu, set et maths');
- assert.match(posts[0].link,/x.com\/JeuSetMaths\/status/);
+ assert.ok(posts.length>=20,'Le relevé intégré complète le post fourni');
+ assert.ok(posts.every(p=>p.source==='Jeu, set et maths'));
+ assert.ok(posts.every(p=>/^https:\/\/x\.com\/JeuSetMaths\/status\//.test(p.link)));
+ assert.ok(posts.some(p=>p.link===raw.posts[0].link));
+ assert.ok(posts.every(p=>!p.link.includes('Imposteur')));
  const feed=newsLastWeek(posts,new Date('2026-11-13T12:00:00Z'));
- assert.equal(feed.length,1);
+ assert.ok(feed.length>=20);
 });
 
 test('aucun rechargement spontané de page lors du remplacement du service worker',async()=>{
@@ -851,8 +853,8 @@ test('Mobile : posts Jeu Set Maths conservés si le réseau se coupe, dans les 7
  }]};
  const values=new Map(),storage={getItem:key=>values.get(key)||null,setItem:(key,value)=>values.set(key,value)};
  const online=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>({ok:true,json:async()=>raw})});
- assert.equal(online.length,1);
- assert.equal(online[0].source,'Jeu, set et maths');
+ assert.ok(online.length>=20,'Le module embarqué contient déjà les posts réels');
+ assert.ok(online.some(p=>p.link===raw.posts[0].link));
  assert.equal(readCachedJeuSetMathsNews({now,storage}).length,1);
  const offline=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>{throw Error('hors ligne');}});
  assert.deepEqual(offline,online);
@@ -883,12 +885,61 @@ test('Mobile : les posts statistiques restent visibles même avec 90 actualités
 test('Android : les posts se chargent indépendamment des scores ESPN',async()=>{
  const {readFile}=await import('node:fs/promises');
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
- assert.match(app,/let jeuSetMathsPosts=readCachedJeuSetMathsNews\(\)/);
+ assert.match(app,/let jeuSetMathsPosts=readAvailableJeuSetMathsNews\(\)/);
  assert.match(app,/function loadJeuSetMathsPosts\(\)/);
  assert.match(app,/news:\[\.\.\.news,\.\.\.jeuSetMathsPosts\]/);
  assert.match(app,/refresh\(\),\s*loadJeuSetMathsPosts\(\),\s*refreshHistory\(\)/);
  const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');
  assert.match(sw,/\.\/data\/jeu-set-et-maths\.json/);
+ assert.match(sw,/\.\/data\/jeu-set-et-maths-bundle\.js\?v=15\.6\.0/);
  const css=await readFile(new URL('../style.css',import.meta.url),'utf8');
  assert.match(css,/\.jsm-native-text\{white-space:pre-line/);
+});
+
+test('Android : les publications réelles sont visibles immédiatement sans appel réseau ni stockage',async()=>{
+ const now=new Date('2026-11-13T15:00:00Z');
+ const snapshot=readBundledJeuSetMathsNews({now});
+ assert.ok(snapshot.length>=15,'Relevé vérifié de 20 posts intégré dans le JS');
+ assert.ok(snapshot.every(p=>p.source==='Jeu, set et maths'&&p.text));
+ const offline=readAvailableJeuSetMathsNews({now,storage:{getItem(){throw Error('stockage interdit')}}});
+ assert.equal(offline.length,snapshot.length);
+ const viaFetch=await fetchJeuSetMathsNews({
+  now,storage:null,fetchFn:async()=>{throw Error('réseau mobile indisponible')}
+ });
+ assert.deepEqual(viaFetch,snapshot);
+ const html=renderNewsView({news:snapshot,now,loading:false,esc:x=>String(x),safeUrl:x=>x,photos:{}});
+ assert.match(html,/Jeu, set et maths : <b>20 publications<\/b>/);
+ assert.ok((html.match(/class="news-card jsm-native-card"/g)||[]).length>=15);
+ assert.match(html,/id="jsmRefresh"/);
+ assert.doesNotMatch(html,/<iframe/);
+});
+
+test('Mobile : même avec d’autres articles, 3 posts X apparaissent immédiatement en premier',()=>{
+ const now=new Date('2026-11-13T15:00:00Z');
+ const articles=Array.from({length:35},(_,i)=>({
+  title:'Le PSG gagne un match de championnat '+i,
+  link:'https://espn.com/soccer/story/'+i,date:new Date(now.getTime()-i*60000).toISOString(),
+  source:'ESPN',sport:'Football',favorite:'PSG'
+ }));
+ const posts=readBundledJeuSetMathsNews({now});
+ const html=renderNewsView({news:[...articles,...posts],now,esc:x=>String(x),safeUrl:x=>x,photos:{}});
+ const posJsm=html.indexOf('class="news-card jsm-native-card"');
+ const posArticle=html.indexOf('class="news-card news-link-card"');
+ assert.ok(posJsm>=0&&posArticle>posJsm);
+ assert.ok((html.match(/class="news-card jsm-native-card"/g)||[]).length>=15);
+});
+
+test('Source intégrée : les valeurs obsolètes ne sont pas présentées comme récentes',()=>{
+ const data=readBundledJeuSetMathsNews({now:new Date('2027-01-01T12:00:00Z')});
+ assert.deepEqual(data,[]);
+ assert.deepEqual(mergeJeuSetMathsNews([],[]),[]);
+});
+
+test('Workflow maintient à jour le module de secours des publications',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const workflow=await readFile(new URL('../.github/workflows/atp-live.yml',import.meta.url),'utf8');
+ assert.match(workflow,/scripts\/build_jeu_set_maths_bundle\.py/);
+ assert.match(workflow,/data\/jeu-set-et-maths-bundle\.js/);
+ const source=await readFile(new URL('../sports-articles.js',import.meta.url),'utf8');
+ assert.match(source,/import \{jeuSetMathsBundledData\}/);
 });

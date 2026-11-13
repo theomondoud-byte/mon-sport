@@ -1,3 +1,23 @@
+# Mon Sport V15.6 — publications « Jeu, set et maths » intégrées au téléphone
+
+## Correction du problème persistant sur Android
+
+Les publications de « Jeu, set et maths » sont désormais **directement incluses dans un module JavaScript de Mon Sport**, produit à partir du dernier relevé de source validée. Ce n'est plus seulement une requête réseau sur `data/jeu-set-et-maths.json` : **le module fournit les publications immédiatement**, même si la connexion mobile, le service worker ou le stockage local bloquent la requête au JSON.
+
+- Un relevé vérifié de **20 publications du 7 au 12 novembre 2026**, incluant texte complet et médias, est livré avec V15.6. Les posts de plus de sept jours sont filtrés automatiquement, sans les présenter comme de l'actualité.
+- Le JSON continuera d'être récupéré lorsque le réseau le permet. L'application fusionne les posts, sans doublons et en privilégiant le texte le plus complet.
+- Le workflow GitHub Actions reconstruit `data/jeu-set-et-maths-bundle.js` après chaque collecte programmée et publie les deux ressources. Le nouveau module est préchargé par le service worker et suit le cache PWA.
+- Dans **Articles**, un compteur indique explicitement combien de posts « Jeu, set et maths » sont chargés, avec un bouton `↻ Posts` permettant de retenter seulement leur actualisation.
+- Les **trois posts les plus récents apparaissent en tête** du fil sur téléphone et PC, suivis des autres actualités. Cela évite de les chercher sous des dizaines de titres ESPN ou de favoris.
+
+L'application conserve les retours à la ligne des statistiques, le texte entier lorsqu'il est disponible, les images et les vidéos, sans fenêtre X ni bouton « Voir plus ». Le cache et les imports passent à **V15.6**.
+
+## Vérifications
+
+Les tests doivent vérifier le rendu mobile sans aucune requête réseau ni accès au stockage local, le nombre de posts réellement fournis par le module, leur priorité en tête de fil, la compatibilité avec la collecte et l'absence de publications obsolètes. Le build Python teste la vérification de provenance et la régénération du module.
+
+---
+
 # Mon Sport V15.5 — fil « Jeu, set et maths » fiable sur téléphone et vrais retours à la ligne
 
 ## Publications manquantes sur mobile
