@@ -1019,3 +1019,18 @@ test('V15.8 : la PWA charge les sources RSS et conserve la lecture vidéo X',asy
  assert.match(app,/newsSportFilter/);
  assert.match(app,/newsFavoriteFilter/);
 });
+
+test('V15.8 : les extraits des médias RSS sont lisibles directement dans les cartes',()=>{
+ const html=renderNewsView({news:[{
+  title:'Paul Seixas prépare sa prochaine course',
+  link:'https://www.cyclismactu.net/test',
+  date:'2026-11-13T10:00:00.000Z',
+  source:"Cyclism'Actu",sport:'Cyclisme',
+  excerpt:'Le jeune coureur français revient sur sa préparation et ses objectifs.'
+ }],now:new Date('2026-11-13T12:00:00Z'),
+  esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
+  safeUrl:x=>x,photos:{},favorites:[]});
+ assert.match(html,/Le jeune coureur français revient sur sa préparation et ses objectifs\./);
+ assert.match(html,/Ouvrir chez l’éditeur/);
+ assert.match(html,/Cyclism'Actu/);
+});
