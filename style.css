@@ -410,3 +410,5 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
  .news-card h3{font-size:.94rem;margin:7px 0}
  .rank-live-details>div{flex-wrap:wrap}
 }
+
+.rank-player-photo{display:inline-block;width:28px;height:28px;object-fit:cover;border-radius:50%;vertical-align:middle;margin-right:6px;background:#315265;border:1px solid #456f7e}
