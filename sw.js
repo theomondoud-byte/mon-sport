@@ -1,10 +1,10 @@
 // V14 : classements et flux d'articles sportifs, nouveaux modules en précache.
-const CACHE = 'mon-sport-v14-1';
+const CACHE = 'mon-sport-v14-2';
 const ASSETS = [
   './',
   './index.html',
-  './style.css?v=14.0.0',
-  './src.js?v=14.0.0',
+  './style.css?v=14.2.0',
+  './src.js?v=14.2.0',
   './tennis-history.js?v=14.0.0',
   './audit-2026.js?v=14.0.0',
   './audit-espn-2026.js?v=14.0.0',
@@ -21,7 +21,7 @@ const ASSETS = [
   './verified-program.js?v=14.0.0',
   './verified-extra-v11.js?v=14.0.0',
   './coverage-v11.js?v=14.0.0',
-  './rankings-view.js?v=14.0.0',
+  './rankings-view.js?v=14.2.0',
   './sports-articles.js?v=14.0.0',
   './sports-media.js?v=14.0.0',
   './manifest.webmanifest',
