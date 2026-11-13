@@ -27,7 +27,12 @@ function sameNewsStory(left,right){
  if(Math.min(a.size,b.size)<4)return false;
  let common=0;for(const word of a)if(b.has(word))common++;
  const overlap=common/Math.min(a.size,b.size),jaccard=common/(a.size+b.size-common);
- const sameFavorite=left.favorite&&right.favorite&&normalized(left.favorite)===normalized(right.favorite);
+ // Ne pas fusionner deux posts distincts du même compte ; le rapprochement
+ // s'applique uniquement entre médias, et pas aux sources génériques FFL/JSM.
+ if(left.source&&left.source===right.source)return false;
+ const generic=new Set(['ffl','jeu, set et maths']);
+ const sameFavorite=left.favorite&&right.favorite&&normalized(left.favorite)===normalized(right.favorite)
+  &&!generic.has(normalized(left.favorite));
  if(sameFavorite)return common>=4&&overlap>=.66&&jaccard>=.5;
  return overlap>=.82&&jaccard>=.62;
 }
