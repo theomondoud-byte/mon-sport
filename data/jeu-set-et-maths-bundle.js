@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-13T15:24:06.768498+00:00",
+ "fetchedAt": "2026-11-13T19:00:01.443357+00:00",
  "posts": [
   {
    "title": "📊 Elles ont réussi à infliger un 6/0 lors d'au moins deux matchs d'un Masters depuis le début des années 2000 : ▪️ 2001 : Serena Williams 🇺🇸 ↪️ 6/0 6/2 vs Silvia Farina…",
