@@ -1,6 +1,7 @@
 """Non-régression du collecteur de classement ATP live français."""
 import unittest
-from scripts.refresh_atp_live import parse, tournament_status
+from datetime import datetime, timezone
+from scripts.refresh_atp_live import parse, tournament_status, add_recent_tournaments
 
 class ATPParserTests(unittest.TestCase):
     def test_status_for_previous_tournament_loss(self):
@@ -9,6 +10,37 @@ class ATPParserTests(unittest.TestCase):
         self.assertEqual(tournament_status("Orléans QF", "Défaite Stockholm 8e"), "en_lice")
         self.assertEqual(tournament_status("Finales ATP RR (0 V / 0 D)", ""), "en_lice")
         self.assertEqual(tournament_status("", ""), "non_communique")
+
+    def test_two_week_observed_tournament_history(self):
+        now=datetime(2026,11,13,10,tzinfo=timezone.utc)
+        previous={"fetchedAt":"2026-11-06T09:00:00Z","rows":[{
+            "name":"Arthur Fils","tournamentHistory":[
+                {"text":"Stockholm QF","lastSeen":"2026-11-06T09:00:00+00:00"},
+                {"text":"Paris R32","lastSeen":"2026-10-28T09:00:00+00:00"}]
+        }]}
+        current=[{"name":"Arthur Fils","tournament":"Finales ATP RR"}]
+        updated=add_recent_tournaments(current,previous,now)
+        self.assertEqual([x["text"] for x in updated[0]["tournamentHistory"]],
+                         ["Finales ATP RR","Stockholm QF"])
+        newer=add_recent_tournaments([{"name":"Arthur Fils","tournament":""}],
+                  {"fetchedAt":now.isoformat(),"rows":updated},
+                  datetime(2026,11,20,10,tzinfo=timezone.utc))
+        self.assertEqual([x["text"] for x in newer[0]["tournamentHistory"]],
+                         ["Finales ATP RR"])
+        expired=add_recent_tournaments([{"name":"Arthur Fils","tournament":""}],
+                  {"rows":updated},datetime(2026,11,28,10,tzinfo=timezone.utc))
+        self.assertEqual(expired[0]["tournamentHistory"],[])
+
+    def test_two_week_history_from_previous_snapshot_without_history_field(self):
+        now=datetime(2026,11,13,10,tzinfo=timezone.utc)
+        rows=add_recent_tournaments([{"name":"Rafael Jódar","tournament":"Orléans QF"}],
+             {"fetchedAt":"2026-11-12T10:00:00+00:00",
+              "rows":[{"name":"Rafael Jódar","tournament":"Stockholm SF"}]},now)
+        self.assertEqual([x["text"] for x in rows[0]["tournamentHistory"]],
+                         ["Orléans QF","Stockholm SF"])
+        duplicate=add_recent_tournaments([{"name":"Rafael Jódar","tournament":"Orléans QF"}],
+             {"fetchedAt":now.isoformat(),"rows":rows},now)
+        self.assertEqual(len(duplicate[0]["tournamentHistory"]),2)
 
     def test_parses_full_top_150_and_explicit_defeats(self):
         rows=[]
