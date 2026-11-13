@@ -14,7 +14,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-SOURCE="https://live-tennis.eu/en/atp-live-ranking"
+SOURCE="https://live-tennis.eu/fr/classement-atp-live"
 DEST=Path("data/atp-live.json")
 HEADERS={"User-Agent":"Mozilla/5.0 (compatible; MonSport/14.1; personal sports dashboard)"}
 
@@ -49,6 +49,10 @@ def parse(html, debug=False):
             continue
         if (next_points is not None and next_points<live_points) or (max_points is not None and max_points<live_points):
             raise RuntimeError("Projection incohérente pour "+name)
+        if debug and rank in (1,9,11,18,26,29,61,73,150):
+            print("CELL_DIAG", rank,
+                  [(i, c.get("class"), txt(c)[:125],c.get("title"),
+                    [d.get("title") for d in c.select("[title]")][:2]) for i,c in enumerate(cells)])
         row={"rank":rank,"name":name,"livePoints":live_points,
             "movement":movement,"pointsChange":points_change,
             "age":age,"country":country,"tournament":tournament,
