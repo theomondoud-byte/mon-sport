@@ -619,6 +619,11 @@ function bindContent(){
  document.querySelectorAll('img.article-thumb-image').forEach(image=>{
   image.addEventListener('error',()=>image.closest('.article-visual')?.classList.add('image-failed'),{once:true});
  });
+ document.querySelectorAll('img.jsm-reader-image').forEach(image=>{
+  const fail=()=>image.closest('.jsm-reader-visual')?.classList.add('image-failed');
+  image.addEventListener('error',fail,{once:true});
+  if(image.complete&&image.naturalWidth===0)fail();
+ });
  // Si une URL Wikimedia ne charge pas, montrer immédiatement les initiales
  // plutôt qu'une image cassée.
  document.querySelectorAll('img.athlete-photo').forEach(img=>{
