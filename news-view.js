@@ -27,15 +27,27 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,esc,safeUr
   +'<p>Sept derniers jours · du plus récent au plus ancien · sans actualités people.</p>'
   +'<a class="news-ffl-link" href="https://fflose.com/" target="_blank" rel="noopener noreferrer">Toutes les actualités FFL ↗</a></div>'
   +'<div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+'</strong><span>Derniers 7 jours</span></div>';
+ const sportIcon=n=>{
+  const s=(n.sport||'')+' '+(n.title||'')+' '+(n.favorite||'');
+  if(/tennis de table|ping.pong|wtt|ittf/i.test(s))return '🏓';
+  if(/tennis|atp|wta|sinner|alcaraz|andreeva/i.test(s))return '🎾';
+  if(/basket|nba|wembanyama|spurs/i.test(s))return '🏀';
+  if(/rugby|top 14|six nations/i.test(s))return '🏉';
+  if(/cyclis|vélo|tour de france/i.test(s))return '🚴';
+  if(/natation|nage|swim/i.test(s))return '🏊';
+  return '⚽';
+ };
  const cards=recent.map(n=>{
   const link=safeUrl(n.link);
   if(link==='#')return '';
   const published=new Date(n.date||n.published).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  const image=safeUrl(n.image||n.thumbnail||'');
+  const thumbnail=image!=='#'?'<img class="news-thumbnail" loading="lazy" decoding="async" src="'+esc(image)+'" alt="" referrerpolicy="no-referrer"/>':'';
   return '<article class="news-card news-link-card"><a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer" class="news-plain-link">'
-    +'<div class="news-card-top"><span class="agenda-favorite">'+esc(n.favorite||'Sport')+'</span>'
+    +'<div class="news-visual-row">'+thumbnail+'<div class="news-content"><div class="news-card-top"><span class="agenda-favorite">'+sportIcon(n)+' '+esc(n.favorite||'Sport')+'</span>'
     +'<span class="news-date">'+esc(published)+'</span></div>'
     +'<h3>'+esc(n.title)+'</h3><p class="news-source">'+esc(n.source||'Éditeur')+'</p>'
-    +'<span class="news-tap">Lire l’article chez l’éditeur ↗</span></a></article>';
+    +'<span class="news-tap">Lire l’article chez l’éditeur ↗</span></div></div></a></article>';
  }).join('');
  return head+(loading?'<p class="agenda-progress">Actualisation du fil…</p>':'')
   +(cards||'<div class="agenda-empty"><h3>Aucun article récent</h3><p>Les articles plus anciens que sept jours sont masqués.</p></div>')
@@ -78,7 +90,8 @@ export async function fetchSportsNews(favorites,now=new Date()){
    const text=normalized(title+' '+description);
    const fav=favorites.find(f=>aliases(f.name).some(alias=>alias.length>3&&text.includes(alias)));
    if(!fav||!/^https?:\/\//.test(link))return null;
-   return {title,link,date,source:'ESPN',favorite:fav.name,excerpt:description};
+   return {title,link,date,source:'ESPN',favorite:fav.name,sport:fav.sport,
+    image:a.images?.find(i=>i.url)?.url||'',excerpt:description};
   }).filter(Boolean);
  }));
  return newsLastWeek(settled.flatMap(x=>x.status==='fulfilled'?x.value:[]),now);
