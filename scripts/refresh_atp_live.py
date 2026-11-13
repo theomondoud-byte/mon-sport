@@ -8,6 +8,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 import requests
@@ -72,6 +73,23 @@ def main():
     response.raise_for_status()
     rows=parse(response.content.decode('utf-8',errors='replace'),debug=ns.debug)
     print("PARSED",len(rows),"TOP",rows[:2])
+    print("PROJECTIONS",sum(r["nextPoints"] is not None for r in rows),
+          "MAX",sum(r["maxPoints"] is not None for r in rows))
+    # Diagnostiquer la concordance réelle avec les joueurs du classement ESPN.
+    def key(name):
+        text=unicodedata.normalize("NFD",name.lower())
+        return " ".join(re.findall(r"[a-z0-9]+","".join(c for c in text if not unicodedata.combining(c))))
+    try:
+        response_espn=requests.get("https://site.api.espn.com/apis/site/v2/sports/tennis/atp/rankings",
+                headers=HEADERS,timeout=15)
+        response_espn.raise_for_status()
+        groups=response_espn.json().get("rankings",[])
+        official={key(v.get("athlete",{}).get("displayName",""))
+                  for group in groups for v in group.get("ranks",[])}
+        overlap=sum(key(r["name"]) in official for r in rows)
+        print("ESPN_NAMES",len(official),"LIVE_MATCHES",overlap)
+    except Exception as exc:
+        print("ESPN_DIAGNOSTIC_UNAVAILABLE",str(exc)[:130])
     data={"source":SOURCE,"fetchedAt":datetime.now(timezone.utc).isoformat(),"rows":rows}
     if not ns.dry_run:
         DEST.parent.mkdir(parents=True,exist_ok=True)
