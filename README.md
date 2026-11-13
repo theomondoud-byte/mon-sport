@@ -1,3 +1,26 @@
+# Mon Sport V15.5 — fil « Jeu, set et maths » fiable sur téléphone et vrais retours à la ligne
+
+## Publications manquantes sur mobile
+
+L’application ne dépend plus du chargement simultané des scores ESPN pour afficher les posts de **« Jeu, set et maths »** : les publications sont récupérées **indépendamment, dès l’ouverture**, y compris si une autre API est lente ou si le navigateur se considère hors connexion. La copie des derniers posts vérifiés est également enregistrée en mémoire locale et conservée pendant leur période de pertinence (sept jours).
+
+- Le fichier `data/jeu-set-et-maths.json` est désormais inclus dans le **précache PWA**, pour rester lisible lors d’une connexion mobile instable.
+- Sur Safari iOS et d'anciens navigateurs Android, le chargement évite désormais l’API `AbortSignal.timeout()`, dont le support peut être incomplet.
+- Si le flux de favoris contient beaucoup d’articles, jusqu’à **douze publications « Jeu, set et maths »** sont préservées dans le fil pour éviter qu’elles ne soient évincées de la sélection.
+- Une mise à jour automatique **n'interrompt jamais un écran déjà ouvert** ; sur une PWA mobile déjà installée, une action volontaire **Réglages → Vérifier et recharger** est nécessaire une fois pour récupérer V15.5.
+
+## Texte et mise en page
+
+Le collecteur reprenait jusque-là le texte publié sur X en transformant tous les retours à la ligne en espaces. La source fournit pourtant des paragraphes, listes d'années, scores et autres éléments sur plusieurs lignes. **Ces ruptures de ligne originales sont maintenant conservées** ; seul le petit titre utilisé pour l'index est ramené à une seule ligne.
+
+Les cartes natives utilisent une typographie mobile adaptée : retour à la ligne sur les mots, paragraphes et listes préservés, images pleine largeur sous le texte, sans fenêtre X ni bouton « Voir plus ». Si le contenu publié est temporairement indisponible, un dernier relevé récent peut être affiché ; les relevés de plus de sept jours ne sont jamais présentés comme récents.
+
+## Validation
+
+Les tests Node vérifient la conservation des posts hors ligne, la compatibilité du chargement, l'inclusion dans le flux même avec 90 autres articles et la présence du précache. Les tests Python vérifient les paragraphes originaux et la conservation des galeries et vidéos. Aucune source de contenu n'est inventée.
+
+---
+
 # Mon Sport V15.4 — publications lisibles directement, sans « Voir plus » de X
 
 Les publications du compte **Jeu, set et maths** apparaissent désormais comme des **articles natifs de Mon Sport** dans le flux d’actualités. L’application n’intègre plus de fenêtre/iframe X, ni son bouton interne « Voir plus » (qui redirigeait vers X). Le bouton « Voir plus » de Mon Sport a également été supprimé : **le texte du post est visible d’emblée, sans limitation de hauteur ni clic nécessaire**.
