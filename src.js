@@ -45,7 +45,7 @@ const safeUrl=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.pr
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(favorites));return true;}catch{alert('Stockage local indisponible : les changements de favoris ne seront pas conservés.');return false;}};
 const date=s=>{if(!s)return '';const d=new Date(s);return Number.isNaN(d.valueOf())?s:d.toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})};
 const filtered=()=>favorites.filter(f=>(sportFilter==='Tous'||f.sport===sportFilter)&&f.name.toLocaleLowerCase('fr').includes(search.toLocaleLowerCase('fr')));
-const tabs=[['semaine','🗓️ Semaine'],['favori','👤 Un favori'],['classements','🏆 Classements'],['actualites','📰 Articles'],['favoris','⭐ Favoris'],['parametres','⚙️ Réglages']];
+const tabs=[['semaine','📅 Résultats'],['favori','👤 Favoris'],['classements','🏆 Classements'],['actualites','📰 Articles'],['favoris','⭐ Gérer mes suivis'],['parametres','⚙️ Réglages']];
 function resultHtml(){
  if(loading&&!matches.length)return '<p class="muted">Récupération des résultats…</p>';
  const notes=scoreNotes.length?`<div class="notice"><strong>Couverture des résultats :</strong><br>${scoreNotes.map(esc).join('<br>')}</div>`:'';
