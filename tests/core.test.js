@@ -797,7 +797,7 @@ test('Jeu, set et maths : lecture intégrée sans redirection obligatoire vers X
  const html=renderNewsView({news:[post],now:new Date('2026-11-13T12:00:00Z'),
   esc:x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),
   safeUrl:x=>x,photos:{}});
- assert.match(html,/<details class="news-card news-post-card">/);
+ assert.match(html,/<details class="news-card news-post-card" data-x-post-id="2120668453770305629">/);
  assert.match(html,/<summary class="news-post-summary">/);
  assert.match(html,/Lire la publication complète ici/);
  assert.match(html,/data-x-post-id="2120668453770305629"/);
