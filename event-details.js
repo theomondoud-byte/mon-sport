@@ -158,6 +158,30 @@ export function recapArticleFromESPN(body,eventId=''){
 // L'essentiel du match en français, construit uniquement à partir de la
 // feuille ESPN : buteurs, statistiques clés, meilleurs marqueurs.
 const stat=(team,...names)=>{for(const n of names){const s=(team?.statistics||[]).find(x=>x.name===n);if(s&&s.displayValue!==undefined&&s.displayValue!=='')return String(s.displayValue);}return null;};
+// Un joueur suivi a-t-il joué ce match ? (feuille ESPN : titulaire, entré, buts, passes)
+export function appearancesFromESPN(body,athletes=[]){
+ const wanted=athletes.map(name=>({name,key:plainName(name).replace(/[^a-z]/g,'')})).filter(a=>a.key);
+ const out={};
+ for(const team of body?.rosters||[]){
+  for(const player of team.roster||[]){
+   const key=plainName(player.athlete?.displayName).replace(/[^a-z]/g,'');
+   const hit=wanted.find(a=>a.key===key);
+   if(!hit)continue;
+   const value=name=>+((player.stats||[]).find(s=>s.name===name)?.value||0);
+   const played=!!player.starter||!!player.subbedIn||value('appearances')>0;
+   out[hit.name]={played,starter:!!player.starter,subbedIn:!!player.subbedIn,goals:value('totalGoals'),assists:value('goalAssists'),shotsOnTarget:value('shotsOnTarget'),team:team.team?.displayName||''};
+  }
+ }
+ return out;
+}
+function appearanceFact(name,a){
+ if(!a.played)return {label:name,text:'Sur la feuille de match, n’a pas joué'};
+ const parts=[a.starter?'Titulaire':'Entré en jeu'];
+ if(a.goals)parts.push(a.goals+' but'+(a.goals>1?'s':''));
+ if(a.assists)parts.push(a.assists+' passe'+(a.assists>1?'s':'')+' décisive'+(a.assists>1?'s':''));
+ if(a.shotsOnTarget)parts.push(a.shotsOnTarget+' tir'+(a.shotsOnTarget>1?'s':'')+' cadré'+(a.shotsOnTarget>1?'s':''));
+ return {label:name,text:parts.join(' · ')};
+}
 export function keyFactsFromESPN(body,sport,favoriteAthlete=''){
  const facts=[];
  const competitors=body?.header?.competitions?.[0]?.competitors||[];
@@ -259,7 +283,7 @@ function dataFromEvent(event){
  }
  return {sport,teamStats:[],players:embedded.length?[{name:original.wembanyamaName||event.favorite,metrics:embedded}]:[],scorers:[],extra};
 }
-export async function loadEventDetails(event,{fetchFn=fetch}={}){
+export async function loadEventDetails(event,{fetchFn=fetch,athletes=[]}={}){
  const data=dataFromEvent(event);
  const origin=event.origin||{};
  const path=origin.leaguePath||origin.espnLeague||'';
@@ -279,12 +303,13 @@ export async function loadEventDetails(event,{fetchFn=fetch}={}){
   const athleteName=origin.wembanyamaName||
    (event.favorites||[]).find(name=>/wemban[yi]ama/i.test(name))||'';
   const parsed={
-   ...data,article:recapArticleFromESPN(body,id),facts:keyFactsFromESPN(body,data.sport,athleteName),videos:videosFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
+   ...data,article:recapArticleFromESPN(body,id),facts:keyFactsFromESPN(body,data.sport,athleteName),appearances:data.sport==='football'?appearancesFromESPN(body,athletes):{},videos:videosFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
    players:parsePlayerStats(body.boxscore,data.sport,athleteName||event.favorite,!!athleteName),
    scorers:parseScorers(body),
    note:'ESPN · statistiques de la feuille de match disponibles selon la compétition.',
    sourceUrl:'https://www.espn.com/'
   };
+  parsed.facts=[...Object.entries(parsed.appearances).map(([name,a])=>appearanceFact(name,a)),...parsed.facts].slice(0,8);
   if(!parsed.players.length&&data.players.length)parsed.players=data.players;
   if(!parsed.teamStats.length&&!parsed.players.length&&!parsed.scorers.length)
    parsed.note='ESPN ne publie pas de statistiques détaillées pour ce match. Seul son score est disponible.';

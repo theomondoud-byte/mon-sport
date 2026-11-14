@@ -1437,3 +1437,53 @@ test('V17.3 : le relais est configuré par défaut et son état est visible dans
  assert.match(app,/function relayDiagnostic\(\)/);
  assert.match(app,/en récupération directe \(sans tweets ni images\)/);
 });
+
+test('V17.4 : une affiche « à vérifier » disparaît quand un match réel du favori existe le même jour',()=>{
+ const pending={id:'v10-wta-finals-mirra-13',favorite:'Mirra Andreeva',date:'2026-11-13T01:00:00+01:00',title:'Mirra Andreeva — Karolína Muchová',competition:'WTA Finals',status:'Résultat à vérifier',pendingResult:true,type:'tennis'};
+ const real={id:'wta|187384|Mirra Andreeva',type:'tennis',favorite:'Mirra Andreeva',date:'2026-11-13T20:10:00Z',title:'Diana Shnaider — Mirra Andreeva',competition:'FAGE WTA Finals',score:'2–6  1–6',status:'Terminé',outcome:'Victoire'};
+ const both=makeAgenda({individuals:[real],verified:[pending]});
+ assert.deepEqual(both.map(i=>i.title),['Diana Shnaider — Mirra Andreeva']);
+ assert.equal(makeAgenda({verified:[pending]}).length,1,'sans match réel, l’affiche reste à vérifier');
+});
+
+test('V17.4 : horaire fictif ESPN (timeValid=false) non affiché comme une heure exacte',()=>{
+ const base={id:'atp|1|Carlos Alcaraz',type:'tennis',favorite:'Carlos Alcaraz',date:'2026-11-16T05:00:00Z',title:'Flavio Cobolli — Carlos Alcaraz',competition:'Nitto ATP Finals',status:'À venir'};
+ assert.equal(makeAgenda({individuals:[{...base,timeUnknown:true}]})[0].datePrecision,'jour');
+ assert.equal(makeAgenda({individuals:[base]})[0].datePrecision,'heure');
+});
+
+test('V17.4 : participation d’un joueur suivi lue sur la feuille ESPN',async()=>{
+ const {appearancesFromESPN}=await import('../event-details.js');
+ const body={rosters:[{team:{displayName:'Real Madrid'},roster:[
+  {athlete:{displayName:'Kylian Mbappé'},starter:true,subbedIn:false,stats:[{name:'appearances',value:1},{name:'totalGoals',value:1},{name:'shotsOnTarget',value:4}]},
+  {athlete:{displayName:'Thibaut Courtois'},starter:true,stats:[]}]}]};
+ assert.deepEqual(appearancesFromESPN(body,['Kylian Mbappé']),{'Kylian Mbappé':{played:true,starter:true,subbedIn:false,goals:1,assists:0,shotsOnTarget:4,team:'Real Madrid'}});
+ const bench={rosters:[{team:{displayName:'France'},roster:[{athlete:{displayName:'Kylian Mbappe'},starter:false,subbedIn:false,stats:[]}]}]};
+ assert.equal(appearancesFromESPN(bench,['Kylian Mbappé'])['Kylian Mbappé'].played,false);
+ const {readFile}=await import('node:fs/promises');
+ const fetcher=await readFile(new URL('../agenda-fetch.js',import.meta.url),'utf8');
+ assert.match(fetcher,/'Kylian Mbappé':\['Real Madrid','Équipe de France de football'\]/);
+});
+
+test('V17.4 : pertinence jugée sur le titre ; presse française préférée par rencontre',()=>{
+ const favorites=[{name:'XV de France',sport:'Rugby',apiName:'France Rugby'},{name:'San Antonio Spurs',sport:'Basketball'}];
+ const keep=(title,sport)=>!!relevantFavoriteNews({title,sport,excerpt:'Après la victoire contre les Fidji, les Bleus…'},favorites);
+ assert.equal(keep('Antoine Dupont et poker menteur : le XV de France mise sur l’effet de surprise','Rugby'),false);
+ assert.equal(keep('Héroïque, le XV de France s’offre l’Afrique du Sud','Rugby'),true);
+ const matches=[{title:'San Antonio Spurs — Golden State Warriors',date:'2026-11-14T01:00:00Z',favorites:['San Antonio Spurs']}];
+ const a=(n,source,title)=>({title,sport:'Basketball',source,link:'https://x.example/'+n,date:'2026-11-14T06:00:00Z',excerpt:'Extrait.'});
+ const kept=limitPerMatch([a(1,'ESPN','Spurs rout Warriors 123-85 for 11th straight win'),a(2,'ESPN','Castle scores 32 as Spurs stop the Warriors 123-85'),a(3,'Basket USA','Les Spurs ne font qu’une bouchée des Warriors')],favorites,matches,2);
+ assert.ok([...kept].some(x=>x.source==='Basket USA'));
+});
+
+test('V17.4 : infos de match mémorisées et vidéos de remplacement',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.match(app,/const MEDIA_KEY='monsport-media-v2'/);
+ assert.match(app,/function mediaIsStale\(item,media\)/);
+ assert.match(app,/frame\.youtubeFailed=/);
+ assert.match(app,/NATIONS_FR=\{'Italy':'Italie'/);
+ const worker=await readFile(new URL('../worker/index.js',import.meta.url),'utf8');
+ assert.match(worker,/previewPlayabilityStatus/);
+ assert.match(worker,/alternatives/);
+});

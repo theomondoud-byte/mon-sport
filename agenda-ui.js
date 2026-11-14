@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.3.0';
-import {sportInfo} from './sports-media.js?v=17.3.0';
+import {sourceIcon} from './source-icons.js?v=17.4.0';
+import {sportInfo} from './sports-media.js?v=17.4.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.3.0';
-import {auditInfo} from './audit-2026.js?v=17.3.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.3.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.3.0';
-import {photoInitials} from './photos.js?v=17.3.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.3.0';
-import {coverageFor} from './coverage-v11.js?v=17.3.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.4.0';
+import {auditInfo} from './audit-2026.js?v=17.4.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.4.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.4.0';
+import {photoInitials} from './photos.js?v=17.4.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.4.0';
+import {coverageFor} from './coverage-v11.js?v=17.4.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -41,7 +41,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
  const stats=recap.stats.length?'<div class="agenda-recap-stats">'+recap.stats.map(st=>
    '<span><strong>'+esc(st.value)+'</strong> '+esc(st.name)+'</span>').join('')+'</div>':'';
  const flags=(item.approximate?'<span class="agenda-caution">Date approximative · semaine du tournoi</span>':'')
-   +(item.uncertainParticipation?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'')
+   +(item.uncertainParticipation||(chosen&&item.uncertainNames?.includes(chosen))?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'')
    +(chosen&&/wemban[yi]ama/i.test(chosen)&&!item.finished&&item.wembanyamaUnconfirmed
     ?'<span class="agenda-caution">Match des Spurs : la participation de Wembanyama n’est pas confirmée pour cette rencontre</span>':'');
  const sourceLink=recap.url&&safeUrl(recap.url)!=='#'
@@ -114,7 +114,7 @@ function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
  const image=https(recap?.image)||https(article?.image)||https(video?.poster)||(youtube?.id?'https://i.ytimg.com/vi/'+youtube.id+'/hqdefault.jpg':'');
  const playAttrs=video
   ?'data-play-video="'+esc(video.src)+'" data-video-page="'+esc(safeUrl(video.page||''))+'" data-poster="'+esc(video.poster||'')+'"'
-  :youtube?.id?'data-youtube-id="'+esc(youtube.id)+'"':'';
+  :youtube?.id?'data-youtube-id="'+esc(youtube.id)+'" data-youtube-alt="'+esc((youtube.alternatives||[]).map(v=>v.id).join(','))+'"':'';
  const picture=image?'<img class="result-hero-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+esc(image)+'" alt="" />':'';
  const meta=!video&&youtube?.id?'<small class="result-video-meta">'+esc(youtube.channel||'YouTube')+(youtube.official?'':' · chaîne non officielle')+(youtube.duration?' · '+esc(youtube.duration):'')
    +' · <a href="https://www.youtube.com/watch?v='+esc(youtube.id)+'" target="_blank" rel="noopener noreferrer" data-stop>YouTube ↗</a></small>':'';
@@ -128,7 +128,11 @@ function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
  }else if(playAttrs){
   replay='<button type="button" class="result-replay" '+playAttrs+' data-stop>▶ Résumé vidéo</button>'+meta+'<div class="result-video-slot"></div>';
  }
- if(!playAttrs){
+ if(!playAttrs&&/^[\w-]{6,20}$/.test(String(media.external?.id||''))){
+  // Résumé trouvé mais réservé à YouTube par la chaîne : lien direct vers la vidéo.
+  replay='<a class="result-replay ghost" href="https://www.youtube.com/watch?v='+esc(media.external.id)+'" target="_blank" rel="noopener noreferrer" data-stop>▶ Résumé sur YouTube ↗</a>'
+   +'<small class="result-video-meta">'+esc(media.external.channel||'')+(media.external.duration?' · '+esc(media.external.duration):'')+' · lecture réservée à YouTube</small>';
+ }else if(!playAttrs){
   replay=page?'<a class="result-replay ghost" href="'+esc(safeUrl(page.page))+'" target="_blank" rel="noopener noreferrer" data-stop>▶ Vidéo sur ESPN ↗</a>'
    :'<a class="result-replay ghost" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener noreferrer" data-stop>🔎 Chercher la vidéo ↗</a>';
  }

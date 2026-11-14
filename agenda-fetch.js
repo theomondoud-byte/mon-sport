@@ -1,6 +1,6 @@
 // Mon Sport V8 : recherche élargie uniquement lors de l'ouverture « Un favori ».
 // Les rencontres ne sont créées que si ESPN retourne date, adversaires et état.
-import {shiftedMonths} from './agenda-model.js?v=17.3.0';
+import {shiftedMonths} from './agenda-model.js?v=17.4.0';
 const humanSource=s=>s.startsWith('soccer/')?'https://www.espn.com/soccer/scoreboard'
   :s.startsWith('basketball/')?'https://www.espn.com/nba/scoreboard'
   :'https://www.espn.com/scores';
@@ -9,10 +9,13 @@ export async function fetchAgendaFavorite(selected,deps,progress=()=>{},now=new 
  const months=deps.monthsInRange(from,to);
  // Un joueur ne doit jamais être présenté comme titulaire sur la seule
  // foi du calendrier de son club. Ces rencontres sont marquées incertaines.
- const proxyMap={'Victor Wembanyama':'San Antonio Spurs','Kylian Mbappé':'Real Madrid'};
- const linkedTeam=selected.type==='équipe'?selected.name:proxyMap[selected.name]||null;
- const proxy=selected.type!=='équipe'&&!!linkedTeam;
- const leagues=linkedTeam&&!(proxy&&phase==='past')?deps.leagues.filter(l=>l.teams.some(([n])=>n===linkedTeam)):[];
+ const proxyMap={'Victor Wembanyama':['San Antonio Spurs'],'Kylian Mbappé':['Real Madrid','Équipe de France de football']};
+ const linkedTeams=selected.type==='équipe'?[selected.name]:proxyMap[selected.name]||[];
+ const proxy=selected.type!=='équipe'&&linkedTeams.length>0;
+ // Wembanyama : ses matchs passés viennent des feuilles NBA nominatives.
+ // Mbappé : matchs passés de son club et de sa sélection, présence à confirmer.
+ const pastFromTeam=selected.name==='Kylian Mbappé';
+ const leagues=linkedTeams.length&&!(proxy&&phase==='past'&&!pastFromTeam)?deps.leagues.filter(l=>l.teams.some(([n])=>linkedTeams.includes(n))):[];
  const tennisLeague=phase==='future'&&selected.type==='sportif'&&selected.sport==='Tennis'
   ?(/andreeva|sabalenka|swiatek|gauff|rybakina|paolini/i.test(selected.name)?'wta':'atp'):null;
  const jobs=[
@@ -30,7 +33,7 @@ export async function fetchAgendaFavorite(selected,deps,progress=()=>{},now=new 
    return deps.getTennisMatches(tournaments,job.code,ms0,ms1,[selected]);
   }
   const events=await deps.espnMonth(deps.base+job.league.url+'/scoreboard',job.month);
-  const pairing=job.league.teams.find(([name])=>name===linkedTeam);
+  const pairing=job.league.teams.find(([name])=>linkedTeams.includes(name));
   if(!pairing)return [];
   const [teamName,pattern]=pairing,result=[];
   for(const event of events){
@@ -40,12 +43,15 @@ export async function fetchAgendaFavorite(selected,deps,progress=()=>{},now=new 
    if(!Number.isFinite(time)||time<ms0||time>ms1)continue;
    const home=people.find(x=>x.homeAway==='home')||people[0];
    const away=people.find(x=>x.homeAway==='away')||people[1];
-   const h=deps.espnName(home),a=deps.espnName(away);
-   if(!h||!a||![h,a].some(n=>pattern.test(n)))continue;
+   const rawHome=deps.espnName(home),rawAway=deps.espnName(away);
+   if(!rawHome||!rawAway||![rawHome,rawAway].some(n=>pattern.test(n)))continue;
+   // Sélections nationales : mêmes noms français que dans la vue de la semaine.
+   const translate=deps.nationName||((league,name)=>name);
+   const h=translate(job.league,rawHome),a=translate(job.league,rawAway);
    const state=c.status?.type||event.status?.type||{};
    const completed=state.completed===true||state.state==='post';
    const playing=state.state==='in'&&!completed;
-   if(proxy&&(completed||playing))continue; // aucune feuille de match nominative
+   if(proxy&&(completed||playing)&&!pastFromTeam)continue; // aucune feuille de match nominative
    result.push({
     id:'agenda-espn-'+(event.id||job.league.url+'-'+when+'-'+h+'-'+a),
     home:h,away:a,

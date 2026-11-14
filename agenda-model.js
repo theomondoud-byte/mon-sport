@@ -19,7 +19,7 @@ export function agendaWindow(view,phase,now=new Date()){
  return past?{from:interval,to:t,days:view==='favori'?null:7}
   :{from:t,to:interval,days:view==='favori'?null:7};
 }
-const precise=x=>!x.approxDate&&!x.snapshot&&!String(x.id||'').startsWith('verified26-')&&x.type!=='manual2026'&&x.type!=='tennis-history'&&x.type!=='verified2026';
+const precise=x=>!x.approxDate&&!x.snapshot&&!x.timeUnknown&&!String(x.id||'').startsWith('verified26-')&&x.type!=='manual2026'&&x.type!=='tennis-history'&&x.type!=='verified2026';
 const selected=x=>Array.isArray(x)?x:[];
 export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expanded=[]}={}){
  const all=[];
@@ -88,6 +88,8 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    // Ne jamais perdre le score d'équipe ; déplacer seulement les statistiques
    // individuelles confirmées vers la même fiche de rencontre.
    if(row.stats&&!existing.stats)existing.stats=row.stats;
+   // Joueur rattaché par le calendrier de son équipe : présence à confirmer.
+   if(row.uncertainParticipation&&!existing.uncertainParticipation)existing.uncertainNames=[...new Set([...(existing.uncertainNames||[]),...row.favorites])];
    if(existing.type==='nba'&&row.type==='team'){
     existing.title=row.title;existing.score=row.score;existing.type='team';
     existing.origin={...row.origin,stats:existing.stats};
@@ -99,7 +101,11 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
   }
   seen.set(row.key,row);
  }
- return [...seen.values()];
+ // Une affiche annoncée « à vérifier » est retirée dès qu'un match réel du même
+ // favori existe à moins de 30 h : le programme a changé (forfait, remplaçant).
+ const rows=[...seen.values()];
+ return rows.filter(r=>!r.pendingResult||!rows.some(o=>o!==r&&!o.pendingResult&&!o.isCompetition&&(o.finished||o.live)
+  &&o.favorites.some(f=>r.favorites.includes(f))&&Math.abs(Date.parse(o.date)-Date.parse(r.date))<30*3600000));
 }
 // Associer les statistiques individuelles confirmées au match ESPN des Spurs.
 // Pas de deuxième carte NBA pour Wembanyama ni de présence présumée lorsqu'il n'a pas joué.

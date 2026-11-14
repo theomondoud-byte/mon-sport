@@ -1,20 +1,20 @@
-import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.3.0';
-import {createOnceLoader} from './session-loader.js?v=17.3.0';
-import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.3.0';
-import {renderAgendaView} from './agenda-ui.js?v=17.3.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.3.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.3.0';
-import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.3.0';
-import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.3.0';
-import {extraProgramFor} from './verified-program.js?v=17.3.0';
-import {verifiedExtraFor} from './verified-extra-v11.js?v=17.3.0';
-import {coverageFor} from './coverage-v11.js?v=17.3.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey} from './news-view.js?v=17.3.0';
-import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=17.3.0';
-import {verified2026For} from './audit-2026.js?v=17.3.0';
-import {renderAudit2026} from './audit-ui.js?v=17.3.0';
-import {auditEspn2026} from './audit-espn-2026.js?v=17.3.0';
-import {APP_LABEL,APP_VERSION} from './version.js?v=17.3.0';
+import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.4.0';
+import {createOnceLoader} from './session-loader.js?v=17.4.0';
+import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.4.0';
+import {renderAgendaView} from './agenda-ui.js?v=17.4.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.4.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.4.0';
+import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.4.0';
+import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.4.0';
+import {extraProgramFor} from './verified-program.js?v=17.4.0';
+import {verifiedExtraFor} from './verified-extra-v11.js?v=17.4.0';
+import {coverageFor} from './coverage-v11.js?v=17.4.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey} from './news-view.js?v=17.4.0';
+import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=17.4.0';
+import {verified2026For} from './audit-2026.js?v=17.4.0';
+import {renderAudit2026} from './audit-ui.js?v=17.4.0';
+import {auditEspn2026} from './audit-espn-2026.js?v=17.4.0';
+import {APP_LABEL,APP_VERSION} from './version.js?v=17.4.0';
 const DEFAULTS = [
  ['Real Madrid','Football','équipe','Real Madrid'],['FC Barcelone','Football','équipe','FC Barcelona'],['PSG','Football','équipe','Paris Saint Germain'],['San Antonio Spurs','Basketball','équipe','San Antonio Spurs'],
  ['Victor Wembanyama','Basketball','sportif'],['Léon Marchand','Natation','sportif'],['Sauveur Cristofini','Natation','sportif'],['Félix Lebrun','Tennis de table','sportif'],['Alexis Lebrun','Tennis de table','sportif'],['Flavien Coton','Tennis de table','sportif'],['Paul Seixas','Cyclisme','sportif'],['Kylian Mbappé','Football','sportif'],['Équipe de France de football','Football','équipe','France'],['XV de France','Rugby','équipe','France Rugby'],['Arthur Fils','Tennis','sportif'],['Jannik Sinner','Tennis','sportif'],['Carlos Alcaraz','Tennis','sportif'],['Rafael Jódar','Tennis','sportif'],['Moïse Kouamé','Tennis','sportif'],['Mirra Andreeva','Tennis','sportif']
@@ -120,6 +120,9 @@ const ESPN_LEAGUES=[
  {url:'rugby/180659',name:'Tournoi des Six Nations',optional:true,teams:[['XV de France',/^france$/i]]}
 ];
 const ESPN_BASE='https://site.api.espn.com/apis/site/v2/sports/';
+// Sélections nationales (football) : noms affichés en français.
+const NATIONS_FR={'Italy':'Italie','Türkiye':'Turquie','Turkey':'Turquie','Germany':'Allemagne','Spain':'Espagne','England':'Angleterre','Belgium':'Belgique','Netherlands':'Pays-Bas','Croatia':'Croatie','Switzerland':'Suisse','Denmark':'Danemark','Poland':'Pologne','Austria':'Autriche','Scotland':'Écosse','Wales':'Pays de Galles','Ireland':'Irlande','Republic of Ireland':'Irlande','Northern Ireland':'Irlande du Nord','Sweden':'Suède','Norway':'Norvège','Greece':'Grèce','Hungary':'Hongrie','Czechia':'Tchéquie','Czech Republic':'Tchéquie','Serbia':'Serbie','Slovakia':'Slovaquie','Slovenia':'Slovénie','Romania':'Roumanie','Iceland':'Islande','Finland':'Finlande','Israel':'Israël','Morocco':'Maroc','Brazil':'Brésil','Argentina':'Argentine','United States':'États-Unis','USA':'États-Unis','Mexico':'Mexique','Japan':'Japon','South Korea':'Corée du Sud','Senegal':'Sénégal','Algeria':'Algérie','Tunisia':'Tunisie','Cameroon':'Cameroun','Ivory Coast':'Côte d’Ivoire','Egypt':'Égypte','Colombia':'Colombie','Chile':'Chili','Australia':'Australie','Canada':'Canada','Ukraine':'Ukraine','Azerbaijan':'Azerbaïdjan','Luxembourg':'Luxembourg','Gibraltar':'Gibraltar','Albania':'Albanie','Georgia':'Géorgie','Kazakhstan':'Kazakhstan','Bosnia and Herzegovina':'Bosnie-Herzégovine','North Macedonia':'Macédoine du Nord','Montenegro':'Monténégro','Bulgaria':'Bulgarie'};
+const nationName=(league,name)=>/^soccer\/(?:fifa\.|uefa\.nations|uefa\.euro)/.test(league.url)?(NATIONS_FR[name]||name):name;
 const DAY_MS=86400000;
 const monthKey=d=>d.toISOString().slice(0,7).replace('-','');
 const dayKey=d=>d.toISOString().slice(0,10).replaceAll('-','');
@@ -192,7 +195,7 @@ async function espnResults(){
     const status=c.status?.type||event.status?.type||{};
     const completed=status.completed===true||status.state==='post';
     const started=completed||status.state==='in';
-    result.push({id:'espn-'+event.id,home:espnName(home),away:espnName(away),
+    result.push({id:'espn-'+event.id,home:nationName(league,espnName(home)),away:nationName(league,espnName(away)),
      homeScore:started?espnScore(home):null,awayScore:started?espnScore(away):null,
      date:event.date||c.date,status:completed?'Terminé':(started?'En cours':'À venir'),favorite,
      competition:league.name,leaguePath:league.url,espnEventId:String(event.id),source:'ESPN ('+league.name+')',
@@ -264,7 +267,7 @@ function getTennisMatches(events,league,start,end,tennisFavorites){
       title:`${names[0]} — ${names[1]}`,competition:tournament.name||'Tennis',round,
       score:score||(completed?'Score par set indisponible':started?'Match en cours':'Match à venir'),
       status:statusText,outcome,leaguePath:'tennis/'+league,espnEventId:String(c.id||tournament.id||''),source:`ESPN ${league.toUpperCase()}`,
-      espnNote:String(c.notes?.find(n=>n?.type==='event')?.text||c.notes?.[0]?.text||''),venueName:String(c.venue?.fullName||''),
+      espnNote:String(c.notes?.find(n=>n?.type==='event')?.text||c.notes?.[0]?.text||''),venueName:String(c.venue?.fullName||''),timeUnknown:c.timeValid===false&&!started,
       sourceUrl:'https://www.espn.com/tennis/scoreboard'});
     }
    }
@@ -473,11 +476,26 @@ function agendaItems(){
  const extra=verifiedExtraFor(favorites,new Date());
  const expanded=agendaExtendedFor===agendaFavorite&&agendaExtendedPhase===(favoritePhase==='future'?'future':'past')
   ?agendaExtended:[];
- return makeAgenda({
+ const items=makeAgenda({
   teams:matches,individuals:individualResults,history:historyResults,
   verified:[...favorites.flatMap(f=>verified2026For(f.name)),...verified.past,...extra.past,...(verified.pending||[]),...(extra.pending||[])],
   expanded:[...expanded,...verified.future,...extra.future]
  });
+ // Joueur de football suivi : ajouté aux matchs où la feuille ESPN confirme
+ // qu'il a joué ; un rattachement non confirmé n'apparaît que sur sa fiche.
+ for(const item of items){
+  const played=Object.entries(eventMedia.get(item.key)?.appearances||{});
+  for(const [name,a] of played){
+   if(a.played&&favorites.some(f=>f.name===name)&&!item.favorites.includes(name))item.favorites=[...item.favorites,name];
+   if(item.uncertainNames?.includes(name)){
+    item.uncertainNames=item.uncertainNames.filter(n=>n!==name);
+    if(!a.played)item.favorites=item.favorites.filter(n=>n!==name);
+   }
+  }
+  if(item.uncertainNames?.length&&!(active==='favori'&&item.uncertainNames.includes(agendaFavorite)))
+   item.favorites=item.favorites.filter(n=>!item.uncertainNames.includes(n)||n===item.favorite);
+ }
+ return items.filter(item=>item.favorites.length);
 }
 function agendaPage(){
  return renderAgendaView({
@@ -503,33 +521,64 @@ function localFacts(item){
  if(origin.venueName)facts.push({label:'Lieu',text:origin.venueName});
  return facts;
 }
-// Résumé ESPN et vidéo des matchs terminés récents, chargés en arrière-plan
-// (15 au plus) pour être visibles sans ouvrir la carte.
+// Infos de match (essentiel, compte rendu, vidéo) : chargées en arrière-plan,
+// affichées au fur et à mesure et mémorisées 10 jours sur l'appareil pour
+// réapparaître immédiatement à l'ouverture suivante.
+const MEDIA_KEY='monsport-media-v2',MEDIA_TTL=10*86400000;
+(()=>{try{
+ const saved=JSON.parse(localStorage.getItem(MEDIA_KEY)||'{}'),now=Date.now();
+ for(const [key,entry] of Object.entries(saved))if(entry&&now-entry.saved<MEDIA_TTL)eventMedia.set(key,entry);
+}catch{}})();
+let mediaSaveTimer=null;
+function saveEventMedia(){
+ clearTimeout(mediaSaveTimer);
+ mediaSaveTimer=setTimeout(()=>{try{localStorage.setItem(MEDIA_KEY,JSON.stringify(Object.fromEntries([...eventMedia].slice(-60))));}catch{}},400);
+}
+// Un match sans vidéo ou sans compte rendu est réessayé (toutes les 2 h le
+// premier jour, puis toutes les 12 h) : les résumés paraissent souvent plus tard.
+function mediaIsStale(item,media){
+ if(!media)return true;
+ const complete=(media.videos||[]).some(v=>v.src)||media.youtube?.id;
+ const hasText=!hasEspnSheet(item)||media.recap||(media.facts||[]).length;
+ if(complete&&hasText)return false;
+ const age=Date.now()-(media.saved||0),sinceMatch=Date.now()-Date.parse(item.date);
+ return age>(sinceMatch<36*3600000?2:12)*3600000;
+}
+const trackedFootballers=()=>favorites.filter(f=>f.type==='sportif'&&f.sport==='Football').map(f=>f.name);
 let mediaLoading=false;
 async function prefetchEventMedia(){
  if(mediaLoading||!navigator.onLine)return;
  const since=Date.now()-8*86400000;
  const todo=agendaItems().filter(item=>item.finished&&!item.pendingResult&&!item.isCompetition&&Date.parse(item.date)>=since
-  &&!eventMedia.has(item.key)).slice(0,20);
+  &&mediaIsStale(item,eventMedia.get(item.key))).slice(0,24);
  if(!todo.length)return;
  mediaLoading=true;
- try{
-  // 4 matchs à la fois : la feuille ESPN (compte rendu, vidéo ESPN), puis
-  // le résumé vidéo YouTube quand ESPN n'en publie pas.
-  for(let i=0;i<todo.length;i+=4){
-   await Promise.allSettled(todo.slice(i,i+4).map(async item=>{
-    const media={recap:null,videos:[],youtube:null,facts:[]};
-    if(hasEspnSheet(item)){
-     try{const details=await loadEventDetails(item);media.recap=details.article||null;media.videos=details.videos||[];media.facts=details.facts||[];}catch{}
-    }
-    const sides=String(item.title||'').split(/\s+[—–-]\s+/).map(x=>x.trim()).filter(Boolean);
-    if(!media.videos.some(v=>v.src)&&workerUrl&&sides.length===2){
-     const tennis=/tennis/i.test(String(item.type||'')+' '+String(item.origin?.leaguePath||''))&&!/table/i.test(String(item.type||''));
-     try{const data=await request('/api/highlight',{q:sides.join(' ')+(tennis?' highlights':' résumé'),teams:sides.join('|')});media.youtube=data.video||null;}catch{}
-    }
-    eventMedia.set(item.key,media);
-   }));
+ let lastPaint=0;
+ const paint=()=>{if(Date.now()-lastPaint>1500&&(active==='semaine'||active==='favori')){lastPaint=Date.now();softRender();}};
+ const one=async item=>{
+  const previous=eventMedia.get(item.key);
+  const media={saved:Date.now(),recap:previous?.recap||null,videos:previous?.videos||[],youtube:previous?.youtube||null,external:previous?.external||null,facts:previous?.facts||[],appearances:previous?.appearances||{},eventId:String(item.origin?.espnEventId||'')};
+  if(hasEspnSheet(item)){
+   try{
+    const details=await loadEventDetails(item,{athletes:trackedFootballers()});
+    if(details.article)media.recap=details.article;
+    if(details.videos?.length)media.videos=details.videos;
+    if(details.facts?.length)media.facts=details.facts;
+    if(details.appearances)media.appearances=details.appearances;
+   }catch{}
+   eventMedia.set(item.key,media);paint();
   }
+  const sides=String(item.title||'').split(/\s+[—–-]\s+/).map(x=>x.trim()).filter(Boolean);
+  if(!media.videos.some(v=>v.src)&&workerUrl&&sides.length===2){
+   const tennis=/tennis/i.test(String(item.type||'')+' '+String(item.origin?.leaguePath||''))&&!/table/i.test(String(item.type||''));
+   try{const data=await request('/api/highlight',{q:sides.join(' ')+(tennis?' highlights':' résumé'),teams:sides.join('|'),c:String(item.competition||'').split(' · ')[0].slice(0,60)});if(data.video)media.youtube=data.video;media.external=data.video?null:(data.external||null);}catch{}
+  }
+  eventMedia.set(item.key,media);saveEventMedia();paint();
+ };
+ try{
+  // Les plus récents d'abord, 5 à la fois.
+  const queue=todo.sort((x,y)=>Date.parse(y.date)-Date.parse(x.date));
+  await Promise.all(Array.from({length:5},async()=>{while(queue.length)await one(queue.shift());}));
  }finally{mediaLoading=false;}
  if(active==='semaine'||active==='favori')softRender();
 }
@@ -553,7 +602,7 @@ async function loadAgendaExpanded(force=false,preload=false){
   const fetches=[
    fetchAgendaFavorite(selected,{
     leagues:ESPN_LEAGUES,monthsInRange,base:ESPN_BASE,espnMonth,espnFetch,
-    getTennisMatches,espnName,espnScore
+    getTennisMatches,espnName,espnScore,nationName
    },(done,total)=>{
     if(token!==agendaRequest)return;
     const status=document.querySelector('.agenda-progress');
@@ -663,7 +712,7 @@ if(active==='resultats')return `${latestKouameHtml()}${latestSinnerHtml()}<secti
 if(active==='bilan')return renderAudit2026({favorites,historyResults,yearAudit,yearLoading,yearMessage,auditSelected,esc,safeUrl,date});
 if(active==='actualites')return newsHtml();
 if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</h2><form id="addform"><input name="name" placeholder="Nom de l'équipe ou du sportif" maxlength="100" required/><select name="sport">${['Football','Tennis','Rugby','Basketball','Cyclisme','Natation','Tennis de table','Autre'].map(s=>`<option>${s}</option>`).join('')}</select><select name="type"><option value="sportif">Sportif</option><option value="équipe">Équipe</option></select><input name="apiName" placeholder="Nom API (facultatif)" maxlength="100"/><button class="button" type="submit">Ajouter aux favoris</button></form></section><section class="panel"><h2>⭐ Mes favoris (${favorites.length})</h2><select id="sportFilter">${sports.map(s=>`<option ${sportFilter===s?'selected':''}>${esc(s)}</option>`).join('')}</select><input class="search" id="search" value="${esc(search)}" placeholder="Rechercher un favori"/><div id="favoriteList">${favoriteRows()}</div></section>`;
-return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Le relais Cloudflare fournit les articles (FFL complet, médias, images), les résumés vidéo et le rugby en direct. Il est configuré par défaut ; laisse le champ vide pour l'utiliser.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="${esc(DEFAULT_WORKER_URL)}" value="${esc(workerUrl===DEFAULT_WORKER_URL?'':workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form>${relayDiagnostic()}<p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🎨 Apparence</h2><p class="sub">Thème de l’application sur cet appareil.</p><div class="theme-choice" role="group" aria-label="Thème"><button type="button" class="button ${currentTheme()==='light'?'':'ghost'}" data-theme-choice="light" aria-pressed="${currentTheme()==='light'}">☀️ Clair</button><button type="button" class="button ${currentTheme()==='dark'?'':'ghost'}" data-theme-choice="dark" aria-pressed="${currentTheme()==='dark'}">🌙 Sombre</button></div></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Relais configuré par défaut sur tous les appareils : articles FFL complets avec tweets et images.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
+return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Le relais Cloudflare fournit les articles (FFL complet, médias, images), les résumés vidéo et le rugby en direct. Il est configuré par défaut ; laisse le champ vide pour l'utiliser.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="${esc(DEFAULT_WORKER_URL)}" value="${esc(workerUrl===DEFAULT_WORKER_URL?'':workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form>${relayDiagnostic()}<p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🎨 Apparence</h2><p class="sub">Thème de l’application sur cet appareil.</p><div class="theme-choice" role="group" aria-label="Thème"><button type="button" class="button ${currentTheme()==='light'?'':'ghost'}" data-theme-choice="light" aria-pressed="${currentTheme()==='light'}">☀️ Clair</button><button type="button" class="button ${currentTheme()==='dark'?'':'ghost'}" data-theme-choice="dark" aria-pressed="${currentTheme()==='dark'}">🌙 Sombre</button></div></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Vidéos vérifiées avant affichage, infos de match mémorisées, résultats de Mbappé, tri des articles affiné.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
 function favoriteRows(){
  return filtered().map(f=>{
   const img=photoMap[f.name]?.src;
@@ -763,6 +812,12 @@ function relayDiagnostic(){
  }else lines.push('Actualisation en attente');
  return '<p class="sub relay-diagnostic" role="status">'+lines.map(esc).join('<br>')+'</p>';
 }
+window.addEventListener('message',event=>{
+ if(!/^https:\/\/www\.youtube(?:-nocookie)?\.com$/.test(event.origin))return;
+ let data;try{data=typeof event.data==='string'?JSON.parse(event.data):event.data;}catch{return;}
+ if(data?.event!=='onError'&&!(data?.event==='infoDelivery'&&data.info?.error))return;
+ for(const frame of document.querySelectorAll('iframe.result-youtube'))if(frame.contentWindow===event.source)frame.youtubeFailed?.();
+});
 // --- Thème clair (par défaut) ou sombre -------------------------------------
 const THEME_KEY='monsport-theme-v1';
 function currentTheme(){try{return localStorage.getItem(THEME_KEY)==='dark'?'dark':'light';}catch{return 'light';}}
@@ -887,14 +942,24 @@ function bindContent(){
  }));
  document.querySelectorAll('[data-youtube-id]').forEach(button=>button.addEventListener('click',event=>{
   event.preventDefault();event.stopPropagation();
-  const id=button.dataset.youtubeId;
-  if(!/^[\w-]{6,20}$/.test(id))return;
+  // Vidéo principale puis vidéos de remplacement : si YouTube signale une
+  // erreur de lecture (vidéo retirée, intégration refusée), on passe à la suivante.
+  const ids=[button.dataset.youtubeId,...String(button.dataset.youtubeAlt||'').split(',')].filter(id=>/^[\w-]{6,20}$/.test(id));
+  if(!ids.length)return;
   const frame=document.createElement('iframe');
   frame.className='result-youtube';
-  frame.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0&modestbranding=1';
   frame.title='Résumé vidéo';frame.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';frame.allowFullscreen=true;
   // YouTube exige un référent pour les vidéos intégrées (la page est en no-referrer).
   frame.referrerPolicy='strict-origin-when-cross-origin';
+  let index=0;
+  const load=()=>{frame.dataset.videoId=ids[index];frame.src='https://www.youtube-nocookie.com/embed/'+ids[index]+'?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);};
+  frame.addEventListener('load',()=>{try{frame.contentWindow.postMessage(JSON.stringify({event:'listening',id:1,channel:'widget'}),'https://www.youtube-nocookie.com');}catch{}});
+  frame.youtubeFailed=()=>{
+   if(++index<ids.length){load();return;}
+   const slot=frame.parentElement;
+   if(slot)slot.innerHTML='<p class="news-reader-note result-video-error">Cette vidéo ne peut pas être lue ici. <a href="https://www.youtube.com/watch?v='+esc(ids[0])+'" target="_blank" rel="noopener noreferrer">Ouvrir sur YouTube ↗</a></p>';
+  };
+  load();
   showPlayer(button,frame);
  }));
  // Image d'article indisponible : afficher uniquement le pictogramme sportif.

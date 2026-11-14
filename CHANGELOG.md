@@ -4,6 +4,20 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.4 — audit complet : vidéos vérifiées, résultats et articles
+
+Audit mené sur les données réelles de la semaine (16 résultats, 16 matchs à venir, 20 favoris).
+
+- **Vidéos** : avant d'être proposée, chaque vidéo YouTube est testée sur la page du lecteur intégré (lisible hors de YouTube, dans le pays de l'utilisateur). Les titres traduits par YouTube (« Moments forts », « Faits saillants ») sont reconnus, les chaînes officielles sont acceptées sans mot-clé ; une seconde recherche (noms + compétition) est lancée si la première ne donne rien. Si la lecture échoue quand même sur l'appareil, l'appli passe à une vidéo de remplacement, puis propose le lien YouTube. Une vidéo réservée à YouTube par sa chaîne est proposée en lien direct.
+- **Infos de match** : affichées au fur et à mesure (au lieu d'un bloc à la fin), 5 matchs en parallèle, et mémorisées 10 jours sur l'appareil ; un match sans vidéo ou sans compte rendu est réessayé plus tard.
+- **Kylian Mbappé** : il n'avait aucun résultat passé. Sa fiche liste les matchs du Real Madrid et de l'équipe de France (présence à confirmer) ; dans la semaine, il est ajouté aux matchs où la feuille ESPN confirme qu'il a joué, avec sa ligne (titulaire, buts, passes, tirs cadrés).
+- **Affiche fantôme** : une affiche manuelle « à vérifier » est retirée dès qu'un match réel du même favori existe à moins de 30 h (Andreeva — Muchová, remplacée par Shnaider).
+- **Horaires** : les horaires fictifs d'ESPN (05:00, `timeValid=false`) ne sont plus affichés comme une heure exacte.
+- **Sélections nationales** : noms en français (Italie, Turquie…).
+- **Articles** : la pertinence est jugée sur le titre (un extrait d'avant-match cite souvent le match précédent), avec davantage de verbes de résultat ; à qualité égale, la presse française passe avant ESPN dans la limite de 2 articles par rencontre.
+
+---
+
 # Mon Sport V17.3 — relais par défaut sur tous les appareils
 
 - L'adresse du relais Cloudflare était mémorisée appareil par appareil : sur un appareil où elle n'avait pas été saisie, les articles FFL venaient d'une récupération directe, sans tweets, sans images et sans texte complet. Le relais de l'application est désormais **utilisé par défaut** partout (le champ de Réglages ne sert plus qu'à en choisir un autre).

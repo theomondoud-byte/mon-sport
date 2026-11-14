@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.3.0';
-import {filterSportsNews} from './sports-articles.js?v=17.3.0';
-import {sourceIcon} from './source-icons.js?v=17.3.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.4.0';
+import {filterSportsNews} from './sports-articles.js?v=17.4.0';
+import {sourceIcon} from './source-icons.js?v=17.4.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -268,15 +268,14 @@ export function renderArticleBody(text,esc){
 // Pertinence (hors FFL et Jeu, set et maths) : on garde les comptes rendus
 // de matchs joués et les records, on écarte avant-matchs, interviews,
 // programmes TV, pronostics et rumeurs de transfert.
-const RESULT_WORDS=/\b(s impose|l emporte|bat|battu|battue|bats|victoire|vainqueur|gagne|remporte|remportee?|elimine|eliminee?|elimination|qualifie|qualifiee?|sacre|sacree?|titre|champion|championne|medaille|podium|defaite|s incline|renverse|domine|ecrase|corrige|triomphe|match nul|score|buteur|marque|doublé|double|triple double|double double|points|rebonds|passes decisives|chrono|beat|beats|beaten|defeat|defeats|defeated|win|wins|won|victory|rout|routs|edge|edges|tops|outlast|scores|scored|rebounds|assists|advance|advances|eliminated|loses|lost|falls|title|clinch|clinches)\b/;
+const RESULT_WORDS=/\b(s impose|l emporte|bat|battu|battue|bats|victoire|vainqueur|gagne|remporte|remportee?|elimine|eliminee?|elimination|qualifie|qualifiee?|sacre|sacree?|titre|champion|championne|medaille|podium|defaite|s incline|renverse|domine|ecrase|corrige|triomphe|match nul|score|buteur|marque|doublé|double|triple double|double double|points|rebonds|passes decisives|chrono|s offre|prend sa revanche|revanche|dompte|fait tomber|surclasse|vient a bout|terrasse|balaie|balaye|arrache|sombre|chute|tombe|craque|cede|revivez|heroique|exploit|ne font qu une bouchee|deroule|file en|se hisse|couronne|beat|beats|beaten|defeat|defeats|defeated|win|wins|won|victory|rout|routs|edge|edges|tops|outlast|scores|scored|rebounds|assists|advance|advances|eliminated|loses|lost|falls|title|clinch|clinches)\b/;
 const RECORD_WORDS=/\b(record|records|historique|histoire|inedit|premier joueur|premiere joueuse|plus jeune|career high|franchise record|first player|youngest|all time|milestone)\b/;
 const SCORE_PATTERN=/\b\d{1,3}\s?[-–]\s?\d{1,3}\b/;
 const OFF_TOPIC=/\b(affrontera|affronter|affronte ce|se frottera|defiera|avant le match|avant de jouer|programme|horaire|a quelle heure|chaine|diffusion|en direct|pronostic|pronostics|cote|cotes|compo|composition probable|mercato|transfert|rumeur|contrat|prolongation|interview|confie|estime|selon lui|reagit|conference de presse|blessure|blesse|forfait|preview|how to watch|odds|picks|prediction|betting|injury|injured|trade|rumor|contract|what to watch|ce qu il faut savoir|visit|visits|host|hosts|take on|takes on|to face|faces|square off|matchup|slate|fantasy|best player|ranking the|power rankings|grades)\b/;
 export function articleRelevance(article){
  const title=normalized(noHashtags(article.title)),body=normalized([article.excerpt,article.description].join(' '));
- const all=title+' '+body;
- const record=RECORD_WORDS.test(all);
- const result=RESULT_WORDS.test(all)||SCORE_PATTERN.test(String(article.title||''));
+ const record=RECORD_WORDS.test(title);
+ const result=RESULT_WORDS.test(title)||SCORE_PATTERN.test(String(article.title||''));
  const quoted=/^[«"“]|:\s*[«"“]|^[A-Z][\w'’.-]+(?: [A-Z][\w'’.-]+)?: /.test(String(article.title||'').trim());
  const offTopic=OFF_TOPIC.test(title)||quoted||/\?\s*$/.test(String(article.title||'').trim());
  if(record)return 'record';
@@ -341,7 +340,7 @@ export function limitPerMatch(articles,favorites=[],matches=[],max=2){
   const opponents=match?normalized(match.m.title).split(/\s+/).filter(w=>w.length>=4&&!favoriteAliases(favorite).some(a=>a.split(' ').includes(w))&&!GENERIC_WORDS.has(w)):[];
   // Le meilleur d'abord : compte rendu citant l'adversaire, record, extrait fourni.
   const relevance=articleRelevance(article);
-  const score=(opponents.length&&mentions(noHashtags(article.title),opponents)?4:0)+(relevance==='record'?3:relevance?2:0)+(safeExcerpt(article.excerpt||article.description)?1:0)+(article.image?0.5:0);
+  const score=(opponents.length&&mentions(noHashtags(article.title),opponents)?4:0)+(relevance==='record'?3:relevance?2:0)+(safeExcerpt(article.excerpt||article.description)?1:0)+(article.image?0.5:0)+(newsSourceName(article)==='ESPN'?0:2.5);
   if(!groups.has(key))groups.set(key,[]);
   groups.get(key).push({article,score,published});
  }
