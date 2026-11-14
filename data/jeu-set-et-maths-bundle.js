@@ -3,8 +3,36 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-13T19:00:01.443357+00:00",
+ "fetchedAt": "2026-11-14T07:08:52.311580+00:00",
  "posts": [
+  {
+   "title": "📊 Le plus petit nombre de jeux perdus pour se qualifier en demi-finale du Masters WTA (2003-2026) : 🥇 Justine Henin 🇧🇪 : 11 jeux (2007) 🥇 Mirra Andreeva 🇷🇺 : 11 jeux…",
+   "text": "📊 Le plus petit nombre de jeux perdus pour se qualifier en demi-finale du Masters WTA (2003-2026) :\n🥇 Justine Henin 🇧🇪 : 11 jeux (2007)\n🥇 Mirra Andreeva 🇷🇺 : 11 jeux (2026 🆕)\n🥉 Iga Swiatek 🇵🇱 : 13 jeux (2022)\n4⃣ Iga Swiatek 🇵🇱 : 14 jeux (2023)\n5⃣ Amelie Mauresmo 🇫🇷 : 15 jeux (2004)\n5⃣ Serena Williams 🇺🇸 : 15 jeux (2013)",
+   "link": "https://x.com/JeuSetMaths/status/2121381604010705016",
+   "date": "2026-11-13T23:16:02.417000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXCpRupWoAAEj9s.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXCpRupWoAAEj9s.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 A 19 ans et 200 jours, Mirra Andreeva 🇷🇺 est devenue la plus jeune joueuse à remporter ses trois matchs de poule depuis le retour du format \"round robin\" du Masters…",
+   "text": "📊 A 19 ans et 200 jours, Mirra Andreeva 🇷🇺 est devenue la plus jeune joueuse à remporter ses trois matchs de poule depuis le retour du format \"round robin\" du Masters en 2003.",
+   "link": "https://x.com/JeuSetMaths/status/2121377983273349219",
+   "date": "2026-11-13T23:01:39.166000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXCloMmWsAAWgJn.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXCloMmWsAAWgJn.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Elles ont réussi à infliger un 6/0 lors d'au moins deux matchs d'un Masters depuis le début des années 2000 : ▪️ 2001 : Serena Williams 🇺🇸 ↪️ 6/0 6/2 vs Silvia Farina…",
    "text": "📊 Elles ont réussi à infliger un 6/0 lors d'au moins deux matchs d'un Masters depuis le début des années 2000 :\n\n▪️ 2001 : Serena Williams 🇺🇸\n↪️ 6/0 6/2 vs Silvia Farina\n↪️ 6/3 6/0 vs Sandrine Testud\n\n▪️ 2003 : Kim Clijsters 🇧🇪\n↪️ 4/6 6/3 6/0 vs Jennifer Capriati\n↪️ 6/2 6/0 vs Amelie Mauresmo\n\n▪️ 2008 : Venus Williams 🇺🇸\n↪️ 5/7 6/1 6/0 vs Serena Williams\n↪️ 6/7 6/0 6/2 vs Vera Zvonareva\n\n▪️ 2017 : Caroline Wozniacki 🇩🇰\n↪️ 6/2 6/0 vs Elina Svitolina\n↪️ 6/0 6/2 vs Simona Halep\n↪️ 6/0 3/6 5/7 vs Caroline Garcia\n\n▪️ 2023 : Iga Swiatek 🇵🇱\n↪️ 7/6 6/0 vs Marketa Vondrousova\n↪️ 6/0 7/5 vs Coco Gauff\n↪️ 6/1 6/0 vs Jessica Pegula\n\n🆕 2026 : Mirra Andreeva 🇷🇺\n↪️ 6/4 6/0 vs Elina Svitolina\n↪️ 6/4 6/0 vs Aryna Sabalenka",
@@ -249,35 +277,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HWim0bcXoAArlwt.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HWim0bcXoAArlwt.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Les 13 derniers matchs de Ben Shelton 🇺🇸 dans le dernier carré d'un tournoi : ✅ 1/2 de Toronto 2025 🇨🇦 vs Fritz ✅ Finale de Toronto 2025 🇨🇦 vs Khachanov ✅ 1/2 de…",
-   "text": "📊 Les 13 derniers matchs de Ben Shelton 🇺🇸 dans le dernier carré d'un tournoi :\n✅ 1/2 de Toronto 2025 🇨🇦 vs Fritz\n✅ Finale de Toronto 2025 🇨🇦 vs Khachanov\n✅ 1/2 de Dallas 2026 🇺🇸 vs Shapovalov\n✅ Finale de Dallas 2026 🇺🇸 vs Fritz\n✅ 1/2 de Munich 2026 🇩🇪 vs Molcan\n✅ Finale de Munich 2026 🇩🇪 vs Cobolli\n✅ 1/2 de Stuttgart 2026 🇩🇪 vs Lehecka\n✅ Finale de Stuttgart 2026 🇩🇪 vs Fritz\n✅ 1/2 de Montreal 2026 🇨🇦 vs Tien\n✅ Finale de Montreal 2026 🇨🇦 vs Nakashima\n✅ 1/2 de l'US Open 2026 🇺🇸 vs Tiafoe\n❌ Finale de l'US Open 2026 🇺🇸 vs Zverev\n✅ 1/2 de Paris 2026 🇫🇷 vs Van Assche\n➡️ 12 victoires, 1 défaite",
-   "link": "https://x.com/JeuSetMaths/status/2119097762474013048",
-   "date": "2026-11-07T16:00:52.163000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HWiMF72WYAA9OTQ.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HWiMF72WYAA9OTQ.jpg?name=orig",
-    "https://pbs.twimg.com/media/HWiMLh-XwAAQoqU.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Luca Van Assche 🇫🇷 lorsqu'il mène 1 set à 0 en 2026 (matchs en 2 sets gagnants) : ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❌✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❔ ➡️ 38 victoires, 1 défaite",
-   "text": "📊 Luca Van Assche 🇫🇷 lorsqu'il mène 1 set à 0 en 2026 (matchs en 2 sets gagnants) :\n✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❌✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❔\n➡️ 38 victoires, 1 défaite",
-   "link": "https://x.com/JeuSetMaths/status/2119077662438425076",
-   "date": "2026-11-07T14:40:59.941000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HWh5zl9XkAAcCfK.jpg?name=small&format=webp",
-   "images": [
-    "https://pbs.twimg.com/media/HWh5zl9XkAAcCfK.jpg?name=small&format=webp"
    ],
    "video": null
   }
