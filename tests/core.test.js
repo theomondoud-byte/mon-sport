@@ -9,6 +9,11 @@ import {renderBlocks as renderBlocksForTest} from '../news-view.js';
 import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle,limitPerMatch} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
+import {jeuSetMathsBundledData} from '../data/jeu-set-et-maths-bundle.js';
+// Le relevé embarqué est rafraîchi par la collecte automatique : les tests qui
+// le lisent se placent une heure après sa publication la plus récente.
+const BUNDLE_NOW=new Date(Math.max(...(jeuSetMathsBundledData.posts||[]).map(p=>Date.parse(p.date)).filter(Number.isFinite))+3600000);
+const BUNDLE_COUNT=readBundledJeuSetMathsNews({now:BUNDLE_NOW}).length;
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
 
 test('décalage de mois en fin de mois',()=>{
@@ -717,26 +722,25 @@ test('Wembanyama : présence non confirmée lorsque le match Spurs n’a pas de 
 });
 
 test('Jeu Set et Maths : uniquement les posts vérifiés et datés dans les articles',async()=>{
- const date=new Date('2026-11-13T10:00:00Z').toISOString();
+ const now=BUNDLE_NOW;
+ const date=new Date(now.getTime()-2*3600000).toISOString();
  const raw={source:'https://x.com/JeuSetMaths',posts:[
   {title:'📊 Statistique du jour en tennis et classement ATP',
    date,link:'https://x.com/JeuSetMaths/status/2120668453770305629',image:null},
   {title:'Ceci ne provient pas du compte',
    date,link:'https://x.com/Imposteur/status/2120668453770305629'},
-  {title:'📊 Annonce vieille de la semaine dernière',
-   date:'2026-10-30T10:00:00Z',link:'https://x.com/JeuSetMaths/status/2120068453770305629'}
+  {title:'📊 Annonce vieille de deux semaines',
+   date:new Date(now.getTime()-14*86400000).toISOString(),link:'https://x.com/JeuSetMaths/status/2120068453770305629'}
  ]};
- const posts=await fetchJeuSetMathsNews({
-  fetchFn:async()=>({ok:true,json:async()=>raw}),
-  now:new Date('2026-11-13T12:00:00Z')
- });
- assert.ok(posts.length>=20,'Le relevé intégré complète le post fourni');
+ const posts=await fetchJeuSetMathsNews({fetchFn:async()=>({ok:true,json:async()=>raw}),now});
+ assert.ok(BUNDLE_COUNT>=5,'Le relevé embarqué contient des posts récents');
+ assert.ok(posts.length>=BUNDLE_COUNT,'Le relevé intégré complète le post fourni');
  assert.ok(posts.every(p=>p.source==='Jeu, set et maths'));
  assert.ok(posts.every(p=>/^https:\/\/x\.com\/JeuSetMaths\/status\//.test(p.link)));
  assert.ok(posts.some(p=>p.link===raw.posts[0].link));
  assert.ok(posts.every(p=>!p.link.includes('Imposteur')));
- const feed=newsLastWeek(posts,new Date('2026-11-13T12:00:00Z'));
- assert.ok(feed.length>=20);
+ const feed=newsLastWeek(posts,now);
+ assert.equal(feed.length,Math.min(25,posts.length));
 });
 
 test('aucun rechargement spontané de page lors du remplacement du service worker',async()=>{
@@ -848,23 +852,23 @@ test('Aucun widget X ni bouton qui ouvre la plateforme dans les posts',async()=>
 });
 
 test('Mobile : posts Jeu Set Maths conservés si le réseau se coupe, dans les 7 jours',async()=>{
- const now=new Date('2026-11-13T12:00:00Z');
+ const now=BUNDLE_NOW;
  const raw={source:'https://x.com/JeuSetMaths',posts:[{
   title:'📊 Classement ATP et statistiques de tennis',
   text:'📊 Tableau tennis\\n\\n▪️ 2001 : Serena Williams\\n↪️ Finale',
-  date:'2026-11-12T11:00:00Z',link:'https://x.com/JeuSetMaths/status/2120668453770305629',
+  date:new Date(now.getTime()-24*3600000).toISOString(),link:'https://x.com/JeuSetMaths/status/2120668453770305629',
   images:['https://pbs.twimg.com/media/graph.jpg?name=orig']
  }]};
  const values=new Map(),storage={getItem:key=>values.get(key)||null,setItem:(key,value)=>values.set(key,value)};
  const online=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>({ok:true,json:async()=>raw})});
- assert.ok(online.length>=20,'Le module embarqué contient déjà les posts réels');
+ assert.ok(online.length>=BUNDLE_COUNT,'Le module embarqué contient déjà les posts réels');
  assert.ok(online.some(p=>p.link===raw.posts[0].link));
  assert.equal(readCachedJeuSetMathsNews({now,storage}).length,1);
  const offline=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>{throw Error('hors ligne');}});
  assert.deepEqual(offline,online);
  const httpFailed=await fetchJeuSetMathsNews({now,storage,fetchFn:async()=>({ok:false,status:503})});
  assert.deepEqual(httpFailed,online);
- assert.deepEqual(readCachedJeuSetMathsNews({now:new Date('2026-12-01'),storage}),[]);
+ assert.deepEqual(readCachedJeuSetMathsNews({now:new Date(now.getTime()+20*86400000),storage}),[]);
  assert.deepEqual(parseJeuSetMathsPosts({...raw,source:'https://x.com/Imposteur'},now),[]);
 });
 
@@ -901,9 +905,9 @@ test('Android : les posts se chargent indépendamment des scores ESPN',async()=>
 });
 
 test('Android : les publications réelles sont visibles immédiatement sans appel réseau ni stockage',async()=>{
- const now=new Date('2026-11-13T15:00:00Z');
+ const now=BUNDLE_NOW;
  const snapshot=readBundledJeuSetMathsNews({now});
- assert.ok(snapshot.length>=15,'Relevé vérifié de 20 posts intégré dans le JS');
+ assert.ok(snapshot.length>=5,'Relevé vérifié intégré dans le JS');
  assert.ok(snapshot.every(p=>p.source==='Jeu, set et maths'&&p.text));
  const offline=readAvailableJeuSetMathsNews({now,storage:{getItem(){throw Error('stockage interdit')}}});
  assert.equal(offline.length,snapshot.length);
@@ -912,14 +916,14 @@ test('Android : les publications réelles sont visibles immédiatement sans appe
  });
  assert.deepEqual(viaFetch,snapshot);
  const html=renderNewsView({news:snapshot,now,loading:false,esc:x=>String(x),safeUrl:x=>x,photos:{}});
- assert.match(html,/Jeu, set et maths : <b>20 publications<\/b>/);
- assert.ok((html.match(/class="news-card jsm-native-card"/g)||[]).length>=15);
+ assert.ok(html.includes('Jeu, set et maths : <b>'+snapshot.length+' publications</b>'));
+ assert.equal((html.match(/class="news-card jsm-native-card"/g)||[]).length,BUNDLE_COUNT);
  assert.match(html,/id="jsmRefresh"/);
  assert.doesNotMatch(html,/<iframe/);
 });
 
 test('Mobile : même avec d’autres articles, 3 posts X apparaissent immédiatement en premier',()=>{
- const now=new Date('2026-11-13T15:00:00Z');
+ const now=BUNDLE_NOW;
  const articles=Array.from({length:35},(_,i)=>({
   title:'Le PSG gagne un match de championnat '+i,
   link:'https://espn.com/soccer/story/'+i,date:new Date(now.getTime()-i*60000).toISOString(),
@@ -930,7 +934,7 @@ test('Mobile : même avec d’autres articles, 3 posts X apparaissent immédiate
  const posJsm=html.indexOf('class="news-card jsm-native-card"');
  const posArticle=html.indexOf('class="news-card news-link-card');
  assert.ok(posJsm>=0&&posArticle>=0);
- assert.ok((html.match(/class="news-card jsm-native-card"/g)||[]).length>=15);
+ assert.equal((html.match(/class="news-card jsm-native-card"/g)||[]).length,BUNDLE_COUNT);
 });
 
 test('Source intégrée : les valeurs obsolètes ne sont pas présentées comme récentes',()=>{
