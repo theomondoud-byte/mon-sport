@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.2.0';
-import {filterSportsNews} from './sports-articles.js?v=17.2.0';
-import {sourceIcon} from './source-icons.js?v=17.2.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.3.0';
+import {filterSportsNews} from './sports-articles.js?v=17.3.0';
+import {sourceIcon} from './source-icons.js?v=17.3.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -173,6 +173,10 @@ export function htmlToBlocks(html,base=''){
  const resolve=src=>{try{const u=new URL(decodeEntities(src),base||undefined);return u.protocol==='https:'?u.href:''}catch{return ''}};
  const marked=String(html||'')
   .replace(/<(script|style|noscript|svg|form|button|nav|aside)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
+  .replace(/<blockquote[^>]*class=["'][^"']*twitter-tweet[^"']*["'][^>]*>([\s\S]*?)<\/blockquote>/gi,(all,inner)=>{
+   const id=(inner.match(/(?:twitter|x)\.com\/\w+\/status(?:es)?\/(\d{10,20})/i)||[])[1];
+   return '\n[[TWEETSTART]]\n'+inner+'\n[[TWEETEND '+(id||'0')+']]\n';
+  })
   .replace(/<img\b[^>]*>/gi,tag=>{
    if(/wp-smiley|emoji|s\.w\.org\/images\/core\/emoji/i.test(tag))return (tag.match(/\balt=["']([^"']*)["']/i)||[])[1]||'';
    const src=(tag.match(/\b(?:data-lazy-src|data-src|data-orig-file|src)=["']([^"']+)["']/i)||[])[1]||'';
@@ -183,10 +187,27 @@ export function htmlToBlocks(html,base=''){
   .replace(/<\/?(?:a|span|strong|em|b|i|u|mark|small|sup|sub|abbr|time|cite)\b[^>]*>/gi,'')
   .replace(/<(?:br|\/p|\/h[1-6]|\/li|\/blockquote|\/div|\/figure|\/figcaption|\/section|\/tr)\b[^>]*>/gi,'\n')
   .replace(/<[^>]+>/g,' ');
- const blocks=[],seen=new Set();
+ const blocks=[],seen=new Set();let inTweet=false,tweetLines=[];
  for(const raw of decodeEntities(marked).replace(/\r/g,'').split(/\n+/)){
   const line=raw.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').replace(/([(“"]) +/g,'$1').trim();
   if(!line)continue;
+  if(line==='[[TWEETSTART]]'){inTweet=true;tweetLines=[];continue;}
+  const tweetEnd=line.match(/^\[\[TWEETEND (\d+)\]\]$/);
+  if(tweetEnd){
+   inTweet=false;
+   const id=tweetEnd[1]==='0'?'':tweetEnd[1];
+   if(id&&seen.has('t'+id))continue;
+   if(id)seen.add('t'+id);
+   const sign=(tweetLines[tweetLines.length-1]||'').match(/^[—–-]\s*(.+?)\s*\((@\w{1,20})\)\s*(.*)$/);
+   if(sign)tweetLines.pop();
+   if(tweetLines.length||id)blocks.push({type:'tweet',id,lines:tweetLines.slice(0,12),author:sign?sign[1]:'',handle:sign?sign[2]:'',date:sign?sign[3]:''});
+   continue;
+  }
+  if(inTweet){
+   const text=line.replace(/https?:\/\/t\.co\/\w+/g,'').replace(/pic\.twitter\.com\/\w+/g,'').replace(/\s+/g,' ').trim();
+   if(text.length>1)tweetLines.push(text.slice(0,1500));
+   continue;
+  }
   const img=line.match(/^\[\[IMG (\S+)\]\]$/);
   if(img){if(!seen.has(img[1])&&blocks.filter(b=>b.type==='img').length<12){seen.add(img[1]);blocks.push({type:'img',src:img[1]});}continue;}
   if(/^(?:[àa] lire aussi|lire aussi|voir aussi|sur le même sujet)\s*[:：]\s*\S/i.test(line))continue;
@@ -197,7 +218,7 @@ export function htmlToBlocks(html,base=''){
  return blocks.slice(0,200);
 }
 export function htmlToText(html){
- return htmlToBlocks(html).filter(b=>b.type==='p').map(b=>b.text).join('\n').slice(0,20000);
+ return htmlToBlocks(html).flatMap(b=>b.type==='p'?[b.text]:b.type==='tweet'?(b.lines||[]):[]).join('\n').slice(0,20000);
 }
 function mediaBlock(b,esc){
  return b.type==='img'&&/^https:\/\//.test(String(b.src||''))

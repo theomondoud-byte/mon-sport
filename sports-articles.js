@@ -1,6 +1,6 @@
-import {sourceImage} from './sports-media.js?v=17.2.0';
-import {htmlToBlocks} from './news-view.js?v=17.2.0';
-import {jeuSetMathsBundledData} from './data/jeu-set-et-maths-bundle.js?v=17.2.0';
+import {sourceImage} from './sports-media.js?v=17.3.0';
+import {htmlToBlocks} from './news-view.js?v=17.3.0';
+import {jeuSetMathsBundledData} from './data/jeu-set-et-maths-bundle.js?v=17.3.0';
 // FFL (Fédération française de la Lose) : articles de sport uniquement.
 // WordPress REST expose titre, date et URL; pas de copie intégrale des articles.
 export const FFL_HOME='https://fflose.com/';
@@ -18,7 +18,7 @@ export function isSportsArticle(article){
 export function filterSportsNews(list=[]){return list.filter(isSportsArticle);}
 function ffBody(html,link){
  const blocks=htmlToBlocks(html,link);
- return {blocks,text:blocks.filter(b=>b.type==='p').map(b=>b.text).join('\n')};
+ return {blocks,text:blocks.flatMap(b=>b.type==='p'?[b.text]:b.type==='tweet'?(b.lines||[]):[]).join('\n')};
 }
 export async function fetchFFLNews({fetchFn=fetch,now=new Date()}={}){
  const endpoints=[

@@ -1164,7 +1164,8 @@ test('V16.5 : un article parle d’un favori seulement si son nom est dans le ti
 
 test('V16.5 : texte complet FFL avec tweets intégrés et images',()=>{
  const blocks=htmlToBlocks('<p>Début.</p><figure class="wp-block-embed"><blockquote class="twitter-tweet"><p>Le tweet <a href="#">@compte</a></p>— Nom (@compte)</blockquote></figure><p><img src="/wp-content/uploads/a.jpg" width="900"><img src="https://secure.gravatar.com/x.png"></p><p>Partager</p><p>Fin.</p>','https://fflose.com/article/');
- assert.deepEqual(blocks,[{type:'p',text:'Début.'},{type:'p',text:'Le tweet @compte'},{type:'p',text:'— Nom (@compte)'},{type:'img',src:'https://fflose.com/wp-content/uploads/a.jpg'},{type:'p',text:'Fin.'}]);
+ assert.deepEqual(blocks,[{type:'p',text:'Début.'},{type:'tweet',id:'',lines:['Le tweet @compte'],author:'Nom',handle:'@compte',date:''},{type:'img',src:'https://fflose.com/wp-content/uploads/a.jpg'},{type:'p',text:'Fin.'}]);
+ assert.equal(htmlToText('<p>A.</p><blockquote class="twitter-tweet"><p>Tweet https://t.co/abc</p>— N (@n) <a href="https://x.com/n/status/2121345295531589933">date</a></blockquote>'),'A.\nTweet');
 });
 
 test('V16.5 : chaque carte d’article a un visuel, image ou illustration du sport',()=>{
@@ -1426,4 +1427,13 @@ test('V17.2 : Spurs et Wembanyama — une seule rencontre, deux articles au plus
  const a=(n,source,title)=>({title,sport:'Basketball',source,link:'https://x.example/'+n,date:'2026-11-14T06:00:00Z',excerpt:'Extrait.'});
  const kept=limitPerMatch([a(1,'TrashTalk','Victor Wembanyama tranquille : 31 points face aux Warriors'),a(2,'ESPN','Victor Wembanyama, Spurs rout Warriors 120-98'),a(3,'Basket USA','Les Spurs ne font qu’une bouchée des Warriors')],favorites,matches,2);
  assert.equal(kept.size,2);
+});
+
+test('V17.3 : le relais est configuré par défaut et son état est visible dans Réglages',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.match(app,/const DEFAULT_WORKER_URL='https:\/\/mon-sport-api\.theomondoud\.workers\.dev';/);
+ assert.match(app,/localStorage\.getItem\(URL_KEY\)\|\|DEFAULT_WORKER_URL/);
+ assert.match(app,/function relayDiagnostic\(\)/);
+ assert.match(app,/en récupération directe \(sans tweets ni images\)/);
 });

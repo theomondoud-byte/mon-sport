@@ -4,6 +4,14 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.3 — relais par défaut sur tous les appareils
+
+- L'adresse du relais Cloudflare était mémorisée appareil par appareil : sur un appareil où elle n'avait pas été saisie, les articles FFL venaient d'une récupération directe, sans tweets, sans images et sans texte complet. Le relais de l'application est désormais **utilisé par défaut** partout (le champ de Réglages ne sert plus qu'à en choisir un autre).
+- **Diagnostic dans Réglages** : version, relais utilisé, nombre d'articles reçus et provenance des articles FFL (relais ou récupération directe).
+- Récupération directe (secours) : tweets en cartes et liens `t.co` retirés, comme via le relais.
+
+---
+
 # Mon Sport V17.2 — résultats repensés, tweets des articles FFL, 2 articles par rencontre
 
 - **Résultats** : grande photo de la rencontre en tête de carte (photo du compte rendu ou de l'article, sinon vignette du résumé vidéo) ; toucher la photo lance la vidéo à sa place. Le cadre entier passe en **vert, rouge ou ambre** selon victoire, défaite ou nul. Textes génériques retirés (« Résumé du résultat », « La rencontre … est terminée », « Articles sur cette rencontre », avertissements) : la partie dépliée ne contient plus que les statistiques détaillées et les liens.
