@@ -65,13 +65,23 @@ function toBlocks(html,base){
   .replace(/<\/?(?:a|span|strong|em|b|i|u|mark|small|sup|sub|abbr|time|cite)\b[^>]*>/gi,'')
   .replace(/<(?:br|\/p|\/h[1-6]|\/li|\/blockquote|\/div|\/figure|\/figcaption|\/section|\/tr)\b[^>]*>/gi,'\n')
   .replace(/<[^>]+>/g,' ');
- const blocks=[],seen=new Set();let inTweet=false;
+ const blocks=[],seen=new Set();let inTweet=false,tweetLines=[];
  for(const raw of decode(marked).replace(/\r/g,'').split(/\n+/)){
   const line=raw.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').trim();
   if(!line)continue;
-  if(line==='[[TWEETSTART]]'){inTweet=true;continue;}
+  if(line==='[[TWEETSTART]]'){inTweet=true;tweetLines=[];continue;}
   const tweetEnd=line.match(/^\[\[TWEETEND (\d+)\]\]$/);
-  if(tweetEnd){inTweet=false;if(tweetEnd[1]!=='0'&&!seen.has('t'+tweetEnd[1])){seen.add('t'+tweetEnd[1]);blocks.push({type:'tweet',id:tweetEnd[1]});}continue;}
+  if(tweetEnd){
+   inTweet=false;
+   const id=tweetEnd[1]==='0'?'':tweetEnd[1];
+   if(id&&seen.has('t'+id))continue;
+   if(id)seen.add('t'+id);
+   // Dernière ligne d'un tweet intégré : « — Nom (@compte) date ».
+   const sign=(tweetLines[tweetLines.length-1]||'').match(/^[—–-]\s*(.+?)\s*\((@\w{1,20})\)\s*(.*)$/);
+   if(sign)tweetLines.pop();
+   if(tweetLines.length||id)blocks.push({type:'tweet',id,lines:tweetLines.slice(0,12),author:sign?sign[1]:'',handle:sign?sign[2]:'',date:sign?sign[3]:''});
+   continue;
+  }
   const img=line.match(/^\[\[IMG (\S+)\]\]$/);
   if(img){if(!seen.has(img[1])&&blocks.filter(b=>b.type==='img').length<12){seen.add(img[1]);blocks.push({type:'img',src:img[1]});}continue;}
   if(/^(?:[àa] lire aussi|lire aussi|voir aussi|sur le même sujet)\s*[:：]\s*\S/i.test(line))continue;
@@ -80,14 +90,14 @@ function toBlocks(html,base){
   if(inTweet){
    // Liens raccourcis de X : sans intérêt hors du tweet.
    const text=line.replace(/https?:\/\/t\.co\/\w+/g,'').replace(/pic\.twitter\.com\/\w+/g,'').replace(/\s+([:!?])\s*$/,'').replace(/\s+/g,' ').trim();
-   if(text.length>1)blocks.push({type:'p',text:text.slice(0,3000),tweet:true});
+   if(text.length>1)tweetLines.push(text.slice(0,1500));
    continue;
   }
   blocks.push({type:'p',text:line.slice(0,3000)});
  }
  return blocks.slice(0,200);
 }
-const blocksText=blocks=>blocks.filter(b=>b.type==='p').map(b=>b.text).join('\n');
+const blocksText=blocks=>blocks.flatMap(b=>b.type==='p'?[b.text]:b.type==='tweet'?(b.lines||[]):[]).join('\n');
 // Image de partage d'une page (og:image / twitter:image), mise en cache 1 jour.
 async function pageImage(link){
  try{
@@ -213,7 +223,7 @@ async function rugbyLive(day){
 async function tweetMedia(id){
  const token=((Number(id)/1e15)*Math.PI).toString(36).replace(/(0+|\.)/g,'');
  const r=await fetch('https://cdn.syndication.twimg.com/tweet-result?id='+id+'&token='+token+'&lang=fr',{headers:{'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'application/json'},cf:{cacheTtl:86400,cacheEverything:true},signal:AbortSignal.timeout(6000)});
- if(!r.ok)return [];
+ if(!r.ok)return {media:[]};
  const d=await r.json();
  const out=[];
  for(const m of [...(d.mediaDetails||[]),...(d.quoted_tweet?.mediaDetails||[])]){
@@ -226,10 +236,20 @@ async function tweetMedia(id){
    if(pick)out.push({type:'video',src:pick.url,poster});
   }
  }
- return out.slice(0,5);
+ const avatar=/^https:\/\/pbs\.twimg\.com\//.test(d.user?.profile_image_url_https||'')?d.user.profile_image_url_https.replace('_normal.','_bigger.'):'';
+ return {media:out.slice(0,5),name:String(d.user?.name||''),handle:d.user?.screen_name?'@'+d.user.screen_name:'',avatar,text:String(d.text||'').replace(/https?:\/\/t\.co\/\w+/g,'').trim()};
+}
+const IMAGE_HOSTS=['static.fflose.com','fflose.com','pbs.twimg.com','i.ytimg.com'];
+async function imageProxy(raw){
+ let url;try{url=new URL(raw)}catch{return json({error:'URL invalide'},400)}
+ if(url.protocol!=='https:'||!IMAGE_HOSTS.includes(url.hostname))return json({error:'Hôte non autorisé'},400);
+ const r=await fetch(url.href,{headers:{'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'image/avif,image/webp,image/*'},cf:{cacheTtl:604800,cacheEverything:true},signal:AbortSignal.timeout(10000)});
+ const type=r.headers.get('content-type')||'';
+ if(!r.ok||!/^image\//i.test(type))return json({error:'Image indisponible ('+r.status+')'},502);
+ return new Response(r.body,{headers:{'Content-Type':type,'Cache-Control':'public, max-age=604800, immutable',...cors}});
 }
 async function tweetsMedia(ids){
- const entries=await Promise.all(ids.map(async id=>{try{return [id,await tweetMedia(id)];}catch{return [id,[]];}}));
+ const entries=await Promise.all(ids.map(async id=>{try{return [id,await tweetMedia(id)];}catch{return [id,{media:[]}];}}));
  return {tweets:Object.fromEntries(entries)};
 }
 async function curatedSportsNews(){
@@ -315,10 +335,10 @@ async function news(q){
  return {articles:articles.slice(0,12)};
 }
 export default {async fetch(request){if(request.method==='OPTIONS')return new Response(null,{headers:cors});if(request.method!=='GET')return json({error:'Méthode non autorisée'},405);const u=new URL(request.url);try{if(u.pathname==='/api/sports-news'){
- const cache=typeof caches!=='undefined'?caches.default:null,key=new Request('https://cache.mon-sport/sports-news-v4');
+ const cache=typeof caches!=='undefined'?caches.default:null,key=new Request('https://cache.mon-sport/sports-news-v5');
  const hit=cache&&!u.searchParams.has('fresh')?await cache.match(key):null;
  if(hit)return hit;
  const response=json(await curatedSportsNews());
  if(cache)await cache.put(key,new Response(response.clone().body,{headers:{...Object.fromEntries(response.headers),'Cache-Control':'public, max-age=600'}}));
  return response;
-}if(u.pathname==='/api/tweets'){const ids=[...new Set(limit(u.searchParams.get('ids'),400).split(',').filter(id=>/^\d{10,20}$/.test(id)))].slice(0,12);if(!ids.length)return json({error:'Identifiants manquants'},400);return json(await tweetsMedia(ids));}if(u.pathname==='/api/rugby-live'){const day=limit(u.searchParams.get('date'),10);if(!/^\d{4}-\d{2}-\d{2}$/.test(day))return json({error:'Date attendue AAAA-MM-JJ'},400);return new Response(JSON.stringify(await rugbyLive(day)),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30',...cors}});}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};
+}if(u.pathname==='/api/image')return imageProxy(limit(u.searchParams.get('url'),1024));if(u.pathname==='/api/tweets'){const ids=[...new Set(limit(u.searchParams.get('ids'),400).split(',').filter(id=>/^\d{10,20}$/.test(id)))].slice(0,12);if(!ids.length)return json({error:'Identifiants manquants'},400);return json(await tweetsMedia(ids));}if(u.pathname==='/api/rugby-live'){const day=limit(u.searchParams.get('date'),10);if(!/^\d{4}-\d{2}-\d{2}$/.test(day))return json({error:'Date attendue AAAA-MM-JJ'},400);return new Response(JSON.stringify(await rugbyLive(day)),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30',...cors}});}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};

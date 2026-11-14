@@ -1,0 +1,8 @@
+
+/* Ajustements propres au thème clair (ajoutés tels quels après la conversion). */
+.agenda-event.verdict-win,.agenda-event.verdict-win[open]{border-color:#34a56b;background:linear-gradient(130deg,#e9f8ef,#f1fbf5)}
+.agenda-event.verdict-loss,.agenda-event.verdict-loss[open]{border-color:#dc5f66;background:linear-gradient(130deg,#fdeeee,#fff5f5)}
+.agenda-event.verdict-draw,.agenda-event.verdict-draw[open]{border-color:#c2a23f;background:linear-gradient(130deg,#faf5e3,#fdfaee)}
+.result-hero-badge{background:rgba(0,0,0,.72);color:#fff}
+.news-tweet-x{background:#000;color:#fff}
+.source-icon.has-logo{background:#fff}

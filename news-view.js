@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.1.0';
-import {filterSportsNews} from './sports-articles.js?v=17.1.0';
-import {sourceIcon} from './source-icons.js?v=17.1.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.2.0';
+import {filterSportsNews} from './sports-articles.js?v=17.2.0';
+import {sourceIcon} from './source-icons.js?v=17.2.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -199,16 +199,33 @@ export function htmlToBlocks(html,base=''){
 export function htmlToText(html){
  return htmlToBlocks(html).filter(b=>b.type==='p').map(b=>b.text).join('\n').slice(0,20000);
 }
-export function renderBlocks(blocks,esc,tweets=null){
- // Un tweet intégré : ses médias s'ils sont déjà connus, sinon un repère
- // que l'appli complète à l'ouverture de l'article.
- const list=(Array.isArray(blocks)?blocks:[]).flatMap(b=>b.type!=='tweet'?[b]
-  :tweets?.has?.(b.id)?tweets.get(b.id):[{type:'tweet-slot',id:b.id}]);
- return list.map(b=>b.type==='tweet-slot'&&/^\d{10,20}$/.test(String(b.id))?'<div class="news-tweet-media" data-tweet-id="'+esc(b.id)+'"></div>':b.type==='img'&&/^https:\/\//.test(String(b.src||''))
+function mediaBlock(b,esc){
+ return b.type==='img'&&/^https:\/\//.test(String(b.src||''))
   ?'<figure class="news-body-figure"><img class="news-body-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+esc(b.src)+'" alt="" /></figure>'
   :b.type==='video'&&/^https:\/\/video\.twimg\.com\/[\w\/.%-]+\.mp4(?:\?[^\s"]*)?$/.test(String(b.src||''))
   ?'<figure class="news-body-figure"><video class="news-body-video" controls playsinline preload="none" referrerpolicy="no-referrer"'+(/^https:\/\//.test(String(b.poster||''))?' poster="'+esc(b.poster)+'"':'')+' src="'+esc(b.src)+'"></video></figure>'
-  :b.type==='p'?'<p'+(b.tweet?' class="news-body-tweet"':'')+'>'+esc(b.text)+'</p>':'').join('');
+  :'';
+}
+// Tweet intégré : carte avec auteur, texte et médias. Les médias viennent du
+// relais à l'ouverture de l'article (repère data-tweet-id en attendant).
+function tweetCard(b,esc,tweets){
+ const id=/^\d{10,20}$/.test(String(b.id||''))?String(b.id):'';
+ const known=id&&tweets?.has?.(id)?tweets.get(id):null;
+ const lines=(Array.isArray(b.lines)?b.lines:[]).filter(Boolean);
+ const media=known?(known.media||[]).map(m=>mediaBlock(m,esc)).join(''):id?'<div class="news-tweet-media" data-tweet-id="'+esc(id)+'"></div>':'';
+ const author=b.author||known?.name||'';
+ const handle=b.handle||known?.handle||'';
+ if(!lines.length&&!media)return '';
+ return '<figure class="news-tweet">'
+  +'<figcaption class="news-tweet-head"><span class="news-tweet-x" aria-hidden="true">𝕏</span>'
+  +(author?'<b>'+esc(author)+'</b>':'<b>Publication X</b>')+(handle?'<span>'+esc(handle)+'</span>':'')+'</figcaption>'
+  +lines.map(l=>'<p>'+esc(l)+'</p>').join('')+media
+  +(id?'<a class="news-tweet-link" href="https://x.com/i/status/'+esc(id)+'" target="_blank" rel="noopener noreferrer">Voir sur X ↗</a>':'')
+  +'</figure>';
+}
+export function renderBlocks(blocks,esc,tweets=null){
+ return (Array.isArray(blocks)?blocks:[]).map(b=>b.type==='tweet'?tweetCard(b,esc,tweets)
+  :b.type==='p'?'<p'+(b.tweet?' class="news-body-tweet"':'')+'>'+esc(b.text)+'</p>':mediaBlock(b,esc)).join('');
 }
 const TRAILING_NOISE=/\s*(?:…|\.\.\.|\[…\]|\[\.\.\.\])?\s*(?:lire la suite|read more|voir plus)\.?\s*$/i;
 export function safeExcerpt(value){
@@ -287,11 +304,36 @@ export function matchSummaryArticle(item,news=[],favorites=[]){
  if(!best)return null;
  return {title:cleanTitle(best.title),excerpt:safeExcerpt(best.excerpt||best.description),link:best.link,source:newsSourceName(best),image:best.image||''};
 }
-export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false,readKeys=new Set(),readView='unread',keepVisible=new Set(),tweets=null}={}){
+// Deux articles au plus par rencontre d'un favori. Une « rencontre » est le
+// match le plus récent du favori avant la publication (à défaut : le jour).
+export function limitPerMatch(articles,favorites=[],matches=[],max=2){
+ const groups=new Map();
+ for(const article of articles){
+  const favorite=findFavorite(article,favorites);
+  if(!favorite)continue;
+  const published=Date.parse(article.date||article.published||'');
+  const match=matches.filter(m=>(m.favorites||[]).includes(favorite.name)).map(m=>({m,start:Date.parse(m.date||'')}))
+   .filter(x=>Number.isFinite(x.start)&&published>=x.start-6*3600000&&published<=x.start+60*3600000)
+   .sort((a,b)=>b.start-a.start)[0];
+  // Même rencontre pour deux favoris (Spurs et Wembanyama) : un seul groupe.
+  const key=match?'match:'+match.m.date+':'+match.m.title:favorite.name+'|jour:'+new Date(published).toISOString().slice(0,10);
+  const opponents=match?normalized(match.m.title).split(/\s+/).filter(w=>w.length>=4&&!favoriteAliases(favorite).some(a=>a.split(' ').includes(w))&&!GENERIC_WORDS.has(w)):[];
+  // Le meilleur d'abord : compte rendu citant l'adversaire, record, extrait fourni.
+  const relevance=articleRelevance(article);
+  const score=(opponents.length&&mentions(noHashtags(article.title),opponents)?4:0)+(relevance==='record'?3:relevance?2:0)+(safeExcerpt(article.excerpt||article.description)?1:0)+(article.image?0.5:0);
+  if(!groups.has(key))groups.set(key,[]);
+  groups.get(key).push({article,score,published});
+ }
+ const kept=new Set();
+ for(const list of groups.values())
+  list.sort((a,b)=>b.score-a.score||b.published-a.published).slice(0,max).forEach(x=>kept.add(x.article));
+ return kept;
+}
+export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false,readKeys=new Set(),readView='unread',keepVisible=new Set(),tweets=null,matches=[]}={}){
  const recentAll=newsLastWeek(news,now);
  const always=n=>['FFL','Jeu, set et maths'].includes(newsSourceName(n));
  const linked=recentAll.filter(n=>!always(n)&&findFavorite(n,favorites));
- const relevant=new Set(linked.filter(n=>relevantFavoriteNews(n,favorites)));
+ const relevant=limitPerMatch(linked.filter(n=>relevantFavoriteNews(n,favorites)),favorites,matches,2);
  const hidden=linked.length-relevant.size;
  const visible=recentAll.filter(n=>always(n)||relevant.has(n)||(showAllRelated&&linked.includes(n)));
  // Un article ouvert reste visible dans « À lire » jusqu'au prochain passage
@@ -307,13 +349,13 @@ export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},
  const sourceButton=name=>'<button type="button" class="news-source-chip '+(chosen.includes(name)?'active':'')+'" data-news-source="'+esc(name)+'" aria-pressed="'+(chosen.includes(name)?'true':'false')+'">'+sourceIcon(name,esc,'small')+esc(name)+' <span>'+(counts.get(name)||0)+'</span></button>';
  const sourceControls='<div class="news-filter-block"><span class="news-filter-label">Sources à afficher</span><div class="news-source-filters" role="group" aria-label="Sélectionner les sources">'+sourceOptions.map(sourceButton).join('')+'</div><button type="button" class="button ghost" id="newsSourcesAll">Toutes les sources</button></div>';
  const ordered=recent;
- const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths sont toujours inclus. Pour les autres médias : uniquement les résultats de matchs et les records de tes favoris.</p><div class="jsm-feed-indicator" role="status">🎾 Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+'<div class="news-read-tabs" role="tablist" aria-label="Articles lus ou non">'
+ const head='<section class="news-feed"><div class="news-intro"><span class="agenda-eyebrow">ACTUALITÉS · 7 DERNIERS JOURS</span><h2>Articles et posts sportifs</h2><p>FFL et Jeu, set et maths en entier. Autres médias : résultats et records de tes favoris, 2 articles au plus par rencontre.</p><div class="jsm-feed-indicator" role="status">'+sourceIcon('Jeu, set et maths',esc,'small')+' Jeu, set et maths : <b>'+mathsTotal+' publication'+(mathsTotal!==1?'s':'')+'</b><button id="jsmRefresh" class="button ghost" type="button">↻ Posts</button></div>'+'<div class="news-read-tabs" role="tablist" aria-label="Articles lus ou non">'
    +'<button type="button" role="tab" data-news-view="unread" aria-selected="'+(readView!=='read')+'" class="'+(readView!=='read'?'active':'')+'">À lire <span>'+unreadList.length+'</span></button>'
    +'<button type="button" role="tab" data-news-view="read" aria-selected="'+(readView==='read')+'" class="'+(readView==='read'?'active':'')+'">Lus <span>'+readList.length+'</span></button></div>'
    +sourceControls+'</div><div class="agenda-countbar"><strong>'+recent.length+' article'+(recent.length!==1?'s':'')+(readView==='read'?' lu'+(recent.length!==1?'s':''):' à lire')+'</strong>'
    +(readView!=='read'&&recent.length?'<button type="button" class="button ghost news-mark-all" id="newsMarkAll">✓ Tout marquer comme lu</button>':'<span>Tri chronologique · plus récent d’abord</span>')+'</div>'
    +'<p class="news-swipe-hint">Tri chronologique, plus récent d’abord · '+(readView!=='read'?'glisse un article vers la gauche pour le ranger dans « Lus ».':'glisse un article vers la gauche pour le remettre dans « À lire ».')+'</p>'
-  +(hidden>0?'<div class="news-hidden-note"><span>'+(showAllRelated?hidden+' article'+(hidden>1?'s':'')+' hors résultats/records affiché'+(hidden>1?'s':''):hidden+' article'+(hidden>1?'s':'')+' sur tes favoris écarté'+(hidden>1?'s':'')+' (avant-match, interview, transfert…)')+'</span><button type="button" class="button ghost" id="newsShowAll">'+(showAllRelated?'Masquer':'Afficher quand même')+'</button></div>':'');
+  +(hidden>0?'<div class="news-hidden-note"><span>'+(showAllRelated?hidden+' article'+(hidden>1?'s':'')+' hors résultats/records affiché'+(hidden>1?'s':''):hidden+' article'+(hidden>1?'s':'')+' sur tes favoris écarté'+(hidden>1?'s':'')+' (avant-match, interview, au-delà de 2 par rencontre…)')+'</span><button type="button" class="button ghost" id="newsShowAll">'+(showAllRelated?'Masquer':'Afficher quand même')+'</button></div>':'');
  const cardHtml=n=>{
   const link=safeUrl(n.link);
   if(link==='#')return '';

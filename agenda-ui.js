@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.1.0';
-import {sportInfo} from './sports-media.js?v=17.1.0';
+import {sourceIcon} from './source-icons.js?v=17.2.0';
+import {sportInfo} from './sports-media.js?v=17.2.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.1.0';
-import {auditInfo} from './audit-2026.js?v=17.1.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.1.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.1.0';
-import {photoInitials} from './photos.js?v=17.1.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.1.0';
-import {coverageFor} from './coverage-v11.js?v=17.1.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.2.0';
+import {auditInfo} from './audit-2026.js?v=17.2.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.2.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.2.0';
+import {photoInitials} from './photos.js?v=17.2.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.2.0';
+import {coverageFor} from './coverage-v11.js?v=17.2.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -51,27 +51,35 @@ function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
  const timing=item.isCompetition&&item.endDate
   ?'Du '+dateLabel(item.date,{day:'numeric',month:'short'})+' au '+dateLabel(item.endDate,{day:'numeric',month:'short',year:'numeric'})
   :readableDate(item);
- return '<details class="agenda-event" data-event-detail="'+esc(item.key)+'">'
+ // Cadre vert / rouge / ambre : uniquement si tous les favoris concernés ont le même verdict.
+ const verdicts=[...new Set(item.favorites.map(name=>matchVerdict(item,name)).filter(Boolean))];
+ const frame=item.finished&&verdicts.length===1?' verdict-'+({V:'win',D:'loss',N:'draw'})[verdicts[0]]:'';
+ const extra=resultExtrasHtml(item,esc,safeUrl,extras);
+ const played=item.finished&&!item.pendingResult&&!item.isCompetition;
+ // Résultat joué : le score, les faits et les statistiques suffisent ; le texte
+ // de présentation n'est gardé que pour les événements à venir ou à vérifier.
+ const about=played
+  ?(item.notes?'<p>'+esc(item.notes)+'</p>':'')+stats+(flags?'<div class="agenda-meta">'+flags+'</div>':'')
+  :'<h4>'+esc(recap.title)+'</h4><p>'+esc(recap.text)+'</p>'+stats+(flags?'<div class="agenda-meta">'+flags+'</div>':'')+'<p class="agenda-recap-note">'+esc(recap.caveat)+'</p>';
+ return '<details class="agenda-event'+frame+'" data-event-detail="'+esc(item.key)+'">'
    +'<summary class="agenda-event-clickable">'
+   +extra.hero
    +'<div class="agenda-event-top"><div class="agenda-people">'+people+'</div>'
    +(item.finished?'':'<span class="agenda-status '+(item.pendingResult?'pending':item.live?'live':'upcoming')+'">'+esc(state)+'</span>')+'</div>'
    +'<h3>'+esc(item.title)+'</h3>'
    +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong>'+(timing?'<span>'+esc(timing)+'</span>':'')+'</div>'
    +'<div class="agenda-detail">'+esc([item.competition,item.round].filter(Boolean).join(' · '))+'</div>'
-   +resultExtrasHtml(item,esc,safeUrl,extras)
-   +'<div class="agenda-open-hint"><span>'+(item.pendingResult?'Voir la source':item.isCompetition?'Voir le programme':'Résumé')+'</span><span aria-hidden="true">⌄</span></div>'
+   +extra.html
+   +'<div class="agenda-open-hint"><span>'+(item.pendingResult?'Voir la source':item.isCompetition?'Voir le programme':played?'Statistiques':'Détails')+'</span><span aria-hidden="true">⌄</span></div>'
    +'</summary>'
-   +'<div class="agenda-recap"><h4>'+esc(recap.title)+'</h4><p>'+esc(recap.text)+'</p>'
-   +stats
-   +(flags?'<div class="agenda-meta">'+flags+'</div>':'')
-   +'<p class="agenda-recap-note">'+esc(recap.caveat)+'</p>'
-   +'<div class="agenda-recap-source">Source : '+esc(recap.source)+' '+sourceLink+'</div>'
-   +'<div class="detail-live-slot" aria-live="polite"></div></div>'
+   +'<div class="agenda-recap">'+about
+   +'<div class="detail-live-slot" aria-live="polite"></div>'
+   +'<div class="agenda-recap-source">'+esc(recap.source)+' '+sourceLink+'</div></div>'
    +'</details>';
 }
 // Résumé d'article et replay pour un résultat terminé.
 function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
- if(!item.finished||item.pendingResult||item.isCompetition)return '';
+ if(!item.finished||item.pendingResult||item.isCompetition)return {hero:'',html:''};
  const article=summaryFor?.(item);
  const media=mediaFor?.(item)||{};
  // 1. L'essentiel, en français, tiré de la feuille de match.
@@ -100,14 +108,31 @@ function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
  const page=(media.videos||[]).find(v=>v.page);
  const q=encodeURIComponent(String(item.title||'').replace(/—/g,' ')+' résumé '+new Date(item.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}));
  const youtube=media.youtube;
- const replay=!video&&youtube?.id
-  ?'<button type="button" class="result-replay" data-youtube-id="'+esc(youtube.id)+'" data-stop>▶ Voir le résumé vidéo</button>'
-   +'<small class="result-video-meta">'+esc(youtube.channel||'YouTube')+(youtube.official?'':' · chaîne non officielle')+(youtube.duration?' · '+esc(youtube.duration):'')+' · <a href="https://www.youtube.com/watch?v='+esc(youtube.id)+'" target="_blank" rel="noopener noreferrer" data-stop>Ouvrir sur YouTube ↗</a></small><div class="result-video-slot"></div>'
-  :video
-  ?'<button type="button" class="result-replay" data-play-video="'+esc(video.src)+'" data-video-page="'+esc(safeUrl(video.page||''))+'" data-poster="'+esc(video.poster||'')+'" data-stop>▶ Voir le résumé vidéo</button><div class="result-video-slot"></div>'
-  :page?'<a class="result-replay ghost" href="'+esc(safeUrl(page.page))+'" target="_blank" rel="noopener noreferrer" data-stop>▶ Résumé vidéo sur ESPN ↗</a>'
-  :'<a class="result-replay ghost" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener noreferrer" data-stop>🔎 Chercher le résumé vidéo ↗</a>';
- return summary+'<div class="result-replay-row">'+replay+'</div>';
+ // Grande photo de la rencontre : photo du compte rendu, de l'article, ou
+ // vignette du résumé vidéo. Si une vidéo existe, toucher la photo la lance.
+ const https=u=>/^https:\/\//.test(String(u||''))?String(u):'';
+ const image=https(recap?.image)||https(article?.image)||https(video?.poster)||(youtube?.id?'https://i.ytimg.com/vi/'+youtube.id+'/hqdefault.jpg':'');
+ const playAttrs=video
+  ?'data-play-video="'+esc(video.src)+'" data-video-page="'+esc(safeUrl(video.page||''))+'" data-poster="'+esc(video.poster||'')+'"'
+  :youtube?.id?'data-youtube-id="'+esc(youtube.id)+'"':'';
+ const picture=image?'<img class="result-hero-image" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+esc(image)+'" alt="" />':'';
+ const meta=!video&&youtube?.id?'<small class="result-video-meta">'+esc(youtube.channel||'YouTube')+(youtube.official?'':' · chaîne non officielle')+(youtube.duration?' · '+esc(youtube.duration):'')
+   +' · <a href="https://www.youtube.com/watch?v='+esc(youtube.id)+'" target="_blank" rel="noopener noreferrer" data-stop>YouTube ↗</a></small>':'';
+ let hero='',replay='';
+ if(image&&playAttrs){
+  hero='<div class="result-hero"><button type="button" class="result-hero-play" '+playAttrs+' data-stop aria-label="Voir le résumé vidéo">'+picture
+   +'<span class="result-hero-badge">▶ Résumé vidéo</span></button><div class="result-video-slot"></div></div>';
+  replay=meta;
+ }else if(image){
+  hero='<div class="result-hero">'+picture+'</div>';
+ }else if(playAttrs){
+  replay='<button type="button" class="result-replay" '+playAttrs+' data-stop>▶ Résumé vidéo</button>'+meta+'<div class="result-video-slot"></div>';
+ }
+ if(!playAttrs){
+  replay=page?'<a class="result-replay ghost" href="'+esc(safeUrl(page.page))+'" target="_blank" rel="noopener noreferrer" data-stop>▶ Vidéo sur ESPN ↗</a>'
+   :'<a class="result-replay ghost" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener noreferrer" data-stop>🔎 Chercher la vidéo ↗</a>';
+ }
+ return {hero,html:summary+(replay?'<div class="result-replay-row">'+replay+'</div>':'')};
 }
 function placeholderMissing(missing,esc,safeUrl){
  if(!missing.length)return '';

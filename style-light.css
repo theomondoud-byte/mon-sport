@@ -993,3 +993,43 @@ body{background:radial-gradient(circle at 85% -8%,#dee7ec 0%,transparent 42%),#f
 .news-body-tweet{border-left:3px solid #bfccd3;padding-left:10px;color:#0e1d25}
 @media(max-width:600px){.result-facts>div{grid-template-columns:1fr;gap:0}}
 .theme-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:360px}
+
+/* V17.2 — résultats : grande photo, cadre selon le verdict, cartes de tweets, logos. */
+.agenda-event{border-width:2px;border-left-width:2px;overflow:hidden}
+.agenda-event.verdict-win,.agenda-event.verdict-win[open]{border-color:#a8d2c0;background:linear-gradient(130deg,#eaf2f0,#eff4f4)}
+.agenda-event.verdict-loss,.agenda-event.verdict-loss[open]{border-color:#bb6068;background:linear-gradient(130deg,#ede7e9,#f1eef1)}
+.agenda-event.verdict-draw,.agenda-event.verdict-draw[open]{border-color:#b9b08f;background:linear-gradient(130deg,#eeeeea,#ecedec)}
+.result-hero{position:relative;margin:-15px -16px 13px;aspect-ratio:16/9;max-height:260px;width:calc(100% + 32px);background:#f1f4f7;overflow:hidden}
+.result-hero-image{display:block;width:100%;height:100%;object-fit:cover}
+.result-hero-play{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.result-hero-badge{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;background:rgba(0,0,0,.72);color:#1a1a1a;font-weight:800;font-size:.84rem;backdrop-filter:blur(4px)}
+.result-hero.playing{aspect-ratio:auto;max-height:none}
+.result-hero.playing .result-hero-play{display:none}
+.result-hero .result-video-slot{display:grid}
+.result-hero .result-video,.result-hero .result-youtube{border-radius:0}
+.result-video-close{justify-self:end;margin:6px 10px;border:0;background:none;color:#16583c;font-weight:750;font-size:.78rem;cursor:pointer}
+.result-hero.no-image{aspect-ratio:auto;margin:0 0 10px;width:auto;background:none;overflow:visible}
+.result-hero.no-image .result-hero-image{display:none}
+.result-hero.no-image .result-hero-badge{position:static;background:var(--accent);color:#f4f9f7;backdrop-filter:none}
+.result-hero.no-image:not(:has(.result-hero-play)){display:none}
+.agenda-recap-source{font-size:.74rem;color:#415d6c;margin-top:8px}
+.event-editorial{display:grid;gap:6px;margin-top:10px}
+.news-tweet{margin:12px 0;padding:11px 13px;border:1px solid #ced8dd;border-radius:14px;background:#edf1f4}
+.news-tweet-head{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.84rem;margin-bottom:6px}
+.news-tweet-head b{color:#012232}
+.news-tweet-head span{color:#415d6c}
+.news-tweet-x{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#000;color:#1a1a1a;font-size:.78rem;font-weight:700}
+.news-fulltext .news-tweet p{margin:6px 0;font-size:.92rem;line-height:1.5}
+.news-tweet .news-body-figure{margin:8px 0 4px}
+.news-tweet-link{display:inline-block;margin-top:4px;font-size:.74rem;font-weight:700;color:#415d6c;text-decoration:none}
+.source-icon.has-logo{background:#1a1a1a;overflow:hidden;padding:0}
+.source-icon.has-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+@media(max-width:600px){.result-hero{margin:-10px -12px 10px;width:calc(100% + 24px);max-height:220px}.result-hero.no-image{margin:0 0 8px;width:auto}}
+
+/* Ajustements propres au thème clair (ajoutés tels quels après la conversion). */
+.agenda-event.verdict-win,.agenda-event.verdict-win[open]{border-color:#34a56b;background:linear-gradient(130deg,#e9f8ef,#f1fbf5)}
+.agenda-event.verdict-loss,.agenda-event.verdict-loss[open]{border-color:#dc5f66;background:linear-gradient(130deg,#fdeeee,#fff5f5)}
+.agenda-event.verdict-draw,.agenda-event.verdict-draw[open]{border-color:#c2a23f;background:linear-gradient(130deg,#faf5e3,#fdfaee)}
+.result-hero-badge{background:rgba(0,0,0,.72);color:#fff}
+.news-tweet-x{background:#000;color:#fff}
+.source-icon.has-logo{background:#fff}

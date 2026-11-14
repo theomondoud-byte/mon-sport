@@ -4,6 +4,16 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.2 — résultats repensés, tweets des articles FFL, 2 articles par rencontre
+
+- **Résultats** : grande photo de la rencontre en tête de carte (photo du compte rendu ou de l'article, sinon vignette du résumé vidéo) ; toucher la photo lance la vidéo à sa place. Le cadre entier passe en **vert, rouge ou ambre** selon victoire, défaite ou nul. Textes génériques retirés (« Résumé du résultat », « La rencontre … est terminée », « Articles sur cette rencontre », avertissements) : la partie dépliée ne contient plus que les statistiques détaillées et les liens.
+- **Articles FFL** : les tweets intégrés s'affichent en cartes (auteur, texte, photos et vidéos). La version complète fournie par le relais est désormais prioritaire : auparavant, une copie de secours récupérée par le téléphone (sans image ni médias) pouvait la remplacer — d'où les images et tweets manquants.
+- **Images** : si une image ne charge pas directement, un second essai passe par le relais (`/api/image`, hôtes connus uniquement).
+- **Articles des autres médias** : 2 articles au plus par rencontre d'un favori (les meilleurs : compte rendu citant l'adversaire, record, extrait fourni) ; Spurs et Wembanyama comptent pour une seule rencontre.
+- **Vrais logos** pour FFL, Jeu, set et maths, Franceinfo et TrashTalk (embarqués dans l'appli).
+
+---
+
 # Mon Sport V17.1 — thème clair, l'essentiel de chaque match, médias des articles FFL
 
 - **Thème clair** par défaut (fonds clairs, textes foncés, mêmes couleurs d'accent). Le thème sombre reste disponible dans Réglages → Apparence. `style-light.css` est généré depuis `style.css` par `scripts/build-light-theme.mjs`.

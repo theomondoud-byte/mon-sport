@@ -1,20 +1,20 @@
-import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.1.0';
-import {createOnceLoader} from './session-loader.js?v=17.1.0';
-import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.1.0';
-import {renderAgendaView} from './agenda-ui.js?v=17.1.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.1.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.1.0';
-import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.1.0';
-import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.1.0';
-import {extraProgramFor} from './verified-program.js?v=17.1.0';
-import {verifiedExtraFor} from './verified-extra-v11.js?v=17.1.0';
-import {coverageFor} from './coverage-v11.js?v=17.1.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey} from './news-view.js?v=17.1.0';
-import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=17.1.0';
-import {verified2026For} from './audit-2026.js?v=17.1.0';
-import {renderAudit2026} from './audit-ui.js?v=17.1.0';
-import {auditEspn2026} from './audit-espn-2026.js?v=17.1.0';
-import {APP_LABEL,APP_VERSION} from './version.js?v=17.1.0';
+import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.2.0';
+import {createOnceLoader} from './session-loader.js?v=17.2.0';
+import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.2.0';
+import {renderAgendaView} from './agenda-ui.js?v=17.2.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.2.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.2.0';
+import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.2.0';
+import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.2.0';
+import {extraProgramFor} from './verified-program.js?v=17.2.0';
+import {verifiedExtraFor} from './verified-extra-v11.js?v=17.2.0';
+import {coverageFor} from './coverage-v11.js?v=17.2.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey} from './news-view.js?v=17.2.0';
+import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=17.2.0';
+import {verified2026For} from './audit-2026.js?v=17.2.0';
+import {renderAudit2026} from './audit-ui.js?v=17.2.0';
+import {auditEspn2026} from './audit-espn-2026.js?v=17.2.0';
+import {APP_LABEL,APP_VERSION} from './version.js?v=17.2.0';
 const DEFAULTS = [
  ['Real Madrid','Football','équipe','Real Madrid'],['FC Barcelone','Football','équipe','FC Barcelona'],['PSG','Football','équipe','Paris Saint Germain'],['San Antonio Spurs','Basketball','équipe','San Antonio Spurs'],
  ['Victor Wembanyama','Basketball','sportif'],['Léon Marchand','Natation','sportif'],['Sauveur Cristofini','Natation','sportif'],['Félix Lebrun','Tennis de table','sportif'],['Alexis Lebrun','Tennis de table','sportif'],['Flavien Coton','Tennis de table','sportif'],['Paul Seixas','Cyclisme','sportif'],['Kylian Mbappé','Football','sportif'],['Équipe de France de football','Football','équipe','France'],['XV de France','Rugby','équipe','France Rugby'],['Arthur Fils','Tennis','sportif'],['Jannik Sinner','Tennis','sportif'],['Carlos Alcaraz','Tennis','sportif'],['Rafael Jódar','Tennis','sportif'],['Moïse Kouamé','Tennis','sportif'],['Mirra Andreeva','Tennis','sportif']
@@ -83,10 +83,11 @@ function softRender(){
  const focused=document.activeElement;
  if(focused&&focused.closest?.('#content')&&/^(INPUT|SELECT|TEXTAREA)$/.test(focused.tagName)){pendingRender=true;return;}
  // Article ouvert ou vidéo affichée : l'écran n'est pas recréé sous les yeux du lecteur.
- if(document.querySelector('#content .news-fulltext:not([hidden]), #content .result-video-slot>*, #content .result-recap-full:not([hidden])')){pendingRender=true;return;}
+ if(document.querySelector('#content .news-fulltext:not([hidden]), #content .result-video-slot>*, #content .result-recap-full:not([hidden]), #content details.agenda-event[open]')){pendingRender=true;return;}
  pendingRender=false;render();
 }
 document.addEventListener('focusout',()=>{if(pendingRender)setTimeout(()=>{if(pendingRender)softRender();},0);});
+function softRenderIfPending(){if(pendingRender)setTimeout(()=>{if(pendingRender)softRender();},0);}
 const app=document.querySelector('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
@@ -448,7 +449,7 @@ const loadRankingsOnce=createOnceLoader(async(force)=>{
  }
 });
 function refreshRankings(force=false){return loadRankingsOnce(force);}
-function newsHtml(){return renderNewsView({news:[...news,...jeuSetMathsPosts],loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date(),selectedSources:newsSelectedSources,showAllRelated:newsShowAll,readKeys:new Set(Object.keys(readArticles)),readView:newsReadView,keepVisible:newsKeep,tweets:tweetMedia,favorites});}
+function newsHtml(){return renderNewsView({news:[...news,...jeuSetMathsPosts],loading,hasWorker:!!workerUrl,photos:photoMap,esc,safeUrl,now:new Date(),selectedSources:newsSelectedSources,showAllRelated:newsShowAll,readKeys:new Set(Object.keys(readArticles)),readView:newsReadView,keepVisible:newsKeep,tweets:tweetMedia,matches:agendaItems().filter(i=>i.finished||i.live).map(i=>({title:i.title,date:i.date,favorites:i.favorites})),favorites});}
 function loadJeuSetMathsPosts(){
  if(jeuSetMathsPending)return jeuSetMathsPending;
  // Le fil de tennis se charge indépendamment des API scores : l'attente
@@ -659,7 +660,7 @@ if(active==='resultats')return `${latestKouameHtml()}${latestSinnerHtml()}<secti
 if(active==='bilan')return renderAudit2026({favorites,historyResults,yearAudit,yearLoading,yearMessage,auditSelected,esc,safeUrl,date});
 if(active==='actualites')return newsHtml();
 if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</h2><form id="addform"><input name="name" placeholder="Nom de l'équipe ou du sportif" maxlength="100" required/><select name="sport">${['Football','Tennis','Rugby','Basketball','Cyclisme','Natation','Tennis de table','Autre'].map(s=>`<option>${s}</option>`).join('')}</select><select name="type"><option value="sportif">Sportif</option><option value="équipe">Équipe</option></select><input name="apiName" placeholder="Nom API (facultatif)" maxlength="100"/><button class="button" type="submit">Ajouter aux favoris</button></form></section><section class="panel"><h2>⭐ Mes favoris (${favorites.length})</h2><select id="sportFilter">${sports.map(s=>`<option ${sportFilter===s?'selected':''}>${esc(s)}</option>`).join('')}</select><input class="search" id="search" value="${esc(search)}" placeholder="Rechercher un favori"/><div id="favoriteList">${favoriteRows()}</div></section>`;
-return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🎨 Apparence</h2><p class="sub">Thème de l’application sur cet appareil.</p><div class="theme-choice" role="group" aria-label="Thème"><button type="button" class="button ${currentTheme()==='light'?'':'ghost'}" data-theme-choice="light" aria-pressed="${currentTheme()==='light'}">☀️ Clair</button><button type="button" class="button ${currentTheme()==='dark'?'':'ghost'}" data-theme-choice="dark" aria-pressed="${currentTheme()==='dark'}">🌙 Sombre</button></div></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Thème clair, essentiel de chaque match en français, photos et vidéos des articles FFL.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
+return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Renseigne l'URL publique de ton Cloudflare Worker pour activer les articles. Les scores ESPN (équipes et sportifs) sont récupérés directement depuis le téléphone ; ils ne nécessitent pas le Worker.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="https://mon-sport-api.nom.workers.dev" value="${esc(workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form><p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🎨 Apparence</h2><p class="sub">Thème de l’application sur cet appareil.</p><div class="theme-choice" role="group" aria-label="Thème"><button type="button" class="button ${currentTheme()==='light'?'':'ghost'}" data-theme-choice="light" aria-pressed="${currentTheme()==='light'}">☀️ Clair</button><button type="button" class="button ${currentTheme()==='dark'?'':'ghost'}" data-theme-choice="dark" aria-pressed="${currentTheme()==='dark'}">🌙 Sombre</button></div></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Résultats repensés (grande photo, cadre vert ou rouge), tweets dans les articles FFL, 2 articles max par rencontre.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
 function favoriteRows(){
  return filtered().map(f=>{
   const img=photoMap[f.name]?.src;
@@ -727,13 +728,29 @@ async function hydrateTweets(slot){
  const holders=[...slot.querySelectorAll('.news-tweet-media[data-tweet-id]:empty')];
  const ids=[...new Set(holders.map(h=>h.dataset.tweetId))].filter(id=>!tweetMedia.has(id)).slice(0,12);
  if(ids.length&&workerUrl){
-  try{const data=await request('/api/tweets',{ids:ids.join(',')});for(const id of ids)tweetMedia.set(id,Array.isArray(data.tweets?.[id])?data.tweets[id]:[]);}catch{}
+  try{const data=await request('/api/tweets',{ids:ids.join(',')});for(const id of ids){const t=data.tweets?.[id];tweetMedia.set(id,{media:Array.isArray(t)?t:Array.isArray(t?.media)?t.media:[],name:t?.name||'',handle:t?.handle||''});}}catch{}
  }
  for(const holder of holders){
-  const media=tweetMedia.get(holder.dataset.tweetId);
-  if(media&&holder.isConnected)holder.outerHTML=renderBlocks(media,esc);
+  const known=tweetMedia.get(holder.dataset.tweetId);
+  if(known&&holder.isConnected)holder.outerHTML=renderBlocks(known.media,esc);
  }
 }
+// Image qui ne charge pas (anti-hotlink, réseau) : un second essai passe par
+// le relais pour les hôtes connus ; sinon l'emplacement se replie proprement.
+const PROXY_HOSTS=['static.fflose.com','fflose.com','pbs.twimg.com','i.ytimg.com'];
+document.addEventListener('error',event=>{
+ const image=event.target;
+ if(!(image instanceof HTMLImageElement)||!image.matches('.article-thumb-image,.news-body-image,.result-hero-image'))return;
+ let host='';try{host=new URL(image.currentSrc||image.src).hostname;}catch{}
+ if(!image.dataset.retried&&workerUrl&&PROXY_HOSTS.includes(host)){
+  image.dataset.retried='1';
+  image.src=workerUrl+'/api/image?url='+encodeURIComponent(image.src);
+  return;
+ }
+ if(image.matches('.article-thumb-image'))image.closest('.article-visual')?.classList.add('image-failed');
+ else if(image.matches('.news-body-image'))image.closest('figure')?.remove();
+ else image.closest('.result-hero')?.classList.add('no-image');
+},true);
 // --- Thème clair (par défaut) ou sombre -------------------------------------
 const THEME_KEY='monsport-theme-v1';
 function currentTheme(){try{return localStorage.getItem(THEME_KEY)==='dark'?'dark':'light';}catch{return 'light';}}
@@ -801,25 +818,20 @@ function bindContent(){
  // n'est téléchargée qu'au moment du premier clic.
  document.querySelectorAll('[data-event-detail]').forEach(card=>{
   card.addEventListener('toggle',async()=>{
-   if(!card.open||card.dataset.detailLoaded==='1')return;
+   if(!card.open){softRenderIfPending();return;}
+   if(card.dataset.detailLoaded==='1')return;
    card.dataset.detailLoaded='1';
    const item=agendaItems().find(x=>x.key===card.dataset.eventDetail);
    const slot=card.querySelector('.detail-live-slot');
    if(!item||!slot)return;
-   slot.textContent='Recherche des statistiques de cette rencontre…';
+   slot.textContent='Chargement…';
    try{
     const details=await loadEventDetails(item);
     if(card.isConnected&&card.open){
      const near=findMatchArticles(item,news);
-     const reports=near.length?'<div class="event-editorial"><h5>📰 Articles sur cette rencontre</h5>'
+     const reports=near.length?'<div class="event-editorial">'
        +near.map(n=>'<a href="'+esc(safeUrl(n.link))+'" target="_blank" rel="noopener noreferrer">'+esc(n.title)+' · '+esc(n.source||'Éditeur')+' ↗</a>').join('')+'</div>':'';
-     const q=[item.title,item.competition,new Date(item.date).getFullYear(),'résumé'].filter(Boolean).join(' ');
-     const search='https://news.google.com/search?q='+encodeURIComponent(q)+'&hl=fr&gl=FR&ceid=FR:fr';
-     const source=item.sourceUrl&&safeUrl(item.sourceUrl)!=='#'
-      ?'<a href="'+esc(safeUrl(item.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Source sportive ↗</a>':'';
-     slot.innerHTML='<div class="event-article-summary"><h4>Compte rendu sportif</h4><p>Résultat et statistiques issus des sources affichées ci-dessous.</p></div>'
-      +renderEventDetails(details,esc)+reports
-      +'<div class="event-source-links">'+source+'<a href="'+esc(search)+'" target="_blank" rel="noopener noreferrer">Chercher un article de cette rencontre ↗</a></div>';
+     slot.innerHTML=renderEventDetails(details,esc)+reports;
     }
    }catch(e){
     if(card.isConnected)slot.textContent='Données détaillées indisponibles : '+String(e.message||e);
@@ -827,22 +839,32 @@ function bindContent(){
   });
  });
  document.querySelectorAll('[data-stop]').forEach(el=>el.addEventListener('click',event=>event.stopPropagation()));
+ // Résumé vidéo : lancé depuis la grande photo (qui laisse place au lecteur)
+ // ou depuis le bouton ; un second appui ou « Fermer » revient à l'état initial.
+ const showPlayer=(button,player)=>{
+  const hero=button.closest('.result-hero'),slot=button.parentElement.querySelector('.result-video-slot');
+  if(!slot)return;
+  const close=()=>{slot.replaceChildren();hero?.classList.remove('playing');if(!hero)button.textContent='▶ Résumé vidéo';softRenderIfPending();};
+  if(slot.firstChild){close();return;}
+  const shut=document.createElement('button');
+  shut.type='button';shut.className='result-video-close';shut.textContent='✕ Fermer la vidéo';
+  shut.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();close();});
+  player.addEventListener('click',e=>e.stopPropagation());
+  slot.replaceChildren(player,...(hero?[shut]:[]));
+  if(hero)hero.classList.add('playing');else button.textContent='✕ Fermer la vidéo';
+ };
  document.querySelectorAll('[data-play-video]').forEach(button=>button.addEventListener('click',event=>{
   event.preventDefault();event.stopPropagation();
-  const slot=button.parentElement.querySelector('.result-video-slot');
-  if(!slot)return;
-  if(slot.firstChild){slot.replaceChildren();button.textContent='▶ Voir le résumé vidéo';return;}
   const video=document.createElement('video');
   video.className='result-video';video.controls=true;video.playsInline=true;video.preload='metadata';
   if(button.dataset.poster)video.poster=button.dataset.poster;
   video.src=button.dataset.playVideo;
-  video.addEventListener('click',e=>e.stopPropagation());
   video.addEventListener('error',()=>{
-   const page=button.dataset.videoPage;
-   slot.innerHTML=page&&page!=='#'?'<a class="result-replay ghost" href="'+esc(page)+'" target="_blank" rel="noopener noreferrer">▶ Ouvrir la vidéo sur ESPN ↗</a>':'<p class="news-reader-note">Vidéo indisponible sur cet appareil.</p>';
+   const page=button.dataset.videoPage,slot=button.parentElement.querySelector('.result-video-slot');
+   if(slot)slot.innerHTML=page&&page!=='#'?'<a class="result-replay ghost" href="'+esc(page)+'" target="_blank" rel="noopener noreferrer">▶ Ouvrir la vidéo sur ESPN ↗</a>':'<p class="news-reader-note">Vidéo indisponible sur cet appareil.</p>';
   },{once:true});
-  slot.replaceChildren(video);button.textContent='✕ Fermer la vidéo';
-  video.play().catch(()=>{});
+  showPlayer(button,video);
+  video.play?.().catch(()=>{});
  }));
  document.querySelectorAll('[data-toggle-recap]').forEach(button=>button.addEventListener('click',event=>{
   event.preventDefault();event.stopPropagation();
@@ -853,9 +875,6 @@ function bindContent(){
  }));
  document.querySelectorAll('[data-youtube-id]').forEach(button=>button.addEventListener('click',event=>{
   event.preventDefault();event.stopPropagation();
-  const slot=button.parentElement.querySelector('.result-video-slot');
-  if(!slot)return;
-  if(slot.firstChild){slot.replaceChildren();button.textContent='▶ Voir le résumé vidéo';return;}
   const id=button.dataset.youtubeId;
   if(!/^[\w-]{6,20}$/.test(id))return;
   const frame=document.createElement('iframe');
@@ -864,13 +883,9 @@ function bindContent(){
   frame.title='Résumé vidéo';frame.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';frame.allowFullscreen=true;
   // YouTube exige un référent pour les vidéos intégrées (la page est en no-referrer).
   frame.referrerPolicy='strict-origin-when-cross-origin';
-  frame.loading='lazy';
-  slot.replaceChildren(frame);button.textContent='✕ Fermer la vidéo';
+  showPlayer(button,frame);
  }));
  // Image d'article indisponible : afficher uniquement le pictogramme sportif.
- document.querySelectorAll('img.article-thumb-image').forEach(image=>{
-  image.addEventListener('error',()=>image.closest('.article-visual')?.classList.add('image-failed'),{once:true});
- });
  // Les photos d'un post s'affichent comme des médias ordinaires, sans iframe X.
  document.querySelectorAll('img.jsm-native-image').forEach(image=>{
   const fail=()=>{
@@ -1002,7 +1017,8 @@ async function refresh(){
   // Les stats NBA sont attachées à la rencontre Spurs : pas de seconde carte individuelle.
   individualResults=tennis.events.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
   individualNotes.push(...tennis.notes,...nba.notes);
-  news=newsLastWeek([...extraNews,...fflNews],new Date());
+  const relayHasFfl=extraNews.some(a=>a.source==='FFL');
+  news=newsLastWeek([...extraNews,...(relayHasFfl?[]:fflNews)],new Date());
   if(!workerUrl&&!news.length&&!jeuSetMathsPosts.length)errors.push('Aucun article reçu de FFL, ESPN ou Jeu, set et maths. Le relais Cloudflare est facultatif.');
   else if(!news.length&&!jeuSetMathsPosts.length)errors.push('Aucune actualité reçue du relais.');
   if(!matches.length&&!scoreNotes.length)scoreNotes.push('Aucune rencontre disponible pour PSG, Real Madrid ou Spurs sur la période consultée.');

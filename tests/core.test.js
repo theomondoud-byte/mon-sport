@@ -6,7 +6,7 @@ import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForF
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
 import {renderBlocks as renderBlocksForTest} from '../news-view.js';
-import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle} from '../news-view.js';
+import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle,limitPerMatch} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {loadEventDetails,renderEventDetails} from '../event-details.js';
@@ -1354,14 +1354,72 @@ test('V17.1 : thème clair généré à partir du thème sombre et à jour',asyn
  assert.match(index,/monsport-theme-v1/);
 });
 
-test('V17.1 : tweets intégrés des articles — repère, médias et vidéo',()=>{
- const blocks=[{type:'p',text:'Texte.'},{type:'p',text:'Quelle action !',tweet:true},{type:'tweet',id:'2121348677637685461'}];
+test('V17.2 : tweet intégré affiché en carte, avec auteur, texte et médias',()=>{
+ const blocks=[{type:'p',text:'Texte.'},{type:'tweet',id:'2121348677637685461',lines:['Quelle action !','21-7'],author:'TF1+',handle:'@tf1plus'}];
  const esc=x=>String(x);
- assert.match(renderBlocksForTest(blocks,esc),/<p class="news-body-tweet">Quelle action !<\/p><div class="news-tweet-media" data-tweet-id="2121348677637685461"><\/div>/);
- const known=new Map([['2121348677637685461',[{type:'video',src:'https://video.twimg.com/amplify_video/1/vid/avc1/1280x720/a.mp4?tag=21',poster:'https://pbs.twimg.com/amplify_video_thumb/1/img/x.jpg'},{type:'img',src:'https://pbs.twimg.com/media/A.jpg'}]]]);
+ const waiting=renderBlocksForTest(blocks,esc);
+ assert.match(waiting,/<figure class="news-tweet">.*<b>TF1\+<\/b><span>@tf1plus<\/span>.*<p>Quelle action !<\/p><p>21-7<\/p><div class="news-tweet-media" data-tweet-id="2121348677637685461"><\/div>/);
+ assert.match(waiting,/href="https:\/\/x\.com\/i\/status\/2121348677637685461"/);
+ const known=new Map([['2121348677637685461',{media:[{type:'video',src:'https://video.twimg.com/amplify_video/1/vid/avc1/1280x720/a.mp4?tag=21',poster:'https://pbs.twimg.com/amplify_video_thumb/1/img/x.jpg'},{type:'img',src:'https://pbs.twimg.com/media/A.jpg'}]}]]);
  const html=renderBlocksForTest(blocks,esc,known);
  assert.match(html,/<video class="news-body-video"[^>]*poster="https:\/\/pbs\.twimg\.com\/amplify_video_thumb\/1\/img\/x\.jpg"[^>]*src="https:\/\/video\.twimg\.com\/amplify_video\/1\/vid\/avc1\/1280x720\/a\.mp4\?tag=21"/);
  assert.match(html,/<img class="news-body-image"[^>]*src="https:\/\/pbs\.twimg\.com\/media\/A\.jpg"/);
  // Une vidéo d'un autre domaine n'est jamais insérée.
  assert.doesNotMatch(renderBlocksForTest([{type:'video',src:'https://evil.example/a.mp4'}],esc),/<video/);
+});
+
+test('V17.2 : deux articles au plus par rencontre d’un favori (hors FFL et JSM)',()=>{
+ const favorites=[{name:'Équipe de France de football',sport:'Football',apiName:'France'}];
+ const matches=[{title:'Italy — France',date:'2026-11-12T19:45:00Z',favorites:['Équipe de France de football']}];
+ const a=(n,title,date,excerpt='Extrait.')=>({title,sport:'Football',source:'Franceinfo',link:'https://www.franceinfo.fr/'+n,date,excerpt});
+ const news=[a(1,'Italie-France : revivez la défaite des Bleus (3-1)','2026-11-12T22:35:00Z'),
+  a(2,'L’équipe de France battue par l’Italie en Ligue des nations','2026-11-12T22:10:00Z'),
+  a(3,'Les Bleus s’inclinent : les notes des joueurs','2026-11-13T07:00:00Z',''),
+  a(4,'Les Bleus s’imposent 2-0 face à la Turquie','2026-11-15T22:00:00Z'),
+  {title:'La lose des Bleus',source:'FFL',favorite:'FFL',link:'https://fflose.com/l',date:'2026-11-12T23:00:00Z'}];
+ const kept=limitPerMatch(news.slice(0,4),favorites,matches,2);
+ assert.deepEqual([...kept].map(x=>x.link).sort(),['https://www.franceinfo.fr/1','https://www.franceinfo.fr/2','https://www.franceinfo.fr/4']);
+ const html=renderNewsView({news,now:new Date('2026-11-16T08:00:00Z'),esc:x=>String(x),safeUrl:x=>x,photos:{},favorites,matches});
+ assert.doesNotMatch(html,/les notes des joueurs/);
+ assert.match(html,/La lose des Bleus/);
+ assert.match(html,/1 article sur tes favoris écarté/);
+});
+
+test('V17.2 : vrais logos pour FFL et Jeu, set et maths',async()=>{
+ const {sourceIcon}=await import('../source-icons.js');
+ const {access}=await import('node:fs/promises');
+ for(const [name,file] of [['FFL','ffl.png'],['Jeu, set et maths','jsm.png']]){
+  assert.match(sourceIcon(name,x=>String(x)),new RegExp('class="source-icon has-logo"[^>]*><img src="\\./icons/sources/'+file.replace('.','\\.')+'"'));
+  await access(new URL('../icons/sources/'+file,import.meta.url));
+ }
+ assert.match(sourceIcon('Tennis Actu',x=>String(x)),/>TA<\/span>/);
+});
+
+test('V17.2 : carte de résultat — cadre selon le verdict, grande photo, détails sans texte superflu',async()=>{
+ const {renderAgendaView}=await import('../agenda-ui.js');
+ const favorites=[{name:'PSG',sport:'Football',apiName:'Paris Saint Germain'}];
+ const base={key:'k',date:'2026-11-12T19:45:00Z',day:'2026-11-12',finished:true,favorite:'PSG',favorites:['PSG'],competition:'Ligue 1',type:'team',source:'ESPN (Ligue 1)'};
+ const render=(item,media)=>renderAgendaView({view:'semaine',phase:'past',favorites,items:[item],esc:x=>String(x),safeUrl:x=>x,now:new Date('2026-11-13T12:00:00Z'),mediaFor:()=>media||{}});
+ const win=render({...base,title:'Paris Saint-Germain — Troyes',score:'1 – 0',origin:{home:'Paris Saint-Germain',away:'Troyes',homeScore:'1',awayScore:'0'}},
+  {youtube:{id:'CpkujKwL7d4',channel:'Ligue 1',official:true,duration:'5:02'}});
+ assert.match(win,/<details class="agenda-event verdict-win"/);
+ assert.match(win,/<div class="result-hero"><button type="button" class="result-hero-play" data-youtube-id="CpkujKwL7d4"[^>]*><img class="result-hero-image"[^>]*src="https:\/\/i\.ytimg\.com\/vi\/CpkujKwL7d4\/hqdefault\.jpg"/);
+ const loss=render({...base,title:'Paris Saint-Germain — Lens',score:'0 – 2',origin:{home:'Paris Saint-Germain',away:'Lens',homeScore:'0',awayScore:'2'}},
+  {recap:{title:'Lens stun PSG',excerpt:'Lens won.',link:'https://www.espn.com/x',image:'https://a.espncdn.com/photo/x.jpg',paragraphs:[]}});
+ assert.match(loss,/class="agenda-event verdict-loss"/);
+ assert.match(loss,/<div class="result-hero"><img class="result-hero-image"[^>]*src="https:\/\/a\.espncdn\.com\/photo\/x\.jpg"/);
+ assert.match(render({...base,title:'Paris Saint-Germain — Nice',score:'1 – 1',origin:{home:'Paris Saint-Germain',away:'Nice',homeScore:'1',awayScore:'1'}}),/class="agenda-event verdict-draw"/);
+ // Textes génériques retirés des résultats joués.
+ for(const html of [win,loss])assert.doesNotMatch(html,/Résumé du résultat|La rencontre .* est terminée|Résumé factuel construit|Articles sur cette rencontre|Compte rendu sportif/);
+ const {readFile}=await import('node:fs/promises');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ assert.doesNotMatch(app,/Articles sur cette rencontre|Résultat et statistiques issus des sources/);
+});
+
+test('V17.2 : Spurs et Wembanyama — une seule rencontre, deux articles au plus',()=>{
+ const favorites=[{name:'San Antonio Spurs',sport:'Basketball'},{name:'Victor Wembanyama',sport:'Basketball'}];
+ const matches=[{title:'San Antonio Spurs — Golden State Warriors',date:'2026-11-14T01:00:00Z',favorites:['San Antonio Spurs','Victor Wembanyama']}];
+ const a=(n,source,title)=>({title,sport:'Basketball',source,link:'https://x.example/'+n,date:'2026-11-14T06:00:00Z',excerpt:'Extrait.'});
+ const kept=limitPerMatch([a(1,'TrashTalk','Victor Wembanyama tranquille : 31 points face aux Warriors'),a(2,'ESPN','Victor Wembanyama, Spurs rout Warriors 120-98'),a(3,'Basket USA','Les Spurs ne font qu’une bouchée des Warriors')],favorites,matches,2);
+ assert.equal(kept.size,2);
 });
