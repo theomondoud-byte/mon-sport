@@ -1,0 +1,995 @@
+/* Fichier généré par scripts/build-light-theme.mjs à partir de style.css — ne pas modifier à la main. */
+:root{font-family:system-ui,-apple-system,Roboto,Arial,sans-serif;color-scheme:light;--bg:#f6f7f9;--panel:#e9edf1;--border:#d6dce2;--muted:#334354;--accent:#27c490}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#0d1b26}button,input,select{font:inherit}button{cursor:pointer}.wrap{max-width:940px;margin:auto;padding:20px 18px 100px}header{display:flex;align-items:center;justify-content:space-between;gap:12px}header h1{font-size:2rem;margin:4px 0}h2{font-size:1.17rem;margin:0 0 12px}.eyebrow,small,.sub{color:var(--muted)}.eyebrow{font-size:.76rem;letter-spacing:.11em;text-transform:uppercase}.hero{background:linear-gradient(135deg,#dbe3e9,#e3eced);padding:23px;border-radius:21px;margin:20px 0}.hero p{color:#101c23;line-height:1.5}.button{background:var(--accent);border:0;color:#f4f9f7;font-weight:750;padding:11px 15px;border-radius:12px}.ghost{background:#dae0e6;color:#1a1a1a;border:1px solid #c2cad2}.danger{color:#470802}.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.tabs button{border-radius:999px;padding:10px 15px;border:1px solid var(--border);background:var(--panel);color:#0d1926}.tabs button.active{background:var(--accent);color:#f4f9f7;font-weight:800}.panel{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:17px;margin-bottom:15px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.stat strong{font-size:1.7rem;display:block}.stat{background:#e2e7ed;border-radius:14px;padding:13px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.row.wraprow{flex-wrap:wrap}.fav{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}.fav:last-child{border-bottom:0}.fav .details{flex:1;min-width:0}.tag{background:#d2dbe1;border-radius:20px;padding:4px 9px;font-size:.76rem;color:#0a1b29;display:inline-block}.card{background:#e1e7ec;border-radius:14px;padding:14px;margin:9px 0}.card a{color:#095134;text-decoration:none;font-weight:700}.card h3{font-size:1rem;margin:7px 0}.card p{margin:7px 0}.score{font-size:1.4rem;font-weight:850}.notice{border-left:3px solid #9d6a21;background:#e0dfe4;padding:12px;border-radius:7px;font-size:.9rem;line-height:1.5}.muted{color:var(--muted)}form{display:grid;grid-template-columns:1fr 1fr;gap:9px}input,select{min-width:0;width:100%;background:#f2f4f8;border:1px solid #b6bdc5;border-radius:11px;padding:12px;color:#1a1a1a}form button{grid-column:1/-1}.search{width:100%;margin:10px 0}a{color:#095134}.actions{display:flex;gap:8px;flex-wrap:wrap}.empty{text-align:center;padding:30px;color:var(--muted)}.spinner{animation:spin 1s linear infinite;display:inline-block}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:620px){.wrap{padding:15px 12px 96px}.hero{padding:17px}form{grid-template-columns:1fr}.stats{gap:6px}.stat{padding:10px}.stat strong{font-size:1.35rem}}
+
+/* V4: scores de tennis et statistiques de joueurs */
+.statline{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.stat-mini{background:#d2dbe1;border-radius:10px;min-width:60px;padding:9px 12px;text-align:center}.stat-mini b{font-size:1.25rem;display:block}.stat-mini small{font-size:.75rem}.tennis-score{font-size:1.15rem;font-weight:800;letter-spacing:.02em;margin:10px 0}.diagnostic{margin:12px 0}.diagnostic summary{cursor:pointer;font-weight:700}.notice-text{margin-top:9px;line-height:1.7}.individual{border-left:3px solid #27c490}
+
+/* Bilan annuel par favori - V6 */
+.audit-fav{align-items:flex-start;gap:12px}
+.audit-fav .details small{line-height:1.5;display:inline-block}
+.audit-fav .details strong{font-size:1.15rem;color:#27c490}
+.audit-fav a{flex-shrink:0;font-size:.86rem;text-align:right}
+@media(max-width:480px){.audit-fav{flex-direction:column}.audit-fav a{align-self:flex-end}}
+
+
+/* ===== Mon Sport V7 : refonte agenda d'abord, mobile first ===== */
+:root{--bg:#f6f7fa;--panel:#ebeff3;--border:#d9dfe4;--muted:#374c5b;--accent:#1d9a69}
+body{background:radial-gradient(circle at 85% -8%,#dee7ec 0%,transparent 42%),#f6f7fa;min-height:100vh}
+.wrap{max-width:1020px;padding-bottom:110px}
+.app-header{padding:14px 0 6px;align-items:center}
+.app-header h1{font-size:clamp(1.65rem,5vw,2.15rem);letter-spacing:-.055em}
+.refresh-btn{font-size:.88rem;white-space:nowrap;min-height:43px;box-shadow:0 6px 24px #f3f9f980}
+.hero-compact{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:140px;
+ background:linear-gradient(115deg,#e2e9ee 0%,#e1eeed 100%);border:1px solid #bfd2d0;
+ position:relative;overflow:hidden;box-shadow:0 12px 34px #f8fafb50}
+.hero-compact h2{font-size:clamp(1.25rem,3.8vw,1.7rem);letter-spacing:-.035em;margin:7px 0}
+.hero-compact p{margin:6px 0 0;font-size:.93rem;max-width:540px}
+.hero-chip{font-size:.65rem;letter-spacing:.15em;font-weight:800;color:#074e2b}
+.hero-stats{text-align:center;padding:12px 16px;min-width:102px;border:1px solid #327b6666;
+ background:#e9f3f266;border-radius:15px;display:grid;gap:1px}
+.hero-stats b{font-size:2rem;line-height:1;color:#01321c}
+.hero-stats span{font-size:.7rem;color:#162e2c}
+.tabs{display:flex;flex-wrap:nowrap;gap:7px;overflow-x:auto;margin:18px 0 22px;padding:3px 0 10px;
+ -webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#b5c4c9 transparent}
+.tabs button{flex:0 0 auto;min-height:43px;white-space:nowrap;padding:9px 13px;border-radius:13px;
+ font-weight:650;transition:background .15s;letter-spacing:-.01em}
+.tabs button.active{background:#1d9a69;box-shadow:0 4px 20px #cceae055;color:#f2f8f7}
+.tabs button:focus-visible,.agenda-segments button:focus-visible,select:focus-visible,.button:focus-visible{outline:3px solid #022958;outline-offset:2px}
+.app-footer{text-align:center;margin:28px 0;font-size:.76rem;line-height:1.6}
+.agenda-shell{display:grid;gap:14px}
+.agenda-head{margin:0 0 1px}
+.agenda-eyebrow{font-size:.69rem;font-weight:800;letter-spacing:.15em;color:var(--accent)}
+.agenda-head h2{font-size:clamp(1.55rem,5vw,2rem);letter-spacing:-.04em;margin:7px 0}
+.agenda-head p{margin:5px 0;color:var(--muted);line-height:1.5}
+.agenda-controls{padding:15px;border:1px solid var(--border);border-radius:16px;background:#eaeff3}
+.agenda-label{font-size:.85rem;color:#1c313a;font-weight:750;display:block;margin-bottom:9px}
+.agenda-select{border-radius:13px;border:1px solid #85a1ac;background:#eff3f6;font-size:1.03rem;font-weight:650;min-height:49px}
+.agenda-segments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:6px;
+ background:#f0f3f6;border:1px solid #d8dfe4;border-radius:17px}
+.agenda-segments button{background:transparent;color:#24343c;border:1px solid transparent;border-radius:12px;
+ font:inherit;font-size:1rem;font-weight:780;display:flex;justify-content:center;align-items:center;
+ gap:8px;min-height:49px;cursor:pointer}
+.agenda-segments button small{font-size:.71rem;opacity:.77;font-weight:600;color:inherit}
+.agenda-segments button.selected{background:#d7e5e3;border-color:#54a48e;color:#01321b;box-shadow:0 4px 14px #fafcfb66}
+.agenda-countbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;
+ padding:2px 2px 3px}
+.agenda-countbar strong{font-size:1.08rem;color:#052e1d}
+.agenda-countbar span{font-size:.84rem;color:var(--muted)}
+.agenda-day-group{margin:0 0 5px}
+.agenda-day{font-size:.85rem;color:#2d4956;text-transform:capitalize;letter-spacing:.04em;
+ margin:8px 0 9px;padding:0 1px}
+.agenda-event{border:1px solid #c9d4da;border-left:4px solid var(--accent);border-radius:17px;
+ background:linear-gradient(130deg,#e3e9ee,#e9eef2);padding:15px 16px;margin:10px 0;
+ box-shadow:0 7px 19px #fafbfc38}
+.agenda-event-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.agenda-tags{display:flex;gap:5px;flex-wrap:wrap}
+.agenda-favorite{display:inline-flex;border-radius:20px;padding:4px 8px;background:#cfdadf;
+ color:#012232;font-size:.74rem;font-weight:750}
+.agenda-status{display:inline-flex;white-space:nowrap;font-size:.69rem;font-weight:800;letter-spacing:.015em;
+ padding:5px 9px;border-radius:20px}
+.agenda-status.done{background:#d7e0e5;color:#143c4e}
+.agenda-status.upcoming{background:#ccd6cb;color:#223e08}
+.agenda-status.live{background:#dcd2c9;color:#412602}
+.agenda-event h3{font-size:1.06rem;font-weight:800;line-height:1.35;margin:12px 0 10px;color:#1a1a1a}
+.agenda-scoreline{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}
+.agenda-scoreline strong{font-size:1.13rem;color:#052f1b}
+.agenda-scoreline span{font-size:.86rem;color:#1e313b}
+.agenda-detail{font-size:.81rem;color:#263945;line-height:1.5;margin-top:11px}
+.agenda-meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.agenda-caution{font-size:.72rem;color:#513902;background:#e1d9cb35;border:1px solid #bc9c5f6b;
+ border-radius:8px;padding:4px 7px}
+.agenda-source{font-size:.8rem;font-weight:750;text-decoration:none}
+.agenda-empty{padding:28px 20px;background:#ecf0f3;border:1px dashed #a8b5bf;
+ border-radius:18px;text-align:center}
+.agenda-empty-icon{font-size:2.2rem}
+.agenda-empty h3{font-size:1.12rem;margin:8px 0}
+.agenda-empty p{color:var(--muted);line-height:1.5;margin-bottom:11px}
+.agenda-empty a{font-weight:750}
+.agenda-missing{background:#ecf0f3;border:1px solid #d1dae0;border-radius:14px;padding:13px 16px}
+.agenda-missing summary{font-size:.87rem;cursor:pointer;font-weight:750;color:#0c2027}
+.agenda-missing p{color:#253843;font-size:.85rem;line-height:1.6}
+.agenda-missing-links{display:flex;flex-wrap:wrap;gap:7px}
+.agenda-missing-links a{display:inline-block;border:1px solid #c3d0d4;background:#e0e7eb;
+ text-decoration:none;border-radius:9px;padding:6px 9px;font-size:.78rem}
+.agenda-footnote{font-size:.79rem;line-height:1.65;color:#344a56;padding:8px 3px 17px}
+.agenda-caution-note{font-size:.83rem;color:#482e02;line-height:1.5;border:1px solid #cebfb5;
+ background:#e3e1df3c;border-radius:12px;padding:11px}
+.agenda-progress{display:flex;gap:11px;align-items:center;border-radius:13px;
+ background:#e3eaee;padding:13px;color:#102530;font-size:.86rem}
+.agenda-spinner{width:15px;height:15px;border:2px solid #1f484866;border-top-color:#109268;
+ display:inline-block;border-radius:50%;animation:spin .9s linear infinite}
+@media(max-width:580px){
+ .wrap{padding:12px 12px 94px}
+ .hero-compact{padding:16px;min-height:120px}
+ .hero-stats{min-width:75px;padding:9px}
+ .hero-stats b{font-size:1.6rem}
+ .agenda-segments button{flex-direction:column;gap:0;font-size:.94rem}
+ .agenda-segments button small{font-size:.7rem}
+ .agenda-event{padding:13px}
+ .agenda-countbar{align-items:flex-start}
+ .refresh-btn{font-size:.79rem;padding:10px 11px}
+}
+
+
+/* === Mon Sport V8 : portraits, score V/D, résumé interactif, statistiques === */
+.agenda-segments.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.agenda-segments.three button{flex-direction:column;gap:1px;font-size:.86rem;padding:7px 4px}
+.agenda-segments.three button small{font-size:.68rem}
+.favorite-profile{display:flex;align-items:center;gap:17px;padding:18px;
+ background:linear-gradient(105deg,#d8e2e7 0%,#e7eeef 100%);border:1px solid #a8beb9;
+ border-radius:19px;min-height:126px}
+.favorite-profile-name{flex:1;min-width:0}
+.favorite-profile-name>span{font-size:.67rem;font-weight:850;letter-spacing:.11em;color:#145436}
+.favorite-profile-name h3{font-size:1.36rem;line-height:1.25;letter-spacing:-.02em;margin:6px 0}
+.favorite-profile-name p{font-size:.86rem;color:#152d31;margin:3px 0}
+.favorite-profile-name a{font-size:.7rem;color:#123227;display:inline-block;margin-top:8px;line-height:1.3}
+.portrait-wrap,.portrait-placeholder{flex:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;
+ background:#e3ebee;color:#052e18;font-weight:800;border:1px solid #6fa39c}
+.portrait-wrap img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.portrait-wrap.large,.portrait-placeholder.large{height:95px;width:95px;border-radius:18px;font-size:1.9rem;box-shadow:0 7px 24px #f5f8f94f}
+.portrait-wrap.tiny,.portrait-placeholder.tiny{width:26px;height:26px;border-radius:50%;font-size:.67rem}
+.agenda-people{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.agenda-person-tag{display:inline-flex;align-items:center;gap:6px;min-height:31px;background:#d7e1e5;
+ border:1px solid #b7cacf;border-radius:22px;color:#012832;font-size:.76rem;font-weight:750;padding:3px 7px 3px 3px}
+.agenda-verdict{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;
+ border-radius:8px;font-size:.82rem;font-weight:950;margin-left:1px}
+.agenda-verdict.win{background:#d4ece0;color:#023f1b;border:1px solid #57c88d}
+.agenda-verdict.loss{background:#dcc2c6;color:#320104;border:1px solid #93232f}
+.agenda-verdict.draw{background:#c2c4cc;color:#14161f;border:1px solid #5c6785}
+.agenda-event{padding:0;transition:border-color .15s,background .15s}
+.agenda-event[open]{border-color:#409777;background:#e2e9ed}
+.agenda-event-clickable{list-style:none;cursor:pointer;display:block;padding:15px 16px;user-select:none}
+.agenda-event-clickable::-webkit-details-marker{display:none}
+.agenda-event-clickable:focus-visible{outline:3px solid #023b58;outline-offset:3px;border-radius:14px}
+.agenda-event-clickable h3{margin:12px 0 9px}
+.agenda-open-hint{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ font-size:.8rem;font-weight:780;color:#196043;margin-top:14px;padding-top:11px;border-top:1px solid #c7d2d6}
+.agenda-open-hint span:last-child{font-size:1.2rem;line-height:1;transition:transform .15s}
+.agenda-event[open] .agenda-open-hint span:last-child{transform:rotate(180deg)}
+.agenda-recap{border-top:1px solid #b7c7ca;padding:15px 17px 18px;background:#e8eef2;
+ border-radius:0 0 14px 14px}
+.agenda-recap h4{font-size:.94rem;color:#0c492c;margin:0 0 10px}
+.agenda-recap p{font-size:.91rem;line-height:1.65;color:#0c1e27;margin:9px 0}
+.agenda-recap-note{font-size:.77rem!important;color:#2c424e!important}
+.agenda-recap-stats{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.agenda-recap-stats span{border:1px solid #c1cdd2;background:#d3e0e4;border-radius:9px;
+ padding:8px 11px;font-size:.8rem;color:#012632}
+.agenda-recap-source{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ flex-wrap:wrap;font-size:.78rem;color:#2a424b;margin-top:12px}
+.agenda-recap-source a{font-weight:800}
+.favorite-stats{display:grid;gap:14px}
+.stat-intro h3{font-size:1.22rem;margin:2px 0 5px}
+.stat-intro p{font-size:.86rem;color:#223b46;margin:0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px}
+.stat-tile{min-height:105px;border:1px solid #cad6db;background:#e2e9ee;
+ border-radius:15px;padding:15px;display:flex;flex-direction:column;gap:4px}
+.stat-tile b{color:#024b21;font-size:1.8rem;line-height:1.18}
+.stat-tile span{font-size:.82rem;font-weight:750;color:#011f32}
+.stat-tile small{font-size:.69rem;line-height:1.35;color:#2e454f}
+.stat-heading{font-size:1.05rem;margin:10px 0 2px}
+.stat-competitions{background:#ebf0f3;border:1px solid #ced8dd;border-radius:14px;padding:3px 15px}
+.stat-competition{display:flex;justify-content:space-between;align-items:center;gap:12px;
+ border-bottom:1px solid #ced8dd;padding:13px 1px;font-size:.88rem}
+.stat-competition:last-child{border-bottom:0}
+.stat-competition b{color:#0c4829}
+.stat-latest{display:grid;gap:5px;border-left:3px solid #289c69;background:#e2e9ed;
+ border-radius:11px;padding:14px}
+.stat-latest span{font-size:.7rem;font-weight:850;color:#265647;text-transform:uppercase;letter-spacing:.04em}
+.stat-latest b{font-size:1rem}
+.stat-latest small{color:#254450}
+@media(max-width:580px){
+ .favorite-profile{gap:13px;padding:13px;min-height:110px}
+ .portrait-wrap.large,.portrait-placeholder.large{width:75px;height:75px;border-radius:14px;font-size:1.5rem}
+ .favorite-profile-name h3{font-size:1.12rem}
+ .agenda-segments.three button{font-size:.77rem;min-height:58px}
+ .agenda-segments.three button small{font-size:.64rem}
+ .agenda-event-clickable{padding:13px}
+ .agenda-person-tag{font-size:.69rem}
+ .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+.stat-source-link{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+ border:1px solid #bcc8ce;background:#e4ebef;padding:12px 14px;border-radius:12px;font-size:.8rem;color:#213b41}
+.stat-source-link a{font-weight:800;font-size:.82rem}
+
+
+/* Mon Sport V9 : lecteur d'actualités, profils et feuilles de match détaillées */
+.portrait-error-initials{display:none;font-weight:900;color:#013a20;font-size:1em}
+.portrait-wrap.photo-failed img{display:none}
+.portrait-wrap.photo-failed .portrait-error-initials{display:inline}
+.stat-profile-section{display:grid;gap:12px;padding:15px 14px;background:#e8eef2;border:1px solid #c8d5d9;border-radius:16px}
+.stat-profile-section>h3{margin:0;color:#013218;font-size:1.12rem}
+.stat-sport-identity{padding:12px;border:1px solid #c6d5d9;border-radius:12px;background:#e3eaee}
+.stat-sport-identity b{font-size:.96rem}
+.stat-sport-identity p{font-size:.88rem;line-height:1.6;color:#0e2125;margin:8px 0}
+.stat-sport-identity small{font-size:.73rem;color:#2c4b54;line-height:1.5}
+.stat-reference-list{display:flex;flex-wrap:wrap;gap:7px}
+.stat-reference-list a{display:inline-block;padding:7px 10px;border:1px solid #b8ccca;background:#dee9ea;border-radius:10px;text-decoration:none}
+.detail-live-slot{margin-top:13px}
+.detail-sport-heading{padding:8px 0;font-size:.86rem;color:#115f42;font-weight:850;letter-spacing:.02em}
+.detail-teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:11px;margin:8px 0 12px}
+.detail-team,.detail-player{background:#e0e9ec;border:1px solid #bbcacf;border-radius:13px;padding:12px}
+.detail-team h5,.detail-head{font-size:.92rem;color:#013221;margin:4px 0 10px}
+.detail-player{margin:7px 0}
+.detail-player>b{font-size:.9rem;display:block;margin-bottom:8px}
+.detail-metrics{display:grid;gap:7px}
+.detail-metric{display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid #c9d2d6;padding:4px 0;font-size:.8rem}
+.detail-metric:last-child{border-bottom:0}
+.detail-metric span{color:#223b46}
+.detail-metric b{font-variant-numeric:tabular-nums;color:#013219;font-weight:800}
+.detail-plays{padding-left:20px;font-size:.84rem;line-height:1.6;color:#101f23}
+.detail-plays li{margin-bottom:5px}
+.news-feed{display:grid;gap:14px}
+.news-intro{display:grid;gap:5px}
+.news-intro h2{font-size:1.55rem;line-height:1.2;margin:5px 0 0}
+.news-intro p{font-size:.89rem;color:#2a4049;line-height:1.6;margin:2px 0}
+.news-card{background:linear-gradient(135deg,#e1e9ed,#e8edf1);border:1px solid #c0cdd2;border-radius:17px;overflow:hidden}
+.news-card[open]{border-color:#399674}
+.news-card>summary{list-style:none;display:block;padding:17px;cursor:pointer}
+.news-card>summary::-webkit-details-marker{display:none}
+.news-card>summary:focus-visible{outline:3px solid #023151;outline-offset:-3px}
+.news-card-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.news-card h3{font-size:1.04rem;line-height:1.45;margin:12px 0 8px;color:#012232}
+.news-date,.news-source{font-size:.78rem;color:#1e2e3b}
+.news-source{margin:0}
+.news-tap{display:flex;justify-content:space-between;border-top:1px solid #c7d0d5;padding-top:10px;margin-top:12px;color:#136847;font-weight:800;font-size:.82rem}
+.news-card[open] .news-tap span{transform:rotate(180deg)}
+.news-reader{padding:18px;background:#ecf1f4;border-top:1px solid #bcc7cd}
+.news-article-label{font-size:.66rem;letter-spacing:.13em;font-weight:900;color:#0d5c36;margin:0 0 9px}
+.news-excerpt{font-size:.97rem;color:#012532;line-height:1.7;margin:8px 0 14px}
+.news-reading-info{font-size:.8rem;color:#2b3f4b;line-height:1.55;margin:11px 0}
+.news-open-frame{font-size:.85rem;padding:10px 13px}
+.news-frame-slot{margin-top:12px}
+.news-embedded-frame{width:100%;height:min(70vh,680px);border:1px solid #a6babd;background:#1a1a1a;border-radius:10px}
+@media(max-width:550px){.news-card>summary{padding:14px}.news-reader{padding:14px}.detail-teams{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* V10 — liens d'actualités fiables et prochaine compétition */
+.news-link-card{overflow:hidden}
+.news-plain-link{display:block;padding:17px;text-decoration:none;color:inherit}
+.news-plain-link:hover{background:#dbe4e9}
+.news-plain-link:focus-visible{outline:3px solid #023352;outline-offset:-3px;border-radius:16px}
+.news-plain-link h3{margin:12px 0 7px;color:#012232}
+.news-plain-link .news-tap{display:block;font-size:.81rem}
+.agenda-next{display:flex;flex-direction:column;gap:7px;border:1px solid #b5cac7;
+ background:linear-gradient(110deg,#e1ebe9,#e3ebef);border-radius:15px;padding:13px 15px;
+ font-size:.83rem;line-height:1.5;color:#072c19}
+.agenda-next b{color:#024022}
+.agenda-next span{color:#112428}
+.agenda-next a{font-weight:750}
+@media(max-width:580px){.news-plain-link{padding:14px}.agenda-next{padding:12px}}
+
+
+/* V11 — densité mobile : moins de titres redondants et portraits dans Favoris */
+.wrap{max-width:990px}
+.app-header-v11{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 4px}
+.app-header-v11 h1{font-size:clamp(1.45rem,4.8vw,1.95rem);line-height:1.2;margin:0}
+.header-actions{display:flex;align-items:center;gap:10px}
+.header-count{font-size:.78rem;font-weight:700;color:#27444a;white-space:nowrap}
+.header-count{display:flex;flex-direction:column;align-items:flex-end;line-height:1.25}
+.header-updated{font-size:.68rem;font-weight:600;color:#476a71;opacity:.85}
+.app-header-v11 .refresh-btn{border-radius:12px;padding:9px 14px;font-size:1.45rem;min-width:44px;min-height:44px;line-height:1}
+.tabs{margin:9px 0 13px}
+.agenda-shell{gap:9px}
+.agenda-head h2{font-size:1.3rem;margin:3px 0 2px}
+.agenda-controls{padding:10px}
+.agenda-label{font-size:.77rem;margin-bottom:5px}
+.agenda-select{min-height:43px}
+.favorite-profile{min-height:83px;padding:11px 13px;gap:12px}
+.portrait-wrap.large,.portrait-placeholder.large{height:64px;width:64px;border-radius:12px}
+.favorite-profile-name h3{font-size:1.11rem;margin:0 0 3px}
+.favorite-profile-name p{margin:0;font-size:.79rem}
+.favorite-profile-name a{margin-top:4px}
+.agenda-segments{margin-top:1px}
+.agenda-segments button{min-height:43px}
+.agenda-countbar{padding:0;align-items:center}
+.agenda-countbar strong{font-size:.94rem}
+.agenda-countbar span{font-size:.76rem}
+.agenda-day{margin:8px 0 5px;font-size:.8rem}
+.agenda-event{margin:6px 0;border-radius:13px}
+.agenda-event-clickable{padding:10px 12px}
+.agenda-event h3{font-size:.97rem;margin:8px 0 7px}
+.agenda-person-tag{min-height:27px;font-size:.72rem;padding:2px 6px 2px 2px}
+.portrait-wrap.tiny,.portrait-placeholder.tiny{width:23px;height:23px}
+.agenda-scoreline strong{font-size:1.02rem}
+.agenda-scoreline span,.agenda-detail{font-size:.76rem}
+.agenda-detail{margin-top:5px}
+.agenda-open-hint{padding-top:7px;margin-top:9px;font-size:.73rem}
+.agenda-status{font-size:.67rem;padding:4px 8px}
+.fav{display:flex;align-items:center;gap:12px;min-height:57px;padding:8px 10px}
+.fav .details{flex:1;min-width:0}
+.fav .details b{display:block;font-size:.92rem}
+.fav .details small{display:block;color:#28414e;font-size:.75rem;margin-top:2px}
+.fav-thumb{display:inline-flex;flex:none;align-items:center;justify-content:center;width:40px;height:40px;
+ border-radius:11px;background:#dce7e9;overflow:hidden;border:1px solid #becfd3;color:#092a20;font-weight:800}
+.fav-thumb img{width:100%;height:100%;object-fit:contain}
+.fav-thumb.photo-failed img{display:none}
+.fav-thumb.photo-failed .portrait-error-initials{display:inline}
+.agenda-next{padding:10px 12px}
+.app-footer{margin:15px 0;font-size:.69rem}
+@media(max-width:580px){
+ .app-header-v11{padding-top:5px}
+ .header-count{font-size:.69rem}
+ .agenda-event-clickable{padding:10px}
+ .favorite-profile{min-height:75px;padding:10px}
+ .portrait-wrap.large,.portrait-placeholder.large{height:58px;width:58px}
+}
+
+/* Mon Sport V12 — logos sans recadrage et commandes photos mobiles */
+.portrait-wrap img[src*="a.espncdn.com"],.fav-thumb img[src*="a.espncdn.com"]{
+ object-fit:contain!important;object-position:center;padding:3px
+}
+#refreshPhotos{min-height:42px}
+#photoStatus{min-height:1.1em}
+
+.agenda-status.pending{background:#c7c9cd;color:#322909;border:1px solid #a1a6a9}
+.agenda-event:has(.agenda-status.pending) .agenda-scoreline strong{color:#4e4417;font-size:.92rem}
+
+
+/* V13 — tableau des classements, liens internes et articles au clic */
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;padding:1px 0 7px}
+.tabs button{flex:none;white-space:nowrap;font-size:.8rem;padding:9px 11px;min-height:43px}
+.rankings-shell{display:flex;flex-direction:column;gap:12px}
+.rankings-heading h2{font-size:1.35rem;margin:0}
+.rankings-heading p{font-size:.81rem;color:#243a46;margin:3px 0}
+.rank-tabs{display:flex;gap:6px;overflow-x:auto;max-width:100%;padding:4px 2px 9px;scrollbar-width:thin}
+.rank-tabs button{border:1px solid #c4d0d6;background:#e4ebf0;color:#152a34;border-radius:11px;
+ white-space:nowrap;flex:none;padding:10px 12px;font-weight:800;font-size:.78rem;min-height:43px}
+.rank-tabs button.selected{background:#d1e3df;border-color:#297955;color:#013222}
+.rankings-source{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ font-size:.74rem;color:#2a474e}
+.rankings-source a{font-size:.78rem;font-weight:850;color:#136040}
+.rank-table{border:1px solid #c1cfd5;border-radius:14px;overflow:hidden;background:#e9eff3}
+.rank-table-head,.rank-row{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(75px,auto);
+ align-items:center;gap:11px;padding:9px 12px}
+.rank-table-head{background:#d7e2e6;font-size:.72rem;color:#122a2c;font-weight:850}
+.rank-table-head>span:last-child{text-align:right}
+.rank-row{border-top:1px solid #cdd7dd;min-height:48px}
+.rank-row:nth-child(2n){background:#e3ebef}
+.rank-row.rank-tracked{background:#deebe9}
+.rank-place{font-size:.88rem;font-weight:900;color:#263a43;text-align:center}
+.rank-person{font-weight:750;min-width:0;overflow-wrap:anywhere;font-size:.88rem}
+.rank-person small{font-size:.69rem;color:#284a4d;display:block;font-weight:450;margin-top:3px}
+.rank-points{text-align:right;font-size:.84rem;font-weight:850;white-space:nowrap;color:#01321a;font-variant-numeric:tabular-nums}
+.rank-favorite-link{appearance:none;background:transparent;border:0;padding:4px 0;text-align:left;cursor:pointer;
+ color:#023f25;font:inherit;font-weight:850;text-decoration:underline;text-decoration-color:#348a67;text-underline-offset:3px}
+.rank-favorite-link:focus-visible,.rank-tabs button:focus-visible{outline:2px solid #024c32;outline-offset:2px}
+.stat-rank-link{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:11px;
+ background:#e3ebef;border:1px solid #bfd0d6;border-radius:12px}
+.stat-rank-link>div{display:flex;flex-direction:column;gap:3px}
+.stat-rank-link b{font-size:.93rem;color:#013222}
+.stat-rank-link span{font-size:.84rem;color:#213e43}
+.stat-rank-link button{font-size:.73rem;min-height:36px;padding:6px 9px}
+.source-native-stats{display:grid;gap:12px}
+.source-native-stats .stat-profile-section>h4{margin:0;color:#0c271e;font-size:.99rem}
+.stat-help{font-size:.85rem;color:#173039;line-height:1.55}
+.event-editorial{display:grid;gap:7px;padding:11px;margin-top:10px;border-radius:12px;
+ border:1px solid #c0d2d1;background:#e7eff1}
+.event-editorial h5{margin:0;color:#024022;font-size:.85rem}
+.event-editorial b{font-size:.91rem;color:#013229}
+.event-editorial p{margin:4px 0;font-size:.82rem;color:#111f28}
+.event-editorial a,.event-source-links a{display:block;font-size:.83rem;color:#063e50;font-weight:800}
+.event-source-links{display:flex;flex-wrap:wrap;gap:9px;margin:11px 0}
+.event-source-links a{padding:7px 9px;border:1px solid #c5d2d7;border-radius:9px}
+.event-article-summary h4{font-size:.98rem;margin:5px 0}
+.event-article-summary p{font-size:.8rem;line-height:1.5;color:#1e343c}
+@media(max-width:540px){
+ .rank-table-head,.rank-row{grid-template-columns:25px minmax(0,1fr) minmax(64px,auto);gap:8px;padding:9px 8px}
+ .rank-favorite-link{font-size:.86rem}
+ .rank-points{font-size:.8rem}
+ .rankings-source{align-items:flex-start}
+}
+
+/* V14 : indication réseau lisible sans bloquer les écrans en cache. */
+.connection-notice{margin:8px 0 12px;padding:10px 13px;border:1px solid #ac824b;border-radius:10px;background:#efedeb;color:#3c2602;font-size:.85rem;line-height:1.4}
+
+/* V14 : rangs détaillés, mouvements hebdomadaires et pictogrammes mobiles */
+.rank-movement{display:inline-block;vertical-align:middle;margin-left:7px;padding:2px 5px;border-radius:6px;font-size:.67rem;font-weight:850}
+.rank-movement.up{background:#e2eeea;color:#024d28}
+.rank-movement.down{background:#ded0d2;color:#320101}
+.rank-movement.flat{background:#dfe5e9;color:#293b43}
+.rank-extras{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px;color:#183039;font-size:.7rem;font-weight:450}
+.rank-extras>span:not(:last-child){border-right:1px solid #aebbc2;padding-right:7px}
+.rank-live-details{margin-top:7px;font-size:.75rem;font-weight:450;line-height:1.6;border-top:1px dashed #b1bfc5;padding-top:5px}
+.rank-live-details summary{cursor:pointer;color:#095031;font-weight:700;min-height:24px}
+.rank-live-details>div{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.rank-live-details>div>b{font-weight:750;text-align:right;color:#0d2620}
+.rank-live-details>p{margin:6px 0;color:#25383f;font-size:.7rem}
+.agenda-person-tag.compact{display:inline-flex;align-items:center;gap:3px;padding:2px 4px}
+.event-sport-icon{display:inline-flex;align-items:center;justify-content:center;min-width:21px;height:21px;font-size:1rem}
+.news-link-card .news-plain-link{display:flex;align-items:stretch;gap:12px;padding:11px;text-decoration:none}
+.news-link-card .news-text{display:block;min-width:0;flex:1}
+.article-visual{width:94px;min-width:94px;min-height:91px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px;overflow:hidden;background:#dae2e7;font-size:2.1rem}
+.article-thumb-image{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.article-image-fallback{display:none}
+.article-visual.image-failed .article-thumb-image{display:none}
+.article-visual.image-failed .article-image-fallback{display:block}
+.news-sport{display:inline-flex;align-items:center;gap:3px;padding:4px 7px;border-radius:8px;background:#d0dde2;color:#062d28;font-size:.72rem;font-weight:800}
+.news-link-card .news-card h3{margin:8px 0}
+.news-link-card .news-date{font-size:.7rem}
+.news-plain-link:focus-visible{outline:3px solid #023151;outline-offset:-3px}
+@media(max-width:550px){
+ .news-link-card .news-plain-link{gap:9px;padding:9px}
+ .article-visual{width:75px;min-width:75px;min-height:75px}
+ .news-card h3{font-size:.94rem;margin:7px 0}
+ .rank-live-details>div{flex-wrap:wrap}
+}
+
+.rank-player-photo{display:inline-block;width:28px;height:28px;object-fit:cover;border-radius:50%;vertical-align:middle;margin-right:6px;background:#cdd7dc;border:1px solid #b6c5cb}
+
+/* Classement ATP/WTA en colonnes : scroll horizontal et contexte visible. */
+.rank-horizontal-hint{font-size:.75rem;color:#1a4247;margin:10px 0 5px}
+.rank-table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;border:1px solid #c0cfd5;border-radius:13px}
+.rank-table-scroll:focus-visible{outline:3px solid #14583b;outline-offset:3px}
+.tennis-rank-table{width:max-content;min-width:100%;border:0;border-radius:0;overflow:visible}
+.tennis-rank-table .tennis-rank-row{display:grid;grid-template-columns:44px 230px 94px 84px 81px 205px 85px 85px;gap:9px;padding:10px 12px;align-items:center}
+.tennis-rank-table .rank-table-head{font-size:.71rem;position:sticky;top:0;z-index:4}
+.tennis-rank-table .rank-row{min-height:54px}
+.tennis-rank-table .rank-place{font-size:.86rem}
+.tennis-rank-table .rank-place small{display:block;font-size:.61rem;color:#185e44;font-weight:600}
+.tennis-rank-table .rank-person{font-size:.84rem;line-height:1.32}
+.tennis-rank-table .rank-person small{font-size:.7rem;margin-top:4px}
+.tennis-rank-table .rank-data{font-size:.84rem;font-weight:700;line-height:1.35;white-space:normal}
+.tennis-rank-table .rank-number{text-align:right;font-variant-numeric:tabular-nums}
+.tennis-rank-table .rank-tournament{font-weight:550;font-size:.75rem;white-space:normal}
+.tennis-rank-table .tennis-rank-row>.rank-place{position:sticky;left:0;background:#e9eff3;z-index:2;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.tennis-rank-table .tennis-rank-row>.rank-person{position:sticky;left:44px;background:#e9eff3;z-index:2;align-self:stretch;display:block;padding-top:4px}
+.tennis-rank-table .rank-row:nth-child(2n)>.rank-place,.tennis-rank-table .rank-row:nth-child(2n)>.rank-person{background:#e3ebef}
+.tennis-rank-table .rank-tracked>.rank-place,.tennis-rank-table .rank-tracked>.rank-person{background:#deebe9!important}
+.tennis-rank-table .rank-table-head>.rank-place,.tennis-rank-table .rank-table-head>.rank-person{background:#d7e2e6}
+@media(max-width:550px){
+ .tennis-rank-table .tennis-rank-row{grid-template-columns:36px 150px 76px 76px 70px 160px 76px 76px;gap:7px;padding:9px 6px}
+ .tennis-rank-table .tennis-rank-row>.rank-person{left:36px}
+ .tennis-rank-table .rank-player-photo{width:24px;height:24px}
+ .tennis-rank-table .rank-data{font-size:.76rem}
+ .tennis-rank-table .rank-person{font-size:.77rem}
+}
+
+/* V14.3 · ATP : uniquement le classement live, fidèle aux colonnes de la source FR. */
+.atp-live-table{width:max-content;min-width:100%;border:0;border-radius:0;overflow:visible}
+.atp-live-table .atp-live-row{display:grid;grid-template-columns:38px 48px 230px 48px 75px 88px 82px 80px 230px 230px 113px 80px 80px;gap:8px;align-items:center;padding:10px 9px;min-height:51px}
+.atp-live-table .rank-table-head{font-size:.68rem;background:#d8e2e7}
+.atp-live-table .rank-table-head>span{font-weight:850}
+.atp-live-table .rank-data{font-variant-numeric:tabular-nums;font-size:.83rem;font-weight:700}
+.atp-live-table .rank-tournament{font-weight:500;font-size:.76rem;overflow-wrap:anywhere;line-height:1.4}
+.atp-live-table .rank-number{text-align:right}
+.atp-live-table .rank-person{line-height:1.38;font-size:.82rem}
+.atp-live-table .rank-country{white-space:nowrap;font-size:.77rem}
+.atp-live-table .rank-career{font-size:.73rem;text-align:center}
+.atp-career{font-size:.66rem;border-radius:4px;padding:2px 3px;background:#cad3d9;color:#08242b;font-weight:800}
+.atp-career.best{background:#d7c3a2;color:#322901}
+.atp-live-table .rank-data.negative{color:#5b0202}
+.atp-live-table .rank-data.positive{color:#0a5022}
+.atp-live-table .atp-movement{text-align:center}
+.atp-live-table .atp-movement .rank-movement{margin:0}
+.atp-status{display:inline-block;white-space:nowrap;border-radius:7px;padding:4px 6px;font-size:.69rem;font-weight:800}
+.atp-status.lost{color:#320101;background:#e0d4d7;border:1px solid #bda1a5}
+.atp-status.playing{color:#0e4d2f;background:#e0ece8;border:1px solid #bed4cb}
+.atp-status.unknown{color:#223035;background:#d9e1e4}
+.atp-live-table .atp-live-row>.rank-place,
+.atp-live-table .atp-live-row>.rank-career,
+.atp-live-table .atp-live-row>.rank-person{position:sticky;align-self:stretch;display:flex;align-items:center;z-index:2;background:#e9eff3}
+.atp-live-table .atp-live-row>.rank-place{left:0;justify-content:center}
+.atp-live-table .atp-live-row>.rank-career{left:46px;justify-content:center}
+.atp-live-table .atp-live-row>.rank-person{left:102px;flex-wrap:wrap;column-gap:5px}
+.atp-live-table .atp-live-row:nth-child(2n)>.rank-place,
+.atp-live-table .atp-live-row:nth-child(2n)>.rank-career,
+.atp-live-table .atp-live-row:nth-child(2n)>.rank-person{background:#e3ebef}
+.atp-live-table .atp-live-row.rank-tracked>.rank-place,
+.atp-live-table .atp-live-row.rank-tracked>.rank-career,
+.atp-live-table .atp-live-row.rank-tracked>.rank-person{background:#deebe9}
+.atp-live-table .rank-table-head>.rank-place,
+.atp-live-table .rank-table-head>.rank-career,
+.atp-live-table .rank-table-head>.rank-person{background:#d8e2e7}
+@media(max-width:550px){
+ .atp-live-table .atp-live-row{grid-template-columns:32px 37px 148px 38px 62px 68px 67px 65px 168px 175px 96px 69px 69px;gap:5px;padding:8px 5px}
+ .atp-live-table .atp-live-row>.rank-career{left:37px}
+ .atp-live-table .atp-live-row>.rank-person{left:79px}
+ .atp-live-table .rank-person{font-size:.78rem}
+ .atp-live-table .rank-data{font-size:.75rem}
+ .atp-live-table .rank-country{font-size:.72rem}
+ .atp-live-table .rank-tournament{font-size:.73rem}
+}
+
+/* V14.4 — filtres tennis accessibles, France en première option. */
+.atp-filters{display:flex;align-items:end;gap:10px;flex-wrap:wrap;padding:12px;margin:10px 0;
+ border:1px solid #c0d0d3;border-radius:13px;background:#e4ecf0}
+.atp-filters label{display:flex;flex-direction:column;gap:5px;min-width:155px;flex:1 1 175px;
+ color:#102023;font-weight:750;font-size:.76rem}
+.atp-filters select{min-height:43px;min-width:0;width:100%;max-width:100%;
+ padding:10px 31px 10px 11px;border:1px solid #9eb3b6;border-radius:9px;
+ background:#dce7eb;color:#013220;font-size:.85rem}
+.atp-filters select:focus-visible,.atp-filter-clear:focus-visible{outline:3px solid #075133;outline-offset:2px}
+.atp-filter-clear{min-height:43px;border:1px solid #8caaad;background:#d0dee3;color:#082b25;
+ padding:8px 12px;border-radius:9px;font-weight:750;cursor:pointer}
+.atp-filter-clear:disabled{opacity:.45;cursor:default}
+.atp-filter-count{color:#123c2e;font-size:.78rem;font-weight:750;align-self:center;white-space:nowrap}
+.atp-tourneys{display:flex;flex-direction:column;align-items:stretch;gap:5px;min-width:0}
+.atp-tourneys-item{display:flex;align-items:flex-start;flex-wrap:wrap;gap:4px;
+ padding:5px 6px;border-radius:7px;border:1px solid #bfcfd3;line-height:1.35}
+.atp-tourneys-item.current{background:#e0edea;color:#013220}
+.atp-tourneys-item.recent{background:#dde4e8;color:#122a35}
+.atp-tourneys-item small{font-size:.63rem;font-weight:850;white-space:nowrap;border-radius:4px;
+ background:#bccdd3;padding:1px 4px}
+.atp-tourneys-item.current small{background:#cce0da;color:#01321b}
+.atp-live-table .atp-live-row{grid-template-columns:38px 48px 230px 48px 75px 88px 82px 80px 265px 230px 113px 80px 80px}
+@media(max-width:550px){
+ .atp-filters{gap:8px;padding:10px}
+ .atp-filters label{flex:1 1 130px;min-width:0}
+ .atp-filter-count{width:100%}
+ .atp-live-table .atp-live-row{grid-template-columns:32px 37px 148px 38px 62px 68px 67px 65px 205px 175px 96px 69px 69px}
+}
+
+/* V14.5 — ATP, WTA, Race ATP/WTA, Next Gen : deux colonnes de tournois cohérentes. */
+.atp-live-table .atp-live-row{grid-template-columns:38px 48px 230px 48px 75px 88px 82px 80px 240px 240px 113px 80px 80px}
+.atp-live-table.race-no-career .atp-live-row{grid-template-columns:38px 230px 48px 75px 88px 82px 80px 240px 240px 113px 80px 80px}
+.atp-live-table.race-no-career .atp-live-row>.rank-person{left:46px}
+.atp-live-table .rank-tournament{font-size:.78rem;line-height:1.5}
+.atp-live-table .tour-observed{display:block;width:max-content;max-width:100%;margin-bottom:4px;
+ border:1px solid #a1b7bf;border-radius:5px;padding:1px 5px;background:#d7dfe3;color:#122f33;font-size:.66rem;font-weight:700}
+@media(max-width:550px){
+ .atp-live-table .atp-live-row{grid-template-columns:32px 37px 148px 38px 62px 68px 67px 65px 185px 185px 96px 69px 69px}
+ .atp-live-table.race-no-career .atp-live-row{grid-template-columns:32px 148px 38px 62px 68px 67px 65px 185px 185px 96px 69px 69px}
+ .atp-live-table.race-no-career .atp-live-row>.rank-person{left:37px}
+}
+
+/* V14.6 : classement tennis compact. Résultats au sein des deux colonnes tournoi. */
+.atp-live-table{
+ --live-rank:32px;--live-career:38px;--live-player:185px;--live-gap:4px;
+}
+.atp-live-table .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-career) var(--live-player)
+  37px 58px 61px 56px 60px 165px 170px 54px 54px;
+ gap:var(--live-gap);padding:6px 6px;min-height:44px;
+}
+.atp-live-table.race-no-career .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-player)
+  37px 58px 61px 56px 60px 165px 170px 54px 54px;
+}
+.atp-live-table .rank-table-head{font-size:.66rem;line-height:1.15}
+.atp-live-table .rank-table-head>span{min-width:0;overflow-wrap:break-word}
+.atp-live-table .rank-row{line-height:1.25}
+.atp-live-table .rank-place{font-size:.78rem}
+.atp-live-table .rank-person{font-size:.76rem;line-height:1.24;min-width:0}
+.atp-live-table .rank-favorite-link{font-size:inherit;line-height:1.25}
+.atp-live-table .rank-data{font-size:.74rem;line-height:1.25;min-width:0}
+.atp-live-table .rank-country{font-size:.69rem;white-space:normal;min-width:0;line-height:1.2}
+.atp-live-table .rank-number{font-size:.73rem}
+.atp-live-table .rank-tournament{font-size:.73rem;line-height:1.27;overflow-wrap:break-word}
+.atp-live-table .rank-movement{font-size:.62rem;padding:2px 3px;white-space:nowrap}
+.atp-live-table .atp-career{font-size:.62rem;padding:1px 2px}
+.atp-live-table .atp-live-row>.rank-career{left:calc(var(--live-rank) + var(--live-gap))}
+.atp-live-table .atp-live-row>.rank-person{left:calc(var(--live-rank) + var(--live-career) + var(--live-gap) + var(--live-gap));column-gap:2px}
+.atp-live-table.race-no-career .atp-live-row>.rank-person{left:calc(var(--live-rank) + var(--live-gap))}
+.atp-live-table .rank-table-head>.rank-place,.atp-live-table .rank-table-head>.rank-career,
+.atp-live-table .rank-table-head>.rank-person{z-index:5;background:#d8e2e7}
+.atp-live-table .tourney-current,.atp-live-table .tourney-previous{display:block;min-width:0}
+.atp-live-table .tourney-text{overflow-wrap:anywhere}
+.atp-live-table .tourney-previous.is-loss .tourney-text{color:#320101}
+.atp-live-table .tourney-status{display:block;width:max-content;max-width:100%;border-radius:4px;
+ padding:2px 4px;margin-top:3px;font-size:.61rem;font-weight:750;line-height:1.2}
+.atp-live-table .tourney-status.playing{color:#0c4529;background:#dfebe8}
+.atp-live-table .tourney-status.lost{color:#320101;background:#ded0d3;margin:0 0 3px}
+.atp-live-table .tourney-loss-symbol{display:inline-block;margin-right:4px;color:#410202;font-size:.75rem;font-weight:900}
+.atp-live-table .tour-observed{font-size:.6rem;margin-bottom:3px;padding:1px 3px}
+@media(max-width:550px){
+ .atp-live-table{--live-rank:26px;--live-career:27px;--live-player:116px;--live-gap:3px}
+ .atp-live-table .atp-live-row{grid-template-columns:var(--live-rank) var(--live-career) var(--live-player)
+  29px 49px 53px 46px 48px 132px 138px 47px 47px;
+  gap:var(--live-gap);padding:5px 4px;min-height:44px}
+ .atp-live-table.race-no-career .atp-live-row{grid-template-columns:var(--live-rank) var(--live-player)
+  29px 49px 53px 46px 48px 132px 138px 47px 47px}
+ .atp-live-table .rank-table-head{font-size:.61rem;line-height:1.15}
+ .atp-live-table .rank-person{font-size:.70rem;line-height:1.2}
+ .atp-live-table .rank-data{font-size:.70rem}
+ .atp-live-table .rank-number,.atp-live-table .rank-country{font-size:.69rem}
+ .atp-live-table .rank-tournament{font-size:.69rem;line-height:1.24}
+ .atp-live-table .rank-place{font-size:.70rem}
+ .atp-live-table .rank-movement{font-size:.61rem;padding:1px 2px}
+ .atp-live-table .atp-career{font-size:.59rem}
+ .atp-live-table .tourney-status{font-size:.59rem}
+ .rank-horizontal-hint{margin:6px 0 4px;font-size:.71rem}
+}
+@media(max-width:360px){
+ .atp-live-table{--live-rank:23px;--live-career:25px;--live-player:104px;--live-gap:3px}
+ .atp-live-table .atp-live-row{grid-template-columns:var(--live-rank) var(--live-career) var(--live-player)
+  27px 44px 50px 43px 45px 122px 125px 45px 45px}
+ .atp-live-table.race-no-career .atp-live-row{grid-template-columns:var(--live-rank) var(--live-player)
+  27px 44px 50px 43px 45px 122px 125px 45px 45px}
+}
+
+/* V14.7 — davantage de statistiques visibles, surtout sur téléphone. */
+/* Tennis : le meilleur classement rejoint le nom ; le drapeau remplace la colonne Pays sur mobile. */
+.atp-live-table{--live-rank:25px;--live-player:174px;--live-gap:3px}
+.atp-live-table .atp-live-row,.atp-live-table.race-no-career .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-player) 32px 54px 57px 48px 49px 150px 158px 49px 49px;
+ gap:var(--live-gap);padding:5px 5px;min-height:40px
+}
+.atp-live-table .atp-live-row>.rank-person,
+.atp-live-table.race-no-career .atp-live-row>.rank-person{left:calc(var(--live-rank) + var(--live-gap))}
+.atp-live-table .rank-person{flex-wrap:wrap;gap:2px;font-size:.72rem;line-height:1.18}
+.atp-live-table .rank-country{font-size:.67rem;white-space:nowrap}
+.atp-live-table .rank-data{font-size:.69rem;line-height:1.19}
+.atp-live-table .rank-tournament{font-size:.68rem;line-height:1.17}
+.atp-live-table .rank-table-head{font-size:.63rem;line-height:1.1}
+.atp-live-table .rank-number{font-size:.69rem}
+.atp-live-table .rank-movement{font-size:.59rem;padding:1px 2px}
+.rank-career-inline{display:inline-flex;align-items:center;justify-content:center;background:#c8d3d9;
+ color:#012332;border-radius:3px;padding:0 3px;font-size:.57rem;font-weight:800;line-height:1.45}
+.rank-career-inline.best{background:#dfd0b5;color:#322601}
+.rank-flag-mobile{display:none}
+.atp-live-table .tourney-status{font-size:.57rem;line-height:1.1;padding:1px 3px;margin-top:2px}
+.atp-live-table .tourney-loss-symbol{font-size:.67rem}
+.rank-table-scroll{scrollbar-width:thin}
+/* Football : vraie table des 18/20/36 équipes et statistiques vérifiées ESPN. */
+.standings-table{width:max-content;min-width:100%;border:0;border-radius:0;overflow:visible}
+.standings-table .standings-row{display:grid;align-items:center;gap:4px;padding:7px 7px;min-height:42px}
+.standings-table .rank-table-head{font-size:.66rem;line-height:1.17}
+.standings-table .rank-data{font-size:.74rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.standings-table .rank-number{text-align:right}
+.standings-table .rank-person{display:flex;align-items:center;gap:5px;line-height:1.24;font-size:.78rem;min-width:0}
+.standings-table .rank-favorite-link{font-size:inherit;line-height:inherit}
+.standings-football .standings-row{grid-template-columns:28px 200px repeat(6,39px) 54px 54px 50px}
+.standings-nba .standings-row{grid-template-columns:28px 208px 38px 38px 64px 57px 56px 67px 65px 65px 65px 65px 65px}
+.standings-table .standings-row>.rank-place,.standings-table .standings-row>.rank-person{position:sticky;
+ align-self:stretch;display:flex;align-items:center;background:#e9eff3;z-index:2}
+.standings-table .standings-row>.rank-place{left:0;justify-content:center}
+.standings-table .standings-row>.rank-person{left:32px}
+.standings-table .standings-row:nth-child(even)>.rank-place,
+.standings-table .standings-row:nth-child(even)>.rank-person{background:#e3ebef}
+.standings-table .rank-tracked>.rank-place,.standings-table .rank-tracked>.rank-person{background:#deebe9}
+.standings-table .rank-table-head>.rank-place,.standings-table .rank-table-head>.rank-person{background:#d7e2e6;z-index:4}
+.standings-team-logo{width:22px;height:22px;object-fit:contain;flex:none}
+.standings-table .rank-points-highlight{font-weight:900;color:#01321c;background:rgba(186,221,211,.22);
+ border-radius:3px}
+.standings-nba .rank-percent{font-weight:850;color:#092f1f}
+.standings-nba .rank-streak{font-weight:800}
+.standings-tabletennis .standings-row{grid-template-columns:35px 200px 90px}
+.standings-tabletennis .standings-row>.rank-person{left:39px}
+@media(max-width:550px){
+ .atp-live-table{--live-rank:22px;--live-player:104px;--live-gap:2px}
+ .atp-live-table .atp-live-row,.atp-live-table.race-no-career .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-player) 25px 47px 36px 40px 125px 130px 42px 42px;
+  gap:var(--live-gap);padding:4px 3px;min-height:38px
+ }
+ .atp-live-table .rank-country,.atp-live-table .rank-table-head .rank-country{display:none}
+ .atp-live-table .rank-person{font-size:.66rem;line-height:1.12;column-gap:2px}
+ .atp-live-table .rank-favorite-link{font-size:inherit;padding:0}
+ .atp-live-table .rank-flag-mobile{display:inline;font-size:.65rem;line-height:1}
+ .atp-live-table .rank-table-head{font-size:.58rem;line-height:1.05}
+ .atp-live-table .rank-data,.atp-live-table .rank-number{font-size:.65rem;line-height:1.15}
+ .atp-live-table .rank-tournament{font-size:.65rem;line-height:1.13}
+ .atp-live-table .rank-place{font-size:.65rem}
+ .atp-live-table .rank-movement{font-size:.55rem;padding:0 1px}
+ .atp-live-table .tourney-status{font-size:.55rem}
+ .rank-career-inline{font-size:.53rem;padding:0 2px}
+ .rank-table-scroll{border-radius:7px}
+ .standings-table .standings-row{gap:2px;padding:5px 3px;min-height:38px}
+ .standings-table .rank-table-head{font-size:.60rem;line-height:1.12}
+ .standings-table .rank-data{font-size:.68rem}
+ .standings-table .rank-person{font-size:.71rem;gap:3px;line-height:1.15}
+ .standings-team-logo{width:17px;height:17px}
+ .standings-football .standings-row{grid-template-columns:22px 116px repeat(6,29px) 42px 39px 40px}
+ .standings-nba .standings-row{grid-template-columns:22px 126px 30px 30px 52px 46px 43px 52px 52px 52px 52px 52px 52px}
+ .standings-table .standings-row>.rank-person{left:24px}
+ .standings-tabletennis .standings-row{grid-template-columns:26px 141px 68px}
+ .standings-tabletennis .standings-row>.rank-person{left:28px}
+}
+@media(max-width:360px){
+ .atp-live-table{--live-rank:20px;--live-player:95px;--live-gap:2px}
+ .atp-live-table .atp-live-row,.atp-live-table.race-no-career .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-player) 24px 44px 34px 38px 118px 123px 41px 41px
+ }
+ .standings-football .standings-row{grid-template-columns:20px 105px repeat(6,27px) 40px 37px 36px}
+ .standings-nba .standings-row{grid-template-columns:20px 112px 28px 28px 50px 44px 42px 48px 48px 48px 48px 48px 48px}
+ .standings-table .standings-row>.rank-person{left:22px}
+}
+
+/* ITTF hebdomadaire : 150 hommes et 150 femmes, cinq colonnes utiles. */
+.standings-tabletennis .standings-row{grid-template-columns:28px 205px 59px 84px 60px}
+.standings-tabletennis .rank-country{font-size:.72rem}
+.standings-tabletennis .rank-data.rise{color:#0b4f31;font-weight:850}
+.standings-tabletennis .rank-data.fall{color:#440202;font-weight:850}
+.standings-tabletennis .standings-row>.rank-person{left:32px}
+@media(max-width:550px){
+ .standings-tabletennis .standings-row{grid-template-columns:22px 120px 40px 59px 42px}
+ .standings-tabletennis .standings-row>.rank-person{left:24px}
+ .standings-tabletennis .rank-country{font-size:.66rem}
+}
+
+/* V14.8 — colonnes centrées sur tous les sports, MC séparé du joueur. */
+.atp-live-table{--live-rank:25px;--live-career:34px;--live-player:170px;--live-gap:3px}
+.atp-live-table .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-career) var(--live-player) 32px 54px 57px 48px 49px 150px 158px 49px 49px;
+ gap:var(--live-gap);
+}
+.atp-live-table.race-no-career .atp-live-row{
+ grid-template-columns:var(--live-rank) var(--live-player) 32px 54px 57px 48px 49px 150px 158px 49px 49px;
+}
+.atp-live-table .atp-live-row>.rank-career{
+ position:sticky;left:calc(var(--live-rank) + var(--live-gap));z-index:3;align-self:stretch;
+ display:flex;align-items:center;justify-content:center;background:#e9eff3;
+}
+.atp-live-table .atp-live-row>.rank-person{
+ left:calc(var(--live-rank) + var(--live-career) + 2 * var(--live-gap));
+ justify-content:center;flex-wrap:nowrap;text-align:center;white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis;min-width:0;
+}
+.atp-live-table.race-no-career .atp-live-row>.rank-person{
+ left:calc(var(--live-rank) + var(--live-gap));
+}
+.atp-live-table .rank-person>span:not(.rank-flag-mobile),
+.atp-live-table .rank-person .rank-favorite-link{
+ display:inline-block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:100%;
+}
+.atp-live-table .rank-person .rank-flag-mobile{flex:none}
+.atp-live-table .rank-table-head>.rank-career{background:#d8e2e7}
+.atp-live-table .atp-live-row:nth-child(even)>.rank-career{background:#e3ebef}
+.atp-live-table .atp-live-row.rank-tracked>.rank-career{background:#deebe9}
+.atp-live-table .rank-data,.atp-live-table .rank-table-head>span,
+.atp-live-table .rank-country,.atp-live-table .rank-number,
+.atp-live-table .atp-movement,.atp-live-table .rank-tournament{
+ text-align:center!important;justify-self:stretch;
+}
+.atp-live-table .rank-tournament .tourney-status,.atp-live-table .tour-observed{
+ margin-left:auto;margin-right:auto;
+}
+.atp-live-table .rank-tournament{overflow-wrap:break-word}
+.standings-table .standings-row>span,
+.standings-table .rank-table-head>span,
+.standings-table .rank-data,
+.standings-table .rank-number{
+ text-align:center!important;justify-content:center;justify-self:stretch;
+}
+.standings-table .standings-row>.rank-person{
+ justify-content:center;text-align:center;overflow:hidden;min-width:0;white-space:nowrap;
+}
+.standings-table .standings-row>.rank-person .rank-favorite-link{
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+}
+.standings-table .standings-row>.rank-person:not(:has(.rank-favorite-link)){text-overflow:ellipsis}
+@media(max-width:550px){
+ .atp-live-table{--live-rank:22px;--live-career:29px;--live-player:112px;--live-gap:2px}
+ .atp-live-table .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-career) var(--live-player) 25px 47px 36px 40px 125px 130px 42px 42px;
+ }
+ .atp-live-table.race-no-career .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-player) 25px 47px 36px 40px 125px 130px 42px 42px;
+ }
+ .atp-live-table .rank-person{white-space:nowrap;line-height:1.12}
+ .atp-live-table .rank-person .rank-favorite-link{padding:0}
+ .atp-live-table .rank-career{font-size:.58rem}
+}
+@media(max-width:360px){
+ .atp-live-table{--live-rank:20px;--live-career:27px;--live-player:101px;--live-gap:2px}
+ .atp-live-table .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-career) var(--live-player) 24px 44px 34px 38px 118px 123px 41px 41px;
+ }
+ .atp-live-table.race-no-career .atp-live-row{
+  grid-template-columns:var(--live-rank) var(--live-player) 24px 44px 34px 38px 118px 123px 41px 41px;
+ }
+}
+
+/* V14.8 — toutes les données de classement dans l'onglet Stats des favoris. */
+.stat-rank-card{border:1px solid #bfd1d5;background:#e4ebef;border-radius:13px;padding:11px;display:grid;gap:10px;min-width:0}
+.stat-rank-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
+.stat-rank-head>div:first-child{display:flex;flex-direction:column;gap:3px;min-width:0}
+.stat-rank-head b{color:#01321b;font-size:.95rem}
+.stat-rank-head span{color:#37250e;font-size:.76rem}
+.stat-rank-head small{font-size:.70rem;color:#2f5051;line-height:1.4}
+.stat-rank-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.stat-rank-actions a{color:#0c4e31;text-decoration:underline;font-size:.73rem}
+.stat-rank-actions button{min-height:35px;padding:6px 9px;font-size:.73rem}
+.stat-ranking-grid{grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:7px}
+.stat-ranking-grid .stat-tile{min-height:73px;padding:9px 8px;border-radius:9px;gap:4px;overflow-wrap:anywhere}
+.stat-ranking-grid .stat-tile b{font-size:1.1rem;line-height:1.22}
+.stat-ranking-grid .stat-tile span{font-size:.72rem;line-height:1.2}
+.stat-ranking-grid .stat-tile small{font-size:.67rem;line-height:1.2}
+@media(max-width:550px){
+ .stat-rank-card{padding:8px;gap:8px}
+ .stat-ranking-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .stat-ranking-grid .stat-tile{min-height:65px;padding:7px 6px}
+ .stat-ranking-grid .stat-tile b{font-size:.99rem}
+ .stat-ranking-grid .stat-tile span{font-size:.66rem}
+ .stat-ranking-grid .stat-tile small{font-size:.62rem}
+}
+@media(max-width:350px){
+ .stat-ranking-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* V14.9 : un seul écran de chargement au démarrage de la session. */
+.startup-shell{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ text-align:center;gap:13px;padding:25px 18px}
+.startup-shell h1{font-size:1.85rem;color:#01321c;margin:0}
+.startup-shell h2{font-size:1.07rem;color:#013a20;margin:0}
+.startup-shell p{max-width:330px;font-size:.81rem;color:#1d353e;line-height:1.5;margin:0}
+.startup-spinner{height:39px;width:39px;border-radius:50%;border:4px solid #c1d0d4;
+ border-top-color:#094e2e;animation:startup-turn .9s linear infinite}
+@keyframes startup-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.startup-spinner{animation:none;border-top-color:#01321e}}
+/* Les tuiles inutiles ont été retirées ; privilégier l'information plutôt que les cases vides. */
+.stat-ranking-grid .stat-tile{min-height:61px}
+.stat-ranking-grid .stat-tile small{color:#1a323b}
+
+/* V15.4 : posts natifs. Ni iframe X, ni fenêtre recadrée, ni bouton « Voir plus ». */
+.jsm-native-card{display:flex;flex-direction:column;gap:12px;padding:14px;overflow:visible;min-width:0}
+.jsm-native-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.jsm-native-header>div{display:flex;align-items:center;gap:10px;min-width:0}
+.jsm-native-avatar{width:36px;height:36px;border-radius:50%;background:#c6dade;display:grid;place-items:center;font-size:1.15rem;flex:none}
+.jsm-native-author{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.jsm-native-author b{font-size:.95rem;color:#01321c}
+.jsm-native-author small{font-size:.72rem;color:#1e303b}
+.jsm-native-text{white-space:pre-line;overflow-wrap:break-word;word-break:normal;font-size:.94rem;line-height:1.55;margin:0;color:#011c32;max-width:100%;min-width:0;text-align:left}
+.jsm-native-gallery{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:800px;margin:0 auto}
+.jsm-native-gallery.single{grid-template-columns:1fr;max-width:680px}
+.jsm-native-figure{margin:0;min-width:0;background:#eaeff3;border-radius:10px;overflow:hidden;display:grid;place-items:center}
+.jsm-native-image{width:100%;height:auto;max-height:72vh;object-fit:contain;display:block}
+.jsm-native-image-error{font-size:.77rem;color:#21333a;padding:12px}
+.jsm-native-figure:has(.jsm-native-image[hidden]){min-height:48px}
+.jsm-native-video{width:100%;max-width:680px;max-height:75vh;border-radius:11px;margin:auto;background:#f3f6f8}
+.jsm-native-note{font-size:.76rem;line-height:1.45;color:#1e2831;margin:0}
+.jsm-native-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ border-top:1px solid #c8d1d9;padding-top:9px;font-size:.70rem;color:#203340}
+.jsm-native-footer a{color:#0c432b;text-decoration:underline}
+@media(max-width:550px){
+ .jsm-native-card{padding:10px;gap:10px}
+ .jsm-native-text{font-size:.86rem;line-height:1.5}
+ .jsm-native-header{gap:6px}
+ .jsm-native-avatar{height:32px;width:32px}
+ .jsm-native-gallery{gap:4px}
+ .jsm-native-image{max-height:64vh}
+ .jsm-native-footer{font-size:.67rem}
+}
+
+/* V15.5 : les ruptures de ligne de la publication sont conservées sur Android. */
+.jsm-native-card{width:100%;max-width:100%;box-sizing:border-box}
+.jsm-native-text{white-space:pre-line!important;overflow-wrap:break-word!important;word-break:normal!important;
+ line-break:auto;hyphens:none;text-wrap:pretty}
+.jsm-native-gallery,.jsm-native-video{max-width:100%;min-width:0}
+@media(max-width:550px){
+ .jsm-native-text{font-size:.89rem;line-height:1.55}
+ .jsm-native-gallery.multi{grid-template-columns:1fr}
+ .jsm-native-figure{width:100%}
+ .jsm-native-image{height:auto;max-height:none;object-fit:contain}
+}
+
+/* V15.6 — présence du flux Jeu, set et maths confirmée sur téléphone. */
+.jsm-feed-indicator{display:flex;align-items:center;flex-wrap:wrap;gap:6px;
+ font-size:.78rem;line-height:1.35;color:#0c271b;margin:7px 0;padding:8px 10px;
+ background:#dde7ec;border:1px solid #c3d4d6;border-radius:9px}
+.jsm-feed-indicator b{font-weight:850;color:#013214}
+.jsm-feed-indicator button{min-height:30px;font-size:.72rem;padding:4px 9px;margin-left:auto}
+@media(max-width:550px){
+ .jsm-feed-indicator{font-size:.73rem;padding:8px;gap:4px}
+ .jsm-feed-indicator button{padding:4px 6px}
+}
+
+/* V15.7 — filtres des médias sportifs, adaptés aux écrans tactiles. */
+.news-filter-block{display:grid;gap:7px;margin:12px 0 9px;min-width:0}
+.news-filter-label{font-size:.74rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#1b343f}
+.news-source-filters{display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-width:0}
+.news-source-chip{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:6px 11px;
+ border:1px solid #bac7ce;border-radius:999px;background:#e7ecf1;color:#0d1d26;font:inherit;font-size:.78rem;
+ cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s}
+.news-source-chip span{font-size:.68rem;color:#274251;font-variant-numeric:tabular-nums}
+.news-source-chip.active{background:#d6e6e7;border-color:#3d9d7f;color:#01321b;font-weight:800}
+.news-source-chip:focus-visible{outline:2px solid #022b40;outline-offset:2px}
+.news-context-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0 12px}
+.news-context-filters label{display:grid;gap:5px;font-size:.75rem;font-weight:750;color:#172831;min-width:0}
+.news-context-filters select{width:100%;min-width:0;min-height:38px;border:1px solid #bac7ce;border-radius:9px;
+ background:#ebeff3;color:#091f2a;padding:7px 9px;font:inherit;font-size:.82rem}
+.jsm-native-video{display:block;width:100%;max-width:760px;max-height:75vh;aspect-ratio:16/9;
+ object-fit:contain;background:#f9fbfc;border-radius:12px;margin:4px auto}
+.jsm-video-hint{font-size:.74rem;color:#1e343f;text-align:center;margin:-5px 0 0}
+.jsm-video-hint a{color:#0d3e28;text-decoration:underline}
+@media(max-width:550px){
+ .news-source-filters{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;
+  padding:2px 0 7px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+ .news-source-chip{flex:none;min-height:36px;padding:7px 10px;font-size:.76rem}
+ .news-context-filters{gap:7px}
+ .news-context-filters label{font-size:.71rem}
+ .news-context-filters select{font-size:.77rem;padding:7px 6px}
+ .jsm-native-video{max-height:62vh;aspect-ratio:9/16}
+}
+
+.news-read-inline{margin-top:8px}.news-tap{display:inline-block;margin:10px 0 0 12px}.news-source-filters{display:flex;flex-wrap:wrap;gap:8px}.news-filter-block{margin:12px 0}.news-filter-label{display:block;margin-bottom:8px;font-size:.8rem;font-weight:800}
+
+
+/* V16.3 — cartes d'actualité : vignette, méta, favori lié et lecture en paragraphes. */
+.news-link-card{display:grid;grid-template-columns:148px minmax(0,1fr);gap:0;align-items:start;min-width:0;background:#e8edf1;border:1px solid #ced8dd;transition:border-color .15s}
+.news-link-card:hover{border-color:#a1bbbf}
+.news-link-card.has-favorite{border-left:4px solid var(--accent)}
+.news-link-card>.article-visual{display:grid;place-items:center;position:relative;width:auto;min-width:0;height:auto;min-height:0;aspect-ratio:1/1;margin:14px 0 14px 14px;overflow:hidden;background:#eef2f5;border-radius:12px;font-size:2.2rem}
+.news-link-card>.article-visual .article-image-fallback{display:block;line-height:1;opacity:.85}
+.news-link-card .article-thumb-image{z-index:1}
+.news-link-card>.article-visual.image-failed .article-thumb-image{display:none}
+.news-link-card .article-thumb-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.news-link-card .news-text{padding:14px 16px 12px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.news-link-card .news-card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%}
+.news-link-card .news-sport{display:inline-flex;align-items:center;gap:5px;background:#d6e1e7;color:#012232;border-radius:999px;padding:4px 9px;font-size:.7rem;font-weight:750}
+.news-link-card .news-date{color:#2e4552;font-size:.74rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.news-link-card h3{font-size:1.02rem;line-height:1.35;margin:0;color:#012232;overflow-wrap:anywhere;font-weight:800}
+.news-link-card .news-excerpt{font-size:.86rem;line-height:1.55;color:#152630;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-size:.74rem}
+.news-link-card .news-source{margin:0;color:#1f3540;font-weight:750;letter-spacing:.02em;font-size:.74rem;display:inline-flex;align-items:center;gap:6px}
+.news-favorite{display:inline-flex;align-items:center;gap:4px;background:#e1ebe8;color:#01321a;border:1px solid #c7dbd4;border-radius:999px;padding:3px 9px;font-size:.72rem;font-weight:750}
+.news-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:2px}
+.news-link-card .news-read-inline{margin:0;min-height:36px;padding:7px 14px;font-size:.84rem;border-radius:10px}
+.news-link-card .news-tap{margin:0;font-size:.78rem;color:#16583c;text-decoration:none;font-weight:700;border:0;padding:0}
+.news-link-card .news-tap:hover{text-decoration:underline}
+.news-fulltext{width:100%;box-sizing:border-box;margin:4px 0 0;padding:4px 0 0;border-top:1px solid #ced8dd;color:#0a1d29;font-size:.95rem;line-height:1.7}
+.news-fulltext p{margin:10px 0;overflow-wrap:anywhere}
+.news-fulltext p:first-child{margin-top:8px}
+.news-reader-note{font-size:.78rem;color:#2b4451;margin:8px 0 0;line-height:1.5}
+@media(max-width:600px){.news-link-card{grid-template-columns:1fr}.news-link-card>.article-visual{width:100%;margin:0;border-radius:0;aspect-ratio:16/9;height:auto;max-height:200px}.news-link-card>.article-visual-empty,.news-link-card>.article-visual.image-failed{aspect-ratio:auto;height:52px;font-size:1.6rem}.news-link-card .news-text{padding:12px;gap:7px}.news-link-card h3{font-size:.97rem}.news-link-card .news-excerpt{-webkit-line-clamp:4}.news-fulltext{font-size:.9rem;line-height:1.65}.news-actions{gap:10px}.news-link-card .news-read-inline{flex:1;text-align:center}}
+
+.news-hidden-note{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.8rem;color:#2a4049;background:#ebf0f3;border:1px dashed #c8d3d8;border-radius:12px;padding:8px 12px}
+.news-hidden-note .button{min-height:32px;padding:5px 11px;font-size:.78rem}
+
+/* V16.5 — résumé d'article et replay dans les résultats ; visuels d'articles. */
+.result-summary{margin:10px 0 2px;padding:10px 12px;background:#ebf0f3;border:1px solid #d0dadf;border-radius:12px}
+.result-summary p{margin:0 0 6px;font-size:.86rem;line-height:1.5;color:#0e1d25;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.result-summary-source{font-size:.76rem;font-weight:750;color:#16583c;text-decoration:none}
+.result-summary-source:hover{text-decoration:underline}
+.result-replay-row{margin:8px 0 2px;display:grid;gap:8px}
+.result-replay{justify-self:start;display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:6px 12px;border-radius:10px;border:0;background:var(--accent);color:#f4f9f7;font-weight:800;font-size:.82rem;text-decoration:none;cursor:pointer}
+.result-replay.ghost{background:#dde4e9;color:#012032;border:1px solid #bfccd3;font-weight:700}
+.result-video{width:100%;max-height:60vh;border-radius:12px;background:#000;display:block}
+.event-editorial small{display:block;margin-top:6px;color:#2e4552;font-size:.74rem}
+.news-body-figure{margin:12px 0}
+.news-body-image{display:block;width:100%;max-height:70vh;object-fit:contain;border-radius:10px;background:#f1f4f7}
+.news-link-card>.article-visual.sport-tennis{background:linear-gradient(135deg,#d9e8e4,#e8eff2)}
+.news-link-card>.article-visual.sport-football{background:linear-gradient(135deg,#d8e7dc,#e8eff2)}
+.news-link-card>.article-visual.sport-basketball{background:linear-gradient(135deg,#e5d3c8,#edebee)}
+.news-link-card>.article-visual.sport-rugby{background:linear-gradient(135deg,#e8dcd9,#e4e8ed)}
+.news-link-card>.article-visual.sport-cyclisme{background:linear-gradient(135deg,#e7e1d1,#e4e8ed)}
+.news-link-card>.article-visual.sport-natation{background:linear-gradient(135deg,#bfd5e4,#e8eff2)}
+.news-link-card>.article-visual.sport-tennis-de-table{background:linear-gradient(135deg,#e1c6ca,#e4e8ed)}
+.news-link-card>.article-visual.sport-sport{background:linear-gradient(135deg,#d0d8df,#eef1f4)}
+.news-link-card>.article-visual .article-image-fallback{font-size:2.6rem;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+@media(max-width:600px){.news-link-card>.article-visual-empty,.news-link-card>.article-visual.image-failed{aspect-ratio:16/9;height:auto;max-height:150px;font-size:2.4rem}}
+
+/* V16.8 — icônes des sources. */
+.source-icon{--size:20px;display:inline-grid;place-items:center;flex:none;width:var(--size);height:var(--size);border-radius:50%;background:var(--src-bg);color:var(--src-fg);font:800 calc(var(--size)*.5)/1 system-ui,-apple-system,Roboto,Arial,sans-serif;letter-spacing:-.02em;box-shadow:0 0 0 1.5px rgba(26,26,26,.14);vertical-align:middle}
+.source-icon.long{font-size:calc(var(--size)*.36)}
+.source-icon.small{--size:18px}
+.source-icon.large{--size:38px}
+.news-source-chip .source-icon{margin-right:2px}
+.result-summary-source{display:inline-flex;align-items:center;gap:6px}
+.jsm-native-header>div>.source-icon{margin-right:2px}
+.news-source-chip .source-icon{color:var(--src-fg);font-size:calc(var(--size)*.5);font-weight:800}
+.news-source-chip .source-icon.long{font-size:calc(var(--size)*.36)}
+.result-youtube{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;display:block}
+.result-video-meta{color:#2e4552;font-size:.74rem;margin-top:-2px}
+
+/* V17.0 — articles À lire / Lus et glissement. */
+.news-read-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0 4px;padding:4px;background:#eff3f6;border:1px solid #d4dce1;border-radius:14px}
+.news-read-tabs button{min-height:40px;border:0;border-radius:10px;background:transparent;color:#172831;font-weight:750;font-size:.92rem;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.news-read-tabs button span{min-width:24px;padding:2px 7px;border-radius:999px;background:#dfe6eb;font-size:.75rem;font-variant-numeric:tabular-nums}
+.news-read-tabs button.active{background:var(--accent);color:#f4f9f7}
+.news-read-tabs button.active span{background:rgba(244,249,247,.18);color:#f4f9f7}
+.news-mark-all{min-height:34px;padding:5px 11px;font-size:.8rem}
+.news-swipe-hint{margin:-4px 0 2px;font-size:.74rem;color:#415d6c}
+.news-swipe{position:relative;min-width:0;max-width:100%;border-radius:17px;touch-action:pan-y;transition:opacity .2s,max-height .22s,margin .22s}
+.news-swipe-action{position:absolute;inset:0;border-radius:17px;display:flex;align-items:center;justify-content:flex-end;padding-right:22px;background:linear-gradient(90deg,transparent 30%,#c6e1d6);color:#01321b;font-weight:850;font-size:.95rem;opacity:calc(var(--swipe,0) * 1.2)}
+.news-swipe>.news-card{position:relative;transition:transform .22s ease}
+.news-swipe.swiping>.news-card{transition:none}
+.news-swipe.news-swipe-out{opacity:0;pointer-events:none}
+.news-mark{position:absolute;top:10px;right:10px;z-index:2;width:34px;height:34px;border-radius:50%;border:1px solid #bfccd3;background:rgba(242,245,247,.82);color:#0a291c;font-weight:900;font-size:1rem;display:grid;place-items:center;cursor:pointer}
+.news-mark:hover{background:#c6e1d6;border-color:#a8d2c0}
+.news-link-card .news-card-top{padding-right:40px}
+.jsm-native-header{padding-right:40px}
+
+/* V17.1 — l'essentiel du match et compte rendu complet dans la carte. */
+.result-facts{margin:10px 0 2px;display:grid;gap:5px;font-size:.84rem;line-height:1.45}
+.result-facts>div{display:grid;grid-template-columns:minmax(92px,30%) 1fr;gap:8px;align-items:baseline}
+.result-facts dt{color:#314f5c;font-weight:750;font-size:.74rem;text-transform:uppercase;letter-spacing:.03em}
+.result-facts dd{margin:0;color:#0a1d29;overflow-wrap:anywhere}
+.result-recap-actions{display:flex;flex-wrap:wrap;gap:8px}
+.result-recap-toggle{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;color:#16583c;font-weight:750;font-size:.78rem;cursor:pointer;text-align:left}
+.result-recap-full{margin-top:10px;padding-top:8px;border-top:1px solid #d0dadf}
+.result-recap-full h5{margin:0 0 6px;font-size:.92rem;line-height:1.35;color:#012232}
+.result-recap-full p{display:block;-webkit-line-clamp:unset;overflow:visible;margin:0 0 9px;font-size:.86rem;line-height:1.6;color:#0e1d25}
+.news-body-video{display:block;width:100%;max-height:70vh;border-radius:10px;background:#000}
+.news-body-tweet{border-left:3px solid #bfccd3;padding-left:10px;color:#0e1d25}
+@media(max-width:600px){.result-facts>div{grid-template-columns:1fr;gap:0}}
+.theme-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:360px}

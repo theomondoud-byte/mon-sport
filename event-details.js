@@ -129,31 +129,86 @@ function parsePlayerStats(box,kind,favorite,strict=false){
  return (selected.length?selected:strict?[]:output).slice(0,kind==='basketball'?5:4);
 }
 // ESPN peut publier un article de match distinct de la simple boxscore.
-export function recapArticleFromESPN(body){
- // Seul le compte rendu du match compte : les « news » d'une feuille ESPN
- // sont souvent des articles génériques de la ligue.
- const plain=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
- const sides=(body?.header?.competitions?.[0]?.competitors||[]).map(c=>[c.team?.displayName,c.team?.shortDisplayName,c.team?.name,c.athlete?.displayName,c.athlete?.shortName].filter(Boolean).map(plain));
- // Article hors compte rendu : les DEUX camps doivent figurer dans le titre.
- const aboutMatch=a=>{const h=plain(a.headline||a.title);return sides.length>=2&&sides.every(names=>names.some(t=>t.length>=3&&h.includes(t)));};
- const candidates=[body?.article,...(body?.news?.articles||[]).filter(a=>/recap/i.test(a.type||'')||aboutMatch(a))].filter(Boolean);
+const plainName=t=>String(t||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+function storyParagraphs(html){
+ return String(html||'').replace(/<(script|style|aside|figure|photo\d*|video\d*|inline\d*|alsosee)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
+  .replace(/<(?:br|\/p|\/h[1-6]|\/li)\b[^>]*>/gi,'\n').replace(/<[^>]+>/g,'')
+  .replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;|&apos;|&rsquo;/g,'’').replace(/&mdash;/g,'—').replace(/&[a-z]+;/g,' ')
+  .split(/\n+/).map(p=>p.replace(/\s+/g,' ').replace(/ +([,.)])/g,'$1').trim().replace(/^[A-Z .,']{3,40} -- (?:[—–-]\s*)?/,''))
+  .filter(p=>p.length>40).slice(0,14);
+}
+export function recapArticleFromESPN(body,eventId=''){
+ // Seul le compte rendu de CE match compte : les « news » d'une feuille ESPN
+ // sont souvent des articles génériques de la ligue ou du tournoi.
+ const sides=(body?.header?.competitions?.[0]?.competitors||[]).map(c=>[c.team?.displayName,c.team?.shortDisplayName,c.team?.name,c.team?.abbreviation,c.athlete?.displayName,c.athlete?.shortName].filter(Boolean).map(plainName));
+ const mentionsBoth=text=>{const h=plainName(text);return sides.length>=2&&sides.every(names=>names.some(t=>t.length>=3&&h.includes(t)));};
+ const own=a=>a&&((eventId&&String(a.gameId||'')===String(eventId))||mentionsBoth((a.headline||a.title||'')+' '+(a.description||'')));
+ const candidates=[body?.article,...(body?.news?.articles||[])].filter(a=>a&&(a===body?.article?own(a):mentionsBoth(a.headline||a.title)));
  for(const a of candidates){
   const title=a.headline||a.title||'';
   const link=String(a.links?.web?.href||a.links?.mobile?.href||a.link||a.url||'').replace(/^http:\/\//,'https://');
   if(title&&/^https:\/\/(?:www\.)?espn\.(?:com|co\.uk)\//i.test(link)){
    const excerpt=String(a.description||a.summary||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().replace(/^[—–-]\s*/,'').slice(0,400);
-   return {title,link,excerpt,source:'ESPN'};
+   return {title,link,excerpt,source:'ESPN',paragraphs:storyParagraphs(a.story)};
   }
  }
- // Les liens dédiés au match (recap) peuvent être présents sans article.
- const competition=body?.header?.competitions?.[0]||{};
- for(const l of competition.links||[]){
-  const rel=String(l.rel?.join(' ')||l.text||'');
-  const url=String(l.href||l.url||'').replace(/^http:\/\//,'https://');
-  if(/recap|article|report|compte rendu/i.test(rel)&&/^https:\/\/(?:www\.)?espn\.(?:com|co\.uk)\//i.test(url))
-   return {title:'Compte rendu du match (ESPN)',link:url,excerpt:'',source:'ESPN'};
- }
  return null;
+}
+// L'essentiel du match en français, construit uniquement à partir de la
+// feuille ESPN : buteurs, statistiques clés, meilleurs marqueurs.
+const stat=(team,...names)=>{for(const n of names){const s=(team?.statistics||[]).find(x=>x.name===n);if(s&&s.displayValue!==undefined&&s.displayValue!=='')return String(s.displayValue);}return null;};
+export function keyFactsFromESPN(body,sport,favoriteAthlete=''){
+ const facts=[];
+ const competitors=body?.header?.competitions?.[0]?.competitors||[];
+ const home=competitors.find(c=>c.homeAway==='home')||competitors[0],away=competitors.find(c=>c.homeAway==='away')||competitors[1];
+ const teams=body?.boxscore?.teams||[];
+ const boxOf=c=>teams.find(t=>String(t.team?.id)===String(c?.team?.id));
+ if(sport==='football'){
+  const byTeam=new Map();let reds=[];
+  for(const k of body?.keyEvents||[]){
+   const type=String(k.type?.text||''),who=k.participants?.[0]?.athlete?.displayName||'',minute=String(k.clock?.displayValue||'');
+   if(/red card/i.test(type)&&who)reds.push(who+' '+minute+' ('+(k.team?.displayName||'')+')');
+   if(!k.scoringPlay||!who)continue;
+   const team=k.team?.displayName||'';
+   const mark=minute+(/penalty/i.test(type)?' (pen.)':/own goal/i.test(type)?' (csc)':'');
+   if(!byTeam.has(team))byTeam.set(team,new Map());
+   const scorers=byTeam.get(team);scorers.set(who,[...(scorers.get(who)||[]),mark]);
+  }
+  for(const c of [home,away]){
+   const name=c?.team?.displayName||'';const scorers=byTeam.get(name);
+   if(scorers)facts.push({label:'Buts '+name,text:[...scorers].map(([who,marks])=>who+' '+marks.join(', ')).join(' · ')});
+  }
+  if(reds.length)facts.push({label:'Cartons rouges',text:reds.join(' · ')});
+  const h=boxOf(home),a=boxOf(away);
+  const pair=(label,...names)=>{const x=stat(h,...names),y=stat(a,...names);return x!==null&&y!==null?label+' '+x+' – '+y:null;};
+  const poss=stat(h,'possessionPct'),poss2=stat(a,'possessionPct');
+  const line=[poss!==null&&poss2!==null?'Possession '+Math.round(+poss)+' % – '+Math.round(+poss2)+' %':null,pair('Tirs','totalShots'),pair('cadrés','shotsOnTarget'),pair('Corners','wonCorners')].filter(Boolean);
+  if(line.length)facts.push({label:'Statistiques',text:line.join(' · ')});
+ }else if(sport==='basketball'){
+  const rows=[];
+  for(const group of body?.boxscore?.players||[]){
+   const cat=group.statistics?.[0];if(!cat)continue;
+   const labels=cat.labels||cat.names||[],idx=n=>labels.indexOf(n);
+   for(const ath of cat.athletes||[]){
+    if(!Array.isArray(ath.stats)||!ath.stats.length)continue;
+    const v=n=>idx(n)>=0?ath.stats[idx(n)]:'';
+    rows.push({team:String(group.team?.id||''),name:ath.athlete?.displayName||'',pts:+v('PTS')||0,reb:v('REB'),ast:v('AST'),blk:v('BLK'),stl:v('STL'),fg:v('FG'),min:v('MIN')});
+   }
+  }
+  const wanted=plainName(favoriteAthlete).replace(/[^a-z]/g,'');
+  const star=wanted?rows.find(r=>plainName(r.name).replace(/[^a-z]/g,'').includes(wanted)||wanted.includes(plainName(r.name).replace(/[^a-z]/g,''))):null;
+  if(star)facts.push({label:star.name,text:[star.pts+' pts',star.reb+' reb',star.ast+' pd',star.blk+' ctr',star.stl+' int',star.fg?star.fg+' aux tirs':'',star.min?star.min+' min':''].filter(x=>x&&!/^ /.test(x)).join(' · ')});
+  for(const c of [home,away]){
+   const short=c?.team?.shortDisplayName||c?.team?.displayName||'';
+   const best=rows.filter(r=>r.team===String(c?.team?.id||'')).sort((x,y)=>y.pts-x.pts).slice(0,3);
+   if(best.length)facts.push({label:'Marqueurs '+short,text:best.map(r=>r.name+' '+r.pts).join(' · ')});
+  }
+  const quarters=[home,away].map(c=>(c?.linescores||[]).map(l=>l.displayValue??l.value));
+  if(quarters[0].length>=4&&quarters[1].length===quarters[0].length)facts.push({label:'Par quart-temps',text:quarters[0].map((q,i)=>q+'-'+quarters[1][i]).join(' · ')});
+ }
+ const venue=body?.gameInfo?.venue;
+ if(venue?.fullName)facts.push({label:'Lieu',text:venue.fullName+(venue.address?.city?' ('+venue.address.city+')':'')+(body.gameInfo.attendance?' · '+Number(body.gameInfo.attendance).toLocaleString('fr-FR')+' spectateurs':'')});
+ return facts.slice(0,7);
 }
 // Résumés vidéo publiés par ESPN pour la rencontre (MP4 lisible dans la page).
 export function videosFromESPN(body){
@@ -223,7 +278,7 @@ export async function loadEventDetails(event,{fetchFn=fetch}={}){
   const athleteName=origin.wembanyamaName||
    (event.favorites||[]).find(name=>/wemban[yi]ama/i.test(name))||'';
   const parsed={
-   ...data,article:recapArticleFromESPN(body),videos:videosFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
+   ...data,article:recapArticleFromESPN(body,id),facts:keyFactsFromESPN(body,data.sport,athleteName),videos:videosFromESPN(body),teamStats:parseTeamData(body.boxscore,data.sport),
    players:parsePlayerStats(body.boxscore,data.sport,athleteName||event.favorite,!!athleteName),
    scorers:parseScorers(body),
    note:'ESPN · statistiques de la feuille de match disponibles selon la compétition.',

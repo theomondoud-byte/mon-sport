@@ -5,6 +5,7 @@ import {makeAgenda,agendaMatches,mergeSpursAndWembanyama,shiftedMonths} from '..
 import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForFavorite,rankingRows,mergeATPLiveRows,parseATPLiveSnapshot,filterTennisRankingRows,tournamentColumns,tournamentStatusInColumns,renderOtherRankingTable,fetchRankings,renderRankingsView} from '../rankings-view.js';
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
+import {renderBlocks as renderBlocksForTest} from '../news-view.js';
 import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
@@ -1196,7 +1197,7 @@ test('V16.6 : un résultat ne reçoit que l’article de CE match (cas réels)',
  const favorites=[{name:'San Antonio Spurs',sport:'Basketball'},{name:'Carlos Alcaraz',sport:'Tennis'},{name:'Équipe de France de football',sport:'Football',apiName:'France'}];
  const news=[
   {title:'Warriors visit Spurs Friday in NBA Cup group stage',excerpt:'Golden State Warriors (8-4, sixth in the Western Conference) vs. San Antonio Spurs (9-3)',sport:'Basketball',source:'ESPN',link:'https://espn.com/1',date:'2026-11-12T10:00:00Z'},
-  {title:'Carlos Alcaraz wins his fifth title of the year',excerpt:'Alcaraz beat Ben Shelton 7-6 7-5 in the final.',sport:'Tennis',source:'ESPN',link:'https://espn.com/2',date:'2026-11-09T18:00:00Z'},
+  {title:'Carlos Alcaraz beats Ben Shelton to win his fifth title of the year',excerpt:'He will face Casper Ruud next week.',sport:'Tennis',source:'ESPN',link:'https://espn.com/2',date:'2026-11-09T18:00:00Z'},
   {title:'L’équipe de France battue par l’Italie en Ligue des nations',excerpt:'Les Bleus ont manqué de précision à Milan.',sport:'Football',source:'Franceinfo',link:'https://franceinfo.fr/3',date:'2026-11-12T22:30:00Z'}];
  const at=(title,date,fav)=>matchSummaryArticle({title,date,favorites:[fav]},news,favorites)?.link||null;
  assert.equal(at('Chicago Bulls — San Antonio Spurs','2026-11-12T01:00:00Z','San Antonio Spurs'),null);
@@ -1217,8 +1218,12 @@ test('V16.6 : le compte rendu ESPN ignore les articles génériques de la ligue'
 test('V16.6 : compte rendu NBA (lien http) accepté, article sur un seul club refusé',async()=>{
  const {recapArticleFromESPN}=await import('../event-details.js');
  const nba={header:{competitions:[{competitors:[{team:{displayName:'Chicago Bulls'}},{team:{displayName:'San Antonio Spurs'}}]}]},
-  article:{headline:'Wembanyama, Harper lead Spurs to 10th straight win, 124-119 over Bulls',description:'Victor Wembanyama scored 32 points.',links:{web:{href:'http://www.espn.com/nba/recap?gameId=401909969'}}}};
- assert.equal(recapArticleFromESPN(nba)?.link,'https://www.espn.com/nba/recap?gameId=401909969');
+  article:{gameId:'401909969',headline:'Wembanyama, Harper lead Spurs to 10th straight win, 124-119 over Bulls',description:'Victor Wembanyama scored 32 points.',story:'<p>CHICAGO -- — Victor Wembanyama scored 32 points and the San Antonio Spurs won their 10th straight game.</p><p>The Bulls have lost eight in a row to fall to 1-9. They are 0-4 at home.</p>',links:{web:{href:'http://www.espn.com/nba/recap?gameId=401909969'}}}};
+ const recap=recapArticleFromESPN(nba,'401909969');
+ assert.equal(recap?.link,'https://www.espn.com/nba/recap?gameId=401909969');
+ assert.deepEqual(recap.paragraphs,['Victor Wembanyama scored 32 points and the San Antonio Spurs won their 10th straight game.','The Bulls have lost eight in a row to fall to 1-9. They are 0-4 at home.']);
+ // Article d'un autre match du tournoi (autre gameId, un seul camp cité) : refusé.
+ assert.equal(recapArticleFromESPN({...nba,article:{...nba.article,gameId:'1',headline:'Spurs win again',description:''}},'401909969'),null);
  const liga={header:{competitions:[{competitors:[{team:{displayName:'Valencia'}},{team:{displayName:'Real Madrid'}}]}]},
   news:{articles:[{headline:"Trent Alexander-Arnold's dream move to Real Madrid is turning sour",links:{web:{href:'https://www.espn.com/soccer/story/9'}}}]}};
  assert.equal(recapArticleFromESPN(liga),null);
@@ -1295,4 +1300,68 @@ test('V17.0 : articles À lire / Lus',()=>{
  assert.match(keep,/Sinner s’impose/);
  const done=renderNewsView({...args,readKeys:new Set(['fflose.com/b','tennisactu.net/a'])});
  assert.match(done,/Tout est lu/);
+});
+
+test('V17.1 : l’essentiel du match en français à partir de la feuille ESPN',async()=>{
+ const {keyFactsFromESPN}=await import('../event-details.js');
+ const team=(id,name,home)=>({homeAway:home?'home':'away',team:{id,displayName:name,shortDisplayName:name}});
+ const soccer={header:{competitions:[{competitors:[team('1','Atlético Madrid',true),team('2','Barcelona',false)]}]},
+  keyEvents:[{scoringPlay:true,type:{text:'Goal'},clock:{displayValue:"10'"},team:{displayName:'Atlético Madrid'},participants:[{athlete:{displayName:'Giuliano Simeone'}}]},
+   {scoringPlay:true,type:{text:'Goal'},clock:{displayValue:"45'"},team:{displayName:'Barcelona'},participants:[{athlete:{displayName:'Fermín López'}}]},
+   {scoringPlay:true,type:{text:'Penalty - Scored'},clock:{displayValue:"66'"},team:{displayName:'Barcelona'},participants:[{athlete:{displayName:'Fermín López'}}]},
+   {type:{text:'Yellow Card'},clock:{displayValue:"70'"},team:{displayName:'Barcelona'},participants:[{athlete:{displayName:'Marc Bernal'}}]}],
+  boxscore:{teams:[{team:{id:'1'},statistics:[{name:'possessionPct',displayValue:'37'},{name:'totalShots',displayValue:'9'}]},{team:{id:'2'},statistics:[{name:'possessionPct',displayValue:'63'},{name:'totalShots',displayValue:'19'}]}]}};
+ const facts=keyFactsFromESPN(soccer,'football');
+ assert.deepEqual(facts[0],{label:'Buts Atlético Madrid',text:"Giuliano Simeone 10'"});
+ assert.deepEqual(facts[1],{label:'Buts Barcelona',text:"Fermín López 45', 66' (pen.)"});
+ assert.equal(facts[2].text,'Possession 37 % – 63 % · Tirs 9 – 19');
+ const nba={header:{competitions:[{competitors:[team('1','Bulls',true),team('2','Spurs',false)]}]},
+  boxscore:{players:[{team:{id:'2',shortDisplayName:'Spurs'},statistics:[{labels:['MIN','PTS','FG','REB','AST','STL','BLK'],athletes:[
+   {athlete:{displayName:'Victor Wembanyama'},stats:['32','32','13-18','9','1','2','5']},{athlete:{displayName:'Dylan Harper'},stats:['36','18','7-18','6','10','4','1']}]}]}]}};
+ const basket=keyFactsFromESPN(nba,'basketball','Victor Wembanyama');
+ assert.deepEqual(basket[0],{label:'Victor Wembanyama',text:'32 pts · 9 reb · 1 pd · 5 ctr · 2 int · 13-18 aux tirs · 32 min'});
+ assert.deepEqual(basket[1],{label:'Marqueurs Spurs',text:'Victor Wembanyama 32 · Dylan Harper 18'});
+});
+
+test('V17.1 : un extrait qui cite le prochain adversaire ne rattache pas l’article à ce match',()=>{
+ const favorites=[{name:'Mirra Andreeva',sport:'Tennis'}];
+ const news=[{title:'Mirra Andreeva beats Elina Svitolina to open WTA Finals',excerpt:'She will face Diana Shnaider on Friday.',sport:'Tennis',source:'ESPN',link:'https://espn.com/a',date:'2026-11-13T08:00:00Z'}];
+ assert.equal(matchSummaryArticle({title:'Diana Shnaider — Mirra Andreeva',date:'2026-11-13T03:00:00Z',favorites:['Mirra Andreeva']},news,favorites),null);
+ assert.equal(matchSummaryArticle({title:'Elina Svitolina — Mirra Andreeva',date:'2026-11-13T03:00:00Z',favorites:['Mirra Andreeva']},news,favorites)?.link,'https://espn.com/a');
+});
+
+test('V17.1 : les mots-dièse d’un titre ne comptent pas pour rattacher un article',()=>{
+ const favorites=[{name:'Mirra Andreeva',sport:'Tennis'}];
+ const article={title:'WTA Finals : Elina Svitolina renverse Aryna Sabalenka et se qualifie en demi-finale #WTAFinals #WTA #Andreeva #Shnaider #Muchova',excerpt:'Elina Svitolina poursuit l’aventure.',sport:'Tennis',source:'Tennis Actu',link:'https://www.tennisactu.net/s',date:'2026-11-13T23:26:00Z'};
+ assert.equal(findFavorite(article,favorites),null);
+ assert.equal(matchSummaryArticle({title:'Diana Shnaider — Mirra Andreeva',date:'2026-11-13T20:00:00Z',favorites:['Mirra Andreeva']},[article],favorites),null);
+ const html=renderNewsView({news:[{...article,title:'Masters : Andreeva bat Shnaider 6-2 6-1 #WTAFinals #Andreeva'}],now:new Date('2026-11-14T08:00:00Z'),esc:x=>String(x),safeUrl:x=>x,photos:{},favorites});
+ assert.match(html,/<h3>Masters : Andreeva bat Shnaider 6-2 6-1<\/h3>/);
+});
+
+test('V17.1 : thème clair généré à partir du thème sombre et à jour',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const {lightTheme,lightness}=await import('../scripts/build-light-theme.mjs');
+ const root=new URL('../',import.meta.url);
+ const dark=await readFile(new URL('style.css',root),'utf8');
+ const light=await readFile(new URL('style-light.css',root),'utf8');
+ assert.ok(light.includes(lightTheme(dark)),'style-light.css n’est pas à jour : lancer node scripts/build-light-theme.mjs');
+ // Fond sombre → très clair ; texte clair → foncé ; noir pur (ombres, vidéo) inchangé.
+ assert.ok(lightness(0.08)>0.94&&lightness(0.96)<0.2);
+ assert.equal(lightTheme('a{color:white;background:#000;border:1px solid #071321}'),'a{color:#1a1a1a;background:#000;border:1px solid '+lightTheme('#071321')+'}');
+ const index=await readFile(new URL('index.html',root),'utf8');
+ assert.match(index,/id="themeCss" rel="stylesheet" href="\.\/style-light\.css\?v=/);
+ assert.match(index,/monsport-theme-v1/);
+});
+
+test('V17.1 : tweets intégrés des articles — repère, médias et vidéo',()=>{
+ const blocks=[{type:'p',text:'Texte.'},{type:'p',text:'Quelle action !',tweet:true},{type:'tweet',id:'2121348677637685461'}];
+ const esc=x=>String(x);
+ assert.match(renderBlocksForTest(blocks,esc),/<p class="news-body-tweet">Quelle action !<\/p><div class="news-tweet-media" data-tweet-id="2121348677637685461"><\/div>/);
+ const known=new Map([['2121348677637685461',[{type:'video',src:'https://video.twimg.com/amplify_video/1/vid/avc1/1280x720/a.mp4?tag=21',poster:'https://pbs.twimg.com/amplify_video_thumb/1/img/x.jpg'},{type:'img',src:'https://pbs.twimg.com/media/A.jpg'}]]]);
+ const html=renderBlocksForTest(blocks,esc,known);
+ assert.match(html,/<video class="news-body-video"[^>]*poster="https:\/\/pbs\.twimg\.com\/amplify_video_thumb\/1\/img\/x\.jpg"[^>]*src="https:\/\/video\.twimg\.com\/amplify_video\/1\/vid\/avc1\/1280x720\/a\.mp4\?tag=21"/);
+ assert.match(html,/<img class="news-body-image"[^>]*src="https:\/\/pbs\.twimg\.com\/media\/A\.jpg"/);
+ // Une vidéo d'un autre domaine n'est jamais insérée.
+ assert.doesNotMatch(renderBlocksForTest([{type:'video',src:'https://evil.example/a.mp4'}],esc),/<video/);
 });

@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.0.0';
-import {sportInfo} from './sports-media.js?v=17.0.0';
+import {sourceIcon} from './source-icons.js?v=17.1.0';
+import {sportInfo} from './sports-media.js?v=17.1.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.0.0';
-import {auditInfo} from './audit-2026.js?v=17.0.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.0.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.0.0';
-import {photoInitials} from './photos.js?v=17.0.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.0.0';
-import {coverageFor} from './coverage-v11.js?v=17.0.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.1.0';
+import {auditInfo} from './audit-2026.js?v=17.1.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.1.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.1.0';
+import {photoInitials} from './photos.js?v=17.1.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.1.0';
+import {coverageFor} from './coverage-v11.js?v=17.1.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -74,13 +74,27 @@ function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
  if(!item.finished||item.pendingResult||item.isCompetition)return '';
  const article=summaryFor?.(item);
  const media=mediaFor?.(item)||{};
- let summary='';
+ // 1. L'essentiel, en français, tiré de la feuille de match.
+ const facts=(media.facts||[]).filter(f=>f&&f.text);
+ let summary=facts.length?'<dl class="result-facts">'+facts.map(f=>'<div><dt>'+esc(f.label)+'</dt><dd>'+esc(f.text)+'</dd></div>').join('')+'</dl>':'';
+ // 2. Article de presse sur CE match (français en priorité).
  if(article&&(article.excerpt||article.title)){
-  summary='<div class="result-summary"><p>'+esc(article.excerpt||article.title)+'</p>'
+  summary+='<div class="result-summary"><p>'+esc(article.excerpt||article.title)+'</p>'
    +'<a class="result-summary-source" href="'+esc(safeUrl(article.link))+'" target="_blank" rel="noopener noreferrer" data-stop>'+sourceIcon(article.source,esc,'small')+esc(article.source)+' · Lire l’article ↗</a></div>';
- }else if(media.recap?.excerpt){
-  summary='<div class="result-summary"><p lang="en">'+esc(media.recap.excerpt)+'</p>'
-   +'<a class="result-summary-source" href="'+esc(safeUrl(media.recap.link))+'" target="_blank" rel="noopener noreferrer" data-stop>'+sourceIcon('ESPN',esc,'small')+'ESPN (en anglais) · Lire le compte rendu ↗</a></div>';
+ }
+ // 3. Compte rendu ESPN du match, lisible en entier dans la carte.
+ const recap=media.recap;
+ if(recap&&(recap.excerpt||recap.paragraphs?.length)){
+  const full=(recap.paragraphs||[]).length>1;
+  summary+='<div class="result-summary result-recap">'
+   +(article?'':'<p lang="en">'+esc(recap.excerpt||recap.paragraphs[0])+'</p>')
+   +'<div class="result-recap-actions">'
+   +(full?'<button type="button" class="result-recap-toggle" data-toggle-recap data-stop>'+sourceIcon('ESPN',esc,'small')+'<span>Lire le compte rendu complet (en anglais)</span></button>'
+    :'<a class="result-summary-source" href="'+esc(safeUrl(recap.link))+'" target="_blank" rel="noopener noreferrer" data-stop>'+sourceIcon('ESPN',esc,'small')+'ESPN (en anglais) ↗</a>')
+   +'</div>'
+   +(full?'<div class="result-recap-full" lang="en" hidden><h5>'+esc(recap.title)+'</h5>'+recap.paragraphs.map(p=>'<p>'+esc(p)+'</p>').join('')
+     +'<a class="result-summary-source" href="'+esc(safeUrl(recap.link))+'" target="_blank" rel="noopener noreferrer" data-stop>Source : ESPN ↗</a></div>':'')
+   +'</div>';
  }
  const video=(media.videos||[]).find(v=>v.src);
  const page=(media.videos||[]).find(v=>v.page);

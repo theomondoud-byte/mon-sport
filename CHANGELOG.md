@@ -4,6 +4,17 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.1 — thème clair, l'essentiel de chaque match, médias des articles FFL
+
+- **Thème clair** par défaut (fonds clairs, textes foncés, mêmes couleurs d'accent). Le thème sombre reste disponible dans Réglages → Apparence. `style-light.css` est généré depuis `style.css` par `scripts/build-light-theme.mjs`.
+- **Résultats — l'essentiel en français**, directement dans la carte : buteurs et minutes, cartons rouges, possession/tirs/corners (football) ; ligne de Wembanyama, meilleurs marqueurs et score par quart-temps (NBA) ; vainqueur, têtes de série, pays et lieu (tennis) ; stade et affluence.
+- **Compte rendu complet** du match lisible dans la carte (ESPN, en anglais), en plus de l'article français quand il existe.
+- **Rapprochement article ↔ match fiabilisé** : le favori ET l'adversaire doivent figurer dans le titre (un extrait peut citer le prochain adversaire) ; les mots-dièse de fin de titre (« #Andreeva #Shnaider ») sont ignorés et retirés de l'affichage ; le compte rendu ESPN doit porter l'identifiant du match ; les tribunes « Nom: … » sont écartées.
+- **Articles FFL** : les photos et vidéos des tweets intégrés s'affichent dans l'article (chargées à l'ouverture, via le relais) ; liens `t.co` retirés.
+- L'écran n'est plus recréé pendant la lecture d'un article ou d'une vidéo.
+
+---
+
 # Mon Sport V17.0 — articles « À lire » / « Lus » et rugby international en direct
 
 - **Articles à lire / lus** : deux onglets avec compteurs. Un article ouvert (« Lire dans Mon Sport » ou lien source) passe dans « Lus » ; il reste visible pendant la lecture et rejoint « Lus » au prochain passage dans l'onglet. Glisser un article vers la gauche (ou toucher ✓) le range dans « Lus » ; dans « Lus », le même geste le remet dans « À lire ». « Tout marquer comme lu » vide la liste en une fois. État mémorisé sur l'appareil (21 jours).

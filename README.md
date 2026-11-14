@@ -70,7 +70,13 @@ Toute modification d'un fichier JS ou CSS doit changer la version, sinon les té
 node scripts/bump-version.mjs 16.4.0
 ```
 
-Le script met à jour `version.js`, `package.json`, `index.html`, le cache de `sw.js` et tous les imports. Un test vérifie que tout est cohérent. Ajouter ensuite une entrée dans [CHANGELOG.md](CHANGELOG.md).
+Le script met à jour `version.js`, `package.json`, `index.html`, le cache de `sw.js` et tous les imports.
+
+Après une modification de `style.css` (thème sombre), régénérer le thème clair :
+
+```bash
+node scripts/build-light-theme.mjs
+``` Un test vérifie que tout est cohérent. Ajouter ensuite une entrée dans [CHANGELOG.md](CHANGELOG.md).
 
 ## Déploiement
 

@@ -977,3 +977,18 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .news-mark:hover{background:#1f7a55;border-color:#2f9b6e}
 .news-link-card .news-card-top{padding-right:40px}
 .jsm-native-header{padding-right:40px}
+
+/* V17.1 — l'essentiel du match et compte rendu complet dans la carte. */
+.result-facts{margin:10px 0 2px;display:grid;gap:5px;font-size:.84rem;line-height:1.45}
+.result-facts>div{display:grid;grid-template-columns:minmax(92px,30%) 1fr;gap:8px;align-items:baseline}
+.result-facts dt{color:#9fbfce;font-weight:750;font-size:.74rem;text-transform:uppercase;letter-spacing:.03em}
+.result-facts dd{margin:0;color:#e8f3fa;overflow-wrap:anywhere}
+.result-recap-actions{display:flex;flex-wrap:wrap;gap:8px}
+.result-recap-toggle{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;color:#9fe9c9;font-weight:750;font-size:.78rem;cursor:pointer;text-align:left}
+.result-recap-full{margin-top:10px;padding-top:8px;border-top:1px solid #2c5163}
+.result-recap-full h5{margin:0 0 6px;font-size:.92rem;line-height:1.35;color:#f3fbff}
+.result-recap-full p{display:block;-webkit-line-clamp:unset;overflow:visible;margin:0 0 9px;font-size:.86rem;line-height:1.6;color:#d6e8f1}
+.news-body-video{display:block;width:100%;max-height:70vh;border-radius:10px;background:#000}
+.news-body-tweet{border-left:3px solid #3b6276;padding-left:10px;color:#d6e8f1}
+@media(max-width:600px){.result-facts>div{grid-template-columns:1fr;gap:0}}
+.theme-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:360px}
