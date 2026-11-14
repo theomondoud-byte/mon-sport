@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-14T07:08:48.216249+00:00",
+  "fetchedAt": "2026-11-14T12:58:16.489973+00:00",
   "rows": [
     {
       "rank": 1,
@@ -35,7 +35,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 0 D)",
@@ -101,7 +101,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
         }
       ]
     },
@@ -122,7 +122,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 1 D)",
@@ -151,7 +151,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
         }
       ]
     },
@@ -1398,7 +1398,7 @@
       "tournamentHistory": [
         {
           "text": "Sopo F",
-          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
         },
         {
           "text": "Sopo DF",
@@ -2329,7 +2329,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 F",
-          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
         },
         {
           "text": "Brisbane 6 DF",
