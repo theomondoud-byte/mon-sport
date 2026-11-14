@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-14T01:09:10.606632+00:00",
+  "fetchedAt": "2026-11-14T07:08:48.216249+00:00",
   "rows": [
     {
       "rank": 1,
@@ -35,7 +35,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 0 D)",
@@ -52,11 +52,11 @@
       "careerHigh": "1",
       "movement": -1,
       "pointsChange": 200,
-      "tournament": "Finales WTA RR (1 V / 2 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 7085,
-      "maxPoints": 7585,
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA RR (1 V / 2 D)",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (1 V / 2 D)",
@@ -101,7 +101,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
         }
       ]
     },
@@ -114,12 +114,16 @@
       "careerHigh": "3",
       "movement": null,
       "pointsChange": 400,
-      "tournament": "Finales WTA RR (2 V / 1 D)",
+      "tournament": "Finales WTA DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 5921,
       "maxPoints": 6421,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA DF",
+          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+        },
         {
           "text": "Finales WTA RR (2 V / 1 D)",
           "lastSeen": "2026-11-14T01:09:10.606632+00:00"
@@ -147,7 +151,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
         }
       ]
     },
@@ -160,11 +164,11 @@
       "careerHigh": "6",
       "movement": -1,
       "pointsChange": null,
-      "tournament": "Finales WTA RR (0 V / 2 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 4865,
-      "maxPoints": 5765,
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA RR (0 V / 2 D)",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (0 V / 2 D)",
@@ -213,11 +217,11 @@
       "careerHigh": "MC",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA RR (0 V / 1 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 3438,
-      "maxPoints": 4538,
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA RR (0 V / 1 D)",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (0 V / 1 D)",
@@ -1394,7 +1398,7 @@
       "tournamentHistory": [
         {
           "text": "Sopo F",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
         },
         {
           "text": "Sopo DF",
@@ -2184,11 +2188,11 @@
       "careerHigh": "122",
       "movement": 1,
       "pointsChange": 9,
-      "tournament": "Brisbane 6 DF (16e )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 610,
-      "maxPoints": 636,
+      "tournament": "",
+      "previousTournaments": "Défaite Brisbane 6 DF (16e )",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Brisbane 6 DF (16e )",
@@ -2310,28 +2314,37 @@
     },
     {
       "rank": 141,
+      "name": "Carol Lee",
+      "age": 24,
+      "country": "USA",
+      "livePoints": 539,
+      "careerHigh": "136",
+      "movement": 15,
+      "pointsChange": 47,
+      "tournament": "Brisbane 6 F",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 565,
+      "maxPoints": 565,
+      "tournamentHistory": [
+        {
+          "text": "Brisbane 6 F",
+          "lastSeen": "2026-11-14T07:08:48.216249+00:00"
+        },
+        {
+          "text": "Brisbane 6 DF",
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 142,
       "name": "Elizara Yaneva",
       "age": 19,
       "country": "BUL",
       "livePoints": 535,
       "careerHigh": "138",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 142,
-      "name": "Han Shi",
-      "age": 21,
-      "country": "CHN",
-      "livePoints": 531,
-      "careerHigh": "140",
-      "movement": -2,
+      "movement": -3,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2342,12 +2355,12 @@
     },
     {
       "rank": 143,
-      "name": "Martyna Kubka",
-      "age": 25,
-      "country": "POL",
-      "livePoints": 528,
-      "careerHigh": "141",
-      "movement": -2,
+      "name": "Han Shi",
+      "age": 21,
+      "country": "CHN",
+      "livePoints": 531,
+      "careerHigh": "140",
+      "movement": -3,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2358,28 +2371,12 @@
     },
     {
       "rank": 144,
-      "name": "Tamara Zidanšek",
-      "age": 28,
-      "country": "SLO",
-      "livePoints": 527,
-      "careerHigh": "22",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Sopo 16e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 145,
-      "name": "Teodora Kostović",
-      "age": 19,
-      "country": "SRB",
-      "livePoints": 522,
-      "careerHigh": "139",
-      "movement": -1,
+      "name": "Martyna Kubka",
+      "age": 25,
+      "country": "POL",
+      "livePoints": 528,
+      "careerHigh": "141",
+      "movement": -3,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2389,25 +2386,36 @@
       "tournamentHistory": []
     },
     {
+      "rank": 145,
+      "name": "Tamara Zidanšek",
+      "age": 28,
+      "country": "SLO",
+      "livePoints": 527,
+      "careerHigh": "22",
+      "movement": -3,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "Défaite Sopo 16e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
       "rank": 146,
-      "name": "Carol Lee",
-      "age": 24,
-      "country": "USA",
-      "livePoints": 519,
-      "careerHigh": "136",
-      "movement": 10,
-      "pointsChange": 27,
-      "tournament": "Brisbane 6 DF",
+      "name": "Teodora Kostović",
+      "age": 19,
+      "country": "SRB",
+      "livePoints": 522,
+      "careerHigh": "139",
+      "movement": -2,
+      "pointsChange": null,
+      "tournament": "",
       "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 539,
-      "maxPoints": 565,
-      "tournamentHistory": [
-        {
-          "text": "Brisbane 6 DF",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
-        }
-      ]
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 147,

@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-14T01:09:11.721231+00:00",
+  "fetchedAt": "2026-11-14T07:08:49.025810+00:00",
   "rows": [
     {
       "rank": 1,
@@ -27,9 +27,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA RR (1 V / 2 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA RR (1 V / 2 D)",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -60,7 +60,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T01:09:11.721231+00:00"
+          "lastSeen": "2026-11-14T07:08:49.025810+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 0 D)",
@@ -101,7 +101,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T01:09:11.721231+00:00"
+          "lastSeen": "2026-11-14T07:08:49.025810+00:00"
         }
       ]
     },
@@ -114,12 +114,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA RR (2 V / 1 D)",
+      "tournament": "Finales WTA DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA DF",
+          "lastSeen": "2026-11-14T07:08:49.025810+00:00"
+        },
         {
           "text": "Finales WTA RR (2 V / 1 D)",
           "lastSeen": "2026-11-14T01:09:11.721231+00:00"
@@ -139,9 +143,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA RR (0 V / 2 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA RR (0 V / 2 D)",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -168,7 +172,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T01:09:11.721231+00:00"
+          "lastSeen": "2026-11-14T07:08:49.025810+00:00"
         }
       ]
     },
@@ -213,9 +217,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA RR (0 V / 1 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA RR (0 V / 1 D)",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -2250,12 +2254,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Brisbane 6 DF",
+      "tournament": "Brisbane 6 F",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Brisbane 6 F",
+          "lastSeen": "2026-11-14T07:08:49.025810+00:00"
+        },
         {
           "text": "Brisbane 6 DF",
           "lastSeen": "2026-11-14T01:09:11.721231+00:00"
