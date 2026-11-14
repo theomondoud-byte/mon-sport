@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-13T18:59:56.168154+00:00",
+  "fetchedAt": "2026-11-14T01:09:10.606632+00:00",
   "rows": [
     {
       "rank": 1,
@@ -23,19 +23,19 @@
       "name": "Mirra Andreeva",
       "age": 19,
       "country": "RUS",
-      "livePoints": 6706,
+      "livePoints": 6906,
       "careerHigh": "NMC (3)",
       "movement": 1,
-      "pointsChange": 400,
+      "pointsChange": 600,
       "tournament": "Finales WTA DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 6906,
+      "nextPoints": 7306,
       "maxPoints": 7806,
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 0 D)",
@@ -52,12 +52,16 @@
       "careerHigh": "1",
       "movement": -1,
       "pointsChange": 200,
-      "tournament": "Finales WTA RR (1 V / 1 D)",
+      "tournament": "Finales WTA RR (1 V / 2 D)",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 6885,
-      "maxPoints": 7785,
+      "nextPoints": 7085,
+      "maxPoints": 7585,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA RR (1 V / 2 D)",
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+        },
         {
           "text": "Finales WTA RR (1 V / 1 D)",
           "lastSeen": "2026-11-13T18:59:56.168154+00:00"
@@ -97,7 +101,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         }
       ]
     },
@@ -106,16 +110,20 @@
       "name": "Elina Svitolina",
       "age": 32,
       "country": "UKR",
-      "livePoints": 5321,
+      "livePoints": 5521,
       "careerHigh": "3",
       "movement": null,
-      "pointsChange": 200,
-      "tournament": "Finales WTA RR (1 V / 1 D)",
+      "pointsChange": 400,
+      "tournament": "Finales WTA RR (2 V / 1 D)",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 5521,
+      "nextPoints": 5921,
       "maxPoints": 6421,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA RR (2 V / 1 D)",
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+        },
         {
           "text": "Finales WTA RR (1 V / 1 D)",
           "lastSeen": "2026-11-13T18:59:56.168154+00:00"
@@ -139,7 +147,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         }
       ]
     },
@@ -160,7 +168,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (0 V / 2 D)",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         }
       ]
     },
@@ -205,12 +213,17 @@
       "careerHigh": "MC",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Finales WTA RR (0 V / 1 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentStatus": "en_lice",
+      "nextPoints": 3438,
+      "maxPoints": 4538,
+      "tournamentHistory": [
+        {
+          "text": "Finales WTA RR (0 V / 1 D)",
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+        }
+      ]
     },
     {
       "rank": 12,
@@ -1381,7 +1394,7 @@
       "tournamentHistory": [
         {
           "text": "Sopo F",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         },
         {
           "text": "Sopo DF",
@@ -2179,7 +2192,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 DF (16e )",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         }
       ]
     },
@@ -2392,7 +2405,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 DF",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         }
       ]
     },
