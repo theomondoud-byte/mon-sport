@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-14T12:58:16.489973+00:00",
+  "fetchedAt": "2026-11-14T18:51:27.205837+00:00",
   "rows": [
     {
       "rank": 1,
@@ -35,7 +35,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
+          "lastSeen": "2026-11-14T18:51:27.205837+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 0 D)",
@@ -101,7 +101,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
+          "lastSeen": "2026-11-14T18:51:27.205837+00:00"
         }
       ]
     },
@@ -122,7 +122,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
+          "lastSeen": "2026-11-14T18:51:27.205837+00:00"
         },
         {
           "text": "Finales WTA RR (2 V / 1 D)",
@@ -151,7 +151,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
-          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
+          "lastSeen": "2026-11-14T18:51:27.205837+00:00"
         }
       ]
     },
@@ -1271,130 +1271,18 @@
     },
     {
       "rank": 77,
-      "name": "Antonia Ružić",
-      "age": 23,
-      "country": "CRO",
-      "livePoints": 898,
-      "careerHigh": "50",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 78,
-      "name": "Alina Korneeva",
-      "age": 19,
-      "country": "RUS",
-      "livePoints": 895,
-      "careerHigh": "67",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 79,
-      "name": "Mananchaya Sawangkaew",
-      "age": 24,
-      "country": "THA",
-      "livePoints": 886,
-      "careerHigh": "77",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 80,
-      "name": "Katie Volynets",
-      "age": 24,
-      "country": "USA",
-      "livePoints": 874,
-      "careerHigh": "56",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 81,
-      "name": "Jaqueline Cristian",
-      "age": 28,
-      "country": "ROU",
-      "livePoints": 869,
-      "careerHigh": "28",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 82,
-      "name": "Xiyu Wang",
-      "age": 25,
-      "country": "CHN",
-      "livePoints": 868,
-      "careerHigh": "49",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 83,
-      "name": "Alina Charaeva",
-      "age": 24,
-      "country": "ARM",
-      "livePoints": 859,
-      "careerHigh": "82",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 84,
       "name": "Bianca Andreescu",
       "age": 26,
       "country": "CAN",
-      "livePoints": 856,
+      "livePoints": 900,
       "careerHigh": "4",
-      "movement": 16,
-      "pointsChange": 79,
-      "tournament": "Sopo F",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 900,
-      "maxPoints": 900,
+      "movement": 23,
+      "pointsChange": 123,
+      "tournament": "",
+      "previousTournaments": "Sopo V",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Sopo F",
@@ -1405,6 +1293,118 @@
           "lastSeen": "2026-11-13T15:24:01.943762+00:00"
         }
       ]
+    },
+    {
+      "rank": 78,
+      "name": "Antonia Ružić",
+      "age": 23,
+      "country": "CRO",
+      "livePoints": 898,
+      "careerHigh": "50",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 79,
+      "name": "Alina Korneeva",
+      "age": 19,
+      "country": "RUS",
+      "livePoints": 895,
+      "careerHigh": "67",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 80,
+      "name": "Mananchaya Sawangkaew",
+      "age": 24,
+      "country": "THA",
+      "livePoints": 886,
+      "careerHigh": "77",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 81,
+      "name": "Katie Volynets",
+      "age": 24,
+      "country": "USA",
+      "livePoints": 874,
+      "careerHigh": "56",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 82,
+      "name": "Jaqueline Cristian",
+      "age": 28,
+      "country": "ROU",
+      "livePoints": 869,
+      "careerHigh": "28",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 83,
+      "name": "Xiyu Wang",
+      "age": 25,
+      "country": "CHN",
+      "livePoints": 868,
+      "careerHigh": "49",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 84,
+      "name": "Alina Charaeva",
+      "age": 24,
+      "country": "ARM",
+      "livePoints": 859,
+      "careerHigh": "82",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 85,
@@ -2329,7 +2329,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 F",
-          "lastSeen": "2026-11-14T12:58:16.489973+00:00"
+          "lastSeen": "2026-11-14T18:51:27.205837+00:00"
         },
         {
           "text": "Brisbane 6 DF",
