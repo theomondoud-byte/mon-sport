@@ -1,7 +1,7 @@
 {
   "source": "https://www.eleventabletennis.com/rankings",
   "officialSource": "https://www.ittf.com/rankings/",
-  "fetchedAt": "2026-11-15T12:59:58.770305+00:00",
+  "fetchedAt": "2026-11-15T18:53:17.289555+00:00",
   "week": 46,
   "rows": [
     {
@@ -510,7 +510,7 @@
     },
     {
       "rank": 73,
-      "name": "Xiaona Shan",
+      "name": "Shan Xiaona",
       "country": "GER",
       "points": 485,
       "movement": -2
@@ -699,7 +699,7 @@
     },
     {
       "rank": 100,
-      "name": "Jie Li",
+      "name": "Li Jie",
       "country": "NED",
       "points": 312,
       "movement": 0

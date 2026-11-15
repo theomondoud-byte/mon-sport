@@ -1,7 +1,7 @@
 {
   "source": "https://www.eleventabletennis.com/rankings",
   "officialSource": "https://www.ittf.com/rankings/",
-  "fetchedAt": "2026-11-15T12:59:58.770305+00:00",
+  "fetchedAt": "2026-11-15T18:53:17.289555+00:00",
   "week": 46,
   "rows": [
     {
@@ -587,7 +587,7 @@
     },
     {
       "rank": 84,
-      "name": "Quek Izaac",
+      "name": "Izaac Quek",
       "country": "SGP",
       "points": 397,
       "movement": 0
@@ -615,7 +615,7 @@
     },
     {
       "rank": 88,
-      "name": "Yang Wang",
+      "name": "Wang Yang",
       "country": "SVK",
       "points": 377,
       "movement": 0
@@ -846,7 +846,7 @@
     },
     {
       "rank": 121,
-      "name": "Pang Koen",
+      "name": "Koen Pang",
       "country": "SGP",
       "points": 248,
       "movement": -2

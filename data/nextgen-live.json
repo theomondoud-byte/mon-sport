@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-race-next-gen",
-  "fetchedAt": "2026-11-15T12:59:55.349284+00:00",
+  "fetchedAt": "2026-11-15T18:53:13.726681+00:00",
   "rows": [
     {
       "rank": 1,
@@ -11,12 +11,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales ATP RR (0 V / 0 D)",
+      "tournament": "Finales ATP RR (0 V / 1 D)",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 1 D)",
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
+        },
         {
           "text": "Finales ATP RR (0 V / 0 D)",
           "lastSeen": "2026-11-15T12:59:55.349284+00:00"
@@ -125,7 +129,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -194,7 +198,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -215,7 +219,7 @@
       "tournamentHistory": [
         {
           "text": "Metz 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -257,7 +261,7 @@
       "tournamentHistory": [
         {
           "text": "Metz 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -294,7 +298,7 @@
       "tournamentHistory": [
         {
           "text": "Metz 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -315,7 +319,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -336,7 +340,7 @@
       "tournamentHistory": [
         {
           "text": "Kōbe 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -431,7 +435,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -489,7 +493,7 @@
       "tournamentHistory": [
         {
           "text": "Kōbe 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         },
         {
           "text": "Matsuyama QF",
@@ -514,7 +518,7 @@
       "tournamentHistory": [
         {
           "text": "Kōbe 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -620,7 +624,7 @@
       "tournamentHistory": [
         {
           "text": "Qualif. Champaign T1",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -707,12 +711,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": 2,
-      "tournament": "Qualif. Montevideo T1",
+      "tournament": "Qualif. Montevideo T2",
       "previousTournaments": "Défaite Qualif. Lima T2",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Qualif. Montevideo T2",
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
+        },
         {
           "text": "Qualif. Montevideo T1",
           "lastSeen": "2026-11-15T12:59:55.349284+00:00"
@@ -752,7 +760,7 @@
       "tournamentHistory": [
         {
           "text": "Qualif. Kōbe T2",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         },
         {
           "text": "Qualif. Kōbe T1",
@@ -777,7 +785,7 @@
       "tournamentHistory": [
         {
           "text": "Kōbe 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -859,9 +867,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Vale Do Lobo 2 F",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Vale Do Lobo 2 F",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -913,7 +921,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -1264,7 +1272,7 @@
       "tournamentHistory": [
         {
           "text": "Qualif. Sydney T2",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         },
         {
           "text": "Qualif. Sydney T1",
@@ -1289,7 +1297,7 @@
       "tournamentHistory": [
         {
           "text": "Qualif. Champaign T1",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -1343,9 +1351,9 @@
       "careerHigh": "",
       "movement": -2,
       "pointsChange": null,
-      "tournament": "Qualif. Helsinki T1",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Qualif. Helsinki T1",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -1396,9 +1404,9 @@
       "careerHigh": "",
       "movement": -4,
       "pointsChange": null,
-      "tournament": "Las Palmas De Gran Canaria F",
-      "previousTournaments": "Défaite Valence 16e",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Valence 16e Las Palmas De Gran Canaria V",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -1477,7 +1485,7 @@
       "tournamentHistory": [
         {
           "text": "Kōbe 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -1570,12 +1578,16 @@
       "careerHigh": "",
       "movement": -3,
       "pointsChange": null,
-      "tournament": "Qualif. Drummondville T1",
+      "tournament": "Qualif. Drummondville T2",
       "previousTournaments": "Défaite Montréal 2 16e",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Qualif. Drummondville T2",
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
+        },
         {
           "text": "Qualif. Drummondville T1",
           "lastSeen": "2026-11-15T12:59:55.349284+00:00"
@@ -1647,7 +1659,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -1928,7 +1940,7 @@
       "tournamentHistory": [
         {
           "text": "Qualif. Héraklion 15 T2",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         }
       ]
     },
@@ -1986,7 +1998,7 @@
       "tournamentHistory": [
         {
           "text": "Qualif. Sydney T2",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         },
         {
           "text": "Qualif. Sydney T1",
@@ -2377,7 +2389,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
-          "lastSeen": "2026-11-15T12:59:55.349284+00:00"
+          "lastSeen": "2026-11-15T18:53:13.726681+00:00"
         },
         {
           "text": "Montréal 2 QF",
