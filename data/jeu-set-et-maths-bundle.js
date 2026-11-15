@@ -3,8 +3,23 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-15T01:14:24.228963+00:00",
+ "fetchedAt": "2026-11-15T07:11:40.824386+00:00",
  "posts": [
+  {
+   "title": "📊 Les plus grandes différences d'âge entre les deux joueuses qualifiées en finale du Masters WTA : ▪️ 17 ans et 45 jours : Navratilova 🇺🇸 vs Seles 🇷🇸 (1991, 1992) ▪️ 12…",
+   "text": "📊 Les plus grandes différences d'âge entre les deux joueuses qualifiées en finale du Masters WTA :\n▪️ 17 ans et 45 jours : Navratilova 🇺🇸 vs Seles 🇷🇸 (1991, 1992)\n▪️ 12 ans et 239 jours : Navratilova 🇺🇸 vs Graf 🇩🇪 (1986, 1989)\n🆕 12 ans et 229 jours : Svitolina 🇺🇦 vs Andreeva 🇷🇺 (2026)\n▪️ 12 ans et 120 jours : Richey 🇺🇸 vs Evert 🇺🇸 (1973)",
+   "link": "https://x.com/JeuSetMaths/status/2121856570896097706",
+   "date": "2026-11-15T06:43:23.347000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXJZQHnWQAAZtoO.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXJZQHnWQAAZtoO.jpg?name=orig",
+    "https://pbs.twimg.com/media/HXJZQyaXwAAU5jJ.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Elina Svitolina 🇺🇦 retrouve la finale du Masters 7 ans après sa dernière finale dans la compétition. 5 autres joueuses ont enregistré un aussi long intervalle entre…",
    "text": "📊 Elina Svitolina 🇺🇦 retrouve la finale du Masters 7 ans après sa dernière finale dans la compétition. 5 autres joueuses ont enregistré un aussi long intervalle entre deux finales :\n▪️ 8 ans : Monica Seles 🇷🇸🇺🇸 (1992-2000)\n▪️ 8 ans : Mary Pierce 🇫🇷 (1997-2005)\n▪️ 8 ans : Venus Williams 🇺🇸 (2009-2017)\n▪️ 7 ans : Kim Clijsters 🇧🇪 (2003-2010)\n▪️ 7 ans : Caroline Wozniacki 🇩🇰 (2010-2017)\n🆕 7 ans : Elina Svitolina 🇺🇦 (2019-2026)",
@@ -165,20 +180,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HW4gmtHWAAAJ12V.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HW4gmtHWAAAJ12V.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Les plus jeunes demi-finalistes du Masters WTA au XXIe siècle : 1⃣ Sharapova 🇷🇺 : 17 ans et 209 jours 2⃣ Clijsters 🇧🇪 : 18 ans et 149 jours 3⃣ Sharapova 🇷🇺 : 18 ans…",
-   "text": "📊 Les plus jeunes demi-finalistes du Masters WTA au XXIe siècle :\n1⃣ Sharapova 🇷🇺 : 17 ans et 209 jours\n2⃣ Clijsters 🇧🇪 : 18 ans et 149 jours\n3⃣ Sharapova 🇷🇺 : 18 ans et 208 jours\n4⃣ Wozniacki 🇩🇰 : 19 ans et 113 jours\n5⃣ Clijsters 🇧🇪 : 19 ans et 155 jours\n6⃣ Andreeva 🇷🇺 : 19 ans et 200 jours 🆕\n7⃣ Sharapova 🇷🇺 : 19 ans et 207 jours\n8⃣ Gauff 🇺🇸 : 19 ans et 237 jours\n9⃣ Ivanovic 🇷🇸 : 20 ans et 5 jours\n🔟 S. Williams 🇺🇸 : 20 ans et 39 jours",
-   "link": "https://x.com/JeuSetMaths/status/2120665645721256201",
-   "date": "2026-11-11T23:51:04.659000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HW4eDJ6XoAAQxaN.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HW4eDJ6XoAAQxaN.jpg?name=orig"
    ],
    "video": null
   }

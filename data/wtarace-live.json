@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-15T01:14:18.650602+00:00",
+  "fetchedAt": "2026-11-15T07:11:35.323606+00:00",
   "rows": [
     {
       "rank": 1,
@@ -60,7 +60,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA F (DF )",
-          "lastSeen": "2026-11-15T01:14:18.650602+00:00"
+          "lastSeen": "2026-11-15T07:11:35.323606+00:00"
         },
         {
           "text": "Finales WTA DF",
@@ -126,7 +126,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA F (DF )",
-          "lastSeen": "2026-11-15T01:14:18.650602+00:00"
+          "lastSeen": "2026-11-15T07:11:35.323606+00:00"
         },
         {
           "text": "Finales WTA DF",
@@ -2182,12 +2182,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "Défaite Sopo 16e",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:35.323606+00:00"
+        }
+      ]
     },
     {
       "rank": 134,
@@ -2214,12 +2219,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:35.323606+00:00"
+        }
+      ]
     },
     {
       "rank": 136,
@@ -2262,9 +2272,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Brisbane 6 F",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Brisbane 6 V",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -2319,12 +2329,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:35.323606+00:00"
+        }
+      ]
     },
     {
       "rank": 142,
@@ -2351,12 +2366,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:35.323606+00:00"
+        }
+      ]
     },
     {
       "rank": 144,

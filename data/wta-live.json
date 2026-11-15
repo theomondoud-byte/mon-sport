@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-15T01:14:17.522571+00:00",
+  "fetchedAt": "2026-11-15T07:11:34.428212+00:00",
   "rows": [
     {
       "rank": 1,
@@ -35,7 +35,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA F (DF )",
-          "lastSeen": "2026-11-15T01:14:17.522571+00:00"
+          "lastSeen": "2026-11-15T07:11:34.428212+00:00"
         },
         {
           "text": "Finales WTA DF",
@@ -126,7 +126,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA F (DF )",
-          "lastSeen": "2026-11-15T01:14:17.522571+00:00"
+          "lastSeen": "2026-11-15T07:11:34.428212+00:00"
         },
         {
           "text": "Finales WTA DF",
@@ -1775,12 +1775,16 @@
       "careerHigh": "NMC (112)",
       "movement": 12,
       "pointsChange": 47,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "Défaite Sopo DF",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:34.428212+00:00"
+        },
         {
           "text": "Sopo DF",
           "lastSeen": "2026-11-13T15:24:01.943762+00:00"
@@ -1844,12 +1848,17 @@
       "careerHigh": "MC",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "Défaite Sopo 16e",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:34.428212+00:00"
+        }
+      ]
     },
     {
       "rank": 112,
@@ -2233,12 +2242,17 @@
       "careerHigh": "46",
       "movement": 1,
       "pointsChange": 6,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "Défaite Sopo 8e",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:34.428212+00:00"
+        }
+      ]
     },
     {
       "rank": 136,
@@ -2313,12 +2327,17 @@
       "careerHigh": "136",
       "movement": 3,
       "pointsChange": 16,
-      "tournament": "",
+      "tournament": "Colina 16e",
       "previousTournaments": "Défaite Sopo QF",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-15T07:11:34.428212+00:00"
+        }
+      ]
     },
     {
       "rank": 141,
@@ -2329,11 +2348,11 @@
       "careerHigh": "136",
       "movement": 15,
       "pointsChange": 47,
-      "tournament": "Brisbane 6 F",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 565,
-      "maxPoints": 565,
+      "tournament": "",
+      "previousTournaments": "Défaite Brisbane 6 F",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Brisbane 6 F",
