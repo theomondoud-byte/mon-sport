@@ -1,20 +1,20 @@
-import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.5.0';
-import {createOnceLoader} from './session-loader.js?v=17.5.0';
-import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.5.0';
-import {renderAgendaView} from './agenda-ui.js?v=17.5.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.5.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.5.0';
-import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.5.0';
-import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.5.0';
-import {extraProgramFor} from './verified-program.js?v=17.5.0';
-import {verifiedExtraFor} from './verified-extra-v11.js?v=17.5.0';
-import {coverageFor} from './coverage-v11.js?v=17.5.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey,competitionResultFromNews} from './news-view.js?v=17.5.0';
-import {loadEventDetails,renderEventDetails,hasEspnSheet} from './event-details.js?v=17.5.0';
-import {verified2026For} from './audit-2026.js?v=17.5.0';
-import {renderAudit2026} from './audit-ui.js?v=17.5.0';
-import {auditEspn2026} from './audit-espn-2026.js?v=17.5.0';
-import {APP_LABEL,APP_VERSION} from './version.js?v=17.5.0';
+import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.6.0';
+import {createOnceLoader} from './session-loader.js?v=17.6.0';
+import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.6.0';
+import {renderAgendaView} from './agenda-ui.js?v=17.6.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.6.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.6.0';
+import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.6.0';
+import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.6.0';
+import {extraProgramFor} from './verified-program.js?v=17.6.0';
+import {verifiedExtraFor} from './verified-extra-v11.js?v=17.6.0';
+import {coverageFor} from './coverage-v11.js?v=17.6.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey,competitionResultFromNews} from './news-view.js?v=17.6.0';
+import {loadEventDetails,renderEventDetails,hasEspnSheet,cyclingQuery,renderClassification} from './event-details.js?v=17.6.0';
+import {verified2026For} from './audit-2026.js?v=17.6.0';
+import {renderAudit2026} from './audit-ui.js?v=17.6.0';
+import {auditEspn2026} from './audit-espn-2026.js?v=17.6.0';
+import {APP_LABEL,APP_VERSION} from './version.js?v=17.6.0';
 const DEFAULTS = [
  ['Real Madrid','Football','équipe','Real Madrid'],['FC Barcelone','Football','équipe','FC Barcelona'],['PSG','Football','équipe','Paris Saint Germain'],['San Antonio Spurs','Basketball','équipe','San Antonio Spurs'],
  ['Victor Wembanyama','Basketball','sportif'],['Léon Marchand','Natation','sportif'],['Sauveur Cristofini','Natation','sportif'],['Félix Lebrun','Tennis de table','sportif'],['Alexis Lebrun','Tennis de table','sportif'],['Flavien Coton','Tennis de table','sportif'],['Paul Seixas','Cyclisme','sportif'],['Kylian Mbappé','Football','sportif'],['Équipe de France de football','Football','équipe','France'],['XV de France','Rugby','équipe','France Rugby'],['Arthur Fils','Tennis','sportif'],['Jannik Sinner','Tennis','sportif'],['Carlos Alcaraz','Tennis','sportif'],['Rafael Jódar','Tennis','sportif'],['Moïse Kouamé','Tennis','sportif'],['Mirra Andreeva','Tennis','sportif']
@@ -495,16 +495,22 @@ function agendaItems(){
   if(item.uncertainNames?.length&&!(active==='favori'&&item.uncertainNames.includes(agendaFavorite)))
    item.favorites=item.favorites.filter(n=>!item.uncertainNames.includes(n)||n===item.favorite);
  }
- // Course annoncée et passée (cyclisme) : résultat lu dans les articles du fil.
+ // Course annoncée et passée (cyclisme) : résultat lu dans les articles du fil,
+ // mémorisé pour rester affiché quand l'article sort du fil.
  const now=Date.now();
+ let stored={};try{stored=JSON.parse(localStorage.getItem('monsport-race-results-v1')||'{}');}catch{}
+ let changed=false;
  for(const item of items){
   const cycling=/cycl/i.test(String(item.type||''))||/cyclisme/i.test(String(item.origin?.sport||''));
   if(!cycling||!(item.isCompetition||item.pendingResult)||Date.parse(item.date)>now)continue;
-  const found=competitionResultFromNews(item,news,favorites);
+  let found=competitionResultFromNews(item,news,favorites);
+  if(found){if(!stored[item.key]){stored[item.key]=found;changed=true;}}
+  else found=stored[item.key];
   if(!found)continue;
   Object.assign(item,{finished:true,live:false,pendingResult:false,isCompetition:false,status:'Terminé',score:found.label,resultRank:found.rank,
    source:found.article.source,sourceUrl:found.article.link,newsResult:found.article,round:''});
  }
+ if(changed)try{localStorage.setItem('monsport-race-results-v1',JSON.stringify(stored));}catch{}
  return items.filter(item=>item.favorites.length);
 }
 function agendaPage(){
@@ -722,7 +728,7 @@ if(active==='resultats')return `${latestKouameHtml()}${latestSinnerHtml()}<secti
 if(active==='bilan')return renderAudit2026({favorites,historyResults,yearAudit,yearLoading,yearMessage,auditSelected,esc,safeUrl,date});
 if(active==='actualites')return newsHtml();
 if(active==='favoris')return `<section class="panel"><h2>➕ Ajouter un favori</h2><form id="addform"><input name="name" placeholder="Nom de l'équipe ou du sportif" maxlength="100" required/><select name="sport">${['Football','Tennis','Rugby','Basketball','Cyclisme','Natation','Tennis de table','Autre'].map(s=>`<option>${s}</option>`).join('')}</select><select name="type"><option value="sportif">Sportif</option><option value="équipe">Équipe</option></select><input name="apiName" placeholder="Nom API (facultatif)" maxlength="100"/><button class="button" type="submit">Ajouter aux favoris</button></form></section><section class="panel"><h2>⭐ Mes favoris (${favorites.length})</h2><select id="sportFilter">${sports.map(s=>`<option ${sportFilter===s?'selected':''}>${esc(s)}</option>`).join('')}</select><input class="search" id="search" value="${esc(search)}" placeholder="Rechercher un favori"/><div id="favoriteList">${favoriteRows()}</div></section>`;
-return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Le relais Cloudflare fournit les articles (FFL complet, médias, images), les résumés vidéo et le rugby en direct. Il est configuré par défaut ; laisse le champ vide pour l'utiliser.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="${esc(DEFAULT_WORKER_URL)}" value="${esc(workerUrl===DEFAULT_WORKER_URL?'':workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form>${relayDiagnostic()}<p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🎨 Apparence</h2><p class="sub">Thème de l’application sur cet appareil.</p><div class="theme-choice" role="group" aria-label="Thème"><button type="button" class="button ${currentTheme()==='light'?'':'ghost'}" data-theme-choice="light" aria-pressed="${currentTheme()==='light'}">☀️ Clair</button><button type="button" class="button ${currentTheme()==='dark'?'':'ghost'}" data-theme-choice="dark" aria-pressed="${currentTheme()==='dark'}">🌙 Sombre</button></div></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Résultats des courses cyclistes lus dans les articles (Seixas), vidéos vérifiées, infos de match mémorisées.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
+return `<section class="panel"><h2>⚙️ Paramétrage des données</h2><p>Le relais Cloudflare fournit les articles (FFL complet, médias, images), les résumés vidéo et le rugby en direct. Il est configuré par défaut ; laisse le champ vide pour l'utiliser.</p><form id="settingsform"><input id="workerUrl" style="grid-column:1/-1" type="url" placeholder="${esc(DEFAULT_WORKER_URL)}" value="${esc(workerUrl===DEFAULT_WORKER_URL?'':workerUrl)}"/><button class="button" type="submit">Enregistrer et actualiser</button></form>${relayDiagnostic()}<p class="sub">Adresse https uniquement. Aucune donnée personnelle n'est envoyée à notre serveur : seules les recherches sur tes favoris sont transmises aux services sportifs et d'actualités.</p></section><section class="panel"><h2>📦 Exporter / importer mes favoris</h2><div class="actions"><button id="export" class="button ghost">Exporter JSON</button><label class="button ghost" style="cursor:pointer">Importer JSON <input id="import" type="file" accept="application/json" hidden/></label><button id="reset" class="button ghost danger">Réinitialiser</button></div><p class="sub">Tes favoris sont stockés uniquement dans ce navigateur. Un export permet de les sauvegarder.</p></section><section class="panel"><h2>🎨 Apparence</h2><p class="sub">Thème de l’application sur cet appareil.</p><div class="theme-choice" role="group" aria-label="Thème"><button type="button" class="button ${currentTheme()==='light'?'':'ghost'}" data-theme-choice="light" aria-pressed="${currentTheme()==='light'}">☀️ Clair</button><button type="button" class="button ${currentTheme()==='dark'?'':'ghost'}" data-theme-choice="dark" aria-pressed="${currentTheme()==='dark'}">🌙 Sombre</button></div></section><section class="panel"><h2>🔄 Mises à jour</h2><p class="sub">Version ${APP_LABEL}. Classements cyclistes (top 10 et temps), résultats de course fiabilisés, vidéos vérifiées.</p><button type="button" class="button" id="checkUpdates">Vérifier et recharger</button><p class="sub" id="updateStatus" role="status"></p></section><section class="panel"><h2>🖼️ Photos et blasons</h2><p class="sub">Une image peut manquer si Wikimedia ou ESPN ne la propose pas. Relancer la recherche ne supprime aucun favori.</p><button type="button" class="button ghost" id="refreshPhotos">Rechercher les photos manquantes</button><p class="sub" id="photoStatus" role="status"></p></section>`}
 function favoriteRows(){
  return filtered().map(f=>{
   const img=photoMap[f.name]?.src;
@@ -908,7 +914,16 @@ function bindContent(){
      const near=findMatchArticles(item,news);
      const reports=near.length?'<div class="event-editorial">'
        +near.map(n=>'<a href="'+esc(safeUrl(n.link))+'" target="_blank" rel="noopener noreferrer">'+esc(n.title)+' · '+esc(n.source||'Éditeur')+' ↗</a>').join('')+'</div>':'';
-     slot.innerHTML=renderEventDetails(details,esc)+reports;
+     const cycling=/cycl/i.test(String(item.type||''))||/cyclisme/i.test(String(item.origin?.sport||''));
+     slot.innerHTML=(cycling?'':renderEventDetails(details,esc))+reports;
+     if(cycling&&workerUrl){
+      const holder=document.createElement('div');holder.className='race-classification-slot';holder.textContent='Classement…';
+      slot.prepend(holder);
+      const query=cyclingQuery(item);
+      const rider=item.favorites.find(n=>favorites.some(f=>f.name===n&&f.sport==='Cyclisme'))||item.favorite;
+      request('/api/race-result',{...query,rider}).then(data=>{if(holder.isConnected)holder.innerHTML=renderClassification(data,esc,rider);})
+       .catch(e=>{if(holder.isConnected)holder.innerHTML='<p class="agenda-recap-note">Classement indisponible : '+esc(String(e.message||e))+'</p>';});
+     }
     }
    }catch(e){
     if(card.isConnected)slot.textContent='Données détaillées indisponibles : '+String(e.message||e);

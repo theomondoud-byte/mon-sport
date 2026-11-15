@@ -331,3 +331,25 @@ export function renderEventDetails(info,esc){
  const body=extras+scores+players;
  return body||'<p class="agenda-recap-note">Pas de statistiques détaillées pour cette rencontre.</p>';
 }
+
+// Classement d'une course cycliste (top 10 et temps, source CyclingDB).
+export function cyclingQuery(item){
+ const title=String(item.title||'').split(/\s+[—–-]\s+/).slice(1).join(' — ')||String(item.competition||'');
+ const stage=(title.match(/[ÉE]tape\s+(\d{1,2})/i)||[])[1];
+ const name=title.replace(/\s*·\s*[ÉE]tape\s+\d+.*$/i,'').trim();
+ const gc=!stage&&(/général|general/i.test(title)||/(^|\s)(tour|volta|itzulia|giro|vuelta)\b/i.test(name)&&!/lombardi|flandres|wallonne|critérium|criterium/i.test(name));
+ return {name,year:String(item.date||'').slice(0,4),...(stage?{stage}:{}),...(gc?{gc:'1'}:{})};
+}
+export function renderClassification(data,esc,favorite=''){
+ const rows=Array.isArray(data?.rows)?data.rows:[];
+ const plain=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const mine=r=>favorite&&plain(r.rider).includes(plain(favorite).split(' ').pop());
+ const title=data?.kind==='gc'?'Classement général':data?.kind==='stage'?'Classement de l’étape':'Classement';
+ if(!rows.length)return '<p class="agenda-recap-note">'+esc(title)+' : '+esc(data?.reason||'non disponible')+'.</p>';
+ const line=r=>'<tr'+(mine(r)?' class="is-favorite"':'')+'><td>'+esc(r.rank)+'</td><td>'+esc(r.rider)+(r.team?'<small>'+esc(r.team)+'</small>':'')+'</td><td>'+esc(r.time)+'</td></tr>';
+ return '<div class="race-classification"><h5>'+esc(title)+' · top 10</h5><table><tbody>'
+  +rows.map(line).join('')
+  +(data.rider?'<tr class="gap"><td colspan="3">…</td></tr>'+line(data.rider):'')
+  +'</tbody></table>'
+  +(data.url?'<a href="'+esc(data.url)+'" target="_blank" rel="noopener noreferrer">Classement complet · CyclingDB ↗</a>':'')+'</div>';
+}

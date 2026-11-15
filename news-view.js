@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.5.0';
-import {filterSportsNews} from './sports-articles.js?v=17.5.0';
-import {sourceIcon} from './source-icons.js?v=17.5.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.6.0';
+import {filterSportsNews} from './sports-articles.js?v=17.6.0';
+import {sourceIcon} from './source-icons.js?v=17.6.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -362,7 +362,7 @@ export function rankFromTitle(title,favorite){
  if(!alias)return null;
  const after=text.slice(text.indexOf(' '+alias+' ')+alias.length+1);
  // « Paul Seixas s'impose / remporte / gagne… » : le coureur est le sujet.
- if(/^\s*(?:\S+\s+){0,3}?(s impose|remporte|gagne|triomphe|s adjuge|est sacre|vainqueur|s envole vers la victoire|signe la victoire)\b/.test(after))return 1;
+ if(/^\s*(?:\S+\s+){0,5}?(s impose|remporte|remportant|gagne|gagnant|triomphe|s adjuge|est sacre|vainqueur|s envole vers la victoire|signe la victoire|s offre|decroche la victoire)\b/.test(after))return 1;
  if(/\b(victoire|succes|sacre) de (?:\w+ )?$/.test(text.slice(0,text.indexOf(' '+alias+' ')+1)))return 1;
  const m=after.match(/^\s*(?:\S+\s+){0,4}?(?:termine|prend|se classe|finit|decroche)?\s*(?:la\s+|a la\s+)?(\d{1,2})\s*(?:e|eme|er|ere)\b/)
   ||after.match(/^\s*(?:\S+\s+){0,4}?(?:termine|prend|se classe|finit|decroche)\s+(?:la\s+|a la\s+)?(premier|premiere|deuxieme|second|seconde|troisieme|quatrieme|cinquieme|sixieme|septieme|huitieme|neuvieme|dixieme)\b/);

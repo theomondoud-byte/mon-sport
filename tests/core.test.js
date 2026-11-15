@@ -1509,3 +1509,16 @@ test('V17.5 : extrait tronqué par l’éditeur — points de suspension conserv
  assert.equal(safeExcerpt('Course disputée sur un circuit urbain de 59,5... lire la suite'),'Course disputée sur un circuit urbain de 59,5…');
  assert.equal(safeExcerpt('Une phrase complète. Lire la suite'),'Une phrase complète.');
 });
+
+test('V17.6 : classement cycliste (top 10, temps) et titres de victoire variés',async()=>{
+ const {cyclingQuery,renderClassification}=await import('../event-details.js');
+ assert.deepEqual(cyclingQuery({title:'Paul Seixas — Tour de France (classement général)',date:'2026-07-26T12:00:00+02:00'}),{name:'Tour de France (classement général)',year:'2026',gc:'1'});
+ assert.deepEqual(cyclingQuery({title:'Paul Seixas — Tour de France · Étape 21',date:'2026-07-26T12:00:00+02:00'}),{name:'Tour de France',year:'2026',stage:'21'});
+ assert.deepEqual(cyclingQuery({title:'Paul Seixas — Tour de Lombardie',date:'2026-10-10T12:00:00+02:00'}),{name:'Tour de Lombardie',year:'2026'});
+ const html=renderClassification({kind:'stage',url:'https://cyclingdb.com/race/tour-de-france/2026/stage-21',rows:[{rank:1,rider:'Mathieu van der Poel',team:'Alpecin',time:'1:58:49'},{rank:2,rider:'Jasper Philipsen',team:'Alpecin',time:'s.t.'}],rider:{rank:47,rider:'Paul Seixas',team:'Decathlon',time:'s.t.'}},x=>String(x),'Paul Seixas');
+ assert.match(html,/Classement de l’étape · top 10/);
+ assert.match(html,/<td>1<\/td><td>Mathieu van der Poel<small>Alpecin<\/small><\/td><td>1:58:49<\/td>/);
+ assert.match(html,/<tr class="gap">.*<tr class="is-favorite"><td>47<\/td><td>Paul Seixas/);
+ assert.match(renderClassification({rows:[],reason:'classement non publié par CyclingDB'},x=>String(x)),/non publié par CyclingDB/);
+ assert.equal(rankFromTitle('Paul Seixas conclut sa saison en remportant le critérium de Saitama de façon spectaculaire',{name:'Paul Seixas'}),1);
+});

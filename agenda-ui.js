@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.5.0';
-import {sportInfo} from './sports-media.js?v=17.5.0';
+import {sourceIcon} from './source-icons.js?v=17.6.0';
+import {sportInfo} from './sports-media.js?v=17.6.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.5.0';
-import {auditInfo} from './audit-2026.js?v=17.5.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.5.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.5.0';
-import {photoInitials} from './photos.js?v=17.5.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.5.0';
-import {coverageFor} from './coverage-v11.js?v=17.5.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.6.0';
+import {auditInfo} from './audit-2026.js?v=17.6.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.6.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.6.0';
+import {photoInitials} from './photos.js?v=17.6.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.6.0';
+import {coverageFor} from './coverage-v11.js?v=17.6.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -71,7 +71,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
    +'<div class="agenda-scoreline"><strong>'+esc(scoreText)+'</strong>'+(timing?'<span>'+esc(timing)+'</span>':'')+'</div>'
    +'<div class="agenda-detail">'+esc([item.competition,item.round].filter(Boolean).join(' · '))+'</div>'
    +extra.html
-   +'<div class="agenda-open-hint"><span>'+(item.pendingResult?'Voir la source':item.isCompetition?'Voir le programme':played?'Statistiques':'Détails')+'</span><span aria-hidden="true">⌄</span></div>'
+   +'<div class="agenda-open-hint"><span>'+(item.pendingResult?'Voir la source':item.isCompetition?'Voir le programme':played?(/cycl/i.test(String(item.type||''))?'Classement':'Statistiques'):'Détails')+'</span><span aria-hidden="true">⌄</span></div>'
    +'</summary>'
    +'<div class="agenda-recap">'+about
    +'<div class="detail-live-slot" aria-live="polite"></div>'

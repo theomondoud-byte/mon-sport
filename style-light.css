@@ -1026,6 +1026,18 @@ body{background:radial-gradient(circle at 85% -8%,#dee7ec 0%,transparent 42%),#f
 .source-icon.has-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
 @media(max-width:600px){.result-hero{margin:-10px -12px 10px;width:calc(100% + 24px);max-height:220px}.result-hero.no-image{margin:0 0 8px;width:auto}}
 
+/* V17.6 — classement cycliste (top 10). */
+.race-classification{margin:4px 0 10px}
+.race-classification h5{margin:0 0 6px;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:#314f5c}
+.race-classification table{width:100%;border-collapse:collapse;font-size:.86rem}
+.race-classification td{padding:5px 4px;border-bottom:1px solid #d4dce1;vertical-align:top}
+.race-classification td:first-child{width:30px;font-weight:800;color:#172831;font-variant-numeric:tabular-nums}
+.race-classification td:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:#0a1d29}
+.race-classification td small{display:block;font-size:.72rem;color:#415d6c}
+.race-classification tr.is-favorite td{background:#e1ebe8;color:#01321b;font-weight:750}
+.race-classification tr.gap td{text-align:center;color:#415d6c;border-bottom:0}
+.race-classification a{display:inline-block;margin-top:6px;font-size:.76rem;font-weight:700}
+
 /* Ajustements propres au thème clair (ajoutés tels quels après la conversion). */
 .agenda-event.verdict-win,.agenda-event.verdict-win[open]{border-color:#34a56b;background:linear-gradient(130deg,#e9f8ef,#f1fbf5)}
 .agenda-event.verdict-loss,.agenda-event.verdict-loss[open]{border-color:#dc5f66;background:linear-gradient(130deg,#fdeeee,#fff5f5)}
@@ -1033,3 +1045,4 @@ body{background:radial-gradient(circle at 85% -8%,#dee7ec 0%,transparent 42%),#f
 .result-hero-badge{background:rgba(0,0,0,.72);color:#fff}
 .news-tweet-x{background:#000;color:#fff}
 .source-icon.has-logo{background:#fff}
+.race-classification tr.is-favorite td{background:#dff3e8;color:#0f3d2a}
