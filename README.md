@@ -10,12 +10,12 @@ Aucune inscription, aucune clé d'API : les favoris sont enregistrés dans le na
 
 | Onglet | Contenu |
 | --- | --- |
-| 📅 **Résultats** | Matchs passés et à venir de tous les favoris (7 jours), scores, verdicts V/D, comptes rendus dépliables. |
+| 📅 **Résultats** | « En cours et passés » (matchs en direct, courses en cours et résultats des 7 derniers jours) et « À venir », scores, verdicts V/D, comptes rendus dépliables. |
 | 👤 **Favoris** | Fiche d'un favori : historique sur un an, programme, statistiques sourcées, lien vers son classement. |
 | 🏆 **Classements** | ATP, WTA, Race, Next Gen, ITTF/WTT, Ligue 1, Liga, Ligue des champions, NBA. Favoris mis en évidence. |
 | 📰 **Articles** | Fil des 7 derniers jours : FFL, ESPN, Jeu, set et maths et médias RSS (avec le relais), filtrable par média. |
-| ⭐ **Gérer mes suivis** | Ajout, suppression, recherche, import/export JSON des favoris. |
-| ⚙️ **Réglages** | URL du relais Cloudflare, photos, mise à jour de l'application. |
+
+Rien n'est à paramétrer : la liste des favoris (`DEFAULTS` dans `src.js`) et l'adresse du relais (`DEFAULT_WORKER_URL`) sont fixées dans le code, si bien que toute personne qui ouvre l'adresse du site voit la même application, complète. Le bouton 🌙/☀️ de l'en-tête change le thème.
 
 L'application s'ouvre instantanément avec les dernières données mémorisées, puis s'actualise en arrière-plan. Elle reste consultable hors connexion.
 
@@ -81,8 +81,8 @@ node scripts/build-light-theme.mjs
 ## Déploiement
 
 - **GitHub Pages** : publication automatique depuis `main` (`.github/workflows/deploy.yml`), et après chaque collecte (toutes les 6 heures, `atp-live.yml`).
-- **Relais Cloudflare** (facultatif) : déployer `worker/` avec `wrangler deploy`, puis saisir son URL dans **Réglages**.
-- Sur une PWA déjà installée : **Réglages → Vérifier et recharger** pour récupérer immédiatement une nouvelle version.
+- **Relais Cloudflare** : déployer `worker/` (`wrangler deploy`) ; son adresse est `DEFAULT_WORKER_URL` dans `src.js`.
+- Sur une PWA déjà installée : lien **Vérifier les mises à jour** en bas de page pour récupérer immédiatement une nouvelle version.
 
 ## Historique
 

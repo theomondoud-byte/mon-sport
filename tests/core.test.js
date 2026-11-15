@@ -1429,13 +1429,13 @@ test('V17.2 : Spurs et Wembanyama — une seule rencontre, deux articles au plus
  assert.equal(kept.size,2);
 });
 
-test('V17.3 : le relais est configuré par défaut et son état est visible dans Réglages',async()=>{
+test('V17.8 : aucun paramétrage sur l’appareil — relais et favoris fixés dans l’appli',async()=>{
  const {readFile}=await import('node:fs/promises');
  const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
  assert.match(app,/const DEFAULT_WORKER_URL='https:\/\/mon-sport-api\.theomondoud\.workers\.dev';/);
- assert.match(app,/localStorage\.getItem\(URL_KEY\)\|\|DEFAULT_WORKER_URL/);
- assert.match(app,/function relayDiagnostic\(\)/);
- assert.match(app,/en récupération directe \(sans tweets ni images\)/);
+ assert.match(app,/workerUrl=DEFAULT_WORKER_URL;/);
+ assert.match(app,/const load=\(\)=>DEFAULTS;/);
+ assert.doesNotMatch(app,/'parametres'|'favoris','⭐|monsport-worker-url-v1|monsport-favorites-v1|id="addform"|id="settingsform"/);
 });
 
 test('V17.4 : une affiche « à vérifier » disparaît quand un match réel du favori existe le même jour',()=>{
@@ -1521,4 +1521,17 @@ test('V17.6 : classement cycliste (top 10, temps) et titres de victoire variés'
  assert.match(html,/<tr class="gap">.*<tr class="is-favorite"><td>47<\/td><td>Paul Seixas/);
  assert.match(renderClassification({rows:[],reason:'classement non publié par CyclingDB'},x=>String(x)),/non publié par CyclingDB/);
  assert.equal(rankFromTitle('Paul Seixas conclut sa saison en remportant le critérium de Saitama de façon spectaculaire',{name:'Paul Seixas'}),1);
+});
+
+test('V17.8 : un match en direct ou une course en cours est rangé dans « En cours et passés »',()=>{
+ const now=new Date('2026-11-15T15:00:00Z'),fav=['XV de France'];
+ const events=[
+  {id:'live',date:'2026-11-15T14:10:00Z',status:'En cours',live:true,finished:false,favorites:fav},
+  {id:'fini',date:'2026-11-14T20:00:00Z',status:'Terminé',live:false,finished:true,favorites:fav},
+  {id:'tour',date:'2026-11-10T00:00:00Z',endDate:'2026-11-20',isCompetition:true,status:'À venir',live:false,finished:false,favorites:fav},
+  {id:'prochain',date:'2026-11-18T20:00:00Z',status:'À venir',live:false,finished:false,favorites:fav}];
+ assert.deepEqual(agendaMatches(events,{phase:'past',now}).map(e=>e.id),['live','fini','tour']);
+ assert.deepEqual(agendaMatches(events,{phase:'future',now}).map(e=>e.id),['prochain']);
+ const html=renderAgendaView({items:[],favorites:[],esc:x=>String(x),safeUrl:x=>x,now});
+ assert.match(html,/En cours et passés/);
 });

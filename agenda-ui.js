@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.7.0';
-import {sportInfo} from './sports-media.js?v=17.7.0';
+import {sourceIcon} from './source-icons.js?v=17.8.0';
+import {sportInfo} from './sports-media.js?v=17.8.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.7.0';
-import {auditInfo} from './audit-2026.js?v=17.7.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.7.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.7.0';
-import {photoInitials} from './photos.js?v=17.7.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.7.0';
-import {coverageFor} from './coverage-v11.js?v=17.7.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.8.0';
+import {auditInfo} from './audit-2026.js?v=17.8.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.8.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.8.0';
+import {photoInitials} from './photos.js?v=17.8.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.8.0';
+import {coverageFor} from './coverage-v11.js?v=17.8.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -174,7 +174,7 @@ export function renderAgendaView({
    +'</div></div>':'';
  const duration=(single&&phase==='past')?'12 mois':single?'2 mois':'7 jours';
  const segments='<div class="agenda-segments '+(single?'three':'')+'" role="group" aria-label="Afficher les matchs ou les statistiques">'
-  +'<button type="button" data-agenda-phase="past" aria-pressed="'+(phase==='past')+'" class="'+(phase==='past'?'selected':'')+'">Passés <small>'+(single?'12 mois':'7 jours')+'</small></button>'
+  +'<button type="button" data-agenda-phase="past" aria-pressed="'+(phase==='past')+'" class="'+(phase==='past'?'selected':'')+'">En cours et passés <small>'+(single?'12 mois':'7 jours')+'</small></button>'
   +'<button type="button" data-agenda-phase="future" aria-pressed="'+(phase==='future')+'" class="'+(phase==='future'?'selected':'')+'">À venir <small>'+(single?'2 mois':'7 jours')+'</small></button>'
   +(single?'<button type="button" data-agenda-phase="stats" aria-pressed="'+stats+'" class="'+(stats?'selected':'')+'">Statistiques <small>sources</small></button>':'')
   +'</div>';

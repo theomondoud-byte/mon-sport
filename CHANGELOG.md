@@ -4,6 +4,15 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.8 — « En cours et passés », plus aucun réglage
+
+- **Matchs en direct et courses en cours** rangés avec les résultats : la catégorie « Passés » devient **« En cours et passés »** (onglets Résultats et Favoris). Une compétition sur plusieurs jours (tournoi, course par étapes) y figure du premier au dernier jour ; « À venir » ne montre plus que ce qui n'a pas commencé.
+- **Plus aucun paramétrage sur l'appareil** : les onglets « Gérer mes suivis » et « Réglages » disparaissent. Les favoris et l'adresse du relais sont fixés dans l'appli : quiconque ouvre l'adresse du site voit tout, sans rien configurer. Les favoris ou l'adresse de relais enregistrés auparavant sur un téléphone sont ignorés.
+- Thème clair/sombre : bouton 🌙/☀️ dans l'en-tête. Mise à jour immédiate : lien « Vérifier les mises à jour » en bas de page.
+- Les quatre onglets tiennent sur une ligne (icône au-dessus du nom), même sur un petit écran.
+
+---
+
 # Mon Sport V17.7 — résultats rugby de la semaine, course de Saitama
 
 - **France — Afrique du Sud (21 – 19)** : le relais ne demandait à World Rugby que les matchs de la veille au surlendemain ; deux jours après, le résultat disparaissait et la carte retombait sur le programme saisi à la main, sans score. Les matchs des 8 derniers jours sont désormais récupérés (`/api/rugby-live?past=8`).

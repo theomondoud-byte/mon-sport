@@ -124,27 +124,32 @@ export function mergeSpursAndWembanyama(matches=[],playerEvents=[],playerName='V
 }
 export function agendaMatches(events,{view='semaine',phase='future',favorite=null,now=new Date()}={}){
  const w=agendaWindow(view,phase,now),lo=w.from.getTime(),hi=w.to.getTime();
+ const nowMs=(now instanceof Date?now:new Date(now)).getTime();
  const wanted=events.filter(e=>{
   if(favorite&&!e.favorites.includes(favorite))return false;
   const dt=Date.parse(e.date);
   if(!Number.isFinite(dt))return false;
+  // Match en direct ou compétition commencée et pas encore finie : rangés
+  // avec les résultats (« En cours et passés »), plus dans « À venir ».
+  const end=e.endDate?Date.parse(e.endDate)+(/T/.test(e.endDate)?0:86400000):NaN;
+  const ongoing=!e.finished&&!e.pendingResult&&(e.live||(e.isCompetition&&dt<=nowMs&&end>nowMs));
   // Pour une archive datée seulement à la semaine, présenter sa semaine
   // plutôt que laisser croire au jour exact de la rencontre.
   const uncertain=!!e.approximate;
   if(phase==='past'){
+   if(ongoing)return dt<=hi+3600000&&(e.isCompetition||dt>=lo);
    if(!e.finished&&!e.pendingResult)return false;
    const relevantDate=e.pendingResult&&e.endDate?Date.parse(e.endDate):dt;
    return uncertain?(relevantDate+6*86400000>=lo&&relevantDate<=hi):(relevantDate>=lo&&relevantDate<=hi);
   }
-  // Les rencontres en cours restent visibles pendant 4 h après le début.
-  if(!(e.status==='À venir'||e.live))return false;
+  if(ongoing||e.status!=='À venir')return false;
   // Une compétition multi-jours continue de s'afficher jusqu'à la fin
   // de son tournoi même si la première journée est passée.
   if(e.isCompetition&&e.endDate){
    const last=Date.parse(e.endDate);
    if(Number.isFinite(last)&&last>=lo&&dt<=hi)return true;
   }
-  return dt>=lo&&dt<hi||(e.live&&dt>=lo-4*3600000&&dt<=hi);
+  return dt>=lo&&dt<hi;
  });
  // Prochains matchs chronologiques ; résultats passés du plus récent au plus ancien.
  const relevantTime=e=>Date.parse(phase==='past'&&e.pendingResult&&e.endDate?e.endDate:e.date);

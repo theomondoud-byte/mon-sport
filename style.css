@@ -1036,3 +1036,13 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .race-classification tr.is-favorite td{background:#1d4a3c;color:#eafff5;font-weight:750}
 .race-classification tr.gap td{text-align:center;color:#93b1c0;border-bottom:0}
 .race-classification a{display:inline-block;margin-top:6px;font-size:.76rem;font-weight:700}
+/* V17.8 : thème dans l'en-tête, mise à jour dans le pied de page */
+.app-header-v11 .theme-toggle{font-size:1.15rem;padding:9px 11px;background:transparent;box-shadow:none;border:1px solid #8aa0b84d}
+.link-button{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+#updateStatus:not(:empty){display:block}
+/* Quatre onglets : ils tiennent sur une ligne, sans défilement */
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible}
+.tabs button{min-width:0;padding:9px 4px;text-align:center;overflow:hidden;text-overflow:ellipsis}
+.tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.15;font-size:.78rem;padding:7px 2px}
+.tabs .tab-icon{font-size:1.15rem}
+@media (max-width:360px){.tabs button{font-size:.7rem}}
