@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.4.0';
-import {filterSportsNews} from './sports-articles.js?v=17.4.0';
-import {sourceIcon} from './source-icons.js?v=17.4.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.5.0';
+import {filterSportsNews} from './sports-articles.js?v=17.5.0';
+import {sourceIcon} from './source-icons.js?v=17.5.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -250,8 +250,10 @@ export function renderBlocks(blocks,esc,tweets=null){
 }
 const TRAILING_NOISE=/\s*(?:…|\.\.\.|\[…\]|\[\.\.\.\])?\s*(?:lire la suite|read more|voir plus)\.?\s*$/i;
 export function safeExcerpt(value){
- return decodeEntities(String(value||'').replace(/<[^>]*>/g,' '))
-  .replace(/\s+/g,' ').trim().replace(TRAILING_NOISE,'').trim().slice(0,600);
+ const text=decodeEntities(String(value||'').replace(/<[^>]*>/g,' ')).replace(/\s+/g,' ').trim();
+ const cut=text.replace(TRAILING_NOISE,'').trim();
+ // Extrait tronqué par l'éditeur (« … lire la suite ») : on garde les points de suspension.
+ return (cut!==text&&cut&&!/[.!?…»"]$/.test(cut)?cut+'…':cut).slice(0,600);
 }
 // Texte intégral : paragraphes propres, sans la rubrique « À lire aussi » de fin.
 const RELATED_SECTION=/\n\s*(?:[àa] lire aussi|lire aussi|sur le même sujet|à voir aussi|voir aussi)\s*(?:\.\.\.|…|:)?\s*\n[\s\S]*$/i;
@@ -348,6 +350,45 @@ export function limitPerMatch(articles,favorites=[],matches=[],max=2){
  for(const list of groups.values())
   list.sort((a,b)=>b.score-a.score||b.published-a.published).slice(0,max).forEach(x=>kept.add(x.article));
  return kept;
+}
+// Résultat d'une course annoncée (cyclisme, sans source de résultats en
+// direct) lu dans le titre d'un article : le coureur suivi, le nom de la
+// course et sa place doivent y figurer.
+const ORDINALS={premier:1,premiere:1,deuxieme:2,second:2,seconde:2,troisieme:3,quatrieme:4,cinquieme:5,sixieme:6,septieme:7,huitieme:8,neuvieme:9,dixieme:10};
+const RACE_GENERIC=new Set(['criterium','tour','course','grand','prix','classic','classique','etape','general','classement','exhibition','asso','aso','france','japon','edition']);
+export function rankFromTitle(title,favorite){
+ const text=' '+normalized(noHashtags(title))+' ';
+ const alias=favoriteAliases(favorite).find(a=>text.includes(' '+a+' '));
+ if(!alias)return null;
+ const after=text.slice(text.indexOf(' '+alias+' ')+alias.length+1);
+ // « Paul Seixas s'impose / remporte / gagne… » : le coureur est le sujet.
+ if(/^\s*(?:\S+\s+){0,3}?(s impose|remporte|gagne|triomphe|s adjuge|est sacre|vainqueur|s envole vers la victoire|signe la victoire)\b/.test(after))return 1;
+ if(/\b(victoire|succes|sacre) de (?:\w+ )?$/.test(text.slice(0,text.indexOf(' '+alias+' ')+1)))return 1;
+ const m=after.match(/^\s*(?:\S+\s+){0,4}?(?:termine|prend|se classe|finit|decroche)?\s*(?:la\s+|a la\s+)?(\d{1,2})\s*(?:e|eme|er|ere)\b/)
+  ||after.match(/^\s*(?:\S+\s+){0,4}?(?:termine|prend|se classe|finit|decroche)\s+(?:la\s+|a la\s+)?(premier|premiere|deuxieme|second|seconde|troisieme|quatrieme|cinquieme|sixieme|septieme|huitieme|neuvieme|dixieme)\b/);
+ if(m)return /^\d+$/.test(m[1])?+m[1]:ORDINALS[m[1]];
+ if(/^\s*(?:\S+\s+){0,3}?(deuxieme|second|troisieme)\b/.test(after))return ORDINALS[after.match(/(deuxieme|second|troisieme)/)[1]];
+ return null;
+}
+export function competitionResultFromNews(item,news=[],favorites=[]){
+ const favorite=favorites.find(f=>f.name===item.favorite)||{name:item.favorite,apiName:item.favorite};
+ const start=Date.parse(item.date),end=Date.parse(item.endDate||item.date);
+ if(!Number.isFinite(start))return null;
+ const raceName=String(item.title||'').split(/\s+[—–-]\s+/).slice(1).join(' ')||String(item.competition||'');
+ const raceWords=[...new Set(normalized(raceName).split(/\s+/).filter(w=>w.length>=4&&!RACE_GENERIC.has(w)&&!favoriteAliases(favorite).some(a=>a.split(' ').includes(w))))];
+ if(!raceWords.length)return null;
+ let best=null;
+ for(const article of news){
+  const published=Date.parse(article.date||article.published||'');
+  if(!Number.isFinite(published)||published<start-12*3600000||published>(Number.isFinite(end)?end:start)+3*86400000)continue;
+  if(!mentions(noHashtags(article.title),raceWords))continue;
+  const rank=rankFromTitle(article.title,favorite);
+  if(!rank)continue;
+  if(!best||published<best.published)best={rank,published,article};
+ }
+ if(!best)return null;
+ const a=best.article;
+ return {rank:best.rank,label:best.rank===1?'1er':best.rank+'e',article:{title:cleanTitle(a.title),excerpt:safeExcerpt(a.excerpt||a.description),link:a.link,source:newsSourceName(a),image:a.image||''}};
 }
 export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false,readKeys=new Set(),readView='unread',keepVisible=new Set(),tweets=null,matches=[]}={}){
  const recentAll=newsLastWeek(news,now);

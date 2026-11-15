@@ -6,7 +6,7 @@ import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForF
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
 import {renderBlocks as renderBlocksForTest} from '../news-view.js';
-import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle,limitPerMatch} from '../news-view.js';
+import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle,limitPerMatch,rankFromTitle,competitionResultFromNews} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {jeuSetMathsBundledData} from '../data/jeu-set-et-maths-bundle.js';
@@ -1078,7 +1078,7 @@ test('V16.2 : ouverture immédiate avec les dernières données et actualisation
 
 test('V16.3 : entités HTML décodées, même encodées deux fois, côté client et côté Worker',async()=>{
  assert.equal(decodeEntities('L&amp;eacute;quipe r&eacute;ussit &agrave; &amp;#39;x&amp;#39; n&deg;7 &euro;'),"L'équipe réussit à 'x' n°7 €".replace("L'équipe","Léquipe"));
- assert.equal(safeExcerpt('<p>Cl&eacute;ment &agrave; Knoxville … lire la suite</p>'),'Clément à Knoxville');
+ assert.equal(safeExcerpt('<p>Cl&eacute;ment &agrave; Knoxville … lire la suite</p>'),'Clément à Knoxville…');
  const {readFile}=await import('node:fs/promises');
  const worker=await readFile(new URL('../worker/index.js',import.meta.url),'utf8');
  assert.match(worker,/function toBlocks\(html,base\)/);
@@ -1486,4 +1486,26 @@ test('V17.4 : infos de match mémorisées et vidéos de remplacement',async()=>{
  const worker=await readFile(new URL('../worker/index.js',import.meta.url),'utf8');
  assert.match(worker,/previewPlayabilityStatus/);
  assert.match(worker,/alternatives/);
+});
+
+test('V17.5 : résultat d’une course annoncée lu dans un article (Seixas, Saitama)',()=>{
+ const fav={name:'Paul Seixas',sport:'Cyclisme'};
+ assert.equal(rankFromTitle("Saitama Critérium - Paul Seixas s'impose à Saitama devant Brandon McNulty ! #SaitamaCriterium #Seixas",fav),1);
+ assert.equal(rankFromTitle('Critérium de Singapour : Paul Seixas termine 2e derrière Pogacar',fav),2);
+ assert.equal(rankFromTitle('Paul Seixas, troisième du Critérium de Saitama',fav),3);
+ assert.equal(rankFromTitle('Victoire de Paul Seixas au Critérium de Saitama',fav),1);
+ assert.equal(rankFromTitle('Le Tour de France, un objectif à très long terme assure Paul Seixas',fav),null);
+ const item={key:'k',favorite:'Paul Seixas',favorites:['Paul Seixas'],date:'2026-11-15T12:00:00+09:00',endDate:'2026-11-15',title:'Paul Seixas — Critérium de Saitama',competition:'Critérium ASO d’exhibition · Saitama (Japon)',isCompetition:true,type:'cycling-competition'};
+ const news=[{title:"Saitama Critérium - Paul Seixas s'impose à Saitama devant Brandon McNulty ! #SaitamaCriterium",source:"Cyclism'Actu",link:'https://www.cyclismactu.net/s',date:'2026-11-15T07:31:00Z',excerpt:'La 12e édition… lire la suite'},
+  {title:'Critérium de Singapour : Paul Seixas termine 2e',source:'Franceinfo',link:'https://x/2',date:'2026-11-08T08:00:00Z'}];
+ const found=competitionResultFromNews(item,news,[fav]);
+ assert.equal(found.label,'1er');
+ assert.equal(found.article.link,'https://www.cyclismactu.net/s');
+ assert.equal(found.article.title,"Saitama Critérium - Paul Seixas s'impose à Saitama devant Brandon McNulty !");
+ assert.equal(competitionResultFromNews({...item,date:'2026-11-22T12:00:00+09:00',endDate:'2026-11-22'},news,[fav]),null);
+});
+
+test('V17.5 : extrait tronqué par l’éditeur — points de suspension conservés',()=>{
+ assert.equal(safeExcerpt('Course disputée sur un circuit urbain de 59,5... lire la suite'),'Course disputée sur un circuit urbain de 59,5…');
+ assert.equal(safeExcerpt('Une phrase complète. Lire la suite'),'Une phrase complète.');
 });

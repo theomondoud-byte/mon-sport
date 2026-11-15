@@ -4,6 +4,13 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.5 — résultats des courses cyclistes lus dans les articles
+
+- Aucune source gratuite ne publie en direct les résultats de cyclisme : les courses de Paul Seixas venaient d'un relevé saisi à la main, et une course seulement « annoncée » (Critérium de Saitama) restait à venir après l'arrivée. Désormais, une fois la course passée, l'appli lit son résultat dans les articles du fil (Cyclism'Actu, Franceinfo) : le titre doit citer le coureur, le nom de la course et sa place (« s'impose », « termine 2e », « troisième »…). La carte passe en résultat (1er → cadre vert) avec l'article et la vidéo.
+- Extraits d'articles tronqués par l'éditeur : points de suspension conservés au lieu d'une phrase coupée net.
+
+---
+
 # Mon Sport V17.4 — audit complet : vidéos vérifiées, résultats et articles
 
 Audit mené sur les données réelles de la semaine (16 résultats, 16 matchs à venir, 20 favoris).

@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.4.0';
-import {sportInfo} from './sports-media.js?v=17.4.0';
+import {sourceIcon} from './source-icons.js?v=17.5.0';
+import {sportInfo} from './sports-media.js?v=17.5.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.4.0';
-import {auditInfo} from './audit-2026.js?v=17.4.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.4.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.4.0';
-import {photoInitials} from './photos.js?v=17.4.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.4.0';
-import {coverageFor} from './coverage-v11.js?v=17.4.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.5.0';
+import {auditInfo} from './audit-2026.js?v=17.5.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.5.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.5.0';
+import {photoInitials} from './photos.js?v=17.5.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.5.0';
+import {coverageFor} from './coverage-v11.js?v=17.5.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -53,7 +53,8 @@ function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
   :readableDate(item);
  // Cadre vert / rouge / ambre : uniquement si tous les favoris concernés ont le même verdict.
  const verdicts=[...new Set(item.favorites.map(name=>matchVerdict(item,name)).filter(Boolean))];
- const frame=item.finished&&verdicts.length===1?' verdict-'+({V:'win',D:'loss',N:'draw'})[verdicts[0]]:'';
+ const frame=item.finished&&verdicts.length===1?' verdict-'+({V:'win',D:'loss',N:'draw'})[verdicts[0]]
+  :item.finished&&item.resultRank===1?' verdict-win':'';
  const extra=resultExtrasHtml(item,esc,safeUrl,extras);
  const played=item.finished&&!item.pendingResult&&!item.isCompetition;
  // Résultat joué : le score, les faits et les statistiques suffisent ; le texte
