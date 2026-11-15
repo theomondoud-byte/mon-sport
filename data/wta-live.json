@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-14T18:51:27.205837+00:00",
+  "fetchedAt": "2026-11-15T01:14:17.522571+00:00",
   "rows": [
     {
       "rank": 1,
@@ -23,16 +23,20 @@
       "name": "Mirra Andreeva",
       "age": 19,
       "country": "RUS",
-      "livePoints": 6906,
+      "livePoints": 7306,
       "careerHigh": "NMC (3)",
       "movement": 1,
-      "pointsChange": 600,
-      "tournament": "Finales WTA DF",
+      "pointsChange": 1000,
+      "tournament": "Finales WTA F (DF )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 7306,
+      "nextPoints": 7806,
       "maxPoints": 7806,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA F (DF )",
+          "lastSeen": "2026-11-15T01:14:17.522571+00:00"
+        },
         {
           "text": "Finales WTA DF",
           "lastSeen": "2026-11-14T18:51:27.205837+00:00"
@@ -93,11 +97,11 @@
       "careerHigh": "3",
       "movement": null,
       "pointsChange": 400,
-      "tournament": "Finales WTA DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 6560,
-      "maxPoints": 7060,
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA DF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
@@ -110,16 +114,20 @@
       "name": "Elina Svitolina",
       "age": 32,
       "country": "UKR",
-      "livePoints": 5521,
+      "livePoints": 5921,
       "careerHigh": "3",
       "movement": null,
-      "pointsChange": 400,
-      "tournament": "Finales WTA DF",
+      "pointsChange": 800,
+      "tournament": "Finales WTA F (DF )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 5921,
+      "nextPoints": 6421,
       "maxPoints": 6421,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA F (DF )",
+          "lastSeen": "2026-11-15T01:14:17.522571+00:00"
+        },
         {
           "text": "Finales WTA DF",
           "lastSeen": "2026-11-14T18:51:27.205837+00:00"
@@ -143,11 +151,11 @@
       "careerHigh": "6",
       "movement": 1,
       "pointsChange": 400,
-      "tournament": "Finales WTA DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 5143,
-      "maxPoints": 5643,
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA DF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales WTA DF",
@@ -552,7 +560,7 @@
     {
       "rank": 32,
       "name": "Ekaterina Alexandrova",
-      "age": 31,
+      "age": 32,
       "country": "RUS",
       "livePoints": 1641,
       "careerHigh": "10",
@@ -952,7 +960,7 @@
     {
       "rank": 57,
       "name": "Paula Badosa",
-      "age": 28,
+      "age": 29,
       "country": "ESP",
       "livePoints": 1076,
       "careerHigh": "2",
@@ -2329,7 +2337,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 F",
-          "lastSeen": "2026-11-14T18:51:27.205837+00:00"
+          "lastSeen": "2026-11-15T01:14:17.522571+00:00"
         },
         {
           "text": "Brisbane 6 DF",

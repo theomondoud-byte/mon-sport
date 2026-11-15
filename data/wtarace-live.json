@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-14T18:51:28.169349+00:00",
+  "fetchedAt": "2026-11-15T01:14:18.650602+00:00",
   "rows": [
     {
       "rank": 1,
@@ -52,12 +52,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA DF",
+      "tournament": "Finales WTA F (DF )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA F (DF )",
+          "lastSeen": "2026-11-15T01:14:18.650602+00:00"
+        },
         {
           "text": "Finales WTA DF",
           "lastSeen": "2026-11-14T18:51:28.169349+00:00"
@@ -93,9 +97,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA DF",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -114,12 +118,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA DF",
+      "tournament": "Finales WTA F (DF )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Finales WTA F (DF )",
+          "lastSeen": "2026-11-15T01:14:18.650602+00:00"
+        },
         {
           "text": "Finales WTA DF",
           "lastSeen": "2026-11-14T18:51:28.169349+00:00"
@@ -164,9 +172,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA DF",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -536,7 +544,7 @@
     {
       "rank": 31,
       "name": "Ekaterina Alexandrova",
-      "age": 31,
+      "age": 32,
       "country": "RUS",
       "livePoints": 1641,
       "careerHigh": "",
@@ -1080,7 +1088,7 @@
     {
       "rank": 65,
       "name": "Paula Badosa",
-      "age": 28,
+      "age": 29,
       "country": "ESP",
       "livePoints": 904,
       "careerHigh": "",
@@ -2262,7 +2270,7 @@
       "tournamentHistory": [
         {
           "text": "Brisbane 6 F",
-          "lastSeen": "2026-11-14T18:51:28.169349+00:00"
+          "lastSeen": "2026-11-15T01:14:18.650602+00:00"
         },
         {
           "text": "Brisbane 6 DF",
