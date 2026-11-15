@@ -4,6 +4,13 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.7 — résultats rugby de la semaine, course de Saitama
+
+- **France — Afrique du Sud (21 – 19)** : le relais ne demandait à World Rugby que les matchs de la veille au surlendemain ; deux jours après, le résultat disparaissait et la carte retombait sur le programme saisi à la main, sans score. Les matchs des 8 derniers jours sont désormais récupérés (`/api/rugby-live?past=8`).
+- **Critérium de Saitama (Paul Seixas 1er)** : le résultat est cherché dans tous les articles reçus, avant le tri qui ne garde que 2 articles par rencontre — l'article de la victoire pouvait être écarté au profit d'un autre sur la même course.
+
+---
+
 # Mon Sport V17.6 — classements cyclistes (top 10 et temps)
 
 - **Top 10 avec les temps** dans le détail de chaque course de cyclisme (classique, classement général ou étape), avec la ligne du coureur suivi s'il est plus loin (« … 47 Paul Seixas s.t. »). Source : CyclingDB, via le relais (`/api/race-result`), qui fait correspondre les noms français des courses (Tour de Lombardie → Il Lombardia, Pays basque → Itzulia…) et écarte les épreuves féminines ou jeunes homonymes. Les critériums d'exhibition n'ont pas de classement publié.
