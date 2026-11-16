@@ -3,8 +3,22 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-16T08:53:43.575446+00:00",
+ "fetchedAt": "2026-11-16T15:13:26.457093+00:00",
  "posts": [
+  {
+   "title": "📊 Présent à Turin en tant que 2e remplaçant, Felix Auger-Aliassime 🇨🇦 (N°17) est le remplaçant* le moins bien classé au Masters depuis Ivan Ljubicic 🇭🇷 (N°24), son…",
+   "text": "📊 Présent à Turin en tant que 2e remplaçant, Felix Auger-Aliassime 🇨🇦 (N°17) est le remplaçant* le moins bien classé au Masters depuis Ivan Ljubicic 🇭🇷 (N°24), son nouvel entraîneur, il y a 17 ans (2009).\n\n✍️ * En 2021, Aslan Karatsev 🇷🇺 (N°17) avait été appelé en cours de tournoi en qualité de 3e remplaçant après les entrées en lice des remplaçants 1 (Sinner) et 2 (Norrie).",
+   "link": "https://x.com/JeuSetMaths/status/2122263480484970875",
+   "date": "2026-11-16T09:40:18.153000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXPLOFWWEAA9LW0.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXPLOFWWEAA9LW0.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Mirra Andreeva 💎 est la 2e plus jeune joueuse à figurer dans le Top 2 mondial au XXIe siècle : 🥇 Maria Sharapova 🇷🇺 : 17 ans et 357 jours 🥈 Mirra Andreeva 🇷🇺 : 19 ans…",
    "text": "📊 Mirra Andreeva 💎 est la 2e plus jeune joueuse à figurer dans le Top 2 mondial au XXIe siècle :\n🥇 Maria Sharapova 🇷🇺 : 17 ans et 357 jours\n🥈 Mirra Andreeva 🇷🇺 : 19 ans et 201 jours",
@@ -257,46 +271,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXHc1VhX0AANlIf.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXHc1VhX0AANlIf.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "⬇️ Envie de connaître des stats supplémentaires sur les 8 participants au Masters cette année ? N'hésitez pas à demander, je garde le tableur Excel ouvert. 👩‍💻",
-   "text": "⬇️ Envie de connaître des stats supplémentaires sur les 8 participants au Masters cette année ? N'hésitez pas à demander, je garde le tableur Excel ouvert. 👩‍💻",
-   "link": "https://x.com/JeuSetMaths/status/2121715854966436238",
-   "date": "2026-11-14T21:24:14.055000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXHZQRwWoAApcVR.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXHZQRwWoAApcVR.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Seulement 3 des 8 joueurs qualifiés ont participé au Masters l'année dernière (Alexander Zverev 🇩🇪, Carlos Alcaraz 🇪🇸 et Ben Shelton 🇺🇸). Ce n'est que la deuxième…",
-   "text": "📊 Seulement 3 des 8 joueurs qualifiés ont participé au Masters l'année dernière (Alexander Zverev 🇩🇪, Carlos Alcaraz 🇪🇸 et Ben Shelton 🇺🇸).\n\nCe n'est que la deuxième fois sur les 20 dernières années qu'un tel turn-over est observé d'une année sur l'autre (après 2016➡️2017).",
-   "link": "https://x.com/JeuSetMaths/status/2121715851871064362",
-   "date": "2026-11-14T21:24:13.317000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
-   "title": "🌍 A la veille du début des ATP Finals, retour en quelques statistiques sur la saison 2026 des 8 joueurs engagés. #Thread 📊",
-   "text": "🌍 A la veille du début des ATP Finals, retour en quelques statistiques sur la saison 2026 des 8 joueurs engagés. #Thread 📊",
-   "link": "https://x.com/JeuSetMaths/status/2121715829666435407",
-   "date": "2026-11-14T21:24:08.023000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXGaPpMX0AAi6dS.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXGaPpMX0AAi6dS.jpg?name=orig"
    ],
    "video": null
   }
