@@ -3,8 +3,126 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-15T18:53:18.438042+00:00",
+ "fetchedAt": "2026-11-16T01:31:39.597314+00:00",
  "posts": [
+  {
+   "title": "📊 Pour la 8e fois, une joueuse a remporté le Masters WTA dès sa toute première participation : ▪️ 1972 : Chris Evert 🇺🇸 ▪️ 1974 : Evonne Goolagong 🇦🇺 ▪️ 2001 : Serena…",
+   "text": "📊 Pour la 8e fois, une joueuse a remporté le Masters WTA dès sa toute première participation :\n▪️ 1972 : Chris Evert 🇺🇸\n▪️ 1974 : Evonne Goolagong 🇦🇺\n▪️ 2001 : Serena Williams 🇺🇸\n▪️ 2004 : Maria Sharapova 🇷🇺\n▪️ 2011 : Petra Kvitova 🇨🇿\n▪️ 2016 : Dominika Cibulkova 🇸🇰\n▪️ 2019 : Ashleigh Barty 🇦🇺\n🆕 2026 : Mirra Andreeva 🇷🇺",
+   "link": "https://x.com/JeuSetMaths/status/2122093782862610587",
+   "date": "2026-11-15T22:25:59.087000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXMxAI1WUAAjeuj.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXMxAI1WUAAjeuj.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Les plus jeunes joueuses au moment de remporter leur premier titre au Masters WTA : 🥇 Monica Seles 🇷🇸 : 16 ans et 351 jours (1990) 🥈 Tracy Austin 🇺🇸 : 17 ans et 101…",
+   "text": "📊 Les plus jeunes joueuses au moment de remporter leur premier titre au Masters WTA :\n🥇 Monica Seles 🇷🇸 : 16 ans et 351 jours (1990)\n🥈 Tracy Austin 🇺🇸 : 17 ans et 101 jours (1980)\n🥉 Maria Sharapova 🇷🇺 : 17 ans et 209 jours (2004)\n4⃣ Chris Evert 🇺🇸 : 17 ans et 298 jours (1972)\n5⃣ Martina Hingis 🇨🇭 : 18 ans et 53 jours (1998)\n6⃣ Steffi Graf 🇩🇪 : 18 ans et 161 jours (1987)\n7⃣ Gabriela Sabatini 🇦🇷 : 18 ans et 188 jours (1988)\n8⃣ Kim Clijsters 🇧🇪 : 19 ans et 155 jours (2002)\n9⃣ Mirra Andreeva 🇷🇺 : 19 ans et 200 jours (2026 🆕)",
+   "link": "https://x.com/JeuSetMaths/status/2122093538930221202",
+   "date": "2026-11-15T22:25:00.929000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXMwvViWgAAnfOw.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXMwvViWgAAnfOw.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Le plus petit nombre de jeux concédés pour remporter le Masters WTA depuis la réintroduction du format \"round-robin\" en 2003 : ▪️ 20 jeux : Iga Swiatek 🇵🇱 (2023) 🆕 26…",
+   "text": "📊 Le plus petit nombre de jeux concédés pour remporter le Masters WTA depuis la réintroduction du format \"round-robin\" en 2003 :\n▪️ 20 jeux : Iga Swiatek 🇵🇱 (2023)\n🆕 26 jeux : Mirra Andreeva 🇷🇺 (2026)\n▪️ 32 jeux : Serena Williams 🇺🇸 (2012)",
+   "link": "https://x.com/JeuSetMaths/status/2122089774076850642",
+   "date": "2026-11-15T22:10:03.318000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2122088960675520513/vid/avc1/1280x720/56QKpFFjjTMcdhmg.mp4?tag=16"
+  },
+  {
+   "title": "📊 Pour la 12e année consécutive, le Masters WTA a couronné une joueuse différente : ▪️ 2014 : Serena Williams 🇺🇸 ▪️ 2015 : Agnieszka Radwanska 🇵🇱 ▪️ 2016 : Dominika…",
+   "text": "📊 Pour la 12e année consécutive, le Masters WTA a couronné une joueuse différente :\n▪️ 2014 : Serena Williams 🇺🇸\n▪️ 2015 : Agnieszka Radwanska 🇵🇱\n▪️ 2016 : Dominika Cibulkova 🇸🇰\n▪️ 2017 : Caroline Wozniacki 🇩🇰\n▪️ 2018 : Elina Svitolina 🇺🇦\n▪️ 2019 : Ashleigh Barty 🇦🇺\n▪️ 2021 : Garbine Muguruza 🇪🇸\n▪️ 2022 : Caroline Garcia 🇫🇷\n▪️ 2023 : Iga Swiatek 🇵🇱\n▪️ 2024 : Coco Gauff 🇺🇸\n▪️ 2025 : Elena Rybakina 🇰🇿\n🆕 2026 : Mirra Andreeva 🇷🇺\n\n✍️ Depuis 2015, le Masters a couronné chaque année une joueuse qui n'avait encore jamais remporté le tournoi.",
+   "link": "https://x.com/JeuSetMaths/status/2122089132956479933",
+   "date": "2026-11-15T22:07:30.463000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXMflzgW0AADHbE.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXMflzgW0AADHbE.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Pour la 3e fois dans l'histoire du Masters une joueuse a remporté le tournoi dès sa toute première participation sans avoir concédé le moindre set : ▪️ 1972* : Chris…",
+   "text": "📊 Pour la 3e fois dans l'histoire du Masters une joueuse a remporté le tournoi dès sa toute première participation sans avoir concédé le moindre set :\n▪️ 1972* : Chris Evert 🇺🇸\n▪️ 2001 : Serena Williams 🇺🇸\n🆕 2026 : Mirra Andreeva 🇷🇺\n\n✍️* 1972 correspond à la toute première édition du Masters",
+   "link": "https://x.com/JeuSetMaths/status/2122087957532463125",
+   "date": "2026-11-15T22:02:50.220000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXMrvAfXAAAV1VV.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXMrvAfXAAAV1VV.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Ils sont gauchers et ont remporté un match au Masters depuis le début des années 2000 : 🇭🇷 Goran Ivanisevic (1 victoire*) 🇪🇸 Rafael Nadal (21 victoires) 🇺🇸 Ben…",
+   "text": "📊 Ils sont gauchers et ont remporté un match au Masters depuis le début des années 2000 :\n🇭🇷 Goran Ivanisevic (1 victoire*)\n🇪🇸 Rafael Nadal (21 victoires)\n🇺🇸 Ben Shelton (1 victoire 🆕)\n\n✍️* Auxquelles s'ajoutent 7 victoires dans les années 90",
+   "link": "https://x.com/JeuSetMaths/status/2122087286166651039",
+   "date": "2026-11-15T22:00:10.154000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2122083449657831425/vid/avc1/576x720/hwKFcLN5GfhCvMHn.mp4?tag=16"
+  },
+  {
+   "title": "📊 Les 10 derniers matchs des Français 🇫🇷 au Masters : ❌ 2011 : Tsonga 🇫🇷 vs Federer (3 sets) ❌ 2012 : Tsonga 🇫🇷 vs Djokovic ❌ 2012 : Tsonga 🇫🇷 vs Berdych (3 sets) ❌…",
+   "text": "📊 Les 10 derniers matchs des Français 🇫🇷 au Masters :\n❌ 2011 : Tsonga 🇫🇷 vs Federer (3 sets)\n❌ 2012 : Tsonga 🇫🇷 vs Djokovic\n❌ 2012 : Tsonga 🇫🇷 vs Berdych (3 sets)\n❌ 2012 : Tsonga 🇫🇷 vs Murray\n❌ 2013 : Gasquet 🇫🇷 vs Del Potro (3 sets)\n❌ 2013 : Gasquet 🇫🇷 vs Federer\n❌ 2013 : Gasquet 🇫🇷 vs Djokovic (3 sets)\n❌ 2016 : Monfils 🇫🇷 vs Raonic\n❌ 2016 : Monfils 🇫🇷 vs Thiem (3 sets)\n❌ 2026 : Fils 🇫🇷 vs Shelton (3 sets) 🆕",
+   "link": "https://x.com/JeuSetMaths/status/2122082771179130914",
+   "date": "2026-11-15T21:42:13.697000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXMm8wiXoAA1se2.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXMm8wiXoAA1se2.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Arthur Fils 🇫🇷 dispute le 11e match de sa saison face à un Top 10. Pour la première fois, le match ne s'est pas conclu en 2 sets.",
+   "text": "📊 Arthur Fils 🇫🇷 dispute le 11e match de sa saison face à un Top 10. Pour la première fois, le match ne s'est pas conclu en 2 sets.",
+   "link": "https://x.com/JeuSetMaths/status/2122073517227172129",
+   "date": "2026-11-15T21:05:27.383000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2122073405990088704/vid/avc1/576x720/RT3ec_ksSbwjZG-e.mp4?tag=16"
+  },
+  {
+   "title": "📊 La dernière fois qu'un joueur français 🇫🇷 remportait un match au Masters ATP... 🏆 Novak Djokovic avait remporté 4 titres du Grand Chelem 🇫🇷 Nicolas Sarkozy était…",
+   "text": "📊 La dernière fois qu'un joueur français 🇫🇷 remportait un match au Masters ATP...\n🏆 Novak Djokovic avait remporté 4 titres du Grand Chelem\n🇫🇷 Nicolas Sarkozy était président de la République\n📽️ Intouchables était N°1 au box office\n📱 L'iPhone 4s venait d'être commercialisé\n👶 Arthur Fils avait 7 ans\n🎵 \"Someone Like You\" d'Adele était N°1 en France\n👻 Snapchat n'existait pas sur Android\n🌖 Neil Armstrong était vivant\n⚽️ Le PSG venait tout juste d'être racheté par le Qatar\n💰 Le Bitcoin valait environ $3\n🎮 GTA V n'était pas encore sorti",
+   "link": "https://x.com/JeuSetMaths/status/2122048819474940112",
+   "date": "2026-11-15T19:27:18.980000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/tweet_video/HXMIJnSXcAAhllf.mp4"
+  },
   {
    "title": "🤩 Un nouvel événement à mon Pokédex avec le Co'Met Orléans Open (Challenger 125). 🔦 L'occasion de mettre un coup de projecteur sur tous ces tournois organisés en…",
    "text": "🤩 Un nouvel événement à mon Pokédex avec le Co'Met Orléans Open (Challenger 125).\n\n🔦 L'occasion de mettre un coup de projecteur sur tous ces tournois organisés en France, dont on parle un peu moins mais qui n'ont pas grand-chose à envier à des tournois du circuit principal.\n\n📺 Et pour tranquillement patienter avant l’entrée en lice d’Arthur Fils à Turin, la finale entre Nishesh Basavareddy 🇺🇸 et Otto Virtanen 🇫🇮 est diffusée et commentée dès maintenant sur France TV et sur la chaîne Youtube d'Ici Centre-Val de Loire. 🎙️",
@@ -155,90 +273,6 @@ export const jeuSetMathsBundledData = {
    "video": null
   },
   {
-   "title": "📊 Leur bilan en carrière face aux autres qualifiés : 🇪🇸 Carlos Alcaraz : 68,6% (24 ✅, 11 ❌) 🇩🇪 Alexander Zverev : 60,9% (39 ✅, 25 ❌) 🇷🇺 Daniil Medvedev : 57,4% (27 ✅,…",
-   "text": "📊 Leur bilan en carrière face aux autres qualifiés :\n🇪🇸 Carlos Alcaraz : 68,6% (24 ✅, 11 ❌)\n🇩🇪 Alexander Zverev : 60,9% (39 ✅, 25 ❌)\n🇷🇺 Daniil Medvedev : 57,4% (27 ✅, 20 ❌)\n🇪🇸 Rafael Jodar : 50,0% (3 ✅, 3 ❌)\n🇺🇸 Ben Shelton : 46,2% (12 ✅, 14 ❌)\n🇫🇷 Arthur Fils : 41,7% (10 ✅, 14 ❌)\n🇺🇸 Frances Tiafoe : 26,5% (9 ✅, 25 ❌)\n🇮🇹 Flavio Cobolli : 25,0% (6 ✅, 18 ❌)",
-   "link": "https://x.com/JeuSetMaths/status/2121715849421639876",
-   "date": "2026-11-14T21:24:12.733000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
-   "title": "📊 La répartition de leurs points ATP par surface : 🇩🇪 Alexander Zverev : 🔵46% | 🟠 36% | 🟢 16% | 🟣 2% 🇪🇸 Carlos Alcaraz : 🔵64% | 🟣 25% | 🟠 11% 🇺🇸 Ben Shelton : 🔵57% | 🟣…",
-   "text": "📊 La répartition de leurs points ATP par surface :\n🇩🇪 Alexander Zverev :\n🔵46% | 🟠 36% | 🟢 16% | 🟣 2%\n\n🇪🇸 Carlos Alcaraz :\n🔵64% | 🟣 25% | 🟠 11%\n\n🇺🇸 Ben Shelton :\n🔵57% | 🟣 23% | 🟠 13% | 🟢 7%\n\n🇷🇺 Daniil Medvedev :\n🔵67% | 🟠 13% | 🟣 12% | 🟢 8%\n\n🇮🇹 Flavio Cobolli :\n🟠 52% | 🔵33% | 🟢 11% | 🟣 4%\n\n🇫🇷 Arthur Fils :\n🔵64% | 🟠 25% | 🟣 10% | 🟢 1%\n\n🇺🇸 Frances Tiafoe :\n🔵69% | 🟢 18% | 🟠 12% | 🟣 2%\n\n🇪🇸 Rafael Jodar :\n🔵54% | 🟠 39% | 🟣 4% | 🟢 3%\n\n✍️ Légende :\n🔵 Dur extérieur | 🟣 Dur intérieur | 🟠 Terre battue | 🟢 Gazon",
-   "link": "https://x.com/JeuSetMaths/status/2121715846829548011",
-   "date": "2026-11-14T21:24:12.115000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
-   "title": "📊 Les matchs gagnés en Grand Chelem cette saison : 🇩🇪 Alexander Zverev : 25 victoires (🏆🏆🥈) 🇺🇸 Frances Tiafoe : 12 victoires 🇪🇸 Carlos Alcaraz : 11 victoires (🏆) 🇮🇹…",
-   "text": "📊 Les matchs gagnés en Grand Chelem cette saison :\n🇩🇪 Alexander Zverev : 25 victoires (🏆🏆🥈)\n🇺🇸 Frances Tiafoe : 12 victoires\n🇪🇸 Carlos Alcaraz : 11 victoires (🏆)\n🇮🇹 Flavio Cobolli : 11 victoires (🥈)\n🇺🇸 Ben Shelton : 11 victoires (🥈)\n🇷🇺 Daniil Medvedev : 8 victoires\n🇪🇸 Rafael Jodar : 7 victoires\n🇫🇷 Arthur Fils : 1 victoire\n\n👇\nArthur Fils 🇫🇷 est le premier joueur à se qualifier pour le Masters en ayant remporté moins de deux matchs en Grand Chelem au cours de la saison depuis Brad Gilbert 🇺🇸 en 1989 (0 victoire).",
-   "link": "https://x.com/JeuSetMaths/status/2121715844237361572",
-   "date": "2026-11-14T21:24:11.497000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
-   "title": "📊 Leur ratio victoires/défaites cette saison (tous circuits confondus) : 🇪🇸 Carlos Alcaraz : 89,4% (42 ✅, 5 ❌) 🇩🇪 Alexander Zverev : 78,3% (65 ✅, 18 ❌) 🇪🇸 Rafael Jodar…",
-   "text": "📊 Leur ratio victoires/défaites cette saison (tous circuits confondus) :\n🇪🇸 Carlos Alcaraz : 89,4% (42 ✅, 5 ❌)\n🇩🇪 Alexander Zverev : 78,3% (65 ✅, 18 ❌)\n🇪🇸 Rafael Jodar : 74,4% (58 ✅, 20 ❌)\n🇷🇺 Daniil Medvedev : 72,2% (52 ✅, 20 ❌)\n🇫🇷 Arthur Fils : 71,9% (41 ✅, 16 ❌)\n🇺🇸 Ben Shelton : 70,3% (45 ✅, 19 ❌)\n🇺🇸 Frances Tiafoe : 67,7% (44 ✅, 21 ❌)\n🇮🇹 Flavio Cobolli : 60,0% (36 ✅, 24 ❌)",
-   "link": "https://x.com/JeuSetMaths/status/2121715841461031263",
-   "date": "2026-11-14T21:24:10.835000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
-   "title": "📊 Leur progression au classement cette saison : 🇪🇸 Rafael Jodar : +157 places (N°168 ➡️ N°11) 🇫🇷 Arthur Fils : +32 places (N°39 ➡️ N°7) 🇺🇸 Frances Tiafoe : +22 places…",
-   "text": "📊 Leur progression au classement cette saison :\n🇪🇸 Rafael Jodar : +157 places (N°168 ➡️ N°11)\n🇫🇷 Arthur Fils : +32 places (N°39 ➡️ N°7)\n🇺🇸 Frances Tiafoe : +22 places (N°30 ➡️ N°8)\n🇮🇹 Flavio Cobolli : +16 places (N°22 ➡️ N°6)\n🇷🇺 Daniil Medvedev : +8 places (N°13 ➡️ N°5)\n🇺🇸 Ben Shelton : +5 places (N°9 ➡️ N°4)\n🇩🇪 Alexander Zverev : +2 places (N°3 ➡️ N°1)\n🇪🇸 Carlos Alcaraz : -2 places (N°1 ➡️ N°3)\n\n👇\nJAMAIS un joueur n'avait réussi à se qualifier pour le Masters en ayant commencé l'année en étant aussi mal classé que Rafael Jodar 🇪🇸 :\n🆕 N°168 : Rafael Jodar 🇪🇸 (2026)\n▪️ N°133 : Mariano Puerta 🇦🇷 (2005)\n▪️ N°130 : Arthur Ashe 🇺🇸 (1978)\n▪️ N°129 : Goran Ivanisevic 🇭🇷 (2001)\n▪️ N°110 : Andre Agassi 🇺🇸 (1998)",
-   "link": "https://x.com/JeuSetMaths/status/2121715838923190313",
-   "date": "2026-11-14T21:24:10.230000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
-   "title": "📊 Leur bilan face au Top 10 cette saison : 🇪🇸 Carlos Alcaraz : 77,8% (7 ✅, 2 ❌) 🇮🇹 Flavio Cobolli : 57,1% (4 ✅, 3 ❌) 🇫🇷 Arthur Fils : 50,0% (5 ✅, 5 ❌) 🇺🇸 Frances Tiafoe…",
-   "text": "📊 Leur bilan face au Top 10 cette saison :\n🇪🇸 Carlos Alcaraz : 77,8% (7 ✅, 2 ❌)\n🇮🇹 Flavio Cobolli : 57,1% (4 ✅, 3 ❌)\n🇫🇷 Arthur Fils : 50,0% (5 ✅, 5 ❌)\n🇺🇸 Frances Tiafoe : 50,0% (5 ✅, 5 ❌)\n🇺🇸 Ben Shelton : 42,9% (3 ✅, 4 ❌)\n🇷🇺 Daniil Medvedev : 40,0% (2 ✅, 3 ❌)\n🇪🇸 Rafael Jodar : 28,6% (2 ✅, 5 ❌)\n🇩🇪 Alexander Zverev : 25,0% (3 ✅, 9 ❌)",
-   "link": "https://x.com/JeuSetMaths/status/2121715836171980852",
-   "date": "2026-11-14T21:24:09.574000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
-   "title": "📊 Les titres remportés sur le circuit principal cette saison : 🇪🇸 Carlos Alcaraz : 5 titres (+1 🥈) 🇺🇸 Ben Shelton : 4 titres (+2 🥈) 🇷🇺 Daniil Medvedev : 4 titres (+1 🥈)…",
-   "text": "📊 Les titres remportés sur le circuit principal cette saison :\n🇪🇸 Carlos Alcaraz : 5 titres (+1 🥈)\n🇺🇸 Ben Shelton : 4 titres (+2 🥈)\n🇷🇺 Daniil Medvedev : 4 titres (+1 🥈)\n🇩🇪 Alexander Zverev : 2 titres (+2 🥈)\n🇫🇷 Arthur Fils : 2 titres (+1 🥈)\n🇮🇹 Flavio Cobolli : 1 titre (+2 🥈)\n🇺🇸 Frances Tiafoe : 1 titre (+2 🥈)\n🇪🇸 Rafael Jodar : 1 titre (+2 🥈)",
-   "link": "https://x.com/JeuSetMaths/status/2121715833340833898",
-   "date": "2026-11-14T21:24:08.899000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": null
-  },
-  {
    "title": "🌍 A la veille du début des ATP Finals, retour en quelques statistiques sur la saison 2026 des 8 joueurs engagés. #Thread 📊",
    "text": "🌍 A la veille du début des ATP Finals, retour en quelques statistiques sur la saison 2026 des 8 joueurs engagés. #Thread 📊",
    "link": "https://x.com/JeuSetMaths/status/2121715829666435407",
@@ -249,20 +283,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXGaPpMX0AAi6dS.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXGaPpMX0AAi6dS.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Le plus petit nombre de jeux perdus pour se qualifier en demi-finale du Masters WTA (2003-2026) : 🥇 Justine Henin 🇧🇪 : 11 jeux (2007) 🥇 Mirra Andreeva 🇷🇺 : 11 jeux…",
-   "text": "📊 Le plus petit nombre de jeux perdus pour se qualifier en demi-finale du Masters WTA (2003-2026) :\n🥇 Justine Henin 🇧🇪 : 11 jeux (2007)\n🥇 Mirra Andreeva 🇷🇺 : 11 jeux (2026 🆕)\n🥉 Iga Swiatek 🇵🇱 : 13 jeux (2022)\n4⃣ Iga Swiatek 🇵🇱 : 14 jeux (2023)\n5⃣ Amelie Mauresmo 🇫🇷 : 15 jeux (2004)\n5⃣ Serena Williams 🇺🇸 : 15 jeux (2013)",
-   "link": "https://x.com/JeuSetMaths/status/2121381604010705016",
-   "date": "2026-11-13T23:16:02.417000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXCpRupWoAAEj9s.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXCpRupWoAAEj9s.jpg?name=orig"
    ],
    "video": null
   }

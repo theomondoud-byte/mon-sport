@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-15T18:53:12.757295+00:00",
+  "fetchedAt": "2026-11-16T01:31:32.942989+00:00",
   "rows": [
     {
       "rank": 1,
@@ -23,15 +23,15 @@
       "name": "Mirra Andreeva",
       "age": 19,
       "country": "RUS",
-      "livePoints": 7306,
+      "livePoints": 7806,
       "careerHigh": "NMC (3)",
       "movement": 1,
-      "pointsChange": 1000,
-      "tournament": "Finales WTA F (DF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 7806,
-      "maxPoints": 7806,
+      "pointsChange": 1500,
+      "tournament": "",
+      "previousTournaments": "Finales WTA V",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales WTA F (DF )",
@@ -118,11 +118,11 @@
       "careerHigh": "3",
       "movement": null,
       "pointsChange": 800,
-      "tournament": "Finales WTA F (DF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 6421,
-      "maxPoints": 6421,
+      "tournament": "",
+      "previousTournaments": "Défaite Finales WTA F",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales WTA F (DF )",
@@ -180,7 +180,7 @@
       "tournamentHistory": [
         {
           "text": "Finales WTA RR (0 V / 0 D)",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         },
         {
           "text": "Finales WTA RR (0 V / 2 D)",
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         }
       ]
     },
@@ -1792,7 +1792,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         },
         {
           "text": "Sopo DF",
@@ -1865,7 +1865,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         }
       ]
     },
@@ -2128,7 +2128,7 @@
     {
       "rank": 128,
       "name": "Jeline Vandromme",
-      "age": 18,
+      "age": 19,
       "country": "BEL",
       "livePoints": 622,
       "careerHigh": "123",
@@ -2222,7 +2222,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         },
         {
           "text": "Brisbane 6 DF (16e )",
@@ -2263,7 +2263,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         }
       ]
     },
@@ -2316,7 +2316,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         }
       ]
     },
@@ -2353,7 +2353,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         }
       ]
     },
@@ -2374,7 +2374,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-15T18:53:12.757295+00:00"
+          "lastSeen": "2026-11-16T01:31:32.942989+00:00"
         },
         {
           "text": "Brisbane 6 F",
