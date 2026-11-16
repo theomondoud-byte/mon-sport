@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-16T01:31:33.879803+00:00",
+  "fetchedAt": "2026-11-16T08:53:39.031950+00:00",
   "rows": [
     {
       "rank": 1,
@@ -28,8 +28,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Finales WTA RR (1 V / 2 D)",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -53,7 +53,7 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Finales WTA V",
+      "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
@@ -82,8 +82,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Finales WTA RR (2 V / 1 D)",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -98,8 +98,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Finales WTA DF",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -119,8 +119,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Finales WTA F",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -151,9 +151,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales WTA RR (0 V / 0 D)",
-      "previousTournaments": "Défaite Finales WTA RR (0 V / 2 D)",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -177,8 +177,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Finales WTA DF",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -214,8 +214,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Finales WTA RR (0 V / 3 D)",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -230,8 +230,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Finales WTA RR (0 V / 1 D)",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -291,22 +291,6 @@
     },
     {
       "rank": 15,
-      "name": "Victoria Mboko",
-      "age": 20,
-      "country": "CAN",
-      "livePoints": 2393,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 16,
       "name": "Sorana Cîrstea",
       "age": 36,
       "country": "ROU",
@@ -322,7 +306,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 17,
+      "rank": 16,
       "name": "Naomi Osaka",
       "age": 29,
       "country": "JPN",
@@ -338,23 +322,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 18,
-      "name": "Leylah Fernandez",
-      "age": 24,
-      "country": "CAN",
-      "livePoints": 2239,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 19,
+      "rank": 17,
       "name": "Alexandra Eala",
       "age": 21,
       "country": "PHI",
@@ -370,11 +338,43 @@
       "tournamentHistory": []
     },
     {
-      "rank": 20,
+      "rank": 18,
+      "name": "Leylah Fernandez",
+      "age": 24,
+      "country": "CAN",
+      "livePoints": 2201,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 19,
       "name": "Belinda Bencic",
       "age": 29,
       "country": "SUI",
-      "livePoints": 2222,
+      "livePoints": 2168,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 20,
+      "name": "Victoria Mboko",
+      "age": 20,
+      "country": "CAN",
+      "livePoints": 2143,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -419,22 +419,6 @@
     },
     {
       "rank": 23,
-      "name": "Anna Kalinskaya",
-      "age": 27,
-      "country": "RUS",
-      "livePoints": 1967,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 24,
       "name": "Amanda Anisimova",
       "age": 25,
       "country": "USA",
@@ -450,7 +434,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 25,
+      "rank": 24,
       "name": "Marie Bouzková",
       "age": 28,
       "country": "CZE",
@@ -466,11 +450,27 @@
       "tournamentHistory": []
     },
     {
-      "rank": 26,
+      "rank": 25,
       "name": "Jeļena Ostapenko",
       "age": 29,
       "country": "LAT",
       "livePoints": 1916,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 26,
+      "name": "Anna Kalinskaya",
+      "age": 27,
+      "country": "RUS",
+      "livePoints": 1913,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -643,22 +643,6 @@
     },
     {
       "rank": 37,
-      "name": "Cristina Bucșa",
-      "age": 28,
-      "country": "ESP",
-      "livePoints": 1300,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 38,
       "name": "Xinyu Wang",
       "age": 25,
       "country": "CHN",
@@ -674,23 +658,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 39,
-      "name": "Kimberly Birrell",
-      "age": 28,
-      "country": "AUS",
-      "livePoints": 1254,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 40,
+      "rank": 38,
       "name": "Ludmilla Samsonova",
       "age": 28,
       "country": "RUS",
@@ -706,7 +674,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 41,
+      "rank": 39,
       "name": "Talia Gibson",
       "age": 22,
       "country": "AUS",
@@ -722,23 +690,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 42,
-      "name": "Donna Vekić",
-      "age": 30,
-      "country": "CRO",
-      "livePoints": 1160,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 43,
+      "rank": 40,
       "name": "Hailey Baptiste",
       "age": 25,
       "country": "USA",
@@ -754,7 +706,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 44,
+      "rank": 41,
       "name": "Kateřina Siniaková",
       "age": 30,
       "country": "CZE",
@@ -770,11 +722,11 @@
       "tournamentHistory": []
     },
     {
-      "rank": 45,
-      "name": "Janice Tjen",
-      "age": 24,
-      "country": "INA",
-      "livePoints": 1120,
+      "rank": 42,
+      "name": "Cristina Bucșa",
+      "age": 28,
+      "country": "ESP",
+      "livePoints": 1137,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -786,7 +738,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 46,
+      "rank": 43,
       "name": "Katie Boulter",
       "age": 30,
       "country": "GBR",
@@ -802,7 +754,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 47,
+      "rank": 44,
       "name": "Magdalena Fręch",
       "age": 28,
       "country": "POL",
@@ -818,7 +770,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 48,
+      "rank": 45,
+      "name": "Donna Vekić",
+      "age": 30,
+      "country": "CRO",
+      "livePoints": 1107,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 46,
       "name": "Karolína Plíšková",
       "age": 34,
       "country": "CZE",
@@ -834,7 +802,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 49,
+      "rank": 47,
+      "name": "Kimberly Birrell",
+      "age": 28,
+      "country": "AUS",
+      "livePoints": 1101,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 48,
       "name": "Sonay Kartal",
       "age": 25,
       "country": "GBR",
@@ -850,7 +834,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 50,
+      "rank": 49,
       "name": "Clara Tauson",
       "age": 23,
       "country": "DEN",
@@ -866,7 +850,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 51,
+      "rank": 50,
       "name": "Alycia Parks",
       "age": 25,
       "country": "USA",
@@ -882,7 +866,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 52,
+      "rank": 51,
       "name": "Kamilla Rakhimova",
       "age": 25,
       "country": "UZB",
@@ -898,23 +882,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 53,
-      "name": "Lilli Tagger",
-      "age": 18,
-      "country": "AUT",
-      "livePoints": 1059,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 54,
+      "rank": 52,
       "name": "Barbora Krejčíková",
       "age": 30,
       "country": "CZE",
@@ -930,7 +898,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 55,
+      "rank": 53,
       "name": "Yulia Starodubtseva",
       "age": 26,
       "country": "UKR",
@@ -946,7 +914,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 56,
+      "rank": 54,
       "name": "Ashlyn Krueger",
       "age": 22,
       "country": "USA",
@@ -962,23 +930,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 57,
-      "name": "Yulia Putintseva",
-      "age": 31,
-      "country": "KAZ",
-      "livePoints": 1020,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 58,
+      "rank": 55,
       "name": "Caty McNally",
       "age": 24,
       "country": "USA",
@@ -994,7 +946,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 59,
+      "rank": 56,
       "name": "Zeynep Sönmez",
       "age": 24,
       "country": "TUR",
@@ -1010,7 +962,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 60,
+      "rank": 57,
+      "name": "Yulia Putintseva",
+      "age": 31,
+      "country": "KAZ",
+      "livePoints": 976,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 58,
       "name": "Elena-Gabriela Ruse",
       "age": 29,
       "country": "ROU",
@@ -1026,7 +994,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 61,
+      "rank": 59,
       "name": "Magda Linette",
       "age": 34,
       "country": "POL",
@@ -1042,7 +1010,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 62,
+      "rank": 60,
       "name": "Elisabetta Cocciaretto",
       "age": 25,
       "country": "ITA",
@@ -1058,7 +1026,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 63,
+      "rank": 61,
       "name": "Anna Bondár",
       "age": 29,
       "country": "HUN",
@@ -1074,7 +1042,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 64,
+      "rank": 62,
       "name": "Daria Snigur",
       "age": 24,
       "country": "UKR",
@@ -1090,7 +1058,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 65,
+      "rank": 63,
       "name": "Paula Badosa",
       "age": 29,
       "country": "ESP",
@@ -1106,10 +1074,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 66,
-      "name": "Maya Joint",
-      "age": 20,
-      "country": "AUS",
+      "rank": 64,
+      "name": "Janice Tjen",
+      "age": 24,
+      "country": "INA",
       "livePoints": 900,
       "careerHigh": "",
       "movement": null,
@@ -1122,7 +1090,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 67,
+      "rank": 65,
+      "name": "Lilli Tagger",
+      "age": 18,
+      "country": "AUT",
+      "livePoints": 897,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 66,
       "name": "Jaqueline Cristian",
       "age": 28,
       "country": "ROU",
@@ -1138,7 +1122,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 68,
+      "rank": 67,
       "name": "Oleksandra Oliynykova",
       "age": 25,
       "country": "UKR",
@@ -1154,7 +1138,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 69,
+      "rank": 68,
       "name": "Taylor Townsend",
       "age": 30,
       "country": "USA",
@@ -1170,11 +1154,27 @@
       "tournamentHistory": []
     },
     {
-      "rank": 70,
+      "rank": 69,
       "name": "Daria Kasatkina",
       "age": 29,
       "country": "AUS",
       "livePoints": 813,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 70,
+      "name": "Maya Joint",
+      "age": 20,
+      "country": "AUS",
+      "livePoints": 812,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -1227,22 +1227,6 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Sopo 8e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 74,
-      "name": "Viktorija Golubic",
-      "age": 34,
-      "country": "SUI",
-      "livePoints": 770,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
@@ -1250,28 +1234,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 75,
-      "name": "Shuai Zhang",
-      "age": 37,
-      "country": "CHN",
-      "livePoints": 766,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Sydney 3 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T01:31:33.879803+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 76,
+      "rank": 74,
       "name": "Panna Udvardy",
       "age": 28,
       "country": "HUN",
@@ -1287,7 +1250,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 77,
+      "rank": 75,
       "name": "Antonia Ružić",
       "age": 23,
       "country": "CRO",
@@ -1303,7 +1266,28 @@
       "tournamentHistory": []
     },
     {
-      "rank": 78,
+      "rank": 76,
+      "name": "Shuai Zhang",
+      "age": 37,
+      "country": "CHN",
+      "livePoints": 736,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Sydney 3 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 3 16e",
+          "lastSeen": "2026-11-16T08:53:39.031950+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 77,
       "name": "Tereza Valentová",
       "age": 19,
       "country": "CZE",
@@ -1319,23 +1303,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 79,
-      "name": "Anna Blinkova",
-      "age": 28,
-      "country": "FRA",
-      "livePoints": 723,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 80,
+      "rank": 78,
       "name": "Aliaksandra Sasnovich",
       "age": 32,
       "country": "BLR",
@@ -1351,7 +1319,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 81,
+      "rank": 79,
       "name": "Emma Raducanu",
       "age": 24,
       "country": "GBR",
@@ -1367,7 +1335,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 82,
+      "rank": 80,
       "name": "Katie Volynets",
       "age": 24,
       "country": "USA",
@@ -1383,7 +1351,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 83,
+      "rank": 81,
       "name": "Dayana Yastremska",
       "age": 26,
       "country": "UKR",
@@ -1399,7 +1367,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 84,
+      "rank": 82,
+      "name": "Viktorija Golubic",
+      "age": 34,
+      "country": "SUI",
+      "livePoints": 673,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 83,
       "name": "Mccartney Kessler",
       "age": 27,
       "country": "USA",
@@ -1415,7 +1399,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 85,
+      "rank": 84,
       "name": "Jéssica Bouzas Maneiro",
       "age": 24,
       "country": "ESP",
@@ -1431,7 +1415,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 86,
+      "rank": 85,
       "name": "Petra Marčinko",
       "age": 20,
       "country": "CRO",
@@ -1447,7 +1431,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 87,
+      "rank": 86,
       "name": "Harriet Dart",
       "age": 30,
       "country": "GBR",
@@ -1463,7 +1447,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 88,
+      "rank": 87,
       "name": "Solana Sierra",
       "age": 22,
       "country": "ARG",
@@ -1479,7 +1463,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 89,
+      "rank": 88,
       "name": "Kaitlin Quevedo",
       "age": 20,
       "country": "ESP",
@@ -1495,39 +1479,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 90,
-      "name": "Lanlana Tararudee",
-      "age": 22,
-      "country": "THA",
-      "livePoints": 622,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 91,
-      "name": "Anastasia Zakharova",
-      "age": 24,
-      "country": "RUS",
-      "livePoints": 615,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 92,
+      "rank": 89,
       "name": "Anhelina Kalinina",
       "age": 29,
       "country": "UKR",
@@ -1543,7 +1495,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 93,
+      "rank": 90,
+      "name": "Anastasia Zakharova",
+      "age": 24,
+      "country": "RUS",
+      "livePoints": 595,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 91,
       "name": "Alina Korneeva",
       "age": 19,
       "country": "RUS",
@@ -1559,11 +1527,43 @@
       "tournamentHistory": []
     },
     {
-      "rank": 94,
-      "name": "Ajla Tomljanović",
+      "rank": 92,
+      "name": "Xiyu Wang",
+      "age": 25,
+      "country": "CHN",
+      "livePoints": 536,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 93,
+      "name": "Sloane Stephens",
       "age": 33,
-      "country": "AUS",
-      "livePoints": 544,
+      "country": "USA",
+      "livePoints": 536,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 94,
+      "name": "Lanlana Tararudee",
+      "age": 22,
+      "country": "THA",
+      "livePoints": 524,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -1576,10 +1576,10 @@
     },
     {
       "rank": 95,
-      "name": "Xiyu Wang",
-      "age": 25,
-      "country": "CHN",
-      "livePoints": 537,
+      "name": "Ajla Tomljanović",
+      "age": 33,
+      "country": "AUS",
+      "livePoints": 514,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -1592,22 +1592,6 @@
     },
     {
       "rank": 96,
-      "name": "Sloane Stephens",
-      "age": 33,
-      "country": "USA",
-      "livePoints": 536,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Orlando 4 8e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 97,
       "name": "Sinja Kraus",
       "age": 24,
       "country": "AUT",
@@ -1623,7 +1607,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 98,
+      "rank": 97,
       "name": "Mayar Sherif",
       "age": 30,
       "country": "EGY",
@@ -1639,7 +1623,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 99,
+      "rank": 98,
       "name": "Polina Kudermetova",
       "age": 23,
       "country": "UZB",
@@ -1655,7 +1639,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 100,
+      "rank": 99,
       "name": "Oksana Selekhmeteva",
       "age": 23,
       "country": "ESP",
@@ -1671,7 +1655,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 101,
+      "rank": 100,
       "name": "Maria Timofeeva",
       "age": 22,
       "country": "UZB",
@@ -1687,11 +1671,11 @@
       "tournamentHistory": []
     },
     {
-      "rank": 102,
-      "name": "Eva Lys",
-      "age": 24,
-      "country": "GER",
-      "livePoints": 470,
+      "rank": 101,
+      "name": "Anna Blinkova",
+      "age": 28,
+      "country": "FRA",
+      "livePoints": 474,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -1703,7 +1687,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 103,
+      "rank": 102,
       "name": "Darja Viďmanová",
       "age": 23,
       "country": "CZE",
@@ -1719,26 +1703,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 104,
-      "name": "Emiliana Arango",
-      "age": 25,
-      "country": "COL",
-      "livePoints": 442,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 105,
-      "name": "Storm Hunter",
-      "age": 32,
-      "country": "AUS",
+      "rank": 103,
+      "name": "Eva Lys",
+      "age": 24,
+      "country": "GER",
       "livePoints": 438,
       "careerHigh": "",
       "movement": null,
@@ -1751,7 +1719,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 106,
+      "rank": 104,
       "name": "Claire Liu",
       "age": 26,
       "country": "USA",
@@ -1767,7 +1735,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 107,
+      "rank": 105,
       "name": "Jil Teichmann",
       "age": 29,
       "country": "SUI",
@@ -1783,7 +1751,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 108,
+      "rank": 106,
       "name": "Taylah Preston",
       "age": 21,
       "country": "AUS",
@@ -1799,7 +1767,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 109,
+      "rank": 107,
       "name": "Robin Montgomery",
       "age": 22,
       "country": "USA",
@@ -1815,7 +1783,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 110,
+      "rank": 108,
       "name": "Renata Zarazúa",
       "age": 29,
       "country": "MEX",
@@ -1831,7 +1799,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 111,
+      "rank": 109,
       "name": "Alina Charaeva",
       "age": 24,
       "country": "ARM",
@@ -1847,11 +1815,11 @@
       "tournamentHistory": []
     },
     {
-      "rank": 112,
-      "name": "Mia Pohánková",
-      "age": 18,
-      "country": "SVK",
-      "livePoints": 414,
+      "rank": 110,
+      "name": "Emiliana Arango",
+      "age": 25,
+      "country": "COL",
+      "livePoints": 413,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -1863,28 +1831,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 113,
-      "name": "Maddison Inglis",
-      "age": 28,
-      "country": "AUS",
-      "livePoints": 411,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Sydney 3 16e",
-      "previousTournaments": "Défaite Brisbane 6 16e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T01:31:33.879803+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 114,
+      "rank": 111,
       "name": "Sofia Kenin",
       "age": 28,
       "country": "USA",
@@ -1900,7 +1847,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 115,
+      "rank": 112,
+      "name": "Storm Hunter",
+      "age": 32,
+      "country": "AUS",
+      "livePoints": 408,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 113,
       "name": "Laura Siegemund",
       "age": 38,
       "country": "GER",
@@ -1916,7 +1879,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 116,
+      "rank": 114,
       "name": "Léolia Jeanjean",
       "age": 31,
       "country": "FRA",
@@ -1932,23 +1895,28 @@
       "tournamentHistory": []
     },
     {
-      "rank": 117,
-      "name": "Linda Fruhvirtová",
-      "age": 21,
-      "country": "CZE",
-      "livePoints": 392,
+      "rank": 115,
+      "name": "Maddison Inglis",
+      "age": 28,
+      "country": "AUS",
+      "livePoints": 393,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Sydney 3 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Sydney 3 16e",
+          "lastSeen": "2026-11-16T08:53:39.031950+00:00"
+        }
+      ]
     },
     {
-      "rank": 118,
+      "rank": 116,
       "name": "Elvina Kalieva",
       "age": 23,
       "country": "USA",
@@ -1964,23 +1932,39 @@
       "tournamentHistory": []
     },
     {
-      "rank": 119,
-      "name": "Himeno Sakatsume",
-      "age": 25,
-      "country": "JPN",
-      "livePoints": 345,
+      "rank": 117,
+      "name": "Linda Fruhvirtová",
+      "age": 21,
+      "country": "CZE",
+      "livePoints": 362,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Brisbane 6 QF",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
     },
     {
-      "rank": 120,
+      "rank": 118,
+      "name": "Mia Pohánková",
+      "age": 18,
+      "country": "SVK",
+      "livePoints": 360,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 119,
       "name": "Elsa Jacquemot",
       "age": 23,
       "country": "FRA",
@@ -1996,23 +1980,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 121,
-      "name": "Dominika Šálková",
-      "age": 22,
-      "country": "CZE",
-      "livePoints": 343,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 122,
+      "rank": 120,
       "name": "Yue Yuan",
       "age": 28,
       "country": "CHN",
@@ -2028,23 +1996,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 123,
-      "name": "Katarzyna Kawa",
-      "age": 33,
-      "country": "POL",
-      "livePoints": 339,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 124,
+      "rank": 121,
       "name": "Varvara Gracheva",
       "age": 26,
       "country": "FRA",
@@ -2060,7 +2012,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 125,
+      "rank": 122,
       "name": "Mananchaya Sawangkaew",
       "age": 24,
       "country": "THA",
@@ -2076,7 +2028,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 126,
+      "rank": 123,
       "name": "Rebecca Šramková",
       "age": 30,
       "country": "SVK",
@@ -2092,7 +2044,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 127,
+      "rank": 124,
       "name": "Kayla Day",
       "age": 27,
       "country": "USA",
@@ -2108,7 +2060,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 128,
+      "rank": 125,
       "name": "Simona Waltert",
       "age": 25,
       "country": "SUI",
@@ -2124,11 +2076,11 @@
       "tournamentHistory": []
     },
     {
-      "rank": 129,
+      "rank": 126,
       "name": "Tatiana Prozorova",
       "age": 23,
       "country": "RUS",
-      "livePoints": 319,
+      "livePoints": 318,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -2140,7 +2092,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 130,
+      "rank": 127,
       "name": "Mary Stoiana",
       "age": 23,
       "country": "USA",
@@ -2156,7 +2108,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 131,
+      "rank": 128,
+      "name": "Katarzyna Kawa",
+      "age": 33,
+      "country": "POL",
+      "livePoints": 309,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 129,
       "name": "Kristina Liutova",
       "age": 16,
       "country": "RUS",
@@ -2172,7 +2140,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 132,
+      "rank": 130,
       "name": "Francesca Jones",
       "age": 26,
       "country": "GBR",
@@ -2188,7 +2156,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 133,
+      "rank": 131,
       "name": "Rebeka Masarova",
       "age": 27,
       "country": "SUI",
@@ -2197,19 +2165,19 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "Colina 16e",
-      "previousTournaments": "Défaite Sopo 16e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T01:31:33.879803+00:00"
+          "lastSeen": "2026-11-16T08:53:39.031950+00:00"
         }
       ]
     },
     {
-      "rank": 134,
+      "rank": 132,
       "name": "Dalma Gálfi",
       "age": 28,
       "country": "HUN",
@@ -2225,7 +2193,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 135,
+      "rank": 133,
       "name": "Victoria Jimenez Kasintseva",
       "age": 21,
       "country": "AND",
@@ -2241,12 +2209,12 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T01:31:33.879803+00:00"
+          "lastSeen": "2026-11-16T08:53:39.031950+00:00"
         }
       ]
     },
     {
-      "rank": 136,
+      "rank": 134,
       "name": "Lucrezia Stefanini",
       "age": 28,
       "country": "ITA",
@@ -2262,11 +2230,11 @@
       "tournamentHistory": []
     },
     {
-      "rank": 137,
-      "name": "Ella Seidel",
-      "age": 21,
-      "country": "GER",
-      "livePoints": 277,
+      "rank": 135,
+      "name": "Himeno Sakatsume",
+      "age": 25,
+      "country": "JPN",
+      "livePoints": 273,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -2278,36 +2246,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 138,
-      "name": "Joanna Garland",
-      "age": 25,
-      "country": "TWN",
-      "livePoints": 275,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Sydney 3 16e",
-      "previousTournaments": "Brisbane 6 V",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T01:31:33.879803+00:00"
-        },
-        {
-          "text": "Brisbane 6 F",
-          "lastSeen": "2026-11-15T01:14:18.650602+00:00"
-        },
-        {
-          "text": "Brisbane 6 DF",
-          "lastSeen": "2026-11-14T01:09:11.721231+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 139,
+      "rank": 136,
       "name": "Moyuka Uchijima",
       "age": 25,
       "country": "JPN",
@@ -2323,7 +2262,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 140,
+      "rank": 137,
       "name": "Elina Avanesyan",
       "age": 24,
       "country": "ARM",
@@ -2339,7 +2278,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 141,
+      "rank": 138,
       "name": "Nadia Podoroska",
       "age": 29,
       "country": "ARG",
@@ -2355,12 +2294,12 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T01:31:33.879803+00:00"
+          "lastSeen": "2026-11-16T08:53:39.031950+00:00"
         }
       ]
     },
     {
-      "rank": 142,
+      "rank": 139,
       "name": "Iryna Shymanovich",
       "age": 29,
       "country": "BLR",
@@ -2376,7 +2315,39 @@
       "tournamentHistory": []
     },
     {
-      "rank": 143,
+      "rank": 140,
+      "name": "Ella Seidel",
+      "age": 21,
+      "country": "GER",
+      "livePoints": 248,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 141,
+      "name": "Dominika Šálková",
+      "age": 22,
+      "country": "CZE",
+      "livePoints": 245,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 142,
       "name": "Darja Semenistaja",
       "age": 24,
       "country": "LAT",
@@ -2392,12 +2363,12 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T01:31:33.879803+00:00"
+          "lastSeen": "2026-11-16T08:53:39.031950+00:00"
         }
       ]
     },
     {
-      "rank": 144,
+      "rank": 143,
       "name": "Veronika Podrez",
       "age": 19,
       "country": "UKR",
@@ -2413,11 +2384,27 @@
       "tournamentHistory": []
     },
     {
+      "rank": 144,
+      "name": "Marina Bassols Ribera",
+      "age": 26,
+      "country": "ESP",
+      "livePoints": 239,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
       "rank": 145,
-      "name": "Elena Pridankina",
-      "age": 21,
-      "country": "RUS",
-      "livePoints": 240,
+      "name": "Tamara Zidanšek",
+      "age": 28,
+      "country": "SLO",
+      "livePoints": 235,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -2430,38 +2417,6 @@
     },
     {
       "rank": 146,
-      "name": "Marina Bassols Ribera",
-      "age": 26,
-      "country": "ESP",
-      "livePoints": 239,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Sopo QF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 147,
-      "name": "Tamara Zidanšek",
-      "age": 28,
-      "country": "SLO",
-      "livePoints": 235,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Sopo 16e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 148,
       "name": "Tyra Grant",
       "age": 18,
       "country": "ITA",
@@ -2477,11 +2432,43 @@
       "tournamentHistory": []
     },
     {
-      "rank": 149,
-      "name": "Hanyu Guo",
+      "rank": 147,
+      "name": "Julia Grabher",
+      "age": 30,
+      "country": "AUT",
+      "livePoints": 229,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 148,
+      "name": "Priscilla Hon",
       "age": 28,
+      "country": "AUS",
+      "livePoints": 209,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 149,
+      "name": "Han Shi",
+      "age": 21,
       "country": "CHN",
-      "livePoints": 231,
+      "livePoints": 204,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -2494,16 +2481,16 @@
     },
     {
       "rank": 150,
-      "name": "Julia Grabher",
-      "age": 30,
-      "country": "AUT",
-      "livePoints": 229,
+      "name": "Mai Hontama",
+      "age": 27,
+      "country": "JPN",
+      "livePoints": 203,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Sopo 8e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []

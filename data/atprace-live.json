@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-race",
-  "fetchedAt": "2026-11-16T01:31:33.499959+00:00",
+  "fetchedAt": "2026-11-16T08:53:38.709145+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 0 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 0 D)",
@@ -60,7 +60,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 0 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
@@ -81,7 +81,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 0 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 0 D)",
@@ -106,7 +106,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 0 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
@@ -127,7 +127,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 0 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
@@ -148,7 +148,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 1 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 0 D)",
@@ -173,12 +173,33 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 0 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
       "rank": 9,
+      "name": "Taylor Fritz",
+      "age": 29,
+      "country": "USA",
+      "livePoints": 3300,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (8e )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 10,
       "name": "Rafael Jódar",
       "age": 20,
       "country": "ESP",
@@ -194,7 +215,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 1 D)",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 0 D)",
@@ -203,7 +224,7 @@
       ]
     },
     {
-      "rank": 10,
+      "rank": 11,
       "name": "Alex de Minaur",
       "age": 27,
       "country": "AUS",
@@ -217,27 +238,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 11,
-      "name": "Taylor Fritz",
-      "age": 29,
-      "country": "USA",
-      "livePoints": 3085,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Stockholm V",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Stockholm DF (8e )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
     },
     {
       "rank": 12,
@@ -345,8 +345,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 8e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -465,6 +465,27 @@
     },
     {
       "rank": 26,
+      "name": "Lorenzo Musetti",
+      "age": 24,
+      "country": "ITA",
+      "livePoints": 1795,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (QF )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 27,
       "name": "Valentin Vacherot",
       "age": 28,
       "country": "MON",
@@ -478,27 +499,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 27,
-      "name": "Lorenzo Musetti",
-      "age": 24,
-      "country": "ITA",
-      "livePoints": 1695,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Stockholm DF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Stockholm DF (QF )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
     },
     {
       "rank": 28,
@@ -521,19 +521,40 @@
       "name": "Tomás Martín Etcheverry",
       "age": 27,
       "country": "ARG",
-      "livePoints": 1625,
+      "livePoints": 1640,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 8e (16e )",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
     },
     {
       "rank": 30,
+      "name": "Alejandro Tabilo",
+      "age": 29,
+      "country": "CHI",
+      "livePoints": 1635,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (QF )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 31,
       "name": "Hubert Hurkacz",
       "age": 29,
       "country": "POL",
@@ -549,13 +570,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 31,
-      "name": "Ignacio Buse",
-      "age": 22,
-      "country": "PER",
-      "livePoints": 1570,
+      "rank": 32,
+      "name": "Arthur Fery",
+      "age": 24,
+      "country": "GBR",
+      "livePoints": 1507,
       "careerHigh": "",
-      "movement": 2,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -565,34 +586,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 32,
-      "name": "Alejandro Tabilo",
-      "age": 29,
-      "country": "CHI",
-      "livePoints": 1525,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Stockholm DF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Stockholm DF (QF )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
-    },
-    {
       "rank": 33,
-      "name": "Arthur Fery",
-      "age": 24,
-      "country": "GBR",
-      "livePoints": 1516,
+      "name": "Ignacio Buse",
+      "age": 22,
+      "country": "PER",
+      "livePoints": 1495,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -622,25 +622,25 @@
       "name": "Alex Michelsen",
       "age": 22,
       "country": "USA",
-      "livePoints": 1460,
+      "livePoints": 1480,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm QF",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
     },
     {
       "rank": 36,
-      "name": "Jan Lennard Struff",
-      "age": 36,
-      "country": "GER",
-      "livePoints": 1433,
+      "name": "Stefanos Tsitsipas",
+      "age": 28,
+      "country": "GRE",
+      "livePoints": 1430,
       "careerHigh": "",
-      "movement": 3,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -651,12 +651,12 @@
     },
     {
       "rank": 37,
-      "name": "Stefanos Tsitsipas",
+      "name": "Ugo Humbert",
       "age": 28,
-      "country": "GRE",
-      "livePoints": 1430,
+      "country": "FRA",
+      "livePoints": 1360,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -667,28 +667,28 @@
     },
     {
       "rank": 38,
-      "name": "Ugo Humbert",
-      "age": 28,
-      "country": "FRA",
-      "livePoints": 1335,
+      "name": "Matteo Arnaldi",
+      "age": 25,
+      "country": "ITA",
+      "livePoints": 1321,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm QF",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
     },
     {
       "rank": 39,
-      "name": "Matteo Arnaldi",
-      "age": 25,
-      "country": "ITA",
-      "livePoints": 1321,
+      "name": "Jan Lennard Struff",
+      "age": 36,
+      "country": "GER",
+      "livePoints": 1296,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -752,7 +752,7 @@
       "country": "ITA",
       "livePoints": 1223,
       "careerHigh": "",
-      "movement": null,
+      "movement": 1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -768,11 +768,11 @@
       "country": "BEL",
       "livePoints": 1220,
       "careerHigh": "",
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -787,8 +787,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -811,6 +811,27 @@
     },
     {
       "rank": 47,
+      "name": "Thiago Agustín Tirante",
+      "age": 25,
+      "country": "ARG",
+      "livePoints": 1197,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Stockholm DF (QF )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 48,
       "name": "Arthur Géa",
       "age": 21,
       "country": "FRA",
@@ -826,11 +847,11 @@
       "tournamentHistory": []
     },
     {
-      "rank": 48,
+      "rank": 49,
       "name": "Mariano Navone",
       "age": 25,
       "country": "ARG",
-      "livePoints": 1113,
+      "livePoints": 1095,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -842,7 +863,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 49,
+      "rank": 50,
       "name": "Tallon Griekspoor",
       "age": 30,
       "country": "NED",
@@ -858,7 +879,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 50,
+      "rank": 51,
       "name": "Denis Shapovalov",
       "age": 27,
       "country": "CAN",
@@ -874,28 +895,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 51,
-      "name": "Thiago Agustín Tirante",
-      "age": 25,
-      "country": "ARG",
-      "livePoints": 1042,
+      "rank": 52,
+      "name": "Cameron Norrie",
+      "age": 31,
+      "country": "GBR",
+      "livePoints": 1045,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm F",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Stockholm DF (QF )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
+      "tournamentHistory": []
     },
     {
-      "rank": 52,
+      "rank": 53,
       "name": "Sebastián Báez",
       "age": 25,
       "country": "ARG",
@@ -904,24 +920,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Orléans 8e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 53,
-      "name": "Cameron Norrie",
-      "age": 31,
-      "country": "GBR",
-      "livePoints": 1030,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Stockholm 8e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -936,8 +936,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 8e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -960,22 +960,6 @@
     },
     {
       "rank": 56,
-      "name": "Adolfo Daniel Vallejo",
-      "age": 22,
-      "country": "PAR",
-      "livePoints": 959,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 57,
       "name": "Jaime Faria",
       "age": 23,
       "country": "POR",
@@ -991,7 +975,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 58,
+      "rank": 57,
       "name": "Arthur Rinderknech",
       "age": 31,
       "country": "FRA",
@@ -1000,14 +984,14 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
     },
     {
-      "rank": 59,
+      "rank": 58,
       "name": "Rinky Hijikata",
       "age": 25,
       "country": "AUS",
@@ -1023,7 +1007,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 60,
+      "rank": 59,
       "name": "Tomáš Macháč",
       "age": 26,
       "country": "CZE",
@@ -1032,14 +1016,14 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
     },
     {
-      "rank": 61,
+      "rank": 60,
       "name": "Adrian Mannarino",
       "age": 38,
       "country": "FRA",
@@ -1048,8 +1032,24 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Qualif. Stockholm T2 Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 61,
+      "name": "Adolfo Daniel Vallejo",
+      "age": 22,
+      "country": "PAR",
+      "livePoints": 897,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -1064,8 +1064,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Orléans 8e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -1091,13 +1091,13 @@
       "name": "Miomir Kecmanović",
       "age": 27,
       "country": "SRB",
-      "livePoints": 859,
+      "livePoints": 871,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 8e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -1119,7 +1119,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
@@ -1165,8 +1165,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -1197,8 +1197,8 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -1221,6 +1221,27 @@
     },
     {
       "rank": 72,
+      "name": "Daniel Altmaier",
+      "age": 28,
+      "country": "GER",
+      "livePoints": 822,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Orléans QF (16e )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 73,
       "name": "Alex Molčan",
       "age": 28,
       "country": "SVK",
@@ -1234,27 +1255,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 73,
-      "name": "Daniel Altmaier",
-      "age": 28,
-      "country": "GER",
-      "livePoints": 812,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Orléans DF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Orléans QF (16e )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
     },
     {
       "rank": 74,
@@ -1290,33 +1290,28 @@
     },
     {
       "rank": 76,
-      "name": "James Duckworth",
-      "age": 34,
-      "country": "AUS",
-      "livePoints": 786,
+      "name": "Pablo Carreño Busta",
+      "age": 35,
+      "country": "ESP",
+      "livePoints": 773,
       "careerHigh": "",
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Défaite Stockholm 16e",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
+      "tournamentHistory": []
     },
     {
       "rank": 77,
-      "name": "Román Andrés Burruchaga",
-      "age": 24,
-      "country": "ARG",
-      "livePoints": 777,
+      "name": "Zachary Svajda",
+      "age": 23,
+      "country": "USA",
+      "livePoints": 759,
       "careerHigh": "",
-      "movement": 3,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1327,12 +1322,12 @@
     },
     {
       "rank": 78,
-      "name": "Pablo Carreño Busta",
-      "age": 35,
-      "country": "ESP",
-      "livePoints": 773,
+      "name": "Hamad Medjedović",
+      "age": 23,
+      "country": "SRB",
+      "livePoints": 751,
       "careerHigh": "",
-      "movement": -2,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1343,12 +1338,12 @@
     },
     {
       "rank": 79,
-      "name": "Zachary Svajda",
-      "age": 23,
-      "country": "USA",
-      "livePoints": 759,
+      "name": "Román Andrés Burruchaga",
+      "age": 24,
+      "country": "ARG",
+      "livePoints": 735,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1359,22 +1354,6 @@
     },
     {
       "rank": 80,
-      "name": "Hamad Medjedović",
-      "age": 23,
-      "country": "SRB",
-      "livePoints": 751,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 81,
       "name": "Titouan Droguet",
       "age": 25,
       "country": "FRA",
@@ -1390,7 +1369,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 82,
+      "rank": 81,
       "name": "Kamil Majchrzak",
       "age": 30,
       "country": "POL",
@@ -1406,34 +1385,50 @@
       "tournamentHistory": []
     },
     {
-      "rank": 83,
-      "name": "Kyrian Jacquet",
-      "age": 25,
-      "country": "FRA",
-      "livePoints": 696,
+      "rank": 82,
+      "name": "James Duckworth",
+      "age": 34,
+      "country": "AUS",
+      "livePoints": 707,
       "careerHigh": "",
-      "movement": 3,
+      "movement": null,
       "pointsChange": null,
-      "tournament": "Metz 16e",
-      "previousTournaments": "Défaite Orléans 8e",
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
-          "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
-      "rank": 84,
+      "rank": 83,
       "name": "Aleksandar Kovačević",
       "age": 28,
       "country": "USA",
       "livePoints": 693,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 84,
+      "name": "Coleman Wong",
+      "age": 22,
+      "country": "HKG",
+      "livePoints": 692,
+      "careerHigh": "",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1444,38 +1439,43 @@
     },
     {
       "rank": 85,
-      "name": "Coleman Wong",
-      "age": 22,
-      "country": "HKG",
-      "livePoints": 692,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 86,
       "name": "Nikoloz Basilashvili",
       "age": 34,
       "country": "GEO",
-      "livePoints": 681,
+      "livePoints": 688,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "Metz 16e",
-      "previousTournaments": "Défaite Qualif. Stockholm T2",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 86,
+      "name": "Kyrian Jacquet",
+      "age": 25,
+      "country": "FRA",
+      "livePoints": 680,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Metz 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Metz 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
@@ -1489,23 +1489,44 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "Helsinki 16e",
-      "previousTournaments": "Défaite Qualif. Stockholm T2",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
       "rank": 88,
-      "name": "Marco Trungelliti",
-      "age": 36,
-      "country": "ARG",
-      "livePoints": 670,
+      "name": "Dino Prižmić",
+      "age": 21,
+      "country": "CRO",
+      "livePoints": 663,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Metz 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Metz 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 89,
+      "name": "Damir Džumhur",
+      "age": 34,
+      "country": "BIH",
+      "livePoints": 661,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
@@ -1517,38 +1538,17 @@
       "tournamentHistory": []
     },
     {
-      "rank": 89,
-      "name": "Dino Prižmić",
-      "age": 21,
-      "country": "CRO",
-      "livePoints": 663,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Metz 16e",
-      "previousTournaments": "Défaite Orléans 16e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
       "rank": 90,
-      "name": "Damir Džumhur",
-      "age": 34,
-      "country": "BIH",
-      "livePoints": 661,
+      "name": "Marco Trungelliti",
+      "age": 36,
+      "country": "ARG",
+      "livePoints": 660,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Qualif. Stockholm T1",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
@@ -1563,14 +1563,14 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "Metz 16e",
-      "previousTournaments": "Défaite Orléans 8e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
@@ -1592,33 +1592,28 @@
     },
     {
       "rank": 93,
-      "name": "Toby Samuel",
-      "age": 24,
-      "country": "GBR",
-      "livePoints": 639,
-      "careerHigh": "",
-      "movement": 3,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Qualif. Stockholm V Défaite Stockholm 8e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 94,
       "name": "Jenson Brooksby",
       "age": 26,
       "country": "USA",
       "livePoints": 638,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 94,
+      "name": "Marcos Giron",
+      "age": 33,
+      "country": "USA",
+      "livePoints": 638,
+      "careerHigh": "",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1629,19 +1624,28 @@
     },
     {
       "rank": 95,
-      "name": "Marcos Giron",
-      "age": 33,
-      "country": "USA",
-      "livePoints": 638,
+      "name": "Zsombor Piros",
+      "age": 27,
+      "country": "HUN",
+      "livePoints": 620,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Knoxville 8e",
-      "tournamentStatus": "defaite",
+      "tournament": "Metz 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Metz 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        },
+        {
+          "text": "Orléans QF (8e )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
     },
     {
       "rank": 96,
@@ -1650,7 +1654,7 @@
       "country": "AUS",
       "livePoints": 619,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1661,6 +1665,31 @@
     },
     {
       "rank": 97,
+      "name": "Michael Zheng",
+      "age": 22,
+      "country": "USA",
+      "livePoints": 616,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Knoxville DF",
+          "lastSeen": "2026-11-14T18:51:27.783845+00:00"
+        },
+        {
+          "text": "Knoxville QF",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 98,
       "name": "Marin Čilić",
       "age": 38,
       "country": "CRO",
@@ -1676,7 +1705,23 @@
       "tournamentHistory": []
     },
     {
-      "rank": 98,
+      "rank": 99,
+      "name": "Aleksandr Shevchenko",
+      "age": 25,
+      "country": "KAZ",
+      "livePoints": 609,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 100,
       "name": "Thiago Seyboth Wild",
       "age": 26,
       "country": "BRA",
@@ -1692,62 +1737,33 @@
       "tournamentHistory": [
         {
           "text": "Montevideo 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 99,
-      "name": "Zsombor Piros",
-      "age": 27,
-      "country": "HUN",
-      "livePoints": 604,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Metz 16e",
-      "previousTournaments": "Défaite Orléans QF",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        },
-        {
-          "text": "Orléans QF (8e )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 100,
-      "name": "Michael Zheng",
-      "age": 22,
-      "country": "USA",
-      "livePoints": 594,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Knoxville DF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Knoxville DF",
-          "lastSeen": "2026-11-14T18:51:27.783845+00:00"
-        },
-        {
-          "text": "Knoxville QF",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
       "rank": 101,
+      "name": "Toby Samuel",
+      "age": 24,
+      "country": "GBR",
+      "livePoints": 604,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 102,
       "name": "Sebastian Korda",
       "age": 26,
       "country": "USA",
@@ -1763,7 +1779,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 102,
+      "rank": 103,
       "name": "Martin Damm",
       "age": 23,
       "country": "USA",
@@ -1779,7 +1795,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 103,
+      "rank": 104,
       "name": "Lloyd Harris",
       "age": 29,
       "country": "RSA",
@@ -1795,7 +1811,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 104,
+      "rank": 105,
       "name": "Jesper de Jong",
       "age": 26,
       "country": "NED",
@@ -1811,7 +1827,7 @@
       "tournamentHistory": []
     },
     {
-      "rank": 105,
+      "rank": 106,
       "name": "Yibing Wu",
       "age": 27,
       "country": "CHN",
@@ -1827,7 +1843,40 @@
       "tournamentHistory": []
     },
     {
-      "rank": 106,
+      "rank": 107,
+      "name": "Otto Virtanen",
+      "age": 25,
+      "country": "FIN",
+      "livePoints": 570,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        },
+        {
+          "text": "Orléans F (DF )",
+          "lastSeen": "2026-11-15T12:59:54.770914+00:00"
+        },
+        {
+          "text": "Orléans F (QF )",
+          "lastSeen": "2026-11-15T07:11:34.964607+00:00"
+        },
+        {
+          "text": "Orléans QF",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 108,
       "name": "Hugo Dellien",
       "age": 33,
       "country": "BOL",
@@ -1836,35 +1885,19 @@
       "movement": null,
       "pointsChange": null,
       "tournament": "Montevideo 16e",
-      "previousTournaments": "Défaite Lima 16e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Montevideo 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
-      "rank": 107,
-      "name": "Aleksandr Shevchenko",
-      "age": 25,
-      "country": "KAZ",
-      "livePoints": 559,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Qualif. Stockholm V Défaite Stockholm QF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 108,
+      "rank": 109,
       "name": "Corentin Moutet",
       "age": 27,
       "country": "FRA",
@@ -1880,13 +1913,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 109,
-      "name": "Gustavo Heide",
-      "age": 24,
-      "country": "BRA",
-      "livePoints": 532,
+      "rank": 110,
+      "name": "Lorenzo Sonego",
+      "age": 31,
+      "country": "ITA",
+      "livePoints": 539,
       "careerHigh": "",
-      "movement": 6,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1896,34 +1929,34 @@
       "tournamentHistory": []
     },
     {
-      "rank": 110,
+      "rank": 111,
       "name": "Hugo Gaston",
       "age": 26,
       "country": "FRA",
       "livePoints": 530,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "Metz 16e",
-      "previousTournaments": "Défaite Orléans 16e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
-      "rank": 111,
+      "rank": 112,
       "name": "Jan Choinski",
       "age": 30,
       "country": "GBR",
       "livePoints": 527,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1933,382 +1966,86 @@
       "tournamentHistory": []
     },
     {
-      "rank": 112,
-      "name": "Dane Sweeny",
-      "age": 25,
-      "country": "AUS",
-      "livePoints": 525,
+      "rank": 113,
+      "name": "Dalibor Svrčina",
+      "age": 24,
+      "country": "CZE",
+      "livePoints": 521,
       "careerHigh": "",
-      "movement": 8,
+      "movement": null,
       "pointsChange": null,
-      "tournament": "Sydney 16e",
-      "previousTournaments": "Défaite Brisbane 3 QF (16e )",
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
-          "text": "Sydney 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        },
-        {
-          "text": "Brisbane 3 QF (16e )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
-      "rank": 113,
+      "rank": 114,
+      "name": "Nicolás Mejía",
+      "age": 26,
+      "country": "COL",
+      "livePoints": 521,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Drummondville 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Drummondville 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 115,
       "name": "Henrique Rocha",
       "age": 22,
       "country": "POR",
       "livePoints": 521,
       "careerHigh": "",
-      "movement": -2,
+      "movement": null,
       "pointsChange": null,
       "tournament": "Montevideo 16e",
-      "previousTournaments": "Défaite Lima 16e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Montevideo 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 114,
-      "name": "Dalibor Svrčina",
-      "age": 24,
-      "country": "CZE",
-      "livePoints": 519,
-      "careerHigh": "",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Défaite Orléans 8e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 115,
-      "name": "Nicolás Mejía",
-      "age": 26,
-      "country": "COL",
-      "livePoints": 515,
-      "careerHigh": "",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "Drummondville 16e",
-      "previousTournaments": "Défaite Knoxville 8e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Drummondville 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     },
     {
       "rank": 116,
-      "name": "Lorenzo Sonego",
-      "age": 31,
-      "country": "ITA",
-      "livePoints": 511,
-      "careerHigh": "",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Qualif. Stockholm V Défaite Stockholm 8e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 117,
-      "name": "Christopher O'Connell",
-      "age": 32,
-      "country": "AUS",
-      "livePoints": 499,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "Sydney 16e",
-      "previousTournaments": "Défaite Brisbane 3 8e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 118,
-      "name": "Jurij Rodionov",
-      "age": 27,
-      "country": "AUT",
-      "livePoints": 496,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Défaite Orléans 16e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 119,
-      "name": "Valentin Royer",
-      "age": 25,
-      "country": "FRA",
-      "livePoints": 493,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 120,
-      "name": "Emilio Nava",
-      "age": 24,
-      "country": "USA",
-      "livePoints": 491,
-      "careerHigh": "",
-      "movement": 1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 121,
-      "name": "Sebastian Ofner",
-      "age": 30,
-      "country": "AUT",
-      "livePoints": 491,
-      "careerHigh": "",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 122,
-      "name": "Rei Sakamoto",
-      "age": 20,
-      "country": "JPN",
-      "livePoints": 489,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Matsuyama DF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Matsuyama QF",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 123,
-      "name": "Sho Shimabukuro",
-      "age": 29,
-      "country": "JPN",
-      "livePoints": 474,
-      "careerHigh": "",
-      "movement": 1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 124,
-      "name": "Pedro Martínez",
-      "age": 29,
-      "country": "ESP",
-      "livePoints": 462,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "Metz 16e",
-      "previousTournaments": "Défaite Orléans DF",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        },
-        {
-          "text": "Orléans QF",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 125,
-      "name": "Alexei Popyrin",
-      "age": 27,
-      "country": "AUS",
-      "livePoints": 448,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 126,
-      "name": "Nishesh Basavareddy",
-      "age": 21,
-      "country": "USA",
-      "livePoints": 446,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Défaite Orléans F",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        },
-        {
-          "text": "Orléans F (DF )",
-          "lastSeen": "2026-11-15T12:59:54.770914+00:00"
-        },
-        {
-          "text": "Orléans F (QF )",
-          "lastSeen": "2026-11-15T07:11:34.964607+00:00"
-        },
-        {
-          "text": "Orléans QF (16e )",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 127,
-      "name": "Otto Virtanen",
-      "age": 25,
-      "country": "FIN",
-      "livePoints": 445,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Orléans V",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        },
-        {
-          "text": "Orléans F (DF )",
-          "lastSeen": "2026-11-15T12:59:54.770914+00:00"
-        },
-        {
-          "text": "Orléans F (QF )",
-          "lastSeen": "2026-11-15T07:11:34.964607+00:00"
-        },
-        {
-          "text": "Orléans QF",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 128,
-      "name": "Shintaro Mochizuki",
-      "age": 23,
-      "country": "JPN",
-      "livePoints": 444,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Défaite Orléans 16e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 129,
       "name": "Clément Chidekh",
       "age": 25,
       "country": "FRA",
-      "livePoints": 444,
+      "livePoints": 512,
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
       "tournament": "Drummondville 16e",
-      "previousTournaments": "Knoxville V",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         },
         {
           "text": "Knoxville F",
@@ -2325,34 +2062,13 @@
       ]
     },
     {
-      "rank": 130,
-      "name": "Matej Dodig",
+      "rank": 117,
+      "name": "Nishesh Basavareddy",
       "age": 21,
-      "country": "CRO",
-      "livePoints": 438,
+      "country": "USA",
+      "livePoints": 510,
       "careerHigh": "",
-      "movement": 10,
-      "pointsChange": null,
-      "tournament": "Metz 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Metz 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 131,
-      "name": "Laslo Djere",
-      "age": 31,
-      "country": "SRB",
-      "livePoints": 431,
-      "careerHigh": "",
-      "movement": 4,
+      "movement": null,
       "pointsChange": null,
       "tournament": "Helsinki 16e",
       "previousTournaments": "",
@@ -2362,18 +2078,97 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        },
+        {
+          "text": "Orléans F (DF )",
+          "lastSeen": "2026-11-15T12:59:54.770914+00:00"
+        },
+        {
+          "text": "Orléans F (QF )",
+          "lastSeen": "2026-11-15T07:11:34.964607+00:00"
+        },
+        {
+          "text": "Orléans QF (16e )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 118,
+      "name": "Christopher O'Connell",
+      "age": 32,
+      "country": "AUS",
+      "livePoints": 505,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "Défaite Sydney 16e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 16e",
           "lastSeen": "2026-11-16T01:31:33.499959+00:00"
         }
       ]
     },
     {
-      "rank": 132,
-      "name": "Stefanos Sakellaridis",
-      "age": 22,
-      "country": "GRE",
-      "livePoints": 431,
+      "rank": 119,
+      "name": "Pedro Martínez",
+      "age": 29,
+      "country": "ESP",
+      "livePoints": 497,
       "careerHigh": "",
-      "movement": -2,
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Metz 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Metz 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        },
+        {
+          "text": "Orléans QF",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 120,
+      "name": "Jurij Rodionov",
+      "age": 27,
+      "country": "AUT",
+      "livePoints": 496,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 121,
+      "name": "Valentin Royer",
+      "age": 25,
+      "country": "FRA",
+      "livePoints": 493,
+      "careerHigh": "",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2383,23 +2178,154 @@
       "tournamentHistory": []
     },
     {
-      "rank": 133,
+      "rank": 122,
+      "name": "Sebastian Ofner",
+      "age": 30,
+      "country": "AUT",
+      "livePoints": 491,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 123,
+      "name": "Dane Sweeny",
+      "age": 25,
+      "country": "AUS",
+      "livePoints": 481,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Sydney 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        },
+        {
+          "text": "Brisbane 3 QF (16e )",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 124,
+      "name": "Emilio Nava",
+      "age": 24,
+      "country": "USA",
+      "livePoints": 477,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 125,
+      "name": "Borna Gojo",
+      "age": 28,
+      "country": "CRO",
+      "livePoints": 461,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 126,
+      "name": "Sho Shimabukuro",
+      "age": 29,
+      "country": "JPN",
+      "livePoints": 457,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 127,
+      "name": "Alexei Popyrin",
+      "age": 27,
+      "country": "AUS",
+      "livePoints": 448,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 128,
+      "name": "Shintaro Mochizuki",
+      "age": 23,
+      "country": "JPN",
+      "livePoints": 444,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 129,
       "name": "Max Alcalá Gurri",
       "age": 24,
       "country": "ESP",
-      "livePoints": 430,
+      "livePoints": 442,
       "careerHigh": "",
-      "movement": -2,
+      "movement": null,
       "pointsChange": null,
       "tournament": "Montevideo 16e",
-      "previousTournaments": "Défaite Lima DF",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Montevideo 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         },
         {
           "text": "Lima DF",
@@ -2412,66 +2338,156 @@
       ]
     },
     {
-      "rank": 134,
+      "rank": 130,
+      "name": "Nikolás Sánchez Izquierdo",
+      "age": 27,
+      "country": "ESP",
+      "livePoints": 438,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 131,
+      "name": "Stefanos Sakellaridis",
+      "age": 22,
+      "country": "GRE",
+      "livePoints": 431,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 132,
       "name": "Moïse Kouamé",
       "age": 17,
       "country": "FRA",
-      "livePoints": 425,
+      "livePoints": 429,
       "careerHigh": "",
-      "movement": -2,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
-      "previousTournaments": "Défaite Monastir 1 8e",
-      "tournamentStatus": "defaite",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 133,
+      "name": "Gustavo Heide",
+      "age": 24,
+      "country": "BRA",
+      "livePoints": 429,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 134,
+      "name": "Grigor Dimitrov",
+      "age": 35,
+      "country": "BUL",
+      "livePoints": 422,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
     },
     {
       "rank": 135,
-      "name": "Cristian Garín",
-      "age": 30,
-      "country": "CHI",
-      "livePoints": 424,
+      "name": "Francisco Comesaña",
+      "age": 26,
+      "country": "ARG",
+      "livePoints": 421,
       "careerHigh": "",
-      "movement": 108,
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Montevideo 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Montevideo 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 136,
+      "name": "Rei Sakamoto",
+      "age": 20,
+      "country": "JPN",
+      "livePoints": 420,
+      "careerHigh": "",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 136,
-      "name": "Borna Gojo",
-      "age": 28,
-      "country": "CRO",
-      "livePoints": 423,
-      "careerHigh": "",
-      "movement": -3,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Qualif. Stockholm V Défaite Stockholm 8e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
       "tournamentHistory": [
         {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "text": "Matsuyama QF",
+          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
         }
       ]
     },
     {
       "rank": 137,
-      "name": "Grigor Dimitrov",
-      "age": 35,
-      "country": "BUL",
-      "livePoints": 422,
+      "name": "Laslo Djere",
+      "age": 31,
+      "country": "SRB",
+      "livePoints": 419,
       "careerHigh": "",
-      "movement": -3,
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Helsinki 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 138,
+      "name": "Aleksandar Vukic",
+      "age": 30,
+      "country": "AUS",
+      "livePoints": 418,
+      "careerHigh": "",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2481,34 +2497,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 138,
-      "name": "Daniil Glinka",
-      "age": 26,
-      "country": "EST",
-      "livePoints": 422,
-      "careerHigh": "",
-      "movement": 60,
-      "pointsChange": null,
-      "tournament": "Helsinki 16e",
-      "previousTournaments": "Défaite Orléans 16e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
       "rank": 139,
-      "name": "Aleksandar Vukic",
-      "age": 30,
-      "country": "AUS",
-      "livePoints": 418,
+      "name": "Federico Cina",
+      "age": 19,
+      "country": "ITA",
+      "livePoints": 415,
       "careerHigh": "",
-      "movement": -3,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2519,33 +2514,12 @@
     },
     {
       "rank": 140,
-      "name": "Francisco Comesaña",
-      "age": 26,
-      "country": "ARG",
-      "livePoints": 415,
+      "name": "Giovanni Mpetshi Perricard",
+      "age": 23,
+      "country": "FRA",
+      "livePoints": 411,
       "careerHigh": "",
-      "movement": -3,
-      "pointsChange": null,
-      "tournament": "Montevideo 16e",
-      "previousTournaments": "Défaite Lima 8e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Montevideo 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 141,
-      "name": "Federico Cina",
-      "age": 19,
-      "country": "ITA",
-      "livePoints": 415,
-      "careerHigh": "",
-      "movement": -3,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2555,13 +2529,34 @@
       "tournamentHistory": []
     },
     {
-      "rank": 142,
-      "name": "Giovanni Mpetshi Perricard",
-      "age": 23,
-      "country": "FRA",
-      "livePoints": 411,
+      "rank": 141,
+      "name": "Matej Dodig",
+      "age": 21,
+      "country": "CRO",
+      "livePoints": 406,
       "careerHigh": "",
-      "movement": -3,
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Metz 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Metz 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 142,
+      "name": "Andrea Pellegrino",
+      "age": 29,
+      "country": "ITA",
+      "livePoints": 404,
+      "careerHigh": "",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2572,53 +2567,12 @@
     },
     {
       "rank": 143,
-      "name": "Alex Bolt",
-      "age": 33,
-      "country": "AUS",
-      "livePoints": 407,
-      "careerHigh": "",
-      "movement": 72,
-      "pointsChange": null,
-      "tournament": "Sydney 16e",
-      "previousTournaments": "Défaite Brisbane 3 QF",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        },
-        {
-          "text": "Brisbane 3 QF",
-          "lastSeen": "2026-11-14T12:58:17.103225+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 144,
-      "name": "Andrea Pellegrino",
-      "age": 29,
-      "country": "ITA",
-      "livePoints": 404,
-      "careerHigh": "",
-      "movement": -3,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "Défaite Orléans 16e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 145,
       "name": "Pablo Llamas Ruiz",
       "age": 24,
       "country": "ESP",
       "livePoints": 403,
       "careerHigh": "",
-      "movement": -3,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2628,13 +2582,50 @@
       "tournamentHistory": []
     },
     {
-      "rank": 146,
-      "name": "Vilius Gaubas",
-      "age": 21,
-      "country": "LTU",
+      "rank": 144,
+      "name": "Jérôme Kym",
+      "age": 23,
+      "country": "SUI",
       "livePoints": 403,
       "careerHigh": "",
-      "movement": 1,
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 145,
+      "name": "Tristan Schoolkate",
+      "age": 25,
+      "country": "AUS",
+      "livePoints": 401,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Sydney 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 146,
+      "name": "Márton Fucsovics",
+      "age": 34,
+      "country": "HUN",
+      "livePoints": 400,
+      "careerHigh": "",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2645,12 +2636,12 @@
     },
     {
       "rank": 147,
-      "name": "Jérôme Kym",
+      "name": "Ilia Simakin",
       "age": 23,
-      "country": "SUI",
-      "livePoints": 403,
+      "country": "RUS",
+      "livePoints": 392,
       "careerHigh": "",
-      "movement": -4,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2661,33 +2652,12 @@
     },
     {
       "rank": 148,
-      "name": "Tristan Schoolkate",
-      "age": 25,
-      "country": "AUS",
-      "livePoints": 401,
+      "name": "Vilius Gaubas",
+      "age": 21,
+      "country": "LTU",
+      "livePoints": 389,
       "careerHigh": "",
-      "movement": -4,
-      "pointsChange": null,
-      "tournament": "Sydney 16e",
-      "previousTournaments": "Défaite Brisbane 3 16e",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 149,
-      "name": "Márton Fucsovics",
-      "age": 34,
-      "country": "HUN",
-      "livePoints": 400,
-      "careerHigh": "",
-      "movement": -4,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2697,23 +2667,44 @@
       "tournamentHistory": []
     },
     {
-      "rank": 150,
-      "name": "Darwin Blanch",
-      "age": 19,
+      "rank": 149,
+      "name": "Michael Mmoh",
+      "age": 28,
       "country": "USA",
-      "livePoints": 398,
+      "livePoints": 386,
       "careerHigh": "",
-      "movement": -1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "Drummondville 16e",
-      "previousTournaments": "Défaite Knoxville 16e",
+      "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
-          "lastSeen": "2026-11-16T01:31:33.499959+00:00"
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 150,
+      "name": "Darwin Blanch",
+      "age": 19,
+      "country": "USA",
+      "livePoints": 380,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Drummondville 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Drummondville 16e",
+          "lastSeen": "2026-11-16T08:53:38.709145+00:00"
         }
       ]
     }
