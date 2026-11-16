@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-16T15:13:26.457093+00:00",
+ "fetchedAt": "2026-11-16T19:02:33.313632+00:00",
  "posts": [
   {
    "title": "📊 Présent à Turin en tant que 2e remplaçant, Felix Auger-Aliassime 🇨🇦 (N°17) est le remplaçant* le moins bien classé au Masters depuis Ivan Ljubicic 🇭🇷 (N°24), son…",

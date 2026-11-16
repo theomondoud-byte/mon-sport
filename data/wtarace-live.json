@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-16T15:13:21.770083+00:00",
+  "fetchedAt": "2026-11-16T19:02:26.371823+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1282,7 +1282,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T15:13:21.770083+00:00"
+          "lastSeen": "2026-11-16T19:02:26.371823+00:00"
         }
       ]
     },
@@ -1911,7 +1911,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T15:13:21.770083+00:00"
+          "lastSeen": "2026-11-16T19:02:26.371823+00:00"
         }
       ]
     },
@@ -2164,12 +2164,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Colina 16e",
+      "tournament": "Colina 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-16T19:02:26.371823+00:00"
+        },
         {
           "text": "Colina 16e",
           "lastSeen": "2026-11-16T15:13:21.770083+00:00"
@@ -2209,7 +2213,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T15:13:21.770083+00:00"
+          "lastSeen": "2026-11-16T19:02:26.371823+00:00"
         }
       ]
     },
@@ -2294,7 +2298,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T15:13:21.770083+00:00"
+          "lastSeen": "2026-11-16T19:02:26.371823+00:00"
         }
       ]
     },
@@ -2323,12 +2327,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Trnava 4 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Trnava 4 16e",
+          "lastSeen": "2026-11-16T19:02:26.371823+00:00"
+        }
+      ]
     },
     {
       "rank": 141,
@@ -2363,7 +2372,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T15:13:21.770083+00:00"
+          "lastSeen": "2026-11-16T19:02:26.371823+00:00"
         }
       ]
     },

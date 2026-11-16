@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-16T15:13:20.943261+00:00",
+  "fetchedAt": "2026-11-16T19:02:25.449644+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         }
       ]
     },
@@ -1840,7 +1840,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         }
       ]
     },
@@ -1973,7 +1973,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         },
         {
           "text": "Sopo DF",
@@ -2222,7 +2222,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         }
       ]
     },
@@ -2275,7 +2275,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         },
         {
           "text": "Brisbane 6 DF (16e )",
@@ -2316,7 +2316,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         }
       ]
     },
@@ -2337,7 +2337,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         }
       ]
     },
@@ -2358,7 +2358,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T15:13:20.943261+00:00"
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         },
         {
           "text": "Brisbane 6 F",
@@ -2443,12 +2443,17 @@
       "careerHigh": "139",
       "movement": 1,
       "pointsChange": -7,
-      "tournament": "",
+      "tournament": "Trnava 4 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentStatus": "en_lice",
+      "nextPoints": 522,
+      "maxPoints": 588,
+      "tournamentHistory": [
+        {
+          "text": "Trnava 4 16e",
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+        }
+      ]
     },
     {
       "rank": 146,
@@ -2491,12 +2496,17 @@
       "careerHigh": "138",
       "movement": -6,
       "pointsChange": -24,
-      "tournament": "",
+      "tournament": "Trnava 4 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentStatus": "en_lice",
+      "nextPoints": 511,
+      "maxPoints": 577,
+      "tournamentHistory": [
+        {
+          "text": "Trnava 4 16e",
+          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+        }
+      ]
     },
     {
       "rank": 149,
