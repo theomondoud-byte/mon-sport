@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-17T07:28:11.863589+00:00",
+ "fetchedAt": "2026-11-17T13:18:04.041687+00:00",
  "posts": [
   {
    "title": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur : ❌ vs Alex De Minaur (N°10) ❌ vs Hubert Hurkacz (N°7) ❌ vs Daniil Medvedev (N°5) ❌ vs Daniil Medvedev (N°5) ❌ vs Novak…",
