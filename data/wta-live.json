@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-16T19:02:25.449644+00:00",
+  "fetchedAt": "2026-11-17T01:19:20.422040+00:00",
   "rows": [
     {
       "rank": 1,
@@ -145,7 +145,7 @@
     {
       "rank": 7,
       "name": "Linda Nosková",
-      "age": 21,
+      "age": 22,
       "country": "CZE",
       "livePoints": 4743,
       "careerHigh": "6",
@@ -276,7 +276,7 @@
     {
       "rank": 14,
       "name": "Elise Mertens",
-      "age": 30,
+      "age": 31,
       "country": "BEL",
       "livePoints": 2540,
       "careerHigh": "12",
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         }
       ]
     },
@@ -1832,12 +1832,16 @@
       "careerHigh": "NMC (111)",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "Colina 16e",
+      "tournament": "Colina 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 695,
+      "nextPoints": 707,
       "maxPoints": 805,
       "tournamentHistory": [
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
+        },
         {
           "text": "Colina 16e",
           "lastSeen": "2026-11-16T19:02:25.449644+00:00"
@@ -1943,7 +1947,7 @@
     {
       "rank": 117,
       "name": "Katarzyna Kawa",
-      "age": 33,
+      "age": 34,
       "country": "POL",
       "livePoints": 672,
       "careerHigh": "106",
@@ -1973,7 +1977,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         },
         {
           "text": "Sopo DF",
@@ -2222,7 +2226,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         }
       ]
     },
@@ -2275,7 +2279,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         },
         {
           "text": "Brisbane 6 DF (16e )",
@@ -2316,7 +2320,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         }
       ]
     },
@@ -2337,7 +2341,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         }
       ]
     },
@@ -2358,7 +2362,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         },
         {
           "text": "Brisbane 6 F",
@@ -2451,7 +2455,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         }
       ]
     },
@@ -2504,7 +2508,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 16e",
-          "lastSeen": "2026-11-16T19:02:25.449644+00:00"
+          "lastSeen": "2026-11-17T01:19:20.422040+00:00"
         }
       ]
     },

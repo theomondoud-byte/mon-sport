@@ -3,8 +3,34 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-16T19:02:33.313632+00:00",
+ "fetchedAt": "2026-11-17T01:19:26.638357+00:00",
  "posts": [
+  {
+   "title": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur : ❌ vs Alex De Minaur (N°10) ❌ vs Hubert Hurkacz (N°7) ❌ vs Daniil Medvedev (N°5) ❌ vs Daniil Medvedev (N°5) ❌ vs Novak…",
+   "text": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur :\n❌ vs Alex De Minaur (N°10)\n❌ vs Hubert Hurkacz (N°7)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Novak Djokovic (N°4)\n❌ vs Alex De Minaur (N°10)\n❌ vs Ben Shelton (N°7)\n❌ vs Lorenzo Musetti (N°10)\n❌ vs Jannik Sinner (N°2)\n❌ vs Ben Shelton (N°7)\n❌ vs Daniil Medvedev (N°5)\n➡️ 2 sets remportés, 25 sets concédés",
+   "link": "https://x.com/JeuSetMaths/status/2122442572106793441",
+   "date": "2026-11-16T21:31:56.923000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXRsbzgXkAAvWHY.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXRsbzgXkAAvWHY.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Pour la première fois depuis plus de 14 ans*, un joueur a réussi à remporter 100% des points disputés sur les seconds services adverses (hors abandon) : ▪️ Estoril…",
+   "text": "📊 Pour la première fois depuis plus de 14 ans*, un joueur a réussi à remporter 100% des points disputés sur les seconds services adverses (hors abandon) :\n\n▪️ Estoril 2012 : Del Potro 🇦🇷 b. Machado (6/1 6/0)\n↪️ 10/10 sur les seconds services adverses\n\n▪️ Masters 2016 : Alcaraz 🇪🇸 b. Tiafoe (6/2 6/2)\n↪️ 12/12 sur les seconds services adverses\n\n✍️ * Coupe Davis non prise en compte, trop de données manquantes",
+   "link": "https://x.com/JeuSetMaths/status/2122423640893350239",
+   "date": "2026-11-16T20:16:43.370000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2122368332913344512/vid/avc1/1080x1350/dtk7cvpsBJ4KUalA.mp4?tag=29"
+  },
   {
    "title": "📊 Présent à Turin en tant que 2e remplaçant, Felix Auger-Aliassime 🇨🇦 (N°17) est le remplaçant* le moins bien classé au Masters depuis Ivan Ljubicic 🇭🇷 (N°24), son…",
    "text": "📊 Présent à Turin en tant que 2e remplaçant, Felix Auger-Aliassime 🇨🇦 (N°17) est le remplaçant* le moins bien classé au Masters depuis Ivan Ljubicic 🇭🇷 (N°24), son nouvel entraîneur, il y a 17 ans (2009).\n\n✍️ * En 2021, Aslan Karatsev 🇷🇺 (N°17) avait été appelé en cours de tournoi en qualité de 3e remplaçant après les entrées en lice des remplaçants 1 (Sinner) et 2 (Norrie).",
@@ -231,46 +257,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXHxaq4WIAA5t6B.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXHxaq4WIAA5t6B.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 JAMAIS depuis la réintroduction du format \"Round Robin\" en 2003 une joueuse avait concédé aussi peu de jeux que Mirra Andreeva 🇷🇺 pour se hisser en finale du Masters…",
-   "text": "📊 JAMAIS depuis la réintroduction du format \"Round Robin\" en 2003 une joueuse avait concédé aussi peu de jeux que Mirra Andreeva 🇷🇺 pour se hisser en finale du Masters :\n🥇 Mirra Andreeva 🇷🇺 : 18 jeux (2026 🆕)\n🥈 Justine Henin 🇧🇪 : 19 jeux (2007)\n🥈 Iga Swiatek 🇵🇱 : 19 jeux (2023)\n4⃣ Jessica Pegula 🇺🇸 : 22 jeux (2023)\n5⃣ Serena Williams 🇺🇸 : 25 jeux (2012)\n6⃣ Caroline Wozniacki 🇩🇰 : 26 jeux (2017)\n7⃣ Maria Sharapova 🇷🇺 : 27 jeux (2007)\n7⃣ Caroline Wozniacki 🇩🇰 : 27 jeux (2010)\n7⃣ Simona Halep 🇷🇴 : 27 jeux (2014)",
-   "link": "https://x.com/JeuSetMaths/status/2121728677998158039",
-   "date": "2026-11-14T22:15:11.304000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXHkwtuWYAAnC3W.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXHkwtuWYAAnC3W.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Mirra Andreeva 🇷🇺 est la 5e joueuse depuis la création du Masters WTA à se qualifier en finale sans avoir concédé le moindre set dès sa première participation : ▪️…",
-   "text": "📊 Mirra Andreeva 🇷🇺 est la 5e joueuse depuis la création du Masters WTA à se qualifier en finale sans avoir concédé le moindre set dès sa première participation :\n▪️ 1972 : Chris Evert 🇺🇸 & Kerry Reid 🇦🇺\n▪️ 1994 : Lindsay Davenport 🇺🇸\n▪️ 2001 : Serena Williams 🇺🇸\n🆕 2026 : Mirra Andreeva 🇷🇺\n\n✍️ Parmi elles, Mirra Andreeva 🇷🇺 est la première à y parvenir dans le format \"Round robin\".",
-   "link": "https://x.com/JeuSetMaths/status/2121724474441793692",
-   "date": "2026-11-14T21:58:29.098000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2121720528016736256/vid/avc1/1280x720/WpjULyGwh67KQnjP.mp4?tag=16"
-  },
-  {
-   "title": "📊 Les plus jeunes finalistes du Masters WTA depuis le début des années 2000 : 🥇 Maria Sharapova 🇷🇺 : 17 ans et 209 jours (2004) 🥈 Kim Clijsters 🇧🇪 : 19 ans et 155 jours…",
-   "text": "📊 Les plus jeunes finalistes du Masters WTA depuis le début des années 2000 :\n🥇 Maria Sharapova 🇷🇺 : 17 ans et 209 jours (2004)\n🥈 Kim Clijsters 🇧🇪 : 19 ans et 155 jours (2002)\n🥉 Mirra Andreeva 🇷🇺 : 19 ans et 200 jours (2026 🆕)\n4⃣ Serena Williams 🇺🇸 : 20 ans et 39 jours (2001)\n5⃣ Martina Hingis* 🇨🇭 : 20 ans et 50 jours (2000)\n\n✍️* Martina Hingis 🇨🇭 disputait alors la 4e finale de sa carrière au Masters, après avoir disputé sa première finale à 16 ans et 55 jours. Le record dans l'histoire du tournoi restant détenu par Andrea Jaeger 🇺🇸, âgée de 15 ans et 298 jours lors de la finale 1981.",
-   "link": "https://x.com/JeuSetMaths/status/2121719753161023770",
-   "date": "2026-11-14T21:39:43.457000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXHc1VhX0AANlIf.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXHc1VhX0AANlIf.jpg?name=orig"
    ],
    "video": null
   }
