@@ -3,8 +3,34 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-17T13:18:04.041687+00:00",
+ "fetchedAt": "2026-11-17T19:10:17.292639+00:00",
  "posts": [
+  {
+   "title": "📊 Le premier joueur de chaque classe d'âge (1980-2004) à avoir remporté un match au Masters : 🆕 2004 : Fils 🇫🇷 ▪️ 2003 : Rune 🇩🇰 ▪️ 2002 : Musetti 🇮🇹 ▪️ 2001 : Sinner…",
+   "text": "📊 Le premier joueur de chaque classe d'âge (1980-2004) à avoir remporté un match au Masters :\n🆕 2004 : Fils 🇫🇷\n▪️ 2003 : Rune 🇩🇰\n▪️ 2002 : Musetti 🇮🇹\n▪️ 2001 : Sinner 🇮🇹\n▪️ 2000 : Auger Aliassime 🇨🇦\n▪️ 1999 : De Minaur 🇦🇺\n▪️ 1998 : Tsitsipas 🇬🇷\n▪️ 1997 : Zverev 🇩🇪\n▪️ 1996 : Berrettini 🇮🇹\n▪️ 1995 : 🚫\n▪️ 1994 : 🚫\n▪️ 1993 : Thiem 🇦🇹\n▪️ 1992 : Sock 🇺🇸\n▪️ 1991 : Dimitrov 🇧🇬\n▪️ 1990 : Raonic 🇨🇦\n▪️ 1989 : Nishikori 🇯🇵\n▪️ 1988 : Del Potro 🇦🇷\n▪️ 1987 : Djokovic 🇷🇸\n▪️ 1986 : Nadal 🇪🇸\n▪️ 1985 : Tsonga 🇫🇷\n▪️ 1984 : Simon 🇫🇷\n▪️ 1983 : 🚫\n▪️ 1982 : Nalbandian 🇦🇷\n▪️ 1981 : Hewitt 🇦🇺\n▪️ 1980 : Safin 🇷🇺",
+   "link": "https://x.com/JeuSetMaths/status/2122723728316387782",
+   "date": "2026-11-17T16:09:09.787000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXVt4WgWEAAMdnR.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXVt4WgWEAAMdnR.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 La dernière fois qu'un joueur français 🇫🇷 (Jo-Wilfried Tsonga) avait remporté un match au Masters, Arthur Fils 🇫🇷 avait 7 ans. En dominant Rafael Jodar, Arthur Fils…",
+   "text": "📊 La dernière fois qu'un joueur français 🇫🇷 (Jo-Wilfried Tsonga) avait remporté un match au Masters, Arthur Fils 🇫🇷 avait 7 ans.\n\nEn dominant Rafael Jodar, Arthur Fils 🇫🇷 met fin à une série de 10 défaites consécutives des tricolores dans la compétition.",
+   "link": "https://x.com/JeuSetMaths/status/2122709006246354983",
+   "date": "2026-11-17T15:10:39.772000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2122708727799164928/vid/avc1/576x720/hvhKHp0_XQO4CpC2.mp4?tag=16"
+  },
   {
    "title": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur : ❌ vs Alex De Minaur (N°10) ❌ vs Hubert Hurkacz (N°7) ❌ vs Daniil Medvedev (N°5) ❌ vs Daniil Medvedev (N°5) ❌ vs Novak…",
    "text": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur :\n❌ vs Alex De Minaur (N°10)\n❌ vs Hubert Hurkacz (N°7)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Novak Djokovic (N°4)\n❌ vs Alex De Minaur (N°10)\n❌ vs Ben Shelton (N°7)\n❌ vs Lorenzo Musetti (N°10)\n❌ vs Jannik Sinner (N°2)\n❌ vs Ben Shelton (N°7)\n❌ vs Daniil Medvedev (N°5)\n➡️ 2 sets remportés, 25 sets concédés",
@@ -231,32 +257,6 @@ export const jeuSetMathsBundledData = {
    "images": [
     "https://pbs.twimg.com/media/HXH1rJ_W0AA7JnP.jpg?name=orig",
     "https://pbs.twimg.com/media/HXH2GqBWMAAEReh.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Les joueuses les plus âgées à s'être qualifiée en finale du Masters : 🇺🇸 Venus Williams : 37 ans et 134 jours (2017) 🇺🇸 Martina Navratilova* : 36 ans et 35 jours…",
-   "text": "📊 Les joueuses les plus âgées à s'être qualifiée en finale du Masters :\n🇺🇸 Venus Williams : 37 ans et 134 jours (2017)\n🇺🇸 Martina Navratilova* : 36 ans et 35 jours (1992)\n🇺🇸 Serena Williams : 33 ans et 30 jours (2014)\n🇺🇦 Elina Svitolina : 32 ans et 64 jours (2026 🆕)\n\n✍️* Martina Navratilova a également disputé la finale en 1989 et 1991 à respectivement 33 ans et 32 jours et 35 ans et 37 jours.",
-   "link": "https://x.com/JeuSetMaths/status/2121745024555635043",
-   "date": "2026-11-14T23:20:08.627000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2121743108085825536/vid/avc1/1280x720/cNfpDc8OK6QQvfYs.mp4?tag=16"
-  },
-  {
-   "title": "📊 A 32 ans, Elina Svitolina 🇺🇦 a enregistré la 11e victoire de sa saison face à une Top 10, égalant son record en la matière de 2017.",
-   "text": "📊 A 32 ans, Elina Svitolina 🇺🇦 a enregistré la 11e victoire de sa saison face à une Top 10, égalant son record en la matière de 2017.",
-   "link": "https://x.com/JeuSetMaths/status/2121742589355291089",
-   "date": "2026-11-14T23:10:28.030000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXHxaq4WIAA5t6B.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXHxaq4WIAA5t6B.jpg?name=orig"
    ],
    "video": null
   }

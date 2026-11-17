@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-17T13:17:57.489556+00:00",
+  "fetchedAt": "2026-11-17T19:10:09.625572+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1282,7 +1282,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-17T13:17:57.489556+00:00"
+          "lastSeen": "2026-11-17T19:10:09.625572+00:00"
         }
       ]
     },
@@ -1911,7 +1911,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-17T13:17:57.489556+00:00"
+          "lastSeen": "2026-11-17T19:10:09.625572+00:00"
         }
       ]
     },
@@ -2172,7 +2172,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-17T13:17:57.489556+00:00"
+          "lastSeen": "2026-11-17T19:10:09.625572+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2290,12 +2290,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Colina 16e",
+      "tournament": "Colina 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-17T19:10:09.625572+00:00"
+        },
         {
           "text": "Colina 16e",
           "lastSeen": "2026-11-17T13:17:57.489556+00:00"
@@ -2335,7 +2339,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 16e",
-          "lastSeen": "2026-11-17T13:17:57.489556+00:00"
+          "lastSeen": "2026-11-17T19:10:09.625572+00:00"
         }
       ]
     },
@@ -2364,9 +2368,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Colina 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Colina 16e",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
