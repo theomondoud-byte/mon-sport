@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-race-next-gen",
-  "fetchedAt": "2026-11-18T07:26:58.392740+00:00",
+  "fetchedAt": "2026-11-18T13:23:27.570764+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 2 D)",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -133,7 +133,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Drummondville 16e",
@@ -190,7 +190,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 8e (16e )",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -244,16 +244,20 @@
       "name": "Henry Searle",
       "age": 20,
       "country": "GBR",
-      "livePoints": 256,
+      "livePoints": 257,
       "careerHigh": "",
       "movement": null,
-      "pointsChange": null,
-      "tournament": "Héraklion 15 16e",
+      "pointsChange": 1,
+      "tournament": "Héraklion 15 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 257,
+      "nextPoints": 259,
       "maxPoints": 281,
       "tournamentHistory": [
+        {
+          "text": "Héraklion 15 8e",
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
+        },
         {
           "text": "Héraklion 15 16e",
           "lastSeen": "2026-11-18T07:26:58.392740+00:00"
@@ -360,7 +364,7 @@
       "tournamentHistory": [
         {
           "text": "Kōbe 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Kōbe 16e",
@@ -442,7 +446,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Champaign 16e",
@@ -640,7 +644,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Qualif. Champaign T2",
@@ -714,12 +718,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Héraklion 15 16e",
+      "tournament": "Héraklion 15 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 78,
+      "nextPoints": 79,
       "maxPoints": 101,
       "tournamentHistory": [
+        {
+          "text": "Héraklion 15 8e",
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
+        },
         {
           "text": "Héraklion 15 16e",
           "lastSeen": "2026-11-18T07:26:58.392740+00:00"
@@ -772,7 +780,7 @@
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Vale Do Lobo 2 F",
@@ -879,7 +887,7 @@
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Vale Do Lobo 2 8e",
@@ -1026,7 +1034,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -1039,11 +1047,11 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Héraklion 15 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 59,
-      "maxPoints": 83,
+      "tournament": "",
+      "previousTournaments": "Défaite Héraklion 15 16e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Héraklion 15 16e",
@@ -1130,7 +1138,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 46 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -1176,7 +1184,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 46 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -1310,7 +1318,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -1363,7 +1371,7 @@
       "tournamentHistory": [
         {
           "text": "Hua Hin 2 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Hua Hin 2 16e",
@@ -1408,7 +1416,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -1482,7 +1490,7 @@
       "tournamentHistory": [
         {
           "text": "Lajeado 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Lajeado 16e",
@@ -1723,7 +1731,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -1748,16 +1756,20 @@
       "name": "Anas Mazdrashki",
       "age": 20,
       "country": "BUL",
-      "livePoints": 32,
+      "livePoints": 33,
       "careerHigh": "",
       "movement": null,
-      "pointsChange": null,
-      "tournament": "Héraklion 15 16e",
+      "pointsChange": 1,
+      "tournament": "Héraklion 15 8e",
       "previousTournaments": "Défaite Héraklion 14 16e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 33,
+      "maxPoints": 35,
       "tournamentHistory": [
+        {
+          "text": "Héraklion 15 8e",
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
+        },
         {
           "text": "Héraklion 15 16e",
           "lastSeen": "2026-11-18T07:26:58.392740+00:00"
@@ -1781,7 +1793,7 @@
       "tournamentHistory": [
         {
           "text": "Kuala Lumpur 2 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Kuala Lumpur 2 16e",
@@ -1949,40 +1961,23 @@
     },
     {
       "rank": 100,
-      "name": "Matteo Gribaldo",
-      "age": 18,
-      "country": "ITA",
-      "livePoints": 28,
-      "careerHigh": "",
-      "movement": 1,
-      "pointsChange": 3,
-      "tournament": "",
-      "previousTournaments": "Défaite San Gregorio Di Catania 2 QF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "San Gregorio Di Catania 2 QF",
-          "lastSeen": "2026-11-14T12:58:17.778220+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 101,
       "name": "Nikita Belozertsev",
       "age": 17,
       "country": "UZB",
-      "livePoints": 28,
+      "livePoints": 29,
       "careerHigh": "",
-      "movement": 7,
-      "pointsChange": 5,
-      "tournament": "Monastir 47 8e",
+      "movement": 8,
+      "pointsChange": 6,
+      "tournament": "Monastir 47 QF",
       "previousTournaments": "Défaite Monastir 45 DF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 29,
+      "maxPoints": 31,
       "tournamentHistory": [
+        {
+          "text": "Monastir 47 QF",
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
+        },
         {
           "text": "Monastir 47 8e",
           "lastSeen": "2026-11-18T07:26:58.392740+00:00"
@@ -1993,6 +1988,27 @@
         },
         {
           "text": "Monastir 45 QF",
+          "lastSeen": "2026-11-14T12:58:17.778220+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 101,
+      "name": "Matteo Gribaldo",
+      "age": 18,
+      "country": "ITA",
+      "livePoints": 28,
+      "careerHigh": "",
+      "movement": null,
+      "pointsChange": 3,
+      "tournament": "",
+      "previousTournaments": "Défaite San Gregorio Di Catania 2 QF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "San Gregorio Di Catania 2 QF",
           "lastSeen": "2026-11-14T12:58:17.778220+00:00"
         }
       ]
@@ -2061,28 +2077,37 @@
     },
     {
       "rank": 105,
+      "name": "William Rejchtman Vinciguerra",
+      "age": 19,
+      "country": "SWE",
+      "livePoints": 26,
+      "careerHigh": "",
+      "movement": -1,
+      "pointsChange": 1,
+      "tournament": "Bhubaneswar 8e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 28,
+      "maxPoints": 50,
+      "tournamentHistory": [
+        {
+          "text": "Bhubaneswar 8e",
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
+        },
+        {
+          "text": "Bhubaneswar 16e",
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 106,
       "name": "Alaa Trifi",
       "age": 19,
       "country": "TUN",
       "livePoints": 25,
       "careerHigh": "",
-      "movement": -3,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 106,
-      "name": "Samuel Alejandro Linde Palacios",
-      "age": 19,
-      "country": "COL",
-      "livePoints": 25,
-      "careerHigh": "",
-      "movement": -3,
+      "movement": -4,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2093,12 +2118,28 @@
     },
     {
       "rank": 107,
+      "name": "Samuel Alejandro Linde Palacios",
+      "age": 19,
+      "country": "COL",
+      "livePoints": 25,
+      "careerHigh": "",
+      "movement": -4,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 108,
       "name": "Mickael Kaouk",
       "age": 18,
       "country": "FRA",
       "livePoints": 25,
       "careerHigh": "",
-      "movement": -1,
+      "movement": -2,
       "pointsChange": 1,
       "tournament": "Héraklion 15 16e",
       "previousTournaments": "Défaite Héraklion 14 8e Qualif. Héraklion 15 V",
@@ -2108,7 +2149,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Qualif. Héraklion 15 T3",
@@ -2117,27 +2158,6 @@
         {
           "text": "Qualif. Héraklion 15 T2",
           "lastSeen": "2026-11-16T08:53:39.385793+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 108,
-      "name": "William Rejchtman Vinciguerra",
-      "age": 19,
-      "country": "SWE",
-      "livePoints": 25,
-      "careerHigh": "",
-      "movement": -4,
-      "pointsChange": null,
-      "tournament": "Bhubaneswar 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 26,
-      "maxPoints": 50,
-      "tournamentHistory": [
-        {
-          "text": "Bhubaneswar 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2247,7 +2267,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -2348,7 +2368,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Montréal 2 QF",
@@ -2389,7 +2409,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 47 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         },
         {
           "text": "Monastir 47 16e",
@@ -2451,7 +2471,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -2568,7 +2588,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -2589,7 +2609,7 @@
       "tournamentHistory": [
         {
           "text": "Santa Cruz 2 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -2727,7 +2747,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 8e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -2748,7 +2768,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -2849,7 +2869,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
@@ -2870,7 +2890,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
         }
       ]
     },
