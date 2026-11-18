@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-race-next-gen",
-  "fetchedAt": "2026-11-18T01:26:02.764532+00:00",
+  "fetchedAt": "2026-11-18T07:26:58.392740+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 2 D)",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -133,7 +133,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Drummondville 16e",
@@ -190,7 +190,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 8e (16e )",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -256,7 +256,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Hersonissos 3 QF",
@@ -360,7 +360,7 @@
       "tournamentHistory": [
         {
           "text": "Kōbe 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Kōbe 16e",
@@ -442,7 +442,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Champaign 16e",
@@ -640,7 +640,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Qualif. Champaign T2",
@@ -722,7 +722,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Hersonissos 3 QF",
@@ -772,7 +772,7 @@
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Vale Do Lobo 2 F",
@@ -879,7 +879,7 @@
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Vale Do Lobo 2 8e",
@@ -965,11 +965,11 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Drummondville 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 67,
-      "maxPoints": 136,
+      "tournament": "",
+      "previousTournaments": "Défaite Drummondville 16e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
@@ -1026,7 +1026,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1047,7 +1047,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1130,7 +1130,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 46 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1176,7 +1176,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 46 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1237,11 +1237,11 @@
       "careerHigh": "",
       "movement": 7,
       "pointsChange": 8,
-      "tournament": "Sydney 8e",
-      "previousTournaments": "Défaite Qualif. Sydney T2",
+      "tournament": "",
+      "previousTournaments": "Défaite Qualif. Sydney T2 Défaite Sydney 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 56,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Sydney 8e",
@@ -1310,7 +1310,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1363,7 +1363,7 @@
       "tournamentHistory": [
         {
           "text": "Hua Hin 2 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Hua Hin 2 16e",
@@ -1408,7 +1408,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1482,7 +1482,7 @@
       "tournamentHistory": [
         {
           "text": "Lajeado 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Lajeado 16e",
@@ -1723,7 +1723,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1760,7 +1760,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -1773,12 +1773,16 @@
       "careerHigh": "",
       "movement": 7,
       "pointsChange": 4,
-      "tournament": "Kuala Lumpur 2 16e",
+      "tournament": "Kuala Lumpur 2 8e",
       "previousTournaments": "Défaite Kuala Lumpur DF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 32,
+      "maxPoints": 33,
       "tournamentHistory": [
+        {
+          "text": "Kuala Lumpur 2 8e",
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
+        },
         {
           "text": "Kuala Lumpur 2 16e",
           "lastSeen": "2026-11-18T01:26:02.764532+00:00"
@@ -1981,7 +1985,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 47 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Monastir 47 16e",
@@ -2104,7 +2108,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Qualif. Héraklion 15 T3",
@@ -2133,7 +2137,7 @@
       "tournamentHistory": [
         {
           "text": "Bhubaneswar 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2243,7 +2247,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2344,7 +2348,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Montréal 2 QF",
@@ -2385,7 +2389,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 47 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         },
         {
           "text": "Monastir 47 16e",
@@ -2447,7 +2451,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2564,7 +2568,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2585,7 +2589,7 @@
       "tournamentHistory": [
         {
           "text": "Santa Cruz 2 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2723,7 +2727,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 8e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2744,7 +2748,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2845,7 +2849,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2866,7 +2870,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-18T01:26:02.764532+00:00"
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },

@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-18T01:26:08.967089+00:00",
+ "fetchedAt": "2026-11-18T07:27:03.666437+00:00",
  "posts": [
   {
    "title": "📊 5 des 6 dernières victoires d’Alexander Zverev 🇩🇪 face à des membres du Top 5 ont été enregistrées au Masters : 🎱 Masters 2023 vs Alcaraz (N°2) 🎱 Masters 2023 vs…",

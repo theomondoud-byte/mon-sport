@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-18T01:26:00.701643+00:00",
+  "fetchedAt": "2026-11-18T07:26:57.149676+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1635,12 +1635,16 @@
       "careerHigh": "22",
       "movement": null,
       "pointsChange": -24,
-      "tournament": "Sydney 3 16e",
+      "tournament": "Sydney 3 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 778,
+      "nextPoints": 779,
       "maxPoints": 838,
       "tournamentHistory": [
+        {
+          "text": "Sydney 3 8e",
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
+        },
         {
           "text": "Sydney 3 16e",
           "lastSeen": "2026-11-18T01:26:00.701643+00:00"
@@ -1840,7 +1844,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
         },
         {
           "text": "Colina 16e",
@@ -1929,7 +1933,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2230,7 +2234,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2287,7 +2291,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2304,12 +2308,16 @@
       "careerHigh": "122",
       "movement": -4,
       "pointsChange": -37,
-      "tournament": "Sydney 3 16e",
+      "tournament": "Sydney 3 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 553,
+      "nextPoints": 557,
       "maxPoints": 616,
       "tournamentHistory": [
+        {
+          "text": "Sydney 3 8e",
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
+        },
         {
           "text": "Sydney 3 16e",
           "lastSeen": "2026-11-18T01:26:00.701643+00:00"
@@ -2322,12 +2330,37 @@
     },
     {
       "rank": 138,
+      "name": "Maddison Inglis",
+      "age": 28,
+      "country": "AUS",
+      "livePoints": 548,
+      "careerHigh": "112",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "Sydney 3 8e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 555,
+      "maxPoints": 614,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 3 8e",
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
+        },
+        {
+          "text": "Sydney 3 16e",
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 139,
       "name": "Alice Tubello",
       "age": 25,
       "country": "FRA",
       "livePoints": 543,
-      "careerHigh": "NMC (139)",
-      "movement": 1,
+      "careerHigh": "MC",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2335,27 +2368,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 139,
-      "name": "Maddison Inglis",
-      "age": 28,
-      "country": "AUS",
-      "livePoints": 540,
-      "careerHigh": "112",
-      "movement": -1,
-      "pointsChange": -8,
-      "tournament": "Sydney 3 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 548,
-      "maxPoints": 614,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
-        }
-      ]
     },
     {
       "rank": 140,
@@ -2366,11 +2378,11 @@
       "careerHigh": "136",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "Sydney 3 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 539,
-      "maxPoints": 605,
+      "tournament": "",
+      "previousTournaments": "Défaite Sydney 3 16e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
@@ -2520,7 +2532,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 16e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+          "lastSeen": "2026-11-18T07:26:57.149676+00:00"
         }
       ]
     },

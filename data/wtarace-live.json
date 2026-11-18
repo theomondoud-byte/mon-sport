@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-18T01:26:02.078215+00:00",
+  "fetchedAt": "2026-11-18T07:26:57.975748+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1274,12 +1274,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Sydney 3 16e",
+      "tournament": "Sydney 3 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Sydney 3 8e",
+          "lastSeen": "2026-11-18T07:26:57.975748+00:00"
+        },
         {
           "text": "Sydney 3 16e",
           "lastSeen": "2026-11-18T01:26:02.078215+00:00"
@@ -1903,12 +1907,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Sydney 3 16e",
+      "tournament": "Sydney 3 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Sydney 3 8e",
+          "lastSeen": "2026-11-18T07:26:57.975748+00:00"
+        },
         {
           "text": "Sydney 3 16e",
           "lastSeen": "2026-11-18T01:26:02.078215+00:00"
@@ -2172,7 +2180,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T01:26:02.078215+00:00"
+          "lastSeen": "2026-11-18T07:26:57.975748+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2298,7 +2306,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T01:26:02.078215+00:00"
+          "lastSeen": "2026-11-18T07:26:57.975748+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2339,7 +2347,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 16e",
-          "lastSeen": "2026-11-18T01:26:02.078215+00:00"
+          "lastSeen": "2026-11-18T07:26:57.975748+00:00"
         }
       ]
     },
