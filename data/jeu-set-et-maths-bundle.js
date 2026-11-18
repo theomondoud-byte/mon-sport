@@ -3,8 +3,48 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-17T19:10:17.292639+00:00",
+ "fetchedAt": "2026-11-18T01:26:08.967089+00:00",
  "posts": [
+  {
+   "title": "📊 5 des 6 dernières victoires d’Alexander Zverev 🇩🇪 face à des membres du Top 5 ont été enregistrées au Masters : 🎱 Masters 2023 vs Alcaraz (N°2) 🎱 Masters 2023 vs…",
+   "text": "📊 5 des 6 dernières victoires d’Alexander Zverev 🇩🇪 face à des membres du Top 5 ont été enregistrées au Masters :\n🎱 Masters 2023 vs Alcaraz (N°2)\n🎱 Masters 2023 vs Rublev (N°5)\n🇦🇺 Open d’Australie 2024 vs Alcaraz (N°2)\n🎱 Masters 2024 vs Alcaraz (N°3)\n🎱 Masters 2025 vs Shelton (N°5)\n🎱 Masters 2026 vs Shelton (N°4) 🆕",
+   "link": "https://x.com/JeuSetMaths/status/2122810398709526774",
+   "date": "2026-11-17T21:53:33.619000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2122803792177471488/vid/avc1/576x720/5yt5uMCOKc4dF-Yg.mp4?tag=16"
+  },
+  {
+   "title": "🔮 Les scénarios pour qu'Arthur Fils 🇫🇷 se qualifie en 1/2 finale du Masters : ➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 2 sets ✅ ➡️ Arthur Fils 🇫🇷 bat Alexander Zverev…",
+   "text": "🔮 Les scénarios pour qu'Arthur Fils 🇫🇷 se qualifie en 1/2 finale du Masters :\n➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 2 sets ✅\n➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 3 sets ✅ ET Ben Shelton bat Rafael Jodar en 3 sets\n➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 3 sets ✅ ET Rafael Jodar bat Ben Shelton\n➡️ Arthur Fils 🇫🇷 s'incline en 3 sets ❌ ET Rafael Jodar bat Ben Shelton\n\n❓ Arthur Fils 🇫🇷 s'incline en 2 sets ET Rafael Jodar bat Ben Shelton en 3 sets : le 2e de la poule sera déterminé au game average.",
+   "link": "https://x.com/JeuSetMaths/status/2122802649539936387",
+   "date": "2026-11-17T21:22:46.073000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXW0pLNWoAAuH7n.png?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXW0pLNWoAAuH7n.png?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Les 50 derniers matchs d’Alexander Zverev 🇩🇪 face à des adversaires gauchers : ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❌✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ ➡️ 49 victoires, 1 défaite",
+   "text": "📊 Les 50 derniers matchs d’Alexander Zverev 🇩🇪 face à des adversaires gauchers :\n✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❌✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅\n➡️ 49 victoires, 1 défaite",
+   "link": "https://x.com/JeuSetMaths/status/2122802056801214639",
+   "date": "2026-11-17T21:20:24.753000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXW1JbMXgAA5guX.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXW1JbMXgAA5guX.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Le premier joueur de chaque classe d'âge (1980-2004) à avoir remporté un match au Masters : 🆕 2004 : Fils 🇫🇷 ▪️ 2003 : Rune 🇩🇰 ▪️ 2002 : Musetti 🇮🇹 ▪️ 2001 : Sinner…",
    "text": "📊 Le premier joueur de chaque classe d'âge (1980-2004) à avoir remporté un match au Masters :\n🆕 2004 : Fils 🇫🇷\n▪️ 2003 : Rune 🇩🇰\n▪️ 2002 : Musetti 🇮🇹\n▪️ 2001 : Sinner 🇮🇹\n▪️ 2000 : Auger Aliassime 🇨🇦\n▪️ 1999 : De Minaur 🇦🇺\n▪️ 1998 : Tsitsipas 🇬🇷\n▪️ 1997 : Zverev 🇩🇪\n▪️ 1996 : Berrettini 🇮🇹\n▪️ 1995 : 🚫\n▪️ 1994 : 🚫\n▪️ 1993 : Thiem 🇦🇹\n▪️ 1992 : Sock 🇺🇸\n▪️ 1991 : Dimitrov 🇧🇬\n▪️ 1990 : Raonic 🇨🇦\n▪️ 1989 : Nishikori 🇯🇵\n▪️ 1988 : Del Potro 🇦🇷\n▪️ 1987 : Djokovic 🇷🇸\n▪️ 1986 : Nadal 🇪🇸\n▪️ 1985 : Tsonga 🇫🇷\n▪️ 1984 : Simon 🇫🇷\n▪️ 1983 : 🚫\n▪️ 1982 : Nalbandian 🇦🇷\n▪️ 1981 : Hewitt 🇦🇺\n▪️ 1980 : Safin 🇷🇺",
@@ -215,48 +255,6 @@ export const jeuSetMathsBundledData = {
    "images": [
     "https://pbs.twimg.com/media/HXLWny1XQAAbeb0.jpg?name=orig",
     "https://pbs.twimg.com/media/HXLWny1XYAAr3za.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 A 20 ans et 59 jours, Rafael Jodar 🇪🇸 est le 2e plus jeune joueur à participer au Masters au XXIe siècle après Juan Martin del Potro 🇦🇷 âgé de 20 ans et 47 jours en…",
-   "text": "📊 A 20 ans et 59 jours, Rafael Jodar 🇪🇸 est le 2e plus jeune joueur à participer au Masters au XXIe siècle après Juan Martin del Potro 🇦🇷 âgé de 20 ans et 47 jours en 2008.\n\n✍️ Le record de la compétition reste détenu par Aaron Krickstein 🇺🇸 qui était âgé de 17 ans et 159 jours lors de l'édition 1984 (qui réunissait 12 joueurs).",
-   "link": "https://x.com/JeuSetMaths/status/2121961386032898202",
-   "date": "2026-11-15T13:39:53.223000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2121959656205475841/vid/avc1/576x720/HAoVVHdIsqs28zHs.mp4?tag=16"
-  },
-  {
-   "title": "📊 Les plus grandes différences d'âge entre les deux joueuses qualifiées en finale du Masters WTA : ▪️ 17 ans et 45 jours : Navratilova 🇺🇸 vs Seles 🇷🇸 (1991, 1992) ▪️ 12…",
-   "text": "📊 Les plus grandes différences d'âge entre les deux joueuses qualifiées en finale du Masters WTA :\n▪️ 17 ans et 45 jours : Navratilova 🇺🇸 vs Seles 🇷🇸 (1991, 1992)\n▪️ 12 ans et 239 jours : Navratilova 🇺🇸 vs Graf 🇩🇪 (1986, 1989)\n🆕 12 ans et 229 jours : Svitolina 🇺🇦 vs Andreeva 🇷🇺 (2026)\n▪️ 12 ans et 120 jours : Richey 🇺🇸 vs Evert 🇺🇸 (1973)",
-   "link": "https://x.com/JeuSetMaths/status/2121856570896097706",
-   "date": "2026-11-15T06:43:23.347000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXJZQHnWQAAZtoO.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXJZQHnWQAAZtoO.jpg?name=orig",
-    "https://pbs.twimg.com/media/HXJZQyaXwAAU5jJ.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Elina Svitolina 🇺🇦 retrouve la finale du Masters 7 ans après sa dernière finale dans la compétition. 5 autres joueuses ont enregistré un aussi long intervalle entre…",
-   "text": "📊 Elina Svitolina 🇺🇦 retrouve la finale du Masters 7 ans après sa dernière finale dans la compétition. 5 autres joueuses ont enregistré un aussi long intervalle entre deux finales :\n▪️ 8 ans : Monica Seles 🇷🇸🇺🇸 (1992-2000)\n▪️ 8 ans : Mary Pierce 🇫🇷 (1997-2005)\n▪️ 8 ans : Venus Williams 🇺🇸 (2009-2017)\n▪️ 7 ans : Kim Clijsters 🇧🇪 (2003-2010)\n▪️ 7 ans : Caroline Wozniacki 🇩🇰 (2010-2017)\n🆕 7 ans : Elina Svitolina 🇺🇦 (2019-2026)",
-   "link": "https://x.com/JeuSetMaths/status/2121747843031642360",
-   "date": "2026-11-14T23:31:20.604000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXH1rJ_W0AA7JnP.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXH1rJ_W0AA7JnP.jpg?name=orig",
-    "https://pbs.twimg.com/media/HXH2GqBWMAAEReh.jpg?name=orig"
    ],
    "video": null
   }

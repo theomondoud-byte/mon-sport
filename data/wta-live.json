@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-17T19:10:08.585902+00:00",
+  "fetchedAt": "2026-11-18T01:26:00.701643+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1204,7 +1204,7 @@
     {
       "rank": 72,
       "name": "Maria Timofeeva",
-      "age": 22,
+      "age": 23,
       "country": "UZB",
       "livePoints": 932,
       "careerHigh": "63",
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
         }
       ]
     },
@@ -1840,7 +1840,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
         },
         {
           "text": "Colina 16e",
@@ -1914,28 +1914,41 @@
     },
     {
       "rank": 115,
+      "name": "Laura Samson",
+      "age": 18,
+      "country": "CZE",
+      "livePoints": 685,
+      "careerHigh": "107",
+      "movement": -8,
+      "pointsChange": -34,
+      "tournament": "Colina 8e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 697,
+      "maxPoints": 795,
+      "tournamentHistory": [
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+        },
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+        },
+        {
+          "text": "Sopo DF",
+          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 116,
       "name": "Sloane Stephens",
       "age": 33,
       "country": "USA",
       "livePoints": 678,
       "careerHigh": "3",
-      "movement": 1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 116,
-      "name": "Lisa Pigato",
-      "age": 23,
-      "country": "ITA",
-      "livePoints": 675,
-      "careerHigh": "102",
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1946,12 +1959,12 @@
     },
     {
       "rank": 117,
-      "name": "Katarzyna Kawa",
-      "age": 34,
-      "country": "POL",
-      "livePoints": 672,
-      "careerHigh": "106",
-      "movement": 1,
+      "name": "Lisa Pigato",
+      "age": 23,
+      "country": "ITA",
+      "livePoints": 675,
+      "careerHigh": "102",
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -1962,28 +1975,19 @@
     },
     {
       "rank": 118,
-      "name": "Laura Samson",
-      "age": 18,
-      "country": "CZE",
+      "name": "Katarzyna Kawa",
+      "age": 34,
+      "country": "POL",
       "livePoints": 672,
-      "careerHigh": "107",
-      "movement": -11,
-      "pointsChange": -47,
-      "tournament": "Colina 16e",
+      "careerHigh": "106",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
       "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 685,
-      "maxPoints": 795,
-      "tournamentHistory": [
-        {
-          "text": "Colina 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
-        },
-        {
-          "text": "Sopo DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
-        }
-      ]
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 119,
@@ -2226,7 +2230,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2268,12 +2272,37 @@
     },
     {
       "rank": 136,
+      "name": "Andrea Lazáro García",
+      "age": 32,
+      "country": "ESP",
+      "livePoints": 554,
+      "careerHigh": "MC",
+      "movement": 4,
+      "pointsChange": 13,
+      "tournament": "Colina 8e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 566,
+      "maxPoints": 664,
+      "tournamentHistory": [
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+        },
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 137,
       "name": "Emerson Jones",
       "age": 18,
       "country": "AUS",
       "livePoints": 553,
       "careerHigh": "122",
-      "movement": -3,
+      "movement": -4,
       "pointsChange": -37,
       "tournament": "Sydney 3 16e",
       "previousTournaments": "",
@@ -2283,7 +2312,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
         },
         {
           "text": "Brisbane 6 DF (16e )",
@@ -2292,13 +2321,13 @@
       ]
     },
     {
-      "rank": 137,
+      "rank": 138,
       "name": "Alice Tubello",
       "age": 25,
       "country": "FRA",
       "livePoints": 543,
       "careerHigh": "NMC (139)",
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2306,27 +2335,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 138,
-      "name": "Andrea Lazáro García",
-      "age": 32,
-      "country": "ESP",
-      "livePoints": 541,
-      "careerHigh": "136",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "Colina 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 554,
-      "maxPoints": 664,
-      "tournamentHistory": [
-        {
-          "text": "Colina 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
-        }
-      ]
     },
     {
       "rank": 139,
@@ -2345,7 +2353,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
         }
       ]
     },
@@ -2366,7 +2374,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
         },
         {
           "text": "Brisbane 6 F",
@@ -2512,7 +2520,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
         }
       ]
     },
