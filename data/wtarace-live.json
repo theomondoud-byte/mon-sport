@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-18T13:23:27.097096+00:00",
+  "fetchedAt": "2026-11-18T19:04:19.559178+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1282,7 +1282,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-18T13:23:27.097096+00:00"
+          "lastSeen": "2026-11-18T19:04:19.559178+00:00"
         },
         {
           "text": "Sydney 3 16e",
@@ -1915,7 +1915,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-18T13:23:27.097096+00:00"
+          "lastSeen": "2026-11-18T19:04:19.559178+00:00"
         },
         {
           "text": "Sydney 3 16e",
@@ -2172,12 +2172,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Colina 8e",
+      "tournament": "Colina QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Colina QF",
+          "lastSeen": "2026-11-18T19:04:19.559178+00:00"
+        },
         {
           "text": "Colina 8e",
           "lastSeen": "2026-11-18T13:23:27.097096+00:00"
@@ -2306,7 +2310,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T13:23:27.097096+00:00"
+          "lastSeen": "2026-11-18T19:04:19.559178+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2339,9 +2343,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Trnava 4 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Trnava 4 16e",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [

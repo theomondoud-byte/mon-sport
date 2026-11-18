@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-18T13:23:26.083969+00:00",
+  "fetchedAt": "2026-11-18T19:04:18.478296+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
         },
         {
           "text": "Sydney 3 16e",
@@ -1844,7 +1844,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
         },
         {
           "text": "Colina 16e",
@@ -1933,7 +1933,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2234,7 +2234,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2291,7 +2291,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2316,7 +2316,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
         },
         {
           "text": "Sydney 3 16e",
@@ -2345,7 +2345,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
         },
         {
           "text": "Sydney 3 16e",
@@ -2524,12 +2524,16 @@
       "careerHigh": "138",
       "movement": -6,
       "pointsChange": -24,
-      "tournament": "Trnava 4 16e",
+      "tournament": "Trnava 4 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 511,
+      "nextPoints": 518,
       "maxPoints": 577,
       "tournamentHistory": [
+        {
+          "text": "Trnava 4 8e",
+          "lastSeen": "2026-11-18T19:04:18.478296+00:00"
+        },
         {
           "text": "Trnava 4 16e",
           "lastSeen": "2026-11-18T13:23:26.083969+00:00"
