@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-19T13:26:55.483194+00:00",
+  "fetchedAt": "2026-11-19T19:08:08.071182+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -1816,7 +1816,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
         },
         {
           "text": "Colina 8e",
@@ -1861,7 +1861,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2234,16 +2234,20 @@
       "name": "Lucia Bronzetti",
       "age": 27,
       "country": "ITA",
-      "livePoints": 569,
+      "livePoints": 581,
       "careerHigh": "46",
       "movement": 2,
-      "pointsChange": 3,
-      "tournament": "Colina 8e",
+      "pointsChange": 15,
+      "tournament": "Colina QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 581,
+      "nextPoints": 603,
       "maxPoints": 679,
       "tournamentHistory": [
+        {
+          "text": "Colina QF",
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+        },
         {
           "text": "Colina 8e",
           "lastSeen": "2026-11-19T13:26:55.483194+00:00"
@@ -2303,7 +2307,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -2336,7 +2340,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2479,7 +2483,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 QF",
-          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
         },
         {
           "text": "Trnava 4 8e",
@@ -2577,7 +2581,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
         }
       ]
     },

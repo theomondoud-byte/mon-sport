@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-race-next-gen",
-  "fetchedAt": "2026-11-19T13:26:56.600296+00:00",
+  "fetchedAt": "2026-11-19T19:08:09.333126+00:00",
   "rows": [
     {
       "rank": 1,
@@ -11,9 +11,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Finales ATP RR (0 V / 2 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Finales ATP RR (0 V / 3 D)",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -133,7 +133,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville QF",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Drummondville 8e",
@@ -194,7 +194,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (8e )",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Helsinki 8e (16e )",
@@ -264,7 +264,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 QF",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Héraklion 15 8e",
@@ -730,11 +730,11 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Héraklion 15 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 79,
-      "maxPoints": 101,
+      "tournament": "",
+      "previousTournaments": "Défaite Héraklion 15 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Héraklion 15 8e",
@@ -759,11 +759,11 @@
       "careerHigh": "",
       "movement": 9,
       "pointsChange": 15,
-      "tournament": "Vale Do Lobo 3 8e",
-      "previousTournaments": "Défaite Vale Do Lobo 2 F",
+      "tournament": "",
+      "previousTournaments": "Défaite Vale Do Lobo 2 F Défaite Vale Do Lobo 3 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 79,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 8e",
@@ -895,11 +895,11 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": 4,
-      "tournament": "Vale Do Lobo 3 8e",
-      "previousTournaments": "Défaite Vale Do Lobo 2 QF",
+      "tournament": "",
+      "previousTournaments": "Défaite Vale Do Lobo 2 QF Défaite Vale Do Lobo 3 8e",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 73,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 8e",
@@ -1046,11 +1046,11 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": 1,
-      "tournament": "Bradenton 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 61,
-      "maxPoints": 83,
+      "tournament": "",
+      "previousTournaments": "Défaite Bradenton 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Bradenton 8e",
@@ -1171,16 +1171,20 @@
       "name": "Kasra Rahmani",
       "age": 20,
       "country": "IRI",
-      "livePoints": 54,
+      "livePoints": 56,
       "careerHigh": "",
       "movement": -1,
-      "pointsChange": 1,
-      "tournament": "Monastir 46 8e",
+      "pointsChange": 3,
+      "tournament": "Monastir 46 QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 56,
+      "nextPoints": 60,
       "maxPoints": 78,
       "tournamentHistory": [
+        {
+          "text": "Monastir 46 QF",
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
+        },
         {
           "text": "Monastir 46 8e",
           "lastSeen": "2026-11-19T13:26:56.600296+00:00"
@@ -1330,7 +1334,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 8e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Bradenton 16e",
@@ -1387,7 +1391,7 @@
       "tournamentHistory": [
         {
           "text": "Hua Hin 2 QF",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Hua Hin 2 8e",
@@ -1526,7 +1530,7 @@
       "tournamentHistory": [
         {
           "text": "Lajeado 8e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Lajeado 16e",
@@ -1719,7 +1723,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares 8e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Alcalá De Henares 16e",
@@ -1833,7 +1837,7 @@
       "tournamentHistory": [
         {
           "text": "Kuala Lumpur 2 QF",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Kuala Lumpur 2 8e",
@@ -2012,11 +2016,11 @@
       "careerHigh": "",
       "movement": 8,
       "pointsChange": 6,
-      "tournament": "Monastir 47 QF",
-      "previousTournaments": "Défaite Monastir 45 DF",
+      "tournament": "",
+      "previousTournaments": "Défaite Monastir 45 DF Défaite Monastir 47 QF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 31,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Monastir 47 QF",
@@ -2136,7 +2140,7 @@
       "tournamentHistory": [
         {
           "text": "Bhubaneswar 8e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         },
         {
           "text": "Bhubaneswar 16e",
@@ -2311,7 +2315,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         }
       ]
     },
@@ -2515,7 +2519,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         }
       ]
     },
@@ -2617,12 +2621,37 @@
     },
     {
       "rank": 132,
+      "name": "Bernardo Munk Mesa",
+      "age": 20,
+      "country": "ESP",
+      "livePoints": 17,
+      "careerHigh": "",
+      "movement": 6,
+      "pointsChange": 2,
+      "tournament": "Alcalá De Henares QF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 19,
+      "maxPoints": 30,
+      "tournamentHistory": [
+        {
+          "text": "Alcalá De Henares QF",
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
+        },
+        {
+          "text": "Alcalá De Henares 16e",
+          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 133,
       "name": "Fanming Meng",
       "age": 18,
       "country": "CHN",
       "livePoints": 17,
       "careerHigh": "",
-      "movement": -5,
+      "movement": -6,
       "pointsChange": null,
       "tournament": "Orlando 3 16e",
       "previousTournaments": "",
@@ -2632,18 +2661,18 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         }
       ]
     },
     {
-      "rank": 133,
+      "rank": 134,
       "name": "Duje Markovina",
       "age": 19,
       "country": "AUS",
       "livePoints": 17,
       "careerHigh": "",
-      "movement": -5,
+      "movement": -6,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "Défaite Santa Cruz 2 16e",
@@ -2658,13 +2687,42 @@
       ]
     },
     {
-      "rank": 134,
+      "rank": 135,
+      "name": "Maximus Dussault",
+      "age": 19,
+      "country": "USA",
+      "livePoints": 16,
+      "careerHigh": "",
+      "movement": 7,
+      "pointsChange": 3,
+      "tournament": "Bradenton QF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 20,
+      "maxPoints": 38,
+      "tournamentHistory": [
+        {
+          "text": "Bradenton QF",
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
+        },
+        {
+          "text": "Bradenton 8e",
+          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+        },
+        {
+          "text": "Bradenton 16e",
+          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 136,
       "name": "Joaquin Guilleme",
       "age": 20,
       "country": "NCA",
       "livePoints": 16,
       "careerHigh": "",
-      "movement": -3,
+      "movement": -5,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2674,13 +2732,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 135,
+      "rank": 137,
       "name": "Mathys Domenc",
       "age": 17,
       "country": "FRA",
       "livePoints": 16,
       "careerHigh": "",
-      "movement": -2,
+      "movement": -4,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2690,13 +2748,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 136,
+      "rank": 138,
       "name": "Nicolas Arseneault",
       "age": 19,
       "country": "CAN",
       "livePoints": 16,
       "careerHigh": "",
-      "movement": 12,
+      "movement": 10,
       "pointsChange": 3,
       "tournament": "",
       "previousTournaments": "Défaite Montréal 2 QF",
@@ -2711,13 +2769,13 @@
       ]
     },
     {
-      "rank": 137,
+      "rank": 139,
       "name": "Nikola Djosic",
       "age": 19,
       "country": "SUI",
       "livePoints": 16,
       "careerHigh": "",
-      "movement": -3,
+      "movement": -5,
       "pointsChange": 8,
       "tournament": "",
       "previousTournaments": "",
@@ -2727,45 +2785,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 138,
+      "rank": 140,
       "name": "Sydney Zick",
       "age": 19,
       "country": "GER",
       "livePoints": 16,
       "careerHigh": "",
-      "movement": -3,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 139,
-      "name": "Melih Anavatan",
-      "age": 20,
-      "country": "TUR",
-      "livePoints": 16,
-      "careerHigh": "",
-      "movement": -3,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 140,
-      "name": "Damir Zhalgasbay",
-      "age": 18,
-      "country": "KAZ",
-      "livePoints": 15,
-      "careerHigh": "",
-      "movement": -3,
+      "movement": -5,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2776,12 +2802,44 @@
     },
     {
       "rank": 141,
+      "name": "Melih Anavatan",
+      "age": 20,
+      "country": "TUR",
+      "livePoints": 16,
+      "careerHigh": "",
+      "movement": -5,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 142,
+      "name": "Damir Zhalgasbay",
+      "age": 18,
+      "country": "KAZ",
+      "livePoints": 15,
+      "careerHigh": "",
+      "movement": -5,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 143,
       "name": "Jordan Lee",
       "age": 16,
       "country": "USA",
       "livePoints": 15,
       "careerHigh": "",
-      "movement": 17,
+      "movement": 15,
       "pointsChange": 4,
       "tournament": "Champaign 8e",
       "previousTournaments": "",
@@ -2791,53 +2849,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 8e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 142,
-      "name": "Bernardo Munk Mesa",
-      "age": 20,
-      "country": "ESP",
-      "livePoints": 15,
-      "careerHigh": "",
-      "movement": -4,
-      "pointsChange": null,
-      "tournament": "Alcalá De Henares 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 16,
-      "maxPoints": 30,
-      "tournamentHistory": [
-        {
-          "text": "Alcalá De Henares 16e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 143,
-      "name": "Maximus Dussault",
-      "age": 19,
-      "country": "USA",
-      "livePoints": 14,
-      "careerHigh": "",
-      "movement": -1,
-      "pointsChange": 1,
-      "tournament": "Bradenton 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 16,
-      "maxPoints": 38,
-      "tournamentHistory": [
-        {
-          "text": "Bradenton 8e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
-        },
-        {
-          "text": "Bradenton 16e",
-          "lastSeen": "2026-11-18T13:23:27.570764+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         }
       ]
     },
@@ -2930,11 +2942,11 @@
       "careerHigh": "",
       "movement": 7,
       "pointsChange": 2,
-      "tournament": "Monastir 47 QF",
-      "previousTournaments": "Défaite Monastir 45 16e",
+      "tournament": "",
+      "previousTournaments": "Défaite Monastir 45 16e Défaite Monastir 47 QF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 15,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Monastir 47 QF",
@@ -2959,7 +2971,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T13:26:56.600296+00:00"
+          "lastSeen": "2026-11-19T19:08:09.333126+00:00"
         }
       ]
     }
