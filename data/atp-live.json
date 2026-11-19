@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-18T19:04:21.081320+00:00",
+  "fetchedAt": "2026-11-19T01:21:45.671301+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (2 V / 0 D)",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -64,7 +64,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (2 V / 0 D)",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -93,7 +93,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -122,7 +122,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -151,7 +151,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -172,12 +172,16 @@
       "age": 24,
       "country": "ITA",
       "careerHigh": "6",
-      "tournament": "Finales ATP RR (0 V / 1 D)",
+      "tournament": "Finales ATP RR (0 V / 2 D)",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 3880,
-      "maxPoints": 4980,
+      "maxPoints": 4780,
       "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (0 V / 2 D)",
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
+        },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
           "lastSeen": "2026-11-18T19:04:20.869583+00:00"
@@ -191,18 +195,22 @@
     {
       "rank": 8,
       "name": "Frances Tiafoe",
-      "livePoints": 3390,
+      "livePoints": 3590,
       "movement": null,
-      "pointsChange": null,
+      "pointsChange": 200,
       "age": 28,
       "country": "USA",
       "careerHigh": "MC",
-      "tournament": "Finales ATP RR (0 V / 1 D)",
+      "tournament": "Finales ATP RR (1 V / 1 D)",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 3590,
+      "nextPoints": 3790,
       "maxPoints": 4690,
       "tournamentHistory": [
+        {
+          "text": "Finales ATP RR (1 V / 1 D)",
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
+        },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
           "lastSeen": "2026-11-18T19:04:20.869583+00:00"
@@ -251,7 +259,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 2 D)",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -1454,11 +1462,11 @@
       "age": 34,
       "country": "GEO",
       "careerHigh": "16",
-      "tournament": "Metz 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 704,
-      "maxPoints": 813,
+      "tournament": "",
+      "previousTournaments": "Défaite Metz 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Metz 8e",
@@ -1519,7 +1527,7 @@
       "tournamentHistory": [
         {
           "text": "Metz 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Metz 16e",
@@ -1544,7 +1552,7 @@
       "tournamentHistory": [
         {
           "text": "Metz QF",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Metz 8e",
@@ -1699,7 +1707,7 @@
       "tournamentHistory": [
         {
           "text": "Metz 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Metz 16e",
@@ -1785,7 +1793,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -1814,7 +1822,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Montevideo 16e",
@@ -1903,7 +1911,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 8e (16e )",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -2029,7 +2037,7 @@
       "tournamentHistory": [
         {
           "text": "Metz 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Metz 16e",
@@ -2070,7 +2078,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Montevideo 16e",
@@ -2095,7 +2103,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 8e (16e )",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -2145,7 +2153,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Helsinki 16e",
@@ -2174,12 +2182,16 @@
       "age": 25,
       "country": "FRA",
       "careerHigh": "116",
-      "tournament": "Drummondville 16e",
+      "tournament": "Drummondville 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 512,
+      "nextPoints": 517,
       "maxPoints": 580,
       "tournamentHistory": [
+        {
+          "text": "Drummondville 8e",
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
+        },
         {
           "text": "Drummondville 16e",
           "lastSeen": "2026-11-18T19:04:20.869583+00:00"
@@ -2359,7 +2371,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki 8e (16e )",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -2495,7 +2507,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -2747,7 +2759,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         },
         {
           "text": "Sydney 16e",
@@ -2841,7 +2853,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo 8e",
-          "lastSeen": "2026-11-18T19:04:20.869583+00:00"
+          "lastSeen": "2026-11-19T01:21:45.419227+00:00"
         }
       ]
     }
