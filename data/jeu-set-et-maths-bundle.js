@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-19T01:21:49.327013+00:00",
+ "fetchedAt": "2026-11-19T07:27:12.896211+00:00",
  "posts": [
   {
    "title": "📊 Pour la première fois depuis 5 ans, un joueur a encaissé un 6/0 au Masters : ▪️ 2021 : Medvedev 🇷🇺 b. Sinner 🇮🇹 (6/0 6/7 7/6) 🆕 2026 : Tiafoe 🇺🇸 b. Cobolli 🇮🇹 (7/6…",

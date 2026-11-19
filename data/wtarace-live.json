@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-19T01:21:44.063636+00:00",
+  "fetchedAt": "2026-11-19T07:27:08.123011+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1274,12 +1274,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Sydney 3 8e",
+      "tournament": "Sydney 3 QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Sydney 3 QF",
+          "lastSeen": "2026-11-19T07:27:08.123011+00:00"
+        },
         {
           "text": "Sydney 3 8e",
           "lastSeen": "2026-11-19T01:21:44.063636+00:00"
@@ -1915,7 +1919,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-19T01:21:44.063636+00:00"
+          "lastSeen": "2026-11-19T07:27:08.123011+00:00"
         },
         {
           "text": "Sydney 3 16e",
@@ -2180,7 +2184,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T01:21:44.063636+00:00"
+          "lastSeen": "2026-11-19T07:27:08.123011+00:00"
         },
         {
           "text": "Colina 8e",

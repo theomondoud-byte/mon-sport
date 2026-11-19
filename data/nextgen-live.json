@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-race-next-gen",
-  "fetchedAt": "2026-11-19T01:21:44.487704+00:00",
+  "fetchedAt": "2026-11-19T07:27:08.357723+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 2 D)",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -121,16 +121,20 @@
       "name": "Darwin Blanch",
       "age": 19,
       "country": "USA",
-      "livePoints": 380,
+      "livePoints": 386,
       "careerHigh": "",
       "movement": null,
-      "pointsChange": null,
-      "tournament": "Drummondville 8e",
+      "pointsChange": 6,
+      "tournament": "Drummondville QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 386,
+      "nextPoints": 396,
       "maxPoints": 449,
       "tournamentHistory": [
+        {
+          "text": "Drummondville QF",
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
+        },
         {
           "text": "Drummondville 8e",
           "lastSeen": "2026-11-19T01:21:44.487704+00:00"
@@ -190,7 +194,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (8e )",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Helsinki 8e (16e )",
@@ -260,7 +264,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Héraklion 15 16e",
@@ -360,11 +364,11 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": 6,
-      "tournament": "Kōbe 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 161,
-      "maxPoints": 224,
+      "tournament": "",
+      "previousTournaments": "Défaite Kōbe 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Kōbe 8e",
@@ -730,7 +734,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Héraklion 15 16e",
@@ -784,7 +788,7 @@
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 16e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Vale Do Lobo 2 F",
@@ -891,7 +895,7 @@
       "tournamentHistory": [
         {
           "text": "Vale Do Lobo 3 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Vale Do Lobo 3 16e",
@@ -1042,7 +1046,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Bradenton 16e",
@@ -1171,7 +1175,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 46 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Monastir 46 16e",
@@ -1318,7 +1322,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Bradenton 16e",
@@ -1360,35 +1364,23 @@
     },
     {
       "rank": 67,
-      "name": "Andres Santamarta Roig",
-      "age": 19,
-      "country": "ESP",
-      "livePoints": 45,
-      "careerHigh": "",
-      "movement": -3,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 68,
       "name": "Kuan Shou Chen",
       "age": 18,
       "country": "TWN",
-      "livePoints": 45,
+      "livePoints": 46,
       "careerHigh": "",
-      "movement": null,
-      "pointsChange": 3,
-      "tournament": "Hua Hin 2 8e",
+      "movement": 1,
+      "pointsChange": 4,
+      "tournament": "Hua Hin 2 QF",
       "previousTournaments": "Qualif. Hua Hin V Défaite Hua Hin QF",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
-      "maxPoints": 46,
+      "maxPoints": 48,
       "tournamentHistory": [
+        {
+          "text": "Hua Hin 2 QF",
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
+        },
         {
           "text": "Hua Hin 2 8e",
           "lastSeen": "2026-11-19T01:21:44.487704+00:00"
@@ -1402,6 +1394,22 @@
           "lastSeen": "2026-11-14T12:58:17.778220+00:00"
         }
       ]
+    },
+    {
+      "rank": 68,
+      "name": "Andres Santamarta Roig",
+      "age": 19,
+      "country": "ESP",
+      "livePoints": 45,
+      "careerHigh": "",
+      "movement": -4,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 69,
@@ -1510,7 +1518,7 @@
       "tournamentHistory": [
         {
           "text": "Lajeado 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Lajeado 16e",
@@ -1703,7 +1711,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Alcalá De Henares 16e",
@@ -1792,7 +1800,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Héraklion 15 16e",
@@ -1817,7 +1825,7 @@
       "tournamentHistory": [
         {
           "text": "Kuala Lumpur 2 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Kuala Lumpur 2 16e",
@@ -2000,7 +2008,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 47 QF",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Monastir 47 8e",
@@ -2116,7 +2124,7 @@
       "tournamentHistory": [
         {
           "text": "Bhubaneswar 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Bhubaneswar 16e",
@@ -2291,7 +2299,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         }
       ]
     },
@@ -2495,7 +2503,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         }
       ]
     },
@@ -2612,7 +2620,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         }
       ]
     },
@@ -2771,7 +2779,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         }
       ]
     },
@@ -2792,7 +2800,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares 16e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         }
       ]
     },
@@ -2813,7 +2821,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton 8e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         },
         {
           "text": "Bradenton 16e",
@@ -2918,7 +2926,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 47 QF",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         }
       ]
     },
@@ -2939,7 +2947,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-19T01:21:44.487704+00:00"
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
         }
       ]
     }

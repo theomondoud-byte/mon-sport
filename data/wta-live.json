@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-19T01:21:43.223306+00:00",
+  "fetchedAt": "2026-11-19T07:27:07.474425+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1631,16 +1631,20 @@
       "name": "Shuai Zhang",
       "age": 37,
       "country": "CHN",
-      "livePoints": 778,
+      "livePoints": 779,
       "careerHigh": "22",
       "movement": null,
-      "pointsChange": -24,
-      "tournament": "Sydney 3 8e",
+      "pointsChange": -23,
+      "tournament": "Sydney 3 QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 779,
+      "nextPoints": 792,
       "maxPoints": 838,
       "tournamentHistory": [
+        {
+          "text": "Sydney 3 QF",
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+        },
         {
           "text": "Sydney 3 8e",
           "lastSeen": "2026-11-19T01:21:43.223306+00:00"
@@ -1812,7 +1816,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
         },
         {
           "text": "Colina 8e",
@@ -1857,7 +1861,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2242,7 +2246,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2284,44 +2288,23 @@
     },
     {
       "rank": 136,
-      "name": "Andrea Lazáro García",
-      "age": 32,
-      "country": "ESP",
-      "livePoints": 554,
-      "careerHigh": "MC",
-      "movement": 4,
-      "pointsChange": 13,
-      "tournament": "Colina 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 566,
-      "maxPoints": 664,
-      "tournamentHistory": [
-        {
-          "text": "Colina 8e",
-          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
-        },
-        {
-          "text": "Colina 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 137,
       "name": "Emerson Jones",
       "age": 18,
       "country": "AUS",
-      "livePoints": 553,
+      "livePoints": 557,
       "careerHigh": "122",
-      "movement": -4,
-      "pointsChange": -37,
-      "tournament": "Sydney 3 8e",
+      "movement": -3,
+      "pointsChange": -33,
+      "tournament": "Sydney 3 QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 557,
+      "nextPoints": 570,
       "maxPoints": 616,
       "tournamentHistory": [
+        {
+          "text": "Sydney 3 QF",
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+        },
         {
           "text": "Sydney 3 8e",
           "lastSeen": "2026-11-19T01:21:43.223306+00:00"
@@ -2333,6 +2316,31 @@
         {
           "text": "Brisbane 6 DF (16e )",
           "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 137,
+      "name": "Andrea Lazáro García",
+      "age": 32,
+      "country": "ESP",
+      "livePoints": 554,
+      "careerHigh": "136",
+      "movement": 3,
+      "pointsChange": 13,
+      "tournament": "Colina 8e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 566,
+      "maxPoints": 664,
+      "tournamentHistory": [
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+        },
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
         }
       ]
     },
@@ -2353,7 +2361,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
         },
         {
           "text": "Sydney 3 16e",
@@ -2540,7 +2548,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 8e",
-          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
         },
         {
           "text": "Trnava 4 16e",
@@ -2550,28 +2558,33 @@
     },
     {
       "rank": 149,
+      "name": "Joanna Garland",
+      "age": 25,
+      "country": "TWN",
+      "livePoints": 510,
+      "careerHigh": "117",
+      "movement": 3,
+      "pointsChange": 15,
+      "tournament": "Sydney 3 QF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 523,
+      "maxPoints": 569,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 3 QF",
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 150,
       "name": "Jil Teichmann",
       "age": 29,
       "country": "SUI",
       "livePoints": 507,
       "careerHigh": "21",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 150,
-      "name": "Rebecca Šramková",
-      "age": 30,
-      "country": "SVK",
-      "livePoints": 507,
-      "careerHigh": "33",
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
