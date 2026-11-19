@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-19T07:27:07.474425+00:00",
+  "fetchedAt": "2026-11-19T13:26:55.483194+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -1816,7 +1816,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
         },
         {
           "text": "Colina 8e",
@@ -1861,7 +1861,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2246,7 +2246,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2303,7 +2303,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -2336,7 +2336,7 @@
       "tournamentHistory": [
         {
           "text": "Colina 8e",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2353,11 +2353,11 @@
       "careerHigh": "112",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Sydney 3 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 555,
-      "maxPoints": 614,
+      "tournament": "",
+      "previousTournaments": "Défaite Sydney 3 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Sydney 3 8e",
@@ -2464,12 +2464,41 @@
     },
     {
       "rank": 144,
+      "name": "Elizara Yaneva",
+      "age": 19,
+      "country": "BUL",
+      "livePoints": 518,
+      "careerHigh": "138",
+      "movement": -2,
+      "pointsChange": -17,
+      "tournament": "Trnava 4 QF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 531,
+      "maxPoints": 577,
+      "tournamentHistory": [
+        {
+          "text": "Trnava 4 QF",
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
+        },
+        {
+          "text": "Trnava 4 8e",
+          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+        },
+        {
+          "text": "Trnava 4 16e",
+          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 145,
       "name": "Ajla Tomljanović",
       "age": 33,
       "country": "AUS",
       "livePoints": 516,
       "careerHigh": "32",
-      "movement": 3,
+      "movement": 2,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2479,13 +2508,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 145,
+      "rank": 146,
       "name": "Teodora Kostović",
       "age": 19,
       "country": "SRB",
       "livePoints": 515,
       "careerHigh": "139",
-      "movement": 1,
+      "movement": null,
       "pointsChange": -7,
       "tournament": "",
       "previousTournaments": "Défaite Trnava 4 16e",
@@ -2500,13 +2529,13 @@
       ]
     },
     {
-      "rank": 146,
+      "rank": 147,
       "name": "Himeno Sakatsume",
       "age": 25,
       "country": "JPN",
       "livePoints": 514,
       "careerHigh": "114",
-      "movement": -17,
+      "movement": -18,
       "pointsChange": -98,
       "tournament": "",
       "previousTournaments": "",
@@ -2516,13 +2545,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 147,
+      "rank": 148,
       "name": "Clara Burel",
       "age": 25,
       "country": "FRA",
       "livePoints": 512,
       "careerHigh": "42",
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2530,31 +2559,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 148,
-      "name": "Elizara Yaneva",
-      "age": 19,
-      "country": "BUL",
-      "livePoints": 511,
-      "careerHigh": "138",
-      "movement": -6,
-      "pointsChange": -24,
-      "tournament": "Trnava 4 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 518,
-      "maxPoints": 577,
-      "tournamentHistory": [
-        {
-          "text": "Trnava 4 8e",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
-        },
-        {
-          "text": "Trnava 4 16e",
-          "lastSeen": "2026-11-18T13:23:26.083969+00:00"
-        }
-      ]
     },
     {
       "rank": 149,
@@ -2573,7 +2577,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T07:27:07.474425+00:00"
+          "lastSeen": "2026-11-19T13:26:55.483194+00:00"
         }
       ]
     },
