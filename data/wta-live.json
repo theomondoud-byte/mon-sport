@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-20T13:21:38.356757+00:00",
+  "fetchedAt": "2026-11-20T19:08:16.715629+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
         },
         {
           "text": "Sydney 3 QF",
@@ -1773,51 +1773,23 @@
     },
     {
       "rank": 106,
-      "name": "Kristina Liutova",
-      "age": 16,
-      "country": "RUS",
-      "livePoints": 725,
-      "careerHigh": "103",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 107,
-      "name": "Emma Raducanu",
-      "age": 24,
-      "country": "GBR",
-      "livePoints": 709,
-      "careerHigh": "10",
-      "movement": 1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 108,
       "name": "Leyre Romero Gormaz",
       "age": 24,
       "country": "ESP",
-      "livePoints": 707,
+      "livePoints": 729,
       "careerHigh": "NMC (111)",
-      "movement": 3,
-      "pointsChange": 12,
-      "tournament": "Colina QF",
+      "movement": 5,
+      "pointsChange": 34,
+      "tournament": "Colina DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 729,
+      "nextPoints": 761,
       "maxPoints": 805,
       "tournamentHistory": [
+        {
+          "text": "Colina DF",
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+        },
         {
           "text": "Colina QF",
           "lastSeen": "2026-11-20T13:21:38.356757+00:00"
@@ -1831,6 +1803,38 @@
           "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         }
       ]
+    },
+    {
+      "rank": 107,
+      "name": "Kristina Liutova",
+      "age": 16,
+      "country": "RUS",
+      "livePoints": 725,
+      "careerHigh": "103",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 108,
+      "name": "Emma Raducanu",
+      "age": 24,
+      "country": "GBR",
+      "livePoints": 709,
+      "careerHigh": "10",
+      "movement": null,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 109,
@@ -1865,7 +1869,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2155,99 +2159,23 @@
     },
     {
       "rank": 128,
-      "name": "Marina Bassols Ribera",
-      "age": 26,
-      "country": "ESP",
-      "livePoints": 599,
-      "careerHigh": "105",
-      "movement": 2,
-      "pointsChange": -10,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 129,
-      "name": "Dominika Šálková",
-      "age": 22,
-      "country": "CZE",
-      "livePoints": 597,
-      "careerHigh": "108",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 130,
-      "name": "Elsa Jacquemot",
-      "age": 23,
-      "country": "FRA",
-      "livePoints": 591,
-      "careerHigh": "53",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 131,
-      "name": "Robin Montgomery",
-      "age": 22,
-      "country": "USA",
-      "livePoints": 584,
-      "careerHigh": "95",
-      "movement": 3,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 132,
-      "name": "Jeline Vandromme",
-      "age": 19,
-      "country": "BEL",
-      "livePoints": 582,
-      "careerHigh": "123",
-      "movement": -4,
-      "pointsChange": -40,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 133,
       "name": "Lucia Bronzetti",
       "age": 27,
       "country": "ITA",
-      "livePoints": 581,
+      "livePoints": 603,
       "careerHigh": "46",
-      "movement": 2,
-      "pointsChange": 15,
-      "tournament": "Colina QF",
+      "movement": 7,
+      "pointsChange": 37,
+      "tournament": "Colina DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 603,
+      "nextPoints": 635,
       "maxPoints": 679,
       "tournamentHistory": [
+        {
+          "text": "Colina DF",
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+        },
         {
           "text": "Colina QF",
           "lastSeen": "2026-11-20T13:21:38.356757+00:00"
@@ -2261,6 +2189,86 @@
           "lastSeen": "2026-11-17T13:17:56.572364+00:00"
         }
       ]
+    },
+    {
+      "rank": 129,
+      "name": "Marina Bassols Ribera",
+      "age": 26,
+      "country": "ESP",
+      "livePoints": 599,
+      "careerHigh": "105",
+      "movement": 1,
+      "pointsChange": -10,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 130,
+      "name": "Dominika Šálková",
+      "age": 22,
+      "country": "CZE",
+      "livePoints": 597,
+      "careerHigh": "108",
+      "movement": 1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 131,
+      "name": "Elsa Jacquemot",
+      "age": 23,
+      "country": "FRA",
+      "livePoints": 591,
+      "careerHigh": "53",
+      "movement": 1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 132,
+      "name": "Robin Montgomery",
+      "age": 22,
+      "country": "USA",
+      "livePoints": 584,
+      "careerHigh": "95",
+      "movement": 2,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 133,
+      "name": "Jeline Vandromme",
+      "age": 19,
+      "country": "BEL",
+      "livePoints": 582,
+      "careerHigh": "123",
+      "movement": -5,
+      "pointsChange": -40,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 134,
@@ -2279,7 +2287,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2459,7 +2467,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 DF",
-          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
         },
         {
           "text": "Trnava 4 QF",
@@ -2524,7 +2532,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
         },
         {
           "text": "Sydney 3 QF",
