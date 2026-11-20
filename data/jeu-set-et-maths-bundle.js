@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-20T01:15:48.171853+00:00",
+ "fetchedAt": "2026-11-20T07:26:56.926374+00:00",
  "posts": [
   {
    "title": "📊 Fin d'une très belle saison pour Arthur Fils 🇫🇷 : 🏆 Vainqueur du Masters 1000 de Cincinnati ↪️ 1er Français 🇫🇷 vainqueur d'un Masters 1000 depuis 12 ans (Tsonga,…",

@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-race-next-gen",
-  "fetchedAt": "2026-11-20T01:15:41.784739+00:00",
+  "fetchedAt": "2026-11-20T07:26:52.572787+00:00",
   "rows": [
     {
       "rank": 1,
@@ -133,7 +133,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville QF",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Drummondville 8e",
@@ -194,7 +194,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (8e )",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Helsinki 8e (16e )",
@@ -264,7 +264,7 @@
       "tournamentHistory": [
         {
           "text": "Héraklion 15 QF",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Héraklion 15 8e",
@@ -1183,7 +1183,7 @@
       "tournamentHistory": [
         {
           "text": "Monastir 46 QF",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Monastir 46 8e",
@@ -1285,7 +1285,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton QF",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Bradenton 8e",
@@ -1387,11 +1387,11 @@
       "careerHigh": "",
       "movement": 1,
       "pointsChange": 4,
-      "tournament": "Hua Hin 2 QF",
-      "previousTournaments": "Qualif. Hua Hin V Défaite Hua Hin QF",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Qualif. Hua Hin V Défaite Hua Hin QF Défaite Hua Hin 2 QF",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 48,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Hua Hin 2 QF",
@@ -1753,92 +1753,23 @@
     },
     {
       "rank": 86,
-      "name": "Dominick Mosejczuk",
-      "age": 19,
-      "country": "USA",
-      "livePoints": 34,
-      "careerHigh": "",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 87,
-      "name": "Gustavo Ribeiro De Almeida",
-      "age": 20,
-      "country": "BRA",
-      "livePoints": 34,
-      "careerHigh": "",
-      "movement": -2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 88,
-      "name": "Yannick Theodor Alexandrescou",
-      "age": 18,
-      "country": "FRA",
-      "livePoints": 33,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 89,
-      "name": "Anas Mazdrashki",
-      "age": 20,
-      "country": "BUL",
-      "livePoints": 33,
-      "careerHigh": "",
-      "movement": null,
-      "pointsChange": 1,
-      "tournament": "",
-      "previousTournaments": "Défaite Héraklion 14 16e Défaite Héraklion 15 8e",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Héraklion 15 8e",
-          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
-        },
-        {
-          "text": "Héraklion 15 16e",
-          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 90,
       "name": "Daniil Sarksian",
       "age": 20,
       "country": "ARM",
-      "livePoints": 33,
+      "livePoints": 35,
       "careerHigh": "",
-      "movement": 7,
-      "pointsChange": 5,
-      "tournament": "Kuala Lumpur 2 QF",
+      "movement": 11,
+      "pointsChange": 7,
+      "tournament": "Kuala Lumpur 2 DF",
       "previousTournaments": "Défaite Kuala Lumpur DF",
       "tournamentStatus": "defaite",
       "nextPoints": null,
-      "maxPoints": 35,
+      "maxPoints": 39,
       "tournamentHistory": [
+        {
+          "text": "Kuala Lumpur 2 DF",
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
+        },
         {
           "text": "Kuala Lumpur 2 QF",
           "lastSeen": "2026-11-20T01:15:41.784739+00:00"
@@ -1854,6 +1785,79 @@
         {
           "text": "Kuala Lumpur QF",
           "lastSeen": "2026-11-14T12:58:17.778220+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 87,
+      "name": "Dominick Mosejczuk",
+      "age": 19,
+      "country": "USA",
+      "livePoints": 34,
+      "careerHigh": "",
+      "movement": -3,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 88,
+      "name": "Gustavo Ribeiro De Almeida",
+      "age": 20,
+      "country": "BRA",
+      "livePoints": 34,
+      "careerHigh": "",
+      "movement": -3,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 89,
+      "name": "Yannick Theodor Alexandrescou",
+      "age": 18,
+      "country": "FRA",
+      "livePoints": 33,
+      "careerHigh": "",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 90,
+      "name": "Anas Mazdrashki",
+      "age": 20,
+      "country": "BUL",
+      "livePoints": 33,
+      "careerHigh": "",
+      "movement": -1,
+      "pointsChange": 1,
+      "tournament": "",
+      "previousTournaments": "Défaite Héraklion 14 16e Défaite Héraklion 15 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Héraklion 15 8e",
+          "lastSeen": "2026-11-19T07:27:08.357723+00:00"
+        },
+        {
+          "text": "Héraklion 15 16e",
+          "lastSeen": "2026-11-18T07:26:58.392740+00:00"
         }
       ]
     },
@@ -2144,7 +2148,7 @@
       "tournamentHistory": [
         {
           "text": "Bhubaneswar 8e",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Bhubaneswar 16e",
@@ -2319,7 +2323,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         }
       ]
     },
@@ -2388,7 +2392,7 @@
       "tournamentHistory": [
         {
           "text": "Champaign QF",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Champaign 8e",
@@ -2548,7 +2552,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         }
       ]
     },
@@ -2665,7 +2669,7 @@
       "tournamentHistory": [
         {
           "text": "Alcalá De Henares QF",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Alcalá De Henares 16e",
@@ -2690,7 +2694,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         }
       ]
     },
@@ -2732,7 +2736,7 @@
       "tournamentHistory": [
         {
           "text": "Bradenton QF",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         },
         {
           "text": "Bradenton 8e",
@@ -2979,7 +2983,7 @@
       "tournamentHistory": [
         {
           "text": "Orlando 3 16e",
-          "lastSeen": "2026-11-20T01:15:41.784739+00:00"
+          "lastSeen": "2026-11-20T07:26:52.572787+00:00"
         }
       ]
     }

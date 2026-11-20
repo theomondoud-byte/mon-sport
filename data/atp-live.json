@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-20T01:15:43.160211+00:00",
+  "fetchedAt": "2026-11-20T07:26:53.562765+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP DF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Finales ATP RR (2 V / 0 D)",
@@ -68,7 +68,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (2 V / 0 D)",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -97,7 +97,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP DF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Finales ATP RR (2 V / 1 D)",
@@ -134,7 +134,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -192,7 +192,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 2 D)",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -221,7 +221,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -1564,7 +1564,7 @@
       "tournamentHistory": [
         {
           "text": "Metz QF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Metz 8e",
@@ -1764,7 +1764,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo QF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Montevideo 8e",
@@ -1834,7 +1834,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -1911,7 +1911,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (8e )",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Helsinki QF (16e )",
@@ -2086,7 +2086,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (16e )",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Helsinki 8e (16e )",
@@ -2160,7 +2160,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (16e )",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Helsinki 8e (16e )",
@@ -2226,7 +2226,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville QF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Drummondville 8e",
@@ -2547,7 +2547,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -2722,11 +2722,11 @@
       "age": 25,
       "country": "AUS",
       "careerHigh": "95",
-      "tournament": "Sydney QF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 417,
-      "maxPoints": 470,
+      "tournament": "",
+      "previousTournaments": "Défaite Sydney QF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Sydney QF",
@@ -2876,7 +2876,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo QF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         },
         {
           "text": "Montevideo 8e",
@@ -2901,7 +2901,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville QF",
-          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+          "lastSeen": "2026-11-20T07:26:53.304538+00:00"
         }
       ]
     }
