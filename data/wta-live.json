@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-20T07:26:51.479507+00:00",
+  "fetchedAt": "2026-11-20T13:21:38.356757+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-20T07:26:51.479507+00:00"
+          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
         },
         {
           "text": "Sydney 3 QF",
@@ -1820,7 +1820,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-20T07:26:51.479507+00:00"
+          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
         },
         {
           "text": "Colina 8e",
@@ -1865,7 +1865,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-20T07:26:51.479507+00:00"
+          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2250,7 +2250,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-20T07:26:51.479507+00:00"
+          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2279,7 +2279,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-20T07:26:51.479507+00:00"
+          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2444,76 +2444,23 @@
     },
     {
       "rank": 142,
-      "name": "Martyna Kubka",
-      "age": 25,
-      "country": "POL",
-      "livePoints": 528,
-      "careerHigh": "141",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 143,
-      "name": "Tamara Zidanšek",
-      "age": 28,
-      "country": "SLO",
-      "livePoints": 527,
-      "careerHigh": "22",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 144,
-      "name": "Joanna Garland",
-      "age": 25,
-      "country": "TWN",
-      "livePoints": 523,
-      "careerHigh": "117",
-      "movement": 8,
-      "pointsChange": 28,
-      "tournament": "Sydney 3 DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 543,
-      "maxPoints": 569,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-20T07:26:51.479507+00:00"
-        },
-        {
-          "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 145,
       "name": "Elizara Yaneva",
       "age": 19,
       "country": "BUL",
-      "livePoints": 518,
+      "livePoints": 531,
       "careerHigh": "138",
-      "movement": -3,
-      "pointsChange": -17,
-      "tournament": "Trnava 4 QF",
+      "movement": null,
+      "pointsChange": -4,
+      "tournament": "Trnava 4 DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 531,
+      "nextPoints": 551,
       "maxPoints": 577,
       "tournamentHistory": [
+        {
+          "text": "Trnava 4 DF",
+          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
+        },
         {
           "text": "Trnava 4 QF",
           "lastSeen": "2026-11-20T07:26:51.479507+00:00"
@@ -2525,6 +2472,63 @@
         {
           "text": "Trnava 4 16e",
           "lastSeen": "2026-11-18T13:23:26.083969+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 143,
+      "name": "Martyna Kubka",
+      "age": 25,
+      "country": "POL",
+      "livePoints": 528,
+      "careerHigh": "141",
+      "movement": 1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 144,
+      "name": "Tamara Zidanšek",
+      "age": 28,
+      "country": "SLO",
+      "livePoints": 527,
+      "careerHigh": "22",
+      "movement": 1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 145,
+      "name": "Joanna Garland",
+      "age": 25,
+      "country": "TWN",
+      "livePoints": 523,
+      "careerHigh": "117",
+      "movement": 7,
+      "pointsChange": 28,
+      "tournament": "Sydney 3 DF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 543,
+      "maxPoints": 569,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 3 DF",
+          "lastSeen": "2026-11-20T13:21:38.356757+00:00"
+        },
+        {
+          "text": "Sydney 3 QF",
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         }
       ]
     },
