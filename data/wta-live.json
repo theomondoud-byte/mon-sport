@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-19T19:08:08.071182+00:00",
+  "fetchedAt": "2026-11-20T01:15:40.107349+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1092,7 +1092,7 @@
     {
       "rank": 65,
       "name": "Caty McNally",
-      "age": 24,
+      "age": 25,
       "country": "USA",
       "livePoints": 999,
       "careerHigh": "50",
@@ -1643,7 +1643,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -1816,7 +1816,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         },
         {
           "text": "Colina 8e",
@@ -1861,7 +1861,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2246,7 +2246,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2260,28 +2260,41 @@
     },
     {
       "rank": 134,
+      "name": "Andrea Lazáro García",
+      "age": 32,
+      "country": "ESP",
+      "livePoints": 566,
+      "careerHigh": "NMC (136)",
+      "movement": 6,
+      "pointsChange": 25,
+      "tournament": "Colina QF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 588,
+      "maxPoints": 664,
+      "tournamentHistory": [
+        {
+          "text": "Colina QF",
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
+        },
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+        },
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 135,
       "name": "Simona Waltert",
       "age": 25,
       "country": "SUI",
       "livePoints": 561,
       "careerHigh": "81",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 135,
-      "name": "Julia Riera",
-      "age": 24,
-      "country": "ARG",
-      "livePoints": 558,
-      "careerHigh": "93",
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2292,12 +2305,28 @@
     },
     {
       "rank": 136,
+      "name": "Julia Riera",
+      "age": 24,
+      "country": "ARG",
+      "livePoints": 558,
+      "careerHigh": "93",
+      "movement": 1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 137,
       "name": "Emerson Jones",
       "age": 18,
       "country": "AUS",
       "livePoints": 557,
       "careerHigh": "122",
-      "movement": -3,
+      "movement": -4,
       "pointsChange": -33,
       "tournament": "Sydney 3 QF",
       "previousTournaments": "",
@@ -2307,7 +2336,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -2320,31 +2349,6 @@
         {
           "text": "Brisbane 6 DF (16e )",
           "lastSeen": "2026-11-14T01:09:10.606632+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 137,
-      "name": "Andrea Lazáro García",
-      "age": 32,
-      "country": "ESP",
-      "livePoints": 554,
-      "careerHigh": "136",
-      "movement": 3,
-      "pointsChange": 13,
-      "tournament": "Colina 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 566,
-      "maxPoints": 664,
-      "tournamentHistory": [
-        {
-          "text": "Colina 8e",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
-        },
-        {
-          "text": "Colina 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
         }
       ]
     },
@@ -2483,7 +2487,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 QF",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         },
         {
           "text": "Trnava 4 8e",
@@ -2581,7 +2585,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
         }
       ]
     },

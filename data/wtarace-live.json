@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-19T19:08:08.901487+00:00",
+  "fetchedAt": "2026-11-20T01:15:41.268689+00:00",
   "rows": [
     {
       "rank": 1,
@@ -932,7 +932,7 @@
     {
       "rank": 55,
       "name": "Caty McNally",
-      "age": 24,
+      "age": 25,
       "country": "USA",
       "livePoints": 999,
       "careerHigh": "",
@@ -1282,7 +1282,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-19T19:08:08.901487+00:00"
+          "lastSeen": "2026-11-20T01:15:41.268689+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -2184,7 +2184,7 @@
       "tournamentHistory": [
         {
           "text": "Colina QF",
-          "lastSeen": "2026-11-19T19:08:08.901487+00:00"
+          "lastSeen": "2026-11-20T01:15:41.268689+00:00"
         },
         {
           "text": "Colina 8e",

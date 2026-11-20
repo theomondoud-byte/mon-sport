@@ -1,22 +1,26 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-19T19:08:10.437808+00:00",
+  "fetchedAt": "2026-11-20T01:15:43.160211+00:00",
   "rows": [
     {
       "rank": 1,
       "name": "Alexander Zverev",
-      "livePoints": 9720,
+      "livePoints": 9920,
       "movement": null,
-      "pointsChange": 400,
+      "pointsChange": 600,
       "age": 29,
       "country": "GER",
       "careerHigh": "MC",
-      "tournament": "Finales ATP RR (2 V / 0 D)",
+      "tournament": "Finales ATP DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 9920,
+      "nextPoints": 10320,
       "maxPoints": 10820,
       "tournamentHistory": [
+        {
+          "text": "Finales ATP DF",
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+        },
         {
           "text": "Finales ATP RR (2 V / 0 D)",
           "lastSeen": "2026-11-19T19:08:10.260953+00:00"
@@ -64,7 +68,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (2 V / 0 D)",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -85,12 +89,16 @@
       "age": 24,
       "country": "USA",
       "careerHigh": "MC",
-      "tournament": "Finales ATP RR (2 V / 1 D)",
+      "tournament": "Finales ATP DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 5970,
       "maxPoints": 6470,
       "tournamentHistory": [
+        {
+          "text": "Finales ATP DF",
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+        },
         {
           "text": "Finales ATP RR (2 V / 1 D)",
           "lastSeen": "2026-11-19T19:08:10.260953+00:00"
@@ -126,7 +134,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Finales ATP RR (1 V / 0 D)",
@@ -147,11 +155,11 @@
       "age": 22,
       "country": "FRA",
       "careerHigh": "NMC (7)",
-      "tournament": "Finales ATP RR (1 V / 1 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 4025,
-      "maxPoints": 4925,
+      "tournament": "",
+      "previousTournaments": "Défaite Finales ATP RR (1 V / 2 D)",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
@@ -184,7 +192,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (0 V / 2 D)",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -213,7 +221,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP RR (1 V / 1 D)",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 1 D)",
@@ -1556,7 +1564,7 @@
       "tournamentHistory": [
         {
           "text": "Metz QF",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Metz 8e",
@@ -1703,11 +1711,11 @@
       "age": 27,
       "country": "HUN",
       "careerHigh": "NMC (96)",
-      "tournament": "Metz 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 632,
-      "maxPoints": 741,
+      "tournament": "",
+      "previousTournaments": "Défaite Metz 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Metz 8e",
@@ -1741,9 +1749,38 @@
     },
     {
       "rank": 97,
+      "name": "Thiago Seyboth Wild",
+      "livePoints": 617,
+      "movement": 4,
+      "pointsChange": 8,
+      "age": 26,
+      "country": "BRA",
+      "careerHigh": "58",
+      "tournament": "Montevideo QF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 627,
+      "maxPoints": 680,
+      "tournamentHistory": [
+        {
+          "text": "Montevideo QF",
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+        },
+        {
+          "text": "Montevideo 8e",
+          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+        },
+        {
+          "text": "Montevideo 16e",
+          "lastSeen": "2026-11-17T19:10:11.540949+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 98,
       "name": "Michael Zheng",
       "livePoints": 616,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 22,
       "country": "USA",
@@ -1765,10 +1802,10 @@
       ]
     },
     {
-      "rank": 98,
+      "rank": 99,
       "name": "Marin Čilić",
       "livePoints": 613,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 38,
       "country": "CRO",
@@ -1781,10 +1818,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 99,
+      "rank": 100,
       "name": "Toby Samuel",
       "livePoints": 613,
-      "movement": -7,
+      "movement": -8,
       "pointsChange": -34,
       "age": 24,
       "country": "GBR",
@@ -1797,7 +1834,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -1806,31 +1843,6 @@
         {
           "text": "Helsinki 16e",
           "lastSeen": "2026-11-16T15:13:22.940427+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 100,
-      "name": "Thiago Seyboth Wild",
-      "livePoints": 611,
-      "movement": 1,
-      "pointsChange": 2,
-      "age": 26,
-      "country": "BRA",
-      "careerHigh": "58",
-      "tournament": "Montevideo 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 617,
-      "maxPoints": 680,
-      "tournamentHistory": [
-        {
-          "text": "Montevideo 8e",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
-        },
-        {
-          "text": "Montevideo 16e",
-          "lastSeen": "2026-11-17T19:10:11.540949+00:00"
         }
       ]
     },
@@ -1891,12 +1903,16 @@
       "age": 25,
       "country": "FIN",
       "careerHigh": "91",
-      "tournament": "Helsinki QF (16e )",
+      "tournament": "Helsinki QF (8e )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": 605,
       "maxPoints": 695,
       "tournamentHistory": [
+        {
+          "text": "Helsinki QF (8e )",
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
+        },
         {
           "text": "Helsinki QF (16e )",
           "lastSeen": "2026-11-19T19:08:10.260953+00:00"
@@ -2037,11 +2053,11 @@
       "age": 26,
       "country": "FRA",
       "careerHigh": "58",
-      "tournament": "Metz 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 539,
-      "maxPoints": 648,
+      "tournament": "",
+      "previousTournaments": "Défaite Metz 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Metz 8e",
@@ -2070,7 +2086,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (16e )",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Helsinki 8e (16e )",
@@ -2111,11 +2127,11 @@
       "age": 22,
       "country": "POR",
       "careerHigh": "99",
-      "tournament": "Montevideo 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 533,
-      "maxPoints": 596,
+      "tournament": "",
+      "previousTournaments": "Défaite Montevideo 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Montevideo 8e",
@@ -2144,7 +2160,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF (16e )",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Helsinki 8e (16e )",
@@ -2210,7 +2226,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville QF",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Drummondville 8e",
@@ -2531,7 +2547,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki QF",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -2714,7 +2730,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney QF",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Sydney 8e",
@@ -2860,7 +2876,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo QF",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         },
         {
           "text": "Montevideo 8e",
@@ -2885,7 +2901,7 @@
       "tournamentHistory": [
         {
           "text": "Drummondville QF",
-          "lastSeen": "2026-11-19T19:08:10.260953+00:00"
+          "lastSeen": "2026-11-20T01:15:42.939755+00:00"
         }
       ]
     }

@@ -3,8 +3,76 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-19T19:08:14.235940+00:00",
+ "fetchedAt": "2026-11-20T01:15:48.171853+00:00",
  "posts": [
+  {
+   "title": "📊 Fin d'une très belle saison pour Arthur Fils 🇫🇷 : 🏆 Vainqueur du Masters 1000 de Cincinnati ↪️ 1er Français 🇫🇷 vainqueur d'un Masters 1000 depuis 12 ans (Tsonga,…",
+   "text": "📊 Fin d'une très belle saison pour Arthur Fils 🇫🇷 :\n\n🏆 Vainqueur du Masters 1000 de Cincinnati\n↪️ 1er Français 🇫🇷 vainqueur d'un Masters 1000 depuis 12 ans (Tsonga, Toronto 2014)\n\n🎾 6 victoires face au Top 10\n↪️ 1er Français 🇫🇷 à battre au moins 6 membres du Top 10 au cours d'une saison depuis 15 ans (Tsonga, 2011)\n\n🎱 Qualifié aux ATP Finals\n↪️ 1er Français 🇫🇷 à disputer le Masters depuis 10 ans (Monfils, 2016)\n↪️ 1er Français 🇫🇷 à remporter un match au Masters depuis 15 ans (Tsonga, 2011)\n\n📈 Top 10 au classement ATP\n↪️ 13e Français 🇫🇷 à figurer dans le Top 10 ATP\n↪️ 1er Français 🇫🇷 à terminer une saison dans le Top 10 depuis 7 ans (Monfils, 2019)",
+   "link": "https://x.com/JeuSetMaths/status/2123532007225397283",
+   "date": "2026-11-19T21:40:58.496000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXhMND2WAAAo5wn.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXhMND2WAAAo5wn.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Ils se sont qualifiés pour les 1/2 finales du Masters sans concéder le moindre break (1991-2026) : ▪️ 1991 : Ivan Lendl 🇨🇿 (1 BdB) 🏆 1992 : Boris Becker 🇩🇪 (6 BdB) ▪️…",
+   "text": "📊 Ils se sont qualifiés pour les 1/2 finales du Masters sans concéder le moindre break (1991-2026) :\n▪️ 1991 : Ivan Lendl 🇨🇿 (1 BdB)\n🏆 1992 : Boris Becker 🇩🇪 (6 BdB)\n▪️ 1992 : Goran Ivanisevic 🇭🇷 (4 BdB)\n🥈 2014 : Roger Federer 🇨🇭 (7 BdB)\n🥈 2018 : Novak Djokovic 🇷🇸 (2 BdB)\n▪️ 2024 : Alexander Zverev 🇩🇪 (2 BdB)\n🏆 2025 : Jannik Sinner 🇮🇹 (8 BdB)\n🆕 2026 : Alexander Zverev 🇩🇪 (6 BdB)\n\n✍️ Entre parenthèses, le nombre de balles de break sauvées.",
+   "link": "https://x.com/JeuSetMaths/status/2123527041639469425",
+   "date": "2026-11-19T21:21:14.608000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXhDOH3XkAAPrhD.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXhDOH3XkAAPrhD.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Ils sont gauchers et se sont qualifiés pour les 1/2 finales du Masters depuis le début des années 2000 : 🇪🇸 Rafael Nadal (x6) 🇺🇸 Ben Shelton 🆕 Voilà. Fin de la liste. 🏁",
+   "text": "📊 Ils sont gauchers et se sont qualifiés pour les 1/2 finales du Masters depuis le début des années 2000 :\n🇪🇸 Rafael Nadal (x6)\n🇺🇸 Ben Shelton 🆕\n\nVoilà. Fin de la liste. 🏁",
+   "link": "https://x.com/JeuSetMaths/status/2123513872028176643",
+   "date": "2026-11-19T20:28:54.728000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXg8kEAW4AAfSod.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXg8kEAW4AAfSod.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 8 joueurs ont remporté 6 des 10 premiers matchs qu'ils ont disputés face à des Top 10 depuis la création de l'ATP Tour en 1990* : 🇸🇪 Magnus Larsson 🇩🇪 Marc-Kevin…",
+   "text": "📊 8 joueurs ont remporté 6 des 10 premiers matchs qu'ils ont disputés face à des Top 10 depuis la création de l'ATP Tour en 1990* :\n🇸🇪 Magnus Larsson\n🇩🇪 Marc-Kevin Goellner\n🇪🇸 Carlos Moya\n🇦🇺 Lleyton Hewitt\n🇷🇺 Marat Safin\n🇨🇱 Fernando Gonzalez\n🇨🇾 Marcos Baghdatis\n🇫🇷 Ugo Humbert\n\n✍️ * Les joueurs ayant affronté des Top 10 avant 1990 ne sont ici pas comptabilisés.",
+   "link": "https://x.com/JeuSetMaths/status/2123512421868335512",
+   "date": "2026-11-19T20:23:08.983000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": null
+  },
+  {
+   "title": "📊 Les résultats des joueurs français 🇫🇷 face aux N°1 mondiaux depuis 2015 : ❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌✅❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌ ➡️ 1 victoire, 52 défaites ✍️ Le…",
+   "text": "📊 Les résultats des joueurs français 🇫🇷 face aux N°1 mondiaux depuis 2015 :\n❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌✅❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌\n➡️ 1 victoire, 52 défaites\n\n✍️ Le détail des N°1 mondiaux affrontés :\n🇷🇸 Novak Djokovic : 0 victoire, 28 défaites\n🇪🇸 Carlos Alcaraz : 0 victoire, 7 défaites\n🇮🇹 Jannik Sinner : 0 victoire, 7 défaites\n🇪🇸 Rafael Nadal : 0 victoire, 4 défaites\n🇬🇧 Andy Murray : 0 victoire, 3 défaites\n🇨🇭 Roger Federer : 0 victoire, 2 défaites\n🇷🇺 Daniil Medvedev : 1 victoire, 1 défaite\n🇩🇪 Alexander Zverev : ❓",
+   "link": "https://x.com/JeuSetMaths/status/2123499736460313032",
+   "date": "2026-11-19T19:32:44.546000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXgvrFkXAAA67MH.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXgvrFkXAAA67MH.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 forment la 6e paire 100% française à se qualifier en demi-finale du double messieurs du Masters : 🥈 1986 : Forget 🇫🇷 & Noah 🇫🇷…",
    "text": "📊 Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 forment la 6e paire 100% française à se qualifier en demi-finale du double messieurs du Masters :\n🥈 1986 : Forget 🇫🇷 & Noah 🇫🇷\n▪️ 1998 : Delaitre 🇫🇷 & Santoro 🇫🇷\n🥈 2003 : Llodra 🇫🇷 & Santoro 🇫🇷\n🏆 2005 : Llodra 🇫🇷 & Santoro 🇫🇷 (2)\n▪️ 2014 : Benneteau 🇫🇷 & Roger-Vasselin 🇫🇷\n🥈 2018 : Mahut 🇫🇷 & Herbert 🇫🇷\n🏆 2019 : Mahut 🇫🇷 & Herbert 🇫🇷 (2)\n🏆 2021 : Mahut 🇫🇷 & Herbert 🇫🇷 (3)\n🆕 2026 : Arribagé 🇫🇷 & Olivetti 🇫🇷\n\n✍️ Auxquelles s'ajoutent 3 paires composées d'un joueur français associé à un partenaire étranger :\n🏆 1990 : Forget 🇫🇷 & Hlasek 🇨🇭\n🥈 2020 : Roger-Vasselin 🇫🇷 & Melzer 🇦🇹\n▪️ 2023 : Roger-Vasselin 🇫🇷 & Gonzalez 🇲🇽",
@@ -176,74 +244,6 @@ export const jeuSetMathsBundledData = {
    "image": null,
    "images": [],
    "video": "https://video.twimg.com/amplify_video/2122368332913344512/vid/avc1/1080x1350/dtk7cvpsBJ4KUalA.mp4?tag=29"
-  },
-  {
-   "title": "📊 Présent à Turin en tant que 2e remplaçant, Felix Auger-Aliassime 🇨🇦 (N°17) est le remplaçant* le moins bien classé au Masters depuis Ivan Ljubicic 🇭🇷 (N°24), son…",
-   "text": "📊 Présent à Turin en tant que 2e remplaçant, Felix Auger-Aliassime 🇨🇦 (N°17) est le remplaçant* le moins bien classé au Masters depuis Ivan Ljubicic 🇭🇷 (N°24), son nouvel entraîneur, il y a 17 ans (2009).\n\n✍️ * En 2021, Aslan Karatsev 🇷🇺 (N°17) avait été appelé en cours de tournoi en qualité de 3e remplaçant après les entrées en lice des remplaçants 1 (Sinner) et 2 (Norrie).",
-   "link": "https://x.com/JeuSetMaths/status/2122263480484970875",
-   "date": "2026-11-16T09:40:18.153000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXPLOFWWEAA9LW0.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXPLOFWWEAA9LW0.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Mirra Andreeva 💎 est la 2e plus jeune joueuse à figurer dans le Top 2 mondial au XXIe siècle : 🥇 Maria Sharapova 🇷🇺 : 17 ans et 357 jours 🥈 Mirra Andreeva 🇷🇺 : 19 ans…",
-   "text": "📊 Mirra Andreeva 💎 est la 2e plus jeune joueuse à figurer dans le Top 2 mondial au XXIe siècle :\n🥇 Maria Sharapova 🇷🇺 : 17 ans et 357 jours\n🥈 Mirra Andreeva 🇷🇺 : 19 ans et 201 jours",
-   "link": "https://x.com/JeuSetMaths/status/2122245811019128877",
-   "date": "2026-11-16T08:30:05.424000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXO7Dd2XwAA8Q1a.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXO7Dd2XwAA8Q1a.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Pour la 8e fois, une joueuse a remporté le Masters WTA dès sa toute première participation : ▪️ 1972 : Chris Evert 🇺🇸 ▪️ 1974 : Evonne Goolagong 🇦🇺 ▪️ 2001 : Serena…",
-   "text": "📊 Pour la 8e fois, une joueuse a remporté le Masters WTA dès sa toute première participation :\n▪️ 1972 : Chris Evert 🇺🇸\n▪️ 1974 : Evonne Goolagong 🇦🇺\n▪️ 2001 : Serena Williams 🇺🇸\n▪️ 2004 : Maria Sharapova 🇷🇺\n▪️ 2011 : Petra Kvitova 🇨🇿\n▪️ 2016 : Dominika Cibulkova 🇸🇰\n▪️ 2019 : Ashleigh Barty 🇦🇺\n🆕 2026 : Mirra Andreeva 🇷🇺",
-   "link": "https://x.com/JeuSetMaths/status/2122093782862610587",
-   "date": "2026-11-15T22:25:59.087000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXMxAI1WUAAjeuj.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXMxAI1WUAAjeuj.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Les plus jeunes joueuses au moment de remporter leur premier titre au Masters WTA : 🥇 Monica Seles 🇷🇸 : 16 ans et 351 jours (1990) 🥈 Tracy Austin 🇺🇸 : 17 ans et 101…",
-   "text": "📊 Les plus jeunes joueuses au moment de remporter leur premier titre au Masters WTA :\n🥇 Monica Seles 🇷🇸 : 16 ans et 351 jours (1990)\n🥈 Tracy Austin 🇺🇸 : 17 ans et 101 jours (1980)\n🥉 Maria Sharapova 🇷🇺 : 17 ans et 209 jours (2004)\n4⃣ Chris Evert 🇺🇸 : 17 ans et 298 jours (1972)\n5⃣ Martina Hingis 🇨🇭 : 18 ans et 53 jours (1998)\n6⃣ Steffi Graf 🇩🇪 : 18 ans et 161 jours (1987)\n7⃣ Gabriela Sabatini 🇦🇷 : 18 ans et 188 jours (1988)\n8⃣ Kim Clijsters 🇧🇪 : 19 ans et 155 jours (2002)\n9⃣ Mirra Andreeva 🇷🇺 : 19 ans et 200 jours (2026 🆕)",
-   "link": "https://x.com/JeuSetMaths/status/2122093538930221202",
-   "date": "2026-11-15T22:25:00.929000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXMwvViWgAAnfOw.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXMwvViWgAAnfOw.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Le plus petit nombre de jeux concédés pour remporter le Masters WTA depuis la réintroduction du format \"round-robin\" en 2003 : ▪️ 20 jeux : Iga Swiatek 🇵🇱 (2023) 🆕 26…",
-   "text": "📊 Le plus petit nombre de jeux concédés pour remporter le Masters WTA depuis la réintroduction du format \"round-robin\" en 2003 :\n▪️ 20 jeux : Iga Swiatek 🇵🇱 (2023)\n🆕 26 jeux : Mirra Andreeva 🇷🇺 (2026)\n▪️ 32 jeux : Serena Williams 🇺🇸 (2012)",
-   "link": "https://x.com/JeuSetMaths/status/2122089774076850642",
-   "date": "2026-11-15T22:10:03.318000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2122088960675520513/vid/avc1/1280x720/56QKpFFjjTMcdhmg.mp4?tag=16"
   }
  ]
 };
