@@ -3,8 +3,36 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-21T13:04:00.944811+00:00",
+ "fetchedAt": "2026-11-21T18:56:06.125535+00:00",
  "posts": [
+  {
+   "title": "📊 Depuis le début de sa carrière, Carlos Alcaraz 🇪🇸 a disputé 20 matchs au tie-break décisif. Son bilan ? ✅✅✅✅✅✅✅✅❌✅✅✅✅✅❌✅✅✅❌✅ ➡️ 17 victoires, 3 défaites ✍️ Tous…",
+   "text": "📊 Depuis le début de sa carrière, Carlos Alcaraz 🇪🇸 a disputé 20 matchs au tie-break décisif. Son bilan ?\n✅✅✅✅✅✅✅✅❌✅✅✅✅✅❌✅✅✅❌✅\n➡️ 17 victoires, 3 défaites\n\n✍️ Tous circuits confondus : ITF, Challenger, ATP",
+   "link": "https://x.com/JeuSetMaths/status/2124175264427245964",
+   "date": "2026-11-21T16:17:02.964000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXqWFpHXAAA5Jvc.png?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXqWFpHXAAA5Jvc.png?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Carlos Alcaraz 🇪🇸 sur dur intérieur en 2026 : 🇦🇹 Vienne ✅ vs Khachanov (N°24) ✅ vs Basilashvili (N°95) ✅ vs Paul (N°14) ✅ vs Medvedev (N°5) 🏆 vs De Minaur (N°10) 🇫🇷…",
+   "text": "📊 Carlos Alcaraz 🇪🇸 sur dur intérieur en 2026 :\n\n🇦🇹 Vienne\n✅ vs Khachanov (N°24)\n✅ vs Basilashvili (N°95)\n✅ vs Paul (N°14)\n✅ vs Medvedev (N°5)\n🏆 vs De Minaur (N°10)\n\n🇫🇷 Paris\n✅ vs Michelsen (N°35)\n✅ vs Fritz (N°12)\n✅ vs Ruud (N°23)\n🏆 vs Shelton (N°4)\n\n🎱 Masters\n✅ vs Tiafoe (N°8)\n✅ vs Medvedev (N°5)\n✅ vs Cobolli (N°6)\n✅ vs Shelton (N°4)\n❓\n\n➡️ 13 victoires, 0 défaite\n↪️ 2 sets concédés\n\n✍️ Auxquelles on devrait ajouter une victoire en Laver Cup (vs Fritz, N°10) qui officiellement est comptabilisée dans les bilans ATP.",
+   "link": "https://x.com/JeuSetMaths/status/2124167768886935873",
+   "date": "2026-11-21T15:47:15.888000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXqPUxyWIAADYl3.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXqPUxyWIAADYl3.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Pour la 5e fois, la finale du Rolex Paris Masters est à nouveau à l'affiche dans le dernier carré du Masters. Par le passé, seul un joueur a réussi à prendre sa…",
    "text": "📊 Pour la 5e fois, la finale du Rolex Paris Masters est à nouveau à l'affiche dans le dernier carré du Masters. Par le passé, seul un joueur a réussi à prendre sa revanche :\n\n🗓️ 1989 : Edberg 🇸🇪 vs Becker 🇩🇪\n🇫🇷 Paris : Boris Becker 🏆\n🎱 Masters : Stefan Edberg 🏆\n\n🗓️ 1997 : Sampras 🇺🇸 vs Bjorkman 🇸🇪\n🇫🇷 Paris : Pete Sampras 🏆\n🎱 Masters : Pete Sampras (1/2)\n\n🗓️ 2001 : Grosjean 🇫🇷 vs Kafelnikov 🇷🇺\n🇫🇷 Paris : Sébastien Grosjean 🏆\n🎱 Masters : Sébastien Grosjean (1/2)\n\n🗓️ 2011 : Federer 🇨🇭 vs Tsonga 🇫🇷\n🇫🇷 Paris : Roger Federer 🏆\n🎱 Masters : Roger Federer 🏆\n\n🗓️ 2026🆕 : Alcaraz 🇪🇸 vs Shelton 🇺🇸\n🇫🇷 Paris : Carlos Alcaraz 🏆\n🎱 Masters : ❓ (1/2)",
@@ -224,18 +252,6 @@ export const jeuSetMathsBundledData = {
    "video": "https://video.twimg.com/amplify_video/2123060875145674752/vid/avc1/576x720/a7rdaD1vLxnEjzRU.mp4?tag=16"
   },
   {
-   "title": "📊 5 des 6 dernières victoires d’Alexander Zverev 🇩🇪 face à des membres du Top 5 ont été enregistrées au Masters : 🎱 Masters 2023 vs Alcaraz (N°2) 🎱 Masters 2023 vs…",
-   "text": "📊 5 des 6 dernières victoires d’Alexander Zverev 🇩🇪 face à des membres du Top 5 ont été enregistrées au Masters :\n🎱 Masters 2023 vs Alcaraz (N°2)\n🎱 Masters 2023 vs Rublev (N°5)\n🇦🇺 Open d’Australie 2024 vs Alcaraz (N°2)\n🎱 Masters 2024 vs Alcaraz (N°3)\n🎱 Masters 2025 vs Shelton (N°5)\n🎱 Masters 2026 vs Shelton (N°4) 🆕",
-   "link": "https://x.com/JeuSetMaths/status/2122810398709526774",
-   "date": "2026-11-17T21:53:33.619000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2122803792177471488/vid/avc1/576x720/5yt5uMCOKc4dF-Yg.mp4?tag=16"
-  },
-  {
    "title": "🔮 Les scénarios pour qu'Arthur Fils 🇫🇷 se qualifie en 1/2 finale du Masters : ➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 2 sets ✅ ➡️ Arthur Fils 🇫🇷 bat Alexander Zverev…",
    "text": "🔮 Les scénarios pour qu'Arthur Fils 🇫🇷 se qualifie en 1/2 finale du Masters :\n➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 2 sets ✅\n➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 3 sets ✅ ET Ben Shelton bat Rafael Jodar en 3 sets\n➡️ Arthur Fils 🇫🇷 bat Alexander Zverev en 3 sets ✅ ET Rafael Jodar bat Ben Shelton\n➡️ Arthur Fils 🇫🇷 s'incline en 3 sets ❌ ET Rafael Jodar bat Ben Shelton\n\n❓ Arthur Fils 🇫🇷 s'incline en 2 sets ET Rafael Jodar bat Ben Shelton en 3 sets : le 2e de la poule sera déterminé au game average.",
    "link": "https://x.com/JeuSetMaths/status/2122802649539936387",
@@ -246,20 +262,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXW0pLNWoAAuH7n.png?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXW0pLNWoAAuH7n.png?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Les 50 derniers matchs d’Alexander Zverev 🇩🇪 face à des adversaires gauchers : ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❌✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ ➡️ 49 victoires, 1 défaite",
-   "text": "📊 Les 50 derniers matchs d’Alexander Zverev 🇩🇪 face à des adversaires gauchers :\n✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅❌✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅\n➡️ 49 victoires, 1 défaite",
-   "link": "https://x.com/JeuSetMaths/status/2122802056801214639",
-   "date": "2026-11-17T21:20:24.753000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXW1JbMXgAA5guX.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXW1JbMXgAA5guX.jpg?name=orig"
    ],
    "video": null
   }

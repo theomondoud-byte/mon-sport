@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-21T13:03:55.843130+00:00",
+  "fetchedAt": "2026-11-21T18:56:01.113461+00:00",
   "rows": [
     {
       "rank": 1,
@@ -618,12 +618,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (0 V / 1 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (0 V / 1 D)",
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
+        }
+      ]
     },
     {
       "rank": 36,
@@ -682,12 +687,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
+        }
+      ]
     },
     {
       "rank": 40,
@@ -1587,7 +1597,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         }
       ]
     },
@@ -1768,7 +1778,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         }
       ]
     },
@@ -1877,12 +1887,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
+        }
+      ]
     },
     {
       "rank": 113,
@@ -2054,7 +2069,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         }
       ]
     },
@@ -2107,7 +2122,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         }
       ]
     },
@@ -2208,7 +2223,7 @@
       "tournamentHistory": [
         {
           "text": "Colina DF",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         },
         {
           "text": "Colina QF",
@@ -2294,7 +2309,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         }
       ]
     },
@@ -2478,7 +2493,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         }
       ]
     },
@@ -2563,7 +2578,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T13:03:55.843130+00:00"
+          "lastSeen": "2026-11-21T18:56:01.113461+00:00"
         }
       ]
     }
