@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-20T19:08:17.740608+00:00",
+  "fetchedAt": "2026-11-21T01:19:50.676550+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1282,7 +1282,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-20T19:08:17.740608+00:00"
+          "lastSeen": "2026-11-21T01:19:50.676550+00:00"
         },
         {
           "text": "Sydney 3 QF",
@@ -2180,12 +2180,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Colina QF",
+      "tournament": "Colina DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Colina DF",
+          "lastSeen": "2026-11-21T01:19:50.676550+00:00"
+        },
         {
           "text": "Colina QF",
           "lastSeen": "2026-11-20T19:08:17.740608+00:00"
@@ -2441,12 +2445,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T01:19:50.676550+00:00"
+        }
+      ]
     },
     {
       "rank": 146,

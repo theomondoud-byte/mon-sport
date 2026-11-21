@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-20T19:08:16.715629+00:00",
+  "fetchedAt": "2026-11-21T01:19:49.805131+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1274,12 +1274,16 @@
       "careerHigh": "4",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
+        },
         {
           "text": "Sopo F",
           "lastSeen": "2026-11-14T12:58:16.489973+00:00"
@@ -1643,7 +1647,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
         },
         {
           "text": "Sydney 3 QF",
@@ -1788,7 +1792,7 @@
       "tournamentHistory": [
         {
           "text": "Colina DF",
-          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
         },
         {
           "text": "Colina QF",
@@ -1861,11 +1865,11 @@
       "careerHigh": "107",
       "movement": -3,
       "pointsChange": -22,
-      "tournament": "Colina QF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 719,
-      "maxPoints": 795,
+      "tournament": "",
+      "previousTournaments": "Défaite Colina QF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Colina QF",
@@ -2174,7 +2178,7 @@
       "tournamentHistory": [
         {
           "text": "Colina DF",
-          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
         },
         {
           "text": "Colina QF",
@@ -2279,11 +2283,11 @@
       "careerHigh": "NMC (136)",
       "movement": 6,
       "pointsChange": 25,
-      "tournament": "Colina QF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 588,
-      "maxPoints": 664,
+      "tournament": "",
+      "previousTournaments": "Défaite Colina QF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Colina QF",
@@ -2467,7 +2471,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 DF",
-          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
         },
         {
           "text": "Trnava 4 QF",
@@ -2492,12 +2496,17 @@
       "careerHigh": "141",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
+        }
+      ]
     },
     {
       "rank": 144,
@@ -2508,12 +2517,17 @@
       "careerHigh": "22",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
+        }
+      ]
     },
     {
       "rank": 145,
@@ -2532,7 +2546,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
         },
         {
           "text": "Sydney 3 QF",
@@ -2542,12 +2556,33 @@
     },
     {
       "rank": 146,
+      "name": "Guiomar Maristany",
+      "age": 27,
+      "country": "ESP",
+      "livePoints": 518,
+      "careerHigh": "138",
+      "movement": 12,
+      "pointsChange": 48,
+      "tournament": "Colina DF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 550,
+      "maxPoints": 594,
+      "tournamentHistory": [
+        {
+          "text": "Colina DF",
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 147,
       "name": "Ajla Tomljanović",
       "age": 33,
       "country": "AUS",
       "livePoints": 516,
       "careerHigh": "32",
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2557,13 +2592,34 @@
       "tournamentHistory": []
     },
     {
-      "rank": 147,
+      "rank": 148,
+      "name": "Rebeka Masarova",
+      "age": 27,
+      "country": "SUI",
+      "livePoints": 516,
+      "careerHigh": "62",
+      "movement": 12,
+      "pointsChange": 47,
+      "tournament": "Colina DF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 548,
+      "maxPoints": 592,
+      "tournamentHistory": [
+        {
+          "text": "Colina DF",
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 149,
       "name": "Teodora Kostović",
       "age": 19,
       "country": "SRB",
       "livePoints": 515,
       "careerHigh": "139",
-      "movement": -1,
+      "movement": -3,
       "pointsChange": -7,
       "tournament": "",
       "previousTournaments": "Défaite Trnava 4 16e",
@@ -2578,46 +2634,14 @@
       ]
     },
     {
-      "rank": 148,
+      "rank": 150,
       "name": "Himeno Sakatsume",
       "age": 25,
       "country": "JPN",
       "livePoints": 514,
       "careerHigh": "114",
-      "movement": -19,
+      "movement": -21,
       "pointsChange": -98,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 149,
-      "name": "Clara Burel",
-      "age": 25,
-      "country": "FRA",
-      "livePoints": 512,
-      "careerHigh": "42",
-      "movement": -1,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 150,
-      "name": "Jil Teichmann",
-      "age": 29,
-      "country": "SUI",
-      "livePoints": 507,
-      "careerHigh": "21",
-      "movement": -1,
-      "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
       "tournamentStatus": "non_communique",

@@ -3,8 +3,36 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-20T19:08:24.464396+00:00",
+ "fetchedAt": "2026-11-21T01:19:56.869724+00:00",
  "posts": [
+  {
+   "title": "📊 Les joueurs français 🇫🇷 les mieux classés en fin de saison : ▪️ N°4 : Yannick Noah 🇫🇷 (1983) ▪️ N°5 : Yannick Noah 🇫🇷 (1986) ▪️ N°6 : Henri Leconte 🇫🇷 (1986) ▪️ N°6 :…",
+   "text": "📊 Les joueurs français 🇫🇷 les mieux classés en fin de saison :\n▪️ N°4 : Yannick Noah 🇫🇷 (1983)\n▪️ N°5 : Yannick Noah 🇫🇷 (1986)\n▪️ N°6 : Henri Leconte 🇫🇷 (1986)\n▪️ N°6 : Sébastien Grosjean 🇫🇷 (2001)\n▪️ N°6 : Jo-Wilfried Tsonga 🇫🇷 (2008)\n▪️ N°6 : Jo-Wilfried Tsonga 🇫🇷 (2011)\n🆕 N°6 : Arthur Fils 🇫🇷 (2026)",
+   "link": "https://x.com/JeuSetMaths/status/2123889977721311290",
+   "date": "2026-11-20T21:23:25.313000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXmSqfHX0AAfXjY.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXmSqfHX0AAfXjY.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 11 des 12 matchs de poule du Masters 2026 ont été remportés par le joueur le mieux classé (la seule exception étant la victoire de Frances Tiafoe, N°8 🇺🇸 face à…",
+   "text": "📊 11 des 12 matchs de poule du Masters 2026 ont été remportés par le joueur le mieux classé (la seule exception étant la victoire de Frances Tiafoe, N°8 🇺🇸 face à Flavio Cobolli, N°6 🇮🇹).\n\nCe n'est que la 8e fois depuis le retour du format \"round-robin\" en 1986 qu'aussi peu de surprises ont eu lieu en phase de poule, une première depuis 2018.",
+   "link": "https://x.com/JeuSetMaths/status/2123885374564872292",
+   "date": "2026-11-20T21:05:07.835000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXmLPo8XEAA6_ng.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXmLPo8XEAA6_ng.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur : ❌ vs Alex De Minaur (N°10) ❌ vs Hubert Hurkacz (N°7) ❌ vs Daniil Medvedev (N°5) ❌ vs Daniil Medvedev (N°5) ❌ vs Novak…",
    "text": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur :\n❌ vs Alex De Minaur (N°10)\n❌ vs Hubert Hurkacz (N°7)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Novak Djokovic (N°4)\n❌ vs Alex De Minaur (N°10)\n❌ vs Ben Shelton (N°7)\n❌ vs Lorenzo Musetti (N°10)\n❌ vs Jannik Sinner (N°2)\n❌ vs Ben Shelton (N°7)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Frances Tiafoe (N°8)\n❌ vs Carlos Alcaraz (N°3) 🆕\n➡️ 2 sets remportés, 29 sets concédés",
@@ -232,32 +260,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXVt4WgWEAAMdnR.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXVt4WgWEAAMdnR.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 La dernière fois qu'un joueur français 🇫🇷 (Jo-Wilfried Tsonga) avait remporté un match au Masters, Arthur Fils 🇫🇷 avait 7 ans. En dominant Rafael Jodar, Arthur Fils…",
-   "text": "📊 La dernière fois qu'un joueur français 🇫🇷 (Jo-Wilfried Tsonga) avait remporté un match au Masters, Arthur Fils 🇫🇷 avait 7 ans.\n\nEn dominant Rafael Jodar, Arthur Fils 🇫🇷 met fin à une série de 10 défaites consécutives des tricolores dans la compétition.",
-   "link": "https://x.com/JeuSetMaths/status/2122709006246354983",
-   "date": "2026-11-17T15:10:39.772000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2122708727799164928/vid/avc1/576x720/hvhKHp0_XQO4CpC2.mp4?tag=16"
-  },
-  {
-   "title": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur : ❌ vs Alex De Minaur (N°10) ❌ vs Hubert Hurkacz (N°7) ❌ vs Daniil Medvedev (N°5) ❌ vs Daniil Medvedev (N°5) ❌ vs Novak…",
-   "text": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur :\n❌ vs Alex De Minaur (N°10)\n❌ vs Hubert Hurkacz (N°7)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Novak Djokovic (N°4)\n❌ vs Alex De Minaur (N°10)\n❌ vs Ben Shelton (N°7)\n❌ vs Lorenzo Musetti (N°10)\n❌ vs Jannik Sinner (N°2)\n❌ vs Ben Shelton (N°7)\n❌ vs Daniil Medvedev (N°5)\n➡️ 2 sets remportés, 25 sets concédés",
-   "link": "https://x.com/JeuSetMaths/status/2122442572106793441",
-   "date": "2026-11-16T21:31:56.923000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXRsbzgXkAAvWHY.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXRsbzgXkAAvWHY.jpg?name=orig"
    ],
    "video": null
   }
