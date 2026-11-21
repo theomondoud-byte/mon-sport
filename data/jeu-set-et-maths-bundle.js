@@ -3,8 +3,22 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-21T07:18:14.929808+00:00",
+ "fetchedAt": "2026-11-21T13:04:00.944811+00:00",
  "posts": [
+  {
+   "title": "📊 Pour la 5e fois, la finale du Rolex Paris Masters est à nouveau à l'affiche dans le dernier carré du Masters. Par le passé, seul un joueur a réussi à prendre sa…",
+   "text": "📊 Pour la 5e fois, la finale du Rolex Paris Masters est à nouveau à l'affiche dans le dernier carré du Masters. Par le passé, seul un joueur a réussi à prendre sa revanche :\n\n🗓️ 1989 : Edberg 🇸🇪 vs Becker 🇩🇪\n🇫🇷 Paris : Boris Becker 🏆\n🎱 Masters : Stefan Edberg 🏆\n\n🗓️ 1997 : Sampras 🇺🇸 vs Bjorkman 🇸🇪\n🇫🇷 Paris : Pete Sampras 🏆\n🎱 Masters : Pete Sampras (1/2)\n\n🗓️ 2001 : Grosjean 🇫🇷 vs Kafelnikov 🇷🇺\n🇫🇷 Paris : Sébastien Grosjean 🏆\n🎱 Masters : Sébastien Grosjean (1/2)\n\n🗓️ 2011 : Federer 🇨🇭 vs Tsonga 🇫🇷\n🇫🇷 Paris : Roger Federer 🏆\n🎱 Masters : Roger Federer 🏆\n\n🗓️ 2026🆕 : Alcaraz 🇪🇸 vs Shelton 🇺🇸\n🇫🇷 Paris : Carlos Alcaraz 🏆\n🎱 Masters : ❓ (1/2)",
+   "link": "https://x.com/JeuSetMaths/status/2124044711509844472",
+   "date": "2026-11-21T07:38:16.723000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXofOcAWYAAKCCt.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXofOcAWYAAKCCt.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Les joueurs français 🇫🇷 les mieux classés en fin de saison : ▪️ N°4 : Yannick Noah 🇫🇷 (1983) ▪️ N°5 : Yannick Noah 🇫🇷 (1986) ▪️ N°6 : Henri Leconte 🇫🇷 (1986) ▪️ N°6 :…",
    "text": "📊 Les joueurs français 🇫🇷 les mieux classés en fin de saison :\n▪️ N°4 : Yannick Noah 🇫🇷 (1983)\n▪️ N°5 : Yannick Noah 🇫🇷 (1986)\n▪️ N°6 : Henri Leconte 🇫🇷 (1986)\n▪️ N°6 : Sébastien Grosjean 🇫🇷 (2001)\n▪️ N°6 : Jo-Wilfried Tsonga 🇫🇷 (2008)\n▪️ N°6 : Jo-Wilfried Tsonga 🇫🇷 (2011)\n🆕 N°6 : Arthur Fils 🇫🇷 (2026)",
@@ -246,20 +260,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXW1JbMXgAA5guX.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXW1JbMXgAA5guX.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Le premier joueur de chaque classe d'âge (1980-2004) à avoir remporté un match au Masters : 🆕 2004 : Fils 🇫🇷 ▪️ 2003 : Rune 🇩🇰 ▪️ 2002 : Musetti 🇮🇹 ▪️ 2001 : Sinner…",
-   "text": "📊 Le premier joueur de chaque classe d'âge (1980-2004) à avoir remporté un match au Masters :\n🆕 2004 : Fils 🇫🇷\n▪️ 2003 : Rune 🇩🇰\n▪️ 2002 : Musetti 🇮🇹\n▪️ 2001 : Sinner 🇮🇹\n▪️ 2000 : Auger Aliassime 🇨🇦\n▪️ 1999 : De Minaur 🇦🇺\n▪️ 1998 : Tsitsipas 🇬🇷\n▪️ 1997 : Zverev 🇩🇪\n▪️ 1996 : Berrettini 🇮🇹\n▪️ 1995 : 🚫\n▪️ 1994 : 🚫\n▪️ 1993 : Thiem 🇦🇹\n▪️ 1992 : Sock 🇺🇸\n▪️ 1991 : Dimitrov 🇧🇬\n▪️ 1990 : Raonic 🇨🇦\n▪️ 1989 : Nishikori 🇯🇵\n▪️ 1988 : Del Potro 🇦🇷\n▪️ 1987 : Djokovic 🇷🇸\n▪️ 1986 : Nadal 🇪🇸\n▪️ 1985 : Tsonga 🇫🇷\n▪️ 1984 : Simon 🇫🇷\n▪️ 1983 : 🚫\n▪️ 1982 : Nalbandian 🇦🇷\n▪️ 1981 : Hewitt 🇦🇺\n▪️ 1980 : Safin 🇷🇺",
-   "link": "https://x.com/JeuSetMaths/status/2122723728316387782",
-   "date": "2026-11-17T16:09:09.787000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXVt4WgWEAAMdnR.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXVt4WgWEAAMdnR.jpg?name=orig"
    ],
    "video": null
   }
