@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-21T01:19:56.869724+00:00",
+ "fetchedAt": "2026-11-21T07:18:14.929808+00:00",
  "posts": [
   {
    "title": "📊 Les joueurs français 🇫🇷 les mieux classés en fin de saison : ▪️ N°4 : Yannick Noah 🇫🇷 (1983) ▪️ N°5 : Yannick Noah 🇫🇷 (1986) ▪️ N°6 : Henri Leconte 🇫🇷 (1986) ▪️ N°6 :…",

@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-21T01:19:50.676550+00:00",
+  "fetchedAt": "2026-11-21T07:18:10.589518+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1274,9 +1274,9 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Sydney 3 DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Sydney 3 DF",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -2188,7 +2188,7 @@
       "tournamentHistory": [
         {
           "text": "Colina DF",
-          "lastSeen": "2026-11-21T01:19:50.676550+00:00"
+          "lastSeen": "2026-11-21T07:18:10.589518+00:00"
         },
         {
           "text": "Colina QF",
@@ -2266,12 +2266,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T07:18:10.589518+00:00"
+        }
+      ]
     },
     {
       "rank": 136,
@@ -2453,7 +2458,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T01:19:50.676550+00:00"
+          "lastSeen": "2026-11-21T07:18:10.589518+00:00"
         }
       ]
     },
@@ -2530,12 +2535,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-21T07:18:10.589518+00:00"
+        }
+      ]
     }
   ]
 }
