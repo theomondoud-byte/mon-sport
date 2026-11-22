@@ -3,8 +3,22 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-22T13:02:12.719751+00:00",
+ "fetchedAt": "2026-11-22T18:57:07.368450+00:00",
  "posts": [
+  {
+   "title": "📊 Enoooorme ! Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 forment la 3e paire 100% française à remporter le double messieurs du Masters : 🏆 2005 : Llodra 🇫🇷 & Santoro 🇫🇷 🏆…",
+   "text": "📊 Enoooorme ! Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 forment la 3e paire 100% française à remporter le double messieurs du Masters :\n🏆 2005 : Llodra 🇫🇷 & Santoro 🇫🇷\n🏆 2019 : Mahut 🇫🇷 & Herbert 🇫🇷\n🏆 2021 : Mahut 🇫🇷 & Herbert 🇫🇷 (2)\n🏆 2026 : Arribagé 🇫🇷 & Olivetti 🇫🇷\n\n✍️ Auxquelles s'ajoute 1 paire composée d'un joueur français associé à un partenaire étranger :\n🏆 1990 : Forget 🇫🇷 & Hlasek 🇨🇭",
+   "link": "https://x.com/JeuSetMaths/status/2124528747118305536",
+   "date": "2026-11-22T15:41:39.805000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXvVp-QXEAAxDbL.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXvVp-QXEAAxDbL.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Théo Arribagé 🇫🇷 est le plus jeune joueur à s'être hissé en finale du double messieurs du Masters depuis Michaël Llodra 🇫🇷 en 2005. Son âge ? Il a fêté ses 26 ans en…",
    "text": "📊 Théo Arribagé 🇫🇷 est le plus jeune joueur à s'être hissé en finale du double messieurs du Masters depuis Michaël Llodra 🇫🇷 en 2005.\n\nSon âge ? Il a fêté ses 26 ans en octobre dernier. 😳\n\n✍️ Source : Notes ATP",
@@ -249,18 +263,6 @@ export const jeuSetMathsBundledData = {
    "images": [
     "https://pbs.twimg.com/media/HXg8kEAW4AAfSod.jpg?name=orig"
    ],
-   "video": null
-  },
-  {
-   "title": "📊 8 joueurs ont remporté 6 des 10 premiers matchs qu'ils ont disputés face à des Top 10 depuis la création de l'ATP Tour en 1990* : 🇸🇪 Magnus Larsson 🇩🇪 Marc-Kevin…",
-   "text": "📊 8 joueurs ont remporté 6 des 10 premiers matchs qu'ils ont disputés face à des Top 10 depuis la création de l'ATP Tour en 1990* :\n🇸🇪 Magnus Larsson\n🇩🇪 Marc-Kevin Goellner\n🇪🇸 Carlos Moya\n🇦🇺 Lleyton Hewitt\n🇷🇺 Marat Safin\n🇨🇱 Fernando Gonzalez\n🇨🇾 Marcos Baghdatis\n🇫🇷 Ugo Humbert\n\n✍️ * Les joueurs ayant affronté des Top 10 avant 1990 ne sont ici pas comptabilisés.",
-   "link": "https://x.com/JeuSetMaths/status/2123512421868335512",
-   "date": "2026-11-19T20:23:08.983000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
    "video": null
   }
  ]

@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-22T13:02:07.887750+00:00",
+  "fetchedAt": "2026-11-22T18:57:03.557129+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP F (DF )",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+          "lastSeen": "2026-11-22T18:57:03.440144+00:00"
         },
         {
           "text": "Finales ATP DF",
@@ -72,7 +72,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP F (DF )",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+          "lastSeen": "2026-11-22T18:57:03.440144+00:00"
         },
         {
           "text": "Finales ATP F",
@@ -1474,7 +1474,7 @@
       "country": "GBR",
       "careerHigh": "NMC (92)",
       "tournament": "",
-      "previousTournaments": "Helsinki V (DF )",
+      "previousTournaments": "Helsinki V",
       "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
@@ -1732,7 +1732,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo F",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+          "lastSeen": "2026-11-22T18:57:03.440144+00:00"
         },
         {
           "text": "Montevideo DF",
@@ -1810,7 +1810,7 @@
       "country": "FIN",
       "careerHigh": "91",
       "tournament": "",
-      "previousTournaments": "Défaite Helsinki F (DF )",
+      "previousTournaments": "Défaite Helsinki F",
       "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
@@ -2434,7 +2434,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 16e",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+          "lastSeen": "2026-11-22T18:57:03.440144+00:00"
         },
         {
           "text": "Sydney 16e",
@@ -2493,9 +2493,30 @@
     },
     {
       "rank": 126,
+      "name": "Francesco Passaro",
+      "livePoints": 465,
+      "movement": 32,
+      "pointsChange": 111,
+      "age": 25,
+      "country": "ITA",
+      "careerHigh": "89",
+      "tournament": "",
+      "previousTournaments": "Metz V",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Metz F",
+          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 127,
       "name": "Sho Shimabukuro",
       "livePoints": 457,
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "age": 29,
       "country": "JPN",
@@ -2508,10 +2529,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 127,
+      "rank": 128,
       "name": "Laslo Djere",
       "livePoints": 454,
-      "movement": 10,
+      "movement": 9,
       "pointsChange": 35,
       "age": 31,
       "country": "SRB",
@@ -2545,10 +2566,10 @@
       ]
     },
     {
-      "rank": 128,
+      "rank": 129,
       "name": "Alexei Popyrin",
       "livePoints": 448,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 27,
       "country": "AUS",
@@ -2561,10 +2582,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 129,
+      "rank": 130,
       "name": "Shintaro Mochizuki",
       "livePoints": 444,
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "age": 23,
       "country": "JPN",
@@ -2582,14 +2603,14 @@
       ]
     },
     {
-      "rank": 130,
+      "rank": 131,
       "name": "Max Alcalá Gurri",
       "livePoints": 442,
-      "movement": null,
+      "movement": -1,
       "pointsChange": -4,
       "age": 24,
       "country": "ESP",
-      "careerHigh": "MC",
+      "careerHigh": "130",
       "tournament": "Florianópolis 16e",
       "previousTournaments": "Défaite Montevideo 16e",
       "tournamentStatus": "en_lice",
@@ -2598,7 +2619,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 16e",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+          "lastSeen": "2026-11-22T18:57:03.440144+00:00"
         },
         {
           "text": "Montevideo 16e",
@@ -2615,14 +2636,14 @@
       ]
     },
     {
-      "rank": 131,
+      "rank": 132,
       "name": "Nikolás Sánchez Izquierdo",
       "livePoints": 438,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 27,
       "country": "ESP",
-      "careerHigh": "NMC (132)",
+      "careerHigh": "MC",
       "tournament": "",
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
@@ -2640,10 +2661,10 @@
       ]
     },
     {
-      "rank": 132,
+      "rank": 133,
       "name": "Stefanos Sakellaridis",
       "livePoints": 431,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 22,
       "country": "GRE",
@@ -2656,10 +2677,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 133,
+      "rank": 134,
       "name": "Moïse Kouamé",
       "livePoints": 429,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 17,
       "country": "FRA",
@@ -2672,10 +2693,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 134,
+      "rank": 135,
       "name": "Gustavo Heide",
       "livePoints": 429,
-      "movement": -15,
+      "movement": -16,
       "pointsChange": -75,
       "age": 24,
       "country": "BRA",
@@ -2688,10 +2709,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 135,
+      "rank": 136,
       "name": "Grigor Dimitrov",
       "livePoints": 422,
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "age": 35,
       "country": "BUL",
@@ -2704,10 +2725,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 136,
+      "rank": 137,
       "name": "Francisco Comesaña",
       "livePoints": 421,
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "age": 26,
       "country": "ARG",
@@ -2725,10 +2746,10 @@
       ]
     },
     {
-      "rank": 137,
+      "rank": 138,
       "name": "Rei Sakamoto",
       "livePoints": 420,
-      "movement": -12,
+      "movement": -13,
       "pointsChange": -67,
       "age": 20,
       "country": "JPN",
@@ -2746,19 +2767,19 @@
       ]
     },
     {
-      "rank": 138,
+      "rank": 139,
       "name": "Soonwoo Kwon",
       "livePoints": 419,
-      "movement": 18,
+      "movement": 17,
       "pointsChange": 64,
       "age": 28,
       "country": "KOR",
       "careerHigh": "52",
-      "tournament": "Metz F",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 480,
-      "maxPoints": 480,
+      "tournament": "",
+      "previousTournaments": "Défaite Metz F",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Metz F",
@@ -2771,10 +2792,10 @@
       ]
     },
     {
-      "rank": 139,
+      "rank": 140,
       "name": "Aleksandar Vukic",
       "livePoints": 418,
-      "movement": -1,
+      "movement": -2,
       "pointsChange": null,
       "age": 30,
       "country": "AUS",
@@ -2787,10 +2808,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 140,
+      "rank": 141,
       "name": "Federico Cina",
       "livePoints": 415,
-      "movement": -1,
+      "movement": -2,
       "pointsChange": null,
       "age": 19,
       "country": "ITA",
@@ -2803,10 +2824,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 141,
+      "rank": 142,
       "name": "Giovanni Mpetshi Perricard",
       "livePoints": 411,
-      "movement": -1,
+      "movement": -2,
       "pointsChange": null,
       "age": 23,
       "country": "FRA",
@@ -2819,10 +2840,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 142,
+      "rank": 143,
       "name": "Tristan Schoolkate",
       "livePoints": 407,
-      "movement": 3,
+      "movement": 2,
       "pointsChange": 6,
       "age": 25,
       "country": "AUS",
@@ -2835,7 +2856,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 16e",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+          "lastSeen": "2026-11-22T18:57:03.440144+00:00"
         },
         {
           "text": "Sydney QF",
@@ -2852,10 +2873,10 @@
       ]
     },
     {
-      "rank": 143,
+      "rank": 144,
       "name": "Matej Dodig",
       "livePoints": 406,
-      "movement": -2,
+      "movement": -3,
       "pointsChange": null,
       "age": 21,
       "country": "CRO",
@@ -2873,10 +2894,10 @@
       ]
     },
     {
-      "rank": 144,
+      "rank": 145,
       "name": "Andrea Pellegrino",
       "livePoints": 404,
-      "movement": -2,
+      "movement": -3,
       "pointsChange": null,
       "age": 29,
       "country": "ITA",
@@ -2887,27 +2908,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 145,
-      "name": "Francesco Passaro",
-      "livePoints": 404,
-      "movement": 13,
-      "pointsChange": 50,
-      "age": 25,
-      "country": "ITA",
-      "careerHigh": "89",
-      "tournament": "Metz F",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 465,
-      "maxPoints": 465,
-      "tournamentHistory": [
-        {
-          "text": "Metz F",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
-        }
-      ]
     },
     {
       "rank": 146,
@@ -2974,7 +2974,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 16e",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+          "lastSeen": "2026-11-22T18:57:03.440144+00:00"
         },
         {
           "text": "Montevideo DF",

@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-22T13:02:05.183452+00:00",
+  "fetchedAt": "2026-11-22T18:57:01.263261+00:00",
   "rows": [
     {
       "rank": 1,
@@ -89,7 +89,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -567,7 +567,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -620,7 +620,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -673,7 +673,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -1110,7 +1110,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -1291,7 +1291,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -1312,7 +1312,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (2 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         },
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
@@ -1393,7 +1393,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -1566,12 +1566,17 @@
       "careerHigh": "28",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        }
+      ]
     },
     {
       "rank": 92,
@@ -1686,7 +1691,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde 16e",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         },
         {
           "text": "Sydney 3 DF",
@@ -1819,7 +1824,7 @@
       "tournamentHistory": [
         {
           "text": "Colina F",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         },
         {
           "text": "Colina DF",
@@ -1848,12 +1853,17 @@
       "careerHigh": "56",
       "movement": -1,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Buenos Aires 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        }
+      ]
     },
     {
       "rank": 107,
@@ -1912,12 +1922,16 @@
       "careerHigh": "107",
       "movement": -3,
       "pointsChange": -22,
-      "tournament": "",
+      "tournament": "Buenos Aires 16e",
       "previousTournaments": "Défaite Colina QF",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        },
         {
           "text": "Colina QF",
           "lastSeen": "2026-11-20T19:08:16.715629+00:00"
@@ -2217,12 +2231,16 @@
       "careerHigh": "46",
       "movement": 7,
       "pointsChange": 37,
-      "tournament": "",
+      "tournament": "Buenos Aires 16e",
       "previousTournaments": "Défaite Colina DF",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        },
         {
           "text": "Colina DF",
           "lastSeen": "2026-11-21T18:56:00.248284+00:00"
@@ -2282,12 +2300,17 @@
       "careerHigh": "53",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (0 V / 1 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (0 V / 1 D)",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        }
+      ]
     },
     {
       "rank": 132,
@@ -2323,150 +2346,18 @@
     },
     {
       "rank": 134,
-      "name": "Joanna Garland",
-      "age": 25,
-      "country": "TWN",
-      "livePoints": 569,
-      "careerHigh": "117",
-      "movement": 18,
-      "pointsChange": 74,
-      "tournament": "",
-      "previousTournaments": "Sydney 3 V",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 3 F",
-          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
-        },
-        {
-          "text": "Sydney 3 DF",
-          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
-        },
-        {
-          "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 135,
-      "name": "Andrea Lazáro García",
-      "age": 32,
-      "country": "ESP",
-      "livePoints": 566,
-      "careerHigh": "NMC (136)",
-      "movement": 5,
-      "pointsChange": 25,
-      "tournament": "",
-      "previousTournaments": "Défaite Colina QF",
-      "tournamentStatus": "defaite",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Colina QF",
-          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
-        },
-        {
-          "text": "Colina 8e",
-          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
-        },
-        {
-          "text": "Colina 16e",
-          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 136,
-      "name": "Simona Waltert",
-      "age": 25,
-      "country": "SUI",
-      "livePoints": 561,
-      "careerHigh": "81",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "Coupe Billie Jean King (0 V / 1 D)",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 137,
-      "name": "Julia Riera",
-      "age": 24,
-      "country": "ARG",
-      "livePoints": 558,
-      "careerHigh": "93",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 138,
-      "name": "Emerson Jones",
-      "age": 18,
-      "country": "AUS",
-      "livePoints": 557,
-      "careerHigh": "122",
-      "movement": -5,
-      "pointsChange": -33,
-      "tournament": "Adélaïde 16e",
-      "previousTournaments": "Défaite Sydney 3 QF",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Adélaïde 16e",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
-        },
-        {
-          "text": "Sydney 3 QF",
-          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
-        },
-        {
-          "text": "Sydney 3 8e",
-          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
-        },
-        {
-          "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
-        },
-        {
-          "text": "Brisbane 6 DF (16e )",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 139,
       "name": "Elizara Yaneva",
       "age": 19,
       "country": "BUL",
-      "livePoints": 551,
-      "careerHigh": "138",
-      "movement": 3,
-      "pointsChange": 16,
-      "tournament": "Trnava 4 F",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 577,
-      "maxPoints": 577,
+      "livePoints": 577,
+      "careerHigh": "NMC (138)",
+      "movement": 8,
+      "pointsChange": 42,
+      "tournament": "",
+      "previousTournaments": "Trnava 4 V",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Trnava 4 F",
@@ -2491,6 +2382,143 @@
       ]
     },
     {
+      "rank": 135,
+      "name": "Joanna Garland",
+      "age": 25,
+      "country": "TWN",
+      "livePoints": 569,
+      "careerHigh": "117",
+      "movement": 17,
+      "pointsChange": 74,
+      "tournament": "",
+      "previousTournaments": "Sydney 3 V",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 3 F",
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
+        },
+        {
+          "text": "Sydney 3 DF",
+          "lastSeen": "2026-11-21T01:19:49.805131+00:00"
+        },
+        {
+          "text": "Sydney 3 QF",
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 136,
+      "name": "Andrea Lazáro García",
+      "age": 32,
+      "country": "ESP",
+      "livePoints": 566,
+      "careerHigh": "MC",
+      "movement": 4,
+      "pointsChange": 25,
+      "tournament": "",
+      "previousTournaments": "Défaite Colina QF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Colina QF",
+          "lastSeen": "2026-11-20T19:08:16.715629+00:00"
+        },
+        {
+          "text": "Colina 8e",
+          "lastSeen": "2026-11-19T19:08:08.071182+00:00"
+        },
+        {
+          "text": "Colina 16e",
+          "lastSeen": "2026-11-17T19:10:08.585902+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 137,
+      "name": "Simona Waltert",
+      "age": 25,
+      "country": "SUI",
+      "livePoints": 561,
+      "careerHigh": "81",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "Coupe Billie Jean King (0 V / 1 D)",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (0 V / 1 D)",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 138,
+      "name": "Julia Riera",
+      "age": 24,
+      "country": "ARG",
+      "livePoints": 558,
+      "careerHigh": "93",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "Buenos Aires 16e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 139,
+      "name": "Emerson Jones",
+      "age": 18,
+      "country": "AUS",
+      "livePoints": 557,
+      "careerHigh": "122",
+      "movement": -6,
+      "pointsChange": -33,
+      "tournament": "Adélaïde 16e",
+      "previousTournaments": "Défaite Sydney 3 QF",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Adélaïde 16e",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        },
+        {
+          "text": "Sydney 3 QF",
+          "lastSeen": "2026-11-20T01:15:40.107349+00:00"
+        },
+        {
+          "text": "Sydney 3 8e",
+          "lastSeen": "2026-11-19T01:21:43.223306+00:00"
+        },
+        {
+          "text": "Sydney 3 16e",
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+        },
+        {
+          "text": "Brisbane 6 DF (16e )",
+          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
+        }
+      ]
+    },
+    {
       "rank": 140,
       "name": "Maddison Inglis",
       "age": 28,
@@ -2507,7 +2535,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde 16e",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -2536,7 +2564,7 @@
       "tournamentHistory": [
         {
           "text": "Colina F",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         },
         {
           "text": "Colina DF",
@@ -2622,7 +2650,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 1 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         },
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
@@ -2647,7 +2675,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     },
@@ -2660,12 +2688,16 @@
       "careerHigh": "138",
       "movement": 11,
       "pointsChange": 48,
-      "tournament": "",
+      "tournament": "Buenos Aires 16e",
       "previousTournaments": "Défaite Colina DF",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        },
         {
           "text": "Colina DF",
           "lastSeen": "2026-11-21T18:56:00.248284+00:00"
@@ -2726,7 +2758,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T13:02:05.183452+00:00"
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
         }
       ]
     }
