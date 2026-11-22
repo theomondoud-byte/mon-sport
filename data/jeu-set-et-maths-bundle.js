@@ -3,8 +3,22 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-22T07:19:07.282506+00:00",
+ "fetchedAt": "2026-11-22T13:02:12.719751+00:00",
  "posts": [
+  {
+   "title": "📊 Théo Arribagé 🇫🇷 est le plus jeune joueur à s'être hissé en finale du double messieurs du Masters depuis Michaël Llodra 🇫🇷 en 2005. Son âge ? Il a fêté ses 26 ans en…",
+   "text": "📊 Théo Arribagé 🇫🇷 est le plus jeune joueur à s'être hissé en finale du double messieurs du Masters depuis Michaël Llodra 🇫🇷 en 2005.\n\nSon âge ? Il a fêté ses 26 ans en octobre dernier. 😳\n\n✍️ Source : Notes ATP",
+   "link": "https://x.com/JeuSetMaths/status/2124414628671160561",
+   "date": "2026-11-22T08:08:11.847000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXtviJTXYAA2vDf.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXtviJTXYAA2vDf.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Ils se sont qualifiés pour la finale du Masters sans perdre un set (format round-robin) : ▪️ 1972 : Ilie Nastase 🇷🇴 ▪️ 1978 : John McEnroe 🇺🇸 ▪️ 1986 : Ivan Lendl 🇨🇿…",
    "text": "📊 Ils se sont qualifiés pour la finale du Masters sans perdre un set (format round-robin) :\n▪️ 1972 : Ilie Nastase 🇷🇴\n▪️ 1978 : John McEnroe 🇺🇸\n▪️ 1986 : Ivan Lendl 🇨🇿\n▪️ 1999 : Andre Agassi 🇺🇸\n▪️ 2010 : Roger Federer 🇨🇭\n▪️ 2018 : Novak Djokovic 🇷🇸\n▪️ 2024 : Jannik Sinner 🇮🇹\n▪️ 2025 : Jannik Sinner 🇮🇹\n🆕 2026 : Alexander Zverev 🇩🇪",
@@ -247,20 +261,6 @@ export const jeuSetMathsBundledData = {
    "sport": "Tennis",
    "image": null,
    "images": [],
-   "video": null
-  },
-  {
-   "title": "📊 Les résultats des joueurs français 🇫🇷 face aux N°1 mondiaux depuis 2015 : ❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌✅❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌ ➡️ 1 victoire, 52 défaites ✍️ Le…",
-   "text": "📊 Les résultats des joueurs français 🇫🇷 face aux N°1 mondiaux depuis 2015 :\n❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌✅❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌\n➡️ 1 victoire, 52 défaites\n\n✍️ Le détail des N°1 mondiaux affrontés :\n🇷🇸 Novak Djokovic : 0 victoire, 28 défaites\n🇪🇸 Carlos Alcaraz : 0 victoire, 7 défaites\n🇮🇹 Jannik Sinner : 0 victoire, 7 défaites\n🇪🇸 Rafael Nadal : 0 victoire, 4 défaites\n🇬🇧 Andy Murray : 0 victoire, 3 défaites\n🇨🇭 Roger Federer : 0 victoire, 2 défaites\n🇷🇺 Daniil Medvedev : 1 victoire, 1 défaite\n🇩🇪 Alexander Zverev : ❓",
-   "link": "https://x.com/JeuSetMaths/status/2123499736460313032",
-   "date": "2026-11-19T19:32:44.546000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXgvrFkXAAA67MH.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXgvrFkXAAA67MH.jpg?name=orig"
-   ],
    "video": null
   }
  ]
