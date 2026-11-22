@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-22T01:15:58.904354+00:00",
+  "fetchedAt": "2026-11-22T07:19:03.675258+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP F (DF )",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Finales ATP DF",
@@ -72,7 +72,7 @@
       "tournamentHistory": [
         {
           "text": "Finales ATP F (DF )",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Finales ATP F",
@@ -1654,7 +1654,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki F (DF )",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Helsinki F",
@@ -1732,7 +1732,7 @@
       "tournamentHistory": [
         {
           "text": "Montevideo F",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Montevideo DF",
@@ -1817,7 +1817,7 @@
       "tournamentHistory": [
         {
           "text": "Helsinki F (DF )",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Helsinki F (QF )",
@@ -2434,7 +2434,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 16e",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Sydney 16e",
@@ -2598,7 +2598,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 16e",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Montevideo 16e",
@@ -2762,7 +2762,7 @@
       "tournamentHistory": [
         {
           "text": "Metz F",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Metz DF",
@@ -2835,7 +2835,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 16e",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Sydney QF",
@@ -2905,7 +2905,7 @@
       "tournamentHistory": [
         {
           "text": "Metz F",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         }
       ]
     },
@@ -2974,7 +2974,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 16e",
-          "lastSeen": "2026-11-22T01:15:58.643412+00:00"
+          "lastSeen": "2026-11-22T07:19:03.498748+00:00"
         },
         {
           "text": "Montevideo DF",

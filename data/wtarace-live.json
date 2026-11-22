@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-22T01:15:57.398046+00:00",
+  "fetchedAt": "2026-11-22T07:19:02.353853+00:00",
   "rows": [
     {
       "rank": 1,
@@ -81,12 +81,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
+        }
+      ]
     },
     {
       "rank": 5,
@@ -538,12 +543,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
+        }
+      ]
     },
     {
       "rank": 31,
@@ -626,7 +636,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -695,7 +705,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -1044,12 +1054,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (0 V / 1 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (0 V / 1 D)",
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
+        }
+      ]
     },
     {
       "rank": 62,
@@ -1284,12 +1299,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Adélaïde 16e",
       "previousTournaments": "Défaite Sydney 3 DF",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Adélaïde 16e",
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
+        },
         {
           "text": "Sydney 3 DF",
           "lastSeen": "2026-11-21T01:19:50.676550+00:00"
@@ -1597,7 +1616,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -1778,7 +1797,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -1895,7 +1914,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -1940,12 +1959,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Adélaïde 16e",
       "previousTournaments": "Défaite Sydney 3 8e",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Adélaïde 16e",
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
+        },
         {
           "text": "Sydney 3 8e",
           "lastSeen": "2026-11-19T07:27:08.123011+00:00"
@@ -2069,7 +2092,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -2122,7 +2145,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -2223,7 +2246,7 @@
       "tournamentHistory": [
         {
           "text": "Colina F",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         },
         {
           "text": "Colina DF",
@@ -2252,12 +2275,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (0 V / 1 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (0 V / 1 D)",
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
+        }
+      ]
     },
     {
       "rank": 133,
@@ -2313,7 +2341,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -2497,7 +2525,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     },
@@ -2582,7 +2610,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T01:15:57.398046+00:00"
+          "lastSeen": "2026-11-22T07:19:02.353853+00:00"
         }
       ]
     }
