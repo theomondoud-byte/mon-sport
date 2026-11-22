@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-21T18:56:00.248284+00:00",
+  "fetchedAt": "2026-11-22T01:15:56.564819+00:00",
   "rows": [
     {
       "rank": 1,
@@ -610,7 +610,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         }
       ]
     },
@@ -663,7 +663,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         }
       ]
     },
@@ -1100,7 +1100,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         }
       ]
     },
@@ -1289,12 +1289,16 @@
       "careerHigh": "4",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
+      "tournament": "Coupe Billie Jean King (2 V / 0 D)",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (2 V / 0 D)",
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
+        },
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
           "lastSeen": "2026-11-21T18:56:00.248284+00:00"
@@ -1374,7 +1378,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         }
       ]
     },
@@ -1781,35 +1785,23 @@
     },
     {
       "rank": 105,
-      "name": "Solana Sierra",
-      "age": 22,
-      "country": "ARG",
-      "livePoints": 730,
-      "careerHigh": "56",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 106,
       "name": "Leyre Romero Gormaz",
       "age": 24,
       "country": "ESP",
-      "livePoints": 729,
+      "livePoints": 761,
       "careerHigh": "NMC (111)",
-      "movement": 5,
-      "pointsChange": 34,
-      "tournament": "Colina DF",
+      "movement": 6,
+      "pointsChange": 66,
+      "tournament": "Colina F",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 761,
+      "nextPoints": 805,
       "maxPoints": 805,
       "tournamentHistory": [
+        {
+          "text": "Colina F",
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
+        },
         {
           "text": "Colina DF",
           "lastSeen": "2026-11-21T18:56:00.248284+00:00"
@@ -1827,6 +1819,22 @@
           "lastSeen": "2026-11-16T19:02:25.449644+00:00"
         }
       ]
+    },
+    {
+      "rank": 106,
+      "name": "Solana Sierra",
+      "age": 22,
+      "country": "ARG",
+      "livePoints": 730,
+      "careerHigh": "56",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 107,
@@ -2190,11 +2198,11 @@
       "careerHigh": "46",
       "movement": 7,
       "pointsChange": 37,
-      "tournament": "Colina DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 635,
-      "maxPoints": 679,
+      "tournament": "",
+      "previousTournaments": "Défaite Colina DF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Colina DF",
@@ -2340,7 +2348,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         }
       ]
     },
@@ -2410,7 +2418,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 4 F",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         },
         {
           "text": "Trnava 4 DF",
@@ -2457,12 +2465,37 @@
     },
     {
       "rank": 140,
+      "name": "Rebeka Masarova",
+      "age": 27,
+      "country": "SUI",
+      "livePoints": 548,
+      "careerHigh": "62",
+      "movement": 20,
+      "pointsChange": 79,
+      "tournament": "Colina F",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 592,
+      "maxPoints": 592,
+      "tournamentHistory": [
+        {
+          "text": "Colina F",
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
+        },
+        {
+          "text": "Colina DF",
+          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 141,
       "name": "Joanna Garland",
       "age": 25,
       "country": "TWN",
       "livePoints": 543,
       "careerHigh": "117",
-      "movement": 12,
+      "movement": 11,
       "pointsChange": 48,
       "tournament": "Sydney 3 F",
       "previousTournaments": "",
@@ -2472,7 +2505,7 @@
       "tournamentHistory": [
         {
           "text": "Sydney 3 F",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         },
         {
           "text": "Sydney 3 DF",
@@ -2485,13 +2518,13 @@
       ]
     },
     {
-      "rank": 141,
+      "rank": 142,
       "name": "Alice Tubello",
       "age": 25,
       "country": "FRA",
       "livePoints": 543,
       "careerHigh": "139",
-      "movement": -2,
+      "movement": -3,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2501,13 +2534,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 142,
+      "rank": 143,
       "name": "Carol Lee",
       "age": 24,
       "country": "USA",
       "livePoints": 539,
       "careerHigh": "136",
-      "movement": -1,
+      "movement": -2,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "Défaite Sydney 3 16e",
@@ -2530,13 +2563,13 @@
       ]
     },
     {
-      "rank": 143,
+      "rank": 144,
       "name": "Han Shi",
       "age": 21,
       "country": "CHN",
       "livePoints": 531,
       "careerHigh": "140",
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2546,13 +2579,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 144,
+      "rank": 145,
       "name": "Martyna Kubka",
       "age": 25,
       "country": "POL",
       "livePoints": 528,
       "careerHigh": "141",
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "tournament": "Coupe Billie Jean King (1 V / 1 D)",
       "previousTournaments": "",
@@ -2562,7 +2595,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 1 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         },
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
@@ -2571,13 +2604,13 @@
       ]
     },
     {
-      "rank": 145,
+      "rank": 146,
       "name": "Tamara Zidanšek",
       "age": 28,
       "country": "SLO",
       "livePoints": 527,
       "careerHigh": "22",
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
@@ -2587,24 +2620,24 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         }
       ]
     },
     {
-      "rank": 146,
+      "rank": 147,
       "name": "Guiomar Maristany",
       "age": 27,
       "country": "ESP",
       "livePoints": 518,
       "careerHigh": "138",
-      "movement": 12,
+      "movement": 11,
       "pointsChange": 48,
-      "tournament": "Colina DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 550,
-      "maxPoints": 594,
+      "tournament": "",
+      "previousTournaments": "Défaite Colina DF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Colina DF",
@@ -2613,13 +2646,13 @@
       ]
     },
     {
-      "rank": 147,
+      "rank": 148,
       "name": "Ajla Tomljanović",
       "age": 33,
       "country": "AUS",
       "livePoints": 516,
       "careerHigh": "32",
-      "movement": null,
+      "movement": -1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2627,27 +2660,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 148,
-      "name": "Rebeka Masarova",
-      "age": 27,
-      "country": "SUI",
-      "livePoints": 516,
-      "careerHigh": "62",
-      "movement": 12,
-      "pointsChange": 47,
-      "tournament": "Colina DF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 548,
-      "maxPoints": 592,
-      "tournamentHistory": [
-        {
-          "text": "Colina DF",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
-        }
-      ]
     },
     {
       "rank": 149,
@@ -2687,7 +2699,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+          "lastSeen": "2026-11-22T01:15:56.564819+00:00"
         }
       ]
     }
