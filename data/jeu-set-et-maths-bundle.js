@@ -3,8 +3,36 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-23T07:44:23.429468+00:00",
+ "fetchedAt": "2026-11-23T13:28:56.135457+00:00",
  "posts": [
+  {
+   "title": "📊 Jamais un joueur n'avait terminé une saison N°1 mondial en ayant remporté moins de 4 titres. Alexander Zverev 🇩🇪 fait sauter cette barre avec ses 2 titres (mais 2…",
+   "text": "📊 Jamais un joueur n'avait terminé une saison N°1 mondial en ayant remporté moins de 4 titres. Alexander Zverev 🇩🇪 fait sauter cette barre avec ses 2 titres (mais 2 titres en Grand Chelem).\n\n✍️ De leur côté, Jimmy Connors 🇺🇸 (1975 et 1977) et John McEnroe 🇺🇸 (1982) sont les seuls joueurs ayant réussi à terminer une saison à la première place mondiale sans avoir remporté le moindre Grand Chelem au cours de la saison écoulée.",
+   "link": "https://x.com/JeuSetMaths/status/2124843463459905865",
+   "date": "2026-11-23T12:32:14.028000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXz1XswWgAEWOYW.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXz1XswWgAEWOYW.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Les meilleurs classements ATP enregistrés par des joueurs français : ▪️ N°3 : 🇫🇷 Yannick Noah ▪️ N°4 : 🇫🇷 Guy Forget 🇫🇷 Sébastien Grosjean ▪️ N°5 : 🇫🇷 Henri Leconte…",
+   "text": "📊 Les meilleurs classements ATP enregistrés par des joueurs français :\n\n▪️ N°3 :\n🇫🇷 Yannick Noah\n\n▪️ N°4 :\n🇫🇷 Guy Forget\n🇫🇷 Sébastien Grosjean\n\n▪️ N°5 :\n🇫🇷 Henri Leconte\n🇫🇷 Cédric Pioline\n🇫🇷 Jo-Wilfried Tsonga\n\n▪️ N°6 :\n🇫🇷 Gaël Monfils\n🇫🇷 Gilles Simon\n🇫🇷 Arthur Fils 🆕",
+   "link": "https://x.com/JeuSetMaths/status/2124793828817207611",
+   "date": "2026-11-23T09:15:00.207000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXyx-mSX0AAwO-W.png?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXyx-mSX0AAwO-W.png?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Ils ont atteint leur meilleur classement ce lundi (Top 100) : 🇫🇷 Arthur Fils - N°6 🇦🇺 Rinky Hijikata - N°58 🇬🇧 Toby Samuel - N°82 🏆",
    "text": "📊 Ils ont atteint leur meilleur classement ce lundi (Top 100) :\n🇫🇷 Arthur Fils - N°6\n🇦🇺 Rinky Hijikata - N°58\n🇬🇧 Toby Samuel - N°82 🏆",
@@ -249,20 +277,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXqPUxyWIAADYl3.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXqPUxyWIAADYl3.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Pour la 5e fois, la finale du Rolex Paris Masters est à nouveau à l'affiche dans le dernier carré du Masters. Par le passé, seul un joueur a réussi à prendre sa…",
-   "text": "📊 Pour la 5e fois, la finale du Rolex Paris Masters est à nouveau à l'affiche dans le dernier carré du Masters. Par le passé, seul un joueur a réussi à prendre sa revanche :\n\n🗓️ 1989 : Edberg 🇸🇪 vs Becker 🇩🇪\n🇫🇷 Paris : Boris Becker 🏆\n🎱 Masters : Stefan Edberg 🏆\n\n🗓️ 1997 : Sampras 🇺🇸 vs Bjorkman 🇸🇪\n🇫🇷 Paris : Pete Sampras 🏆\n🎱 Masters : Pete Sampras (1/2)\n\n🗓️ 2001 : Grosjean 🇫🇷 vs Kafelnikov 🇷🇺\n🇫🇷 Paris : Sébastien Grosjean 🏆\n🎱 Masters : Sébastien Grosjean (1/2)\n\n🗓️ 2011 : Federer 🇨🇭 vs Tsonga 🇫🇷\n🇫🇷 Paris : Roger Federer 🏆\n🎱 Masters : Roger Federer 🏆\n\n🗓️ 2026🆕 : Alcaraz 🇪🇸 vs Shelton 🇺🇸\n🇫🇷 Paris : Carlos Alcaraz 🏆\n🎱 Masters : ❓ (1/2)",
-   "link": "https://x.com/JeuSetMaths/status/2124044711509844472",
-   "date": "2026-11-21T07:38:16.723000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXofOcAWYAAKCCt.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXofOcAWYAAKCCt.jpg?name=orig"
    ],
    "video": null
   }

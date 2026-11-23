@@ -1,8 +1,8 @@
 {
   "source": "https://www.eleventabletennis.com/rankings",
   "officialSource": "https://www.ittf.com/rankings/",
-  "fetchedAt": "2026-11-23T07:44:22.430002+00:00",
-  "week": 47,
+  "fetchedAt": "2026-11-23T13:28:54.922553+00:00",
+  "week": 48,
   "rows": [
     {
       "rank": 1,
@@ -22,7 +22,7 @@
       "rank": 3,
       "name": "Félix Lebrun",
       "country": "FRA",
-      "points": 6859,
+      "points": 6559,
       "movement": 0
     },
     {
@@ -62,52 +62,52 @@
     },
     {
       "rank": 9,
-      "name": "Alexis Lebrun",
-      "country": "FRA",
-      "points": 3750,
-      "movement": 0
-    },
-    {
-      "rank": 10,
       "name": "Lin Shidong",
       "country": "CHN",
       "points": 3686,
-      "movement": 0
+      "movement": 1
+    },
+    {
+      "rank": 10,
+      "name": "Alexis Lebrun",
+      "country": "FRA",
+      "points": 3630,
+      "movement": -1
     },
     {
       "rank": 11,
-      "name": "Patrick Franziska",
-      "country": "GER",
-      "points": 3260,
-      "movement": 0
+      "name": "Shunsuke Togami",
+      "country": "JPN",
+      "points": 3273,
+      "movement": 4
     },
     {
       "rank": 12,
-      "name": "Zhou Qihao",
-      "country": "CHN",
-      "points": 3030,
-      "movement": 0
+      "name": "Patrick Franziska",
+      "country": "GER",
+      "points": 3260,
+      "movement": -1
     },
     {
       "rank": 13,
-      "name": "Wen Ruibo",
+      "name": "Zhou Qihao",
       "country": "CHN",
-      "points": 2900,
-      "movement": 0
+      "points": 3030,
+      "movement": -1
     },
     {
       "rank": 14,
-      "name": "Darko Jorgic",
-      "country": "SLO",
-      "points": 2895,
-      "movement": 0
+      "name": "Wen Ruibo",
+      "country": "CHN",
+      "points": 2900,
+      "movement": -1
     },
     {
       "rank": 15,
-      "name": "Shunsuke Togami",
-      "country": "JPN",
-      "points": 2848,
-      "movement": 0
+      "name": "Darko Jorgic",
+      "country": "SLO",
+      "points": 2895,
+      "movement": -1
     },
     {
       "rank": 16,
@@ -118,10 +118,10 @@
     },
     {
       "rank": 17,
-      "name": "Vladimir Sidorenko",
-      "country": "RUS",
-      "points": 2290,
-      "movement": 0
+      "name": "Oh Junsung",
+      "country": "KOR",
+      "points": 2362,
+      "movement": 2
     },
     {
       "rank": 18,
@@ -132,10 +132,10 @@
     },
     {
       "rank": 19,
-      "name": "Oh Junsung",
-      "country": "KOR",
-      "points": 2197,
-      "movement": 0
+      "name": "Vladimir Sidorenko",
+      "country": "RUS",
+      "points": 2235,
+      "movement": -2
     },
     {
       "rank": 20,
@@ -148,7 +148,7 @@
       "rank": 21,
       "name": "Dimitrij Ovtcharov",
       "country": "GER",
-      "points": 1895,
+      "points": 1930,
       "movement": 0
     },
     {
@@ -162,50 +162,50 @@
       "rank": 23,
       "name": "Flavien Coton",
       "country": "FRA",
-      "points": 1864,
+      "points": 1829,
       "movement": 0
     },
     {
       "rank": 24,
-      "name": "Kanak Jha",
-      "country": "USA",
+      "name": "Chen Yuanyu",
+      "country": "CHN",
       "points": 1730,
-      "movement": 0
+      "movement": 5
     },
     {
       "rank": 25,
-      "name": "Tomislav Pucar",
-      "country": "CRO",
-      "points": 1654,
-      "movement": 0
+      "name": "Kanak Jha",
+      "country": "USA",
+      "points": 1730,
+      "movement": -1
     },
     {
       "rank": 26,
-      "name": "Elias Ranefur",
-      "country": "SWE",
-      "points": 1647,
-      "movement": 1
+      "name": "Tomislav Pucar",
+      "country": "CRO",
+      "points": 1654,
+      "movement": -1
     },
     {
       "rank": 27,
+      "name": "Elias Ranefur",
+      "country": "SWE",
+      "points": 1647,
+      "movement": -1
+    },
+    {
+      "rank": 28,
       "name": "Anton Källberg",
       "country": "SWE",
       "points": 1623,
       "movement": -1
     },
     {
-      "rank": 28,
+      "rank": 29,
       "name": "Omar Assar",
       "country": "EGY",
-      "points": 1534,
-      "movement": 0
-    },
-    {
-      "rank": 29,
-      "name": "Chen Yuanyu",
-      "country": "CHN",
-      "points": 1500,
-      "movement": 0
+      "points": 1509,
+      "movement": -1
     },
     {
       "rank": 30,
@@ -216,31 +216,31 @@
     },
     {
       "rank": 31,
-      "name": "Feng Yi-hsin",
-      "country": "TPE",
-      "points": 1395,
-      "movement": 0
+      "name": "Lim Jonghoon",
+      "country": "KOR",
+      "points": 1415,
+      "movement": 3
     },
     {
       "rank": 32,
-      "name": "Kuo Guan-Hong",
+      "name": "Feng Yi-hsin",
       "country": "TPE",
-      "points": 1367,
-      "movement": 0
+      "points": 1395,
+      "movement": -1
     },
     {
       "rank": 33,
-      "name": "Yukiya Uda",
-      "country": "JPN",
-      "points": 1355,
-      "movement": 0
+      "name": "Kuo Guan-Hong",
+      "country": "TPE",
+      "points": 1367,
+      "movement": -1
     },
     {
       "rank": 34,
-      "name": "Lim Jonghoon",
-      "country": "KOR",
-      "points": 1330,
-      "movement": 0
+      "name": "Yukiya Uda",
+      "country": "JPN",
+      "points": 1355,
+      "movement": -1
     },
     {
       "rank": 35,
@@ -265,51 +265,51 @@
     },
     {
       "rank": 38,
-      "name": "Benedikt Duda",
-      "country": "GER",
-      "points": 1207,
-      "movement": 1
+      "name": "Park Ganghyeon",
+      "country": "KOR",
+      "points": 1210,
+      "movement": 6
     },
     {
       "rank": 39,
-      "name": "João Geraldo",
-      "country": "POR",
-      "points": 1187,
-      "movement": 1
+      "name": "Benedikt Duda",
+      "country": "GER",
+      "points": 1207,
+      "movement": -1
     },
     {
       "rank": 40,
-      "name": "Wim Verdonschot",
-      "country": "GER",
-      "points": 1160,
-      "movement": -2
+      "name": "João Geraldo",
+      "country": "POR",
+      "points": 1187,
+      "movement": -1
     },
     {
       "rank": 41,
-      "name": "Li Tianyang",
-      "country": "CHN",
-      "points": 1000,
-      "movement": 1
+      "name": "Wim Verdonschot",
+      "country": "GER",
+      "points": 1160,
+      "movement": -1
     },
     {
       "rank": 42,
+      "name": "Li Tianyang",
+      "country": "CHN",
+      "points": 1115,
+      "movement": -1
+    },
+    {
+      "rank": 43,
       "name": "Wong Chun Ting",
       "country": "HKG",
       "points": 907,
       "movement": -1
     },
     {
-      "rank": 43,
+      "rank": 44,
       "name": "Lubomir Jancarik",
       "country": "CZE",
-      "points": 850,
-      "movement": 6
-    },
-    {
-      "rank": 44,
-      "name": "Park Ganghyeon",
-      "country": "KOR",
-      "points": 820,
+      "points": 865,
       "movement": -1
     },
     {
@@ -317,7 +317,7 @@
       "name": "Manush Shah",
       "country": "IND",
       "points": 801,
-      "movement": -1
+      "movement": 0
     },
     {
       "rank": 46,
@@ -338,91 +338,91 @@
       "name": "Maharu Yoshimura",
       "country": "JPN",
       "points": 769,
-      "movement": -3
+      "movement": 0
     },
     {
       "rank": 49,
       "name": "Ryoichi Yoshiyama",
       "country": "JPN",
-      "points": 755,
-      "movement": 13
+      "points": 730,
+      "movement": 0
     },
     {
       "rank": 50,
-      "name": "Kristian Karlsson",
-      "country": "SWE",
-      "points": 740,
-      "movement": -2
+      "name": "Joe Seyfried",
+      "country": "FRA",
+      "points": 725,
+      "movement": 8
     },
     {
       "rank": 51,
+      "name": "Kristian Karlsson",
+      "country": "SWE",
+      "points": 715,
+      "movement": -1
+    },
+    {
+      "rank": 52,
       "name": "Jonathan Groth",
       "country": "DEN",
       "points": 708,
       "movement": -1
     },
     {
-      "rank": 52,
+      "rank": 53,
       "name": "Tom Jarvis",
       "country": "ENG",
       "points": 708,
       "movement": -1
     },
     {
-      "rank": 53,
-      "name": "Cedric Nuytinck",
-      "country": "BEL",
-      "points": 676,
-      "movement": -1
-    },
-    {
       "rank": 54,
       "name": "Nicholas Lum",
       "country": "AUS",
-      "points": 668,
+      "points": 683,
       "movement": 0
     },
     {
       "rank": 55,
-      "name": "Andre Bertelsmeier",
-      "country": "GER",
-      "points": 665,
-      "movement": 0
+      "name": "Cedric Nuytinck",
+      "country": "BEL",
+      "points": 676,
+      "movement": -2
     },
     {
       "rank": 56,
-      "name": "Guilherme Teodoro",
-      "country": "BRA",
-      "points": 663,
-      "movement": 0
+      "name": "Csaba Andras",
+      "country": "HUN",
+      "points": 674,
+      "movement": 1
     },
     {
       "rank": 57,
-      "name": "Csaba Andras",
-      "country": "HUN",
-      "points": 656,
-      "movement": 0
+      "name": "Andre Bertelsmeier",
+      "country": "GER",
+      "points": 665,
+      "movement": -2
     },
     {
       "rank": 58,
-      "name": "Joe Seyfried",
-      "country": "FRA",
-      "points": 655,
-      "movement": 0
+      "name": "Guilherme Teodoro",
+      "country": "BRA",
+      "points": 663,
+      "movement": -2
     },
     {
       "rank": 59,
-      "name": "Youssef Abdelaziz",
-      "country": "EGY",
-      "points": 653,
-      "movement": 0
-    },
-    {
-      "rank": 60,
       "name": "Huang Youzheng",
       "country": "CHN",
       "points": 650,
-      "movement": 0
+      "movement": 1
+    },
+    {
+      "rank": 60,
+      "name": "Youssef Abdelaziz",
+      "country": "EGY",
+      "points": 648,
+      "movement": -1
     },
     {
       "rank": 61,
@@ -436,139 +436,139 @@
       "name": "Kirill Gerassimenko",
       "country": "KAZ",
       "points": 618,
-      "movement": -9
+      "movement": 0
     },
     {
       "rank": 63,
       "name": "Ryuusei Kawakami",
       "country": "JPN",
       "points": 600,
-      "movement": 2
+      "movement": 0
     },
     {
       "rank": 64,
       "name": "Léo de Nodrest",
       "country": "FRA",
       "points": 580,
-      "movement": -1
+      "movement": 0
     },
     {
       "rank": 65,
+      "name": "Fang Bo",
+      "country": "KAZ",
+      "points": 575,
+      "movement": 1
+    },
+    {
+      "rank": 66,
       "name": "Alvaro Robles",
       "country": "ESP",
       "points": 570,
       "movement": -1
     },
     {
-      "rank": 66,
-      "name": "Fang Bo",
-      "country": "KAZ",
-      "points": 567,
-      "movement": 94
+      "rank": 67,
+      "name": "Kang Dongsoo",
+      "country": "KOR",
+      "points": 565,
+      "movement": 1
     },
     {
-      "rank": 67,
+      "rank": 68,
       "name": "Andrej Gacina",
       "country": "CRO",
       "points": 553,
       "movement": -1
     },
     {
-      "rank": 68,
-      "name": "Kang Dongsoo",
-      "country": "KOR",
-      "points": 542,
-      "movement": 52
-    },
-    {
       "rank": 69,
       "name": "Deni Kozul",
       "country": "SLO",
       "points": 541,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 70,
-      "name": "Darius Movileanu",
+      "name": "Iulian Chirita",
       "country": "ROU",
-      "points": 538,
-      "movement": -2
+      "points": 540,
+      "movement": 13
     },
     {
       "rank": 71,
-      "name": "Evgeny Tikhonov",
-      "country": "RUS",
-      "points": 523,
-      "movement": -2
+      "name": "Darius Movileanu",
+      "country": "ROU",
+      "points": 520,
+      "movement": -1
     },
     {
       "rank": 72,
       "name": "Mehdi Bouloussa",
       "country": "ALG",
       "points": 515,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 73,
-      "name": "Park Gyuhyeon",
-      "country": "KOR",
-      "points": 478,
+      "name": "Evgeny Tikhonov",
+      "country": "RUS",
+      "points": 505,
       "movement": -2
     },
     {
       "rank": 74,
-      "name": "Marcos Freitas",
-      "country": "POR",
-      "points": 477,
-      "movement": -2
+      "name": "Yuan Licen",
+      "country": "CHN",
+      "points": 485,
+      "movement": 41
     },
     {
       "rank": 75,
-      "name": "Ankur Bhattacharjee",
-      "country": "IND",
-      "points": 470,
-      "movement": -2
+      "name": "Marcos Freitas",
+      "country": "POR",
+      "points": 477,
+      "movement": -1
     },
     {
       "rank": 76,
-      "name": "Nikita Artemenko",
-      "country": "RUS",
-      "points": 466,
-      "movement": 0
+      "name": "Ankur Bhattacharjee",
+      "country": "IND",
+      "points": 470,
+      "movement": -1
     },
     {
       "rank": 77,
-      "name": "Chan Baldwin",
-      "country": "HKG",
-      "points": 464,
-      "movement": -3
+      "name": "Nikita Artemenko",
+      "country": "RUS",
+      "points": 466,
+      "movement": -1
     },
     {
       "rank": 78,
-      "name": "Yuta Tanaka",
-      "country": "JPN",
-      "points": 450,
-      "movement": -3
+      "name": "Chan Baldwin",
+      "country": "HKG",
+      "points": 464,
+      "movement": -1
     },
     {
       "rank": 79,
-      "name": "Milosz Redzimski",
-      "country": "POL",
-      "points": 443,
-      "movement": -2
+      "name": "Park Gyuhyeon",
+      "country": "KOR",
+      "points": 463,
+      "movement": -6
     },
     {
       "rank": 80,
       "name": "Sathiyan Gnanasekaran",
       "country": "IND",
       "points": 443,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 81,
-      "name": "Eduard Ionescu",
-      "country": "ROU",
-      "points": 438,
+      "name": "Milosz Redzimski",
+      "country": "POL",
+      "points": 442,
       "movement": -2
     },
     {
@@ -576,483 +576,483 @@
       "name": "Vladislav Ursu",
       "country": "MDA",
       "points": 437,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 83,
-      "name": "Iulian Chirita",
-      "country": "ROU",
-      "points": 435,
-      "movement": -2
+      "name": "Kwon Hyuk",
+      "country": "KOR",
+      "points": 437,
+      "movement": 23
     },
     {
       "rank": 84,
       "name": "Lubomir Pistej",
       "country": "SVK",
       "points": 434,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 85,
-      "name": "Kazuki Hamada",
+      "name": "Yuta Tanaka",
       "country": "JPN",
-      "points": 408,
-      "movement": -2
+      "points": 420,
+      "movement": -7
     },
     {
       "rank": 86,
       "name": "Chen Junsong",
       "country": "CHN",
       "points": 400,
-      "movement": 3
+      "movement": 0
     },
     {
       "rank": 87,
       "name": "Izaac Quek",
       "country": "SGP",
-      "points": 397,
-      "movement": -3
+      "points": 392,
+      "movement": 0
     },
     {
       "rank": 88,
       "name": "Ricardo Walther",
       "country": "GER",
       "points": 387,
-      "movement": 55
+      "movement": 0
     },
     {
       "rank": 89,
-      "name": "John Oyebode",
-      "country": "ITA",
-      "points": 384,
+      "name": "Kazuki Hamada",
+      "country": "JPN",
+      "points": 386,
       "movement": -4
     },
     {
       "rank": 90,
-      "name": "Yuto Kizukuri",
-      "country": "JPN",
-      "points": 381,
-      "movement": -4
+      "name": "John Oyebode",
+      "country": "ITA",
+      "points": 384,
+      "movement": -1
     },
     {
       "rank": 91,
-      "name": "Hwan Bae",
-      "country": "AUS",
-      "points": 378,
-      "movement": -4
+      "name": "Eduard Ionescu",
+      "country": "ROU",
+      "points": 383,
+      "movement": -10
     },
     {
       "rank": 92,
-      "name": "Wang Yang",
-      "country": "SVK",
-      "points": 377,
-      "movement": -4
+      "name": "Yuto Kizukuri",
+      "country": "JPN",
+      "points": 381,
+      "movement": -2
     },
     {
       "rank": 93,
-      "name": "Tiago Apolonia",
-      "country": "POR",
-      "points": 372,
-      "movement": -3
+      "name": "Hwan Bae",
+      "country": "AUS",
+      "points": 378,
+      "movement": -2
     },
     {
       "rank": 94,
-      "name": "Ivor Ban",
-      "country": "CRO",
-      "points": 366,
-      "movement": -3
+      "name": "Wang Yang",
+      "country": "SVK",
+      "points": 377,
+      "movement": -2
     },
     {
       "rank": 95,
-      "name": "Horacio Cifuentes",
-      "country": "ARG",
-      "points": 363,
-      "movement": -3
+      "name": "Tiago Apolonia",
+      "country": "POR",
+      "points": 372,
+      "movement": -2
     },
     {
       "rank": 96,
-      "name": "Jules Rolland",
-      "country": "FRA",
-      "points": 349,
-      "movement": -3
+      "name": "Ivor Ban",
+      "country": "CRO",
+      "points": 366,
+      "movement": -2
     },
     {
       "rank": 97,
-      "name": "Chang Yu-An",
-      "country": "TPE",
-      "points": 346,
-      "movement": -3
+      "name": "Horacio Cifuentes",
+      "country": "ARG",
+      "points": 363,
+      "movement": -2
     },
     {
       "rank": 98,
-      "name": "Lilian Bardet",
+      "name": "Jules Rolland",
       "country": "FRA",
-      "points": 335,
-      "movement": -3
+      "points": 349,
+      "movement": -2
     },
     {
       "rank": 99,
-      "name": "Snehit Suravajjula",
-      "country": "IND",
-      "points": 332,
-      "movement": -3
+      "name": "Chang Yu-An",
+      "country": "TPE",
+      "points": 346,
+      "movement": -2
     },
     {
       "rank": 100,
-      "name": "Mattias Karlsson",
-      "country": "SWE",
-      "points": 324,
+      "name": "Lilian Bardet",
+      "country": "FRA",
+      "points": 342,
       "movement": -2
     },
     {
       "rank": 101,
       "name": "Alexis Kouraichi",
       "country": "FRA",
-      "points": 323,
-      "movement": -2
+      "points": 331,
+      "movement": 0
     },
     {
       "rank": 102,
+      "name": "Snehit Suravajjula",
+      "country": "IND",
+      "points": 330,
+      "movement": -3
+    },
+    {
+      "rank": 103,
+      "name": "Mattias Karlsson",
+      "country": "SWE",
+      "points": 324,
+      "movement": -3
+    },
+    {
+      "rank": 104,
       "name": "Quadri Aruna",
       "country": "NGR",
       "points": 323,
       "movement": -2
     },
     {
-      "rank": 103,
+      "rank": 105,
+      "name": "Borgar Haug",
+      "country": "NOR",
+      "points": 322,
+      "movement": 4
+    },
+    {
+      "rank": 106,
       "name": "Emanuel Otalvaro",
       "country": "COL",
       "points": 317,
-      "movement": 1
+      "movement": -3
     },
     {
-      "rank": 104,
+      "rank": 107,
       "name": "Payas Jain",
       "country": "IND",
       "points": 316,
       "movement": -3
     },
     {
-      "rank": 105,
+      "rank": 108,
       "name": "Harmeet Desai",
       "country": "IND",
       "points": 315,
       "movement": -3
     },
     {
-      "rank": 106,
-      "name": "Kwon Hyuk",
-      "country": "KOR",
-      "points": 314,
-      "movement": -9
-    },
-    {
-      "rank": 107,
+      "rank": 109,
       "name": "Rogelio Castro",
       "country": "MEX",
       "points": 313,
-      "movement": -4
+      "movement": -2
     },
     {
-      "rank": 108,
+      "rank": 110,
       "name": "Jo Yokotani",
       "country": "JPN",
       "points": 312,
       "movement": -2
     },
     {
-      "rank": 109,
-      "name": "Borgar Haug",
-      "country": "NOR",
-      "points": 305,
-      "movement": 42
-    },
-    {
-      "rank": 110,
-      "name": "Aditya Sareen",
-      "country": "AUS",
-      "points": 303,
-      "movement": 5
-    },
-    {
       "rank": 111,
-      "name": "Xue Fei",
-      "country": "CHN",
-      "points": 300,
-      "movement": -6
+      "name": "Kay Stumper",
+      "country": "GER",
+      "points": 303,
+      "movement": 1
     },
     {
       "rank": 112,
-      "name": "Kay Stumper",
-      "country": "GER",
-      "points": 299,
-      "movement": -5
+      "name": "Aditya Sareen",
+      "country": "AUS",
+      "points": 303,
+      "movement": -2
     },
     {
       "rank": 113,
-      "name": "Lam Siu Hang",
-      "country": "HKG",
-      "points": 295,
-      "movement": -5
+      "name": "Xue Fei",
+      "country": "CHN",
+      "points": 300,
+      "movement": -2
     },
     {
       "rank": 114,
       "name": "Esteban Dorr",
       "country": "FRA",
-      "points": 295,
-      "movement": -5
+      "points": 297,
+      "movement": 0
     },
     {
       "rank": 115,
-      "name": "Yuan Licen",
-      "country": "CHN",
-      "points": 290,
-      "movement": -1
+      "name": "Lam Siu Hang",
+      "country": "HKG",
+      "points": 295,
+      "movement": -2
     },
     {
       "rank": 116,
       "name": "Eugene Wang",
       "country": "CAN",
       "points": 288,
-      "movement": -6
+      "movement": 0
     },
     {
       "rank": 117,
       "name": "Marek Badowski",
       "country": "POL",
       "points": 284,
-      "movement": -6
+      "movement": 0
     },
     {
       "rank": 118,
       "name": "Edward Ly",
       "country": "CAN",
       "points": 283,
-      "movement": -6
+      "movement": 0
     },
     {
       "rank": 119,
       "name": "Xu Yingbin",
       "country": "CHN",
       "points": 271,
-      "movement": -6
+      "movement": 0
     },
     {
       "rank": 120,
       "name": "Hung Jing-Kai",
       "country": "TPE",
       "points": 260,
-      "movement": -4
+      "movement": 0
     },
     {
       "rank": 121,
       "name": "Gustavo Gomez",
       "country": "CHI",
       "points": 258,
-      "movement": -4
+      "movement": 0
     },
     {
       "rank": 122,
       "name": "Connor Green",
       "country": "ENG",
       "points": 256,
-      "movement": -4
+      "movement": 0
     },
     {
       "rank": 123,
       "name": "Samuel Walker",
       "country": "ENG",
       "points": 253,
-      "movement": -4
+      "movement": 0
     },
     {
       "rank": 124,
-      "name": "Koen Pang",
-      "country": "SGP",
-      "points": 248,
-      "movement": -3
-    },
-    {
-      "rank": 125,
       "name": "Luka Mladenovic",
       "country": "LUX",
       "points": 245,
-      "movement": -3
+      "movement": 1
     },
     {
-      "rank": 126,
+      "rank": 125,
       "name": "Dean Shu",
       "country": "NZL",
       "points": 241,
-      "movement": -3
+      "movement": 1
+    },
+    {
+      "rank": 126,
+      "name": "Koen Pang",
+      "country": "SGP",
+      "points": 239,
+      "movement": -2
     },
     {
       "rank": 127,
       "name": "Florian Bourrassaud",
       "country": "FRA",
       "points": 229,
-      "movement": -3
+      "movement": 0
     },
     {
       "rank": 128,
       "name": "Hung Che-Yen",
       "country": "TPE",
       "points": 228,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 129,
       "name": "Filip Zeljko",
       "country": "CRO",
       "points": 228,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 130,
       "name": "Wassim Essid",
       "country": "TUN",
       "points": 227,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 131,
       "name": "Alan Kurmangaliyev",
       "country": "KAZ",
       "points": 225,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 132,
       "name": "Alberto Mino",
       "country": "ECU",
       "points": 224,
-      "movement": 2
+      "movement": 0
     },
     {
       "rank": 133,
       "name": "Badr Mostafa",
       "country": "EGY",
       "points": 222,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 134,
-      "name": "Dimitrije Levajac",
-      "country": "SRB",
+      "name": "Sun Yang",
+      "country": "CHN",
       "points": 222,
-      "movement": -4
+      "movement": 94
     },
     {
       "rank": 135,
-      "name": "Kazuhiro Yoshimura",
-      "country": "JPN",
-      "points": 219,
-      "movement": -3
+      "name": "Dimitrije Levajac",
+      "country": "SRB",
+      "points": 222,
+      "movement": -1
     },
     {
       "rank": 136,
-      "name": "Liam Pitchford",
-      "country": "ENG",
-      "points": 218,
-      "movement": -3
+      "name": "Denis Ivonin",
+      "country": "RUS",
+      "points": 219,
+      "movement": 4
     },
     {
       "rank": 137,
-      "name": "Andreas Levenko",
-      "country": "AUT",
-      "points": 214,
-      "movement": -2
+      "name": "Liam Pitchford",
+      "country": "ENG",
+      "points": 218,
+      "movement": -1
     },
     {
       "rank": 138,
-      "name": "Vincent Picard",
-      "country": "FRA",
+      "name": "Andreas Levenko",
+      "country": "AUT",
       "points": 214,
-      "movement": -2
+      "movement": -1
     },
     {
       "rank": 139,
       "name": "Timothy Choi",
       "country": "NZL",
       "points": 212,
-      "movement": -2
+      "movement": 0
     },
     {
       "rank": 140,
-      "name": "Denis Ivonin",
-      "country": "RUS",
-      "points": 211,
-      "movement": -2
-    },
-    {
-      "rank": 141,
       "name": "Maciej Kubik",
       "country": "POL",
       "points": 211,
-      "movement": -16
+      "movement": 1
     },
     {
-      "rank": 142,
+      "rank": 141,
       "name": "Mizuki Oikawa",
       "country": "JPN",
       "points": 208,
-      "movement": -3
+      "movement": 1
     },
     {
-      "rank": 143,
+      "rank": 142,
       "name": "Matteo Mutti",
       "country": "ITA",
       "points": 205,
-      "movement": -1
+      "movement": 1
     },
     {
-      "rank": 144,
+      "rank": 143,
       "name": "Stephane Ouaiche",
       "country": "ALG",
       "points": 203,
-      "movement": -4
+      "movement": 1
     },
     {
-      "rank": 145,
+      "rank": 144,
       "name": "Cedric Meissner",
       "country": "GER",
       "points": 202,
-      "movement": -4
+      "movement": 1
     },
     {
-      "rank": 146,
+      "rank": 145,
       "name": "Leonardo Iizuka",
       "country": "BRA",
       "points": 201,
+      "movement": 1
+    },
+    {
+      "rank": 146,
+      "name": "Noshad Alamiyan",
+      "country": "IRI",
+      "points": 192,
       "movement": 2
     },
     {
       "rank": 147,
-      "name": "Yuhi Sakai",
-      "country": "JPN",
-      "points": 194,
-      "movement": -3
-    },
-    {
-      "rank": 148,
-      "name": "Noshad Alamiyan",
-      "country": "IRI",
-      "points": 192,
-      "movement": -3
-    },
-    {
-      "rank": 149,
       "name": "Angel Naranjo",
       "country": "PUR",
       "points": 190,
+      "movement": 2
+    },
+    {
+      "rank": 148,
+      "name": "Joao Monteiro",
+      "country": "POR",
+      "points": 189,
+      "movement": 2
+    },
+    {
+      "rank": 149,
+      "name": "Yuhi Sakai",
+      "country": "JPN",
+      "points": 186,
       "movement": -2
     },
     {
       "rank": 150,
-      "name": "Joao Monteiro",
-      "country": "POR",
-      "points": 189,
-      "movement": -4
+      "name": "Martin Allegro",
+      "country": "BEL",
+      "points": 182,
+      "movement": 1
     }
   ]
 }
