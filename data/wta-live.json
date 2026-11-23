@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-23T13:28:48.653266+00:00",
+  "fetchedAt": "2026-11-23T19:10:37.599528+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1776,7 +1776,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
         },
         {
           "text": "Colina F",
@@ -1817,7 +1817,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
         },
         {
           "text": "Sydney 3 DF",
@@ -1870,7 +1870,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
         }
       ]
     },
@@ -2067,7 +2067,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
         },
         {
           "text": "Colina QF",
@@ -2248,7 +2248,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
         },
         {
           "text": "Colina DF",
@@ -2309,11 +2309,11 @@
       "careerHigh": "62",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Buenos Aires 16e",
+      "tournament": "",
       "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 605,
-      "maxPoints": 715,
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
@@ -2375,12 +2375,16 @@
       "careerHigh": "NMC (135)",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Trnava 5 16e",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
+      "tournamentStatus": "en_lice",
+      "nextPoints": 577,
+      "maxPoints": 641,
       "tournamentHistory": [
+        {
+          "text": "Trnava 5 16e",
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+        },
         {
           "text": "Trnava 4 F",
           "lastSeen": "2026-11-22T13:02:05.183452+00:00"
@@ -2499,7 +2503,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
         }
       ]
     },
@@ -2717,7 +2721,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
         },
         {
           "text": "Colina DF",
