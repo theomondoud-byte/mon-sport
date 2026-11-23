@@ -3,8 +3,93 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-22T18:57:07.368450+00:00",
+ "fetchedAt": "2026-11-23T01:23:05.694840+00:00",
  "posts": [
+  {
+   "title": "📊 Les saisons 2026 de Carlos Alcaraz 🇪🇸 et Jannik Sinner 🇮🇹 : 🇪🇸 CARLOS ALCARAZ ✅✅✅✅✅✅✅🏆✅✅✅✅✅🏆✅✅✅✅❌✅❌✅✅✅✅❌✅🚑✅✅✅✅❌✅✅✅✅✅✅🏆✅❌✅✅✅✅✅🏆✅✅✅✅🏆✅✅✅✅✅🏆 ➡️ 47 victoires, 5 défaites…",
+   "text": "📊 Les saisons 2026 de Carlos Alcaraz 🇪🇸 et Jannik Sinner 🇮🇹 :\n\n🇪🇸 CARLOS ALCARAZ\n✅✅✅✅✅✅✅🏆✅✅✅✅✅🏆✅✅✅✅❌✅❌✅✅✅✅❌✅🚑✅✅✅✅❌✅✅✅✅✅✅🏆✅❌✅✅✅✅✅🏆✅✅✅✅🏆✅✅✅✅✅🏆\n➡️ 47 victoires, 5 défaites\n↪️ Soit 90% de victoires\n🏆 6 titres\n\n🇮🇹 JANNIK SINNER\n✅✅✅✅✅❌✅✅❌✅✅✅✅✅✅🏆✅✅✅✅✅✅🏆✅✅✅✅✅🏆✅✅✅✅✅✅🏆✅✅✅✅✅✅🏆✅❌✅✅✅✅✅✅✅🏆\n➡️ 44 victoires, 3 défaites\n↪️ Soit 94% de victoires\n🏆 6 titres",
+   "link": "https://x.com/JeuSetMaths/status/2124600811753800122",
+   "date": "2026-11-22T20:28:01.353000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXwY6_wWoAAxzE6.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXwY6_wWoAAxzE6.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Carlos Alcaraz 🇪🇸 sur dur intérieur en 2026 : 🇦🇹 Vienne ✅ vs Khachanov (N°24) ✅ vs Basilashvili (N°95) ✅ vs Paul (N°14) ✅ vs Medvedev (N°5) 🏆 vs De Minaur (N°10) 🇫🇷…",
+   "text": "📊 Carlos Alcaraz 🇪🇸 sur dur intérieur en 2026 :\n\n🇦🇹 Vienne\n✅ vs Khachanov (N°24)\n✅ vs Basilashvili (N°95)\n✅ vs Paul (N°14)\n✅ vs Medvedev (N°5)\n🏆 vs De Minaur (N°10)\n\n🇫🇷 Paris\n✅ vs Michelsen (N°35)\n✅ vs Fritz (N°12)\n✅ vs Ruud (N°23)\n🏆 vs Shelton (N°4)\n\n🎱 Masters\n✅ vs Tiafoe (N°8)\n✅ vs Medvedev (N°5)\n✅ vs Cobolli (N°6)\n✅ vs Shelton (N°4)\n🏆 vs Zverev (N°1)\n\n➡️ 14 victoires, 0 défaite\n↪️ 2 sets concédés\n\n✍️ Auxquelles on devrait ajouter une victoire en Laver Cup (vs Fritz, N°10) qui officiellement est comptabilisée dans les bilans ATP.",
+   "link": "https://x.com/JeuSetMaths/status/2124587150695895495",
+   "date": "2026-11-22T19:33:44.303000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXv8l6XWEAApzoO.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXv8l6XWEAApzoO.jpg?name=orig",
+    "https://pbs.twimg.com/media/HXv8483XwAEkj2D.jpg?name=orig",
+    "https://pbs.twimg.com/media/HXwMtkJXsAAX5xY.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Les joueurs en activité avec le plus de titres ATP : 🇷🇸 Novak Djokovic : 102 ... ... 🇪🇸 Carlos Alcaraz : 30 ⬆️ 🇮🇹 Jannik Sinner : 30 🇩🇪 Alexander Zverev : 26 🇷🇺…",
+   "text": "📊 Les joueurs en activité avec le plus de titres ATP :\n🇷🇸 Novak Djokovic : 102\n...\n...\n🇪🇸 Carlos Alcaraz : 30 ⬆️\n🇮🇹 Jannik Sinner : 30\n🇩🇪 Alexander Zverev : 26\n🇷🇺 Daniil Medvedev : 25\n🇭🇷 Marin Cilic : 21\n🇷🇺 Andrey Rublev : 18\n🇳🇴 Casper Ruud : 14",
+   "link": "https://x.com/JeuSetMaths/status/2124584437912338916",
+   "date": "2026-11-22T19:22:57.525000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2124584012249255936/vid/avc1/576x720/dYJbYmT4OLWN28Aj.mp4?tag=16"
+  },
+  {
+   "title": "📊 Alexander Zverev 🇩🇪 face à Jannik Sinner 🇮🇹 et Carlos Alcaraz 🇪🇸 depuis le début de la saison dernière : ❌ Open d'Australie 2025 vs Sinner 🇮🇹 ❌ Cincinnati 2025 vs…",
+   "text": "📊 Alexander Zverev 🇩🇪 face à Jannik Sinner 🇮🇹 et Carlos Alcaraz 🇪🇸 depuis le début de la saison dernière :\n❌ Open d'Australie 2025 vs Sinner 🇮🇹\n❌ Cincinnati 2025 vs Alcaraz 🇪🇸\n❌ Vienne 2025 vs Sinner 🇮🇹\n❌ Paris 2025 vs Sinner 🇮🇹\n❌ Masters 2025 vs Sinner 🇮🇹\n❌ Open d'Australie 2026 vs Alcaraz 🇪🇸\n❌ Indian Wells 2026 vs Sinner 🇮🇹\n❌ Miami 2026 vs Sinner 🇮🇹\n❌ Monte Carlo 2026 vs Sinner 🇮🇹\n❌ Madrid 2026 vs Sinner 🇮🇹\n❌ Wimbledon 2026 vs Sinner 🇮🇹\n❌ Masters 2026 🆕 vs Alcaraz 🇪🇸\n➡️ 0 victoire, 12 défaites\n↪️ 4 sets remportés, 27 sets concédés",
+   "link": "https://x.com/JeuSetMaths/status/2124583425650880616",
+   "date": "2026-11-22T19:18:56.183000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXv--ZkXQAA75IM.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXv--ZkXQAA75IM.jpg?name=orig",
+    "https://pbs.twimg.com/media/HXv_ASgXEAAQ5sU.png?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Les finales disputées sur dur 🔵 sur le circuit principal par Carlos Alcaraz 🇪🇸 : 🏆 Miami 2022 vs Ruud 🏆 US Open 2022 vs Ruud 🏆 Indian Wells 2023 vs Medvedev ❌…",
+   "text": "📊 Les finales disputées sur dur 🔵 sur le circuit principal par Carlos Alcaraz 🇪🇸 :\n🏆 Miami 2022 vs Ruud\n🏆 US Open 2022 vs Ruud\n🏆 Indian Wells 2023 vs Medvedev\n❌ Cincinnati 2023 vs Djokovic\n🏆 Indian Wells 2024 vs Medvedev\n🏆 Pékin 2024 vs Sinner\n🏆 Rotterdam 2025 vs De Minaur\n🏆 Cincinnati 2025 vs Sinner\n🏆 US Open 2025 vs Sinner\n🏆 Tokyo 2025 vs Fritz\n❌ Masters 2025 vs Sinner\n🏆 Open d'Australie 2026 vs Djokovic\n🏆 Doha 2026 vs Fils\n🏆 Tokyo 2026 vs Lehecka\n🏆 Vienne 2026 vs De Minaur\n🏆 Paris 2026 vs Shelton\n🏆 Masters 2026 vs Zverev\n➡️ 15 titres, 2 défaites 🤯",
+   "link": "https://x.com/JeuSetMaths/status/2124583253491229174",
+   "date": "2026-11-22T19:18:15.137000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXwJHV0XMAAeMPS.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXwJHV0XMAAeMPS.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Le pokédex de Carlos Alcaraz 🇪🇸 à seulement 23 ans, 6 mois et 17 jours : 🐨Open d'Australie : 🏆 🌴 Indian Wells : 🏆 🐬 Miami : 🏆 🎲 Monte Carlo : 🏆 🐂 Madrid : 🏆 🍝 Rome :…",
+   "text": "📊 Le pokédex de Carlos Alcaraz 🇪🇸 à seulement 23 ans, 6 mois et 17 jours :\n🐨Open d'Australie : 🏆\n🌴 Indian Wells : 🏆\n🐬 Miami : 🏆\n🎲 Monte Carlo : 🏆\n🐂 Madrid : 🏆\n🍝 Rome : 🏆\n🐌 Roland-Garros : 🏆\n🍓 Wimbledon : 🏆\n🏅 Jeux olympiques : 🥈\n🍁 Canada : ❌\n🎢 Cincinnati : 🏆\n🗽 US Open : 🏆\n🍜 Shanghai : ❌\n🗼 Paris : 🏆\n🎱 Masters : 🏆 🆕",
+   "link": "https://x.com/JeuSetMaths/status/2124582975941537809",
+   "date": "2026-11-22T19:17:08.964000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HXv4BPFWQAAy5CH.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HXv4BPFWQAAy5CH.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Enoooorme ! Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 forment la 3e paire 100% française à remporter le double messieurs du Masters : 🏆 2005 : Llodra 🇫🇷 & Santoro 🇫🇷 🏆…",
    "text": "📊 Enoooorme ! Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 forment la 3e paire 100% française à remporter le double messieurs du Masters :\n🏆 2005 : Llodra 🇫🇷 & Santoro 🇫🇷\n🏆 2019 : Mahut 🇫🇷 & Herbert 🇫🇷\n🏆 2021 : Mahut 🇫🇷 & Herbert 🇫🇷 (2)\n🏆 2026 : Arribagé 🇫🇷 & Olivetti 🇫🇷\n\n✍️ Auxquelles s'ajoute 1 paire composée d'un joueur français associé à un partenaire étranger :\n🏆 1990 : Forget 🇫🇷 & Hlasek 🇨🇭",
@@ -178,90 +263,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXmSqfHX0AAfXjY.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXmSqfHX0AAfXjY.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 11 des 12 matchs de poule du Masters 2026 ont été remportés par le joueur le mieux classé (la seule exception étant la victoire de Frances Tiafoe, N°8 🇺🇸 face à…",
-   "text": "📊 11 des 12 matchs de poule du Masters 2026 ont été remportés par le joueur le mieux classé (la seule exception étant la victoire de Frances Tiafoe, N°8 🇺🇸 face à Flavio Cobolli, N°6 🇮🇹).\n\nCe n'est que la 8e fois depuis le retour du format \"round-robin\" en 1986 qu'aussi peu de surprises ont eu lieu en phase de poule, une première depuis 2018.",
-   "link": "https://x.com/JeuSetMaths/status/2123885374564872292",
-   "date": "2026-11-20T21:05:07.835000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXmLPo8XEAA6_ng.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXmLPo8XEAA6_ng.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur : ❌ vs Alex De Minaur (N°10) ❌ vs Hubert Hurkacz (N°7) ❌ vs Daniil Medvedev (N°5) ❌ vs Daniil Medvedev (N°5) ❌ vs Novak…",
-   "text": "📊 Flavio Cobolli 🇮🇹 face au Top 10 sur dur :\n❌ vs Alex De Minaur (N°10)\n❌ vs Hubert Hurkacz (N°7)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Novak Djokovic (N°4)\n❌ vs Alex De Minaur (N°10)\n❌ vs Ben Shelton (N°7)\n❌ vs Lorenzo Musetti (N°10)\n❌ vs Jannik Sinner (N°2)\n❌ vs Ben Shelton (N°7)\n❌ vs Daniil Medvedev (N°5)\n❌ vs Frances Tiafoe (N°8)\n❌ vs Carlos Alcaraz (N°3) 🆕\n➡️ 2 sets remportés, 29 sets concédés",
-   "link": "https://x.com/JeuSetMaths/status/2123784545673609531",
-   "date": "2026-11-20T14:24:28.354000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXkyxWiWYAAQeCP.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXkyxWiWYAAQeCP.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Ils se sont qualifiés pour les 1/2 finales du Masters sans concéder le moindre break (1991-2026) : ▪️ 1991 : Ivan Lendl 🇨🇿 (1 BdB) 🏆 1992 : Boris Becker 🇩🇪 (6 BdB) ▪️…",
-   "text": "📊 Ils se sont qualifiés pour les 1/2 finales du Masters sans concéder le moindre break (1991-2026) :\n▪️ 1991 : Ivan Lendl 🇨🇿 (1 BdB)\n🏆 1992 : Boris Becker 🇩🇪 (6 BdB)\n▪️ 1992 : Goran Ivanisevic 🇭🇷 (4 BdB)\n🥈 2014 : Roger Federer 🇨🇭 (7 BdB)\n🥈 2018 : Novak Djokovic 🇷🇸 (2 BdB)\n▪️ 2024 : Alexander Zverev 🇩🇪 (2 BdB)\n🏆 2025 : Jannik Sinner 🇮🇹 (8 BdB)\n🆕 2026 : Alexander Zverev 🇩🇪 (6 BdB)\n🆕 2026 : Carlos Alcaraz 🇪🇸(3 BdB)\n\n✍️ Entre parenthèses, le nombre de balles de break sauvées.",
-   "link": "https://x.com/JeuSetMaths/status/2123783690471796824",
-   "date": "2026-11-20T14:21:04.458000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXkyAEcWYAAM120.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXkyAEcWYAAM120.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Fin d'une très belle saison pour Arthur Fils 🇫🇷 : 🏆 Vainqueur du Masters 1000 de Cincinnati ↪️ 1er Français 🇫🇷 vainqueur d'un Masters 1000 depuis 12 ans (Tsonga,…",
-   "text": "📊 Fin d'une très belle saison pour Arthur Fils 🇫🇷 :\n\n🏆 Vainqueur du Masters 1000 de Cincinnati\n↪️ 1er Français 🇫🇷 vainqueur d'un Masters 1000 depuis 12 ans (Tsonga, Toronto 2014)\n\n🎾 6 victoires face au Top 10\n↪️ 1er Français 🇫🇷 à battre au moins 6 membres du Top 10 au cours d'une saison depuis 15 ans (Tsonga, 2011)\n\n🎱 Qualifié aux ATP Finals\n↪️ 1er Français 🇫🇷 à disputer le Masters depuis 10 ans (Monfils, 2016)\n↪️ 1er Français 🇫🇷 à remporter un match au Masters depuis 15 ans (Tsonga, 2011)\n\n📈 Top 10 au classement ATP\n↪️ 13e Français 🇫🇷 à figurer dans le Top 10 ATP\n↪️ 1er Français 🇫🇷 à terminer une saison dans le Top 10 depuis 7 ans (Monfils, 2019)",
-   "link": "https://x.com/JeuSetMaths/status/2123532007225397283",
-   "date": "2026-11-19T21:40:58.496000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXhMND2WAAAo5wn.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXhMND2WAAAo5wn.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Ils se sont qualifiés pour les 1/2 finales du Masters sans concéder le moindre break (1991-2026) : ▪️ 1991 : Ivan Lendl 🇨🇿 (1 BdB) 🏆 1992 : Boris Becker 🇩🇪 (6 BdB) ▪️…",
-   "text": "📊 Ils se sont qualifiés pour les 1/2 finales du Masters sans concéder le moindre break (1991-2026) :\n▪️ 1991 : Ivan Lendl 🇨🇿 (1 BdB)\n🏆 1992 : Boris Becker 🇩🇪 (6 BdB)\n▪️ 1992 : Goran Ivanisevic 🇭🇷 (4 BdB)\n🥈 2014 : Roger Federer 🇨🇭 (7 BdB)\n🥈 2018 : Novak Djokovic 🇷🇸 (2 BdB)\n▪️ 2024 : Alexander Zverev 🇩🇪 (2 BdB)\n🏆 2025 : Jannik Sinner 🇮🇹 (8 BdB)\n🆕 2026 : Alexander Zverev 🇩🇪 (6 BdB)\n\n✍️ Entre parenthèses, le nombre de balles de break sauvées.",
-   "link": "https://x.com/JeuSetMaths/status/2123527041639469425",
-   "date": "2026-11-19T21:21:14.608000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXhDOH3XkAAPrhD.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXhDOH3XkAAPrhD.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Ils sont gauchers et se sont qualifiés pour les 1/2 finales du Masters depuis le début des années 2000 : 🇪🇸 Rafael Nadal (x6) 🇺🇸 Ben Shelton 🆕 Voilà. Fin de la liste. 🏁",
-   "text": "📊 Ils sont gauchers et se sont qualifiés pour les 1/2 finales du Masters depuis le début des années 2000 :\n🇪🇸 Rafael Nadal (x6)\n🇺🇸 Ben Shelton 🆕\n\nVoilà. Fin de la liste. 🏁",
-   "link": "https://x.com/JeuSetMaths/status/2123513872028176643",
-   "date": "2026-11-19T20:28:54.728000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXg8kEAW4AAfSod.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXg8kEAW4AAfSod.jpg?name=orig"
    ],
    "video": null
   }

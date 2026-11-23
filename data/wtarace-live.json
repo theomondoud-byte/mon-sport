@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-race",
-  "fetchedAt": "2026-11-22T18:57:02.136612+00:00",
+  "fetchedAt": "2026-11-23T01:22:59.038628+00:00",
   "rows": [
     {
       "rank": 1,
@@ -89,7 +89,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -551,7 +551,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -636,7 +636,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -705,7 +705,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -942,12 +942,17 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Coupe Billie Jean King (1 V / 0 D)",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (1 V / 0 D)",
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
+        }
+      ]
     },
     {
       "rank": 55,
@@ -1062,7 +1067,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -1211,7 +1216,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -1312,7 +1317,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde 16e",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         },
         {
           "text": "Sydney 3 DF",
@@ -1509,7 +1514,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -1626,7 +1631,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -1807,7 +1812,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -1924,7 +1929,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -1977,7 +1982,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde 16e",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         },
         {
           "text": "Sydney 3 8e",
@@ -2054,7 +2059,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -2107,7 +2112,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -2160,7 +2165,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -2253,12 +2258,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Colina F",
-      "previousTournaments": "",
+      "tournament": "Buenos Aires 16e",
+      "previousTournaments": "Colina V",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
+        },
         {
           "text": "Colina F",
           "lastSeen": "2026-11-22T18:57:02.136612+00:00"
@@ -2298,7 +2307,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -2319,7 +2328,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         },
         {
           "text": "Colina 16e",
@@ -2360,7 +2369,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -2413,7 +2422,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         },
         {
           "text": "Colina 8e",
@@ -2487,12 +2496,16 @@
       "careerHigh": "",
       "movement": null,
       "pointsChange": null,
-      "tournament": "",
+      "tournament": "Florianópolis 16e",
       "previousTournaments": "Défaite Colina 16e",
-      "tournamentStatus": "defaite",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Florianópolis 16e",
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
+        },
         {
           "text": "Colina 16e",
           "lastSeen": "2026-11-17T13:17:57.489556+00:00"
@@ -2548,7 +2561,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     },
@@ -2633,7 +2646,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Billie Jean King (1 V / 0 D)",
-          "lastSeen": "2026-11-22T18:57:02.136612+00:00"
+          "lastSeen": "2026-11-23T01:22:59.038628+00:00"
         }
       ]
     }
