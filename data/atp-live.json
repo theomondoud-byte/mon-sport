@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-24T13:26:03.524034+00:00",
+  "fetchedAt": "2026-11-24T19:08:19.899124+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1079,12 +1079,17 @@
       "age": 26,
       "country": "CZE",
       "careerHigh": "20",
-      "tournament": "",
+      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (1 V / 0 D) (QF )",
+          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
+        }
+      ]
     },
     {
       "rank": 59,
@@ -2590,7 +2595,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-24T13:26:03.421258+00:00"
+          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
         },
         {
           "text": "Playford 16e",
@@ -2615,12 +2620,16 @@
       "age": 24,
       "country": "ESP",
       "careerHigh": "130",
-      "tournament": "Florianópolis 16e",
+      "tournament": "Florianópolis 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 442,
+      "nextPoints": 448,
       "maxPoints": 511,
       "tournamentHistory": [
+        {
+          "text": "Florianópolis 8e",
+          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
+        },
         {
           "text": "Florianópolis 16e",
           "lastSeen": "2026-11-24T13:26:03.421258+00:00"
@@ -2860,7 +2869,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-24T13:26:03.421258+00:00"
+          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
         },
         {
           "text": "Playford 16e",
