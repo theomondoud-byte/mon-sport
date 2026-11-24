@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-24T01:19:55.862259+00:00",
+  "fetchedAt": "2026-11-24T07:28:41.495001+00:00",
   "rows": [
     {
       "rank": 1,
@@ -2575,13 +2575,46 @@
     },
     {
       "rank": 130,
+      "name": "Dane Sweeny",
+      "livePoints": 443,
+      "movement": -7,
+      "pointsChange": -38,
+      "age": 25,
+      "country": "AUS",
+      "careerHigh": "109",
+      "tournament": "Playford 8e",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 449,
+      "maxPoints": 512,
+      "tournamentHistory": [
+        {
+          "text": "Playford 8e",
+          "lastSeen": "2026-11-24T07:28:41.318545+00:00"
+        },
+        {
+          "text": "Playford 16e",
+          "lastSeen": "2026-11-24T01:19:55.767449+00:00"
+        },
+        {
+          "text": "Sydney 16e",
+          "lastSeen": "2026-11-17T07:28:07.085179+00:00"
+        },
+        {
+          "text": "Brisbane 3 QF (16e )",
+          "lastSeen": "2026-11-14T12:58:18.744900+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 131,
       "name": "Max Alcalá Gurri",
       "livePoints": 442,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 24,
       "country": "ESP",
-      "careerHigh": "MC",
+      "careerHigh": "130",
       "tournament": "Florianópolis 16e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
@@ -2590,7 +2623,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 16e",
-          "lastSeen": "2026-11-24T01:19:55.767449+00:00"
+          "lastSeen": "2026-11-24T07:28:41.318545+00:00"
         },
         {
           "text": "Montevideo 16e",
@@ -2607,14 +2640,14 @@
       ]
     },
     {
-      "rank": 131,
+      "rank": 132,
       "name": "Nikolás Sánchez Izquierdo",
       "livePoints": 438,
-      "movement": 1,
+      "movement": null,
       "pointsChange": null,
       "age": 27,
       "country": "ESP",
-      "careerHigh": "NMC (132)",
+      "careerHigh": "MC",
       "tournament": "",
       "previousTournaments": "",
       "tournamentStatus": "non_communique",
@@ -2628,35 +2661,6 @@
         {
           "text": "Lima DF",
           "lastSeen": "2026-11-14T18:51:29.542563+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 132,
-      "name": "Dane Sweeny",
-      "livePoints": 437,
-      "movement": -9,
-      "pointsChange": -44,
-      "age": 25,
-      "country": "AUS",
-      "careerHigh": "109",
-      "tournament": "Playford 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 443,
-      "maxPoints": 512,
-      "tournamentHistory": [
-        {
-          "text": "Playford 16e",
-          "lastSeen": "2026-11-24T01:19:55.767449+00:00"
-        },
-        {
-          "text": "Sydney 16e",
-          "lastSeen": "2026-11-17T07:28:07.085179+00:00"
-        },
-        {
-          "text": "Brisbane 3 QF (16e )",
-          "lastSeen": "2026-11-14T12:58:18.744900+00:00"
         }
       ]
     },
@@ -2848,12 +2852,16 @@
       "age": 25,
       "country": "AUS",
       "careerHigh": "95",
-      "tournament": "Playford 16e",
+      "tournament": "Playford 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 407,
+      "nextPoints": 413,
       "maxPoints": 476,
       "tournamentHistory": [
+        {
+          "text": "Playford 8e",
+          "lastSeen": "2026-11-24T07:28:41.318545+00:00"
+        },
         {
           "text": "Playford 16e",
           "lastSeen": "2026-11-24T01:19:55.767449+00:00"

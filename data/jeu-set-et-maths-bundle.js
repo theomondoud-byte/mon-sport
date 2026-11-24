@@ -3,8 +3,38 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-23T13:28:56.135457+00:00",
+ "fetchedAt": "2026-11-24T07:28:44.542549+00:00",
  "posts": [
+  {
+   "title": "📊 Pour la 6e fois, les circuits ATP et WTA ont couronné un nouveau ET une nouvelle N°1 à la fin de la saison : ▪️ 2003 : Andy Roddick 🇺🇸 & Justine Henin 🇧🇪 ▪️ 2008 :…",
+   "text": "📊 Pour la 6e fois, les circuits ATP et WTA ont couronné un nouveau ET une nouvelle N°1 à la fin de la saison :\n▪️ 2003 : Andy Roddick 🇺🇸 & Justine Henin 🇧🇪\n▪️ 2008 : Rafael Nadal 🇪🇸 & Jelena Jankovic 🇷🇸\n▪️ 2016 : Andy Murray 🇬🇧 & Angelique Kerber 🇩🇪\n▪️ 2022 : Carlos Alcaraz 🇪🇸 & Iga Swiatek 🇵🇱\n▪️ 2024 : Jannik Sinner 🇮🇹 & Aryna Sabalenka 🇧🇾\n🆕 2026 : Alexander Zverev 🇩🇪 & Elena Rybakina 🇰🇿",
+   "link": "https://x.com/JeuSetMaths/status/2124957180369489988",
+   "date": "2026-11-23T20:04:06.252000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HX1cBuEWMAAvp1k.png?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HX1cBuEWMAAvp1k.png?name=orig",
+    "https://pbs.twimg.com/media/HX1cCL2WMAAOw5j.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Les classements ATP et WTA en relief de cette saison 2026 (par paliers de 250 pts).",
+   "text": "📊 Les classements ATP et WTA en relief de cette saison 2026 (par paliers de 250 pts).",
+   "link": "https://x.com/JeuSetMaths/status/2124953126101016957",
+   "date": "2026-11-23T19:47:59.639000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HX1Yl28WAAA64dp.png?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HX1Yl28WAAA64dp.png?name=orig",
+    "https://pbs.twimg.com/media/HX1Yv30WUAE0nuu.png?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Jamais un joueur n'avait terminé une saison N°1 mondial en ayant remporté moins de 4 titres. Alexander Zverev 🇩🇪 fait sauter cette barre avec ses 2 titres (mais 2…",
    "text": "📊 Jamais un joueur n'avait terminé une saison N°1 mondial en ayant remporté moins de 4 titres. Alexander Zverev 🇩🇪 fait sauter cette barre avec ses 2 titres (mais 2 titres en Grand Chelem).\n\n✍️ De leur côté, Jimmy Connors 🇺🇸 (1975 et 1977) et John McEnroe 🇺🇸 (1982) sont les seuls joueurs ayant réussi à terminer une saison à la première place mondiale sans avoir remporté le moindre Grand Chelem au cours de la saison écoulée.",
@@ -249,34 +279,6 @@ export const jeuSetMathsBundledData = {
    "image": "https://pbs.twimg.com/media/HXq1QZUWYAAtuGT.jpg?name=orig",
    "images": [
     "https://pbs.twimg.com/media/HXq1QZUWYAAtuGT.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Depuis le début de sa carrière, Carlos Alcaraz 🇪🇸 a disputé 20 matchs au tie-break décisif. Son bilan ? ✅✅✅✅✅✅✅✅❌✅✅✅✅✅❌✅✅✅❌✅ ➡️ 17 victoires, 3 défaites ✍️ Tous…",
-   "text": "📊 Depuis le début de sa carrière, Carlos Alcaraz 🇪🇸 a disputé 20 matchs au tie-break décisif. Son bilan ?\n✅✅✅✅✅✅✅✅❌✅✅✅✅✅❌✅✅✅❌✅\n➡️ 17 victoires, 3 défaites\n\n✍️ Tous circuits confondus : ITF, Challenger, ATP",
-   "link": "https://x.com/JeuSetMaths/status/2124175264427245964",
-   "date": "2026-11-21T16:17:02.964000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXqWFpHXAAA5Jvc.png?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXqWFpHXAAA5Jvc.png?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Carlos Alcaraz 🇪🇸 sur dur intérieur en 2026 : 🇦🇹 Vienne ✅ vs Khachanov (N°24) ✅ vs Basilashvili (N°95) ✅ vs Paul (N°14) ✅ vs Medvedev (N°5) 🏆 vs De Minaur (N°10) 🇫🇷…",
-   "text": "📊 Carlos Alcaraz 🇪🇸 sur dur intérieur en 2026 :\n\n🇦🇹 Vienne\n✅ vs Khachanov (N°24)\n✅ vs Basilashvili (N°95)\n✅ vs Paul (N°14)\n✅ vs Medvedev (N°5)\n🏆 vs De Minaur (N°10)\n\n🇫🇷 Paris\n✅ vs Michelsen (N°35)\n✅ vs Fritz (N°12)\n✅ vs Ruud (N°23)\n🏆 vs Shelton (N°4)\n\n🎱 Masters\n✅ vs Tiafoe (N°8)\n✅ vs Medvedev (N°5)\n✅ vs Cobolli (N°6)\n✅ vs Shelton (N°4)\n❓\n\n➡️ 13 victoires, 0 défaite\n↪️ 2 sets concédés\n\n✍️ Auxquelles on devrait ajouter une victoire en Laver Cup (vs Fritz, N°10) qui officiellement est comptabilisée dans les bilans ATP.",
-   "link": "https://x.com/JeuSetMaths/status/2124167768886935873",
-   "date": "2026-11-21T15:47:15.888000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXqPUxyWIAADYl3.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXqPUxyWIAADYl3.jpg?name=orig"
    ],
    "video": null
   }
