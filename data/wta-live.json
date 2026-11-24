@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-23T19:10:37.599528+00:00",
+  "fetchedAt": "2026-11-24T01:19:53.760113+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1776,7 +1776,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
         },
         {
           "text": "Colina F",
@@ -1817,7 +1817,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
         },
         {
           "text": "Sydney 3 DF",
@@ -1870,7 +1870,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
         }
       ]
     },
@@ -2067,7 +2067,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
         },
         {
           "text": "Colina QF",
@@ -2248,7 +2248,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
         },
         {
           "text": "Colina DF",
@@ -2383,7 +2383,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 5 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
         },
         {
           "text": "Trnava 4 F",
@@ -2491,16 +2491,20 @@
       "name": "Julia Riera",
       "age": 24,
       "country": "ARG",
-      "livePoints": 558,
+      "livePoints": 561,
       "careerHigh": "93",
       "movement": 1,
-      "pointsChange": null,
-      "tournament": "Buenos Aires 16e",
+      "pointsChange": 3,
+      "tournament": "Buenos Aires 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 561,
+      "nextPoints": 573,
       "maxPoints": 671,
       "tournamentHistory": [
+        {
+          "text": "Buenos Aires 8e",
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
+        },
         {
           "text": "Buenos Aires 16e",
           "lastSeen": "2026-11-23T19:10:37.599528+00:00"
@@ -2721,7 +2725,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+          "lastSeen": "2026-11-24T01:19:53.760113+00:00"
         },
         {
           "text": "Colina DF",
