@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-24T07:28:41.495001+00:00",
+  "fetchedAt": "2026-11-24T13:26:03.524034+00:00",
   "rows": [
     {
       "rank": 1,
@@ -2590,7 +2590,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-24T07:28:41.318545+00:00"
+          "lastSeen": "2026-11-24T13:26:03.421258+00:00"
         },
         {
           "text": "Playford 16e",
@@ -2623,7 +2623,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 16e",
-          "lastSeen": "2026-11-24T07:28:41.318545+00:00"
+          "lastSeen": "2026-11-24T13:26:03.421258+00:00"
         },
         {
           "text": "Montevideo 16e",
@@ -2860,7 +2860,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-24T07:28:41.318545+00:00"
+          "lastSeen": "2026-11-24T13:26:03.421258+00:00"
         },
         {
           "text": "Playford 16e",
