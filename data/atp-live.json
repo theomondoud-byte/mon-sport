@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-25T07:31:25.292697+00:00",
+  "fetchedAt": "2026-11-25T13:31:16.728762+00:00",
   "rows": [
     {
       "rank": 1,
@@ -368,7 +368,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
+          "lastSeen": "2026-11-25T13:31:16.565790+00:00"
         }
       ]
     },
@@ -421,7 +421,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
+          "lastSeen": "2026-11-25T13:31:16.565790+00:00"
         }
       ]
     },
@@ -1097,7 +1097,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
+          "lastSeen": "2026-11-25T13:31:16.565790+00:00"
         }
       ]
     },
@@ -2605,7 +2605,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
+          "lastSeen": "2026-11-25T13:31:16.565790+00:00"
         },
         {
           "text": "Playford 16e",
@@ -2638,7 +2638,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 8e",
-          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
+          "lastSeen": "2026-11-25T13:31:16.565790+00:00"
         },
         {
           "text": "Florianópolis 16e",
@@ -2863,7 +2863,7 @@
       "tournamentHistory": [
         {
           "text": "Playford QF",
-          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
+          "lastSeen": "2026-11-25T13:31:16.565790+00:00"
         },
         {
           "text": "Playford 8e",
