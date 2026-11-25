@@ -3,7 +3,7 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-25T01:26:15.613391+00:00",
+ "fetchedAt": "2026-11-25T07:31:29.900268+00:00",
  "posts": [
   {
    "title": "📊 Les plus jeunes joueurs qualifiés pour le Master Next Gen : 🆕 17 ans et 278 jours : Moise Kouame 🇫🇷 (2026) ▪️ 18 ans et 77 jours : Justin Engel 🇩🇪 (2025) ▪️ 18 ans et…",

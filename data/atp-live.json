@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-25T01:26:10.728132+00:00",
+  "fetchedAt": "2026-11-25T07:31:25.292697+00:00",
   "rows": [
     {
       "rank": 1,
@@ -368,7 +368,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
+          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
         }
       ]
     },
@@ -421,7 +421,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
+          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
         }
       ]
     },
@@ -1097,7 +1097,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
+          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
         }
       ]
     },
@@ -2605,7 +2605,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
+          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
         },
         {
           "text": "Playford 16e",
@@ -2638,7 +2638,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 8e",
-          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
+          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
         },
         {
           "text": "Florianópolis 16e",
@@ -2848,35 +2848,23 @@
     },
     {
       "rank": 142,
-      "name": "Giovanni Mpetshi Perricard",
-      "livePoints": 411,
-      "movement": null,
-      "pointsChange": null,
-      "age": 23,
-      "country": "FRA",
-      "careerHigh": "29",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 143,
       "name": "Tristan Schoolkate",
-      "livePoints": 407,
-      "movement": null,
-      "pointsChange": null,
+      "livePoints": 413,
+      "movement": 1,
+      "pointsChange": 6,
       "age": 25,
       "country": "AUS",
       "careerHigh": "95",
-      "tournament": "Playford 8e",
+      "tournament": "Playford QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 413,
+      "nextPoints": 423,
       "maxPoints": 476,
       "tournamentHistory": [
+        {
+          "text": "Playford QF",
+          "lastSeen": "2026-11-25T07:31:25.039465+00:00"
+        },
         {
           "text": "Playford 8e",
           "lastSeen": "2026-11-25T01:26:10.640027+00:00"
@@ -2898,6 +2886,22 @@
           "lastSeen": "2026-11-17T07:28:07.085179+00:00"
         }
       ]
+    },
+    {
+      "rank": 143,
+      "name": "Giovanni Mpetshi Perricard",
+      "livePoints": 411,
+      "movement": -1,
+      "pointsChange": null,
+      "age": 23,
+      "country": "FRA",
+      "careerHigh": "29",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 144,
