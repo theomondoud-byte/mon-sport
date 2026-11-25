@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-24T19:08:19.899124+00:00",
+  "fetchedAt": "2026-11-25T01:26:10.728132+00:00",
   "rows": [
     {
       "rank": 1,
@@ -360,12 +360,17 @@
       "age": 25,
       "country": "CZE",
       "careerHigh": "12",
-      "tournament": "",
+      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (1 V / 0 D) (QF )",
+          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
+        }
+      ]
     },
     {
       "rank": 15,
@@ -408,12 +413,17 @@
       "age": 26,
       "country": "CAN",
       "careerHigh": "4",
-      "tournament": "",
+      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (0 V / 1 D) (QF )",
+          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
+        }
+      ]
     },
     {
       "rank": 18,
@@ -1087,7 +1097,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
+          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
         }
       ]
     },
@@ -2595,7 +2605,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
+          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
         },
         {
           "text": "Playford 16e",
@@ -2628,7 +2638,7 @@
       "tournamentHistory": [
         {
           "text": "Florianópolis 8e",
-          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
+          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
         },
         {
           "text": "Florianópolis 16e",
@@ -2869,7 +2879,7 @@
       "tournamentHistory": [
         {
           "text": "Playford 8e",
-          "lastSeen": "2026-11-24T19:08:19.695346+00:00"
+          "lastSeen": "2026-11-25T01:26:10.640027+00:00"
         },
         {
           "text": "Playford 16e",

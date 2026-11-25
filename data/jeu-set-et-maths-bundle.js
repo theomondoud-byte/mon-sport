@@ -3,8 +3,34 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-24T19:08:24.453548+00:00",
+ "fetchedAt": "2026-11-25T01:26:15.613391+00:00",
  "posts": [
+  {
+   "title": "📊 Les plus jeunes joueurs qualifiés pour le Master Next Gen : 🆕 17 ans et 278 jours : Moise Kouame 🇫🇷 (2026) ▪️ 18 ans et 77 jours : Justin Engel 🇩🇪 (2025) ▪️ 18 ans et…",
+   "text": "📊 Les plus jeunes joueurs qualifiés pour le Master Next Gen :\n🆕 17 ans et 278 jours : Moise Kouame 🇫🇷 (2026)\n▪️ 18 ans et 77 jours : Justin Engel 🇩🇪 (2025)\n▪️ 18 ans et 81 jours : Jannik Sinner 🇮🇹 (2019)\n▪️ 18 ans et 119 jours : Joao Fonseca 🇧🇷 (2024)\n▪️ 18 ans et 188 jours : Carlos Alcaraz 🇪🇸 (2021)\n▪️ 18 ans et 194 jours : Holger Rune 🇩🇰 (2021)\n▪️ 18 ans et 206 jours : Denis Shapovalov 🇨🇦 (2017)",
+   "link": "https://x.com/JeuSetMaths/status/2125336643779358986",
+   "date": "2026-11-24T21:11:57.379000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2124173413375692803/vid/avc1/1080x1920/0BmFhcA4LPELx2Db.mp4?tag=29"
+  },
+  {
+   "title": "📊 Ils ont terminé une saison dans le Top 10 du classement ATP en ayant remporté un match en Grand Chelem ou moins : ▪️ 1974 : Rod Laver 🇦🇺, N°4 (0 victoire) ▪️ 1983 :…",
+   "text": "📊 Ils ont terminé une saison dans le Top 10 du classement ATP en ayant remporté un match en Grand Chelem ou moins :\n▪️ 1974 : Rod Laver 🇦🇺, N°4 (0 victoire)\n▪️ 1983 : Jose Luis Clerc 🇦🇷, N°8 (1 victoire)\n▪️ 1989 : Brad Gilbert 🇺🇸, N°6 (0 victoire)\n🆕 2026 : Arthur Fils 🇫🇷, N°6 (1 victoire)",
+   "link": "https://x.com/JeuSetMaths/status/2125331264119152976",
+   "date": "2026-11-24T20:50:34.768000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HX6xd7_W4AEcp_j.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HX6xd7_W4AEcp_j.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Pour la 6e fois, les circuits ATP et WTA ont couronné un nouveau ET une nouvelle N°1 à la fin de la saison : ▪️ 2003 : Andy Roddick 🇺🇸 & Justine Henin 🇧🇪 ▪️ 2008 :…",
    "text": "📊 Pour la 6e fois, les circuits ATP et WTA ont couronné un nouveau ET une nouvelle N°1 à la fin de la saison :\n▪️ 2003 : Andy Roddick 🇺🇸 & Justine Henin 🇧🇪\n▪️ 2008 : Rafael Nadal 🇪🇸 & Jelena Jankovic 🇷🇸\n▪️ 2016 : Andy Murray 🇬🇧 & Angelique Kerber 🇩🇪\n▪️ 2022 : Carlos Alcaraz 🇪🇸 & Iga Swiatek 🇵🇱\n▪️ 2024 : Jannik Sinner 🇮🇹 & Aryna Sabalenka 🇧🇾\n🆕 2026 : Alexander Zverev 🇩🇪 & Elena Rybakina 🇰🇿",
@@ -255,32 +281,6 @@ export const jeuSetMathsBundledData = {
    "image": null,
    "images": [],
    "video": "https://video.twimg.com/amplify_video/2124240497724047360/vid/avc1/576x720/YbsovLmAdB1sV1IZ.mp4?tag=16"
-  },
-  {
-   "title": "📊 Les joueurs en activité qui se sont le plus souvent affrontés sur le circuit principal : ⬆️ 23 matchs : Medvedev 🇷🇺 vs Zverev 🇩🇪 ⬇️ 22 matchs : Djokovic 🇷🇸 vs Cilic…",
-   "text": "📊 Les joueurs en activité qui se sont le plus souvent affrontés sur le circuit principal :\n⬆️ 23 matchs : Medvedev 🇷🇺 vs Zverev 🇩🇪\n⬇️ 22 matchs : Djokovic 🇷🇸 vs Cilic 🇭🇷\n▪️ 17 matchs : Sinner 🇮🇹 vs Medvedev 🇷🇺\n▪️ 17 matchs : Sinner 🇮🇹 vs Alcaraz 🇪🇸",
-   "link": "https://x.com/JeuSetMaths/status/2124235092663128568",
-   "date": "2026-11-21T20:14:47.127000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2124227761648599040/vid/avc1/576x720/0PnZEKvp2PLFUHjh.mp4?tag=16"
-  },
-  {
-   "title": "📊 Quel scénario ! Après laissé filer 3 balles de match dans le tie-break du 2e set, Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 en ont sauvé 3 à leur tour dans le super…",
-   "text": "📊 Quel scénario ! Après laissé filer 3 balles de match dans le tie-break du 2e set, Théo Arribagé 🇫🇷 et Albano Olivetti 🇫🇷 en ont sauvé 3 à leur tour dans le super tie-break pour devenir la 4e paire 100% française à se qualifier en finale du double messieurs du Masters :\n🥈 1986 : Forget 🇫🇷 & Noah 🇫🇷\n🥈 2003 : Llodra 🇫🇷 & Santoro 🇫🇷\n🏆 2005 : Llodra 🇫🇷 & Santoro 🇫🇷 (2)\n🥈 2018 : Mahut 🇫🇷 & Herbert 🇫🇷\n🏆 2019 : Mahut 🇫🇷 & Herbert 🇫🇷 (2)\n🏆 2021 : Mahut 🇫🇷 & Herbert 🇫🇷 (3)\n❓ 2026 : Arribagé 🇫🇷 & Olivetti 🇫🇷\n\n✍️ Auxquelles s'ajoutent 2 paires composées d'un joueur français associé à un partenaire étranger :\n🏆 1990 : Forget 🇫🇷 & Hlasek 🇨🇭\n🥈 2020 : Roger-Vasselin 🇫🇷 & Melzer 🇦🇹",
-   "link": "https://x.com/JeuSetMaths/status/2124219973409046934",
-   "date": "2026-11-21T19:14:42.416000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXq1QZUWYAAtuGT.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXq1QZUWYAAtuGT.jpg?name=orig"
-   ],
-   "video": null
   }
  ]
 };

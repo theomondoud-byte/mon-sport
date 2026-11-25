@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-24T19:08:17.308666+00:00",
+  "fetchedAt": "2026-11-25T01:26:08.509270+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1768,11 +1768,11 @@
       "careerHigh": "NMC (105)",
       "movement": 2,
       "pointsChange": null,
-      "tournament": "Buenos Aires 16e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 761,
-      "maxPoints": 871,
+      "tournament": "",
+      "previousTournaments": "Défaite Buenos Aires 16e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Buenos Aires 16e",
@@ -1817,7 +1817,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde 8e",
-          "lastSeen": "2026-11-24T19:08:17.308666+00:00"
+          "lastSeen": "2026-11-25T01:26:08.509270+00:00"
         },
         {
           "text": "Adélaïde 16e",
@@ -1866,12 +1866,16 @@
       "careerHigh": "56",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Buenos Aires 16e",
+      "tournament": "Buenos Aires 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 730,
+      "nextPoints": 737,
       "maxPoints": 835,
       "tournamentHistory": [
+        {
+          "text": "Buenos Aires 8e",
+          "lastSeen": "2026-11-25T01:26:08.509270+00:00"
+        },
         {
           "text": "Buenos Aires 16e",
           "lastSeen": "2026-11-24T19:08:17.308666+00:00"
@@ -2023,7 +2027,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-24T19:08:17.308666+00:00"
+          "lastSeen": "2026-11-25T01:26:08.509270+00:00"
         },
         {
           "text": "Buenos Aires 16e",
@@ -2391,7 +2395,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 5 16e",
-          "lastSeen": "2026-11-24T19:08:17.308666+00:00"
+          "lastSeen": "2026-11-25T01:26:08.509270+00:00"
         },
         {
           "text": "Trnava 4 F",
@@ -2511,7 +2515,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-24T19:08:17.308666+00:00"
+          "lastSeen": "2026-11-25T01:26:08.509270+00:00"
         },
         {
           "text": "Buenos Aires 16e",
@@ -2659,7 +2663,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-24T19:08:17.308666+00:00"
+          "lastSeen": "2026-11-25T01:26:08.509270+00:00"
         },
         {
           "text": "Buenos Aires 16e",
