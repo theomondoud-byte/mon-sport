@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-25T13:31:14.068781+00:00",
+  "fetchedAt": "2026-11-25T19:01:33.940048+00:00",
   "rows": [
     {
       "rank": 1,
@@ -1874,7 +1874,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-25T13:31:14.068781+00:00"
+          "lastSeen": "2026-11-25T19:01:33.940048+00:00"
         },
         {
           "text": "Buenos Aires 16e",
@@ -2027,7 +2027,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-25T13:31:14.068781+00:00"
+          "lastSeen": "2026-11-25T19:01:33.940048+00:00"
         },
         {
           "text": "Buenos Aires 16e",
@@ -2387,12 +2387,16 @@
       "careerHigh": "NMC (135)",
       "movement": 1,
       "pointsChange": null,
-      "tournament": "Trnava 5 16e",
+      "tournament": "Trnava 5 8e",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 577,
+      "nextPoints": 582,
       "maxPoints": 641,
       "tournamentHistory": [
+        {
+          "text": "Trnava 5 8e",
+          "lastSeen": "2026-11-25T19:01:33.940048+00:00"
+        },
         {
           "text": "Trnava 5 16e",
           "lastSeen": "2026-11-25T13:31:14.068781+00:00"
@@ -2515,7 +2519,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-25T13:31:14.068781+00:00"
+          "lastSeen": "2026-11-25T19:01:33.940048+00:00"
         },
         {
           "text": "Buenos Aires 16e",
@@ -2663,7 +2667,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-25T13:31:14.068781+00:00"
+          "lastSeen": "2026-11-25T19:01:33.940048+00:00"
         },
         {
           "text": "Buenos Aires 16e",
