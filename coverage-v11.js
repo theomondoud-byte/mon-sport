@@ -21,7 +21,7 @@ export const COVERAGE={
  'Jannik Sinner':{level:'automatique partielle',source:'ATP · résultats',url:'https://www.atptour.com/en/players',scope:'ATP/Wimbledon/ATP Finals et archives ; tableaux et doubles incomplets'},
  'Carlos Alcaraz':{level:'automatique partielle',source:'ATP · résultats',url:'https://www.atptour.com/en/players',scope:'ATP 2026 et Finals ; sources hebdomadaires, doubles incomplets'},
  'Rafael Jódar':{level:'automatique partielle',source:'ATP · Challenger',url:'https://www.atptour.com/en/players',scope:'ATP 2026 et Challenger selon disponibilité ; ATP Finals'},
- 'Moïse Kouamé':{level:'automatique partielle',source:'FFT · tennis et Challenger',url:'https://www.fft.fr/',scope:'ITF/Challenger, Open de Metz annoncé ; matches récents sans tirage parfois non publics'},
+ 'Moïse Kouamé':{level:'automatique',source:'ESPN + Tennis Explorer (Challenger, ITF, qualifications)',url:'https://www.tennisexplorer.com/player/kouame-d4969/',scope:'Tous les matchs joués, circuit principal et Challenger, avec score et tour'},
  'Mirra Andreeva':{level:'automatique partielle',source:'WTA · résultats',url:'https://www.wtatennis.com/players',scope:'WTA 2026 et Finals ; tableaux et doubles incomplets'}
 };
 export function coverageFor(name){

@@ -4,6 +4,15 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.10 — Challenger et Coupe Davis automatiques
+
+- **Nouvelle source tennis** : le relais lit la liste des matchs de chaque joueur suivi sur Tennis Explorer (`/api/tennis-matches`) — Challenger, ITF, qualifications, Coupe Davis, que ESPN ne couvre pas. Les matchs déjà fournis par ESPN ou les archives (même adversaire, ±2 jours) ne sont pas doublés. Score, tour et verdict V/D sont affichés comme pour les autres matchs.
+- **Coupe Davis** : Rafael Jódar — Jurij Rodionov 2-6 6-0 6-1 (quart de finale Espagne — Autriche, 26 novembre) apparaît en vert dans « En cours et passés ».
+- **Moïse Kouamé** : la carte « Open Metz–Grand Est · à vérifier » est supprimée — il n'y a pas joué ; ses derniers matchs sont au Challenger de Monastir (victoire contre R. Strombachs, défaite contre J. Forejtek en huitièmes).
+- Limite connue : Tennis Explorer annonce son transfert vers Flashscore le 16 décembre 2026.
+
+---
+
 # Mon Sport V17.9 — audit des résultats du 26 novembre
 
 Comparaison de ce que l'appli affichait avec ce qui s'est réellement passé :

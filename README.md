@@ -25,6 +25,9 @@ L'application s'ouvre instantanément avec les dernières données mémorisées,
 - **Relevés tennis et tennis de table** (`data/*.json`) : classements ATP/WTA live, Race, Next Gen, ITTF, collectés toutes les 6 heures par GitHub Actions (`scripts/refresh_*.py`).
 - **Jeu, set et maths** : publications collectées par `scripts/refresh_jeu_set_maths.py`, embarquées dans `data/jeu-set-et-maths-bundle.js` pour fonctionner même sans réseau.
 - **FFL** : API WordPress publique.
+- **Tennis Explorer** (via le relais, `/api/tennis-matches`) : matchs des joueurs suivis absents d'ESPN — Challenger, ITF, qualifications, Coupe Davis. Le site annonce son transfert vers Flashscore le 16 décembre 2026 : la source sera à remplacer.
+- **World Rugby** (via le relais, `/api/rugby-live`) : rugby international en direct et résultats des 8 derniers jours.
+- **CyclingDB** (via le relais, `/api/race-result`) : classements cyclistes (top 10 et temps).
 - **Relais Cloudflare** (facultatif, `worker/index.js`) : flux RSS (Tennis Actu, Franceinfo, Basket USA, TrashTalk, Cyclism'Actu), recherche d'actualités et lecture des articles, sans problème de CORS.
 
 ## Architecture
@@ -40,6 +43,7 @@ Application statique en JavaScript natif (modules ES), sans framework ni étape 
 | `agenda-*.js`, `event-details.js`, `match-details.js` | Résultats, programme et comptes rendus. |
 | `rankings-view.js`, `stats-view.js`, `sports-profiles.js` | Classements et statistiques. |
 | `news-view.js`, `sports-articles.js`, `sports-media.js` | Fil d'actualités. |
+| `tennis-explorer.js` | Matchs Challenger / Coupe Davis lus par le relais, sans doublon ESPN. |
 | `tennis-history.js`, `audit-*.js`, `verified-*.js`, `coverage-v11.js` | Historiques et données vérifiées. |
 | `photos.js` | Portraits et logos des favoris. |
 | `worker/` | Relais Cloudflare facultatif. |

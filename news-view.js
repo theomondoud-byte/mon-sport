@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.9.0';
-import {filterSportsNews} from './sports-articles.js?v=17.9.0';
-import {sourceIcon} from './source-icons.js?v=17.9.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.10.0';
+import {filterSportsNews} from './sports-articles.js?v=17.10.0';
+import {sourceIcon} from './source-icons.js?v=17.10.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;

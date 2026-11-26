@@ -1580,3 +1580,44 @@ test('V17.9 : le résumé d’un match reprend le compte rendu, pas le multiplex
  const best=matchSummaryArticle(item,[a(1,'Lille s’offre un bel exploit face au Bayern Munich, le PSG accroché à domicile par la Roma... Revivez le multiplex de Ligue des champions','22:51'),a(2,'Tenu en échec par l’AS Rome en Ligue des champions, le PSG voit sa série de victoires s’arrêter','22:07')],[{name:'PSG',apiName:'Paris Saint Germain',sport:'Football'}]);
  assert.equal(best.link,'https://x.example/2');
 });
+
+test('V17.10 : matchs Challenger et Coupe Davis lus sur Tennis Explorer, sans doublon ESPN',async()=>{
+ const {tennisExplorerItems,abbreviatedMatches,tournamentLabel,roundLabel}=await import('../tennis-explorer.js');
+ assert.ok(abbreviatedMatches('Moïse Kouamé','Kouame M.'));
+ assert.ok(!abbreviatedMatches('Moïse Kouamé','Kouame A.'));
+ assert.ok(abbreviatedMatches('Rafael Jódar','Jodar R.'));
+ assert.equal(tournamentLabel('Monastir challenger'),'Challenger de Monastir');
+ assert.equal(tournamentLabel('Phan Thiet 4 challenger'),'Challenger de Phan Thiet 4');
+ assert.equal(tournamentLabel('Davis Cup'),'Coupe Davis');
+ assert.equal(roundLabel('R16'),'8e de finale');assert.equal(roundLabel('Q-1R'),'Qualifications · 1er tour');
+ const favorites=[{name:'Moïse Kouamé',sport:'Tennis'},{name:'Rafael Jódar',sport:'Tennis'}];
+ const payloads=[
+  {player:'Moïse Kouamé',url:'https://www.tennisexplorer.com/player/kouame-d4969/',matches:[
+   {date:'2026-11-11',tournament:'Monastir challenger',round:'R16',winner:'Forejtek J.',loser:'Kouame M.',score:'6-4 4-6 6-4'},
+   {date:'2026-11-09',tournament:'Monastir challenger',round:'1R',winner:'Kouame M.',loser:'Strombachs R.',score:'6-3 6-4'},
+   {date:'2026-08-01',tournament:'Old',round:'1R',winner:'Kouame M.',loser:'X Y.',score:'6-0 6-0'}]},
+  {player:'Rafael Jódar',matches:[
+   {date:'2026-11-26',tournament:'Davis Cup',round:'',winner:'Jodar R.',loser:'Rodionov J.',score:'2-6 6-0 6-1'},
+   {date:'2026-11-19',tournament:'Masters Cup ATP',round:'',winner:'Shelton B.',loser:'Jodar R.',score:'7-6(8) 7-5'}]}];
+ const espn=[{favorite:'Rafael Jódar',date:'2026-11-19T13:10:00Z',title:'Rafael Jodar — Ben Shelton'}];
+ const items=tennisExplorerItems(payloads,favorites,espn,{now:new Date('2026-11-26T20:00:00Z')});
+ assert.deepEqual(items.map(i=>[i.title,i.score,i.outcome,i.competition,i.round]),[
+  ['J. Forejtek — Moïse Kouamé','6-4 4-6 6-4','Défaite','Challenger de Monastir','8e de finale'],
+  ['Moïse Kouamé — R. Strombachs','6-3 6-4','Victoire','Challenger de Monastir','1er tour'],
+  ['Rafael Jódar — J. Rodionov','2-6 6-0 6-1','Victoire','Coupe Davis','']]);
+ const rows=makeAgenda({individuals:items});
+ assert.equal(rows.find(r=>/Rodionov/.test(r.title)).finished,true);
+});
+
+test('V17.10 : le relais lit la liste des matchs Tennis Explorer (vainqueur en premier, jeux décisifs)',async()=>{
+ const {parseTennisExplorer}=await import('../worker/index.js');
+ const html='<div id="matches-2026-1-data" class="none"><table><tbody>'
+  +'<tr class="head flags"><td class="t-name" colspan="3"><a href="/davis-cup/2026/atp-men/">Davis Cup</a></td><th class="round">Round</th><th class="f-score">Result</th></tr>'
+  +'<tr class="one"><td class="first time">26.11.</td><td class="s-color">&nbsp;</td><td class="t-name"><a><strong>Jodar R.</strong></a> - <a>Rodionov J.</a></td><td class="round">&nbsp;</td><td class="tl"><a>2-6, 6-0, 6-1</a></td></tr>'
+  +'<tr class="head flags"><td class="t-name" colspan="3"><a>Shanghai</a></td><th class="round">Round</th><th class="f-score">Result</th></tr>'
+  +'<tr class="two"><td class="first time">14.10.</td><td class="s-color"></td><td class="t-name"><a>Jodar R.</a> - <a>Van De Zandschulp B.</a></td><td class="round" title="round of 16">R16</td><td class="tl"><a>6<sup>4</sup>-7, 6-4, 7-6<sup>2</sup></a></td></tr>'
+  +'</tbody></table></div><div id="matches-2026-2-data"><table><tr class="one"><td class="first time">01.01.</td><td class="t-name">A B. / C D. - E F. / G H.</td></tr></table></div>';
+ assert.deepEqual(parseTennisExplorer(html),[
+  {date:'2026-11-26',tournament:'Davis Cup',round:'',winner:'Jodar R.',loser:'Rodionov J.',score:'2-6 6-0 6-1'},
+  {date:'2026-10-14',tournament:'Shanghai',round:'R16',winner:'Jodar R.',loser:'Van De Zandschulp B.',score:'6-7(4) 6-4 7-6(2)'}]);
+});

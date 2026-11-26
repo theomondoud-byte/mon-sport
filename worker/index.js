@@ -321,6 +321,43 @@ function classificationRows(html){
  }
  return [];
 }
+
+// Matchs de tennis hors ESPN (Challenger, ITF, Coupe Davis, qualifications) :
+// liste des matchs de l'année sur la fiche publique Tennis Explorer du joueur.
+// Le vainqueur y est toujours cité en premier.
+const TE_PLAYERS={'Moïse Kouamé':'kouame-d4969','Rafael Jódar':'jodar','Carlos Alcaraz':'alcaraz-5ab70','Jannik Sinner':'sinner-8b8e8','Arthur Fils':'fils','Mirra Andreeva':'andreeva-7d55d'};
+export function parseTennisExplorer(html){
+ const year=(html.match(/id="matches-(\d{4})-1-data"/)||[])[1];
+ if(!year)return [];
+ const from=html.indexOf('id="matches-'+year+'-1-data"');
+ const to=html.indexOf('id="matches-'+year+'-2-data"',from);
+ const block=html.slice(from,to>from?to:undefined);
+ const plain=v=>decode(String(v||'').replace(/<[^>]+>/g,' ')).replace(/\s+/g,' ').trim();
+ const cell=(row,cls)=>(row.match(new RegExp('<t[dh][^>]*class="'+cls+'"[^>]*>([\\s\\S]*?)<\\/t[dh]>','i'))||[])[1]||'';
+ const out=[];let tournament='';
+ for(const row of block.match(/<tr\b[^>]*>[\s\S]*?<\/tr>/gi)||[]){
+  if(/class="head/.test(row)){tournament=plain(cell(row,'t-name'));continue;}
+  const d=plain(cell(row,'first time')).match(/^(\d\d)\.(\d\d)\.$/);
+  if(!d||!tournament)continue;
+  const players=plain(cell(row,'t-name'));
+  if(!/ - /.test(players)||players.includes(' / '))continue;
+  const [winner,loser]=players.split(' - ').map(x=>x.trim());
+  const round=plain(cell(row,'round'));
+  // « 7-6<sup>8</sup> » → 7-6(8) ; « 6<sup>5</sup>-7 » → 6-7(5)
+  const score=plain(cell(row,'tl').replace(/(\d+)<sup>(\d+)<\/sup>-(\d+)/g,'$1-$3($2)').replace(/<sup>(\d+)<\/sup>/g,'($1)'))
+   .split(/\s*,\s*/).filter(Boolean).join(' ').replace(/\s*ret\.?$/i,' ab.');
+  out.push({date:year+'-'+d[2]+'-'+d[1],tournament,round,winner,loser,score});
+ }
+ return out;
+}
+async function tennisMatches(name){
+ const slug=TE_PLAYERS[name];
+ if(!slug)return {player:name,matches:[],error:'Joueur non suivi'};
+ const url='https://www.tennisexplorer.com/player/'+slug+'/';
+ const r=await fetch(url,{cf:{cacheTtl:1800,cacheEverything:true},headers:{'User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)','Accept':'text/html','Accept-Language':'en'}});
+ if(!r.ok)throw Error('Tennis Explorer HTTP '+r.status);
+ return {player:name,source:'Tennis Explorer',url,matches:parseTennisExplorer(await r.text()).slice(0,60)};
+}
 async function raceResult(name,year,{stage=0,gc=false,rider=''}={}){
  const alias=(RACE_ALIASES.find(([re])=>re.test(name))||[])[1]||name.replace(/\(.*?\)|·.*$/g,'').trim();
  const search=await fetch('https://cyclingdb.com/api/search?q='+encodeURIComponent(alias),{headers:CDB_HEADERS,cf:{cacheTtl:604800,cacheEverything:true},signal:AbortSignal.timeout(8000)});
@@ -441,4 +478,4 @@ export default {async fetch(request){if(request.method==='OPTIONS')return new Re
  const response=json(await curatedSportsNews());
  if(cache)await cache.put(key,new Response(response.clone().body,{headers:{...Object.fromEntries(response.headers),'Cache-Control':'public, max-age=600'}}));
  return response;
-}if(u.pathname==='/api/race-result'){const name=limit(u.searchParams.get('name'),120),year=limit(u.searchParams.get('year'),4);if(name.length<3||!/^20\d\d$/.test(year))return json({error:'Paramètres manquants'},400);const stage=+(u.searchParams.get('stage')||0);return json(await raceResult(name,year,{stage:stage>0&&stage<30?stage:0,gc:u.searchParams.get('gc')==='1',rider:limit(u.searchParams.get('rider'),80)}));}if(u.pathname==='/api/image')return imageProxy(limit(u.searchParams.get('url'),1024));if(u.pathname==='/api/tweets'){const ids=[...new Set(limit(u.searchParams.get('ids'),400).split(',').filter(id=>/^\d{10,20}$/.test(id)))].slice(0,12);if(!ids.length)return json({error:'Identifiants manquants'},400);return json(await tweetsMedia(ids));}if(u.pathname==='/api/rugby-live'){const day=limit(u.searchParams.get('date'),10);if(!/^\d{4}-\d{2}-\d{2}$/.test(day))return json({error:'Date attendue AAAA-MM-JJ'},400);const past=Math.min(10,Math.max(1,+(u.searchParams.get('past')||1)));return new Response(JSON.stringify(await rugbyLive(day,past)),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30',...cors}});}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams,u.searchParams.has('debug'),limit(u.searchParams.get('c'),80)));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};
+}if(u.pathname==='/api/tennis-matches'){const name=limit(u.searchParams.get('player'),60);try{return json(await tennisMatches(name));}catch(e){return json({player:name,matches:[],error:String(e.message||e)},502);}}if(u.pathname==='/api/race-result'){const name=limit(u.searchParams.get('name'),120),year=limit(u.searchParams.get('year'),4);if(name.length<3||!/^20\d\d$/.test(year))return json({error:'Paramètres manquants'},400);const stage=+(u.searchParams.get('stage')||0);return json(await raceResult(name,year,{stage:stage>0&&stage<30?stage:0,gc:u.searchParams.get('gc')==='1',rider:limit(u.searchParams.get('rider'),80)}));}if(u.pathname==='/api/image')return imageProxy(limit(u.searchParams.get('url'),1024));if(u.pathname==='/api/tweets'){const ids=[...new Set(limit(u.searchParams.get('ids'),400).split(',').filter(id=>/^\d{10,20}$/.test(id)))].slice(0,12);if(!ids.length)return json({error:'Identifiants manquants'},400);return json(await tweetsMedia(ids));}if(u.pathname==='/api/rugby-live'){const day=limit(u.searchParams.get('date'),10);if(!/^\d{4}-\d{2}-\d{2}$/.test(day))return json({error:'Date attendue AAAA-MM-JJ'},400);const past=Math.min(10,Math.max(1,+(u.searchParams.get('past')||1)));return new Response(JSON.stringify(await rugbyLive(day,past)),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30',...cors}});}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams,u.searchParams.has('debug'),limit(u.searchParams.get('c'),80)));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};
