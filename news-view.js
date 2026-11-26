@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.8.0';
-import {filterSportsNews} from './sports-articles.js?v=17.8.0';
-import {sourceIcon} from './source-icons.js?v=17.8.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.9.0';
+import {filterSportsNews} from './sports-articles.js?v=17.9.0';
+import {sourceIcon} from './source-icons.js?v=17.9.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -270,7 +270,7 @@ export function renderArticleBody(text,esc){
 // Pertinence (hors FFL et Jeu, set et maths) : on garde les comptes rendus
 // de matchs joués et les records, on écarte avant-matchs, interviews,
 // programmes TV, pronostics et rumeurs de transfert.
-const RESULT_WORDS=/\b(s impose|l emporte|bat|battu|battue|bats|victoire|vainqueur|gagne|remporte|remportee?|elimine|eliminee?|elimination|qualifie|qualifiee?|sacre|sacree?|titre|champion|championne|medaille|podium|defaite|s incline|renverse|domine|ecrase|corrige|triomphe|match nul|score|buteur|marque|doublé|double|triple double|double double|points|rebonds|passes decisives|chrono|s offre|prend sa revanche|revanche|dompte|fait tomber|surclasse|vient a bout|terrasse|balaie|balaye|arrache|sombre|chute|tombe|craque|cede|revivez|heroique|exploit|ne font qu une bouchee|deroule|file en|se hisse|couronne|beat|beats|beaten|defeat|defeats|defeated|win|wins|won|victory|rout|routs|edge|edges|tops|outlast|scores|scored|rebounds|assists|advance|advances|eliminated|loses|lost|falls|title|clinch|clinches)\b/;
+const RESULT_WORDS=/\b(s impose|tenu en echec|tenue en echec|tenus en echec|accroche|accrochee|accroches|neutralise|neutralisee|partagent les points|concede le nul|freine|stoppe|enchaine|l emporte|bat|battu|battue|bats|victoire|vainqueur|gagne|remporte|remportee?|elimine|eliminee?|elimination|qualifie|qualifiee?|sacre|sacree?|titre|champion|championne|medaille|podium|defaite|s incline|renverse|domine|ecrase|corrige|triomphe|match nul|score|buteur|marque|doublé|double|triple double|double double|points|rebonds|passes decisives|chrono|s offre|prend sa revanche|revanche|dompte|fait tomber|surclasse|vient a bout|terrasse|balaie|balaye|arrache|sombre|chute|tombe|craque|cede|revivez|heroique|exploit|ne font qu une bouchee|deroule|file en|se hisse|couronne|beat|beats|beaten|defeat|defeats|defeated|win|wins|won|victory|rout|routs|edge|edges|tops|outlast|scores|scored|rebounds|assists|advance|advances|eliminated|loses|lost|falls|title|clinch|clinches)\b/;
 const RECORD_WORDS=/\b(record|records|historique|histoire|inedit|premier joueur|premiere joueuse|plus jeune|career high|franchise record|first player|youngest|all time|milestone)\b/;
 const SCORE_PATTERN=/\b\d{1,3}\s?[-–]\s?\d{1,3}\b/;
 const OFF_TOPIC=/\b(affrontera|affronter|affronte ce|se frottera|defiera|avant le match|avant de jouer|programme|horaire|a quelle heure|chaine|diffusion|en direct|pronostic|pronostics|cote|cotes|compo|composition probable|mercato|transfert|rumeur|contrat|prolongation|interview|confie|estime|selon lui|reagit|conference de presse|blessure|blesse|forfait|preview|how to watch|odds|picks|prediction|betting|injury|injured|trade|rumor|contract|what to watch|ce qu il faut savoir|visit|visits|host|hosts|take on|takes on|to face|faces|square off|matchup|slate|fantasy|best player|ranking the|power rankings|grades)\b/;
@@ -314,13 +314,13 @@ export function matchSummaryArticle(item,news=[],favorites=[]){
   if(!favs.some(f=>sportCompatible(n,f)))continue;
   const headline=noHashtags(n.title);
   const favHit=favs.some(f=>titleMentions(n,f)||mentions(headline,favoriteAliases(f).flatMap(a=>a.split(' ')).filter(w=>w.length>=5)));
-  const oppTitle=mentions(headline,opponents);
+  const oppTitle=mentions(headline,opponents)||(mentionsOpponent(n.title,opponents)?1:0);
   // Le favori ET l'adversaire doivent figurer dans le TITRE (un extrait peut
   // citer le prochain adversaire) ; un avant-match est écarté.
   if(!favHit||!oppTitle)continue;
   const relevance=articleRelevance(n);
   if(!relevance&&OFF_TOPIC.test(normalized(n.title)))continue;
-  const score=oppTitle*3+(relevance?2:0)+(safeExcerpt(n.excerpt||n.description)?1:0)-(published-day)/86400000;
+  const score=oppTitle*3+(relevance?2:0)+(safeExcerpt(n.excerpt||n.description)?1:0)-(isRoundup(n.title)?4:0)-(published-day)/86400000;
   if(score>bestScore){best=n;bestScore=score;}
  }
  if(!best)return null;
@@ -328,6 +328,18 @@ export function matchSummaryArticle(item,news=[],favorites=[]){
 }
 // Deux articles au plus par rencontre d'un favori. Une « rencontre » est le
 // match le plus récent du favori avant la publication (à défaut : le jour).
+// Adversaire cité sous son nom français (« AS Rome » pour « AS Roma »).
+const OPPONENT_FR={roma:'rome',munchen:'munich',milano:'milan',napoli:'naples',torino:'turin',firenze:'florence',sevilla:'seville',lisboa:'lisbonne',bruxelles:'brussels',london:'londres',wien:'vienne',praha:'prague',koln:'cologne',argentina:'argentine',africa:'afrique',ireland:'irlande',scotland:'ecosse',wales:'galles',england:'angleterre',italy:'italie',spain:'espagne',germany:'allemagne'};
+function mentionsOpponent(title,opponents){
+ const words=new Set(normalized(noHashtags(title)).split(/\s+/));
+ return opponents.some(w=>words.has(w)||words.has(OPPONENT_FR[w])||[...words].some(t=>t.length===w.length&&t.length>=4&&t.slice(0,-1)===w.slice(0,-1)));
+}
+// Récapitulatif de plusieurs matchs (« Lille s'offre…, le PSG accroché… ») :
+// moins pertinent qu'un compte rendu consacré à la rencontre du favori.
+function isRoundup(title){
+ const t=String(title||'');
+ return /(\.\.\.|…)\s*\S/.test(t)||/\b(multiplex|ce qu.il faut retenir|le point sur|tous les r[ée]sultats|la soir[ée]e de)\b/i.test(t);
+}
 export function limitPerMatch(articles,favorites=[],matches=[],max=2){
  const groups=new Map();
  for(const article of articles){
@@ -342,7 +354,7 @@ export function limitPerMatch(articles,favorites=[],matches=[],max=2){
   const opponents=match?normalized(match.m.title).split(/\s+/).filter(w=>w.length>=4&&!favoriteAliases(favorite).some(a=>a.split(' ').includes(w))&&!GENERIC_WORDS.has(w)):[];
   // Le meilleur d'abord : compte rendu citant l'adversaire, record, extrait fourni.
   const relevance=articleRelevance(article);
-  const score=(opponents.length&&mentions(noHashtags(article.title),opponents)?4:0)+(relevance==='record'?3:relevance?2:0)+(safeExcerpt(article.excerpt||article.description)?1:0)+(article.image?0.5:0)+(newsSourceName(article)==='ESPN'?0:2.5);
+  const score=(opponents.length&&mentionsOpponent(article.title,opponents)?4:0)+(isRoundup(article.title)?-3:0)+(relevance==='record'?3:relevance?2:0)+(safeExcerpt(article.excerpt||article.description)?1:0)+(article.image?0.5:0)+(newsSourceName(article)==='ESPN'?0:2.5);
   if(!groups.has(key))groups.set(key,[]);
   groups.get(key).push({article,score,published});
  }
@@ -370,10 +382,26 @@ export function rankFromTitle(title,favorite){
  if(/^\s*(?:\S+\s+){0,3}?(deuxieme|second|troisieme)\b/.test(after))return ORDINALS[after.match(/(deuxieme|second|troisieme)/)[1]];
  return null;
 }
+// Tennis : « Kouamé éliminé au 2e tour à Metz », « battu en quarts »…
+const ROUNDS=[[/\b(premier|1er) tour\b/,'1er tour'],[/\b(deuxieme|second|2e) tour\b/,'2e tour'],[/\b(troisieme|3e) tour\b/,'3e tour'],[/\bhuitiemes?\b/,'8es de finale'],[/\bquarts?\b/,'quarts de finale'],[/\bdemi(?: finales?|s)?\b/,'demi-finale'],[/\bfinale\b/,'finale']];
+export function tennisExitFromTitle(title,favorite){
+ const text=' '+normalized(noHashtags(title))+' ';
+ const alias=favoriteAliases(favorite).find(a=>text.includes(' '+a+' '));
+ if(!alias)return '';
+ const after=text.slice(text.indexOf(' '+alias+' ')+alias.length+1);
+ const before=text.slice(0,text.indexOf(' '+alias+' ')+1);
+ const lost=/^\s*(?:\S+\s+){0,4}?(s incline|est battu|battu|elimine|est elimine|chute|tombe|sort|est sorti|sorti|perd|prend la porte|quitte)\b/.test(after)
+  ||/\b(elimine|bat|domine|sort|ecarte|surprend|renverse)\s+$/.test(before);
+ if(!lost)return '';
+ const round=ROUNDS.find(([re])=>re.test(text));
+ if(round?.[1]==='finale')return 'Finaliste';
+ return 'Éliminé'+(round?(round[1]==='demi-finale'||/finale/.test(round[1])?' en ':' au ')+round[1]:'');
+}
 export function competitionResultFromNews(item,news=[],favorites=[]){
  const favorite=favorites.find(f=>f.name===item.favorite)||{name:item.favorite,apiName:item.favorite};
  const start=Date.parse(item.date),end=Date.parse(item.endDate||item.date);
  if(!Number.isFinite(start))return null;
+ const tennis=/tennis/i.test(String(item.origin?.type||item.type||''))&&!/table/i.test(String(item.origin?.sport||''));
  const raceName=String(item.title||'').split(/\s+[—–-]\s+/).slice(1).join(' ')||String(item.competition||'');
  const raceWords=[...new Set(normalized(raceName).split(/\s+/).filter(w=>w.length>=4&&!RACE_GENERIC.has(w)&&!favoriteAliases(favorite).some(a=>a.split(' ').includes(w))))];
  if(!raceWords.length)return null;
@@ -382,13 +410,17 @@ export function competitionResultFromNews(item,news=[],favorites=[]){
   const published=Date.parse(article.date||article.published||'');
   if(!Number.isFinite(published)||published<start-12*3600000||published>(Number.isFinite(end)?end:start)+3*86400000)continue;
   if(!mentions(noHashtags(article.title),raceWords))continue;
-  const rank=rankFromTitle(article.title,favorite);
-  if(!rank)continue;
-  if(!best||published<best.published)best={rank,published,article};
+  // En tennis, « s'incline au deuxième tour » n'est pas une 2e place.
+  const exit=tennis?tennisExitFromTitle(article.title,favorite):'';
+  const rankRaw=exit?null:rankFromTitle(article.title,favorite);
+  const rank=tennis&&rankRaw&&rankRaw!==1?null:rankRaw;
+  if(!rank&&!exit)continue;
+  if(!best||published<best.published)best={rank:rank||null,exit,published,article};
  }
  if(!best)return null;
  const a=best.article;
- return {rank:best.rank,label:best.rank===1?'1er':best.rank+'e',article:{title:cleanTitle(a.title),excerpt:safeExcerpt(a.excerpt||a.description),link:a.link,source:newsSourceName(a),image:a.image||''}};
+ const label=best.exit||(tennis&&best.rank===1?'Titre':best.rank===1?'1er':best.rank+'e');
+ return {rank:best.rank,label,article:{title:cleanTitle(a.title),excerpt:safeExcerpt(a.excerpt||a.description),link:a.link,source:newsSourceName(a),image:a.image||''}};
 }
 export function renderNewsView({news=[],loading=false,hasWorker=false,photos={},esc,safeUrl,now=new Date(),sourceFilter='Tous',selectedSources=[],sportFilter='Tous',favoriteFilter='Tous',favorites=[],showAllRelated=false,readKeys=new Set(),readView='unread',keepVisible=new Set(),tweets=null,matches=[]}={}){
  const recentAll=newsLastWeek(news,now);

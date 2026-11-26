@@ -71,6 +71,7 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    uncertainParticipation:!!item.uncertainParticipation,
    wembanyamaUnconfirmed:!!item.wembanyamaUnconfirmed,
    pendingResult,isCompetition:!!item.scheduledCompetition,
+   resultRank:item.resultRank??(/^cycling/.test(String(item.type||''))&&/^1er\b/.test(score)?1:null),
    endDate:item.endDate||null,participationLevel:item.participationLevel||null,
    notes:item.notes||'',cycleUnit:item.cycleUnit||null,
    source,sourceUrl:item.sourceUrl||'',type,stats:item.stats||null,
@@ -103,7 +104,18 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
  }
  // Une affiche annoncée « à vérifier » est retirée dès qu'un match réel du même
  // favori existe à moins de 30 h : le programme a changé (forfait, remplaçant).
- const rows=[...seen.values()];
+ // Un match saisi à la main (calendrier du club) disparaît quand ESPN livre la
+ // même rencontre du même favori à moins de 6 h, même sous un autre nom
+ // (« Deportivo de La Coruña » / « Deportivo »).
+ const fromEspn=r=>/^(?:agenda-)?espn-/.test(String(r.origin?.id||''));
+ const manualTeam=r=>r.origin?.home&&r.origin?.away&&!fromEspn(r)&&!r.isCompetition&&!r.pendingResult;
+ const rows=[...seen.values()].filter(r=>{
+  if(!manualTeam(r))return true;
+  const twin=[...seen.values()].find(o=>o!==r&&fromEspn(o)&&o.origin?.home&&o.favorites.some(f=>r.favorites.includes(f))
+   &&Math.abs(Date.parse(o.date)-Date.parse(r.date))<=6*3600000);
+  if(twin)twin.favorites=[...new Set([...twin.favorites,...r.favorites])];
+  return !twin;
+ });
  return rows.filter(r=>!r.pendingResult||!rows.some(o=>o!==r&&!o.pendingResult&&!o.isCompetition&&(o.finished||o.live)
   &&o.favorites.some(f=>r.favorites.includes(f))&&Math.abs(Date.parse(o.date)-Date.parse(r.date))<30*3600000));
 }

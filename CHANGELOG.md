@@ -4,6 +4,20 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.9 — audit des résultats du 26 novembre
+
+Comparaison de ce que l'appli affichait avec ce qui s'est réellement passé :
+
+- **Critérium de Saitama (Paul Seixas 1er)** : le résultat dépendait d'un article qui a quitté le fil ; il retombait en « Résultat non disponible ». Il est désormais enregistré avec sa source (Cyclingnews). Les courses gagnées par Seixas ont aussi le cadre vert.
+- **SPO Rouen — Alliance Nîmes–Montpellier (0 – 3)** : victoire des frères Lebrun en Pro A le 24 novembre, auparavant « à vérifier ». Résultat sourcé (Tendance Ouest), cadre vert.
+- **Coupe Davis** : la phase finale de Bologne (24–29 novembre) manquait — ESPN ne la couvre pas. Carte « Espagne — Coupe Davis » pour Alcaraz et Jódar, rangée dans « En cours et passés ». Une compétition commencée s'affiche « En cours » au lieu de « Tableau et horaires à confirmer ».
+- **Doublon** : « Deportivo de La Coruña — FC Barcelona » (calendrier du club) et « Deportivo — Barcelona » (ESPN) apparaissaient deux fois ; un match saisi à la main disparaît quand ESPN livre la même rencontre.
+- **Articles** : un compte rendu consacré au match est préféré à un multiplex (« Lille s'offre…, le PSG accroché… Revivez le multiplex ») pour le résumé de la carte et le tri des 2 articles par rencontre. « Tenu en échec », « accroché »… sont reconnus comme des résultats, et l'adversaire est reconnu sous son nom français (AS Roma / AS Rome).
+- **Tennis** : une élimination lue dans un titre d'article (« éliminé au 2e tour », « battu en quarts ») renseigne le résultat d'un tournoi suivi ; un titre gagné s'affiche « Titre ».
+- Non résolu : le parcours de Moïse Kouamé à l'Open de Metz (aucune source accessible ne le donne) reste « à vérifier ».
+
+---
+
 # Mon Sport V17.8 — « En cours et passés », plus aucun réglage
 
 - **Matchs en direct et courses en cours** rangés avec les résultats : la catégorie « Passés » devient **« En cours et passés »** (onglets Résultats et Favoris). Une compétition sur plusieurs jours (tournoi, course par étapes) y figure du premier au dernier jour ; « À venir » ne montre plus que ce qui n'a pas commencé.

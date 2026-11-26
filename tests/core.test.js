@@ -6,7 +6,7 @@ import {parseESPNStandings,parseESPNTennisRankings,parseWTTRankings,rankingsForF
 import {renderFavoriteRankingDetails,renderFavoriteStats} from '../stats-view.js';
 import {createOnceLoader} from '../session-loader.js';
 import {renderBlocks as renderBlocksForTest} from '../news-view.js';
-import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle,limitPerMatch,rankFromTitle,competitionResultFromNews} from '../news-view.js';
+import {newsLastWeek,renderNewsView,safeExcerpt,decodeEntities,articleParagraphs,findFavorite,relevantFavoriteNews,htmlToText,htmlToBlocks,matchSummaryArticle,limitPerMatch,rankFromTitle,competitionResultFromNews,tennisExitFromTitle} from '../news-view.js';
 import {isSportsArticle,fetchJeuSetMathsNews,readCachedJeuSetMathsNews,readBundledJeuSetMathsNews,readAvailableJeuSetMathsNews,mergeJeuSetMathsNews,parseJeuSetMathsPosts} from '../sports-articles.js';
 import {renderAgendaView} from '../agenda-ui.js';
 import {jeuSetMathsBundledData} from '../data/jeu-set-et-maths-bundle.js';
@@ -1534,4 +1534,49 @@ test('V17.8 : un match en direct ou une course en cours est rangé dans « En co
  assert.deepEqual(agendaMatches(events,{phase:'future',now}).map(e=>e.id),['prochain']);
  const html=renderAgendaView({items:[],favorites:[],esc:x=>String(x),safeUrl:x=>x,now});
  assert.match(html,/En cours et passés/);
+});
+
+test('V17.9 : un match du calendrier du club n’est pas doublé par le même match ESPN sous un autre nom',()=>{
+ const manual={id:'v11-barca-next-2026-11-29-Deportivo',date:'2026-11-29T16:15:00+01:00',home:'Deportivo de La Coruña',away:'FC Barcelona',homeScore:null,awayScore:null,favorite:'FC Barcelone',status:'À venir',competition:'LaLiga',type:'team'};
+ const espn={id:'agenda-espn-740123',date:'2026-11-29T15:15:00Z',home:'Deportivo',away:'Barcelona',favorite:'FC Barcelone',status:'À venir',competition:'LaLiga',type:'team'};
+ const rows=makeAgenda({verified:[manual],expanded:[espn]});
+ assert.deepEqual(rows.map(r=>r.title),['Deportivo — Barcelona']);
+ const other={...manual,id:'v11-x',date:'2026-12-02T21:30:00+01:00',home:'FC Barcelona',away:'Atlético Madrid'};
+ assert.equal(makeAgenda({verified:[manual,other],expanded:[espn]}).length,2);
+});
+
+test('V17.9 : élimination en tennis lue dans un titre, compte rendu préféré au récapitulatif',()=>{
+ const kouame={name:'Moïse Kouamé',apiName:'Moïse Kouamé'};
+ assert.equal(tennisExitFromTitle('Metz (CH) : Moïse Kouamé éliminé dès le premier tour',kouame),'Éliminé au 1er tour');
+ assert.equal(tennisExitFromTitle('Bonzi sort Kouamé en quarts de finale à Metz',kouame),'Éliminé en quarts de finale');
+ assert.equal(tennisExitFromTitle('Kouamé bat Gaston et file en demi-finale',kouame),'');
+ const item={favorite:'Moïse Kouamé',title:'Moïse Kouamé — Open Metz–Grand Est',date:'2026-11-15T12:00:00+01:00',endDate:'2026-11-22T23:59:00+01:00',type:'tennis-competition',origin:{type:'tennis-competition',sport:'Tennis'}};
+ const found=competitionResultFromNews(item,[{title:'Metz : Moïse Kouamé s’incline au deuxième tour',link:'https://x.example/a',date:'2026-11-19T18:00:00Z',source:'Tennis Actu'}],[kouame]);
+ assert.equal(found.label,'Éliminé au 2e tour');assert.equal(found.rank,null);
+ const psg=[{name:'PSG',apiName:'Paris Saint Germain',sport:'Football'}];
+ const match=[{title:'Paris Saint-Germain — AS Roma',date:'2026-11-25T20:00:00Z',favorites:['PSG']}];
+ const a=(n,title)=>({title,sport:'Football',source:'Franceinfo',link:'https://x.example/'+n,date:'2026-11-25T22:30:00Z',excerpt:'Extrait.'});
+ const kept=[...limitPerMatch([a(1,'Lille s’offre un bel exploit face au Bayern Munich, le PSG accroché à domicile par la Roma... Résultats'),a(2,'Tenu en échec par l’AS Rome, le PSG voit sa série de victoires s’arrêter'),a(3,'Ligue des champions : le PSG accroché par la Roma au Parc')],psg,match,2)].map(x=>x.link);
+ assert.deepEqual(kept.sort(),['https://x.example/2','https://x.example/3']);
+});
+
+test('V17.9 : résultats sourcés de Saitama et de Pro A, Coupe Davis en cours',async()=>{
+ const {extraProgramFor}=await import('../verified-program.js');
+ const favs=['Paul Seixas','Félix Lebrun','Alexis Lebrun','Carlos Alcaraz','Rafael Jódar'].map(name=>({name}));
+ const now=new Date('2026-11-26T18:00:00Z');
+ const p=extraProgramFor(favs,now);
+ const rows=makeAgenda({verified:[...p.future,...p.past,...p.pending]});
+ const saitama=rows.filter(r=>/Saitama/.test(r.title));
+ assert.equal(saitama.length,1);assert.equal(saitama[0].score,'1er');assert.equal(saitama[0].resultRank,1);
+ const rouen=rows.filter(r=>/Rouen/.test(r.title));
+ assert.equal(rouen.length,1);assert.equal(rouen[0].score,'0 – 3');assert.deepEqual(rouen[0].favorites.sort(),['Alexis Lebrun','Félix Lebrun']);
+ const davis=agendaMatches(rows,{phase:'past',now}).filter(r=>/Coupe Davis/.test(r.title));
+ assert.equal(davis.length,1);assert.deepEqual(davis[0].favorites.sort(),['Carlos Alcaraz','Rafael Jódar']);
+});
+
+test('V17.9 : le résumé d’un match reprend le compte rendu, pas le multiplex',()=>{
+ const item={title:'Paris Saint-Germain — AS Roma',date:'2026-11-25T20:00:00Z',favorites:['PSG'],favorite:'PSG',finished:true};
+ const a=(n,title,h)=>({title,sport:'Football',source:'Franceinfo',link:'https://x.example/'+n,date:'2026-11-25T'+h+':00Z',excerpt:'Extrait.'});
+ const best=matchSummaryArticle(item,[a(1,'Lille s’offre un bel exploit face au Bayern Munich, le PSG accroché à domicile par la Roma... Revivez le multiplex de Ligue des champions','22:51'),a(2,'Tenu en échec par l’AS Rome en Ligue des champions, le PSG voit sa série de victoires s’arrêter','22:07')],[{name:'PSG',apiName:'Paris Saint Germain',sport:'Football'}]);
+ assert.equal(best.link,'https://x.example/2');
 });

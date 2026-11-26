@@ -14,6 +14,9 @@ const WTA='https://www.wtatennis.com/news/4599683';
 const CYCLING='https://cyclingdb.com/rider/paul-seixas';
 const PCS='https://www.procyclingstats.com/rider/paul-seixas/calendar';
 const SAITAMA='https://www.saitamacriterium.com/fr/actus/2025/seixas-et-un-arc-en-ciel-au-pays-du-soleil-levant/204';
+const SAITAMA_RESULT='https://www.cyclingnews.com/pro-cycling/racing/paul-seixas-chases-down-world-champion-brandon-mcnulty-at-tour-de-france-saitama-criterium-to-close-out-2026-season-with-a-win/';
+const ROUEN_RESULT='https://www.tendanceouest.com/actualite-444513-photos-tennis-de-table-l-alliance-nimes-montpellier-des-freres-lebrun-s-impose-face-au-spo-de-rouen';
+const DAVIS='https://www.daviscup.com/en/draws-results/2026/finals';
 const SINGAPORE='https://www.straitstimes.com/sport/mexican-young-star-isaac-del-toro-wins-tour-de-france-singapore-criterium';
 // Niveau de vérification : "affiche" pour une rencontre et un adversaire annoncés ;
 // "engagé" pour une participation annoncée à une compétition sans tableau précis ;
@@ -36,6 +39,10 @@ const UPCOMING=[
  fixture('Alexis Lebrun','rouen-proa-2026','2026-11-24T19:30:00+01:00','SPO Rouen — Alliance Nîmes–Montpellier','Pro A messieurs · Journée 7',ROUEN,{sport:'Tennis de table',type:'ping',exactTime:true,organizer:'Ville de Rouen',participationLevel:'engagé',notes:'Présence annoncée des frères Lebrun ; adversaire du simple à déterminer.'}),
  ...['Félix Lebrun','Alexis Lebrun','Flavien Coton'].map(name=>
   fixture(name,'world-mixed-2026','2026-11-29T12:00:00+01:00','Coupe du monde mixte — Chengdu','Tennis de table · 29 nov. – 6 déc.',MIXED,{sport:'Tennis de table',type:'ping-competition',scheduledCompetition:true,endDate:'2026-12-06T23:59:00+01:00',participationLevel:'engagé',organizer:'FFTT',notes:'Sélection officielle de l’équipe de France ; horaires et oppositions à venir.'})),
+ // Coupe Davis, phase finale à huit (Bologne, 24–29 novembre) : l'Espagne
+ // joue son quart contre l'Autriche le 26 ; Alcaraz est réservé au double.
+ ...['Carlos Alcaraz','Rafael Jódar'].map(name=>
+  fixture(name,'davis-final8-2026','2026-11-26T10:00:00+01:00','Espagne — Coupe Davis','Coupe Davis · phase finale · Bologne · 24–29 nov.',DAVIS,{sport:'Tennis',type:'tennis-competition',scheduledCompetition:true,endDate:'2026-11-29T23:59:00+01:00',participationLevel:'engagé',organizer:'ITF',notes:'Quart de finale Espagne — Autriche le 26 novembre (Mérida et Jódar en simple, Alcaraz réservé au double) ; demi-finale contre la Grande-Bretagne le 28, finale le 29.'})),
  fixture('Rafael Jódar','atp-finals-jodar-15','2026-11-15T14:00:00+01:00','Alexander Zverev — Rafael Jódar','ATP Finals · Turin · Phase de groupes',ATP,{sport:'Tennis',type:'tennis',exactTime:true,organizer:'ATP',round:'Round robin',notes:'Pas avant 14 h 00'}),
  fixture('Arthur Fils','atp-finals-fils-15','2026-11-15T20:30:00+01:00','Ben Shelton — Arthur Fils','ATP Finals · Turin · Phase de groupes',ATP,{sport:'Tennis',type:'tennis',exactTime:true,organizer:'ATP',round:'Round robin',notes:'Pas avant 20 h 30'}),
  fixture('Carlos Alcaraz','atp-finals-alcaraz-16','2026-11-16T14:00:00+01:00','Carlos Alcaraz — Frances Tiafoe','ATP Finals · Turin · Phase de groupes',ATP,{sport:'Tennis',type:'tennis',exactTime:true,organizer:'ATP',round:'Round robin',notes:'Pas avant 14 h 00'}),
@@ -90,6 +97,16 @@ const result=(id,date,title,score,category,type='cycling')=>({
  sport:'Cyclisme'
 });
 const PAST=[
+ {id:'v10-criterium-saitama',date:'2026-11-15T12:00:00+09:00',favorite:'Paul Seixas',
+  title:'Paul Seixas — Critérium de Saitama',score:'1er',competition:'Critérium ASO · exhibition',
+  source:'Cyclingnews · 15 novembre 2026',sourceUrl:SAITAMA_RESULT,status:'Terminé',
+  type:'cycling-criterium',snapshot:true,cycleUnit:'critérium',sport:'Cyclisme',
+  notes:'Seixas rejoint puis lâche le champion du monde Brandon McNulty à 3 km de l’arrivée ; Torstein Træen 3e.'},
+ {id:'v10-proa-rouen-result',date:'2026-11-24T19:30:00+01:00',favorite:'Félix Lebrun',additionalFavorites:['Alexis Lebrun'],
+  home:'SPO Rouen',away:'Alliance Nîmes–Montpellier',homeScore:0,awayScore:3,winner:true,exactTime:true,
+  competition:'Pro A messieurs · Journée 7',source:'Tendance Ouest · 24 novembre 2026',sourceUrl:ROUEN_RESULT,
+  status:'Terminé',type:'ping',sport:'Tennis de table',
+  notes:'Victoire 3–0 de l’Alliance des frères Lebrun devant 5 276 spectateurs, record d’affluence en Pro A.'},
  {id:'v10-criterium-singapore',date:'2026-11-08T12:00:00+08:00',favorite:'Paul Seixas',
   title:'Paul Seixas — Critérium de Singapour',score:'2e',competition:'Critérium ASO · exhibition',
   source:'The Straits Times · 8 novembre 2026',sourceUrl:SINGAPORE,status:'Terminé',

@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.8.0';
-import {sportInfo} from './sports-media.js?v=17.8.0';
+import {sourceIcon} from './source-icons.js?v=17.9.0';
+import {sportInfo} from './sports-media.js?v=17.9.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.8.0';
-import {auditInfo} from './audit-2026.js?v=17.8.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.8.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.8.0';
-import {photoInitials} from './photos.js?v=17.8.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.8.0';
-import {coverageFor} from './coverage-v11.js?v=17.8.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.9.0';
+import {auditInfo} from './audit-2026.js?v=17.9.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.9.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.9.0';
+import {photoInitials} from './photos.js?v=17.9.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.9.0';
+import {coverageFor} from './coverage-v11.js?v=17.9.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -28,7 +28,9 @@ function verdictChip(item,name,esc){
 }
 function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
  const isFuture=!item.finished;
- const state=item.pendingResult?'À vérifier':item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
+ const nowMs=(extras.now?new Date(extras.now):new Date()).getTime();
+ const running=item.isCompetition&&!item.pendingResult&&Date.parse(item.date)<=nowMs&&Date.parse(item.endDate||item.date)>nowMs;
+ const state=item.pendingResult?'À vérifier':running?'En cours':item.isCompetition?'Compétition':item.live?'En cours':isFuture?'À venir':'Terminé';
  const people=item.favorites.map(name=>{
   const sport=sportInfo(name,item.competition,item.type);
   return '<span class="agenda-person-tag compact" title="'+esc(name)+' · '+esc(sport.name)+'" aria-label="'+esc(name)+' · '+esc(sport.name)+'">'
@@ -46,7 +48,7 @@ function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
     ?'<span class="agenda-caution">Match des Spurs : la participation de Wembanyama n’est pas confirmée pour cette rencontre</span>':'');
  const sourceLink=recap.url&&safeUrl(recap.url)!=='#'
   ?'<a href="'+esc(safeUrl(recap.url))+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a>':'';
- const scoreText=item.pendingResult?'Résultat non disponible':item.isCompetition?(/cycling|cyclisme/i.test(item.type)?'Horaire et résultat à confirmer':'Tableau et horaires à confirmer')
+ const scoreText=item.pendingResult?'Résultat non disponible':running?'Compétition en cours':item.isCompetition?(/cycling|cyclisme/i.test(item.type)?'Horaire et résultat à confirmer':'Tableau et horaires à confirmer')
   :item.score||(!item.finished?'Score à venir':'Score indisponible');
  const timing=item.isCompetition&&item.endDate
   ?'Du '+dateLabel(item.date,{day:'numeric',month:'short'})+' au '+dateLabel(item.endDate,{day:'numeric',month:'short',year:'numeric'})
@@ -185,7 +187,7 @@ export function renderAgendaView({
   +'<span>'+esc(period)+'</span></div>';
  const missing=single||loading?[]:agendaCoverage(favorites,cards).missing;
  const details=groupAgenda(cards).map(g=>'<section class="agenda-day-group"><h3 class="agenda-day">'+esc(fullDay(g.day))+'</h3>'
-  +g.items.map(e=>eventHtml(e,esc,safeUrl,photos,single?chosen:null,{summaryFor,mediaFor})).join('')+'</section>').join('');
+  +g.items.map(e=>eventHtml(e,esc,safeUrl,photos,single?chosen:null,{summaryFor,mediaFor,now})).join('')+'</section>').join('');
  const empty=!cards.length&&!loading&&!extendedLoading?'<div class="agenda-empty"><div class="agenda-empty-icon">📅</div>'
   +'<h3>Aucun événement trouvé</h3><p>Les sources peuvent être incomplètes.</p>'
   +(single?'<a href="'+esc(safeUrl(auditInfo(chosen).url))+'" target="_blank" rel="noopener noreferrer">Vérifier le calendrier source ↗</a>':'')+'</div>':'';
