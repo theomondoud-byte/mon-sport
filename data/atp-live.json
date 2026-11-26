@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-26T01:26:50.152289+00:00",
+  "fetchedAt": "2026-11-26T16:52:09.199919+00:00",
   "rows": [
     {
       "rank": 1,
@@ -11,12 +11,16 @@
       "age": 29,
       "country": "GER",
       "careerHigh": "MC",
-      "tournament": "",
+      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Davis (1 V / 0 D) (QF )",
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+        },
         {
           "text": "Finales ATP F (DF )",
           "lastSeen": "2026-11-22T18:57:03.440144+00:00"
@@ -212,7 +216,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 2 D)",
@@ -372,7 +376,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
         }
       ]
     },
@@ -425,7 +429,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
         }
       ]
     },
@@ -590,7 +594,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
         },
         {
           "text": "Stockholm DF (QF )",
@@ -708,12 +712,17 @@
       "age": 24,
       "country": "GBR",
       "careerHigh": "32",
-      "tournament": "",
+      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (0 V / 1 D) (QF )",
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+        }
+      ]
     },
     {
       "rank": 35,
@@ -788,12 +797,17 @@
       "age": 36,
       "country": "GER",
       "careerHigh": "21",
-      "tournament": "",
+      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (0 V / 1 D) (QF )",
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+        }
+      ]
     },
     {
       "rank": 40,
@@ -1001,12 +1015,17 @@
       "age": 31,
       "country": "GBR",
       "careerHigh": "8",
-      "tournament": "",
+      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (1 V / 0 D) (QF )",
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+        }
+      ]
     },
     {
       "rank": 53,
@@ -1105,7 +1124,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
         }
       ]
     },
@@ -2540,77 +2559,23 @@
     },
     {
       "rank": 127,
-      "name": "Alexei Popyrin",
-      "livePoints": 448,
-      "movement": 2,
-      "pointsChange": null,
-      "age": 27,
-      "country": "AUS",
-      "careerHigh": "19",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 128,
-      "name": "Nicolás Mejía",
-      "livePoints": 446,
-      "movement": -11,
-      "pointsChange": -75,
-      "age": 26,
-      "country": "COL",
-      "careerHigh": "114",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Drummondville 16e",
-          "lastSeen": "2026-11-17T19:10:11.540949+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 129,
-      "name": "Shintaro Mochizuki",
-      "livePoints": 444,
-      "movement": 1,
-      "pointsChange": null,
-      "age": 23,
-      "country": "JPN",
-      "careerHigh": "92",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Helsinki 16e",
-          "lastSeen": "2026-11-16T15:13:22.940427+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 130,
       "name": "Dane Sweeny",
-      "livePoints": 443,
-      "movement": -7,
-      "pointsChange": -38,
+      "livePoints": 449,
+      "movement": -4,
+      "pointsChange": -32,
       "age": 25,
       "country": "AUS",
       "careerHigh": "109",
-      "tournament": "Playford 8e",
+      "tournament": "Playford QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 449,
+      "nextPoints": 459,
       "maxPoints": 512,
       "tournamentHistory": [
+        {
+          "text": "Playford QF",
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+        },
         {
           "text": "Playford 8e",
           "lastSeen": "2026-11-26T01:26:50.034509+00:00"
@@ -2630,6 +2595,64 @@
       ]
     },
     {
+      "rank": 128,
+      "name": "Alexei Popyrin",
+      "livePoints": 448,
+      "movement": 1,
+      "pointsChange": null,
+      "age": 27,
+      "country": "AUS",
+      "careerHigh": "19",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 129,
+      "name": "Nicolás Mejía",
+      "livePoints": 446,
+      "movement": -12,
+      "pointsChange": -75,
+      "age": 26,
+      "country": "COL",
+      "careerHigh": "114",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Drummondville 16e",
+          "lastSeen": "2026-11-17T19:10:11.540949+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 130,
+      "name": "Shintaro Mochizuki",
+      "livePoints": 444,
+      "movement": null,
+      "pointsChange": null,
+      "age": 23,
+      "country": "JPN",
+      "careerHigh": "92",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Helsinki 16e",
+          "lastSeen": "2026-11-16T15:13:22.940427+00:00"
+        }
+      ]
+    },
+    {
       "rank": 131,
       "name": "Max Alcalá Gurri",
       "livePoints": 442,
@@ -2638,11 +2661,11 @@
       "age": 24,
       "country": "ESP",
       "careerHigh": "130",
-      "tournament": "Florianópolis 8e",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 448,
-      "maxPoints": 511,
+      "tournament": "",
+      "previousTournaments": "Défaite Florianópolis 8e",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Florianópolis 8e",
@@ -2814,7 +2837,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
         },
         {
           "text": "Metz F",
@@ -2875,7 +2898,7 @@
       "tournamentHistory": [
         {
           "text": "Playford QF",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
         },
         {
           "text": "Playford 8e",

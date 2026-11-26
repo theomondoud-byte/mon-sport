@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-26T01:26:47.333713+00:00",
+  "fetchedAt": "2026-11-26T16:52:07.261235+00:00",
   "rows": [
     {
       "rank": 1,
@@ -2027,7 +2027,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-26T01:26:47.333713+00:00"
+          "lastSeen": "2026-11-26T16:52:07.261235+00:00"
         },
         {
           "text": "Buenos Aires 16e",
@@ -2383,16 +2383,20 @@
       "name": "Elizara Yaneva",
       "age": 19,
       "country": "BUL",
-      "livePoints": 577,
+      "livePoints": 582,
       "careerHigh": "NMC (135)",
       "movement": 1,
-      "pointsChange": null,
-      "tournament": "Trnava 5 8e",
+      "pointsChange": 5,
+      "tournament": "Trnava 5 QF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 582,
+      "nextPoints": 595,
       "maxPoints": 641,
       "tournamentHistory": [
+        {
+          "text": "Trnava 5 QF",
+          "lastSeen": "2026-11-26T16:52:07.261235+00:00"
+        },
         {
           "text": "Trnava 5 8e",
           "lastSeen": "2026-11-26T01:26:47.333713+00:00"
@@ -2440,7 +2444,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires QF",
-          "lastSeen": "2026-11-26T01:26:47.333713+00:00"
+          "lastSeen": "2026-11-26T16:52:07.261235+00:00"
         },
         {
           "text": "Buenos Aires 8e",
@@ -2671,7 +2675,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-26T01:26:47.333713+00:00"
+          "lastSeen": "2026-11-26T16:52:07.261235+00:00"
         },
         {
           "text": "Buenos Aires 16e",
