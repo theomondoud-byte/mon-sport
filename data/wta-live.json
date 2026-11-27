@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-27T01:43:48.611480+00:00",
+  "fetchedAt": "2026-11-27T16:37:37.782546+00:00",
   "rows": [
     {
       "rank": 1,
@@ -40,10 +40,6 @@
         {
           "text": "Finales WTA DF",
           "lastSeen": "2026-11-14T18:51:27.205837+00:00"
-        },
-        {
-          "text": "Finales WTA RR (2 V / 0 D)",
-          "lastSeen": "2026-11-13T14:55:30.185202+00:00"
         }
       ]
     },
@@ -1326,10 +1322,6 @@
         {
           "text": "Sopo F",
           "lastSeen": "2026-11-14T12:58:16.489973+00:00"
-        },
-        {
-          "text": "Sopo DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
         }
       ]
     },
@@ -1947,7 +1939,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires QF",
-          "lastSeen": "2026-11-27T01:43:48.611480+00:00"
+          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
         },
         {
           "text": "Buenos Aires 8e",
@@ -1968,10 +1960,6 @@
         {
           "text": "Colina 16e",
           "lastSeen": "2026-11-17T19:10:08.585902+00:00"
-        },
-        {
-          "text": "Sopo DF",
-          "lastSeen": "2026-11-13T15:24:01.943762+00:00"
         }
       ]
     },
@@ -2318,85 +2306,23 @@
     },
     {
       "rank": 131,
-      "name": "Rebeka Masarova",
-      "age": 27,
-      "country": "SUI",
-      "livePoints": 592,
-      "careerHigh": "62",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
-        },
-        {
-          "text": "Colina F",
-          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
-        },
-        {
-          "text": "Colina DF",
-          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 132,
-      "name": "Elsa Jacquemot",
-      "age": 23,
-      "country": "FRA",
-      "livePoints": 591,
-      "careerHigh": "53",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Coupe Billie Jean King (0 V / 1 D)",
-          "lastSeen": "2026-11-23T01:22:58.130313+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 133,
-      "name": "Robin Montgomery",
-      "age": 22,
-      "country": "USA",
-      "livePoints": 584,
-      "careerHigh": "95",
-      "movement": null,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 134,
       "name": "Elizara Yaneva",
       "age": 19,
       "country": "BUL",
-      "livePoints": 582,
+      "livePoints": 595,
       "careerHigh": "NMC (135)",
-      "movement": 1,
-      "pointsChange": 5,
-      "tournament": "Trnava 5 QF",
+      "movement": 4,
+      "pointsChange": 18,
+      "tournament": "Trnava 5 DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 595,
+      "nextPoints": 615,
       "maxPoints": 641,
       "tournamentHistory": [
+        {
+          "text": "Trnava 5 DF",
+          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
+        },
         {
           "text": "Trnava 5 QF",
           "lastSeen": "2026-11-27T01:43:48.611480+00:00"
@@ -2432,6 +2358,72 @@
       ]
     },
     {
+      "rank": 132,
+      "name": "Rebeka Masarova",
+      "age": 27,
+      "country": "SUI",
+      "livePoints": 592,
+      "careerHigh": "62",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-23T13:28:48.653266+00:00"
+        },
+        {
+          "text": "Colina F",
+          "lastSeen": "2026-11-22T18:57:01.263261+00:00"
+        },
+        {
+          "text": "Colina DF",
+          "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 133,
+      "name": "Elsa Jacquemot",
+      "age": 23,
+      "country": "FRA",
+      "livePoints": 591,
+      "careerHigh": "53",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Coupe Billie Jean King (0 V / 1 D)",
+          "lastSeen": "2026-11-23T01:22:58.130313+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 134,
+      "name": "Robin Montgomery",
+      "age": 22,
+      "country": "USA",
+      "livePoints": 584,
+      "careerHigh": "95",
+      "movement": -1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
       "rank": 135,
       "name": "Julia Riera",
       "age": 24,
@@ -2448,7 +2440,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires QF",
-          "lastSeen": "2026-11-27T01:43:48.611480+00:00"
+          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
         },
         {
           "text": "Buenos Aires 8e",
@@ -2617,7 +2609,7 @@
       "tournamentHistory": [
         {
           "text": "Buenos Aires QF",
-          "lastSeen": "2026-11-27T01:43:48.611480+00:00"
+          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
         },
         {
           "text": "Buenos Aires 8e",
@@ -2697,12 +2689,33 @@
     },
     {
       "rank": 146,
+      "name": "Katie Swan",
+      "age": 27,
+      "country": "GBR",
+      "livePoints": 519,
+      "careerHigh": "118",
+      "movement": 11,
+      "pointsChange": 28,
+      "tournament": "Adélaïde DF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 539,
+      "maxPoints": 565,
+      "tournamentHistory": [
+        {
+          "text": "Adélaïde DF",
+          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 147,
       "name": "Ajla Tomljanović",
       "age": 33,
       "country": "AUS",
       "livePoints": 516,
       "careerHigh": "32",
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2712,13 +2725,13 @@
       "tournamentHistory": []
     },
     {
-      "rank": 147,
+      "rank": 148,
       "name": "Teodora Kostović",
       "age": 19,
       "country": "SRB",
       "livePoints": 515,
       "careerHigh": "139",
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2733,13 +2746,13 @@
       ]
     },
     {
-      "rank": 148,
+      "rank": 149,
       "name": "Himeno Sakatsume",
       "age": 25,
       "country": "JPN",
       "livePoints": 514,
       "careerHigh": "114",
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2754,29 +2767,13 @@
       ]
     },
     {
-      "rank": 149,
+      "rank": 150,
       "name": "Clara Burel",
       "age": 25,
       "country": "FRA",
       "livePoints": 512,
       "careerHigh": "42",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 150,
-      "name": "Jil Teichmann",
-      "age": 29,
-      "country": "SUI",
-      "livePoints": 507,
-      "careerHigh": "21",
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",

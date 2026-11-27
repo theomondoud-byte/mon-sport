@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-27T01:43:50.939110+00:00",
+  "fetchedAt": "2026-11-27T16:37:40.287958+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         },
         {
           "text": "Finales ATP F (DF )",
@@ -216,7 +216,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 2 D)",
@@ -299,7 +299,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 2 D)",
@@ -380,7 +380,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         }
       ]
     },
@@ -433,7 +433,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         }
       ]
     },
@@ -598,7 +598,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         },
         {
           "text": "Stockholm DF (QF )",
@@ -724,7 +724,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         }
       ]
     },
@@ -809,7 +809,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         }
       ]
     },
@@ -878,7 +878,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         }
       ]
     },
@@ -1032,7 +1032,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         }
       ]
     },
@@ -1133,7 +1133,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         }
       ]
     },
@@ -2382,7 +2382,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
         },
         {
           "text": "Helsinki 8e",
@@ -2519,9 +2519,50 @@
     },
     {
       "rank": 125,
+      "name": "Dane Sweeny",
+      "livePoints": 459,
+      "movement": -2,
+      "pointsChange": -22,
+      "age": 25,
+      "country": "AUS",
+      "careerHigh": "109",
+      "tournament": "Playford DF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 481,
+      "maxPoints": 512,
+      "tournamentHistory": [
+        {
+          "text": "Playford DF",
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+        },
+        {
+          "text": "Playford QF",
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+        },
+        {
+          "text": "Playford 8e",
+          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
+        },
+        {
+          "text": "Playford 16e",
+          "lastSeen": "2026-11-24T01:19:55.767449+00:00"
+        },
+        {
+          "text": "Sydney 16e",
+          "lastSeen": "2026-11-17T07:28:07.085179+00:00"
+        },
+        {
+          "text": "Brisbane 3 QF (16e )",
+          "lastSeen": "2026-11-14T12:58:18.744900+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 126,
       "name": "Sho Shimabukuro",
       "livePoints": 457,
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "age": 29,
       "country": "JPN",
@@ -2534,10 +2575,10 @@
       "tournamentHistory": []
     },
     {
-      "rank": 126,
+      "rank": 127,
       "name": "Laslo Djere",
       "livePoints": 454,
-      "movement": 2,
+      "movement": 1,
       "pointsChange": null,
       "age": 31,
       "country": "SRB",
@@ -2567,43 +2608,6 @@
         {
           "text": "Helsinki 16e",
           "lastSeen": "2026-11-17T13:17:58.993154+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 127,
-      "name": "Dane Sweeny",
-      "livePoints": 449,
-      "movement": -4,
-      "pointsChange": -32,
-      "age": 25,
-      "country": "AUS",
-      "careerHigh": "109",
-      "tournament": "Playford QF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 459,
-      "maxPoints": 512,
-      "tournamentHistory": [
-        {
-          "text": "Playford QF",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
-        },
-        {
-          "text": "Playford 8e",
-          "lastSeen": "2026-11-26T01:26:50.034509+00:00"
-        },
-        {
-          "text": "Playford 16e",
-          "lastSeen": "2026-11-24T01:19:55.767449+00:00"
-        },
-        {
-          "text": "Sydney 16e",
-          "lastSeen": "2026-11-17T07:28:07.085179+00:00"
-        },
-        {
-          "text": "Brisbane 3 QF (16e )",
-          "lastSeen": "2026-11-14T12:58:18.744900+00:00"
         }
       ]
     },
@@ -2777,138 +2781,23 @@
     },
     {
       "rank": 136,
-      "name": "Grigor Dimitrov",
-      "livePoints": 422,
-      "movement": null,
-      "pointsChange": null,
-      "age": 35,
-      "country": "BUL",
-      "careerHigh": "3",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 137,
-      "name": "Francisco Comesaña",
-      "livePoints": 421,
-      "movement": null,
-      "pointsChange": null,
-      "age": 26,
-      "country": "ARG",
-      "careerHigh": "54",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Montevideo 16e",
-          "lastSeen": "2026-11-18T01:26:03.953743+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 138,
-      "name": "Rei Sakamoto",
-      "livePoints": 420,
-      "movement": null,
-      "pointsChange": null,
-      "age": 20,
-      "country": "JPN",
-      "careerHigh": "122",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Matsuyama QF",
-          "lastSeen": "2026-11-14T12:58:18.744900+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 139,
-      "name": "Soonwoo Kwon",
-      "livePoints": 419,
-      "movement": null,
-      "pointsChange": null,
-      "age": 28,
-      "country": "KOR",
-      "careerHigh": "52",
-      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
-        },
-        {
-          "text": "Metz F",
-          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
-        },
-        {
-          "text": "Metz DF",
-          "lastSeen": "2026-11-21T13:03:57.080691+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 140,
-      "name": "Aleksandar Vukic",
-      "livePoints": 418,
-      "movement": null,
-      "pointsChange": null,
-      "age": 30,
-      "country": "AUS",
-      "careerHigh": "48",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 141,
-      "name": "Federico Cina",
-      "livePoints": 415,
-      "movement": null,
-      "pointsChange": null,
-      "age": 19,
-      "country": "ITA",
-      "careerHigh": "135",
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 142,
       "name": "Tristan Schoolkate",
-      "livePoints": 413,
-      "movement": 1,
-      "pointsChange": 6,
+      "livePoints": 423,
+      "movement": 7,
+      "pointsChange": 16,
       "age": 25,
       "country": "AUS",
       "careerHigh": "95",
-      "tournament": "Playford QF",
+      "tournament": "Playford DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 423,
+      "nextPoints": 445,
       "maxPoints": 476,
       "tournamentHistory": [
+        {
+          "text": "Playford DF",
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+        },
         {
           "text": "Playford QF",
           "lastSeen": "2026-11-27T01:43:50.818280+00:00"
@@ -2934,6 +2823,125 @@
           "lastSeen": "2026-11-17T07:28:07.085179+00:00"
         }
       ]
+    },
+    {
+      "rank": 137,
+      "name": "Grigor Dimitrov",
+      "livePoints": 422,
+      "movement": -1,
+      "pointsChange": null,
+      "age": 35,
+      "country": "BUL",
+      "careerHigh": "3",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 138,
+      "name": "Francisco Comesaña",
+      "livePoints": 421,
+      "movement": -1,
+      "pointsChange": null,
+      "age": 26,
+      "country": "ARG",
+      "careerHigh": "54",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Montevideo 16e",
+          "lastSeen": "2026-11-18T01:26:03.953743+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 139,
+      "name": "Rei Sakamoto",
+      "livePoints": 420,
+      "movement": -1,
+      "pointsChange": null,
+      "age": 20,
+      "country": "JPN",
+      "careerHigh": "122",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Matsuyama QF",
+          "lastSeen": "2026-11-14T12:58:18.744900+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 140,
+      "name": "Soonwoo Kwon",
+      "livePoints": 419,
+      "movement": -1,
+      "pointsChange": null,
+      "age": 28,
+      "country": "KOR",
+      "careerHigh": "52",
+      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (1 V / 0 D) (QF )",
+          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+        },
+        {
+          "text": "Metz F",
+          "lastSeen": "2026-11-22T13:02:07.783367+00:00"
+        },
+        {
+          "text": "Metz DF",
+          "lastSeen": "2026-11-21T13:03:57.080691+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 141,
+      "name": "Aleksandar Vukic",
+      "livePoints": 418,
+      "movement": -1,
+      "pointsChange": null,
+      "age": 30,
+      "country": "AUS",
+      "careerHigh": "48",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 142,
+      "name": "Federico Cina",
+      "livePoints": 415,
+      "movement": -1,
+      "pointsChange": null,
+      "age": 19,
+      "country": "ITA",
+      "careerHigh": "135",
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
     },
     {
       "rank": 143,
