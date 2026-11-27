@@ -4,6 +4,21 @@ Les versions les plus récentes sont en haut. Le fonctionnement actuel de l'appl
 
 ---
 
+# Mon Sport V17.11 — programme à venir de tous les favoris
+
+Recensement du programme des 20 favoris jusqu'à fin janvier, comparé à l'appli :
+
+- **Rugby (cause corrigée)** : le relais ne lisait que la 1re page de 100 matchs World Rugby (toutes compétitions, rugby à 7 compris), triés du plus ancien au plus récent ; avec 8 jours de résultats en arrière, les matchs à venir étaient coupés. Toutes les pages sont lues, filtrées sur l'équipe de France, 60 jours à l'avance. **France — Afrique du Sud, finale du Championnat des Nations, dimanche 29 novembre à 17 h 40** apparaît (tour « Finale », Twickenham, TF1).
+- **Léon Marchand** : Mondiaux en petit bassin à Pékin (1er–6 décembre) et ses six épreuves, chacune à l'heure de sa finale : 200 m 4 nages, 200 m papillon, 200 m brasse, relais 4 × 200 m, 400 m 4 nages, relais 4 × 100 m 4 nages. **Sauveur Cristofini** est aussi sélectionné.
+- **Moïse Kouamé** : Next Gen ATP Finals à Reggio de Calabre (9–13 décembre, 2e tête de série), puis Open d'Australie (qualifications dès le 11 janvier).
+- **Coupe Davis** : demi-finale Grande-Bretagne — Espagne samedi 28 novembre à 12 h (Alcaraz, Jódar).
+- **Frères Lebrun** : WTT Finals à Hong Kong (9–13 décembre), après la Coupe du monde mixte.
+- **Open d'Australie 2027** (17–31 janvier) pour Alcaraz, Jódar, Fils et Andreeva, marqué « participation pas encore officialisée » tant que la liste des engagés n'est pas publiée. Le niveau de participation est désormais affiché sur les cartes.
+- **Plus de favori sans explication** : dans « À venir », chaque favori sans événement dans la période affiche sa prochaine échéance connue et sa source (Seixas : programme 2027 non annoncé ; Sinner : forfait pour l'Open d'Australie ; Bleus du foot : quarts de Ligue des nations fin mars…). Un test vérifie que chacun des 20 favoris a une prochaine échéance ou une explication.
+- Résultats lus dans les articles : médailles (or, argent, bronze, « champion du monde ») et distance de l'épreuve (un article sur le 400 m 4 nages ne renseigne pas le 200 m 4 nages).
+
+---
+
 # Mon Sport V17.10 — Challenger et Coupe Davis automatiques
 
 - **Nouvelle source tennis** : le relais lit la liste des matchs de chaque joueur suivi sur Tennis Explorer (`/api/tennis-matches`) — Challenger, ITF, qualifications, Coupe Davis, que ESPN ne couvre pas. Les matchs déjà fournis par ESPN ou les archives (même adversaire, ±2 jours) ne sont pas doublés. Score, tour et verdict V/D sont affichés comme pour les autres matchs.

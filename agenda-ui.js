@@ -1,13 +1,13 @@
-import {sourceIcon} from './source-icons.js?v=17.10.0';
-import {sportInfo} from './sports-media.js?v=17.10.0';
+import {sourceIcon} from './source-icons.js?v=17.11.0';
+import {sportInfo} from './sports-media.js?v=17.11.0';
 // Mon Sport V8 — deux agendas, portrait des sportifs, verdicts et résumés.
-import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.10.0';
-import {auditInfo} from './audit-2026.js?v=17.10.0';
-import {matchVerdict,summaryForMatch} from './match-details.js?v=17.10.0';
-import {renderFavoriteStats} from './stats-view.js?v=17.10.0';
-import {photoInitials} from './photos.js?v=17.10.0';
-import {nextCompetitionNote} from './verified-program.js?v=17.10.0';
-import {coverageFor} from './coverage-v11.js?v=17.10.0';
+import {agendaMatches,agendaWindow,groupAgenda,agendaCoverage} from './agenda-model.js?v=17.11.0';
+import {auditInfo} from './audit-2026.js?v=17.11.0';
+import {matchVerdict,summaryForMatch} from './match-details.js?v=17.11.0';
+import {renderFavoriteStats} from './stats-view.js?v=17.11.0';
+import {photoInitials} from './photos.js?v=17.11.0';
+import {nextCompetitionNote} from './verified-program.js?v=17.11.0';
+import {coverageFor} from './coverage-v11.js?v=17.11.0';
 const dateLabel=(date,opts)=>new Date(date).toLocaleDateString('fr-FR',opts);
 const readableDate=(item)=>{
  return item.datePrecision==='heure'?new Date(item.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
@@ -42,7 +42,8 @@ function eventHtml(item,esc,safeUrl,photos,chosen,extras={}){
  const recap=summaryForMatch(item,primary);
  const stats=recap.stats.length?'<div class="agenda-recap-stats">'+recap.stats.map(st=>
    '<span><strong>'+esc(st.value)+'</strong> '+esc(st.name)+'</span>').join('')+'</div>':'';
- const flags=(item.approximate?'<span class="agenda-caution">Date approximative · semaine du tournoi</span>':'')
+ const flags=(!item.finished&&!item.pendingResult&&item.participationLevel==='calendrier'?'<span class="agenda-caution">Participation pas encore officialisée</span>':'')
+   +(item.approximate?'<span class="agenda-caution">Date approximative · semaine du tournoi</span>':'')
    +(item.uncertainParticipation||(chosen&&item.uncertainNames?.includes(chosen))?'<span class="agenda-caution">Match de son équipe · présence du sportif non confirmée</span>':'')
    +(chosen&&/wemban[yi]ama/i.test(chosen)&&!item.finished&&item.wembanyamaUnconfirmed
     ?'<span class="agenda-caution">Match des Spurs : la participation de Wembanyama n’est pas confirmée pour cette rencontre</span>':'');
@@ -141,14 +142,17 @@ function resultExtrasHtml(item,esc,safeUrl,{summaryFor,mediaFor}={}){
  }
  return {hero,html:summary+(replay?'<div class="result-replay-row">'+replay+'</div>':'')};
 }
-function placeholderMissing(missing,esc,safeUrl){
+// Favoris sans événement dans la période : leur prochaine échéance connue,
+// plutôt qu'un simple lien, pour qu'aucun absent ne reste inexpliqué.
+function placeholderMissing(missing,esc,safeUrl,now){
  if(!missing.length)return '';
- return '<details class="agenda-missing"><summary>'+missing.length+' favori(s) sans événement confirmé dans cette période</summary>'
-   +'<p>Certains calendriers restent incomplets.</p>'
-   +'<div class="agenda-missing-links">'+missing.map(f=>{
-    const info=auditInfo(f.name);
-    return '<a href="'+esc(safeUrl(info.url))+'" target="_blank" rel="noopener noreferrer">'+esc(f.name)+' ↗</a>';
-   }).join('')+'</div></details>';
+ return '<details class="agenda-missing agenda-next-list"><summary>'+missing.length+' favori'+(missing.length>1?'s':'')+' sans événement dans cette période</summary>'
+   +'<ul>'+missing.map(f=>{
+    const next=nextCompetitionNote(f.name,now);
+    const url=next?.url||auditInfo(f.name).url;
+    return '<li><b>'+esc(f.name)+'</b> — '+esc(next?.text||'Aucune échéance connue.')
+     +(url?' <a href="'+esc(safeUrl(url))+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':'')+'</li>';
+   }).join('')+'</ul></details>';
 }
 export function renderAgendaView({
  view='semaine',phase='future',favorite='',favorites=[],items=[],loading=false,
@@ -202,7 +206,7 @@ export function renderAgendaView({
   +esc(verification.source)+' ↗</a></details>':'';
  return '<section class="agenda-shell">'+header+select+picture+segments+extraNext
   +(stats?progress+error+renderFavoriteStats({favorite:chosen,favoriteData:which,now,rankings,esc,safeUrl}):
-    count+progress+error+(details||empty)+placeholderMissing(missing,esc,safeUrl)+reliability)
+    count+progress+error+(details||empty)+placeholderMissing(missing,esc,safeUrl,now)+reliability)
   +sources
   +'</section>';
 }

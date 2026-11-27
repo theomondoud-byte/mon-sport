@@ -240,23 +240,30 @@ async function highlightSearch(query,teams,debug=false){
 }
 
 // --- Rugby international en direct : API publique de World Rugby (site world.rugby).
-async function rugbyLive(day,pastDays=1){
- // De « pastDays » jours avant la date demandée jusqu'à deux jours après :
- // les résultats de la semaine écoulée restent disponibles.
- const start=new Date(day+'T00:00:00Z'),end=new Date(start.getTime()+2*86400000);
+async function rugbyLive(day,pastDays=1,futureDays=2,team=''){
+ // De « pastDays » jours avant la date demandée à « futureDays » jours après.
+ // L'API pagine par 100 matchs (toutes compétitions, rugby à 7 compris) :
+ // toutes les pages sont lues, sinon les matchs à venir étaient coupés.
+ const start=new Date(day+'T00:00:00Z'),end=new Date(start.getTime()+futureDays*86400000);
  const iso=d=>d.toISOString().slice(0,10);
- const url='https://api.wr-rims-prod.pulselive.com/rugby/v3/match?startDate='+iso(new Date(start.getTime()-pastDays*86400000))+'&endDate='+iso(end)+'&sort=asc&pageSize=100&page=0';
- const r=await fetch(url,{headers:{'Accept':'application/json','User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)'},cf:{cacheTtl:30,cacheEverything:true},signal:AbortSignal.timeout(9000)});
- if(!r.ok)throw Error('World Rugby HTTP '+r.status);
- const body=await r.json();
- const matches=(body.content||[]).map(m=>({
+ const base='https://api.wr-rims-prod.pulselive.com/rugby/v3/match?startDate='+iso(new Date(start.getTime()-pastDays*86400000))+'&endDate='+iso(end)+'&sort=asc&pageSize=100&page=';
+ const get=async page=>{
+  const r=await fetch(base+page,{headers:{'Accept':'application/json','User-Agent':'Mozilla/5.0 (compatible; MonSport/1.0)'},cf:{cacheTtl:30,cacheEverything:true},signal:AbortSignal.timeout(9000)});
+  if(!r.ok)throw Error('World Rugby HTTP '+r.status);
+  return r.json();
+ };
+ const first=await get(0);
+ const pages=Math.min(12,Math.max(1,+first.pageInfo?.numPages||1));
+ const rest=await Promise.all(Array.from({length:pages-1},(_,i)=>get(i+1).catch(()=>({content:[]}))));
+ const wanted=String(team||'').toLowerCase();
+ const matches=[first,...rest].flatMap(body=>body.content||[]).map(m=>({
   id:String(m.matchId||''),start:m.time?.millis?new Date(m.time.millis).toISOString():'',
   status:m.status||'',clock:m.clock?.label||m.clock?.secs||'',
   competition:m.competition||m.events?.[0]?.label||'',venue:m.venue?.name||'',
   teams:(m.teams||[]).map(t=>({name:t?.name||'',abbreviation:t?.abbreviation||''})),
   scores:Array.isArray(m.scores)?m.scores:[]
- })).filter(m=>m.teams.length===2);
- return {matches};
+ })).filter(m=>m.teams.length===2&&(!wanted||m.teams.some(t=>t.name.toLowerCase()===wanted)));
+ return {matches,pages};
 }
 
 // --- Photos et vidéos d'un tweet intégré (API publique d'intégration de X).
@@ -478,4 +485,4 @@ export default {async fetch(request){if(request.method==='OPTIONS')return new Re
  const response=json(await curatedSportsNews());
  if(cache)await cache.put(key,new Response(response.clone().body,{headers:{...Object.fromEntries(response.headers),'Cache-Control':'public, max-age=600'}}));
  return response;
-}if(u.pathname==='/api/tennis-matches'){const name=limit(u.searchParams.get('player'),60);try{return json(await tennisMatches(name));}catch(e){return json({player:name,matches:[],error:String(e.message||e)},502);}}if(u.pathname==='/api/race-result'){const name=limit(u.searchParams.get('name'),120),year=limit(u.searchParams.get('year'),4);if(name.length<3||!/^20\d\d$/.test(year))return json({error:'Paramètres manquants'},400);const stage=+(u.searchParams.get('stage')||0);return json(await raceResult(name,year,{stage:stage>0&&stage<30?stage:0,gc:u.searchParams.get('gc')==='1',rider:limit(u.searchParams.get('rider'),80)}));}if(u.pathname==='/api/image')return imageProxy(limit(u.searchParams.get('url'),1024));if(u.pathname==='/api/tweets'){const ids=[...new Set(limit(u.searchParams.get('ids'),400).split(',').filter(id=>/^\d{10,20}$/.test(id)))].slice(0,12);if(!ids.length)return json({error:'Identifiants manquants'},400);return json(await tweetsMedia(ids));}if(u.pathname==='/api/rugby-live'){const day=limit(u.searchParams.get('date'),10);if(!/^\d{4}-\d{2}-\d{2}$/.test(day))return json({error:'Date attendue AAAA-MM-JJ'},400);const past=Math.min(10,Math.max(1,+(u.searchParams.get('past')||1)));return new Response(JSON.stringify(await rugbyLive(day,past)),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30',...cors}});}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams,u.searchParams.has('debug'),limit(u.searchParams.get('c'),80)));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};
+}if(u.pathname==='/api/tennis-matches'){const name=limit(u.searchParams.get('player'),60);try{return json(await tennisMatches(name));}catch(e){return json({player:name,matches:[],error:String(e.message||e)},502);}}if(u.pathname==='/api/race-result'){const name=limit(u.searchParams.get('name'),120),year=limit(u.searchParams.get('year'),4);if(name.length<3||!/^20\d\d$/.test(year))return json({error:'Paramètres manquants'},400);const stage=+(u.searchParams.get('stage')||0);return json(await raceResult(name,year,{stage:stage>0&&stage<30?stage:0,gc:u.searchParams.get('gc')==='1',rider:limit(u.searchParams.get('rider'),80)}));}if(u.pathname==='/api/image')return imageProxy(limit(u.searchParams.get('url'),1024));if(u.pathname==='/api/tweets'){const ids=[...new Set(limit(u.searchParams.get('ids'),400).split(',').filter(id=>/^\d{10,20}$/.test(id)))].slice(0,12);if(!ids.length)return json({error:'Identifiants manquants'},400);return json(await tweetsMedia(ids));}if(u.pathname==='/api/rugby-live'){const day=limit(u.searchParams.get('date'),10);if(!/^\d{4}-\d{2}-\d{2}$/.test(day))return json({error:'Date attendue AAAA-MM-JJ'},400);const past=Math.min(10,Math.max(1,+(u.searchParams.get('past')||1))),future=Math.min(90,Math.max(1,+(u.searchParams.get('future')||2))),team=limit(u.searchParams.get('team'),40);return new Response(JSON.stringify(await rugbyLive(day,past,future,team)),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30',...cors}});}if(u.pathname==='/api/highlight'){const q=limit(u.searchParams.get('q'),160),teams=limit(u.searchParams.get('teams'),160).split('|').map(t=>t.trim()).filter(Boolean).slice(0,2);if(q.length<3||teams.length<2)return json({error:'Paramètres manquants'},400);return json(await highlight(q,teams,u.searchParams.has('debug'),limit(u.searchParams.get('c'),80)));}if(u.pathname==='/api/article'){const target=limit(u.searchParams.get('url'),2048);if(!target)return json({error:'URL manquante'},400);return json(await articleText(target));}if(u.pathname==='/api/news'){const q=limit(u.searchParams.get('q'),120);if(q.length<2)return json({error:'Recherche trop courte'},400);return json(await news(q))}if(u.pathname==='/api/team'){const name=limit(u.searchParams.get('name'),100);if(name.length<2)return json({error:'Nom trop court'},400);return json(await team(name))}return json({service:'Mon Sport API',endpoints:['/api/news?q=PSG','/api/sports-news','/api/article?url=https%3A%2F%2Fwww.basketusa.com%2F','/api/team?name=Real%20Madrid']})}catch(e){return json({error:String(e.message||e)},502)}}};

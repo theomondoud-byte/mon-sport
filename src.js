@@ -1,21 +1,21 @@
-import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.10.0';
-import {createOnceLoader} from './session-loader.js?v=17.10.0';
-import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.10.0';
-import {renderAgendaView} from './agenda-ui.js?v=17.10.0';
-import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.10.0';
-import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.10.0';
-import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.10.0';
-import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.10.0';
-import {extraProgramFor} from './verified-program.js?v=17.10.0';
-import {verifiedExtraFor} from './verified-extra-v11.js?v=17.10.0';
-import {coverageFor} from './coverage-v11.js?v=17.10.0';
-import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey,competitionResultFromNews} from './news-view.js?v=17.10.0';
-import {loadEventDetails,renderEventDetails,hasEspnSheet,cyclingQuery,renderClassification} from './event-details.js?v=17.10.0';
-import {verified2026For} from './audit-2026.js?v=17.10.0';
-import {renderAudit2026} from './audit-ui.js?v=17.10.0';
-import {auditEspn2026} from './audit-espn-2026.js?v=17.10.0';
-import {APP_LABEL,APP_VERSION} from './version.js?v=17.10.0';
-import {tennisExplorerItems} from './tennis-explorer.js?v=17.10.0';
+import {recentKouameSnapshot,recentSinnerSnapshot,tennisSnapshot2026,loadArchiveTennis,TENNIS_HISTORY_SOURCE,TENNIS_LATEST_SOURCE,SINNER_MATCH_SOURCE} from './tennis-history.js?v=17.11.0';
+import {createOnceLoader} from './session-loader.js?v=17.11.0';
+import {makeAgenda,mergeSpursAndWembanyama} from './agenda-model.js?v=17.11.0';
+import {renderAgendaView} from './agenda-ui.js?v=17.11.0';
+import {RANKINGS,renderRankingsView,fetchRankings,rankingForFavorite} from './rankings-view.js?v=17.11.0';
+import {fetchFFLNews,fetchJeuSetMathsNews,readAvailableJeuSetMathsNews,findMatchArticles} from './sports-articles.js?v=17.11.0';
+import {fetchAgendaFavorite} from './agenda-fetch.js?v=17.11.0';
+import {loadFavoritePhotos,clearPhotoCache,photoInitials} from './photos.js?v=17.11.0';
+import {extraProgramFor} from './verified-program.js?v=17.11.0';
+import {verifiedExtraFor} from './verified-extra-v11.js?v=17.11.0';
+import {coverageFor} from './coverage-v11.js?v=17.11.0';
+import {renderNewsView,newsLastWeek,fetchSportsNews,renderArticleBody,renderBlocks,matchSummaryArticle,articleKey,competitionResultFromNews} from './news-view.js?v=17.11.0';
+import {loadEventDetails,renderEventDetails,hasEspnSheet,cyclingQuery,renderClassification} from './event-details.js?v=17.11.0';
+import {verified2026For} from './audit-2026.js?v=17.11.0';
+import {renderAudit2026} from './audit-ui.js?v=17.11.0';
+import {auditEspn2026} from './audit-espn-2026.js?v=17.11.0';
+import {APP_LABEL,APP_VERSION} from './version.js?v=17.11.0';
+import {tennisExplorerItems} from './tennis-explorer.js?v=17.11.0';
 const DEFAULTS = [
  ['Real Madrid','Football','équipe','Real Madrid'],['FC Barcelone','Football','équipe','FC Barcelona'],['PSG','Football','équipe','Paris Saint Germain'],['San Antonio Spurs','Basketball','équipe','San Antonio Spurs'],
  ['Victor Wembanyama','Basketball','sportif'],['Léon Marchand','Natation','sportif'],['Sauveur Cristofini','Natation','sportif'],['Félix Lebrun','Tennis de table','sportif'],['Alexis Lebrun','Tennis de table','sportif'],['Flavien Coton','Tennis de table','sportif'],['Paul Seixas','Cyclisme','sportif'],['Kylian Mbappé','Football','sportif'],['Équipe de France de football','Football','équipe','France'],['XV de France','Rugby','équipe','France Rugby'],['Arthur Fils','Tennis','sportif'],['Jannik Sinner','Tennis','sportif'],['Carlos Alcaraz','Tennis','sportif'],['Rafael Jódar','Tennis','sportif'],['Moïse Kouamé','Tennis','sportif'],['Mirra Andreeva','Tennis','sportif']
@@ -1044,7 +1044,7 @@ async function rugbyResults(){
  if(!fav||!workerUrl)return {events:[],notes:[]};
  const today=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Paris'});
  try{
-  const data=await request('/api/rugby-live',{date:today,past:8});
+  const data=await request('/api/rugby-live',{date:today,past:8,future:60,team:'France'});
   const events=(data.matches||[]).filter(m=>m.teams.some(t=>t.name==='France')&&!/women|féminin|u20|sevens|7s/i.test(m.competition)).map(m=>{
    const [home,away]=m.teams.map(t=>RUGBY_FR[t.name]||t.name);
    const status=/^C/.test(m.status)?'Terminé':/^(L|HT)/.test(m.status)?'En cours':'À venir';

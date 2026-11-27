@@ -89,6 +89,10 @@ export function makeAgenda({teams=[],individuals=[],history=[],verified=[],expan
    // Ne jamais perdre le score d'équipe ; déplacer seulement les statistiques
    // individuelles confirmées vers la même fiche de rencontre.
    if(row.stats&&!existing.stats)existing.stats=row.stats;
+   // Le calendrier vérifié précise le tour (« Finale ») ou le lieu quand la
+   // source automatique ne les donne pas.
+   if(row.round&&!existing.round)existing.round=row.round;
+   if(row.notes&&!existing.notes)existing.notes=row.notes;
    // Joueur rattaché par le calendrier de son équipe : présence à confirmer.
    if(row.uncertainParticipation&&!existing.uncertainParticipation)existing.uncertainNames=[...new Set([...(existing.uncertainNames||[]),...row.favorites])];
    if(existing.type==='nba'&&row.type==='team'){

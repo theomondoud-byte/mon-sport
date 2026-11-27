@@ -26,7 +26,8 @@ L'application s'ouvre instantanément avec les dernières données mémorisées,
 - **Jeu, set et maths** : publications collectées par `scripts/refresh_jeu_set_maths.py`, embarquées dans `data/jeu-set-et-maths-bundle.js` pour fonctionner même sans réseau.
 - **FFL** : API WordPress publique.
 - **Tennis Explorer** (via le relais, `/api/tennis-matches`) : matchs des joueurs suivis absents d'ESPN — Challenger, ITF, qualifications, Coupe Davis. Le site annonce son transfert vers Flashscore le 16 décembre 2026 : la source sera à remplacer.
-- **World Rugby** (via le relais, `/api/rugby-live`) : rugby international en direct et résultats des 8 derniers jours.
+- **World Rugby** (via le relais, `/api/rugby-live`) : matchs du XV de France — résultats des 8 derniers jours, direct et 60 jours à venir.
+- **Calendrier vérifié** (`verified-program.js`) : événements que les API ne donnent pas (natation, tennis de table, Next Gen, Coupe Davis…), avec leur source, et `NEXT_NOTES` : prochaine échéance connue de chaque favori, affichée quand rien n'est programmé. À revoir à chaque changement de favoris (un test l'exige).
 - **CyclingDB** (via le relais, `/api/race-result`) : classements cyclistes (top 10 et temps).
 - **Relais Cloudflare** (facultatif, `worker/index.js`) : flux RSS (Tennis Actu, Franceinfo, Basket USA, TrashTalk, Cyclism'Actu), recherche d'actualités et lecture des articles, sans problème de CORS.
 

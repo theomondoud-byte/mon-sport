@@ -1621,3 +1621,37 @@ test('V17.10 : le relais lit la liste des matchs Tennis Explorer (vainqueur en p
   {date:'2026-11-26',tournament:'Davis Cup',round:'',winner:'Jodar R.',loser:'Rodionov J.',score:'2-6 6-0 6-1'},
   {date:'2026-10-14',tournament:'Shanghai',round:'R16',winner:'Jodar R.',loser:'Van De Zandschulp B.',score:'6-7(4) 6-4 7-6(2)'}]);
 });
+
+test('V17.11 : médailles lues dans les titres, distance de nage respectée',()=>{
+ const f={name:'Léon Marchand',apiName:'Léon Marchand'};
+ assert.equal(rankFromTitle('Mondiaux : Léon Marchand en argent sur 200 m 4 nages',f),2);
+ assert.equal(rankFromTitle('Léon Marchand décroche l’or du 400 m 4 nages à Pékin',f),1);
+ assert.equal(rankFromTitle('Léon Marchand, médaille de bronze du 200 m papillon',f),3);
+ const event={favorite:'Léon Marchand',title:'Léon Marchand — 200 m 4 nages',date:'2026-12-01T12:00:00+01:00',type:'swim-event'};
+ const art=(title,date)=>({title,link:'https://x.example/'+date,date,source:'Franceinfo'});
+ assert.equal(competitionResultFromNews(event,[art('Léon Marchand champion du monde du 400 m 4 nages','2026-12-02T12:30:00Z')],[f]),null);
+ assert.equal(competitionResultFromNews(event,[art('Mondiaux : Léon Marchand en argent sur 200 m 4 nages','2026-12-01T12:30:00Z')],[f]).label,'2e');
+});
+
+test('V17.11 : chaque favori a une prochaine échéance connue ou une explication',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const {NEXT_NOTES,nextCompetitionNote,extraProgramFor}=await import('../verified-program.js');
+ const app=await readFile(new URL('../src.js',import.meta.url),'utf8');
+ const block=app.slice(app.indexOf('const DEFAULTS'),app.indexOf('].map(([name,sport,type,apiName])'));
+ const names=[...block.matchAll(/\['([^']+)','/g)].map(m=>m[1]);
+ assert.equal(names.length,20);
+ for(const name of names)assert.ok(NEXT_NOTES[name]?.text,'Prochaine échéance manquante pour '+name);
+ const now=new Date('2026-11-27T12:00:00Z');
+ assert.match(nextCompetitionNote('Léon Marchand',now).text,/Mondiaux en petit bassin/);
+ assert.match(nextCompetitionNote('Moïse Kouamé',now).text,/Next Gen ATP Finals/);
+ const fav=names.map(name=>({name}));
+ const future=extraProgramFor(fav,now).future;
+ const rows=makeAgenda({expanded:future});
+ const upcoming=agendaMatches(rows,{view:'favori',phase:'future',now});
+ for(const name of ['Léon Marchand','Sauveur Cristofini','Moïse Kouamé','Félix Lebrun','Alexis Lebrun','XV de France','Carlos Alcaraz','Rafael Jódar','Arthur Fils','Mirra Andreeva'])
+  assert.ok(upcoming.some(e=>e.favorites.includes(name)),'Aucun événement à venir pour '+name);
+ const marchand=upcoming.filter(e=>e.favorites.includes('Léon Marchand')&&!e.isCompetition).map(e=>e.title.replace('Léon Marchand — ',''));
+ assert.deepEqual(marchand,['200 m 4 nages','200 m papillon','200 m brasse','Relais 4 × 200 m nage libre','400 m 4 nages','Relais 4 × 100 m 4 nages']);
+ const final=upcoming.find(e=>/Afrique du Sud/.test(e.title));
+ assert.equal(final.round,'Finale');
+});

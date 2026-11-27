@@ -1,6 +1,6 @@
-import {sportInfo,sourceImage} from './sports-media.js?v=17.10.0';
-import {filterSportsNews} from './sports-articles.js?v=17.10.0';
-import {sourceIcon} from './source-icons.js?v=17.10.0';
+import {sportInfo,sourceImage} from './sports-media.js?v=17.11.0';
+import {filterSportsNews} from './sports-articles.js?v=17.11.0';
+import {sourceIcon} from './source-icons.js?v=17.11.0';
 // Mon Sport — fil chronologique, sélection de sources et lecture intégrée.
 const HOUR=3600000;
 const DAY=24*HOUR;
@@ -376,6 +376,10 @@ export function rankFromTitle(title,favorite){
  // « Paul Seixas s'impose / remporte / gagne… » : le coureur est le sujet.
  if(/^\s*(?:\S+\s+){0,5}?(s impose|remporte|remportant|gagne|gagnant|triomphe|s adjuge|est sacre|vainqueur|s envole vers la victoire|signe la victoire|s offre|decroche la victoire)\b/.test(after))return 1;
  if(/\b(victoire|succes|sacre) de (?:\w+ )?$/.test(text.slice(0,text.indexOf(' '+alias+' ')+1)))return 1;
+ // Natation, athlétisme… : « Léon Marchand en argent sur 200 m 4 nages ».
+ const medal=(after.match(/^\s*(?:\S+\s+){0,6}?(?:medaille d |medaille de |decroche l |remporte l |en |l )?(or|argent|bronze)\b/)||[])[1];
+ if(medal)return {or:1,argent:2,bronze:3}[medal];
+ if(/^\s*(?:\S+\s+){0,4}?(champion|championne) du monde\b/.test(after))return 1;
  const m=after.match(/^\s*(?:\S+\s+){0,4}?(?:termine|prend|se classe|finit|decroche)?\s*(?:la\s+|a la\s+)?(\d{1,2})\s*(?:e|eme|er|ere)\b/)
   ||after.match(/^\s*(?:\S+\s+){0,4}?(?:termine|prend|se classe|finit|decroche)\s+(?:la\s+|a la\s+)?(premier|premiere|deuxieme|second|seconde|troisieme|quatrieme|cinquieme|sixieme|septieme|huitieme|neuvieme|dixieme)\b/);
  if(m)return /^\d+$/.test(m[1])?+m[1]:ORDINALS[m[1]];
@@ -405,11 +409,15 @@ export function competitionResultFromNews(item,news=[],favorites=[]){
  const raceName=String(item.title||'').split(/\s+[—–-]\s+/).slice(1).join(' ')||String(item.competition||'');
  const raceWords=[...new Set(normalized(raceName).split(/\s+/).filter(w=>w.length>=4&&!RACE_GENERIC.has(w)&&!favoriteAliases(favorite).some(a=>a.split(' ').includes(w))))];
  if(!raceWords.length)return null;
+ const distance=(raceName.match(/\b(\d{2,4})\s?m\b/)||[])[1]||'';
  let best=null;
  for(const article of news){
   const published=Date.parse(article.date||article.published||'');
   if(!Number.isFinite(published)||published<start-12*3600000||published>(Number.isFinite(end)?end:start)+3*86400000)continue;
   if(!mentions(noHashtags(article.title),raceWords))continue;
+  // Épreuve de natation / athlétisme : la distance doit aussi correspondre
+  // (« 200 m 4 nages » n'est pas « 400 m 4 nages »).
+  if(distance&&!new RegExp('\\b'+distance+'\\s?m\\b').test(noHashtags(article.title)))continue;
   // En tennis, « s'incline au deuxième tour » n'est pas une 2e place.
   const exit=tennis?tennisExitFromTitle(article.title,favorite):'';
   const rankRaw=exit?null:rankFromTitle(article.title,favorite);

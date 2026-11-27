@@ -1046,3 +1046,7 @@ body{background:radial-gradient(circle at 85% -8%,#173b53 0%,transparent 42%),#0
 .tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.15;font-size:.78rem;padding:7px 2px}
 .tabs .tab-icon{font-size:1.15rem}
 @media (max-width:360px){.tabs button{font-size:.7rem}}
+/* V17.11 : prochaine échéance des favoris sans événement */
+.agenda-next-list ul{margin:8px 0 0;padding-left:18px;display:grid;gap:7px}
+.agenda-next-list li{line-height:1.4}
+.agenda-next-list a{white-space:nowrap}
