@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-26T16:52:09.199919+00:00",
+  "fetchedAt": "2026-11-27T01:43:50.939110+00:00",
   "rows": [
     {
       "rank": 1,
@@ -19,7 +19,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         },
         {
           "text": "Finales ATP F (DF )",
@@ -216,7 +216,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 2 D)",
@@ -291,12 +291,16 @@
       "age": 20,
       "country": "ESP",
       "careerHigh": "MC",
-      "tournament": "",
+      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Davis (1 V / 0 D) (QF )",
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+        },
         {
           "text": "Finales ATP RR (0 V / 2 D)",
           "lastSeen": "2026-11-19T13:26:57.456450+00:00"
@@ -376,7 +380,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         }
       ]
     },
@@ -429,7 +433,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         }
       ]
     },
@@ -594,7 +598,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         },
         {
           "text": "Stockholm DF (QF )",
@@ -720,7 +724,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         }
       ]
     },
@@ -805,7 +809,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         }
       ]
     },
@@ -866,12 +870,17 @@
       "age": 22,
       "country": "ESP",
       "careerHigh": "39",
-      "tournament": "",
+      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (1 V / 0 D) (QF )",
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+        }
+      ]
     },
     {
       "rank": 44,
@@ -1023,7 +1032,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         }
       ]
     },
@@ -1124,7 +1133,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         }
       ]
     },
@@ -2365,12 +2374,16 @@
       "age": 27,
       "country": "AUT",
       "careerHigh": "87",
-      "tournament": "",
+      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Davis (0 V / 1 D) (QF )",
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
+        },
         {
           "text": "Helsinki 8e",
           "lastSeen": "2026-11-18T13:23:28.674063+00:00"
@@ -2574,7 +2587,7 @@
       "tournamentHistory": [
         {
           "text": "Playford QF",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         },
         {
           "text": "Playford 8e",
@@ -2837,7 +2850,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         },
         {
           "text": "Metz F",
@@ -2898,7 +2911,7 @@
       "tournamentHistory": [
         {
           "text": "Playford QF",
-          "lastSeen": "2026-11-26T16:52:08.980318+00:00"
+          "lastSeen": "2026-11-27T01:43:50.818280+00:00"
         },
         {
           "text": "Playford 8e",
