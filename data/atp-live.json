@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-atp-live",
-  "fetchedAt": "2026-11-27T16:37:40.287958+00:00",
+  "fetchedAt": "2026-11-28T01:27:20.659616+00:00",
   "rows": [
     {
       "rank": 1,
@@ -11,9 +11,9 @@
       "age": 29,
       "country": "GER",
       "careerHigh": "MC",
-      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Coupe Davis (1 V / 0 D) (QF )",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -208,12 +208,16 @@
       "age": 24,
       "country": "ITA",
       "careerHigh": "6",
-      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
+      "tournament": "Coupe Davis (0 V / 2 D) (QF )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Davis (0 V / 2 D) (QF )",
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
+        },
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
           "lastSeen": "2026-11-27T16:37:40.230969+00:00"
@@ -299,7 +303,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
         },
         {
           "text": "Finales ATP RR (0 V / 2 D)",
@@ -372,12 +376,16 @@
       "age": 25,
       "country": "CZE",
       "careerHigh": "12",
-      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
+      "tournament": "Coupe Davis (2 V / 0 D) (DF )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Davis (2 V / 0 D) (DF )",
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
+        },
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
           "lastSeen": "2026-11-27T16:37:40.230969+00:00"
@@ -393,12 +401,17 @@
       "age": 21,
       "country": "CZE",
       "careerHigh": "12",
-      "tournament": "",
+      "tournament": "Coupe Davis (0 V / 1 D) (DF )",
       "previousTournaments": "",
-      "tournamentStatus": "non_communique",
+      "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": []
+      "tournamentHistory": [
+        {
+          "text": "Coupe Davis (0 V / 1 D) (DF )",
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
+        }
+      ]
     },
     {
       "rank": 16,
@@ -425,9 +438,9 @@
       "age": 26,
       "country": "CAN",
       "careerHigh": "4",
-      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Coupe Davis (0 V / 1 D) (QF )",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -590,12 +603,16 @@
       "age": 24,
       "country": "ITA",
       "careerHigh": "5",
-      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
+      "tournament": "Coupe Davis (2 V / 0 D) (QF )",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
+        {
+          "text": "Coupe Davis (2 V / 0 D) (QF )",
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
+        },
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
           "lastSeen": "2026-11-27T16:37:40.230969+00:00"
@@ -724,7 +741,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (0 V / 1 D) (QF )",
-          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
         }
       ]
     },
@@ -801,9 +818,9 @@
       "age": 36,
       "country": "GER",
       "careerHigh": "21",
-      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Coupe Davis (0 V / 1 D) (QF )",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -878,7 +895,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
         }
       ]
     },
@@ -1032,7 +1049,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
         }
       ]
     },
@@ -1133,7 +1150,7 @@
       "tournamentHistory": [
         {
           "text": "Coupe Davis (1 V / 0 D) (QF )",
-          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
         }
       ]
     },
@@ -2374,9 +2391,9 @@
       "age": 27,
       "country": "AUT",
       "careerHigh": "87",
-      "tournament": "Coupe Davis (0 V / 1 D) (QF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Coupe Davis (0 V / 1 D) (QF )",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [
@@ -2534,7 +2551,7 @@
       "tournamentHistory": [
         {
           "text": "Playford DF",
-          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
         },
         {
           "text": "Playford QF",
@@ -2796,7 +2813,7 @@
       "tournamentHistory": [
         {
           "text": "Playford DF",
-          "lastSeen": "2026-11-27T16:37:40.230969+00:00"
+          "lastSeen": "2026-11-28T01:27:20.607971+00:00"
         },
         {
           "text": "Playford QF",
@@ -2891,9 +2908,9 @@
       "age": 28,
       "country": "KOR",
       "careerHigh": "52",
-      "tournament": "Coupe Davis (1 V / 0 D) (QF )",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
+      "tournament": "",
+      "previousTournaments": "Défaite Coupe Davis (1 V / 0 D) (QF )",
+      "tournamentStatus": "defaite",
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": [

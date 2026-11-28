@@ -1,6 +1,6 @@
 {
   "source": "https://live-tennis.eu/fr/classement-wta-live",
-  "fetchedAt": "2026-11-27T16:37:37.782546+00:00",
+  "fetchedAt": "2026-11-28T01:27:19.162465+00:00",
   "rows": [
     {
       "rank": 1,
@@ -57,16 +57,7 @@
       "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Finales WTA RR (1 V / 2 D)",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
-        },
-        {
-          "text": "Finales WTA RR (1 V / 1 D)",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
-        }
-      ]
+      "tournamentHistory": []
     },
     {
       "rank": 4,
@@ -132,14 +123,6 @@
         {
           "text": "Finales WTA DF",
           "lastSeen": "2026-11-14T18:51:27.205837+00:00"
-        },
-        {
-          "text": "Finales WTA RR (2 V / 1 D)",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
-        },
-        {
-          "text": "Finales WTA RR (1 V / 1 D)",
-          "lastSeen": "2026-11-13T18:59:56.168154+00:00"
         }
       ]
     },
@@ -182,10 +165,6 @@
         {
           "text": "Finales WTA RR (0 V / 0 D)",
           "lastSeen": "2026-11-16T01:31:32.942989+00:00"
-        },
-        {
-          "text": "Finales WTA RR (0 V / 2 D)",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
         }
       ]
     },
@@ -235,12 +214,7 @@
       "tournamentStatus": "non_communique",
       "nextPoints": null,
       "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Finales WTA RR (0 V / 1 D)",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
-        }
-      ]
+      "tournamentHistory": []
     },
     {
       "rank": 12,
@@ -1931,11 +1905,11 @@
       "careerHigh": "107",
       "movement": null,
       "pointsChange": null,
-      "tournament": "Buenos Aires QF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 719,
-      "maxPoints": 795,
+      "tournament": "",
+      "previousTournaments": "Défaite Buenos Aires QF",
+      "tournamentStatus": "defaite",
+      "nextPoints": null,
+      "maxPoints": null,
       "tournamentHistory": [
         {
           "text": "Buenos Aires QF",
@@ -2306,12 +2280,45 @@
     },
     {
       "rank": 131,
+      "name": "Julia Riera",
+      "age": 24,
+      "country": "ARG",
+      "livePoints": 595,
+      "careerHigh": "93",
+      "movement": 8,
+      "pointsChange": 37,
+      "tournament": "Buenos Aires DF",
+      "previousTournaments": "",
+      "tournamentStatus": "en_lice",
+      "nextPoints": 627,
+      "maxPoints": 671,
+      "tournamentHistory": [
+        {
+          "text": "Buenos Aires DF",
+          "lastSeen": "2026-11-28T01:27:19.162465+00:00"
+        },
+        {
+          "text": "Buenos Aires QF",
+          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
+        },
+        {
+          "text": "Buenos Aires 8e",
+          "lastSeen": "2026-11-25T19:01:33.940048+00:00"
+        },
+        {
+          "text": "Buenos Aires 16e",
+          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 132,
       "name": "Elizara Yaneva",
       "age": 19,
       "country": "BUL",
       "livePoints": 595,
       "careerHigh": "NMC (135)",
-      "movement": 4,
+      "movement": 3,
       "pointsChange": 18,
       "tournament": "Trnava 5 DF",
       "previousTournaments": "",
@@ -2321,7 +2328,7 @@
       "tournamentHistory": [
         {
           "text": "Trnava 5 DF",
-          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
+          "lastSeen": "2026-11-28T01:27:19.162465+00:00"
         },
         {
           "text": "Trnava 5 QF",
@@ -2358,13 +2365,13 @@
       ]
     },
     {
-      "rank": 132,
+      "rank": 133,
       "name": "Rebeka Masarova",
       "age": 27,
       "country": "SUI",
       "livePoints": 592,
       "careerHigh": "62",
-      "movement": -1,
+      "movement": -2,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2387,13 +2394,13 @@
       ]
     },
     {
-      "rank": 133,
+      "rank": 134,
       "name": "Elsa Jacquemot",
       "age": 23,
       "country": "FRA",
       "livePoints": 591,
       "careerHigh": "53",
-      "movement": -1,
+      "movement": -2,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2408,13 +2415,13 @@
       ]
     },
     {
-      "rank": 134,
+      "rank": 135,
       "name": "Robin Montgomery",
       "age": 22,
       "country": "USA",
       "livePoints": 584,
       "careerHigh": "95",
-      "movement": -1,
+      "movement": -2,
       "pointsChange": null,
       "tournament": "",
       "previousTournaments": "",
@@ -2422,35 +2429,6 @@
       "nextPoints": null,
       "maxPoints": null,
       "tournamentHistory": []
-    },
-    {
-      "rank": 135,
-      "name": "Julia Riera",
-      "age": 24,
-      "country": "ARG",
-      "livePoints": 573,
-      "careerHigh": "93",
-      "movement": 4,
-      "pointsChange": 15,
-      "tournament": "Buenos Aires QF",
-      "previousTournaments": "",
-      "tournamentStatus": "en_lice",
-      "nextPoints": 595,
-      "maxPoints": 671,
-      "tournamentHistory": [
-        {
-          "text": "Buenos Aires QF",
-          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
-        },
-        {
-          "text": "Buenos Aires 8e",
-          "lastSeen": "2026-11-25T19:01:33.940048+00:00"
-        },
-        {
-          "text": "Buenos Aires 16e",
-          "lastSeen": "2026-11-23T19:10:37.599528+00:00"
-        }
-      ]
     },
     {
       "rank": 136,
@@ -2533,80 +2511,23 @@
     },
     {
       "rank": 139,
-      "name": "Jeline Vandromme",
-      "age": 19,
-      "country": "BEL",
-      "livePoints": 555,
-      "careerHigh": "123",
-      "movement": -5,
-      "pointsChange": -27,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 140,
-      "name": "Alice Tubello",
-      "age": 25,
-      "country": "FRA",
-      "livePoints": 543,
-      "careerHigh": "139",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": []
-    },
-    {
-      "rank": 141,
-      "name": "Carol Lee",
-      "age": 24,
-      "country": "USA",
-      "livePoints": 539,
-      "careerHigh": "136",
-      "movement": 2,
-      "pointsChange": null,
-      "tournament": "",
-      "previousTournaments": "",
-      "tournamentStatus": "non_communique",
-      "nextPoints": null,
-      "maxPoints": null,
-      "tournamentHistory": [
-        {
-          "text": "Sydney 3 16e",
-          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
-        },
-        {
-          "text": "Brisbane 6 F",
-          "lastSeen": "2026-11-15T01:14:17.522571+00:00"
-        },
-        {
-          "text": "Brisbane 6 DF",
-          "lastSeen": "2026-11-14T01:09:10.606632+00:00"
-        }
-      ]
-    },
-    {
-      "rank": 142,
       "name": "Guiomar Maristany",
       "age": 27,
       "country": "ESP",
-      "livePoints": 537,
+      "livePoints": 559,
       "careerHigh": "138",
-      "movement": 5,
-      "pointsChange": 19,
-      "tournament": "Buenos Aires QF",
+      "movement": 8,
+      "pointsChange": 41,
+      "tournament": "Buenos Aires DF",
       "previousTournaments": "",
       "tournamentStatus": "en_lice",
-      "nextPoints": 559,
+      "nextPoints": 591,
       "maxPoints": 635,
       "tournamentHistory": [
+        {
+          "text": "Buenos Aires DF",
+          "lastSeen": "2026-11-28T01:27:19.162465+00:00"
+        },
         {
           "text": "Buenos Aires QF",
           "lastSeen": "2026-11-27T16:37:37.782546+00:00"
@@ -2622,6 +2543,63 @@
         {
           "text": "Colina DF",
           "lastSeen": "2026-11-21T18:56:00.248284+00:00"
+        }
+      ]
+    },
+    {
+      "rank": 140,
+      "name": "Jeline Vandromme",
+      "age": 19,
+      "country": "BEL",
+      "livePoints": 555,
+      "careerHigh": "123",
+      "movement": -6,
+      "pointsChange": -27,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 141,
+      "name": "Alice Tubello",
+      "age": 25,
+      "country": "FRA",
+      "livePoints": 543,
+      "careerHigh": "139",
+      "movement": 1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": []
+    },
+    {
+      "rank": 142,
+      "name": "Carol Lee",
+      "age": 24,
+      "country": "USA",
+      "livePoints": 539,
+      "careerHigh": "136",
+      "movement": 1,
+      "pointsChange": null,
+      "tournament": "",
+      "previousTournaments": "",
+      "tournamentStatus": "non_communique",
+      "nextPoints": null,
+      "maxPoints": null,
+      "tournamentHistory": [
+        {
+          "text": "Sydney 3 16e",
+          "lastSeen": "2026-11-18T01:26:00.701643+00:00"
+        },
+        {
+          "text": "Brisbane 6 F",
+          "lastSeen": "2026-11-15T01:14:17.522571+00:00"
         }
       ]
     },
@@ -2704,7 +2682,7 @@
       "tournamentHistory": [
         {
           "text": "Adélaïde DF",
-          "lastSeen": "2026-11-27T16:37:37.782546+00:00"
+          "lastSeen": "2026-11-28T01:27:19.162465+00:00"
         }
       ]
     },

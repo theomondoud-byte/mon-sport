@@ -3,8 +3,48 @@
 export const jeuSetMathsBundledData = {
  "source": "https://x.com/JeuSetMaths",
  "retrievedFrom": "https://teapawt.org/JeuSetMaths",
- "fetchedAt": "2026-11-27T16:37:45.357851+00:00",
+ "fetchedAt": "2026-11-28T01:27:23.932553+00:00",
  "posts": [
+  {
+   "title": "📊 L'Italie 🇮🇹 est la première équipe à se qualifier en finale de 4 éditions consécutives de Coupe Davis depuis la Suède 🇸🇪 qui avait réalisé un 7 à la suite entre 1983…",
+   "text": "📊 L'Italie 🇮🇹 est la première équipe à se qualifier en finale de 4 éditions consécutives de Coupe Davis depuis la Suède 🇸🇪 qui avait réalisé un 7 à la suite entre 1983 et 1989.",
+   "link": "https://x.com/JeuSetMaths/status/2126475946626535909",
+   "date": "2026-11-28T00:39:08.345000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": null,
+   "images": [],
+   "video": "https://video.twimg.com/amplify_video/2126434556467154944/vid/avc1/1080x1920/HNKJ7JgK_9rvpTI7.mp4?tag=29"
+  },
+  {
+   "title": "📊 Triple tenante du titre, l’équipe d’Italie 🇮🇹 de Coupe Davis a désormais remporté les 16 dernières rencontres qu’elle a disputées : 🇨🇱🇸🇪🇳🇱🇷🇸🇦🇺🇧🇷🇧🇪🇳🇱🇦🇷🇦🇺🇳🇱🇦🇹🇧🇪🇪🇸🇰🇷🇨🇿 📸…",
+   "text": "📊 Triple tenante du titre, l’équipe d’Italie 🇮🇹 de Coupe Davis a désormais remporté les 16 dernières rencontres qu’elle a disputées :\n🇨🇱🇸🇪🇳🇱🇷🇸🇦🇺🇧🇷🇧🇪🇳🇱🇦🇷🇦🇺🇳🇱🇦🇹🇧🇪🇪🇸🇰🇷🇨🇿\n\n📸 FITP / Tennis World",
+   "link": "https://x.com/JeuSetMaths/status/2126475493968945633",
+   "date": "2026-11-28T00:37:20.423000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HYJslyZXUAAdP3G.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HYJslyZXUAAdP3G.jpg?name=orig"
+   ],
+   "video": null
+  },
+  {
+   "title": "📊 Avec Ben Shelton, Frances Tiafoe et Taylor Fritz, les Etats-Unis 🇺🇸 ont réussi à placer trois représentants dans le Top 10 de fin de saison. Une première pour une…",
+   "text": "📊 Avec Ben Shelton, Frances Tiafoe et Taylor Fritz, les Etats-Unis 🇺🇸 ont réussi à placer trois représentants dans le Top 10 de fin de saison. Une première pour une nation depuis l'Espagne 🇪🇸 il y a 15 ans :\n\n🗓️ Saison 2011 : Espagne 🇪🇸\n2⃣ Rafael Nadal 🇪🇸\n5⃣ David Ferrer 🇪🇸\n🔟 Nicolas Almagro 🇪🇸\n\n🗓️ Saison 2026 : Etats-Unis 🇺🇸\n4⃣ Ben Shelton 🇺🇸\n8⃣ Frances Tiafoe 🇺🇸\n9⃣ Taylor Fritz 🇺🇸",
+   "link": "https://x.com/JeuSetMaths/status/2126372075455602767",
+   "date": "2026-11-27T17:46:23.528000+00:00",
+   "source": "Jeu, set et maths",
+   "favorite": "Jeu, set et maths",
+   "sport": "Tennis",
+   "image": "https://pbs.twimg.com/media/HYJkILiXoAAUSAe.jpg?name=orig",
+   "images": [
+    "https://pbs.twimg.com/media/HYJkILiXoAAUSAe.jpg?name=orig"
+   ],
+   "video": null
+  },
   {
    "title": "📊 Les plus jeunes joueurs qualifiés pour le Master Next Gen : 🆕 17 ans et 278 jours : Moise Kouame 🇫🇷 (2026) ▪️ 18 ans et 77 jours : Justin Engel 🇩🇪 (2025) ▪️ 18 ans et…",
    "text": "📊 Les plus jeunes joueurs qualifiés pour le Master Next Gen :\n🆕 17 ans et 278 jours : Moise Kouame 🇫🇷 (2026)\n▪️ 18 ans et 77 jours : Justin Engel 🇩🇪 (2025)\n▪️ 18 ans et 81 jours : Jannik Sinner 🇮🇹 (2019)\n▪️ 18 ans et 119 jours : Joao Fonseca 🇧🇷 (2024)\n▪️ 18 ans et 188 jours : Carlos Alcaraz 🇪🇸 (2021)\n▪️ 18 ans et 194 jours : Holger Rune 🇩🇰 (2021)\n▪️ 18 ans et 206 jours : Denis Shapovalov 🇨🇦 (2017)",
@@ -241,46 +281,6 @@ export const jeuSetMathsBundledData = {
    "image": null,
    "images": [],
    "video": "https://video.twimg.com/amplify_video/2124251384849526784/vid/avc1/576x720/wVo2apKYmRJO2cZr.mp4?tag=16"
-  },
-  {
-   "title": "📊 Ils se sont qualifiés pour la finale du Masters sans concéder le moindre break (1991-2026) : 🥈 2018 : Novak Djokovic 🇷🇸 (2 BdB) 🏆 2025 : Jannik Sinner 🇮🇹 (12 BdB) 🆕…",
-   "text": "📊 Ils se sont qualifiés pour la finale du Masters sans concéder le moindre break (1991-2026) :\n🥈 2018 : Novak Djokovic 🇷🇸 (2 BdB)\n🏆 2025 : Jannik Sinner 🇮🇹 (12 BdB)\n🆕 2026 : Alexander Zverev 🇩🇪 (6 BdB)\n\n✍️ Entre parenthèses, le nombre de balles de break sauvées.",
-   "link": "https://x.com/JeuSetMaths/status/2124249803861475379",
-   "date": "2026-11-21T21:13:14.550000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXrY5e4XAAAW-Y5.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXrY5e4XAAAW-Y5.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 6 des 7 dernières victoires d’Alexander Zverev 🇩🇪 face à des membres du Top 5 ont été enregistrées au Masters : 🎱 Masters 2023 vs Alcaraz (N°2) 🎱 Masters 2023 vs…",
-   "text": "📊 6 des 7 dernières victoires d’Alexander Zverev 🇩🇪 face à des membres du Top 5 ont été enregistrées au Masters :\n🎱 Masters 2023 vs Alcaraz (N°2)\n🎱 Masters 2023 vs Rublev (N°5)\n🇦🇺 Open d’Australie 2024 vs Alcaraz (N°2)\n🎱 Masters 2024 vs Alcaraz (N°3)\n🎱 Masters 2025 vs Shelton (N°5)\n🎱 Masters 2026 vs Shelton (N°4)\n🎱 Masters 2026 vs Medvedev (N°5) 🆕",
-   "link": "https://x.com/JeuSetMaths/status/2124249665629515974",
-   "date": "2026-11-21T21:12:41.593000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": "https://pbs.twimg.com/media/HXrZzQlXYAAuVYM.jpg?name=orig",
-   "images": [
-    "https://pbs.twimg.com/media/HXrZzQlXYAAuVYM.jpg?name=orig"
-   ],
-   "video": null
-  },
-  {
-   "title": "📊 Pour la première fois de sa carrière sur le circuit principal, Daniil Medvedev 🇷🇺 a encaissé un 7/0 dans un tie-break.",
-   "text": "📊 Pour la première fois de sa carrière sur le circuit principal, Daniil Medvedev 🇷🇺 a encaissé un 7/0 dans un tie-break.",
-   "link": "https://x.com/JeuSetMaths/status/2124240892194369703",
-   "date": "2026-11-21T20:37:49.843000+00:00",
-   "source": "Jeu, set et maths",
-   "favorite": "Jeu, set et maths",
-   "sport": "Tennis",
-   "image": null,
-   "images": [],
-   "video": "https://video.twimg.com/amplify_video/2124240497724047360/vid/avc1/576x720/YbsovLmAdB1sV1IZ.mp4?tag=16"
   }
  ]
 };
